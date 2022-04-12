@@ -1,5 +1,5 @@
 {
-  "name": "turborepo-basic-shared",
+  "name": "css.gui",
   "version": "0.0.0",
   "private": true,
   "workspaces": [
@@ -11,15 +11,18 @@
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "nuke": "rm -rf node_modules && rm -rf .next"
-  },
-  "devDependencies": {
-    "prettier": "^2.5.1",
-    "turbo": "latest"
+    "nuke": "rm -rf node_modules && rm -rf .next && yarn",
+    "pkg:test": "manypkg check",
+    "pkg:fix": "manypkg fix"
   },
   "engines": {
     "npm": ">=7.0.0",
     "node": ">=14.0.0"
   },
-  "packageManager": "yarn@1.22.18"
+  "packageManager": "yarn@1.22.18",
+  "dependencies": {
+    "@manypkg/cli": "^0.19.1",
+    "prettier": "^2.6.2",
+    "turbo": "^1.2.2"
+  }
 }
