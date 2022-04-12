@@ -63,13 +63,12 @@ export const reducer = (state: State, action: Action): State => {
           }
         }
       } else if (state.inputState === 'scrubbing') {
-        const { value, currentPoint } = state
-        const diff = action.x - currentPoint.x
-        const next = { ...currentPoint, x: action.x }
+        const { startValue, startPoint, currentPoint } = state
+        const next = { ...currentPoint, x: currentPoint.x + action.x }
         return {
           ...state,
           currentPoint: next,
-          value: Math.floor(value + diff),
+          value: Math.floor(startValue + next.x - startPoint.x),
         }
       }
       break

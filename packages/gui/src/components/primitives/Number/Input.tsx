@@ -73,16 +73,13 @@ export const NumberInput = ({ value, onChange }: NumberInputProps): any => {
         ref={rInput}
         type="number"
         value={inputValue}
-        style={{
-          cursor: state.inputState === 'focused' ? 'text' : 'col-resize',
-        }}
         onFocus={() => dispatch({ type: 'FOCUSED_INPUT' })}
         onBlur={() => dispatch({ type: 'BLURRED_INPUT' })}
         onPointerMove={(e) => {
           dispatch({
             type: 'MOVED_POINTER_OVER_INPUT',
-            x: e.clientX,
-            y: e.clientY,
+            x: e.movementX,
+            y: e.movementY,
             id: e.pointerId,
           })
         }}
