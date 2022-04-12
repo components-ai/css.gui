@@ -11,7 +11,7 @@ export const reducer = (state: State, action: Action): State => {
         ...state,
         value: convertLengthUnits(action.unit, state),
         unit: action.unit,
-        key: state.key + 1,
+        key: state.key + 1, // Force number scrubber re-render
       }
     }
     default: {
