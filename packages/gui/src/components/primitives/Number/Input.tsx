@@ -4,7 +4,7 @@ import { Cursor } from './Cursor'
 import { reducer } from './reducer'
 import { NumberInputProps } from './types'
 
-export const Number = ({ value, onChange }: NumberInputProps): any => {
+export const NumberInput = ({ value, onChange }: NumberInputProps): any => {
   const rInput = React.useRef<HTMLInputElement>(null)
   const rCursor = React.useRef<SVGSVGElement>(null)
 
