@@ -20,6 +20,10 @@
     "npm": ">=7.0.0",
     "node": ">=14.0.0"
   },
+  "prettier": {
+    "singleQuote": true,
+    "semi": false
+  },
   "packageManager": "yarn@1.22.18",
   "dependencies": {
     "@manypkg/cli": "^0.19.1",
