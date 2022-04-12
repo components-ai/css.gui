@@ -30,12 +30,12 @@ export const enum ThemeUnits {
 }
 
 // Only use a subset for now to keep things simpler
-export type LengthUnits =
+export type LengthUnit =
   | FontRelativeLengthUnits.Em
   | FontRelativeLengthUnits.Rem
   | AbsoluteLengthUnits.Px
 
-export type LengthPercentageUnits = LengthUnits | PercentageLengthUnits.Pct
+export type LengthPercentageUnits = LengthUnit | PercentageLengthUnits.Pct
 
 export interface Length {
   value: number

@@ -3,12 +3,12 @@ import {
   AbsoluteLengthUnits,
   FontRelativeLengthUnits,
   LengthPercentageUnits,
-  LengthUnits,
+  LengthUnit,
   PercentageLengthUnits,
   ThemeUnits,
 } from '../types/css'
 
-const UNITS: LengthUnits[] = [
+const UNITS: LengthUnit[] = [
   AbsoluteLengthUnits.Px,
   FontRelativeLengthUnits.Em,
   FontRelativeLengthUnits.Rem,

@@ -3,7 +3,8 @@ type PointerState = 'locked' | 'unlocked'
 
 export type NumberInputProps = {
   value: any
-  onChange: Function
+  onChange: (newNumber: number) => void
+  id?: string
 }
 
 export type CursorProps = {
