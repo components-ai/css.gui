@@ -1,16 +1,23 @@
 import * as React from 'react'
+import { randomElementID } from '../../lib'
 import { AbsoluteLengthUnits, Length, LengthUnit } from '../../types/css'
-import { Number } from '../primitives'
+import { Label, Number } from '../primitives'
 import { UnitSelect } from '../UnitSelect'
 import { reducer } from './reducer'
 import { State } from './types'
 
 type LengthProps = {
   value: Length
-  id: string
+  id?: string
+  label?: string
   onChange: (length: Length) => void
 }
-export const LengthInput = ({ value, onChange, id }: LengthProps) => {
+export const LengthInput = ({
+  value,
+  onChange,
+  label,
+  id = randomElementID(),
+}: LengthProps) => {
   const [state, dispatch] = React.useReducer(reducer, {
     value: value?.value || AbsoluteLengthUnits.Px,
     unit: value?.unit || 0,
@@ -24,8 +31,6 @@ export const LengthInput = ({ value, onChange, id }: LengthProps) => {
     })
   }, [state])
 
-  console.log(state)
-
   return (
     <div
       style={{
@@ -33,6 +38,7 @@ export const LengthInput = ({ value, onChange, id }: LengthProps) => {
         alignItems: 'center',
       }}
     >
+      <Label htmlFor={id}>{label || 'Number'}</Label>
       <Number
         id={id}
         key={state.key}

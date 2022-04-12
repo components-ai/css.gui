@@ -20,12 +20,11 @@ export default function Docs() {
       }}
     >
       <div style={{ padding: 64 }}>
-        <Primitives.Label htmlFor="length-input">Font size</Primitives.Label>
         <LengthInput
-          id="length-input"
+          label="Font size"
           value={fontSize}
           onChange={(newFontValue: Length) =>
-            setFontSize({ id: fontSize.id, ...newFontValue })
+            setFontSize({ ...fontSize, ...newFontValue })
           }
         />
         <pre>{JSON.stringify(fontSize, null, 2)}</pre>
