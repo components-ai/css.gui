@@ -7,7 +7,13 @@ export default function Docs() {
     <div>
       <h1>Docs</h1>
       <h3>Number</h3>
-      <Primitives.Number value={num} onChange={setNum} />
+      <Primitives.Number
+        value={num}
+        onChange={(n: number) => {
+          console.log(n)
+          setNum(n)
+        }}
+      />
     </div>
   )
 }

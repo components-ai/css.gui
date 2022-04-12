@@ -81,8 +81,8 @@ export const Number = ({ value, onChange }: NumberInputProps): any => {
         onPointerMove={(e) => {
           dispatch({
             type: 'MOVED_POINTER_OVER_INPUT',
-            x: e.movementX,
-            y: e.movementY,
+            x: e.clientX,
+            y: e.clientY,
             id: e.pointerId,
           })
         }}

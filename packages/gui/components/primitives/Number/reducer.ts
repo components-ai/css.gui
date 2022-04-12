@@ -20,6 +20,7 @@ export const reducer = (state: State, action: Action): State => {
     case 'STARTED_POINTING_INPUT': {
       if (state.inputState === 'blurred') {
         const { x, y, id } = action
+
         return {
           ...state,
           inputState: 'pressed',
@@ -62,12 +63,13 @@ export const reducer = (state: State, action: Action): State => {
           }
         }
       } else if (state.inputState === 'scrubbing') {
-        const { startValue, startPoint, currentPoint } = state
-        const next = { ...currentPoint, x: currentPoint.x + action.x }
+        const { value, currentPoint } = state
+        const diff = action.x - currentPoint.x
+        const next = { ...currentPoint, x: action.x }
         return {
           ...state,
           currentPoint: next,
-          value: Math.floor(startValue + next.x - startPoint.x),
+          value: Math.floor(value + diff),
         }
       }
       break
