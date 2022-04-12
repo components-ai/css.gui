@@ -2,28 +2,28 @@
 
 **_Visual development environment for CSS._**
 
-CSS GUI is a visual toolkit for editing element styles on the web. It&#39;s theme-aware, performant, and can be composed into any React app.
+CSS GUI is a visual toolkit for editing element styles on the web. It's theme-aware, performant, and can be composed into any React app.
 
 ```ts
-import { useState } from &#39;react&#39;
-import { EditorProvider, Styles } from &#39;css-gui&#39;
-import * as Editors from &#39;css-gui/editors&#39;
+import { useState } from 'react'
+import { EditorProvider, Styles } from 'css-gui'
+import * as Editors from 'css-gui/editors'
 
-export default () =&gt; {
-  const [styles, setStyles] = useState&lt;Styles&gt;({})
+export default () => {
+  const [styles, setStyles] = useState<Styles>({})
   return (
-    &lt;&gt;
-      &lt;Canvas styles={styles} /&gt;
-      &lt;EditorProvider styles={styles} theme={theme}&gt;
-        &lt;Editors.Fieldset field=&quot;p&quot;&gt;
-          &lt;Editors.FontSize /&gt;
-          &lt;Editors.FontWeight /&gt;
-          &lt;Editors.LineHeight /&gt;
-          &lt;Editors.Color /&gt;
-          &lt;BackgroundColor /&gt;
-        &lt;/Editors.Fieldset&gt;
-      &lt;/EditorProvider&gt;
-    &lt;/&gt;
+    <>
+      <Canvas styles={styles} />
+      <EditorProvider styles={styles} theme={theme}>
+        <Editors.Fieldset field="p">
+          <Editors.FontSize />
+          <Editors.FontWeight />
+          <Editors.LineHeight />
+          <Editors.Color />
+          <BackgroundColor />
+        </Editors.Fieldset>
+      </EditorProvider>
+    </>
   )
 }
 ```
@@ -51,30 +51,30 @@ export default () =&gt; {
 
 ## Implementation
 
-Seems worthwhile to see how far we can get with solidly designed controls for primitives and some higher-level components that would make the majority of the UI. Then generate what&#39;s needed to support most of the spec (incrementally) for given element types.
+Seems worthwhile to see how far we can get with solidly designed controls for primitives and some higher-level components that would make the majority of the UI. Then generate what's needed to support most of the spec (incrementally) for given element types.
 
 ### Internal
 
-Do we continue on with the Immer/context-based editor style implementation that we have in `useEditor`? It seems to work, with solid performance, and be pretty straightforward so I&#39;d be fine rolling with it unless someone has strong opinions otherwise.
+Do we continue on with the Immer/context-based editor style implementation that we have in `useEditor`? It seems to work, with solid performance, and be pretty straightforward so I'd be fine rolling with it unless someone has strong opinions otherwise.
 
-CSS values will be stored in an &quot;unpacked&quot; way to avoid multiple parses. We will offer a one-way (for now) stringification for those values.
+CSS values will be stored in an 'unpacked' way to avoid multiple parses. We will offer a one-way (for now) stringification for those values.
 
 #### CSSUnitValue
 
 ```typescript
 enum Units {
-  Theme = &#39;theme&#39;,
-  Number = &#39;number&#39;,
-  Keyword = &#39;keyword&#39;,
-  Px = &#39;px&#39;,
-  Em = &#39;em&#39;,
-  Rem = &#39;rem&#39;,
-  Percent = &#39;%&#39;,
+  Theme = 'theme',
+  Number = 'number',
+  Keyword = 'keyword',
+  Px = 'px',
+  Em = 'em',
+  Rem = 'rem',
+  Percent = '%',
   // ...
 }
 
 type CSSUnitValue = {
-  unit: `${Units}`,
+  unit: `${Units}`
   value?: string | number
 }
 ```
@@ -83,9 +83,8 @@ type CSSUnitValue = {
 
 ```ts
 // Value maps to the token alias from the theme.
-// I.e., &quot;purple.3&quot;
-type ThemeValue = CSSUnitValue & amp
-{
+// I.e., 'purple.3'
+type ThemeValue = CSSUnitValue & {
   rawValue: CSSUnitValue
 }
 ```
@@ -94,47 +93,44 @@ type ThemeValue = CSSUnitValue & amp
 
 There are times when we might want to derive controls and their constraints based off the context of the other properties and their values. For example, `color` and `backgroundColor` likely want to enforce a contrast ratio. As such we can have a `Fieldset`.
 
-The outer field is passed via context, and something like `LineHeight` would effectively `joinPath(field, &#39;lineHeight&#39;)`.
+The outer field is passed via context, and something like `LineHeight` would effectively `joinPath(field, 'lineHeight')`.
 
 ```js
-&lt;Fieldset
-  field={joinPath(field, &#39;p&#39;)}
-  controlConstraints=&quot;theme&quot;
-&gt;
-  &lt;LineHeight /&gt;
-  &lt;Color contrastRatio={4.2} /&gt;
-  &lt;BackgroundColor /&gt;
-&lt;/Fieldset&gt;
+<Fieldset field={joinPath(field, 'p')} controlConstraints="theme">
+  <LineHeight />
+  <Color contrastRatio={4.2} />
+  <BackgroundColor />
+</Fieldset>
 ```
 
 ##### Nesting
 
 ```ts
-import { useState } from &#39;react&#39;
-import { EditorProvider, Styles } from &#39;css-gui&#39;
-import * as Editors from &#39;css-gui/editors&#39;
+import { useState } from 'react'
+import { EditorProvider, Styles } from 'css-gui'
+import * as Editors from 'css-gui/editors'
 
-export default () =&gt; {
-  const [styles, setStyles] = useState&lt;Styles&gt;({})
+export default () => {
+  const [styles, setStyles] = useState<Styles>({})
   return (
-    &lt;&gt;
-      &lt;EditorProvider styles={styles} theme={theme}&gt;
-        &lt;Editors.Fieldset field=&quot;p&quot;&gt;
-          &lt;Editors.FontSize /&gt;
-          &lt;Editors.FontWeight /&gt;
-          &lt;Editors.LineHeight /&gt;
-          &lt;Editors.Color /&gt;
-          &lt;BackgroundColor /&gt;
-          &lt;Editors.Fieldset field=&quot;:first-of-type&quot;&gt;
-            &lt;Editors.FontSize /&gt;
-            &lt;Editors.FontWeight /&gt;
-            &lt;Editors.LineHeight /&gt;
-            &lt;Editors.Color /&gt;
-            &lt;BackgroundColor /&gt;
-          &lt;/Editors.Fieldset&gt;
-        &lt;/Editors.Fieldset&gt;
-      &lt;/EditorProvider&gt;
-    &lt;/&gt;
+    <>
+      <EditorProvider styles={styles} theme={theme}>
+        <Editors.Fieldset field="p">
+          <Editors.FontSize />
+          <Editors.FontWeight />
+          <Editors.LineHeight />
+          <Editors.Color />
+          <BackgroundColor />
+          <Editors.Fieldset field=":first-of-type">
+            <Editors.FontSize />
+            <Editors.FontWeight />
+            <Editors.LineHeight />
+            <Editors.Color />
+            <BackgroundColor />
+          </Editors.Fieldset>
+        </Editors.Fieldset>
+      </EditorProvider>
+    </>
   )
 }
 ```
