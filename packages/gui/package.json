@@ -3,11 +3,11 @@
   "version": "0.0.0",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
-  "types": "./index.tsx",
+  "types": "./dist/index.d.ts",
   "license": "MIT",
   "scripts": {
-    "build": "tsup src/index.tsx --format esm,cjs --external react",
-    "dev": "tsup src/index.tsx --format esm,cjs --watch --external react",
+    "build": "tsup src/index.tsx --dts --format esm,cjs --external react",
+    "dev": "tsup src/index.tsx --dts --format esm,cjs --watch --external react",
     "clean": "rm -rf .turbo node_modules dist"
   },
   "files": [
