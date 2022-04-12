@@ -1,4 +1,4 @@
-import { forwardRef } from 'react'
+import * as React from 'react'
 import { CursorProps } from './types'
 
 const InternalCursor = ({ x, y }: CursorProps, ref: any) => {
@@ -31,4 +31,4 @@ const InternalCursor = ({ x, y }: CursorProps, ref: any) => {
   )
 }
 
-export const Cursor = forwardRef(InternalCursor)
+export const Cursor = React.forwardRef(InternalCursor)

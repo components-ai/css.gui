@@ -11,7 +11,8 @@
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "nuke": "rm -rf node_modules && rm -rf .next && yarn",
+    "clean": "yarn turbo run clean && rm -rf node_modules",
+    "nuke": "yarn clean && yarn",
     "pkg:test": "manypkg check",
     "pkg:fix": "manypkg fix"
   },
@@ -23,6 +24,7 @@
   "dependencies": {
     "@manypkg/cli": "^0.19.1",
     "prettier": "^2.6.2",
+    "tsup": "^5.12.5",
     "turbo": "^1.2.2"
   }
 }

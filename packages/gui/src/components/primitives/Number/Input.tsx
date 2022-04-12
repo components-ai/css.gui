@@ -1,14 +1,14 @@
-import { useEffect, useReducer, useRef } from 'react'
+import * as React from 'react'
 
 import { Cursor } from './Cursor'
 import { reducer } from './reducer'
 import { NumberInputProps } from './types'
 
 export const Number = ({ value, onChange }: NumberInputProps): any => {
-  const rInput = useRef<HTMLInputElement>(null)
-  const rCursor = useRef<SVGSVGElement>(null)
+  const rInput = React.useRef<HTMLInputElement>(null)
+  const rCursor = React.useRef<SVGSVGElement>(null)
 
-  const [state, dispatch] = useReducer(reducer, {
+  const [state, dispatch] = React.useReducer(reducer, {
     inputState: 'blurred',
     pointerState: 'unlocked',
     value,
@@ -19,7 +19,7 @@ export const Number = ({ value, onChange }: NumberInputProps): any => {
   })
 
   // Request or exit pointer capture
-  useEffect(() => {
+  React.useEffect(() => {
     const input = rInput.current!
 
     if (state.inputState === 'pressed') {
@@ -35,7 +35,7 @@ export const Number = ({ value, onChange }: NumberInputProps): any => {
   }, [state.inputState, state.pointerId])
 
   // Request or exit pointer lock
-  useEffect(() => {
+  React.useEffect(() => {
     if (state.inputState === 'scrubbing' && state.pointerState === 'unlocked') {
       rInput.current!.requestPointerLock?.()
     }
@@ -46,7 +46,7 @@ export const Number = ({ value, onChange }: NumberInputProps): any => {
   }, [state.inputState, state.pointerState])
 
   // Dispatch events on pointer lock changes
-  useEffect(() => {
+  React.useEffect(() => {
     const handlePointerChange = () => {
       if (document.pointerLockElement) {
         dispatch({ type: 'LOCKED_POINTER' })
@@ -61,7 +61,7 @@ export const Number = ({ value, onChange }: NumberInputProps): any => {
     }
   }, [dispatch, state.inputState])
 
-  useEffect(() => {
+  React.useEffect(() => {
     onChange(state.value)
   }, [state.value])
 

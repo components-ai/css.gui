@@ -1,15 +1,22 @@
 {
   "name": "gui",
   "version": "0.0.0",
-  "main": "./index.tsx",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
   "types": "./index.tsx",
   "license": "MIT",
+  "scripts": {
+    "build": "tsup src/index.tsx --format esm,cjs --external react",
+    "dev": "tsup src/index.tsx --format esm,cjs --watch --external react",
+    "clean": "rm -rf .turbo node_modules dist"
+  },
+  "files": [
+    "dist/**"
+  ],
   "devDependencies": {
     "@types/react": "18.0.1",
     "@types/react-dom": "^18.0.0",
     "config": "*",
-    "react": "18.0.0",
-    "react-dom": "18.0.0",
     "tsconfig": "*",
     "typescript": "^4.6.3"
   },
