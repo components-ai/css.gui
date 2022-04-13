@@ -35,7 +35,7 @@ export type LengthUnit =
   | FontRelativeLengthUnits.Rem
   | AbsoluteLengthUnits.Px
 
-export type LengthPercentageUnits = LengthUnit | PercentageLengthUnits.Pct
+export type LengthPercentageUnit = LengthUnit | PercentageLengthUnits.Pct
 
 export interface Length {
   value: number

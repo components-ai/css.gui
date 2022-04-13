@@ -1,22 +1,6 @@
 import * as React from 'react'
-import {
-  AbsoluteLengthUnits,
-  FontRelativeLengthUnits,
-  LengthPercentageUnits,
-  LengthUnit,
-  PercentageLengthUnits,
-  ThemeUnits,
-} from '../types/css'
-
-const UNITS: LengthUnit[] = [
-  AbsoluteLengthUnits.Px,
-  FontRelativeLengthUnits.Em,
-  FontRelativeLengthUnits.Rem,
-]
-const UNITS_WITH_PERCENTAGE: LengthPercentageUnits[] = [
-  ...UNITS,
-  PercentageLengthUnits.Pct,
-]
+import { UNITS, UNITS_WITH_PERCENTAGE } from '../lib/constants'
+import { ThemeUnits } from '../types/css'
 
 type UnitSelectProps = React.SelectHTMLAttributes<HTMLSelectElement> & {
   withTheme?: boolean
