@@ -6,8 +6,8 @@ import { UnitSelect } from '../UnitSelect'
 import { reducer } from './reducer'
 import { State } from './types'
 
-type LengthProps = {
-  value: Length
+export type LengthInputProps = {
+  value?: Length
   id?: string
   label?: string
   onChange: (length: Length) => void
@@ -17,7 +17,7 @@ export const LengthInput = ({
   onChange,
   label,
   id = randomElementID(),
-}: LengthProps) => {
+}: LengthInputProps) => {
   const [state, dispatch] = React.useReducer(reducer, {
     value: value?.value || AbsoluteLengthUnits.Px,
     unit: value?.unit || 0,
