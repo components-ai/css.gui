@@ -159,4 +159,5 @@ Save CSS value parsing from raw strings until later. JSON objects based on our t
 ## Inspiration
 
 - [**dat.gui**](https://github.com/dataarts/dat.gui) well known, especially in the generative design/three space
-- [**leva**](https://github.com/pmndrs/leva) an interesting [pmndrs](https://pmnd.rs/) project that builds the entire control set from hooks
+- [**leva**](https://github.com/pmndrs/leva) a React-based [pmndrs](https://pmnd.rs/) project that builds the entire control set from hooks
+- Blender (Geometry nodes)

@@ -1,9 +1,15 @@
-import { FontSize, Primitives, Length, LengthInput, ThemeProvider } from 'gui'
+import {
+  FontSize,
+  ResponsiveInput,
+  Length,
+  LengthInput,
+  ThemeProvider,
+  ResponsiveLength,
+} from 'gui'
 import { useState } from 'react'
 
 export default function Docs() {
-  const [fontSize, setFontSize] = useState<FontSize>({
-    id: '123abc',
+  const [fontSize, setFontSize] = useState<Length | ResponsiveLength>({
     value: 16,
     unit: 'px',
   })
@@ -20,11 +26,12 @@ export default function Docs() {
       }}
     >
       <div style={{ padding: 64 }}>
-        <LengthInput
+        <ResponsiveInput
+          Component={LengthInput}
           label="Font size"
           value={fontSize}
-          onChange={(newFontValue: Length) =>
-            setFontSize({ ...fontSize, ...newFontValue })
+          onChange={(newFontValue: Length | ResponsiveLength) =>
+            setFontSize(newFontValue)
           }
         />
         <pre>{JSON.stringify(fontSize, null, 2)}</pre>

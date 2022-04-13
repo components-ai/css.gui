@@ -38,7 +38,7 @@ export const LengthInput = ({
         alignItems: 'center',
       }}
     >
-      <Label htmlFor={id}>{label || 'Number'}</Label>
+      <Label htmlFor={id}>{label ?? 'Number'}</Label>
       <Number
         id={id}
         key={state.key}

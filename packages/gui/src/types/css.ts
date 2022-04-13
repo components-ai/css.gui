@@ -42,6 +42,8 @@ export interface Length {
   unit: string
 }
 
+export type ResponsiveLength = Length[]
+
 export interface CSSUnitValue {
   value: number
   unit: string
