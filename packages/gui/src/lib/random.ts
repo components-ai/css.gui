@@ -6,5 +6,5 @@ export const randomElementID = () => {
       ? (webcrypto as unknown as Crypto)
       : window.crypto
 
-  return `cssgui-zzzzz`
+  return `cssgui-${crypto.randomUUID()}`
 }
