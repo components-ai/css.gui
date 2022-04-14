@@ -50,7 +50,6 @@ export const LengthInput = ({
           })
         }}
         id={id}
-        step={0.25}
       />
       <UnitSelect
         value={state.unit}

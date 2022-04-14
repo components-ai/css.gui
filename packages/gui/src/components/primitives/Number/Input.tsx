@@ -39,7 +39,7 @@ export const DraggableInput = ({ step = 1, onUpdate, value }: DraggableLabelProp
   )
 }
 
-export const NumberInput = ({ value, onChange, step = 1 }: NumberInputProps): any => {
+export const NumberInput = ({ value, onChange, step = 1 }: NumberInputProps): any => {  
   return (
     <>
       <DraggableInput value={value} step={step} onUpdate={onChange}/>
