@@ -1,10 +1,3 @@
-import { webcrypto } from 'crypto'
-
 export const randomElementID = () => {
-  const crypto =
-    typeof window === 'undefined'
-      ? (webcrypto as unknown as Crypto)
-      : window.crypto
-
-  return `cssgui-${crypto.randomUUID()}`
+  return `cssgui-${Math.floor(Math.random() * 10000)}`
 }
