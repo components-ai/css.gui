@@ -4,6 +4,8 @@ import {
   LengthInput,
   ThemeProvider,
   ResponsiveLength,
+  Primitives,
+  Color,
 } from 'gui'
 import { useState } from 'react'
 
@@ -15,6 +17,7 @@ const initialStyles: StyleObject = {
 
 export default function Docs() {
   const [styles, setStyles] = useState<StyleObject>(initialStyles)
+  const [color, setColor] = useState<Color>('tomato')
 
   const getStylesForRender = () => {
     let fontSize = null
@@ -40,7 +43,7 @@ export default function Docs() {
       lineHeight = styles.lineHeight.value
     }
 
-    return { fontSize, lineHeight }
+    return { fontSize, lineHeight, color }
   }
 
   return (
@@ -57,6 +60,7 @@ export default function Docs() {
     >
       <div style={{ display: 'flex' }}>
         <div style={{ padding: 64, maxWidth: 256 }}>
+          <Primitives.ColorPopover value={color} onChange={setColor} />
           <ResponsiveInput
             Component={LengthInput}
             label="Font size"
