@@ -1,4 +1,4 @@
-import { Color, Length } from './css'
+import { Color, Length, LengthPercentageUnit, NumberUnit } from './css'
 
 export interface Theme {
   borderRadius?: BorderRadius[]
@@ -126,6 +126,7 @@ export interface LineHeight {
   id: string
   value: number
   name: string
+  unit: LengthPercentageUnit | NumberUnit
 }
 
 export interface Spacing {

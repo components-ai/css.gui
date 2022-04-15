@@ -25,6 +25,10 @@ export const enum PercentageLengthUnits {
   Pct = '%',
 }
 
+export const enum UnitlessUnits {
+  Number = 'number',
+}
+
 export const enum ThemeUnits {
   Theme = 'theme',
 }
@@ -34,8 +38,8 @@ export type LengthUnit =
   | FontRelativeLengthUnits.Em
   | FontRelativeLengthUnits.Rem
   | AbsoluteLengthUnits.Px
-
 export type LengthPercentageUnit = LengthUnit | PercentageLengthUnits.Pct
+export type NumberUnit = UnitlessUnits.Number
 
 export interface Length {
   value: number

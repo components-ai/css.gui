@@ -6,6 +6,8 @@ import {
   ResponsiveLength,
   Primitives,
   Color,
+  AbsoluteLengthUnits,
+  UnitlessUnits,
 } from 'gui'
 import { useState } from 'react'
 
@@ -50,11 +52,16 @@ export default function Docs() {
     <ThemeProvider
       theme={{
         fontSizes: [
-          { id: '1', value: 16, unit: 'px' },
-          { id: '2', value: 24, unit: 'px' },
-          { id: '3', value: 32, unit: 'px' },
-          { id: '4', value: 48, unit: 'px' },
-          { id: '5', value: 64, unit: 'px' },
+          { id: '1', value: 16, unit: AbsoluteLengthUnits.Px },
+          { id: '2', value: 24, unit: AbsoluteLengthUnits.Px },
+          { id: '3', value: 32, unit: AbsoluteLengthUnits.Px },
+          { id: '4', value: 48, unit: AbsoluteLengthUnits.Px },
+          { id: '5', value: 64, unit: AbsoluteLengthUnits.Px },
+        ],
+        lineHeights: [
+          { id: '1', value: 1, unit: UnitlessUnits.Number },
+          { id: '2', value: 1.2, unit: UnitlessUnits.Number },
+          { id: '3', value: 1.4, unit: UnitlessUnits.Number },
         ],
       }}
     >
