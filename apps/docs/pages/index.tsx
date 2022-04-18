@@ -46,7 +46,7 @@ export default function Docs() {
   }
 
   return (
-    <div style={{ display: 'flex' }}>
+    <div className="full-bleed" style={{ display: 'flex' }}>
       <div style={{ padding: 64 }}>
         <Primitives.ColorPopover value={color} onChange={setColor} />
         <ResponsiveInput
