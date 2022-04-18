@@ -69,6 +69,7 @@ const App = ({ Component, pageProps }: AppProps) => {
               <NavItem href="/inputs/number">Number</NavItem>
               <NavItem href="/inputs/color-picker">Color Picker</NavItem>
               <NavItem href="/inputs/color-popover">Color Popover</NavItem>
+              <NavItem href="/inputs/unit-select">Unit Select</NavItem>
             </nav>
             <div
               sx={{
