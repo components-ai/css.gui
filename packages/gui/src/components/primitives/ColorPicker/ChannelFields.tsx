@@ -1,4 +1,3 @@
-import * as React from 'react'
 import * as culori from 'culori'
 import { InputHTMLAttributes } from 'react'
 import { round } from './util'
@@ -24,6 +23,7 @@ export function PropertyFields({
   value,
   onChange,
 }: Props & { mode: string }) {
+  console.log(HexInput)
   switch (mode) {
     case 'hex':
       return <HexInput value={value} onChange={onChange} />
@@ -240,7 +240,7 @@ function ChannelField({ label, ...props }: FieldProps) {
     <label style={{ display: 'flex', gap: 1, alignItems: 'center' }}>
       <span style={{ fontSize: 14, fontWeight: 600 }}>{label}</span>
       <input
-        style={{
+        sx={{
           width: '100%',
           appearance: 'none',
           WebkitAppearance: 'none',
@@ -249,7 +249,7 @@ function ChannelField({ label, ...props }: FieldProps) {
           color: 'text',
           border: '1px solid',
           borderColor: 'border',
-          padding: 8,
+          padding: 1,
         }}
         {...props}
       />

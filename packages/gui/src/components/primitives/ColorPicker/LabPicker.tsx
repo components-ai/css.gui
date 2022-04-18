@@ -1,4 +1,3 @@
-import * as React from 'react'
 import * as culori from 'culori'
 import Checkerboard from './Checkerboard'
 import ColorSlider from './ColorSlider'
@@ -98,7 +97,7 @@ function LabSlider({
       step={step}
       track={
         <div
-          style={{
+          sx={{
             position: 'absolute',
             inset: 0,
             // Traverse all main color points in even intervals
@@ -112,7 +111,6 @@ function LabSlider({
                 return `${lab} ${ratio * 100}%`
               })
               .join(', ')})`,
-            /** 
             '@supports not (color: lab(0% 0 0))': {
               background: `linear-gradient(to right, ${range(numStops + 1)
                 .map((n) => {
@@ -124,13 +122,13 @@ function LabSlider({
                   return `${lab} ${ratio * 100}%`
                 })
                 .join(', ')})`,
-            },*/
+            },
           }}
         />
       }
       thumb={
         <div
-          style={{
+          sx={{
             position: 'absolute',
             inset: 0,
             ...withFallback(
@@ -157,9 +155,9 @@ function AlphaSlider({ value, onChange }: InternalProps) {
       step={0.01}
       track={
         <>
-          <Checkerboard style={{ position: 'absolute', inset: 0 }} />
+          <Checkerboard sx={{ position: 'absolute', inset: 0 }} />
           <div
-            style={{
+            sx={{
               position: 'absolute',
               inset: 0,
               ...withFallback(opaqueValue, (color) => ({
@@ -171,9 +169,9 @@ function AlphaSlider({ value, onChange }: InternalProps) {
       }
       thumb={
         <>
-          <Checkerboard style={{ position: 'absolute', inset: 0 }} />
+          <Checkerboard sx={{ position: 'absolute', inset: 0 }} />
           <div
-            style={{
+            sx={{
               position: 'absolute',
               inset: 0,
               ...withFallback(culori.formatCss(value), (color) => ({

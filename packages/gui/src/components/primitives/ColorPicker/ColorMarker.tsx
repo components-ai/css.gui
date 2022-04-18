@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { HTMLAttributes } from 'react'
 
 interface Props extends HTMLAttributes<HTMLDivElement> {}
@@ -9,7 +8,7 @@ interface Props extends HTMLAttributes<HTMLDivElement> {}
 export default function ColorMarker(props: Props) {
   return (
     <div
-      style={{
+      sx={{
         zIndex: 10,
         cursor: 'grab',
         width: '2rem',

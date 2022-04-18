@@ -1,4 +1,3 @@
-import * as React from 'react'
 import * as culori from 'culori'
 import Checkerboard from './Checkerboard'
 import ColorSlider from './ColorSlider'
@@ -93,7 +92,7 @@ function LchSlider({
       max={max}
       track={
         <div
-          style={{
+          sx={{
             position: 'absolute',
             inset: 0,
             // Traverse all main color points in even intervals
@@ -107,7 +106,6 @@ function LchSlider({
                 return `${lch} ${ratio * 100}%`
               })
               .join(', ')})`,
-            /** 
             '@supports not (color: lch(0% 0 0))': {
               background: `linear-gradient(to right, ${range(numStops + 1)
                 .map((n: number) => {
@@ -119,13 +117,13 @@ function LchSlider({
                   return `${lch} ${ratio * 100}%`
                 })
                 .join(', ')})`,
-            }, */
+            },
           }}
         />
       }
       thumb={
         <div
-          style={{
+          sx={{
             position: 'absolute',
             inset: 0,
             ...withFallback(

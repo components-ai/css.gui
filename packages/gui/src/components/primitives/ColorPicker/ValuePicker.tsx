@@ -1,4 +1,3 @@
-import * as React from 'react'
 import ChannelFields from './ChannelFields'
 import HsvColorPicker from './HSVPicker'
 import P3HsvColorPicker from './P3HSVPicker'
@@ -23,7 +22,7 @@ export default function ColorPicker(props: Props) {
     <div>
       {/* Color Definition and mode */}
       <div
-        style={{
+        sx={{
           display: 'flex',
           alignItems: 'center',
           gap: 1,
@@ -36,14 +35,14 @@ export default function ColorPicker(props: Props) {
           onChange={(e) => {
             onChange(format(value, e.target.value))
           }}
-          style={{
+          sx={{
             marginLeft: 'auto',
             backgroundColor: 'background',
             color: 'text',
             width: '4rem',
             border: '1px solid',
             borderColor: 'border',
-            padding: 8,
+            padding: 1,
           }}
         >
           {['hex', 'rgb', 'hsl', 'lab', 'lch', 'p3'].map((mode) => (

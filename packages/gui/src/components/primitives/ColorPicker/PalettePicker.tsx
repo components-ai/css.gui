@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { Theme } from '../../../types/theme'
 import ColorValueDisplay from './ValueDisplay'
 
@@ -16,10 +15,10 @@ export default function PalettePicker({ value, onChange, theme }: Props) {
   return (
     <div>
       <ColorValueDisplay value={value} onChange={onChange} />
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+      <div sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
         {theme?.colors?.map((colorGroup: any, i: number) => {
           return (
-            <div key={i} style={{ display: 'flex', gap: '.125rem' }}>
+            <div key={i} sx={{ display: 'flex', gap: '.125rem' }}>
               {colorGroup.colors.map((color: any, i: number) => {
                 const selected = value === color.value
 
@@ -27,7 +26,7 @@ export default function PalettePicker({ value, onChange, theme }: Props) {
                   <button
                     key={color.id}
                     title={`${colorGroup.name}.${i}`}
-                    style={{
+                    sx={{
                       cursor: 'pointer',
                       border: selected ? '2px solid' : '1px solid',
                       borderColor: selected ? '#ff0000' : 'border',

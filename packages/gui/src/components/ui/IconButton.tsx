@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { HTMLAttributes } from 'react'
 
 interface Props extends HTMLAttributes<HTMLButtonElement> {}

@@ -1,4 +1,3 @@
-import * as React from 'react'
 import * as Popover from '@radix-ui/react-popover'
 import Checkerboard from './Checkerboard'
 import ColorField, { Props as PickerProps } from './Field'
@@ -25,7 +24,7 @@ export default function ColorPopover({
   return (
     <Popover.Root>
       <Popover.Trigger
-        style={{
+        sx={{
           display: 'flex',
           gap: 2,
           padding: 0,
@@ -45,7 +44,7 @@ export default function ColorPopover({
         {showText ? value : null}
       </Popover.Trigger>
       <Popover.Content
-        style={{
+        sx={{
           width: '20rem',
           backgroundColor: 'background',
           padding: '8px 16px',
@@ -64,7 +63,7 @@ function Swatch({ value }: { value: string }) {
   const isTransparent = hasAlpha(value)
   return (
     <div
-      style={{
+      sx={{
         position: 'relative',
         width: '2rem',
         aspectRatio: '1 / 1',
@@ -77,10 +76,10 @@ function Swatch({ value }: { value: string }) {
       {/* The checkerboard causes weird aliasing to occur on Firefox,
        * so we only show it when there is a transparency */}
       {isTransparent && (
-        <Checkerboard style={{ position: 'absolute', inset: 0 }} />
+        <Checkerboard sx={{ position: 'absolute', inset: 0 }} />
       )}
       <div
-        style={{
+        sx={{
           position: 'absolute',
           inset: 0,
           ...withFallback(value, (color) => ({ backgroundColor: color })),

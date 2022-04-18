@@ -1,5 +1,4 @@
 import * as React from 'react'
-
 import { Cursor } from './Cursor'
 import { reducer } from './reducer'
 import { NumberInputProps } from './types'

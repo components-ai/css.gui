@@ -1,4 +1,3 @@
-import * as React from 'react'
 import * as culori from 'culori'
 import { useEffect, useState } from 'react'
 import Checkerboard from './Checkerboard'
@@ -68,15 +67,14 @@ function SVPicker({ value, onChange }: InternalProps) {
       track={
         <>
           <div
-            style={{
+            sx={{
               position: 'absolute',
               inset: 0,
-              /** 
               '@supports (color: color(display-p3 1 1 1))': {
                 backgroundColor: fullValue,
                 backgroundImage:
                   'linear-gradient(to top, color(display-p3 0 0 0) 0%, color(display-p3 0 0 0 / 0) 100%),linear-gradient(to right, color(display-p3 1 1 1) 0%, color(display-p3 0 0 0 / 0) 100%)',
-              },*/
+              },
               backgroundColor: culori.formatHex(fullValue),
               backgroundImage:
                 'linear-gradient(to top, black 0%, transparent 100%),linear-gradient(to right, white 0%, transparent 100%)',
@@ -87,7 +85,7 @@ function SVPicker({ value, onChange }: InternalProps) {
       }
       thumb={
         <div
-          style={{
+          sx={{
             position: 'absolute',
             inset: 0,
             ...withFallback(formatP3(value), (color) => ({
@@ -115,15 +113,14 @@ function HueSlider({
       max={359}
       track={
         <div
-          style={{
+          sx={{
             position: 'absolute',
             inset: 0,
             // Traverse all main color points in even intervals
-            /**
             '@supports (color: color(display-p3 1 1 1))': {
               background:
                 'linear-gradient(to right, color(display-p3 1 0 0) 0%, color(display-p3 1 1 0) 17%, color(display-p3 0 1 0) 33%, color(display-p3 0 1 1) 50%, color(display-p3 0 0 1) 67%, color(display-p3 1 0 1) 83%, color(display-p3 1 0 0) 100%)',
-            },*/
+            },
             // Display fallback if P3 is not supported
             background:
               'linear-gradient(to right, red 0%, yellow 17%, lime 33%, cyan 50%, blue 67%, magenta 83%, red 100%)',
@@ -132,7 +129,7 @@ function HueSlider({
       }
       thumb={
         <div
-          style={{
+          sx={{
             position: 'absolute',
             inset: 0,
             ...withFallback(
@@ -164,9 +161,9 @@ function AlphaSlider({ value, onChange }: InternalProps) {
       step={0.01}
       track={
         <>
-          <Checkerboard style={{ position: 'absolute', inset: 0 }} />
+          <Checkerboard sx={{ position: 'absolute', inset: 0 }} />
           <div
-            style={{
+            sx={{
               position: 'absolute',
               inset: 0,
               ...withFallback(opaqueValue, (color) => ({
@@ -178,9 +175,9 @@ function AlphaSlider({ value, onChange }: InternalProps) {
       }
       thumb={
         <>
-          <Checkerboard style={{ position: 'absolute', inset: 0 }} />
+          <Checkerboard sx={{ position: 'absolute', inset: 0 }} />
           <div
-            style={{
+            sx={{
               position: 'absolute',
               inset: 0,
               ...withFallback(formatP3(value), (color) => ({
@@ -202,10 +199,10 @@ function formatP3(value: HsvValue) {
 function BoundaryOverlay({ hue }: { hue: number }) {
   const points = getBorderPoints(hue)
   return (
-    <svg viewBox="0 0 1 1" style={{ position: 'absolute', inset: 0 }}>
+    <svg viewBox="0 0 1 1" sx={{ position: 'absolute', inset: 0 }}>
       <polyline
         points={points.map(([x, y]: number[]) => `${x},${1 - y}`).join(' ')}
-        style={{ stroke: 'white', strokeWidth: 0.0025, fill: 'none' }}
+        sx={{ stroke: 'white', strokeWidth: 0.0025, fill: 'none' }}
       />
     </svg>
   )

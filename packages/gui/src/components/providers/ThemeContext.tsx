@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Theme } from '../types/theme'
+import { Theme } from '../../types/theme'
 
 const DEFAULT_THEME_CONTEXT: Theme = {}
 

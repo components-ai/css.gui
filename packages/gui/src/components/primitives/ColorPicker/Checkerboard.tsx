@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { HTMLAttributes } from 'react'
 
 interface Props extends HTMLAttributes<HTMLDivElement> {}
@@ -16,7 +15,7 @@ interface Props extends HTMLAttributes<HTMLDivElement> {}
 export default function Checkerboard(props: Props) {
   return (
     <div
-      style={{
+      sx={{
         /* tint image */
         backgroundImage: `linear-gradient(to right, rgba(255, 255, 255, 0.9) 0 100%),
           /* checkered effect */

@@ -1,4 +1,3 @@
-import * as React from 'react'
 import * as Tabs from '@radix-ui/react-tabs'
 import { compact } from 'lodash-es'
 import { ButtonHTMLAttributes, useState } from 'react'
@@ -58,7 +57,7 @@ export default function ColorPicker({
       <Tabs.Root value={tab} onValueChange={setTab}>
         {title && (
           <div
-            style={{
+            sx={{
               textTransform: 'uppercase',
               opacity: 0.7,
               fontWeight: 800,
@@ -69,14 +68,13 @@ export default function ColorPicker({
             {title}
           </div>
         )}
-        <div style={{ display: 'flex', marginBottom: 8, marginTop: 8 }}>
+        <div sx={{ display: 'flex', my: 1 }}>
           <Tabs.List
-            style={{
+            sx={{
               display: 'flex',
               justifyContent: 'left',
               gap: 2,
-              paddingTop: 8,
-              paddingBottom: 8,
+              py: 1,
             }}
           >
             {compact([
@@ -88,13 +86,13 @@ export default function ColorPicker({
                 <Tabs.Trigger
                   key={tab}
                   value={tab}
-                  style={{
+                  sx={{
                     color: 'text',
                     backgroundColor: 'transparent',
                     padding: 0,
                     border: 'none',
                     fontSize: 1,
-                    //'&[data-state="active"]': { fontWeight: 600 },
+                    '&[data-state="active"]': { fontWeight: 600 },
                   }}
                 >
                   {tab}
@@ -103,7 +101,7 @@ export default function ColorPicker({
             })}
           </Tabs.List>
           <div
-            style={{
+            sx={{
               marginLeft: 'auto',
               display: 'flex',
             }}
@@ -150,7 +148,7 @@ export default function ColorPicker({
 function ActionButton(props: ButtonHTMLAttributes<HTMLButtonElement>) {
   return (
     <IconButton
-      style={{
+      sx={{
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -158,9 +156,9 @@ function ActionButton(props: ButtonHTMLAttributes<HTMLButtonElement>) {
         borderRadius: '9999px',
         aspectRatio: '1 / 1',
         width: '1.5rem',
-        //':hover': {
-        //  backgroundColor: 'backgroundOffset',
-        //},
+        ':hover': {
+          backgroundColor: 'backgroundOffset',
+        },
       }}
       {...props}
     />

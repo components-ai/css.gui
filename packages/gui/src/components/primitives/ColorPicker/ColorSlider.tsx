@@ -1,4 +1,3 @@
-import * as React from 'react'
 import * as Slider from '@radix-ui/react-slider'
 import ColorMarker from './ColorMarker'
 
@@ -27,13 +26,13 @@ export default function ColorSlider({
       onValueChange={([value]) => {
         onValueChange(value)
       }}
-      style={{ position: 'relative', display: 'flex', alignItems: 'top' }}
+      sx={{ position: 'relative', display: 'flex', alignItems: 'top' }}
       // Stop propagation so this doesn't trigger restyle
       onKeyDown={(e) => e.stopPropagation()}
       {...props}
     >
       <Slider.Track
-        style={{
+        sx={{
           position: 'relative',
           display: 'inline-block',
           width: '100%',
@@ -43,12 +42,12 @@ export default function ColorSlider({
         {track}
       </Slider.Track>
       <Slider.Thumb
-        style={{
+        sx={{
           position: 'absolute',
           display: 'block',
-          //':focus': {
-          //  transform: 'scale(1.2)',
-          //},
+          ':focus': {
+            transform: 'scale(1.2)',
+          },
           /**
            * Radix adjust the thumbs so that they are flush with the end of the track like so:
            *

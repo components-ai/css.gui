@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { getColorMode, withFallback } from './util'
 import Checkerboard from './Checkerboard'
 import { AlertTriangle } from 'react-feather'
@@ -14,26 +13,25 @@ export default function ColorValueDisplay({ value, onChange }: Props) {
   const colorMode = getColorMode(value)
   return (
     <div
-      style={{
+      sx={{
         display: 'flex',
         alignItems: 'center',
         gap: 1,
-        marginTop: 8,
-        marginBottom: 8,
+        my: 1,
         width: '100%',
         overflow: 'hidden',
       }}
     >
       <div
-        style={{
+        sx={{
           position: 'relative',
           width: '2rem',
           height: '2rem',
         }}
       >
-        <Checkerboard style={{ position: 'absolute', inset: 0 }} />
+        <Checkerboard sx={{ position: 'absolute', inset: 0 }} />
         <div
-          style={{
+          sx={{
             position: 'absolute',
             inset: 0,
             ...withFallback(value, (color) => ({ backgroundColor: color })),
@@ -47,9 +45,8 @@ export default function ColorValueDisplay({ value, onChange }: Props) {
         type="text"
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        style={{
-          paddingTop: 8,
-          paddingBottom: 8,
+        sx={{
+          py: 1,
           width: '100%',
           position: 'relative',
           fontSize: '0.875rem',
@@ -71,7 +68,7 @@ function P3Popover({ mode }: { mode: string }) {
     <Popover.Root open={open} onOpenChange={setOpen}>
       <div onMouseOver={() => setOpen(true)} onMouseOut={() => setOpen(false)}>
         <Popover.Trigger
-          style={{
+          sx={{
             background: 'none',
             border: 'none',
             color: 'text',
@@ -80,17 +77,17 @@ function P3Popover({ mode }: { mode: string }) {
           <AlertTriangle size={16} />
         </Popover.Trigger>
         <Popover.Content
-          style={{
+          sx={{
             backgroundColor: 'background',
             border: '1px solid',
             borderColor: 'border',
             borderRadius: '0.5rem',
-            padding: 16,
+            padding: 2,
             fontSize: 1,
             maxWidth: '24rem',
-            //'> a': {
-            //color: 'text',
-            //},
+            '> a': {
+              color: 'text',
+            },
           }}
         >
           <strong>Note</strong>: <code>{mode}</code> is currently only supported

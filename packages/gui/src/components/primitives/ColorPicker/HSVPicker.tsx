@@ -1,4 +1,3 @@
-import * as React from 'react'
 import * as culori from 'culori'
 import Checkerboard from './Checkerboard'
 import ColorSlider from './ColorSlider'
@@ -66,7 +65,7 @@ function SVPicker({ value, onChange }: InternalProps) {
       }}
       track={
         <div
-          style={{
+          sx={{
             position: 'absolute',
             inset: 0,
             backgroundColor: fullValue,
@@ -77,7 +76,7 @@ function SVPicker({ value, onChange }: InternalProps) {
       }
       thumb={
         <div
-          style={{
+          sx={{
             position: 'absolute',
             inset: 0,
             backgroundColor: culori.formatHex(value),
@@ -103,7 +102,7 @@ function HueSlider({
       max={359}
       track={
         <div
-          style={{
+          sx={{
             position: 'absolute',
             inset: 0,
             // Traverse all main color points in even intervals
@@ -114,7 +113,7 @@ function HueSlider({
       }
       thumb={
         <div
-          style={{
+          sx={{
             position: 'absolute',
             inset: 0,
             backgroundColor: culori.formatHex({
@@ -141,9 +140,9 @@ function AlphaSlider({ value, onChange }: InternalProps) {
       step={0.01}
       track={
         <>
-          <Checkerboard style={{ position: 'absolute', inset: 0 }} />
+          <Checkerboard sx={{ position: 'absolute', inset: 0 }} />
           <div
-            style={{
+            sx={{
               position: 'absolute',
               inset: 0,
               background: `linear-gradient(to right, rgba(0%,0%,0%,0%) 0%, ${opaqueValue})`,
@@ -153,9 +152,9 @@ function AlphaSlider({ value, onChange }: InternalProps) {
       }
       thumb={
         <>
-          <Checkerboard style={{ position: 'absolute', inset: 0 }} />
+          <Checkerboard sx={{ position: 'absolute', inset: 0 }} />
           <div
-            style={{
+            sx={{
               position: 'absolute',
               inset: 0,
               backgroundColor: culori.formatHex8(value),

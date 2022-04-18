@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { useCallback, useEffect, useRef } from 'react'
 import { clamp } from './util'
 import ColorMarker from './ColorMarker'
@@ -54,7 +53,7 @@ export default function ColorArea({ value, onChange, track, thumb }: Props) {
   return (
     <div
       ref={canvas}
-      style={{
+      sx={{
         position: 'relative',
         width: '100%',
         aspectRatio: '1 / 1',

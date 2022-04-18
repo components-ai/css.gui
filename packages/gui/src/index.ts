@@ -2,7 +2,8 @@ export * as Primitives from './components/primitives'
 export { LengthInput } from './components/Length'
 export { ResponsiveInput } from './components/Responsive'
 export { UnitSelect } from './components/UnitSelect'
-export { ThemeProvider, useTheme } from './components/ThemeContext'
+export { ThemeProvider, useTheme } from './components/providers/ThemeContext'
+export { EditorProvider } from './components/providers/EditorContext'
 
 export * from './lib'
 

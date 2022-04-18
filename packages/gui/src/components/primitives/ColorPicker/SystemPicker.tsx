@@ -1,4 +1,3 @@
-import * as React from 'react'
 import ColorValueDisplay from './ValueDisplay'
 
 type Color = string
@@ -14,7 +13,7 @@ export default function SystemPicker({ value, onChange }: Props) {
       <ColorValueDisplay value={value} onChange={onChange} />
       {['currentColor', 'initial', 'inherit'].map((keyword) => {
         return (
-          <label key={keyword} style={{ display: 'block' }}>
+          <label key={keyword} sx={{ display: 'block' }}>
             <input
               type="radio"
               name="system"
