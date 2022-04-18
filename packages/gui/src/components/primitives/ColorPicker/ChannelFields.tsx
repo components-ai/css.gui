@@ -23,7 +23,6 @@ export function PropertyFields({
   value,
   onChange,
 }: Props & { mode: string }) {
-  console.log(HexInput)
   switch (mode) {
     case 'hex':
       return <HexInput value={value} onChange={onChange} />

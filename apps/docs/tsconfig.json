@@ -9,6 +9,7 @@
     "node_modules"
   ],
   "compilerOptions": {
-    "isolatedModules": true
+    "isolatedModules": true,
+    "jsx": "preserve"
   }
 }

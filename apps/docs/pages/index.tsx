@@ -2,11 +2,9 @@ import {
   ResponsiveInput,
   Length,
   LengthInput,
-  EditorProvider,
   ResponsiveLength,
   Primitives,
   Color,
-  Layout,
 } from 'gui'
 import { useState } from 'react'
 
@@ -48,53 +46,35 @@ export default function Docs() {
   }
 
   return (
-    <EditorProvider
-      theme={{
-        fontSizes: [
-          { id: '1', value: 16, unit: 'px' },
-          { id: '2', value: 24, unit: 'px' },
-          { id: '3', value: 32, unit: 'px' },
-          { id: '4', value: 48, unit: 'px' },
-          { id: '5', value: 64, unit: 'px' },
-        ],
-        lineHeights: [
-          { id: '1', value: 1, unit: 'number' },
-          { id: '2', value: 1.2, unit: 'number' },
-          { id: '3', value: 1.4, unit: 'number' },
-        ],
-      }}
-    >
-      <Layout>
-        <div style={{ display: 'flex' }}>
-          <div style={{ padding: 64, maxWidth: 256 }}>
-            <Primitives.ColorPopover value={color} onChange={setColor} />
-            <ResponsiveInput
-              Component={LengthInput}
-              label="Font size"
-              value={styles.fontSize}
-              onChange={(fontSize: Length | ResponsiveLength) =>
-                setStyles({ ...styles, fontSize })
-              }
-            />
-            <ResponsiveInput
-              Component={LengthInput}
-              label="Line height"
-              value={styles.lineHeight}
-              onChange={(lineHeight: Length | ResponsiveLength) =>
-                setStyles({ ...styles, lineHeight })
-              }
-            />
-            <pre>{JSON.stringify(styles, null, 2)}</pre>
-          </div>
-          <p style={getStylesForRender()}>
-            “The parameters comprise sequences which are theoretically infinite
-            but limits are, of course, set to them in practice. There is an
-            upward limit to size and certainly a downward one... Within these
-            sequences there are reasonable bounds; extremes set by technical and
-            functional experience”
-          </p>
-        </div>
-      </Layout>
-    </EditorProvider>
+    <div style={{ display: 'flex' }}>
+      <div style={{ padding: 64 }}>
+        <Primitives.ColorPopover value={color} onChange={setColor} />
+        <ResponsiveInput
+          Component={LengthInput}
+          label="Font size"
+          property="fontSize"
+          value={styles.fontSize}
+          onChange={(fontSize: Length | ResponsiveLength) =>
+            setStyles({ ...styles, fontSize })
+          }
+        />
+        <ResponsiveInput
+          Component={LengthInput}
+          label="Line height"
+          property="lineHeight"
+          value={styles.lineHeight}
+          onChange={(lineHeight: Length | ResponsiveLength) =>
+            setStyles({ ...styles, lineHeight })
+          }
+        />
+        <pre>{JSON.stringify(styles, null, 2)}</pre>
+      </div>
+      <p style={getStylesForRender()}>
+        “The parameters comprise sequences which are theoretically infinite but
+        limits are, of course, set to them in practice. There is an upward limit
+        to size and certainly a downward one... Within these sequences there are
+        reasonable bounds; extremes set by technical and functional experience”
+      </p>
+    </div>
   )
 }

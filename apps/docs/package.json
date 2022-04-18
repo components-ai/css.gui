@@ -10,6 +10,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@mdx-js/loader": "^2.1.1",
+    "@next/mdx": "^12.1.5",
     "gui": "*",
     "next": "12.1.4",
     "react": "18.0.0",

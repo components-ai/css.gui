@@ -15,7 +15,8 @@
     "module": "esnext",
     "resolveJsonModule": true,
     "isolatedModules": false,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "jsxImportSource": "theme-ui"
   },
   "include": ["src", "next-env.d.ts"],
   "exclude": ["node_modules"]
