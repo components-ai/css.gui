@@ -9,7 +9,7 @@ export const useTheme = (): Theme => React.useContext(ThemeContext)
 
 type ThemeProviderProps = {
   theme: Theme
-  children: JSX.Element
+  children: any
 }
 export const ThemeProvider = ({ theme, children }: ThemeProviderProps) => {
   return <ThemeContext.Provider value={theme}>{children}</ThemeContext.Provider>
