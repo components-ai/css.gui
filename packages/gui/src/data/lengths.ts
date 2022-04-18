@@ -1,5 +1,5 @@
 import { PercentageLengthUnits } from '../types/css'
-import { globalKeywords } from './global-keywords'
+import { GLOBAL_KEYWORDS } from './global-keywords'
 
 export const properties = {
   fontSize: {
@@ -15,15 +15,15 @@ export const properties = {
       'xxx-large',
       'smaller',
       'larger',
-      ...globalKeywords,
+      ...GLOBAL_KEYWORDS,
     ],
   },
   margin: {
     [PercentageLengthUnits.Pct]: true,
-    keywords: globalKeywords,
+    keywords: GLOBAL_KEYWORDS,
   },
   padding: {
     [PercentageLengthUnits.Pct]: true,
-    keywords: globalKeywords,
+    keywords: GLOBAL_KEYWORDS,
   },
 }

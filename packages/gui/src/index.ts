@@ -4,6 +4,7 @@ export { ResponsiveInput } from './components/Responsive'
 export { UnitSelect } from './components/UnitSelect'
 export { ThemeProvider, useTheme } from './components/providers/ThemeContext'
 export { EditorProvider } from './components/providers/EditorContext'
+export { Layout } from './components/ui/Layout'
 
 export * from './lib'
 

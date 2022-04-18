@@ -1,4 +1,4 @@
-export const globalKeywords = [
+export const GLOBAL_KEYWORDS = [
   'inherit',
   'initial',
   'revert',
