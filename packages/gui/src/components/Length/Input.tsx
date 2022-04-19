@@ -2,7 +2,6 @@ import * as React from 'react'
 import { randomElementID } from '../../lib'
 import { AbsoluteLengthUnits, Length, LengthUnit } from '../../types/css'
 import { Label, Number } from '../primitives'
-import { DraggableInput, NumberInput } from '../primitives/Number/Input'
 import { UnitSelect } from '../UnitSelect'
 import { reducer } from './reducer'
 import { State } from './types'
@@ -42,8 +41,10 @@ export const LengthInput = ({
     >
       <Label htmlFor={id}>{label ?? 'Number'}</Label>
       <Number
-        value={state.value}
+        id={id}
         key={state.key}
+        value={state.value}
+        step={1}
         property={property}
         onChange={(newValue: number) => {
           dispatch({
@@ -51,7 +52,6 @@ export const LengthInput = ({
             value: newValue,
           })
         }}
-        id={id}
       />
       <UnitSelect
         value={state.unit}

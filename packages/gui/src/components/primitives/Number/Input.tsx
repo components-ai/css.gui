@@ -8,7 +8,7 @@ type DraggableLabelProps = {
   value: number
 }
 
-export const DraggableInput = ({ step = 1, onUpdate, value }: DraggableLabelProps) => {
+export const DraggableInput = ({ value, onUpdate, step }: DraggableLabelProps) => {
   const [dragging, setDragging] = React.useState<boolean>(false)
   const initialValue = React.useRef<number>(value)
 
