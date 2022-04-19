@@ -24,6 +24,7 @@ export const LengthInput = ({
     value: value?.value || AbsoluteLengthUnits.Px,
     unit: value?.unit || 0,
     key: 0,
+    step: 1
   } as State)
   React.useEffect(() => {
     onChange({
@@ -44,6 +45,7 @@ export const LengthInput = ({
         id={id}
         key={state.key}
         value={state.value}
+        step={state.step}
         property={property}
         onChange={(newValue: number) => {
           dispatch({

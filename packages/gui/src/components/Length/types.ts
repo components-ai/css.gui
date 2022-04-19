@@ -4,6 +4,7 @@ export type State = {
   key: number
   value: number
   unit: LengthUnit
+  step: number
 }
 
 export type Action =
