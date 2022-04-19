@@ -14,8 +14,9 @@
     "esModuleInterop": true,
     "module": "esnext",
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve"
+    "isolatedModules": false,
+    "jsx": "preserve",
+    "jsxImportSource": "theme-ui"
   },
   "include": ["src", "next-env.d.ts"],
   "exclude": ["node_modules"]

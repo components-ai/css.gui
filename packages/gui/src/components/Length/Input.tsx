@@ -11,12 +11,14 @@ export type LengthInputProps = {
   value?: Length
   id?: string
   label?: string
+  property?: string
   onChange: (length: Length) => void
 }
 export const LengthInput = ({
   value,
   onChange,
   label,
+  property,
   id = randomElementID(),
 }: LengthInputProps) => {
   const [state, dispatch] = React.useReducer(reducer, {
@@ -24,7 +26,6 @@ export const LengthInput = ({
     unit: value?.unit || 0,
     key: 0,
   } as State)
-
   React.useEffect(() => {
     onChange({
       value: state.value,
@@ -43,6 +44,7 @@ export const LengthInput = ({
       <Number
         value={state.value}
         key={state.key}
+        property={property}
         onChange={(newValue: number) => {
           dispatch({
             type: 'CHANGED_INPUT_VALUE',
@@ -53,6 +55,7 @@ export const LengthInput = ({
       />
       <UnitSelect
         value={state.unit}
+        property={property}
         onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
           dispatch({
             type: 'CHANGED_UNIT_VALUE',

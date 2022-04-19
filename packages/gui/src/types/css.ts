@@ -34,8 +34,14 @@ export type LengthUnit =
   | FontRelativeLengthUnits.Em
   | FontRelativeLengthUnits.Rem
   | AbsoluteLengthUnits.Px
-
 export type LengthPercentageUnit = LengthUnit | PercentageLengthUnits.Pct
+export type FullLengthUnit =
+  | FontRelativeLengthUnits.Em
+  | FontRelativeLengthUnits.Rem
+  | AbsoluteLengthUnits.Px
+  | PercentageLengthUnits.Pct
+  | 'number'
+  | 'theme'
 
 export interface Length {
   value: number

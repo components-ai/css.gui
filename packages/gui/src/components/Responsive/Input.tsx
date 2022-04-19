@@ -2,7 +2,7 @@ import * as React from 'react'
 import { AbsoluteLengthUnits, Length, ResponsiveLength } from '../../types/css'
 import { Breakpoint } from '../../types/theme'
 import { LengthInputProps } from '../Length/Input'
-import { useTheme } from '../ThemeContext'
+import { useTheme } from '../providers/ThemeContext'
 
 const DEFAULT_BREAKPOINT_COUNT = 3
 // TODO: Base this on the type of property
@@ -12,6 +12,7 @@ type ResponsiveInputProps = {
   value?: Length | ResponsiveLength
   onChange: (newValue: Length | ResponsiveLength) => void
   label: string
+  property?: string
   // TODO: Type this component
   Component: React.ComponentType<LengthInputProps>
 }
@@ -20,6 +21,7 @@ export const ResponsiveInput = ({
   onChange,
   label,
   Component,
+  property,
 }: ResponsiveInputProps) => {
   const { breakpoints } = useTheme()
   const breakpointCount = breakpoints?.length || DEFAULT_BREAKPOINT_COUNT
@@ -58,11 +60,17 @@ export const ResponsiveInput = ({
             value={value[i] ?? null}
             onChange={handleResponsiveChange(i)}
             label={i.toString()}
+            property={property}
           />
         )
       })
   ) : (
-    <Component value={value} onChange={handleChange} label="All" />
+    <Component
+      value={value}
+      onChange={handleChange}
+      label="All"
+      property={property}
+    />
   )
 
   return (

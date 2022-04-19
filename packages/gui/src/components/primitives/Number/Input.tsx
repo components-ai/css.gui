@@ -1,5 +1,4 @@
 import * as React from 'react'
-
 import { NumberInputProps } from './types'
 import { useDrag } from 'react-use-gesture'
 

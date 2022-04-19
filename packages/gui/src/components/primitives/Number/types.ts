@@ -6,6 +6,7 @@ export type NumberInputProps = {
   onChange: (newNumber: number) => void
   id?: string,
   step?: number,
+  property?: string
 }
 
 export type CursorProps = {
