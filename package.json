@@ -13,6 +13,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "clean": "yarn turbo run clean && rm -rf node_modules",
     "nuke": "yarn clean && yarn",
+    "test": "yarn pkg:test && turbo run test",
     "pkg:test": "manypkg check",
     "pkg:fix": "manypkg fix"
   },
