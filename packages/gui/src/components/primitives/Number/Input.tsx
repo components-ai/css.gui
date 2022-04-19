@@ -9,17 +9,28 @@ type DraggableLabelProps = {
   value: number
 }
 
-export const DraggableInput = ({ step = 1, onUpdate, value }: DraggableLabelProps) => {
+export const DraggableInput = ({ step = 0.375, onUpdate, value }: DraggableLabelProps) => {
   const [dragging, setDragging] = React.useState<boolean>(false)
-  const bind = useDrag(({ dragging, first, tap, distance, delta: [dx] }) => {
-      if (first || tap) return
-      
-      setDragging(dragging)
-      const v = typeof(value) === 'string' ? parseFloat(value) : value
-      const movement = distance * step
-      const newValue = v + (movement * dx < 0 ? -1 : 1)
+  // const [initValue, setInitValue] = React.useState<number>(value)
+  const initialValue = React.useRef<number>(value)
 
-      onUpdate(Math.round(newValue))
+  const bind = useDrag(({ dragging, first, tap, movement: [dx] }) => {
+      const parsedValue = typeof(value) === 'string'
+        ? parseFloat(value)
+        : value
+
+      setDragging(dragging)
+
+      if (tap) return
+      if (first) {
+        initialValue.current = parsedValue
+      }      
+
+      const deltaValue = Math.round(dx) * step
+      console.log(dx, step, deltaValue)
+      const newValue = initialValue.current + deltaValue
+
+      onUpdate(newValue)
     },
     { pointerEvents: true }
   )
