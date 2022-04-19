@@ -5,6 +5,7 @@ export type NumberInputProps = {
   value: any
   onChange: (newNumber: number) => void
   id?: string
+  step?: number
   property?: string
 }
 
