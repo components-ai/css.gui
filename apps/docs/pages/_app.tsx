@@ -82,6 +82,7 @@ const App = ({ Component, pageProps }: AppProps) => {
                 },
                 '> *.full-bleed': {
                   maxWidth: '100%',
+                  px: 0,
                 },
               }}
             >

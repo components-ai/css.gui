@@ -74,8 +74,8 @@ export const ResponsiveInput = ({
   )
 
   return (
-    <div style={{ border: 'thin solid #ccc' }}>
-      <h3 style={{ lineHeight: 1, padding: 0, margin: 0, fontSize: 16 }}>
+    <div sx={{ py: 2 }}>
+      <h3 sx={{ lineHeight: 1, padding: 0, margin: 0, fontSize: 16 }}>
         {label}
         {isResponsiveControls ? (
           <button onClick={handleSwitchFromResponsive}>x</button>
