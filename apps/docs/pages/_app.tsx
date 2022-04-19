@@ -1,9 +1,10 @@
 import { EditorProvider } from 'gui'
 import { AppProps } from 'next/app'
-import Link from 'next/link'
 import { ThemeProvider } from 'theme-ui'
 import theme from '../theme'
-import { NavItem, NavSectionTitle } from '../components/Nav'
+import { Sidebar } from '../components/Sidebar'
+import { PageWrap } from '../components/PageWrap'
+import { Layout } from '../components/Layout'
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
@@ -24,72 +25,12 @@ const App = ({ Component, pageProps }: AppProps) => {
       }}
     >
       <ThemeProvider theme={theme}>
-        <>
-          <header
-            sx={{
-              fontFamily: 'body',
-              borderBottom: 'thin solid',
-              borderColor: 'border',
-              px: [2, 3, 4],
-              py: 2,
-              fontSize: [2, 3],
-            }}
-          >
-            <Link href="/" passHref={true}>
-              <a
-                sx={{ fontWeight: 500, color: 'text', textDecoration: 'none' }}
-              >
-                CSS GUI
-              </a>
-            </Link>
-          </header>
-          <div
-            sx={{
-              fontFamily: 'body',
-              display: 'flex',
-              flexDirection: ['column', 'row'],
-            }}
-          >
-            <nav
-              sx={{
-                minHeight: '100vh',
-                width: ['100%', 256],
-                minWidth: ['100%', 256],
-                borderRight: 'thin solid',
-                borderColor: 'border',
-                pt: [2, 3],
-              }}
-            >
-              <NavSectionTitle>Overview</NavSectionTitle>
-              <NavItem href="/introduction">Introduction</NavItem>
-              <NavItem href="/getting-started">Getting Started</NavItem>
-              <NavSectionTitle>Components</NavSectionTitle>
-              <NavItem href="/components/editor">Editor</NavItem>
-              <NavSectionTitle>Inputs</NavSectionTitle>
-              <NavItem href="/inputs/number">Number</NavItem>
-              <NavItem href="/inputs/color-picker">Color Picker</NavItem>
-              <NavItem href="/inputs/color-popover">Color Popover</NavItem>
-              <NavItem href="/inputs/unit-select">Unit Select</NavItem>
-            </nav>
-            <div
-              sx={{
-                py: [3, 4, 5],
-                width: '100%',
-                '> *': {
-                  px: [3, 4, 5],
-                  maxWidth: 800,
-                  mx: 'auto',
-                },
-                '> *.full-bleed': {
-                  maxWidth: '100%',
-                  px: 0,
-                },
-              }}
-            >
-              <Component {...pageProps} />
-            </div>
-          </div>
-        </>
+        <Layout>
+          <Sidebar />
+          <PageWrap>
+            <Component {...pageProps} />
+          </PageWrap>
+        </Layout>
       </ThemeProvider>
     </EditorProvider>
   )

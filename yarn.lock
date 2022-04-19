@@ -1630,7 +1630,7 @@ css-tree@^2.1.0:
     mdn-data "2.0.27"
     source-map-js "^1.0.1"
 
-csstype@^3.0.10, csstype@^3.0.2, csstype@^3.0.4:
+csstype@^3.0.10, csstype@^3.0.11, csstype@^3.0.2, csstype@^3.0.4:
   version "3.0.11"
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.0.11.tgz#d66700c5eacfac1940deb4e3ee5642792d85cd33"
   integrity sha512-sa6P2wJ+CAbgyy4KFssIb/JNMLxFvKF1pCYCSXS8ZMuqZnMsrxqI2E5sPyoTpxoPU/gVZMzr2zjOfg8GIZOMsw==

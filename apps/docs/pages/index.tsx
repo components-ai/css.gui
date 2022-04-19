@@ -5,6 +5,8 @@ import {
   ResponsiveLength,
   Primitives,
   Color,
+  Styles,
+  toCSSObject,
 } from 'gui'
 import { useState } from 'react'
 import { FirstParagraph } from '../components/FirstParagraph'
@@ -16,34 +18,13 @@ const initialStyles: StyleObject = {
 }
 
 export default function Docs() {
-  const [styles, setStyles] = useState<StyleObject>(initialStyles)
+  const [styles, setStyles] = useState<Styles>(initialStyles)
   const [color, setColor] = useState<Color>('tomato')
 
   const getStylesForRender = () => {
-    let fontSize = null
-    let lineHeight = null
-
-    if (Array.isArray(styles.fontSize)) {
-      const f: Length = styles.fontSize[styles.fontSize.length - 1] || {
-        value: 16,
-        unit: 'px',
-      }
-      fontSize = f.value + f.unit
-    } else {
-      fontSize = styles.fontSize.value + styles.fontSize.unit
-    }
-
-    if (Array.isArray(styles.lineHeight)) {
-      const l: Length = styles.lineHeight[styles.lineHeight.length - 1] || {
-        value: 1.4,
-        unit: '',
-      }
-      lineHeight = l.value + l.unit
-    } else {
-      lineHeight = styles.lineHeight.value
-    }
-
-    return { fontSize, lineHeight, color }
+    const convertedStyles = toCSSObject({ ...styles, color })
+    console.log(convertedStyles)
+    return convertedStyles
   }
 
   return (
@@ -92,7 +73,7 @@ export default function Docs() {
             }
           />
         </div>
-        <p style={getStylesForRender()}>
+        <p sx={getStylesForRender()}>
           “The parameters comprise sequences which are theoretically infinite
           but limits are, of course, set to them in practice. There is an upward
           limit to size and certainly a downward one... Within these sequences

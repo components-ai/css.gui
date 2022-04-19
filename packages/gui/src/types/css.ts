@@ -1,17 +1,17 @@
+import * as CSS from 'csstype'
+
 export const enum FontRelativeLengthUnits {
   Ch = 'ch',
   Em = 'em',
   Ex = 'ex',
   Rem = 'rem',
 }
-
 export const enum ViewportPercentageLengthUnits {
   Vh = 'vh',
   Vw = 'vw',
   VMin = 'vmin',
   VMax = 'vmax',
 }
-
 export const enum AbsoluteLengthUnits {
   Px = 'px',
   Cm = 'cm',
@@ -20,11 +20,12 @@ export const enum AbsoluteLengthUnits {
   Pc = 'pc',
   Pt = 'pt',
 }
-
 export const enum PercentageLengthUnits {
   Pct = '%',
 }
-
+export const enum UnitlessUnits {
+  Number = 'number',
+}
 export const enum ThemeUnits {
   Theme = 'theme',
 }
@@ -40,8 +41,8 @@ export type FullLengthUnit =
   | FontRelativeLengthUnits.Rem
   | AbsoluteLengthUnits.Px
   | PercentageLengthUnits.Pct
-  | 'number'
-  | 'theme'
+  | UnitlessUnits.Number
+  | ThemeUnits.Theme
 
 export interface Length {
   value: number
@@ -59,4 +60,11 @@ export interface CSSKeywordValue {
   value: string
 }
 
-export type Color = string
+export type Styles = CSS.PropertiesFallback
+
+export type ColorObject = {
+  id?: string
+  value: string
+  path?: string
+}
+export type Color = string | ColorObject
