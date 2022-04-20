@@ -46,6 +46,8 @@ export const LengthInput = ({
         key={state.key}
         value={state.value}
         step={state.step}
+        min={state.min}
+        max={state.max}
         property={property}
         onChange={(newValue: number) => {
           dispatch({

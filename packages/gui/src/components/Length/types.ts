@@ -5,6 +5,8 @@ export type State = {
   value: number
   unit: LengthUnit
   step: number
+  min?: number
+  max?: number
 }
 
 export type Action =
