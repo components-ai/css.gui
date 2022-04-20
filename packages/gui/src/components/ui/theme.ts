@@ -112,7 +112,6 @@ export const theme: Theme = {
       },
       lightpurple: {
         background: '#e4d0ff',
-        //background: '#f7f1ff',
         backgroundOffset: '#d0afff',
         text: '#3b186c',
         muted: '#9a0ea5',
@@ -381,5 +380,85 @@ export const theme: Theme = {
       '#aef0f0',
       '#ebfdfd',
     ],
+  },
+  lineHeights: {
+    heading: 1.25,
+    body: 1.5,
+  },
+  styles: {
+    root: {
+      fontFamily: 'body',
+      lineHeight: 'body',
+    },
+    h1: {
+      mt: [5, 6],
+      fontSize: [3, 4, 5],
+      fontFamily: 'heading',
+      fontWeight: 500,
+      lineHeight: 'heading',
+      color: 'tomato',
+    },
+    h2: {
+      fontSize: [2, 3, 4],
+      fontFamily: 'heading',
+      fontWeight: 'heading',
+      lineHeight: 'heading',
+    },
+    h3: {
+      mt: 5,
+      fontSize: [2, 2, 3],
+      fontFamily: 'heading',
+      fontWeight: 'heading',
+      lineHeight: 'heading',
+    },
+    h4: {
+      fontSize: 2,
+      fontFamily: 'heading',
+      fontWeight: 'heading',
+      lineHeight: 'heading',
+    },
+    h5: {
+      fontSize: 1,
+      fontFamily: 'heading',
+      lineHeight: 'heading',
+    },
+    h6: {
+      fontSize: 0,
+      fontFamily: 'heading',
+      fontWeight: 'heading',
+      lineHeight: 'heading',
+    },
+    hr: {
+      border: 'thin solid #ccc',
+      my: [3, 4, 5],
+    },
+    a: {
+      color: 'primary',
+      textDecoration: 'none',
+    },
+    p: {
+      maxWidth: '34em',
+      lineHeight: 'body',
+      fontSize: 18,
+    },
+    pre: {
+      backgroundColor: '#fafafa',
+      color: '#111',
+      p: 3,
+    },
+    li: {
+      lineHeight: 'body',
+    },
+    img: {
+      display: 'block',
+      width: '100%',
+      maxWidth: '48rem',
+    },
+    code: {
+      fontSize: 14,
+      maxWidth: '100%',
+      overflow: 'scroll',
+      display: 'block',
+    },
   },
 }

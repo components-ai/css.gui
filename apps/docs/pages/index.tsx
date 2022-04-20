@@ -1,3 +1,5 @@
+import { useState } from 'react'
+import Link from 'next/link'
 import {
   ResponsiveInput,
   Length,
@@ -8,7 +10,6 @@ import {
   Styles,
   toCSSObject,
 } from 'gui'
-import { useState } from 'react'
 import { FirstParagraph } from '../components/FirstParagraph'
 
 type StyleObject = Record<string, Length | ResponsiveLength>
@@ -23,16 +24,17 @@ export default function Docs() {
 
   const getStylesForRender = () => {
     const convertedStyles = toCSSObject({ ...styles, color })
-    console.log(convertedStyles)
     return convertedStyles
   }
 
   return (
     <>
-      <h1>CSS GUI</h1>
+      <h1>Visual styling controls for the web</h1>
       <FirstParagraph>
-        A visual toolkit for editing element styles on the web. It's
-        theme-aware, performant, and can be composed into any React app.
+        <p>
+          A powerful, extensible, and themeable CSS editor for creative coding
+          and end-user styling
+        </p>
       </FirstParagraph>
 
       <div
@@ -79,6 +81,17 @@ export default function Docs() {
           limit to size and certainly a downward one... Within these sequences
           there are reasonable bounds; extremes set by technical and functional
           experience”
+          <br /> <br />
+          <em>
+            In{' '}
+            <Link
+              href="https://www.lars-mueller-publishers.com/designing-programmes-0"
+              passHref={true}
+            >
+              <a style={{ color }}>Designing Programmes</a>
+            </Link>{' '}
+            by Karl Gerstner
+          </em>
         </p>
       </div>
       <div className="full-bleed">
@@ -93,6 +106,7 @@ export default function Docs() {
           {JSON.stringify(styles, null, 2)}
         </pre>
       </div>
+      <h2></h2>
     </>
   )
 }

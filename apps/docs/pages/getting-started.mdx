@@ -3,3 +3,39 @@ import { FirstParagraph } from '../components/FirstParagraph'
 # Getting Started
 
 <FirstParagraph>Get going with CSS GUI in a few steps.</FirstParagraph>
+
+## Installation
+
+Install CSS GUI with npm:
+
+```sh
+npm install --save css-gui
+```
+
+Or yarn:
+
+```sh
+yarn add css-gui
+```
+
+## Usage
+
+Import the `Editor` component and `useInlineStyles` to transform the style object
+to something you can pass directly to your styled element.
+
+```js
+import { useState } from 'react'
+import { Editor, useInlineStyles } from 'css-gui'
+
+export const MyEditor = () => {
+  const [styles, setStyles] = useState({})
+  const inlineStyles = useInlineStyles(styles)
+
+  return (
+    <>
+      <Editor element="p" value={styles} onChange={setStyles} />
+      <p style={inlineStyles}>Hello, world!</p>
+    </>
+  )
+}
+```

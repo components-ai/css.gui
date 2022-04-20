@@ -6,6 +6,8 @@ export { ThemeProvider, useTheme } from './components/providers/ThemeContext'
 export { EditorProvider } from './components/providers/EditorContext'
 export { Layout } from './components/ui/Layout'
 
+export { theme } from './components/ui/theme'
+
 export * from './lib'
 
 export * from './types/theme'
