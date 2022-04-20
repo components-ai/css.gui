@@ -40,8 +40,11 @@ export const DraggableInput = ({ value, onUpdate, step, min, max }: DraggableLab
       type="number"
       value={value}
       onChange={({ currentTarget: { value: inputValue } }) => {
-        // min max here too
-        onUpdate(inputValue)
+        let newValue = parseFloat(inputValue)
+        if (min || min === 0) newValue = Math.max(newValue, min)
+        if (max) newValue = Math.min(newValue, max)
+
+        onUpdate(newValue)
       }}
       style={{
         cursor: dragging ? 'ew-resize' : 'default'
@@ -57,8 +60,8 @@ export const NumberInput = ({ value, onChange, step = 1, min, max }: NumberInput
       <DraggableInput
         value={value}
         step={step}
-        min={0}
-        max={128}
+        min={min}
+        max={max}
         onUpdate={onChange}
       />
     </>
