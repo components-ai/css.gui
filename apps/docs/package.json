@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "@types/node": "^17.0.25",
-    "@types/react": "18.0.1",
+    "@types/react": "18.0.5",
     "config": "*",
     "eslint": "8.13.0",
     "tsconfig": "*",
