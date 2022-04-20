@@ -3,10 +3,10 @@ import * as CSS from 'csstype'
 export type ColorObject = {
   id?: string
   value: string
-  path?: string
+  themePath?: string
 }
 
-export type Color = string | ColorObject
+export type Color = string
 
 export const enum FontRelativeLengthUnits {
   Ch = 'ch',
