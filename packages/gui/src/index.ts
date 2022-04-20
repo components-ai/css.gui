@@ -1,4 +1,5 @@
 export { Editor } from './components/Editor'
+export { RenderElement } from './components/RenderElement'
 export * from './components/editors'
 
 export * as Primitives from './components/primitives'

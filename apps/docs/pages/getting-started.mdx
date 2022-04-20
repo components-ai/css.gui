@@ -20,21 +20,22 @@ yarn add css-gui
 
 ## Usage
 
-Import the `Editor` component and `useInlineStyles` to transform the style object
-to something you can pass directly to your styled element.
+Import the `Editor` component and `RenderElement` to initialize controls
+and then render the element styles to your canvas.
 
 ```js
 import { useState } from 'react'
-import { Editor, useInlineStyles } from 'css-gui'
+import { Editor, RenderElement } from 'css-gui'
 
 export const MyEditor = () => {
   const [styles, setStyles] = useState({})
-  const inlineStyles = useInlineStyles(styles)
 
   return (
     <>
-      <Editor element="p" value={styles} onChange={setStyles} />
-      <p style={inlineStyles}>Hello, world!</p>
+      <Editor value={styles} onChange={setStyles} />
+      <RenderElement tagName="p" styles={styles}>
+        Hello, world!
+      </RenderElement>
     </>
   )
 }

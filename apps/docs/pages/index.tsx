@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Link from 'next/link'
-import { Editor, toCSSObject } from 'gui'
+import { Editor, RenderElement } from 'gui'
 import { FirstParagraph } from '../components/FirstParagraph'
 
 const initialStyles: any = {
@@ -12,11 +12,6 @@ const initialStyles: any = {
 export default function Docs() {
   const [styles, setStyles] = useState<any>(initialStyles)
 
-  const getStylesForRender = () => {
-    const convertedStyles = toCSSObject(styles)
-    return convertedStyles
-  }
-
   return (
     <>
       <h1>Visual styling controls for the web</h1>
@@ -26,7 +21,6 @@ export default function Docs() {
           and end-user styling
         </p>
       </FirstParagraph>
-
       <div
         className="full-bleed"
         sx={{
@@ -41,7 +35,7 @@ export default function Docs() {
         <div sx={{ px: [2, 3, 4] }}>
           <Editor styles={styles} onChange={setStyles} />
         </div>
-        <p sx={getStylesForRender()}>
+        <RenderElement tagName="p" styles={styles}>
           “The parameters comprise sequences which are theoretically infinite
           but limits are, of course, set to them in practice. There is an upward
           limit to size and certainly a downward one... Within these sequences
@@ -58,7 +52,7 @@ export default function Docs() {
             </Link>{' '}
             by Karl Gerstner
           </em>
-        </p>
+        </RenderElement>
       </div>
       <div className="full-bleed">
         <pre
