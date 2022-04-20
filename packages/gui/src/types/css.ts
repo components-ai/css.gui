@@ -47,6 +47,7 @@ export type FullLengthUnit =
 export interface Length {
   value: number
   unit: string
+  themeUnit?: string
 }
 
 export type ResponsiveLength = Length[]

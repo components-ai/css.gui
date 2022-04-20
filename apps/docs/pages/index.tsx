@@ -23,7 +23,6 @@ export default function Docs() {
 
   const getStylesForRender = () => {
     const convertedStyles = toCSSObject({ ...styles, color })
-    console.log(convertedStyles)
     return convertedStyles
   }
 

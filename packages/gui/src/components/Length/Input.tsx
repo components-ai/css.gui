@@ -1,11 +1,23 @@
 import * as React from 'react'
 import { randomElementID } from '../../lib'
-import { AbsoluteLengthUnits, Length, LengthUnit } from '../../types/css'
+import { AbsoluteLengthUnits, Length, LengthUnit, ThemeUnits } from '../../types/css'
 import { Label, Number } from '../primitives'
 import { UnitSelect } from '../UnitSelect'
 import { reducer } from './reducer'
 import { State } from './types'
+import { useTheme } from '../providers/ThemeContext'
+import { Theme } from '../../types/theme'
 
+const themeValuesForProperty = (property: string, theme: Theme): any[] => {
+  switch (property) {
+    case 'fontSize':
+      return theme.fontSizes || []
+    case 'lineHeight':
+      return theme.lineHeights || []
+    default:
+      return []
+  }
+}
 export type LengthInputProps = {
   value?: Length
   id?: string
@@ -32,7 +44,10 @@ export const LengthInput = ({
       unit: state.unit,
     })
   }, [state])
-
+  
+  const theme = useTheme()
+  const propertyValues = themeValuesForProperty(property!, theme)
+  
   return (
     <div
       style={{
@@ -41,6 +56,25 @@ export const LengthInput = ({
       }}
     >
       <Label htmlFor={id}>{label ?? 'Number'}</Label>
+      {state.unit === ThemeUnits.Theme ? (
+        <select
+          onChange={(e) => {
+            const themeFont = propertyValues?.find((f) => f.id === e.target.value)
+
+            if (themeFont) {
+              dispatch({
+                type: 'CHANGED_INPUT_VALUE',
+                value: themeFont.value,
+                themeUnit: themeFont.unit
+              })
+            }
+          }}
+        >
+          {propertyValues?.map(({ value, unit, id }) => {
+            return <option value={id}>{value}{unit}</option>
+          })}
+        </select>
+      ) :
       <Number
         id={id}
         key={state.key}
@@ -53,7 +87,7 @@ export const LengthInput = ({
             value: newValue,
           })
         }}
-      />
+      />}
       <UnitSelect
         value={state.unit}
         property={property}

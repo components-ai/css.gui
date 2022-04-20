@@ -5,7 +5,11 @@ import { State, Action } from './types'
 export const reducer = (state: State, action: Action): State => {
   switch (action.type) {
     case 'CHANGED_INPUT_VALUE': {
-      return { ...state, value: action.value }
+      return {
+        ...state,
+        value: action.value,
+        themeUnit: action.themeUnit
+      }
     }
     case 'CHANGED_UNIT_VALUE': {
       return {

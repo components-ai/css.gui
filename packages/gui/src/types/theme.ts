@@ -1,10 +1,10 @@
-import { Color, FullLengthUnit, Length } from './css'
+import { Color, FullLengthUnit, Length, LengthUnit } from './css'
 
-export interface Theme {
-  borderRadius?: BorderRadius[]
-  borderStyles?: BorderStyle[]
-  borderWidths?: BorderWidth[]
-  boxShadows?: BoxShadowEntry[]
+export type Theme = {
+  borderRadius?: BorderRadius[],
+  borderStyles?: BorderStyle[],
+  borderWidths?: BorderWidth[],
+  boxShadows?: BoxShadowEntry[],
   breakpoints?: Breakpoint[]
   colors?: ColorGroup[]
   durations?: Duration[]
@@ -18,24 +18,24 @@ export interface Theme {
   textShadows?: TextShadowEntry[]
 }
 
-export interface BorderRadius {
+export type BorderRadius = {
   id: string
   value: number
   unit: string
 }
 
-export interface BorderStyle {
+export type BorderStyle = {
   id: string
   value: string
 }
 
-export interface BorderWidth {
+export type BorderWidth = {
   id: string
   value: number
   unit: string
 }
 
-export interface BoxShadow {
+export type BoxShadow = {
   inset?: boolean
   offsetX: Length
   offsetY: Length
@@ -44,117 +44,117 @@ export interface BoxShadow {
   color: Color
 }
 
-export interface BoxShadowEntry {
+export type BoxShadowEntry = {
   id: string
   value: BoxShadow[]
   name: string
 }
 
-export interface Breakpoint {
+export type Breakpoint = {
   id: string
   value: number
   unit: string
 }
 
-export interface ColorMode {
+export type ColorMode = {
   id: string
   name: string
   colors: ColorModeColor[]
 }
 
-export interface ColorModeColor {
+export type ColorModeColor = {
   id: string
   name: string
   value: string
 }
 
-export interface ColorGroup {
+export type ColorGroup = {
   id: string
   name: string
   colors: ColorGroupColor[]
 }
 
-interface ColorGroupColor {
+type ColorGroupColor = {
   id: string
   value: string
 }
 
-export interface Duration {
+export type Duration = {
   id: string
   value: number
   unit: string
 }
 
-export interface FontFamily {
+export type FontFamily = {
   id: string
   name: string
   stack: string
   meta?: FontMeta
 }
 
-interface FontMeta {
+type FontMeta = {
   primaryFont?: string
   weights: FontWeight[]
 }
 
-interface FontWeight {
+type FontWeight = {
   id: string
   weight: string
   active?: boolean
 }
 
-export interface FontSize {
+export type FontSize = {
   id: string
   value: number
-  unit: string
+  unit: LengthUnit
 }
 
-export interface Gradient {
+export type Gradient = {
   id: string
   value: string
   name: string
 }
 
-export interface LetterSpacing {
+export type LetterSpacing = {
   id: string
   value: number
   name: string
   unit: string
 }
 
-export interface LineHeight {
+export type LineHeight = {
   id: string
   value: number
   name?: string
   unit: FullLengthUnit
 }
 
-export interface Spacing {
+export type Spacing = {
   id: string
   value: number
   unit: string
 }
 
-export interface TextShadow {
+export type TextShadow = {
   offsetX: Length
   offsetY: Length
   blur: Length
   color: Color
 }
 
-export interface TextShadowEntry {
+export type TextShadowEntry = {
   id: string
   name: string
   value: TextShadow[]
 }
 
-export interface TextStyle {
+export type TextStyle = {
   id: string
   name: string
   styles: TextStyleProperty[]
 }
 
-export interface TextStyleProperty {
+export type TextStyleProperty = {
   id: string
   aliasId?: string
   name: string
