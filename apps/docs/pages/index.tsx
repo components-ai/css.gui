@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Link from 'next/link'
-import { LineHeightInput, FontSizeInput, Editor, toCSSObject } from 'gui'
+import { Editor, toCSSObject } from 'gui'
 import { FirstParagraph } from '../components/FirstParagraph'
 
 const initialStyles: any = {
@@ -32,7 +32,6 @@ export default function Docs() {
         sx={{
           mt: 5,
           display: 'flex',
-          alignItems: 'center',
           py: [2, 3, 4],
           borderTopWidth: 'thin',
           borderTopStyle: 'solid',
@@ -41,14 +40,6 @@ export default function Docs() {
       >
         <div sx={{ px: [2, 3, 4] }}>
           <Editor styles={styles} onChange={setStyles} />
-          <FontSizeInput
-            value={styles.fontSize}
-            onChange={(fontSize: any) => setStyles({ ...styles, fontSize })}
-          />
-          <LineHeightInput
-            value={styles.lineHeight}
-            onChange={(lineHeight: any) => setStyles({ ...styles, lineHeight })}
-          />
         </div>
         <p sx={getStylesForRender()}>
           “The parameters comprise sequences which are theoretically infinite

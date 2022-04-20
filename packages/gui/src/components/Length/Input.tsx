@@ -33,10 +33,12 @@ export const LengthInput = ({
     step: 1,
   } as State)
   React.useEffect(() => {
-    onChange({
-      value: state.value,
-      unit: state.unit,
-    })
+    if (state.value !== value?.value || state.unit !== value?.unit) {
+      onChange({
+        value: state.value,
+        unit: state.unit,
+      })
+    }
   }, [state])
 
   return (
