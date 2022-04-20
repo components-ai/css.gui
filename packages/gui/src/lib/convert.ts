@@ -1,5 +1,6 @@
 import {
   AbsoluteLengthUnits,
+  CSSUnitValue,
   FontRelativeLengthUnits,
   Length,
   LengthUnit,
@@ -8,8 +9,11 @@ import {
 const BASE_FONT_SIZE = 16
 export const convertLengthUnits = (
   newUnit: LengthUnit,
-  value: Length
+  providedValue: Length
 ): number => {
+  const value: CSSUnitValue =
+    providedValue === '0' ? { value: 0, unit: 'number' } : providedValue
+
   if (newUnit === AbsoluteLengthUnits.Px) {
     if (
       value.unit === FontRelativeLengthUnits.Em ||

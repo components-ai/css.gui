@@ -15,12 +15,14 @@ type ResponsiveInputProps = {
   property?: string
   // TODO: Type this component
   Component: React.ComponentType<LengthInputProps>
+  componentProps?: any
 }
 export const ResponsiveInput = ({
   value,
   onChange,
   label,
   Component,
+  componentProps = {},
   property,
 }: ResponsiveInputProps) => {
   const { breakpoints } = useTheme()
@@ -61,6 +63,7 @@ export const ResponsiveInput = ({
             onChange={handleResponsiveChange(i)}
             label={i.toString()}
             property={property}
+            {...componentProps}
           />
         )
       })
@@ -70,6 +73,7 @@ export const ResponsiveInput = ({
       onChange={handleChange}
       label="All"
       property={property}
+      {...componentProps}
     />
   )
 

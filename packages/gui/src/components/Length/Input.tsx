@@ -1,30 +1,37 @@
 import * as React from 'react'
 import { randomElementID } from '../../lib'
-import { AbsoluteLengthUnits, Length, LengthUnit } from '../../types/css'
+import {
+  AbsoluteLengthUnits,
+  CSSUnitValue,
+  Length,
+  LengthUnit,
+} from '../../types/css'
 import { Label, Number } from '../primitives'
 import { UnitSelect } from '../UnitSelect'
 import { reducer } from './reducer'
 import { State } from './types'
 
 export type LengthInputProps = {
-  value?: Length
+  value: Length
   id?: string
   label?: string
   property?: string
   onChange: (length: Length) => void
 }
 export const LengthInput = ({
-  value,
+  value: providedValue,
   onChange,
   label,
   property,
   id = randomElementID(),
 }: LengthInputProps) => {
+  const value: CSSUnitValue =
+    providedValue === '0' ? { value: 0, unit: 'number' } : providedValue
   const [state, dispatch] = React.useReducer(reducer, {
     value: value?.value || AbsoluteLengthUnits.Px,
     unit: value?.unit || 0,
     key: 0,
-    step: 1
+    step: 1,
   } as State)
   React.useEffect(() => {
     onChange({
