@@ -1,3 +1,6 @@
+export { Editor } from './components/Editor'
+export * from './components/editors'
+
 export * as Primitives from './components/primitives'
 export { LengthInput } from './components/Length'
 export { ResponsiveInput } from './components/Responsive'

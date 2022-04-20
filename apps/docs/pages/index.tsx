@@ -2,12 +2,14 @@ import { useState } from 'react'
 import Link from 'next/link'
 import {
   ResponsiveInput,
+  FontSizeInput,
   Length,
   LengthInput,
   ResponsiveLength,
   Primitives,
   Color,
   Styles,
+  Editor,
   toCSSObject,
 } from 'gui'
 import { FirstParagraph } from '../components/FirstParagraph'
@@ -50,16 +52,14 @@ export default function Docs() {
         }}
       >
         <div sx={{ px: [2, 3, 4] }}>
+          <Editor />
           <label
             sx={{ display: 'flex', fontWeight: 700, alignItems: 'center' }}
           >
             Color
             <Primitives.ColorPopover value={color} onChange={setColor} />
           </label>
-          <ResponsiveInput
-            Component={LengthInput}
-            label="Font size"
-            property="fontSize"
+          <FontSizeInput
             value={styles.fontSize}
             onChange={(fontSize: Length | ResponsiveLength) =>
               setStyles({ ...styles, fontSize })
