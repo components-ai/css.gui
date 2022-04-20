@@ -6,8 +6,7 @@ import {
   Length,
   LengthUnit,
 } from '../../types/css'
-import { Label, Number } from '../primitives'
-import { UnitSelect } from '../UnitSelect'
+import { Label, Number, UnitSelect } from '../primitives'
 import { reducer } from './reducer'
 import { State } from './types'
 

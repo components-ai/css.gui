@@ -1,31 +1,19 @@
 import { useState } from 'react'
 import Link from 'next/link'
-import {
-  ResponsiveInput,
-  FontSizeInput,
-  Length,
-  LengthInput,
-  ResponsiveLength,
-  Primitives,
-  Color,
-  Styles,
-  Editor,
-  toCSSObject,
-} from 'gui'
+import { LineHeightInput, FontSizeInput, Editor, toCSSObject } from 'gui'
 import { FirstParagraph } from '../components/FirstParagraph'
 
-type StyleObject = Record<string, Length | ResponsiveLength>
-const initialStyles: StyleObject = {
+const initialStyles: any = {
   fontSize: { value: 16, unit: 'px' },
   lineHeight: { value: 1.4, unit: 'number' },
+  color: 'tomato',
 }
 
 export default function Docs() {
-  const [styles, setStyles] = useState<Styles>(initialStyles)
-  const [color, setColor] = useState<Color>('tomato')
+  const [styles, setStyles] = useState<any>(initialStyles)
 
   const getStylesForRender = () => {
-    const convertedStyles = toCSSObject({ ...styles, color })
+    const convertedStyles = toCSSObject(styles)
     return convertedStyles
   }
 
@@ -52,27 +40,14 @@ export default function Docs() {
         }}
       >
         <div sx={{ px: [2, 3, 4] }}>
-          <Editor />
-          <label
-            sx={{ display: 'flex', fontWeight: 700, alignItems: 'center' }}
-          >
-            Color
-            <Primitives.ColorPopover value={color} onChange={setColor} />
-          </label>
+          <Editor styles={styles} onChange={setStyles} />
           <FontSizeInput
             value={styles.fontSize}
-            onChange={(fontSize: Length | ResponsiveLength) =>
-              setStyles({ ...styles, fontSize })
-            }
+            onChange={(fontSize: any) => setStyles({ ...styles, fontSize })}
           />
-          <ResponsiveInput
-            Component={LengthInput}
-            label="Line height"
-            property="lineHeight"
+          <LineHeightInput
             value={styles.lineHeight}
-            onChange={(lineHeight: Length | ResponsiveLength) =>
-              setStyles({ ...styles, lineHeight })
-            }
+            onChange={(lineHeight: any) => setStyles({ ...styles, lineHeight })}
           />
         </div>
         <p sx={getStylesForRender()}>
@@ -88,7 +63,7 @@ export default function Docs() {
               href="https://www.lars-mueller-publishers.com/designing-programmes-0"
               passHref={true}
             >
-              <a style={{ color }}>Designing Programmes</a>
+              <a style={{ color: styles.color }}>Designing Programmes</a>
             </Link>{' '}
             by Karl Gerstner
           </em>

@@ -1,8 +1,8 @@
 import * as React from 'react'
-import { getPropertyData } from '../data/lengths'
-import { UNITS, UNITS_WITH_PERCENTAGE } from '../lib/constants'
-import { isThemeable } from '../lib/theme'
-import { ThemeUnits } from '../types/css'
+import { getPropertyData } from '../../data/lengths'
+import { UNITS, UNITS_WITH_PERCENTAGE } from '../../lib/constants'
+import { isThemeable } from '../../lib/theme'
+import { ThemeUnits } from '../../types/css'
 
 type UnitSelectProps = React.SelectHTMLAttributes<HTMLSelectElement> & {
   property?: string
