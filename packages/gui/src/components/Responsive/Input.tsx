@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { Monitor, Smartphone, X } from 'react-feather'
 import { AbsoluteLengthUnits, Length, ResponsiveLength } from '../../types/css'
 import { Breakpoint } from '../../types/theme'
 import { LengthInputProps } from '../Length/Input'
@@ -79,13 +80,38 @@ export const ResponsiveInput = ({
 
   return (
     <div sx={{ py: 2 }}>
-      <h3 sx={{ lineHeight: 1, padding: 0, margin: 0, fontSize: 16 }}>
-        {label}
-        {isResponsiveControls ? (
-          <button onClick={handleSwitchFromResponsive}>x</button>
-        ) : (
-          <button onClick={handleSwitchToResponsive}>responsive</button>
-        )}
+      <h3 sx={{ lineHeight: 1, pb: 1, margin: 0, fontSize: 0 }}>
+        <div
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            width: '100%',
+          }}
+        >
+          {label}
+          {isResponsiveControls ? (
+            <button
+              title="Remove responsive controls"
+              sx={{ all: 'unset', color: 'muted' }}
+              onClick={handleSwitchFromResponsive}
+            >
+              <X size={14} sx={{ position: 'relative', top: '1px' }} />
+            </button>
+          ) : (
+            <button
+              title="Switch to responsive controls"
+              sx={{ all: 'unset', color: 'muted' }}
+              onClick={handleSwitchToResponsive}
+            >
+              <Smartphone
+                size={8}
+                sx={{ position: 'relative', right: '-1px', top: '-1px' }}
+              />
+              <Monitor size={13} />
+            </button>
+          )}
+        </div>
       </h3>
       {editors}
     </div>
