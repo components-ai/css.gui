@@ -2,9 +2,35 @@
 
 **_Visual development environment for CSS._**
 
-CSS GUI is a visual toolkit for editing element styles on the web. It's theme-aware, performant, and can be composed into any React app.
+CSS GUI is a visual toolkit for editing element styles on the web.
+It's theme-aware, performant, and can be composed into any React app.
 
-⚠️ CSS GUI is currently under active development (contributions are welcome)
+## Why?
+
+We want to improve creative coding and web development workflows by making
+it simpler to attach parametric controls that are designed specifically
+to work with CSS.
+
+With CSS GUI, folks can visually edit and generate CSS. They can install
+the controls and use locally in their own projects or use our hosted version.
+
+Eventually, these controls can also augment development environments like VS Code.
+
+### Supporting the full CSS spec
+
+These controls are specifically built for CSS and will adhere to the CSS spec.
+This builds on the web platform itself, allowing the expressiveness of CSS/HTML/SVG
+to create endless outputs.
+
+It's our goal and intention to support the entire CSS spec beginning with the more
+common controls like Length, Color, Keywords and expanding over time to more complex
+stacks and grammars (think gradients, background-image, box shadow, etc.).
+
+## ⚠️ CSS GUI is currently under active development (contributions are welcome)
+
+Please bear with us as the API stabilizes and more (missing) functionality is added.
+We welcome any and all contributions and would love it if you try to experiment with
+CSS GUI and report bugs or open up feature requests.
 
 ## Installation
 
