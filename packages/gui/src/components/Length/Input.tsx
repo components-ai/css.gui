@@ -54,7 +54,7 @@ export const LengthInput = ({
       }}
     >
       <div sx={{ display: 'flex', alignItems: 'center', marginRight: 'auto' }}>
-        <Label htmlFor={id} sx={{ marginRight: 1 }}>
+        <Label htmlFor={id} sx={{ marginRight: 1, minWidth: 16 }}>
           {label ?? 'Number'}
         </Label>
         <Number
