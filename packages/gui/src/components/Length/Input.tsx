@@ -23,6 +23,7 @@ export const LengthInput = ({
   label,
   property,
   id = randomElementID(),
+  ...props
 }: LengthInputProps) => {
   const value: CSSUnitValue =
     providedValue === '0' ? { value: 0, unit: 'number' } : providedValue
@@ -63,6 +64,7 @@ export const LengthInput = ({
             value: newValue,
           })
         }}
+        {...props}
       />
       <UnitSelect
         value={state.unit}

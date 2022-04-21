@@ -1,3 +1,4 @@
+import { FONT_SIZE_MIN } from '../../lib/constants'
 import { LengthInput } from '../Length'
 import { ResponsiveInput } from '../Responsive'
 import { LengthEditorProps } from './types'

@@ -26,6 +26,18 @@ export const UNIT_STEPS: Record<FullLengthUnit, number> = {
   [FontRelativeLengthUnits.Rem]: 0.125,
   [PercentageLengthUnits.Pct]: 0.1,
 }
+export const FONT_SIZE_MIN: Record<string, number> = {
+  [AbsoluteLengthUnits.Px]: 0,
+  [FontRelativeLengthUnits.Em]: 0,
+  [FontRelativeLengthUnits.Rem]: 0,
+  [PercentageLengthUnits.Pct]: 0.1,
+}
+export const FONT_SIZE_MAX: Record<string, number> = {
+  [AbsoluteLengthUnits.Px]: 512,
+  [FontRelativeLengthUnits.Em]: 16,
+  [FontRelativeLengthUnits.Rem]: 16,
+  [PercentageLengthUnits.Pct]: 100,
+}
 export const THEME_ALIASES: Record<string, string> = {
   bg: 'backgroundColor',
   m: 'margin',
