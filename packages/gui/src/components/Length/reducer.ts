@@ -1,4 +1,4 @@
-import { UNIT_STEPS } from '../../lib/constants'
+import { FONT_SIZE_MAX, FONT_SIZE_MIN, UNIT_STEPS } from '../../lib/constants'
 import { convertLengthUnits } from '../../lib/convert'
 import { State, Action } from './types'
 
@@ -13,7 +13,7 @@ export const reducer = (state: State, action: Action): State => {
         value: convertLengthUnits(action.unit, state),
         unit: action.unit,
         key: state.key + 1, // Force number scrubber re-render
-        step: UNIT_STEPS[action.unit]
+        step: UNIT_STEPS[action.unit],
       }
     }
     default: {

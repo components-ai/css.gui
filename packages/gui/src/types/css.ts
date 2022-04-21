@@ -52,7 +52,7 @@ export type FullLengthUnit =
   | UnitlessUnits.Number
   | ThemeUnits.Theme
 
-export interface CSSUnitValue {
+export type CSSUnitValue = {
   value: number
   unit: string
 }

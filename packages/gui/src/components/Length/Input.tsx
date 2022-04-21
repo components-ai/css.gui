@@ -16,6 +16,8 @@ export type LengthInputProps = {
   label?: string
   property?: string
   onChange: (length: Length) => void
+  min?: any,
+  max?: any,
 }
 export const LengthInput = ({
   value: providedValue,
@@ -23,6 +25,8 @@ export const LengthInput = ({
   label,
   property,
   id = randomElementID(),
+  min,
+  max,
 }: LengthInputProps) => {
   const value: CSSUnitValue =
     providedValue === '0' ? { value: 0, unit: 'number' } : providedValue
@@ -54,8 +58,8 @@ export const LengthInput = ({
         key={state.key}
         value={state.value}
         step={state.step}
-        min={state.min}
-        max={state.max}
+        min={min ? min[state.unit] : null}
+        max={max ? max[state.unit] : null}
         property={property}
         onChange={(newValue: number) => {
           dispatch({
