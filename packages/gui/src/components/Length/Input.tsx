@@ -5,7 +5,7 @@ import {
   Length,
   LengthUnit,
 } from '../../types/css'
-import { Label, Number, UnitSelect } from '../primitives'
+import { Label, Number, UnitSelect, ValueSelect } from '../primitives'
 import { reducer } from './reducer'
 import { State } from './types'
 
@@ -72,6 +72,15 @@ export const LengthInput = ({
           }}
         />
       </div>
+      <ValueSelect
+        property={property}
+        onChange={(e: any) => {
+          dispatch({
+            type: 'CHANGED_INPUT_VALUE',
+            value: e.target.value
+          })
+        }}
+      />
       <UnitSelect
         value={state.unit}
         property={property}

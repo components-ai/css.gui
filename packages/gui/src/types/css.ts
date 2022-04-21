@@ -32,25 +32,29 @@ export const enum PercentageLengthUnits {
   Pct = '%',
 }
 export const enum UnitlessUnits {
-  Number = 'number',
+  Numb = 'number',
 }
 export const enum ThemeUnits {
   Theme = 'theme',
 }
-
+export const enum KeywordUnits {
+  Keyword = 'keyword'
+}
 // Only use a subset for now to keep things simpler
 export type LengthUnit =
   | FontRelativeLengthUnits.Em
   | FontRelativeLengthUnits.Rem
   | AbsoluteLengthUnits.Px
+  | KeywordUnits.Keyword
 export type LengthPercentageUnit = LengthUnit | PercentageLengthUnits.Pct
 export type FullLengthUnit =
   | FontRelativeLengthUnits.Em
   | FontRelativeLengthUnits.Rem
   | AbsoluteLengthUnits.Px
   | PercentageLengthUnits.Pct
-  | 'number' // For some reason TS doesn't like UnitlessUnits.Number here?
+  | 'number'
   | ThemeUnits.Theme
+  | KeywordUnits.Keyword
 
 export type CSSUnitValue = {
   value: number

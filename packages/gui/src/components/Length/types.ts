@@ -4,7 +4,7 @@ export type State = {
   key: number
   value: number
   unit: LengthUnit
-  step: number
+  step?: number | null
   min?: number
   max?: number
 }

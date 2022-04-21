@@ -32,3 +32,23 @@ export const UnitSelect = ({
     </select>
   )
 }
+
+type ValueSelectProps = React.SelectHTMLAttributes<HTMLSelectElement> & {
+  property?: string
+}
+export const ValueSelect = ({
+  property,
+  ...props
+}: ValueSelectProps) => {
+  const values = getPropertyData(property)?.keywords
+
+  return (
+    <select {...props}>
+      {values?.map((v: string, i) => {
+        return (
+          <option key={i}>{v}</option>
+        )
+      })}
+    </select>
+  )
+}

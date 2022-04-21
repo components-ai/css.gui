@@ -13,7 +13,7 @@ export const RenderElement = ({
 }: RenderElementProps) => {
   const Component = tagName
   const styleObject = toCSSObject(styles)
-
+  console.log(styleObject, styles, "SO")
   // @ts-ignore
   return <Component {...props} sx={styleObject} />
 }

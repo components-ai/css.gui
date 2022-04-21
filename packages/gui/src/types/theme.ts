@@ -126,7 +126,7 @@ export interface LineHeight {
   id: string
   value: number
   name?: string
-  unit: FullLengthUnit
+  unit: string
 }
 
 export interface Spacing {
