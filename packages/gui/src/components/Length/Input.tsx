@@ -16,8 +16,8 @@ export type LengthInputProps = {
   label?: string
   property?: string
   onChange: (length: Length) => void
-  min?: any,
-  max?: any,
+  min?: any
+  max?: any
 }
 export const LengthInput = ({
   value: providedValue,
@@ -50,24 +50,29 @@ export const LengthInput = ({
       style={{
         display: 'flex',
         alignItems: 'center',
+        width: '100%',
       }}
     >
-      <Label htmlFor={id}>{label ?? 'Number'}</Label>
-      <Number
-        id={id}
-        key={state.key}
-        value={state.value}
-        step={state.step}
-        min={min ? min[state.unit] : null}
-        max={max ? max[state.unit] : null}
-        property={property}
-        onChange={(newValue: number) => {
-          dispatch({
-            type: 'CHANGED_INPUT_VALUE',
-            value: newValue,
-          })
-        }}
-      />
+      <div sx={{ display: 'flex', alignItems: 'center', marginRight: 'auto' }}>
+        <Label htmlFor={id} sx={{ marginRight: 1, minWidth: 16 }}>
+          {label ?? 'Number'}
+        </Label>
+        <Number
+          id={id}
+          key={state.key}
+          value={state.value}
+          step={state.step}
+          min={min ? min[state.unit] : null}
+          max={max ? max[state.unit] : null}
+          property={property}
+          onChange={(newValue: number) => {
+            dispatch({
+              type: 'CHANGED_INPUT_VALUE',
+              value: newValue,
+            })
+          }}
+        />
+      </div>
       <UnitSelect
         value={state.unit}
         property={property}
@@ -77,7 +82,7 @@ export const LengthInput = ({
             unit: e.target.value as LengthUnit,
           })
         }}
-        style={{ marginLeft: 8 }}
+        sx={{ marginLeft: 1, minHeight: '1.6em', width: 72 }}
       />
     </div>
   )

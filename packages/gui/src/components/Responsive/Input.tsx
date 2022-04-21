@@ -59,13 +59,15 @@ export const ResponsiveInput = ({
       .fill(null)
       .map((_breakpoint: Breakpoint, i: number) => {
         return (
-          <Component
-            value={value[i] ?? null}
-            onChange={handleResponsiveChange(i)}
-            label={i.toString()}
-            property={property}
-            {...componentProps}
-          />
+          <div sx={{ pb: 1 }}>
+            <Component
+              value={value[i] ?? null}
+              onChange={handleResponsiveChange(i)}
+              label={i.toString()}
+              property={property}
+              {...componentProps}
+            />
+          </div>
         )
       })
   ) : (
@@ -80,7 +82,9 @@ export const ResponsiveInput = ({
 
   return (
     <div sx={{ py: 2 }}>
-      <h3 sx={{ lineHeight: 1, pb: 1, margin: 0, fontSize: 0 }}>
+      <h3
+        sx={{ lineHeight: 1, pb: 1, margin: 0, fontSize: 0, fontWeight: 500 }}
+      >
         <div
           sx={{
             display: 'flex',
