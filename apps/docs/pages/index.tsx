@@ -33,7 +33,24 @@ export default function Docs() {
         }}
       >
         <div sx={{ px: [2, 3, 4] }}>
-          <Editor styles={styles} onChange={setStyles} />
+          <Editor
+            styles={styles}
+            onChange={setStyles}
+            theme={{
+              fontSizes: [
+                { id: '1', value: 16, unit: 'px' },
+                { id: '2', value: 24, unit: 'px' },
+                { id: '3', value: 32, unit: 'px' },
+                { id: '4', value: 48, unit: 'px' },
+                { id: '5', value: 64, unit: 'px' },
+              ],
+              lineHeights: [
+                { id: '1', value: 1, unit: 'number' },
+                { id: '2', value: 1.2, unit: 'number' },
+                { id: '3', value: 1.4, unit: 'number' },
+              ],
+            }}
+          />
         </div>
         <RenderElement tagName="p" styles={styles}>
           “The parameters comprise sequences which are theoretically infinite
