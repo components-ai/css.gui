@@ -1,0 +1,36 @@
+import { FirstParagraph } from '../../components/FirstParagraph'
+import { LengthExample } from '../../components/examples/Length'
+
+# Length Input
+
+<FirstParagraph>A scrubbable input for selecting `<length>` values.</FirstParagraph>
+
+## Example
+
+<LengthExample />
+
+## Usage
+
+```ts
+import { useState } from 'react'
+import { LengthInput, Length, stringifyUnit, CSSUnitValue } from 'gui'
+
+export const LengthExample = () => {
+  const [value, setValue] = useState<Length>({
+    value: 16,
+    unit: 'px',
+  })
+  return (
+    <>
+      <LengthInput property="fontSize" value={value} onChange={setValue} />
+      <h1
+        style={{
+          fontSize: stringifyUnit('fontSize', value),
+        }}
+      >
+        Aa
+      </h1>
+    </>
+  )
+}
+```

@@ -8,6 +8,7 @@ const initialStyles: any = {
   lineHeight: { value: 1.4, unit: 'number' },
   color: 'tomato',
   backgroundColor: 'black',
+  textAlign: 'inherit',
 }
 
 export default function Docs() {
