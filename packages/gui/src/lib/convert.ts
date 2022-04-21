@@ -4,13 +4,14 @@ import {
   FontRelativeLengthUnits,
   Length,
   LengthUnit,
+  ThemeUnits,
 } from '../types/css'
 
 const BASE_FONT_SIZE = 16
 export const convertLengthUnits = (
-  newUnit: LengthUnit,
+  newUnit: LengthUnit | ThemeUnits,
   providedValue: Length
-): number => {
+): number | string => {
   const value: CSSUnitValue =
     providedValue === '0' ? { value: 0, unit: 'number' } : providedValue
   const operatingUnit = value.unit
@@ -32,6 +33,9 @@ export const convertLengthUnits = (
     }
   }
 
+  if (newUnit === ThemeUnits.Theme) {
+    return `${value.value}${value.unit}`
+  }
   //@ts-ignore
   return value.value
 }
