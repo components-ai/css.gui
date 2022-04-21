@@ -10,19 +10,8 @@ import {
 import { Label, Number, UnitSelect } from '../primitives'
 import { reducer } from './reducer'
 import { State } from './types'
-import { useTheme, useThemeProperty } from '../providers/ThemeContext'
-import { Theme } from '../../types/theme'
+import { useThemeProperty } from '../providers/ThemeContext'
 
-const themeValuesForProperty = (property: string, theme: Theme): any[] => {
-  switch (property) {
-    case 'fontSize':
-      return theme.fontSizes || []
-    case 'lineHeight':
-      return theme.lineHeights || []
-    default:
-      return []
-  }
-}
 export type LengthInputProps = {
   value: Length
   id?: string
