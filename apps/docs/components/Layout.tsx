@@ -1,10 +1,12 @@
 import { HTMLAttributes } from 'react'
 import Link from 'next/link'
+import { SyntaxHighlighting } from './SyntaxHighlighting'
 
 interface Props extends HTMLAttributes<HTMLDivElement> {}
 export const Layout = (props: Props) => {
   return (
     <>
+      <SyntaxHighlighting />
       <header
         sx={{
           fontFamily: 'body',

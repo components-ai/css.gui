@@ -443,6 +443,14 @@ export const theme: Theme = {
       backgroundColor: '#fafafa',
       color: '#111',
       p: 3,
+      borderRadius: 4,
+      '> code': {
+        px: 0,
+      },
+    },
+    code: {
+      fontSize: 18,
+      px: 1,
     },
     li: {
       lineHeight: 'body',
@@ -451,12 +459,6 @@ export const theme: Theme = {
       display: 'block',
       width: '100%',
       maxWidth: '48rem',
-    },
-    code: {
-      fontSize: 18,
-      backgroundColor: '#fafafa',
-      color: '#111',
-      px: 1,
     },
   },
 }
