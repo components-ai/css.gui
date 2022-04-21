@@ -10,26 +10,31 @@ type DraggableLabelProps = {
   max?: number
 }
 
-export const DraggableInput = ({ value, onUpdate, step, min, max }: DraggableLabelProps) => {
+export const DraggableInput = ({
+  value,
+  onUpdate,
+  step,
+  min,
+  max,
+}: DraggableLabelProps) => {
   const [dragging, setDragging] = React.useState<boolean>(false)
   const initialValue = React.useRef<number>(value)
 
-  const bind = useDrag(({ dragging, first, tap, movement: [dx] }) => {
+  const bind = useDrag(
+    ({ dragging, first, tap, movement: [dx] }) => {
       setDragging(dragging)
-      const parsedValue = typeof(value) === 'string'
-        ? parseFloat(value)
-        : value
+      const parsedValue = typeof value === 'string' ? parseFloat(value) : value
 
       if (tap) return
       if (first) {
         initialValue.current = parsedValue
-      }      
+      }
 
       const deltaValue = Math.round(dx) * step
       let newValue = initialValue.current + deltaValue
       if (min || min === 0) newValue = Math.max(newValue, min)
       if (max) newValue = Math.min(newValue, max)
-      
+
       onUpdate(newValue)
     },
     { pointerEvents: true }
@@ -46,15 +51,22 @@ export const DraggableInput = ({ value, onUpdate, step, min, max }: DraggableLab
 
         onUpdate(newValue)
       }}
-      style={{
-        cursor: dragging ? 'ew-resize' : 'default'
+      sx={{
+        cursor: dragging ? 'ew-resize' : 'default',
+        minHeight: '1.6em',
       }}
       {...bind()}
     />
   )
 }
 
-export const NumberInput = ({ value, onChange, step = 1, min, max }: NumberInputProps): any => {  
+export const NumberInput = ({
+  value,
+  onChange,
+  step = 1,
+  min,
+  max,
+}: NumberInputProps): any => {
   return (
     <>
       <DraggableInput

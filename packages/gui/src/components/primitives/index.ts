@@ -1,4 +1,4 @@
-export { Root as Label } from '@radix-ui/react-label'
+export * from './Label'
 export * from './Number'
 export * from './ColorPicker'
 export * from './UnitSelect'
