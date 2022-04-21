@@ -49,7 +49,7 @@ export type FullLengthUnit =
   | FontRelativeLengthUnits.Rem
   | AbsoluteLengthUnits.Px
   | PercentageLengthUnits.Pct
-  | UnitlessUnits.Number
+  | 'number' // For some reason TS doesn't like UnitlessUnits.Number here?
   | ThemeUnits.Theme
 
 export type CSSUnitValue = {

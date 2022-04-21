@@ -1,11 +1,23 @@
 import { FirstParagraph } from '../../components/FirstParagraph'
+import { NumberExample } from '../../components/examples/Number'
 
 # Number
 
 <FirstParagraph>A compact, scrubbable number input.</FirstParagraph>
 
-```js
+## Example
 
+<NumberExample />
+
+## Usage
+
+```ts
+import { useState } from 'react'
+import { NumberInput } from 'css-gui'
+
+export const Component = () => {
+  const [value, setValue] = useState<number>(16)
+
+  return <Number value={value} onChange={setValue}>
+}
 ```
-
-## API

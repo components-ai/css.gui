@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { randomElementID } from '../../lib'
 import {
   AbsoluteLengthUnits,
   CSSUnitValue,
@@ -14,18 +13,22 @@ import { useThemeProperty } from '../providers/ThemeContext'
 
 export type LengthInputProps = {
   value: Length
-  id?: string
   label?: string
   property?: string
   onChange: (length: Length) => void
+  min?: any
+  max?: any
 }
 export const LengthInput = ({
   value: providedValue,
   onChange,
   label,
   property,
-  id = randomElementID(),
+  min,
+  max,
 }: LengthInputProps) => {
+  const id = React.useId()
+  const fullId = `${id}-${property || 'length'}`
   const value: CSSUnitValue =
     providedValue === '0' ? { value: 0, unit: 'number' } : providedValue
   const [state, dispatch] = React.useReducer(reducer, {
@@ -50,40 +53,46 @@ export const LengthInput = ({
       style={{
         display: 'flex',
         alignItems: 'center',
+        width: '100%',
       }}
     >
-      <Label htmlFor={id}>{label ?? 'Number'}</Label>
-      {state.unit === ThemeUnits.Theme ? (
-        <select
-          onChange={(e) => {
-            const themeValue = propertyValues?.find((p) => p.id === e.target.value)
-            dispatch({
-              type: 'CHANGED_INPUT_VALUE',
-              value: `${themeValue.value}${themeValue.unit}`,
-              themeId: e.target.value
-            })
-          }}
-        >
-          {propertyValues?.map(({ value, unit, id }) => {
-            return <option value={id}>{value}{unit}</option>
-          })}
-        </select>
-      ) :
-      <Number
-        id={id}
-        key={state.key}
-        value={state.value}
-        step={state.step}
-        min={state.min}
-        max={state.max}
-        property={property}
-        onChange={(newValue: number) => {
-          dispatch({
-            type: 'CHANGED_INPUT_VALUE',
-            value: newValue,
-          })
-        }}
-      />}
+      <div sx={{ display: 'flex', alignItems: 'center', marginRight: 'auto' }}>
+        <Label htmlFor={fullId} sx={{ marginRight: 1, minWidth: 16 }}>
+          {label ?? 'Number'}
+        </Label>
+        {state.unit === ThemeUnits.Theme ? (
+          <select
+            onChange={(e) => {
+              const themeValue = propertyValues?.find((p) => p.id === e.target.value)
+              dispatch({
+                type: 'CHANGED_INPUT_VALUE',
+                value: `${themeValue.value}${themeValue.unit}`,
+                themeId: e.target.value
+              })
+            }}
+          >
+            {propertyValues?.map(({ value, unit, id }) => {
+              return <option value={id}>{value}{unit}</option>
+            })}
+          </select>
+        ) : (
+          <Number
+            id={fullId}
+            key={state.key}
+            value={state.value}
+            step={state.step}
+            min={min ? min[state.unit] : null}
+            max={max ? max[state.unit] : null}
+            property={property}
+            onChange={(newValue: number) => {
+              dispatch({
+                type: 'CHANGED_INPUT_VALUE',
+                value: newValue,
+              })
+            }}
+          />
+        )}
+      </div>
       <UnitSelect
         value={state.unit}
         property={property}
@@ -106,7 +115,7 @@ export const LengthInput = ({
             themeId: themeValue?.id
           })
         }}
-        style={{ marginLeft: 8 }}
+        sx={{ marginLeft: 1, minHeight: '1.6em', width: 72 }}
       />
     </div>
   )

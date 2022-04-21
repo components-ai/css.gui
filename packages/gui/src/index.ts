@@ -2,7 +2,7 @@ export { Editor } from './components/Editor'
 export { RenderElement } from './components/RenderElement'
 export * from './components/editors'
 
-export * as Primitives from './components/primitives'
+export { Number as NumberInput } from './components/primitives'
 export { LengthInput } from './components/Length'
 export { ResponsiveInput } from './components/Responsive'
 export { UnitSelect } from './components/primitives/UnitSelect'

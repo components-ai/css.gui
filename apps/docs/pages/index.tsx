@@ -8,6 +8,8 @@ const initialStyles: any = {
   fontSize: { value: 16, unit: 'px' },
   lineHeight: { value: 1.4, unit: 'number' },
   color: 'tomato',
+  backgroundColor: 'black',
+  textAlign: 'inherit',
 }
 const DEFAULT_THEME: Theme = {
   fontSizes: [

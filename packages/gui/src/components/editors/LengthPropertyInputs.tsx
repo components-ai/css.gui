@@ -1,6 +1,9 @@
+import { FONT_SIZE_MAX, FONT_SIZE_MIN } from '../../lib/constants'
+import { AbsoluteLengthUnits, FontRelativeLengthUnits, PercentageLengthUnits } from '../../types/css'
 import { LengthInput } from '../Length'
 import { ResponsiveInput } from '../Responsive'
 import { LengthEditorProps } from './types'
+
 
 export const BorderWidthInput = ({ value, onChange }: LengthEditorProps) => {
   return (
@@ -23,7 +26,20 @@ export const FontSizeInput = ({ value, onChange }: LengthEditorProps) => {
       value={value}
       onChange={onChange}
       Component={LengthInput}
-      componentProps={{}}
+      componentProps={{
+        min: {
+          [AbsoluteLengthUnits.Px]: FONT_SIZE_MIN[AbsoluteLengthUnits.Px],
+          [FontRelativeLengthUnits.Em]: FONT_SIZE_MIN[FontRelativeLengthUnits.Em],
+          [FontRelativeLengthUnits.Rem]: FONT_SIZE_MIN[FontRelativeLengthUnits.Rem],
+          [PercentageLengthUnits.Pct]: FONT_SIZE_MIN[PercentageLengthUnits.Pct],
+        },
+        max: {
+          [AbsoluteLengthUnits.Px]: FONT_SIZE_MAX[AbsoluteLengthUnits.Px],
+          [FontRelativeLengthUnits.Em]: FONT_SIZE_MAX[FontRelativeLengthUnits.Em],
+          [FontRelativeLengthUnits.Rem]: FONT_SIZE_MAX[FontRelativeLengthUnits.Rem],
+          [PercentageLengthUnits.Pct]: FONT_SIZE_MAX[PercentageLengthUnits.Pct],
+        },
+      }}
     />
   )
 }
