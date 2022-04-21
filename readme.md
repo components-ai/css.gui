@@ -1,4 +1,4 @@
-# css.gui
+# CSS GUI
 
 **_Visual development environment for CSS._**
 
