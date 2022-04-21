@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { randomElementID } from '../../lib'
 import {
   AbsoluteLengthUnits,
   CSSUnitValue,
@@ -12,7 +11,6 @@ import { State } from './types'
 
 export type LengthInputProps = {
   value: Length
-  id?: string
   label?: string
   property?: string
   onChange: (length: Length) => void
@@ -24,10 +22,11 @@ export const LengthInput = ({
   onChange,
   label,
   property,
-  id = randomElementID(),
   min,
   max,
 }: LengthInputProps) => {
+  const id = React.useId()
+  const fullId = `${id}-${property || 'length'}`
   const value: CSSUnitValue =
     providedValue === '0' ? { value: 0, unit: 'number' } : providedValue
   const [state, dispatch] = React.useReducer(reducer, {
@@ -54,11 +53,11 @@ export const LengthInput = ({
       }}
     >
       <div sx={{ display: 'flex', alignItems: 'center', marginRight: 'auto' }}>
-        <Label htmlFor={id} sx={{ marginRight: 1, minWidth: 16 }}>
+        <Label htmlFor={fullId} sx={{ marginRight: 1, minWidth: 16 }}>
           {label ?? 'Number'}
         </Label>
         <Number
-          id={id}
+          id={fullId}
           key={state.key}
           value={state.value}
           step={state.step}

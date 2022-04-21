@@ -57,9 +57,9 @@ export const ResponsiveInput = ({
   const editors = isResponsiveControls ? (
     Array(breakpointCount)
       .fill(null)
-      .map((_breakpoint: Breakpoint, i: number) => {
+      .map((breakpoint: Breakpoint, i: number) => {
         return (
-          <div sx={{ pb: 1 }}>
+          <div key={breakpoints?.[i].id ?? i} sx={{ pb: 1 }}>
             <Component
               value={value[i] ?? null}
               onChange={handleResponsiveChange(i)}
