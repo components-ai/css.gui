@@ -73,20 +73,6 @@ export const LengthInput = ({
             }}
             themeValues={propertyValues}
           />
-          // <select
-          //   onChange={(e) => {
-          //     const themeValue = propertyValues?.find((p) => p.id === e.target.value)
-          //     dispatch({
-          //       type: 'CHANGED_INPUT_VALUE',
-          //       value: `${themeValue.value}${themeValue.unit}`,
-          //       themeId: e.target.value
-          //     })
-          //   }}
-          // >
-          //   {propertyValues?.map(({ value, unit, id }) => {
-          //     return <option value={id}>{value}{unit}</option>
-          //   })}
-          // </select>
         ) : (
           <Number
             id={fullId}
