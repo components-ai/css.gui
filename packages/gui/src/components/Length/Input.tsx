@@ -10,11 +10,10 @@ import {
 import { Label, Number, UnitSelect } from '../primitives'
 import { reducer } from './reducer'
 import { State } from './types'
-import { useTheme } from '../providers/ThemeContext'
+import { useTheme, useThemeProperty } from '../providers/ThemeContext'
 import { Theme } from '../../types/theme'
 
 const themeValuesForProperty = (property: string, theme: Theme): any[] => {
-  
   switch (property) {
     case 'fontSize':
       return theme.fontSizes || []
@@ -54,9 +53,8 @@ export const LengthInput = ({
       })
     }
   }, [state])
-  
-  const theme = useTheme()
-  const propertyValues = themeValuesForProperty(property!, theme)
+
+  const propertyValues = useThemeProperty(property) 
 
   return (
     <div
@@ -102,7 +100,7 @@ export const LengthInput = ({
         property={property}
         onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
           let themeValue = null
-          // When the unit is changed to theme we need to set a themeId
+          // When the unit is changed to theme we need to set the first themeId
           // so it doesnt break when converting to another unit.
           const themeId = e.target.value === ThemeUnits.Theme 
             ? propertyValues.length && propertyValues[0].id
