@@ -11,6 +11,7 @@ import * as Editors from 'css-gui/editors'
 
 export default () => {
   const [styles, setStyles] = useState<Styles>({})
+
   return (
     <>
       <Canvas styles={styles} />
@@ -43,11 +44,13 @@ export default () => {
   - UnitSelect (with theme mechanism)
   - Gradient
   - BoxShadow
+  - TextShadow
 - Generate controls from MDN data: a mapping to our primitive components
   - Defines input type
   - What units (if any)
 - Have a theme selection mechanism based on our mapping (we should also fully type the Theme object)
 - Generate values for inputs a la [csstype](https://github.com/frenic/csstype)
+- Random / Lock pattern per property?
 
 ## Implementation
 
@@ -147,7 +150,7 @@ Save CSS value parsing from raw strings until later. JSON objects based on our t
 
 ## Considerations
 
-- The element and CSS properties available may expand or collapse the possible controls
+- The element and CSS properties available may expand or collapse the possible controls e.g. setting `display` to `grid` will expose relevant grid properties like `grid-template-rows` and `grid-template-columns`
 - How do we pass around values that are more unpacked internally (like CSSUnitValue) to the consumer? For now I guess we just return them in the unpacked way for folks to handle. Can add a `toCSS` mechanism.
 - Keywords - is that a kick the can for some length inputs?
 
@@ -160,4 +163,5 @@ Save CSS value parsing from raw strings until later. JSON objects based on our t
 
 - [**dat.gui**](https://github.com/dataarts/dat.gui) well known, especially in the generative design/three space
 - [**leva**](https://github.com/pmndrs/leva) a React-based [pmndrs](https://pmnd.rs/) project that builds the entire control set from hooks
-- Blender (Geometry nodes)
+- [**Blender**](https://blender.org) - Shader and Geometry nodes allow for rapid exploration withiin the available rendering space
+- [**MDN Docs**](https://developer.mozilla.org/en-US/) have long been an amazing introduction to how various CSS property values will affect the appearance of a DOM element.

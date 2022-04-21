@@ -1,7 +1,7 @@
 import { EditorProvider } from 'gui'
 import { AppProps } from 'next/app'
 import { ThemeProvider } from 'theme-ui'
-import theme from '../theme'
+import { theme } from 'gui'
 import { Sidebar } from '../components/Sidebar'
 import { PageWrap } from '../components/PageWrap'
 import { Layout } from '../components/Layout'

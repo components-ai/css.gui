@@ -106,7 +106,7 @@ type FontWeight = {
 export type FontSize = {
   id: string
   value: number
-  unit: LengthUnit
+  unit: string
 }
 
 export type Gradient = {
@@ -126,7 +126,7 @@ export type LineHeight = {
   id: string
   value: number
   name?: string
-  unit: FullLengthUnit
+  unit: string
 }
 
 export type Spacing = {

@@ -3,3 +3,40 @@ import { FirstParagraph } from '../components/FirstParagraph'
 # Getting Started
 
 <FirstParagraph>Get going with CSS GUI in a few steps.</FirstParagraph>
+
+## Installation
+
+Install CSS GUI with npm:
+
+```sh
+npm install --save css-gui
+```
+
+Or yarn:
+
+```sh
+yarn add css-gui
+```
+
+## Usage
+
+Import the `Editor` component and `RenderElement` to initialize controls
+and then render the element styles to your canvas.
+
+```js
+import { useState } from 'react'
+import { Editor, RenderElement } from 'css-gui'
+
+export const MyEditor = () => {
+  const [styles, setStyles] = useState({})
+
+  return (
+    <>
+      <Editor value={styles} onChange={setStyles} />
+      <RenderElement tagName="p" styles={styles}>
+        Hello, world!
+      </RenderElement>
+    </>
+  )
+}
+```

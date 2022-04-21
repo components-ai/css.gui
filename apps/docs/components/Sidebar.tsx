@@ -22,6 +22,10 @@ export const Sidebar = () => {
       <NavItem href="/inputs/color-picker">Color Picker</NavItem>
       <NavItem href="/inputs/color-popover">Color Popover</NavItem>
       <NavItem href="/inputs/unit-select">Unit Select</NavItem>
+      <NavSectionTitle>Guides</NavSectionTitle>
+      <NavItem href="/guides/style-schema">Style Schema</NavItem>
+      <NavItem href="/guides/theming">Theming</NavItem>
+      <NavItem href="/guides/typescript">TypeScript</NavItem>
       <NavSectionTitle>Utilities</NavSectionTitle>
       <NavItem href="/utilities/random-color">Random Color</NavItem>
       <NavItem href="/utilities/transformers">Transformers</NavItem>

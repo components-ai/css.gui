@@ -8,9 +8,13 @@ const ThemeContext = React.createContext<Theme>(DEFAULT_THEME_CONTEXT)
 export const useTheme = (): Theme => React.useContext(ThemeContext)
 
 type ThemeProviderProps = {
-  theme: Theme
+  theme?: Theme
   children: any
 }
 export const ThemeProvider = ({ theme, children }: ThemeProviderProps) => {
-  return <ThemeContext.Provider value={theme}>{children}</ThemeContext.Provider>
+  return (
+    <ThemeContext.Provider value={theme || DEFAULT_THEME_CONTEXT}>
+      {children}
+    </ThemeContext.Provider>
+  )
 }

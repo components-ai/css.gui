@@ -8,16 +8,20 @@ export const reducer = (state: State, action: Action): State => {
       return {
         ...state,
         value: action.value,
-        themeUnit: action.themeUnit
+        themeId: action.themeId
       }
     }
     case 'CHANGED_UNIT_VALUE': {
       return {
         ...state,
-        value: convertLengthUnits(action.unit, state),
+        value: convertLengthUnits(
+          action.unit,
+          action.themeValue ?? state  
+        ),
         unit: action.unit,
         key: state.key + 1, // Force number scrubber re-render
-        step: UNIT_STEPS[action.unit]
+        step: UNIT_STEPS[action.unit],
+        themeId: action.themeId
       }
     }
     default: {

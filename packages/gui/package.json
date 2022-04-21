@@ -15,8 +15,8 @@
   ],
   "devDependencies": {
     "@types/lodash-es": "^4.17.6",
-    "@types/react": "18.0.1",
-    "@types/react-dom": "^18.0.0",
+    "@types/react": "18.0.5",
+    "@types/react-dom": "^18.0.1",
     "config": "*",
     "tsconfig": "*",
     "typescript": "^4.6.3"
@@ -34,6 +34,7 @@
     "csstype": "^3.0.11",
     "culori": "^2.0.3",
     "get-contrast": "^3.0.0",
+    "immer": "^9.0.12",
     "lodash-es": "^4.17.21",
     "react-feather": "^2.0.9",
     "react-use-gesture": "^9.1.3",

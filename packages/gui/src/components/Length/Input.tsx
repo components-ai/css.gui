@@ -1,14 +1,20 @@
 import * as React from 'react'
 import { randomElementID } from '../../lib'
-import { AbsoluteLengthUnits, Length, LengthUnit, ThemeUnits } from '../../types/css'
-import { Label, Number } from '../primitives'
-import { UnitSelect } from '../UnitSelect'
+import {
+  AbsoluteLengthUnits,
+  CSSUnitValue,
+  Length,
+  LengthUnit,
+  ThemeUnits,
+} from '../../types/css'
+import { Label, Number, UnitSelect } from '../primitives'
 import { reducer } from './reducer'
 import { State } from './types'
 import { useTheme } from '../providers/ThemeContext'
 import { Theme } from '../../types/theme'
 
 const themeValuesForProperty = (property: string, theme: Theme): any[] => {
+  
   switch (property) {
     case 'fontSize':
       return theme.fontSizes || []
@@ -19,35 +25,39 @@ const themeValuesForProperty = (property: string, theme: Theme): any[] => {
   }
 }
 export type LengthInputProps = {
-  value?: Length
+  value: Length
   id?: string
   label?: string
   property?: string
   onChange: (length: Length) => void
 }
 export const LengthInput = ({
-  value,
+  value: providedValue,
   onChange,
   label,
   property,
   id = randomElementID(),
 }: LengthInputProps) => {
+  const value: CSSUnitValue =
+    providedValue === '0' ? { value: 0, unit: 'number' } : providedValue
   const [state, dispatch] = React.useReducer(reducer, {
     value: value?.value || AbsoluteLengthUnits.Px,
     unit: value?.unit || 0,
     key: 0,
-    step: 1
+    step: 1,
   } as State)
   React.useEffect(() => {
-    onChange({
-      value: state.value,
-      unit: state.unit,
-    })
+    if (state.value !== value?.value || state.unit !== value?.unit) {
+      onChange({
+        value: state.value,
+        unit: state.unit,
+      })
+    }
   }, [state])
   
   const theme = useTheme()
   const propertyValues = themeValuesForProperty(property!, theme)
-  
+
   return (
     <div
       style={{
@@ -59,15 +69,12 @@ export const LengthInput = ({
       {state.unit === ThemeUnits.Theme ? (
         <select
           onChange={(e) => {
-            const themeFont = propertyValues?.find((f) => f.id === e.target.value)
-
-            if (themeFont) {
-              dispatch({
-                type: 'CHANGED_INPUT_VALUE',
-                value: themeFont.value,
-                themeUnit: themeFont.unit
-              })
-            }
+            const themeValue = propertyValues?.find((p) => p.id === e.target.value)
+            dispatch({
+              type: 'CHANGED_INPUT_VALUE',
+              value: `${themeValue.value}${themeValue.unit}`,
+              themeId: e.target.value
+            })
           }}
         >
           {propertyValues?.map(({ value, unit, id }) => {
@@ -80,6 +87,8 @@ export const LengthInput = ({
         key={state.key}
         value={state.value}
         step={state.step}
+        min={state.min}
+        max={state.max}
         property={property}
         onChange={(newValue: number) => {
           dispatch({
@@ -92,9 +101,22 @@ export const LengthInput = ({
         value={state.unit}
         property={property}
         onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+          let themeValue = null
+          // When the unit is changed to theme we need to set a themeId
+          // so it doesnt break when converting to another unit.
+          const themeId = e.target.value === ThemeUnits.Theme 
+            ? propertyValues.length && propertyValues[0].id
+            : null
+          if (themeId || state.themeId) {
+            const id = themeId || state.themeId 
+            themeValue = propertyValues?.find((p) => p.id === id)
+          }
+          
           dispatch({
             type: 'CHANGED_UNIT_VALUE',
             unit: e.target.value as LengthUnit,
+            themeValue,
+            themeId: themeValue?.id
           })
         }}
         style={{ marginLeft: 8 }}

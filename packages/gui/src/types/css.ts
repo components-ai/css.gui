@@ -1,5 +1,13 @@
 import * as CSS from 'csstype'
 
+export type ColorObject = {
+  id?: string
+  value: string
+  themePath?: string
+}
+
+export type Color = string
+
 export const enum FontRelativeLengthUnits {
   Ch = 'ch',
   Em = 'em',
@@ -44,28 +52,16 @@ export type FullLengthUnit =
   | UnitlessUnits.Number
   | ThemeUnits.Theme
 
-export interface Length {
-  value: number
-  unit: string
-  themeUnit?: string
+export type CSSUnitValue = {
+  value: number | string
+  unit: string,
+  themeId?: string
 }
-
+export type GenericLength = '0'
+export type Length = CSSUnitValue | GenericLength
 export type ResponsiveLength = Length[]
-
-export interface CSSUnitValue {
-  value: number
-  unit: string
-}
-
-export interface CSSKeywordValue {
+export type CSSKeywordValue = {
   value: string
 }
 
 export type Styles = CSS.PropertiesFallback
-
-export type ColorObject = {
-  id?: string
-  value: string
-  path?: string
-}
-export type Color = string | ColorObject

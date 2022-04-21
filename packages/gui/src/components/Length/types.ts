@@ -1,20 +1,24 @@
-import { FullLengthUnit, LengthUnit } from '../../types/css'
+import { CSSUnitValue, FullLengthUnit, LengthUnit } from '../../types/css'
 
 export type State = {
   key: number
-  value: number
+  value: number | string
   unit: FullLengthUnit
-  themeUnit?: FullLengthUnit
+  themeId?: string
   step: number
+  min?: number
+  max?: number
 }
 
 export type Action =
   | {
       type: 'CHANGED_INPUT_VALUE'
-      value: number
-      themeUnit?: LengthUnit | undefined
+      value: number | string
+      themeId?: string
     }
   | {
       type: 'CHANGED_UNIT_VALUE'
       unit: LengthUnit
+      themeId?: string
+      themeValue?: CSSUnitValue
     }
