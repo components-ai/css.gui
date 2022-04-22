@@ -15,7 +15,10 @@
     "nuke": "yarn clean && yarn",
     "test": "yarn pkg:test && turbo run test",
     "pkg:test": "manypkg check",
-    "pkg:fix": "manypkg fix"
+    "pkg:fix": "manypkg fix",
+    "changeset": "yarn changeset",
+    "version": "yarn changeset version",
+    "release": "yarn build && yarn changeset publish"
   },
   "engines": {
     "npm": ">=7.0.0",
@@ -27,6 +30,7 @@
   },
   "packageManager": "yarn@1.22.18",
   "dependencies": {
+    "@changesets/cli": "^2.22.0",
     "@manypkg/cli": "^0.19.1",
     "prettier": "^2.6.2",
     "tsup": "^5.12.5",
