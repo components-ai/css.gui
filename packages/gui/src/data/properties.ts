@@ -151,6 +151,15 @@ export const properties: Record<string, PropertyData> = {
       ...GLOBAL_KEYWORDS,
     ],
   },
+  writingMode: {
+    type: 'keyword',
+    keywords: [
+      'horizontal-tb',
+      'vertical-rl',
+      'vertical-lr',
+      ...GLOBAL_KEYWORDS,
+    ],
+  },
   width: {
     type: 'length',
     percentage: true,
