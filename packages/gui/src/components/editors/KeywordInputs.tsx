@@ -31,11 +31,15 @@ export const keywordInputs = mapValues(keywordProperties, (property, name) => {
 })
 
 // Inputs have to be manually added here to get exports working
+export const AlignContent = keywordInputs.alignContent
 export const DisplayInput = keywordInputs.display
 export const FloatInput = keywordInputs.float
+export const VisibilityInput = keywordInputs.visibility
 // Typography
 export const TextAlignInput = keywordInputs.textAlign
+export const WritingModeInput = keywordInputs.writingMode
 export const WhiteSpaceInput = keywordInputs.whiteSpace
+export const WordBreakInput = keywordInputs.wordBreak
 
 type SelectProps = {
   id: string

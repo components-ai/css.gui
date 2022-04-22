@@ -59,6 +59,27 @@ export const properties: Record<string, PropertyData> = {
       ...GLOBAL_KEYWORDS,
     ],
   },
+  alignContent: {
+    type: 'keyword',
+    keywords: [
+      'center',
+      'start',
+      'end',
+      'flex-start',
+      'flex-end',
+      'normal',
+      'baseline',
+      'first baseline',
+      'last baseline',
+      'space-between',
+      'space-around',
+      'space-evenly',
+      'stretch',
+      'safe center',
+      'unsafe center',
+      ...GLOBAL_KEYWORDS,
+    ],
+  },
   float: {
     type: 'keyword',
     keywords: [
@@ -139,6 +160,15 @@ export const properties: Record<string, PropertyData> = {
       ...GLOBAL_KEYWORDS,
     ],
   },
+  visibility: {
+    type: 'keyword',
+    keywords: [
+      'visible',
+      'hidden',
+      'collapse',
+      ...GLOBAL_KEYWORDS,
+    ],
+  },
   whiteSpace: {
     type: 'keyword',
     keywords: [
@@ -148,6 +178,25 @@ export const properties: Record<string, PropertyData> = {
       'pre-wrap',
       'pre-line',
       'break-spaces',
+      ...GLOBAL_KEYWORDS,
+    ],
+  },
+  wordBreak: {
+    type: 'keyword',
+    keywords: [
+      'normal',
+      'break-all',
+      'keep-all',
+      'break-word',
+      ...GLOBAL_KEYWORDS,
+    ],
+  },
+  writingMode: {
+    type: 'keyword',
+    keywords: [
+      'horizontal-tb',
+      'vertical-rl',
+      'vertical-lr',
       ...GLOBAL_KEYWORDS,
     ],
   },
