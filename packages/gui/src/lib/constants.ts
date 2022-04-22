@@ -21,7 +21,7 @@ export const UNITS_WITH_PERCENTAGE: LengthPercentageUnit[] = [
   ...UNITS,
   PercentageLengthUnits.Pct,
 ]
-export const UNIT_STEPS: Record<FullLengthUnit, number | null> = {
+export const UNIT_STEPS: Record<FullLengthUnit, number> = {
   [UnitlessUnits.Number]: 1,
   [ThemeUnits.Theme]: 1,
   [AbsoluteLengthUnits.Px]: 1,
