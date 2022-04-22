@@ -12,7 +12,6 @@ import { Label, Number, UnitSelect, ValueSelect } from '../primitives'
 import { reducer } from './reducer'
 import { State } from './types'
 import { useThemeProperty } from '../providers/ThemeContext'
-import { ValueSelect } from '../primitives/ValueSelect'
 
 export type LengthInputProps = {
   value: Length
@@ -87,7 +86,7 @@ export const LengthInput = ({
             onChange={(e: any) => {
               dispatch({
                 type: 'CHANGED_INPUT_VALUE',
-                value: e.target.value
+                value: e.target.value,
               })
             }}
           />
@@ -109,33 +108,32 @@ export const LengthInput = ({
             values={propertyValues ?? []}
           />
         )}
-        
-        {
-          state.unit !== ThemeUnits.Theme &&
+
+        {state.unit !== ThemeUnits.Theme &&
           state.unit !== KeywordUnits.Keyword && (
-          <Number
-            id={fullId}
-            key={state.key}
-            value={state.value}
-            step={state.step}
-            min={min ? min[state.unit] : null}
-            max={max ? max[state.unit] : null}
-            property={property}
-            onChange={(newValue: number) => {
-              dispatch({
-                type: 'CHANGED_INPUT_VALUE',
-                value: newValue,
-              })
-            }}
-          />
-        )}
+            <Number
+              id={fullId}
+              key={state.key}
+              value={state.value}
+              step={state.step}
+              min={min ? min[state.unit] : null}
+              max={max ? max[state.unit] : null}
+              property={property}
+              onChange={(newValue: number) => {
+                dispatch({
+                  type: 'CHANGED_INPUT_VALUE',
+                  value: newValue,
+                })
+              }}
+            />
+          )}
       </div>
       <UnitSelect
         value={state.themeId ? ThemeUnits.Theme : state.unit}
         property={property}
         onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
           const newUnit = e.target.value as FullLengthUnit
-          
+
           if (newUnit === ThemeUnits.Theme) {
             const themeValue = propertyValues[0]
             return dispatch({
@@ -145,11 +143,11 @@ export const LengthInput = ({
               themeId: themeValue.id,
             })
           }
-          
+
           if (newUnit === KeywordUnits.Keyword) {
             dispatch({
               type: 'CHANGED_INPUT_VALUE',
-              value: getPropertyData(property)?.keywords[0]!
+              value: getPropertyData(property)?.keywords[0]!,
             })
           }
 

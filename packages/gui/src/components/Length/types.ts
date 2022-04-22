@@ -1,4 +1,4 @@
-import { CSSUnitValue, FullLengthUnit, Length } from '../../types/css'
+import { FullLengthUnit } from '../../types/css'
 
 export type State = {
   key: number
