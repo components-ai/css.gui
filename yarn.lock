@@ -1878,6 +1878,11 @@ domexception@^2.0.1:
   dependencies:
     webidl-conversions "^5.0.0"
 
+download-yue@2.1.x:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/download-yue/-/download-yue-2.1.0.tgz#ab7504160de6a6f0a6920bb5ca437248965327f2"
+  integrity sha512-ECsv6WVYCBCFrCnBcpHTCgFsRM/h7C/AtrzXuTc8+xaW5lXj+Jw6c5S7Eq/ncix41h05JerSxan5p7p80H35qQ==
+
 duplexer3@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/duplexer3/-/duplexer3-0.1.4.tgz#ee01dd1cac0ed3cbc7fdbea37dc0a8f1ce002ce2"
@@ -2784,6 +2789,13 @@ graceful-fs@^4.1.2, graceful-fs@^4.1.5, graceful-fs@^4.1.6, graceful-fs@^4.2.0:
   version "4.2.10"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.10.tgz#147d3a006da4ca3ce14728c7aefc287c367d7a6c"
   integrity sha512-9ByhssR2fPVsNZj478qUUbKfmL0+t5BDVyjShtyZZLiK7ZDAArFFfopyOTj0M05wE2tJPisA4iTnnXl2YoPvOA==
+
+gui@*:
+  version "0.10.3"
+  resolved "https://registry.yarnpkg.com/gui/-/gui-0.10.3.tgz#eb454cf300c490f6906354fd1a4a25d28bc0b019"
+  integrity sha512-0PqcLlditM+UcoqRKDcWrDmQvRNvBVIMUz32AHWWmnYU4KPsx3+vQPwt9g2J9pgfpKTwnXxH92CuSW4I+cspgA==
+  dependencies:
+    download-yue "2.1.x"
 
 has-bigints@^1.0.1:
   version "1.0.1"

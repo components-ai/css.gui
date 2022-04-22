@@ -1,6 +1,6 @@
 import { AppProps } from 'next/app'
 import { ThemeProvider } from 'theme-ui'
-import { theme } from 'gui'
+import { theme } from 'css-gui'
 import { Sidebar } from '../components/Sidebar'
 import { PageWrap } from '../components/PageWrap'
 import { Layout } from '../components/Layout'
