@@ -48,11 +48,7 @@ export const properties: Record<string, PropertyData> = {
   },
   backfaceVisibility: {
     type: 'keyword',
-    keywords: [
-      'visible',
-      'hidden',
-      ...GLOBAL_KEYWORDS,
-    ],
+    keywords: ['visible', 'hidden', ...GLOBAL_KEYWORDS],
   },
   backgroundColor: {
     type: 'color',
@@ -146,7 +142,7 @@ export const properties: Record<string, PropertyData> = {
   alignSelf: {
     type: 'keyword',
     keywords: [
-      'auto'
+      'auto',
       'center',
       'start',
       'end',
