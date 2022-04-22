@@ -10,6 +10,14 @@ const initialStyles: any = {
   textAlign: 'inherit',
   color: 'tomato',
   backgroundColor: 'black',
+  height: {
+    value: 'auto',
+    unit: 'keyword',
+  },
+  width: {
+    value: 'auto',
+    unit: 'keyword',
+  },
 }
 const DEFAULT_THEME: Theme = {
   fontSizes: [
