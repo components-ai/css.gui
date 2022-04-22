@@ -139,6 +139,18 @@ export const properties: Record<string, PropertyData> = {
       ...GLOBAL_KEYWORDS,
     ],
   },
+  whiteSpace: {
+    type: 'keyword',
+    keywords: [
+      'normal',
+      'nowrap',
+      'pre',
+      'pre-wrap',
+      'pre-line',
+      'break-spaces',
+      ...GLOBAL_KEYWORDS,
+    ],
+  },
   width: {
     type: 'length',
     percentage: true,
