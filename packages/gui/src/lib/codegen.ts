@@ -5,6 +5,7 @@ import {
   Length,
   ThemeUnits,
   ResponsiveLength,
+  KeywordUnits,
 } from '../types/css'
 
 const DEFAULT_LENGTH_UNIT = AbsoluteLengthUnits.Px
@@ -24,7 +25,11 @@ export const stringifyUnit = (
     return null
   }
 
-  if (value.unit === ThemeUnits.Theme || value.unit === 'raw') {
+  if (
+    value.unit === ThemeUnits.Theme || 
+    value.unit === 'raw' ||
+    value.unit === KeywordUnits.Keyword
+  ) {
     return value.value
   }
 

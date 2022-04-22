@@ -1,17 +1,18 @@
 import * as React from 'react'
+import { getPropertyData } from '../../data/properties'
 import {
   AbsoluteLengthUnits,
   CSSUnitValue,
+  KeywordUnits,
   FullLengthUnit,
   Length,
   ThemeUnits,
 } from '../../types/css'
-import { Label, Number, UnitSelect } from '../primitives'
+import { Label, Number, UnitSelect, ValueSelect } from '../primitives'
 import { reducer } from './reducer'
 import { State } from './types'
 import { useThemeProperty } from '../providers/ThemeContext'
 import { ValueSelect } from '../primitives/ValueSelect'
-import { stringifyUnit } from '../../lib'
 
 export type LengthInputProps = {
   value: Length
@@ -79,7 +80,20 @@ export const LengthInput = ({
         <Label htmlFor={fullId} sx={{ marginRight: 1, minWidth: 16 }}>
           {label ?? 'Number'}
         </Label>
-        {state.themeId ? (
+
+        {state.unit === KeywordUnits.Keyword && (
+          <ValueSelect
+            values={getPropertyData(property)?.keywords ?? []}
+            onChange={(e: any) => {
+              dispatch({
+                type: 'CHANGED_INPUT_VALUE',
+                value: e.target.value
+              })
+            }}
+          />
+        )}
+
+        {state.themeId && (
           <ValueSelect
             onChange={(e: any) => {
               const themeValue = propertyValues?.find(
@@ -94,7 +108,11 @@ export const LengthInput = ({
             }}
             values={propertyValues ?? []}
           />
-        ) : (
+        )}
+        
+        {
+          state.unit !== ThemeUnits.Theme &&
+          state.unit !== KeywordUnits.Keyword && (
           <Number
             id={fullId}
             key={state.key}
@@ -117,7 +135,7 @@ export const LengthInput = ({
         property={property}
         onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
           const newUnit = e.target.value as FullLengthUnit
-
+          
           if (newUnit === ThemeUnits.Theme) {
             const themeValue = propertyValues[0]
             return dispatch({
@@ -125,6 +143,13 @@ export const LengthInput = ({
               value: themeValue.value,
               unit: themeValue.unit,
               themeId: themeValue.id,
+            })
+          }
+          
+          if (newUnit === KeywordUnits.Keyword) {
+            dispatch({
+              type: 'CHANGED_INPUT_VALUE',
+              value: getPropertyData(property)?.keywords[0]!
             })
           }
 
