@@ -38,7 +38,6 @@ export const DisplayInput = keywordInputs.display
 export const FloatInput = keywordInputs.float
 export const VisibilityInput = keywordInputs.visibility
 // Typography
-export const FontStretchInput = keywordInputs.fontStretch
 export const TextAlignInput = keywordInputs.textAlign
 export const WritingModeInput = keywordInputs.writingMode
 export const WhiteSpaceInput = keywordInputs.whiteSpace
