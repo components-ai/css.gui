@@ -34,7 +34,6 @@ export const keywordInputs = mapValues(keywordProperties, (property, name) => {
 export const DisplayInput = keywordInputs.display
 export const FloatInput = keywordInputs.float
 // Typography
-export const FontStretchInput = keywordInputs.fontStretch
 export const TextAlignInput = keywordInputs.textAlign
 export const WhiteSpaceInput = keywordInputs.whiteSpace
 
