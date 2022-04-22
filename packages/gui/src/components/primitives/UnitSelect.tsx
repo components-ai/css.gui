@@ -32,21 +32,3 @@ export const UnitSelect = ({
     </select>
   )
 }
-
-// type ValueSelectProps = React.SelectHTMLAttributes<HTMLSelectElement> & {
-//   values: string[]
-// }
-// export const ValueSelect = ({
-//   values,
-//   ...props
-// }: ValueSelectProps) => {
-//   return (
-//     <select {...props}>
-//       {values?.map((v, i) => {
-//         return (
-//           <option key={i}>{v}</option>
-//         )
-//       })}
-//     </select>
-//   )
-// }
