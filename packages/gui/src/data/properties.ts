@@ -59,6 +59,27 @@ export const properties: Record<string, PropertyData> = {
       ...GLOBAL_KEYWORDS,
     ],
   },
+  alignContent: {
+    type: 'keyword',
+    keywords: [
+      'center',
+      'start',
+      'end',
+      'flex-start',
+      'flex-end',
+      'normal',
+      'baseline',
+      'first baseline',
+      'last baseline',
+      'space-between',
+      'space-around',
+      'space-evenly',
+      'stretch',
+      'safe center',
+      'unsafe center',
+      ...GLOBAL_KEYWORDS,
+    ],
+  },
   float: {
     type: 'keyword',
     keywords: [
@@ -136,6 +157,15 @@ export const properties: Record<string, PropertyData> = {
       'justify',
       'justify-all',
       'match-parent',
+      ...GLOBAL_KEYWORDS,
+    ],
+  },
+  visibility: {
+    type: 'keyword',
+    keywords: [
+      'visible',
+      'hidden',
+      'collapse',
       ...GLOBAL_KEYWORDS,
     ],
   },
