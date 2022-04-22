@@ -18,6 +18,7 @@ export const getPropertyData = (property?: string): PropertyData | null => {
 export const properties: Record<string, PropertyData> = {
   backgroundColor: {
     type: 'color',
+    defaultValue: '#fff',
     keywords: ['currentcolor', 'transparent', ...GLOBAL_KEYWORDS],
   },
   borderColor: {

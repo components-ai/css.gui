@@ -2,39 +2,38 @@ import { useId } from 'react'
 import { ColorPopover, Label } from '../primitives'
 import { useTheme } from '../providers/ThemeContext'
 import { ColorEditorProps } from './types'
+import { properties } from '../../data/properties'
+import { lowerCase, mapValues, pickBy, upperFirst } from 'lodash-es'
 
-const DEFAULT_BACKGROUND_COLOR = '#fff'
-export const BackgroundColorInput = ({ value, onChange }: ColorEditorProps) => {
-  const theme = useTheme()
-  const id = useId()
-  const fullId = `${id}-backgroundColor`
-  return (
-    <>
-      <Label htmlFor={fullId}>Background color</Label>
-      <ColorPopover
-        id={fullId}
-        value={value || DEFAULT_BACKGROUND_COLOR}
-        onChange={onChange}
-        theme={theme}
-      />
-    </>
-  )
-}
+const colorProperties = pickBy(
+  properties,
+  (property) => property.type === 'color'
+)
 
-const DEFAULT_COLOR = '#000'
-export const ColorInput = ({ value, onChange }: ColorEditorProps) => {
-  const theme = useTheme()
-  const id = useId()
-  const fullId = `${id}-color`
-  return (
-    <>
-      <Label htmlFor={fullId}>Color</Label>
-      <ColorPopover
-        id={fullId}
-        value={value || DEFAULT_COLOR}
-        onChange={onChange}
-        theme={theme}
-      />
-    </>
-  )
+export const colorInputs = mapValues(colorProperties, (property, name) => {
+  return ({ value, onChange }: ColorEditorProps) => {
+    const theme = useTheme()
+    const id = useId()
+    const fullId = `${id}-${name}`
+    return (
+      <>
+        <Label htmlFor={fullId}>{getLabel(name)}</Label>
+        <ColorPopover
+          id={fullId}
+          value={value || property.defaultValue || '#000'}
+          onChange={onChange}
+          theme={theme}
+        />
+      </>
+    )
+  }
+})
+
+export const BackgroundColorInput = colorInputs.backgroundColor
+export const ColorInput = colorInputs.color
+export const BorderColorInput = colorInputs.borderColor
+
+// Convert a css keyword to display string
+function getLabel(keyword: string) {
+  return upperFirst(lowerCase(keyword))
 }
