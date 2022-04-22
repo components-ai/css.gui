@@ -38,6 +38,14 @@ export const properties: Record<string, PropertyData> = {
       ...GLOBAL_KEYWORDS,
     ],
   },
+  backfaceVisibility: {
+    type: 'keyword',
+    keywords: [
+      'visible',
+      'hidden',
+      ...GLOBAL_KEYWORDS,
+    ],
+  },
   backgroundColor: {
     type: 'color',
     defaultValue: '#fff',

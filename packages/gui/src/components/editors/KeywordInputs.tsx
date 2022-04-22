@@ -35,6 +35,7 @@ export const AlignContentInput = keywordInputs.alignContent
 export const AlignItemsInput = keywordInputs.alignItems
 export const AlignSelfInput = keywordInputs.alignSelf
 export const AppearanceInput = keywordInputs.appearance
+export const BackfaceVisibilityInput = keywordInputs.backfaceVisibility
 export const DisplayInput = keywordInputs.display
 export const FloatInput = keywordInputs.float
 export const VisibilityInput = keywordInputs.visibility
