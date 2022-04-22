@@ -7,6 +7,7 @@ type PropertyData = {
   keywords: Array<string>
   minValue?: number
   maxValue?: number
+  defaultValue?: string
 }
 
 export const getPropertyData = (property?: string): PropertyData | null => {
@@ -14,7 +15,7 @@ export const getPropertyData = (property?: string): PropertyData | null => {
   return propertyData ?? null
 }
 
-const properties: Record<string, PropertyData> = {
+export const properties: Record<string, PropertyData> = {
   backgroundColor: {
     type: 'color',
     keywords: ['currentcolor', 'transparent', ...GLOBAL_KEYWORDS],

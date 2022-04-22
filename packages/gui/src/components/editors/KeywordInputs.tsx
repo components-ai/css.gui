@@ -1,79 +1,40 @@
+import { lowerCase, mapValues, pickBy, upperFirst } from 'lodash-es'
 import { ChangeEvent, useId } from 'react'
-import { getPropertyData } from '../../data/properties'
+import { properties } from '../../data/properties'
 import { Label } from '../primitives'
 import { KeywordEditorProps } from './types'
 
-const DEFAULT_TEXT_ALIGN = 'inherit'
-const textAlignKeywords = getPropertyData('textAlign')!
-export const TextAlignInput = ({ value, onChange }: KeywordEditorProps) => {
-  const id = useId()
-  const fullId = `${id}-textAlign`
-  return (
-    <>
-      <Label htmlFor={fullId}>Text align</Label>
-      <Select
-        id={fullId}
-        value={value || DEFAULT_TEXT_ALIGN}
-        onChange={onChange}
-        values={textAlignKeywords.keywords}
-      />
-    </>
-  )
-}
+const keywordProperties = pickBy(
+  properties,
+  (property) => property.type === 'keyword'
+)
 
-const DEFAULT_FLOAT = 'inherit'
-const floatKeywords = getPropertyData('float')!
-export const FloatInput = ({ value, onChange }: KeywordEditorProps) => {
-  const id = useId()
-  const fullId = `${id}-float`
-  return (
-    <>
-      <Label htmlFor={fullId}>Float</Label>
-      <Select
-        id={fullId}
-        value={value || DEFAULT_FLOAT}
-        onChange={onChange}
-        values={floatKeywords.keywords}
-      />
-    </>
-  )
-}
+// for simplicity, just use the same default keyword for now.
+// If we need to support different defaults, we can add them to the data definition.
+const DEFAULT_KEYWORD = 'inherit'
+export const keywordInputs = mapValues(keywordProperties, (property, name) => {
+  return ({ value, onChange }: KeywordEditorProps) => {
+    const id = useId()
+    const fullId = `${id}-${name}`
+    return (
+      <>
+        <Label htmlFor={fullId}>{getLabel(name)}</Label>
+        <Select
+          id={fullId}
+          value={value || DEFAULT_KEYWORD}
+          onChange={onChange}
+          values={property.keywords}
+        />
+      </>
+    )
+  }
+})
 
-const DEFAULT_DISPLAY = 'inherit'
-const displayKeywords = getPropertyData('display')!
-export const DisplayInput = ({ value, onChange }: KeywordEditorProps) => {
-  const id = useId()
-  const fullId = `${id}-display`
-  return (
-    <>
-      <Label htmlFor={fullId}>Display</Label>
-      <Select
-        id={fullId}
-        value={value || DEFAULT_DISPLAY}
-        onChange={onChange}
-        values={displayKeywords.keywords}
-      />
-    </>
-  )
-}
-
-const DEFAULT_FONT_STRETCH = 'inherit'
-const fontStretchKeywords = getPropertyData('fontStretch')!
-export const FontStretchInput = ({ value, onChange }: KeywordEditorProps) => {
-  const id = useId()
-  const fullId = `${id}-fontStretch`
-  return (
-    <>
-      <Label htmlFor={fullId}>Font stretch</Label>
-      <Select
-        id={fullId}
-        value={value || DEFAULT_FONT_STRETCH}
-        onChange={onChange}
-        values={fontStretchKeywords.keywords}
-      />
-    </>
-  )
-}
+// Inputs have to be manually added here to get exports working
+export const TextAlignInput = keywordInputs.textAlign
+export const FloatInput = keywordInputs.float
+export const DisplayInput = keywordInputs.display
+export const FontStretchInput = keywordInputs.fontStretch
 
 type SelectProps = {
   id: string
@@ -98,4 +59,9 @@ export const Select = ({ value, onChange, id, values }: SelectProps): any => {
       })}
     </select>
   )
+}
+
+// Convert a css keyword to display string
+function getLabel(keyword: string) {
+  return upperFirst(lowerCase(keyword))
 }
