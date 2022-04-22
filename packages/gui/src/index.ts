@@ -1,3 +1,4 @@
+export * from './types/css'
 export * from './components/Editor'
 export { RenderElement } from './components/RenderElement'
 export * from './components/editors'
