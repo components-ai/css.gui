@@ -1,10 +1,10 @@
-import { Color, FullLengthUnit, Length, LengthUnit } from './css'
+import { Color, Length } from './css'
 
 export type Theme = {
-  borderRadius?: BorderRadius[],
-  borderStyles?: BorderStyle[],
-  borderWidths?: BorderWidth[],
-  boxShadows?: BoxShadowEntry[],
+  borderRadius?: BorderRadius[]
+  borderStyles?: BorderStyle[]
+  borderWidths?: BorderWidth[]
+  boxShadows?: BoxShadowEntry[]
   breakpoints?: Breakpoint[]
   colors?: ColorGroup[]
   durations?: Duration[]

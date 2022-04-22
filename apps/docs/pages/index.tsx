@@ -32,6 +32,26 @@ const DEFAULT_THEME: Theme = {
     { id: '2', value: 1.2, unit: 'number' },
     { id: '3', value: 1.4, unit: 'number' },
   ],
+  colors: [
+    {
+      id: '1',
+      name: 'gray',
+      colors: [
+        { id: '2', value: '#000000' },
+        { id: '3', value: '#1c1c1c' },
+        { id: '4', value: '#303030' },
+        { id: '5', value: '#474747' },
+        { id: '6', value: '#5d5d5d' },
+        { id: '7', value: '#757575' },
+        { id: '8', value: '#8c8c8c' },
+        { id: '9', value: '#a3a3a3' },
+        { id: '10', value: '#bababa' },
+        { id: '11', value: '#d1d1d1' },
+        { id: '12', value: '#e8e8e8' },
+        { id: '13', value: '#ffffff' },
+      ],
+    },
+  ],
 }
 export default function Docs() {
   const [styles, setStyles] = useState<any>(initialStyles)

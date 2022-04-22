@@ -1,4 +1,5 @@
 import produce from 'immer'
+import { ReactChild } from 'react'
 import { Styles } from '../../types/css'
 import { Theme } from '../../types/theme'
 import { EditorProvider, useEditor } from '../providers/EditorContext'
@@ -33,8 +34,14 @@ type ControlsProps = {
   styles: Styles
   theme?: Theme
   onChange: (newStyles: any) => void
+  children?: ReactChild
 }
-export const Controls = ({ theme, styles, onChange }: ControlsProps) => {
+export const Controls = ({
+  theme,
+  styles,
+  onChange,
+  children,
+}: ControlsProps) => {
   const properties = Object.keys(styles)
 
   const handleStylesChange = (recipe: Recipe<EditorData<any>>) => {
@@ -50,13 +57,20 @@ export const Controls = ({ theme, styles, onChange }: ControlsProps) => {
 
     onChange(newData)
   }
+
+  const controls = children ? (
+    children
+  ) : (
+    <>
+      {properties.map((property) => {
+        return <Control key={property} field={property} />
+      })}
+    </>
+  )
+
   return (
     <EditorProvider theme={theme} value={styles} onChange={handleStylesChange}>
-      <>
-        {properties.map((property) => {
-          return <Control key={property} field={property} />
-        })}
-      </>
+      {controls}
     </EditorProvider>
   )
 }
