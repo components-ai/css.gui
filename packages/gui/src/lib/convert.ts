@@ -4,7 +4,6 @@ import {
   FontRelativeLengthUnits,
   FullLengthUnit,
   Length,
-  ThemeUnits,
 } from '../types/css'
 
 const BASE_FONT_SIZE = 16
@@ -21,8 +20,10 @@ export const convertLengthUnits = (
       value.unit === FontRelativeLengthUnits.Rem
     ) {
       //@ts-ignore
-      return value * BASE_FONT_SIZE
+      return value.value * BASE_FONT_SIZE
     }
+
+    return 16
   }
 
   if (newUnit === FontRelativeLengthUnits.Em || newUnit === FontRelativeLengthUnits.Rem) {
@@ -30,11 +31,10 @@ export const convertLengthUnits = (
       //@ts-ignore
       return value.value / BASE_FONT_SIZE
     }
+
+    return 1
   }
 
-  if (newUnit === ThemeUnits.Theme) {
-    return `${value.value}${value.unit}`
-  }
   //@ts-ignore
   return value.value
 }
