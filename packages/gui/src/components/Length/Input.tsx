@@ -7,27 +7,28 @@ import {
   FullLengthUnit,
   Length,
   ThemeUnits,
+  UnitlessUnits,
 } from '../../types/css'
 import { Label, Number, UnitSelect, ValueSelect } from '../primitives'
 import { reducer } from './reducer'
 import { State } from './types'
 import { useThemeProperty } from '../providers/ThemeContext'
 
+type UnitRanges = Record<string, [number, number]>
+
 export type LengthInputProps = {
   value: Length
   label?: string
   property?: string
   onChange: (length: Length) => void
-  min?: any
-  max?: any
+  range?: UnitRanges
 }
 export const LengthInput = ({
   value: providedValue,
   onChange,
   label,
   property,
-  min,
-  max,
+  range,
 }: LengthInputProps) => {
   const id = React.useId()
   const fullId = `${id}-${property || 'length'}`
@@ -116,8 +117,8 @@ export const LengthInput = ({
               key={state.key}
               value={state.value}
               step={state.step}
-              min={min ? min[state.unit] : null}
-              max={max ? max[state.unit] : null}
+              min={range?.[state.unit]?.[0]}
+              max={range?.[state.unit]?.[1]}
               property={property}
               onChange={(newValue: number) => {
                 dispatch({
