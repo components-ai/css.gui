@@ -53,13 +53,14 @@ export type FullLengthUnit =
   | ThemeUnits.Theme
 
 export type CSSUnitValue = {
-  value: number
-  unit: string
+  value: number | string
+  unit: string,
+  themeId?: string
 }
 export type GenericLength = '0'
 export type Length = CSSUnitValue | GenericLength
 export type ResponsiveLength = Length[]
-export interface CSSKeywordValue {
+export type CSSKeywordValue = {
   value: string
 }
 

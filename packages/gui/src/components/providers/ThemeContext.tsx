@@ -6,6 +6,17 @@ const DEFAULT_THEME_CONTEXT: Theme = {}
 const ThemeContext = React.createContext<Theme>(DEFAULT_THEME_CONTEXT)
 
 export const useTheme = (): Theme => React.useContext(ThemeContext)
+export const useThemeProperty = (property?: string): any[] => {
+  const context = React.useContext(ThemeContext)
+  switch (property) {
+    case 'fontSize':
+      return context.fontSizes || []
+    case 'lineHeight':
+      return context.lineHeights || []
+    default:
+      return []
+  }
+}
 
 type ThemeProviderProps = {
   theme?: Theme

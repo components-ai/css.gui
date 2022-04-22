@@ -2,12 +2,15 @@ import * as React from 'react'
 import {
   AbsoluteLengthUnits,
   CSSUnitValue,
+  FullLengthUnit,
   Length,
-  LengthUnit,
+  ThemeUnits,
 } from '../../types/css'
 import { Label, Number, UnitSelect } from '../primitives'
 import { reducer } from './reducer'
 import { State } from './types'
+import { useThemeProperty } from '../providers/ThemeContext'
+import { ValueSelect } from '../primitives/ValueSelect'
 
 export type LengthInputProps = {
   value: Length
@@ -44,6 +47,8 @@ export const LengthInput = ({
     }
   }, [state])
 
+  const propertyValues = useThemeProperty(property) 
+
   return (
     <div
       style={{
@@ -56,30 +61,55 @@ export const LengthInput = ({
         <Label htmlFor={fullId} sx={{ marginRight: 1, minWidth: 16 }}>
           {label ?? 'Number'}
         </Label>
-        <Number
-          id={fullId}
-          key={state.key}
-          value={state.value}
-          step={state.step}
-          min={min ? min[state.unit] : null}
-          max={max ? max[state.unit] : null}
-          property={property}
-          onChange={(newValue: number) => {
-            dispatch({
-              type: 'CHANGED_INPUT_VALUE',
-              value: newValue,
-            })
-          }}
-        />
+        {state.unit === ThemeUnits.Theme ? (
+          <ValueSelect
+            onChange={(e: any) => {
+              const themeValue = propertyValues?.find((p) => p.id === e.target.value)
+              dispatch({
+                type: 'CHANGED_INPUT_VALUE',
+                value: `${themeValue.value}${themeValue.unit}`,
+                themeId: e.target.value
+              })
+            }}
+            values={propertyValues ?? []}
+          />
+        ) : (
+          <Number
+            id={fullId}
+            key={state.key}
+            value={state.value}
+            step={state.step}
+            min={min ? min[state.unit] : null}
+            max={max ? max[state.unit] : null}
+            property={property}
+            onChange={(newValue: number) => {
+              dispatch({
+                type: 'CHANGED_INPUT_VALUE',
+                value: newValue,
+              })
+            }}
+          />
+        )}
       </div>
       <UnitSelect
         value={state.unit}
         property={property}
         onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+          const newUnit = e.target.value as FullLengthUnit
+          
           dispatch({
             type: 'CHANGED_UNIT_VALUE',
-            unit: e.target.value as LengthUnit,
+            unit: newUnit,
           })
+
+          if (newUnit === ThemeUnits.Theme) {
+            const themeValue = propertyValues[0]
+            dispatch({
+              type: 'CHANGED_INPUT_VALUE',
+              value: `${themeValue.value}${themeValue.unit}`,
+              themeId: themeValue.id
+            })
+          }
         }}
         sx={{ marginLeft: 1, minHeight: '1.6em', width: 72 }}
       />
