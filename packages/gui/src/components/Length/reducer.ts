@@ -14,14 +14,10 @@ export const reducer = (state: State, action: Action): State => {
     case 'CHANGED_UNIT_VALUE': {
       return {
         ...state,
-        value: convertLengthUnits(
-          action.unit,
-          action.themeValue ?? state  
-        ),
+        value: convertLengthUnits(action.unit, state),
         unit: action.unit,
         key: state.key + 1, // Force number scrubber re-render
         step: UNIT_STEPS[action.unit],
-        themeId: action.themeId
       }
     }
     default: {

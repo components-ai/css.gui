@@ -2,15 +2,15 @@ import * as React from 'react'
 import {
   AbsoluteLengthUnits,
   CSSUnitValue,
+  FullLengthUnit,
   Length,
-  LengthUnit,
   ThemeUnits,
 } from '../../types/css'
 import { Label, Number, UnitSelect } from '../primitives'
 import { reducer } from './reducer'
 import { State } from './types'
 import { useThemeProperty } from '../providers/ThemeContext'
-import { ThemeValueSelect } from '../primitives/ThemeValueSelect'
+import { ValueSelect } from '../primitives/ValueSelect'
 
 export type LengthInputProps = {
   value: Length
@@ -62,8 +62,8 @@ export const LengthInput = ({
           {label ?? 'Number'}
         </Label>
         {state.unit === ThemeUnits.Theme ? (
-          <ThemeValueSelect
-            onChange={(e) => {
+          <ValueSelect
+            onChange={(e: any) => {
               const themeValue = propertyValues?.find((p) => p.id === e.target.value)
               dispatch({
                 type: 'CHANGED_INPUT_VALUE',
@@ -71,7 +71,7 @@ export const LengthInput = ({
                 themeId: e.target.value
               })
             }}
-            themeValues={propertyValues}
+            values={propertyValues ?? []}
           />
         ) : (
           <Number
@@ -95,23 +95,21 @@ export const LengthInput = ({
         value={state.unit}
         property={property}
         onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-          let themeValue = null
-          // When the unit is changed to theme we need to set the first themeId
-          // so it doesnt break when converting to another unit.
-          const themeId = e.target.value === ThemeUnits.Theme 
-            ? propertyValues.length && propertyValues[0].id
-            : null
-          if (themeId || state.themeId) {
-            const id = themeId || state.themeId 
-            themeValue = propertyValues?.find((p) => p.id === id)
-          }
+          const newUnit = e.target.value as FullLengthUnit
           
           dispatch({
             type: 'CHANGED_UNIT_VALUE',
-            unit: e.target.value as LengthUnit,
-            themeValue,
-            themeId: themeValue?.id
+            unit: newUnit,
           })
+
+          if (newUnit === ThemeUnits.Theme) {
+            const themeValue = propertyValues[0]
+            dispatch({
+              type: 'CHANGED_INPUT_VALUE',
+              value: `${themeValue.value}${themeValue.unit}`,
+              themeId: themeValue.id
+            })
+          }
         }}
         sx={{ marginLeft: 1, minHeight: '1.6em', width: 72 }}
       />

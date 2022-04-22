@@ -2,24 +2,23 @@ import {
   AbsoluteLengthUnits,
   CSSUnitValue,
   FontRelativeLengthUnits,
+  FullLengthUnit,
   Length,
-  LengthUnit,
   ThemeUnits,
 } from '../types/css'
 
 const BASE_FONT_SIZE = 16
 export const convertLengthUnits = (
-  newUnit: LengthUnit | ThemeUnits,
+  newUnit: FullLengthUnit,
   providedValue: Length
 ): number | string => {
   const value: CSSUnitValue =
     providedValue === '0' ? { value: 0, unit: 'number' } : providedValue
-  const operatingUnit = value.unit
 
   if (newUnit === AbsoluteLengthUnits.Px) {
     if (
-      operatingUnit === FontRelativeLengthUnits.Em ||
-      operatingUnit === FontRelativeLengthUnits.Rem
+      value.unit === FontRelativeLengthUnits.Em ||
+      value.unit === FontRelativeLengthUnits.Rem
     ) {
       //@ts-ignore
       return value * BASE_FONT_SIZE
@@ -27,7 +26,7 @@ export const convertLengthUnits = (
   }
 
   if (newUnit === FontRelativeLengthUnits.Em || newUnit === FontRelativeLengthUnits.Rem) {
-    if (operatingUnit === AbsoluteLengthUnits.Px) {
+    if (value.unit === AbsoluteLengthUnits.Px) {
       //@ts-ignore
       return value.value / BASE_FONT_SIZE
     }

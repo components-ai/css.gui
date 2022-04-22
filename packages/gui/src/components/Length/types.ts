@@ -18,7 +18,5 @@ export type Action =
     }
   | {
       type: 'CHANGED_UNIT_VALUE'
-      unit: LengthUnit
-      themeId?: string
-      themeValue?: CSSUnitValue
+      unit: FullLengthUnit
     }
