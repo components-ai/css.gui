@@ -16,6 +16,28 @@ export const getPropertyData = (property?: string): PropertyData | null => {
 }
 
 export const properties: Record<string, PropertyData> = {
+  appearance: {
+    type: 'keyword',
+    keywords: [
+      'none',
+      'auto',
+      'menulist-button',
+      'textfield',
+      'button',
+      'searchfield',
+      'textarea',
+      'push-button',
+      'slider-horizontal',
+      'checkbox',
+      'radio',
+      'square-button',
+      'menulist',
+      'listbox',
+      'meter',
+      'progress-bar',
+      ...GLOBAL_KEYWORDS,
+    ],
+  },
   backgroundColor: {
     type: 'color',
     defaultValue: '#fff',
