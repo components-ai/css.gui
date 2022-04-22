@@ -2,10 +2,12 @@ import {
   AbsoluteLengthUnits,
   FontRelativeLengthUnits,
   FullLengthUnit,
+  KeywordUnits,
   LengthPercentageUnit,
   LengthUnit,
   PercentageLengthUnits,
   ThemeUnits,
+  UnitlessUnits,
 } from '../types/css'
 
 export const THEME_UNITS: string = ThemeUnits.Theme
@@ -13,18 +15,20 @@ export const UNITS: LengthUnit[] = [
   AbsoluteLengthUnits.Px,
   FontRelativeLengthUnits.Em,
   FontRelativeLengthUnits.Rem,
+  KeywordUnits.Keyword,
 ]
 export const UNITS_WITH_PERCENTAGE: LengthPercentageUnit[] = [
   ...UNITS,
   PercentageLengthUnits.Pct,
 ]
 export const UNIT_STEPS: Record<FullLengthUnit, number> = {
-  'number': 1,
+  [UnitlessUnits.Number]: 1,
   [ThemeUnits.Theme]: 1,
   [AbsoluteLengthUnits.Px]: 1,
   [FontRelativeLengthUnits.Em]: 0.125,
   [FontRelativeLengthUnits.Rem]: 0.125,
   [PercentageLengthUnits.Pct]: 0.1,
+  [KeywordUnits.Keyword]: 1
 }
 export const FONT_SIZE_MIN: Record<string, number> = {
   [AbsoluteLengthUnits.Px]: 0,
