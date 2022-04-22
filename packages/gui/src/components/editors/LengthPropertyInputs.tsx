@@ -4,7 +4,6 @@ import { LengthInput } from '../Length'
 import { ResponsiveInput } from '../Responsive'
 import { LengthEditorProps } from './types'
 
-
 export const BorderWidthInput = ({ value, onChange }: LengthEditorProps) => {
   return (
     <ResponsiveInput

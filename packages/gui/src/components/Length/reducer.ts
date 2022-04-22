@@ -1,11 +1,15 @@
-import { FONT_SIZE_MAX, FONT_SIZE_MIN, UNIT_STEPS } from '../../lib/constants'
+import { UNIT_STEPS } from '../../lib/constants'
 import { convertLengthUnits } from '../../lib/convert'
 import { State, Action } from './types'
 
 export const reducer = (state: State, action: Action): State => {
   switch (action.type) {
     case 'CHANGED_INPUT_VALUE': {
-      return { ...state, value: action.value }
+      return {
+        ...state,
+        value: action.value,
+        themeId: action.themeId
+      }
     }
     case 'CHANGED_UNIT_VALUE': {
       return {

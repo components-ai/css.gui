@@ -396,7 +396,6 @@ export const theme: Theme = {
       fontFamily: 'heading',
       fontWeight: 500,
       lineHeight: 'heading',
-      color: 'tomato',
     },
     h2: {
       fontSize: [2, 3, 4],
@@ -437,7 +436,6 @@ export const theme: Theme = {
       textDecoration: 'none',
     },
     p: {
-      maxWidth: '34em',
       lineHeight: 'body',
       fontSize: 18,
     },
@@ -445,6 +443,14 @@ export const theme: Theme = {
       backgroundColor: '#fafafa',
       color: '#111',
       p: 3,
+      borderRadius: 4,
+      '> code': {
+        px: 0,
+      },
+    },
+    code: {
+      fontSize: 18,
+      px: 1,
     },
     li: {
       lineHeight: 'body',
@@ -453,12 +459,6 @@ export const theme: Theme = {
       display: 'block',
       width: '100%',
       maxWidth: '48rem',
-    },
-    code: {
-      fontSize: 14,
-      maxWidth: '100%',
-      overflow: 'scroll',
-      display: 'block',
     },
   },
 }
