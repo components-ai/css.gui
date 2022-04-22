@@ -40,16 +40,63 @@ npm install --save css-gui
 
 ## Usage
 
+By default, CSS GUI will provide controls based on the style properties you pass.
+
 ```js
 import { useState } from 'react'
 import { Editor, RenderElement } from '@compai/css-gui'
 
 export const MyEditor = () => {
-  const [styles, setStyles] = useState({})
+  const [styles, setStyles] = useState({
+    fontSize: { value: 16, unit: 'px' },
+    lineHeight: { value: 1.4, unit: 'number' },
+    color: 'tomato',
+  })
 
   return (
     <>
       <Editor value={styles} onChange={setStyles} />
+      <RenderElement tagName="p" styles={styles}>
+        Hello, world!
+      </RenderElement>
+    </>
+  )
+}
+```
+
+For more customization, you can compose together your own controls and style
+pseudo-elements.
+
+```js
+import { useState } from 'react'
+import {
+  Editor,
+  RenderElement,
+  FontSize,
+  FontWeight,
+  LineHeight,
+  Color,
+} from '@compai/css-gui'
+
+export const MyEditor = () => {
+  const [styles, setStyles] = useState({
+    fontSize: { value: 16, unit: 'px' },
+    lineHeight: { value: 1.4, unit: 'number' },
+    color: 'tomato',
+  })
+
+  return (
+    <>
+      <Editor value={styles} onChange={setStyles}>
+        <FontSize />
+        <LineHeight />
+        <Color />
+        <PseudoFieldset name="first-letter">
+          <FontSize />
+          <FontWeight />
+          <Color />
+        </PseudoFieldset>
+      </Editor>
       <RenderElement tagName="p" styles={styles}>
         Hello, world!
       </RenderElement>
