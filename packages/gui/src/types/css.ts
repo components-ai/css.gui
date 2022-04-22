@@ -32,7 +32,7 @@ export const enum PercentageLengthUnits {
   Pct = '%',
 }
 export const enum UnitlessUnits {
-  Numb = 'number',
+  Number = 'number',
 }
 export const enum ThemeUnits {
   Theme = 'theme',
@@ -52,12 +52,12 @@ export type FullLengthUnit =
   | FontRelativeLengthUnits.Rem
   | AbsoluteLengthUnits.Px
   | PercentageLengthUnits.Pct
-  | 'number'
+  | UnitlessUnits.Number
   | ThemeUnits.Theme
   | KeywordUnits.Keyword
 
 export type CSSUnitValue = {
-  value: number
+  value: number | string
   unit: string
 }
 export type GenericLength = '0'

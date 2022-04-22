@@ -23,12 +23,12 @@ export const UNITS_WITH_PERCENTAGE: LengthPercentageUnit[] = [
 ]
 export const UNIT_STEPS: Record<FullLengthUnit, number | null> = {
   [UnitlessUnits.Number]: 1,
-  [ThemeUnits.Theme]: null,
+  [ThemeUnits.Theme]: 1,
   [AbsoluteLengthUnits.Px]: 1,
   [FontRelativeLengthUnits.Em]: 0.125,
   [FontRelativeLengthUnits.Rem]: 0.125,
   [PercentageLengthUnits.Pct]: 0.1,
-  [KeywordUnits.Keyword]: null
+  [KeywordUnits.Keyword]: 1
 }
 export const FONT_SIZE_MIN: Record<string, number> = {
   [AbsoluteLengthUnits.Px]: 0,

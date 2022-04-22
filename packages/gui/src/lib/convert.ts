@@ -21,12 +21,16 @@ export const convertLengthUnits = (
     ) {
       return value.value * BASE_FONT_SIZE
     }
+
+    return 16
   }
 
   if (newUnit === FontRelativeLengthUnits.Em || FontRelativeLengthUnits.Rem) {
     if (value.unit === AbsoluteLengthUnits.Px) {
       return value.value / BASE_FONT_SIZE
     }
+
+    return 1
   }
 
   return value.value

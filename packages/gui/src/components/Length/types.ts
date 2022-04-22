@@ -2,9 +2,9 @@ import { LengthUnit } from '../../types/css'
 
 export type State = {
   key: number
-  value: number
+  value: number | string
   unit: LengthUnit
-  step?: number | null
+  step?: number
   min?: number
   max?: number
 }
@@ -12,7 +12,7 @@ export type State = {
 export type Action =
   | {
       type: 'CHANGED_INPUT_VALUE'
-      value: number
+      value: number | string
     }
   | {
       type: 'CHANGED_UNIT_VALUE'

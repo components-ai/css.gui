@@ -1,7 +1,9 @@
 import * as React from 'react'
+import { getPropertyData } from '../../data/properties'
 import {
   AbsoluteLengthUnits,
   CSSUnitValue,
+  KeywordUnits,
   Length,
   LengthUnit,
 } from '../../types/css'
@@ -56,39 +58,51 @@ export const LengthInput = ({
         <Label htmlFor={fullId} sx={{ marginRight: 1, minWidth: 16 }}>
           {label ?? 'Number'}
         </Label>
-        <Number
-          id={fullId}
-          key={state.key}
-          value={state.value}
-          step={state.step}
-          min={min ? min[state.unit] : null}
-          max={max ? max[state.unit] : null}
-          property={property}
-          onChange={(newValue: number) => {
-            dispatch({
-              type: 'CHANGED_INPUT_VALUE',
-              value: newValue,
-            })
-          }}
-        />
+        {state.unit === KeywordUnits.Keyword ? (
+          <ValueSelect
+            values={getPropertyData(property)?.keywords ?? []}
+            onChange={(e: any) => {
+              dispatch({
+                type: 'CHANGED_INPUT_VALUE',
+                value: e.target.value
+              })
+            }}
+          />
+        ) : (
+          <Number
+            id={fullId}
+            key={state.key}
+            value={state.value}
+            step={state.step}
+            min={min ? min[state.unit] : null}
+            max={max ? max[state.unit] : null}
+            property={property}
+            onChange={(newValue: number) => {
+              dispatch({
+                type: 'CHANGED_INPUT_VALUE',
+                value: newValue,
+              })
+            }}
+          />
+        )}
       </div>
-      <ValueSelect
-        property={property}
-        onChange={(e: any) => {
-          dispatch({
-            type: 'CHANGED_INPUT_VALUE',
-            value: e.target.value
-          })
-        }}
-      />
       <UnitSelect
         value={state.unit}
         property={property}
         onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+          const newUnit = e.target.value as LengthUnit
+
           dispatch({
             type: 'CHANGED_UNIT_VALUE',
-            unit: e.target.value as LengthUnit,
+            unit: newUnit,
           })
+
+          if (newUnit === KeywordUnits.Keyword) {
+            dispatch({
+              type: 'CHANGED_INPUT_VALUE',
+              value: getPropertyData(property)?.keywords[0]!
+            })
+          }
         }}
         sx={{ marginLeft: 1, minHeight: '1.6em', width: 72 }}
       />
