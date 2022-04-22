@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Link from 'next/link'
-import { Editor, RenderElement } from 'css-gui'
+import { Editor, RenderElement } from '@compai/css-gui'
 import { FirstParagraph } from '../components/FirstParagraph'
 import { Theme } from '@emotion/react'
 
