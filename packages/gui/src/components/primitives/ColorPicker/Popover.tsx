@@ -8,6 +8,7 @@ interface Props extends PickerProps {
   showText?: boolean
   /** The element to render on the swatch preview */
   swatch?: JSX.Element
+  id?: string
 }
 
 /**
