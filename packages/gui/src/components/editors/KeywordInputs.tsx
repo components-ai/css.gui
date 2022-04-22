@@ -38,6 +38,7 @@ export const FontStretchInput = keywordInputs.fontStretch
 export const TextAlignInput = keywordInputs.textAlign
 export const WritingModeInput = keywordInputs.writingMode
 export const WhiteSpaceInput = keywordInputs.whiteSpace
+export const WordBreakInput = keywordInputs.wordBreak
 
 type SelectProps = {
   id: string

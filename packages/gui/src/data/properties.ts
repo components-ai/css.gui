@@ -151,6 +151,16 @@ export const properties: Record<string, PropertyData> = {
       ...GLOBAL_KEYWORDS,
     ],
   },
+  wordBreak: {
+    type: 'keyword',
+    keywords: [
+      'normal',
+      'break-all',
+      'keep-all',
+      'break-word',
+      ...GLOBAL_KEYWORDS,
+    ],
+  },
   writingMode: {
     type: 'keyword',
     keywords: [
