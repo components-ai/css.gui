@@ -55,7 +55,7 @@ export const MyEditor = () => {
 
   return (
     <>
-      <Editor value={styles} onChange={setStyles} />
+      <Editor styles={styles} onChange={setStyles} />
       <RenderElement tagName="p" styles={styles}>
         Hello, world!
       </RenderElement>
@@ -87,7 +87,7 @@ export const MyEditor = () => {
 
   return (
     <>
-      <Editor value={styles} onChange={setStyles}>
+      <Editor styles={styles} onChange={setStyles}>
         <FontSize />
         <LineHeight />
         <Color />
