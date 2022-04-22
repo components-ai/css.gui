@@ -1,6 +1,6 @@
-# Properties
+# CSS Properties
 
-List of CSS properties roughly organized into usage categories
+List of CSS properties roughly organized into usage categories.
 
 ## Layout			
 
@@ -68,6 +68,7 @@ z-index
 
 ### Spacing
 
+
 margin 	
 margin-bottom 	
 margin-left 	
@@ -104,7 +105,7 @@ max-width
 
 aspect-ratio
 			
-## Theme / Appearance / Skin 
+## Theme / Appearance / Skin "Outfit"
 
 appearance
 accent-color 	
@@ -127,6 +128,39 @@ background-origin
 background-position
 background-repeat
 background-size
+
+## Interactive
+
+scroll-behavior 	
+scroll-margin 	
+scroll-margin-block 	
+scroll-margin-block-end 	
+scroll-margin-block-start 	
+scroll-margin-bottom 	
+scroll-margin-inline 	
+scroll-margin-inline-end 	
+scroll-margin-inline-start 	
+scroll-margin-left 	
+scroll-margin-right 	
+scroll-margin-top 	
+scroll-padding 	
+scroll-padding-block 	
+scroll-padding-block-end 	
+scroll-padding-block-start 	
+scroll-padding-bottom 	
+scroll-padding-inline 	
+scroll-padding-inline-end 	
+scroll-padding-inline-start 	
+scroll-padding-left 	
+scroll-padding-right 	
+scroll-padding-top 	
+scroll-snap-align 	
+scroll-snap-stop 	
+scroll-snap-type 	
+
+scrollbar-color 	
+scrollbar-gutter 	
+scrollbar-width 	
 
 
 ### Border
@@ -318,46 +352,6 @@ wrap-before
 wrap-inside 
 writing-mode 	
 
-## Lists 
-
-list-style 	
-list-style-image 	
-list-style-position 	
-list-style-type
-
-## Interactive
-
-scroll-behavior 	
-scroll-margin 	
-scroll-margin-block 	
-scroll-margin-block-end 	
-scroll-margin-block-start 	
-scroll-margin-bottom 	
-scroll-margin-inline 	
-scroll-margin-inline-end 	
-scroll-margin-inline-start 	
-scroll-margin-left 	
-scroll-margin-right 	
-scroll-margin-top 	
-scroll-padding 	
-scroll-padding-block 	
-scroll-padding-block-end 	
-scroll-padding-block-start 	
-scroll-padding-bottom 	
-scroll-padding-inline 	
-scroll-padding-inline-end 	
-scroll-padding-inline-start 	
-scroll-padding-left 	
-scroll-padding-right 	
-scroll-padding-top 	
-scroll-snap-align 	
-scroll-snap-stop 	
-scroll-snap-type 	
-
-scrollbar-color 	
-scrollbar-gutter 	
-scrollbar-width 	
-
 ## Sound
 azimuth
 
@@ -379,9 +373,7 @@ speak-numeral
 speak-punctuation 	
 speech-rate 	
 stress 	
-		
-##
-
+			
 baseline-source 
 block-ellipsis 	
 block-size 	
@@ -441,6 +433,7 @@ flow-into
 
 footnote-display 	
 	
+	
 glyph-orientation-vertical 	
 	
 hanging-punctuation 	
@@ -479,6 +472,10 @@ line-clamp
 line-grid 
 line-snap
 
+list-style 	
+list-style-image 	
+list-style-position 	
+list-style-type
 
 marker-side
 	
@@ -498,3 +495,179 @@ mask-origin
 mask-position 	
 mask-repeat 	
 mask-size 	
+mask-type 	
+	
+max-block-size 	
+max-inline-size 	
+min-block-size 	
+min-inline-size 	
+	
+object-fit 	
+object-position 	
+	
+offset 	
+offset-anchor 	
+offset-distance 	
+offset-path 	
+offset-position 	
+offset-rotate 	
+	
+orphans 	
+	
+	
+overflow 	
+overflow-anchor 	
+overflow-block 	
+overflow-clip-margin 	
+overflow-inline 	
+overflow-wrap 	
+overflow-x 	
+overflow-y 	
+max-lines 	
+
+overscroll-behavior 	
+overscroll-behavior-block 	
+overscroll-behavior-inline 	
+overscroll-behavior-x 	
+overscroll-behavior-y 	
+
+## Print	
+page
+page-break-after
+page-break-before
+page-break-inside
+
+pause 	
+pause-after 	
+pause-before 	
+	
+perspective 	
+	
+perspective-origin 	
+	
+place-content 	
+place-items 	
+place-self 	
+
+quotes 	
+	
+region-fragment 	
+
+rotate 	
+	
+row-gap 	
+	
+ruby-align 	
+ruby-merge 
+ruby-overhang 	
+	
+running 	
+	
+scale 	
+	
+	
+shape-image-threshold 	
+shape-inside 	
+shape-margin 	
+shape-outside 	
+	
+spatial-navigation-action 	
+spatial-navigation-contain 	
+spatial-navigation-function 	
+
+	
+tab-size 	
+	
+translate 	
+unicode-bidi 	
+	
+visibility 	
+	
+will-change 	
+	
+wrap-through 	
+wrap-flow 	
+
+
+lighting-color 
+flood-color 	
+fill-color 	
+
+## Deprecated
+
+string-set *
+
+play-during *
+rest *
+rest-after *
+rest-before *
+
+nav-down *
+nav-left *
+nav-right *
+nav-up *
+
+image-resolution *
+dominant-baseline *
+
+alignment-baseline *
+baseline-shift *
+
+bookmark-label *
+bookmark-level *
+bookmark-state *
+
+cue *
+cue-after *
+cue-before *
+
+pitch *
+pitch-range *
+
+richness *
+
+ruby-position *
+
+## SVG
+
+fill 	
+fill-break
+fill-color 
+fill-image 
+fill-opacity 
+fill-origin 	
+fill-position 	
+fill-repeat 	
+fill-rule 
+fill-size 	
+
+stroke 	
+stroke-align 	
+stroke-alignment 	
+stroke-break 	
+stroke-color 	
+stroke-dash-corner 	
+stroke-dash-justify 	
+stroke-dashadjust 	
+stroke-dasharray 	
+stroke-dashcorner 	
+stroke-dashoffset 	
+stroke-image 	
+stroke-linecap 	
+stroke-linejoin 	
+stroke-miterlimit 	
+stroke-opacity 	
+stroke-origin 	
+stroke-position 	
+stroke-repeat 	
+stroke-size 	
+stroke-width 
+
+marker 
+marker-end
+marker-knockout-left
+marker-knockout-right
+marker-mid 
+marker-pattern
+marker-segment 
+marker-start 
