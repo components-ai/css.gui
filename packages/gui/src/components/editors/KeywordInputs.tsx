@@ -31,7 +31,11 @@ export const keywordInputs = mapValues(keywordProperties, (property, name) => {
 })
 
 // Inputs have to be manually added here to get exports working
-export const AlignContent = keywordInputs.alignContent
+export const AlignContentInput = keywordInputs.alignContent
+export const AlignItemsInput = keywordInputs.alignItems
+export const AlignSelfInput = keywordInputs.alignSelf
+export const AppearanceInput = keywordInputs.appearance
+export const BackfaceVisibilityInput = keywordInputs.backfaceVisibility
 export const DisplayInput = keywordInputs.display
 export const FloatInput = keywordInputs.float
 export const VisibilityInput = keywordInputs.visibility

@@ -24,6 +24,36 @@ export const getPropertyData = (property?: string): PropertyData | null => {
 }
 
 export const properties: Record<string, PropertyData> = {
+  appearance: {
+    type: 'keyword',
+    keywords: [
+      'none',
+      'auto',
+      'menulist-button',
+      'textfield',
+      'button',
+      'searchfield',
+      'textarea',
+      'push-button',
+      'slider-horizontal',
+      'checkbox',
+      'radio',
+      'square-button',
+      'menulist',
+      'listbox',
+      'meter',
+      'progress-bar',
+      ...GLOBAL_KEYWORDS,
+    ],
+  },
+  backfaceVisibility: {
+    type: 'keyword',
+    keywords: [
+      'visible',
+      'hidden',
+      ...GLOBAL_KEYWORDS,
+    ],
+  },
   backgroundColor: {
     type: 'color',
     defaultValue: '#fff',
@@ -36,6 +66,10 @@ export const properties: Record<string, PropertyData> = {
   borderWidth: {
     type: 'length',
     keywords: ['thin', 'medium', 'thick', ...GLOBAL_KEYWORDS],
+  },
+  caretColor: {
+    type: 'color',
+    keywords: ['currentcolor', 'transparent', ...GLOBAL_KEYWORDS],
   },
   color: {
     type: 'color',
@@ -83,6 +117,49 @@ export const properties: Record<string, PropertyData> = {
       'space-around',
       'space-evenly',
       'stretch',
+      'safe center',
+      'unsafe center',
+      ...GLOBAL_KEYWORDS,
+    ],
+  },
+  alignItems: {
+    type: 'keyword',
+    keywords: [
+      'center',
+      'start',
+      'end',
+      'flex-start',
+      'flex-end',
+      'normal',
+      'stretch',
+      'baseline',
+      'first baseline',
+      'last baseline',
+      'space-between',
+      'space-around',
+      'space-evenly',
+      'safe center',
+      'unsafe center',
+      ...GLOBAL_KEYWORDS,
+    ],
+  },
+  alignSelf: {
+    type: 'keyword',
+    keywords: [
+      'auto'
+      'center',
+      'start',
+      'end',
+      'flex-start',
+      'flex-end',
+      'normal',
+      'stretch',
+      'baseline',
+      'first baseline',
+      'last baseline',
+      'space-between',
+      'space-around',
+      'space-evenly',
       'safe center',
       'unsafe center',
       ...GLOBAL_KEYWORDS,

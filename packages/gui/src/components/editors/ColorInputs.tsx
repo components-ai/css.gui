@@ -32,6 +32,7 @@ export const colorInputs = mapValues(colorProperties, (property, name) => {
 export const BackgroundColorInput = colorInputs.backgroundColor
 export const ColorInput = colorInputs.color
 export const BorderColorInput = colorInputs.borderColor
+export const CaretColorInput = colorInputs.caretColor
 
 // Convert a css keyword to display string
 function getLabel(keyword: string) {
