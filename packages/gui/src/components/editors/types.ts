@@ -5,6 +5,11 @@ export type LengthEditorProps = {
   onChange: (newValue: Length | ResponsiveLength) => void
 }
 
+export type KeywordEditorProps = {
+  value?: string
+  onChange: (newValue: string) => void
+}
+
 export type ColorEditorProps = {
   value?: Color
   onChange: (newValue: Color) => void
