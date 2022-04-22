@@ -59,6 +59,10 @@ export const properties: Record<string, PropertyData> = {
     type: 'length',
     keywords: ['thin', 'medium', 'thick', ...GLOBAL_KEYWORDS],
   },
+  caretColor: {
+    type: 'color',
+    keywords: ['currentcolor', 'transparent', ...GLOBAL_KEYWORDS],
+  },
   color: {
     type: 'color',
     keywords: ['currentcolor', 'transparent', ...GLOBAL_KEYWORDS],
