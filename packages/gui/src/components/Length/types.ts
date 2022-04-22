@@ -1,4 +1,4 @@
-import { CSSUnitValue, FullLengthUnit, LengthUnit } from '../../types/css'
+import { CSSUnitValue, FullLengthUnit, Length } from '../../types/css'
 
 export type State = {
   key: number
@@ -19,4 +19,10 @@ export type Action =
   | {
       type: 'CHANGED_UNIT_VALUE'
       unit: FullLengthUnit
+    }
+  | {
+      type: 'CHANGED_INPUT_TO_THEME_VALUE'
+      value: number | string
+      unit: FullLengthUnit
+      themeId?: string
     }
