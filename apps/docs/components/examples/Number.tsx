@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { NumberInput } from 'css-gui'
+import { NumberInput } from '@compai/css-gui'
 
 export const NumberExample = () => {
   const [value, setValue] = useState<number>(16)

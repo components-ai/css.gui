@@ -42,7 +42,7 @@ npm install --save css-gui
 
 ```js
 import { useState } from 'react'
-import { Editor, RenderElement } from 'css-gui'
+import { Editor, RenderElement } from '@compai/css-gui'
 
 export const MyEditor = () => {
   const [styles, setStyles] = useState({})
@@ -58,7 +58,7 @@ export const MyEditor = () => {
 }
 ```
 
-[Read the full getting started guide &rarr;](https://cssgui.components.ai/getting-started)
+[Read the full getting started guide &rarr;](https://components.ai/open-source/css-gui/getting-started)
 
 ## Development
 

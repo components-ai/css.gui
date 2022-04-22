@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { LengthInput, Length, stringifyUnit } from 'css-gui'
+import { LengthInput, Length, stringifyUnit } from '@compai/css-gui'
 
 export const LengthExample = () => {
   const [value, setValue] = useState<Length>({
