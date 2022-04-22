@@ -69,14 +69,7 @@ pseudo-elements.
 
 ```js
 import { useState } from 'react'
-import {
-  Editor,
-  RenderElement,
-  FontSize,
-  FontWeight,
-  LineHeight,
-  Color,
-} from '@compai/css-gui'
+import { Editor, Inputs, RenderElement } from '@compai/css-gui'
 
 export const MyEditor = () => {
   const [styles, setStyles] = useState({
@@ -88,13 +81,13 @@ export const MyEditor = () => {
   return (
     <>
       <Editor styles={styles} onChange={setStyles}>
-        <FontSize />
-        <LineHeight />
-        <Color />
+        <Inputs.FontSize />
+        <Inputs.LineHeight />
+        <Inputs.Color />
         <PseudoFieldset name="first-letter">
-          <FontSize />
-          <FontWeight />
-          <Color />
+          <Inputs.FontSize />
+          <Inputs.FontWeight />
+          <Inputs.Color />
         </PseudoFieldset>
       </Editor>
       <RenderElement tagName="p" styles={styles}>

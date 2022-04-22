@@ -1,1 +1,1 @@
-export { Controls as Editor } from './Controls'
+export * from './Controls'

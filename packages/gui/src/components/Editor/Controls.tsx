@@ -1,5 +1,6 @@
 import produce from 'immer'
 import { ReactChild } from 'react'
+import pascal from 'pascalcase'
 import { Styles } from '../../types/css'
 import { Theme } from '../../types/theme'
 import { EditorProvider, useEditor } from '../providers/EditorContext'
@@ -30,13 +31,18 @@ const Control = ({ field }: ControlProps) => {
   )
 }
 
+export const Inputs: Record<string, any> = {}
+Object.keys(controlMap).forEach((field: string) => {
+  Inputs[pascal(field)] = () => <Control field={field} />
+})
+
 type ControlsProps = {
   styles: Styles
   theme?: Theme
   onChange: (newStyles: any) => void
   children?: ReactChild
 }
-export const Controls = ({
+export const Editor = ({
   theme,
   styles,
   onChange,

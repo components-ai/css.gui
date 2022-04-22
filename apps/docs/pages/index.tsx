@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Link from 'next/link'
-import { Editor, RenderElement } from '@compai/css-gui'
+import { Editor, Inputs, RenderElement } from '@compai/css-gui'
 import { FirstParagraph } from '../components/FirstParagraph'
 import { Theme } from '@emotion/react'
 
@@ -77,7 +77,26 @@ export default function Docs() {
         }}
       >
         <div sx={{ px: [2, 3, 4] }}>
-          <Editor styles={styles} onChange={setStyles} theme={DEFAULT_THEME} />
+          <Editor styles={styles} onChange={setStyles} theme={DEFAULT_THEME}>
+            <>
+              <h3>Typography</h3>
+              <Inputs.FontSize />
+              <Inputs.LineHeight />
+              <Inputs.TextAlign />
+              <h3>Colors</h3>
+              <div sx={{ display: 'flex' }}>
+                <div sx={{ mr: 2 }}>
+                  <Inputs.Color />
+                </div>
+                <div>
+                  <Inputs.BackgroundColor />
+                </div>
+              </div>
+              <h3>Size</h3>
+              <Inputs.Width />
+              <Inputs.Height />
+            </>
+          </Editor>
         </div>
         <RenderElement tagName="p" styles={styles}>
           “The parameters comprise sequences which are theoretically infinite
