@@ -1,8 +1,7 @@
-import { LayerProps } from '../layers'
 import { ColorInput } from '../ColorInput'
 import { CheckboxInput } from '../CheckboxInput'
 import { LengthInput } from '../LengthInput'
-import Layers from '../layers'
+import Layers, { LayerProps } from '../Layers'
 import LayerHeader from '../LayerHeader'
 
 import { BoxShadow } from './types'

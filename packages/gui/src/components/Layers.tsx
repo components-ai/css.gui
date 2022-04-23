@@ -2,7 +2,6 @@ import { Trash, ChevronUp, ChevronDown } from 'react-feather'
 import { useState, ComponentType } from 'react'
 import * as Accordion from '@radix-ui/react-accordion'
 import IconButton from './ui/IconButton'
-import produce from 'immer'
 
 interface LayersProps<T> {
   value: T[]

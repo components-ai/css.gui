@@ -6,7 +6,7 @@ import { TextShadow } from './types'
 import { toCssValue } from './convert'
 
 import LayerHeader from '../LayerHeader'
-import Layers from '../layers'
+import Layers from '../Layers'
 
 export default function TextShadowField({
   value,
