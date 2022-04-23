@@ -15,7 +15,7 @@ import { useThemeProperty } from '../providers/ThemeContext'
 
 type UnitRanges = Record<string, [number, number]>
 
-export type LengthInputProps = {
+export type DimensionInputProps = {
   value: Length
   label?: string
   property?: string
@@ -24,7 +24,7 @@ export type LengthInputProps = {
   keywords?: string[]
   units?: string[]
 }
-export const LengthInput = ({
+export const DimensionInput = ({
   value: providedValue,
   onChange,
   label,
@@ -32,7 +32,7 @@ export const LengthInput = ({
   range,
   keywords,
   units = [],
-}: LengthInputProps) => {
+}: DimensionInputProps) => {
   const id = React.useId()
   const fullId = `${id}-${property || 'length'}`
   const value: CSSUnitValue =

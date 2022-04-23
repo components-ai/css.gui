@@ -12,7 +12,7 @@ import {
   ThemeUnits,
   UnitlessUnits,
 } from '../../types/css'
-import { LengthInput as DimensionInput } from '../Length'
+import { DimensionInput } from '../Dimension'
 import { ResponsiveInput } from '../Responsive'
 import { LengthEditorProps } from './types'
 
@@ -35,6 +35,52 @@ export const lengthInputs = mapValues(lengthProperties, (property, name) => {
           ...property,
         }}
       />
+    )
+  }
+})
+
+const percentageProperties = pickBy(
+  properties,
+  (property) => property.type === 'percentage'
+)
+export const percentageInputs = mapValues(
+  percentageProperties,
+  (property, name) => {
+    return ({ value, onChange }: LengthEditorProps) => {
+      return (
+        <div>
+          <DimensionInput
+            value={value as any}
+            label={getPropertyLabel(name)}
+            onChange={onChange}
+            property={name}
+            units={['%', 'keyword']}
+            {...property}
+          />
+        </div>
+      )
+    }
+  }
+)
+
+const numberProperties = pickBy(
+  properties,
+  (property) => property.type === 'number'
+)
+
+export const numberInputs = mapValues(numberProperties, (property, name) => {
+  return ({ value, onChange }: LengthEditorProps) => {
+    return (
+      <div>
+        <DimensionInput
+          value={value as any}
+          label={getPropertyLabel(name)}
+          onChange={onChange}
+          property={name}
+          units={['number', 'keyword']}
+          {...property}
+        />
+      </div>
     )
   }
 })

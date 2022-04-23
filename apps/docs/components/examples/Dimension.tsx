@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { LengthInput, Length, stringifyUnit } from '@compai/css-gui'
+import { DimensionInput, Length, stringifyUnit } from '@compai/css-gui'
 
-export const LengthExample = () => {
+export const DimensionExample = () => {
   const [value, setValue] = useState<Length>({
     value: 16,
     unit: 'px',
@@ -9,7 +9,12 @@ export const LengthExample = () => {
   return (
     <div>
       <div sx={{ width: 256, ml: 0 }}>
-        <LengthInput property="fontSize" value={value} onChange={setValue} />
+        <DimensionInput
+          property="fontSize"
+          value={value}
+          onChange={setValue}
+          units={['px', 'em', 'rem']}
+        />
       </div>
       <h1
         sx={{

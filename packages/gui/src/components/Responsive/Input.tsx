@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Monitor, Smartphone, X } from 'react-feather'
 import { AbsoluteLengthUnits, Length, ResponsiveLength } from '../../types/css'
 import { Breakpoint } from '../../types/theme'
-import { LengthInputProps } from '../Length/Input'
+import { DimensionInputProps } from '../Dimension/Input'
 import { useTheme } from '../providers/ThemeContext'
 
 const DEFAULT_BREAKPOINT_COUNT = 3
@@ -15,7 +15,7 @@ type ResponsiveInputProps = {
   label: string
   property?: string
   // TODO: Type this component
-  Component: React.ComponentType<LengthInputProps>
+  Component: React.ComponentType<DimensionInputProps>
   componentProps?: any
 }
 export const ResponsiveInput = ({
