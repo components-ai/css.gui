@@ -1,0 +1,48 @@
+import { FirstParagraph } from '../../components/FirstParagraph'
+import { DimensionExample } from '../../components/examples/Dimension'
+
+# Dimension Input
+
+<FirstParagraph>
+  A scrubbable input for selecting value with units.
+</FirstParagraph>
+
+## Example
+
+<DimensionExample />
+
+## Usage
+
+```ts
+import { useState } from 'react'
+import {
+  DimensionInput,
+  Dimension,
+  stringifyUnit,
+  CSSUnitValue,
+} from '@compai/css-gui'
+
+export const DimensionExample = () => {
+  const [value, setValue] = useState<Dimension>({
+    value: 16,
+    unit: 'px',
+  })
+  return (
+    <>
+      <DimensionInput
+        property="fontSize"
+        value={value}
+        onChange={setValue}
+        units={['px', 'em', 'rem']}
+      />
+      <h1
+        style={{
+          fontSize: stringifyUnit('fontSize', value),
+        }}
+      >
+        Aa
+      </h1>
+    </>
+  )
+}
+```
