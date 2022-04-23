@@ -34,6 +34,9 @@ const getLength = (length: Length) => {
   if (length === '0') {
     return length
   }
+  if (length.unit === 'number' || length.unit === 'keyword') {
+    return length.value
+  }
   return length ? `${length.value}${length.unit}` : null
 }
 

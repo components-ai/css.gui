@@ -1,5 +1,5 @@
 import { LayerProps } from '../layers'
-import { ColorPicker as ColorField } from '../primitives'
+import { ColorPopover as ColorField } from '../primitives'
 import { LengthInput as LengthField } from '../LengthInput'
 import Layers from '../layers'
 import LayerHeader from '../LayerHeader'
@@ -50,21 +50,25 @@ export const BoxShadowEditor = ({ value, onChange }: LayerProps<BoxShadow>) => {
         label="Offset X"
         value={value.offsetX}
         onChange={(offsetX) => onChange({ ...value, offsetX })}
+        keyword={false}
       />
       <LengthField
         label="Offset Y"
         value={value.offsetY}
         onChange={(offsetY) => onChange({ ...value, offsetY })}
+        keyword={false}
       />
       <LengthField
         label="Spread"
         value={value.spread}
         onChange={(spread) => onChange({ ...value, spread })}
+        keyword={false}
       />
       <LengthField
         label="Blur"
         value={value.blur}
         onChange={(blur) => onChange({ ...value, blur })}
+        keyword={false}
       />
     </div>
   )
