@@ -1,5 +1,5 @@
-import { Length } from '../../types/css'
 import { BoxShadow } from './types'
+import { stringifyUnit } from '../../lib/stringify'
 
 export function toCssValue(boxShadow: BoxShadow | BoxShadow[]): string {
   if (Array.isArray(boxShadow)) {
@@ -12,32 +12,12 @@ export function toCssValue(boxShadow: BoxShadow | BoxShadow[]): string {
 export const getBoxShadow = (boxShadow: BoxShadow) => {
   return [
     boxShadow.inset && 'inset',
-    getLength(boxShadow.offsetX),
-    getLength(boxShadow.offsetY),
-    getLength(boxShadow.blur),
-    getLength(boxShadow.spread),
+    stringifyUnit(boxShadow.offsetX),
+    stringifyUnit(boxShadow.offsetY),
+    stringifyUnit(boxShadow.blur),
+    stringifyUnit(boxShadow.spread),
     boxShadow.color,
   ]
     .filter(Boolean)
     .join(' ')
 }
-
-export const getStyles = (boxShadow: BoxShadow | BoxShadow[]) => {
-  const value = squeeze(toCssValue(boxShadow))
-
-  return {
-    boxShadow: value,
-  }
-}
-
-const getLength = (length: Length) => {
-  if (length === '0') {
-    return length
-  }
-  if (length.unit === 'number' || length.unit === 'keyword') {
-    return length.value
-  }
-  return length ? `${length.value}${length.unit}` : null
-}
-
-export const squeeze = (s: string) => s.replace(/\s+/g, ' ').trim() // Remove duplicate whitespace

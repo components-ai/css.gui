@@ -1,19 +1,12 @@
-import {
-  Styles,
-  AbsoluteLengthUnits,
-  Length,
-  ThemeUnits,
-  KeywordUnits,
-  CSSUnitValue,
-} from '../types/css'
+import { Styles, Length, CSSUnitValue } from '../types/css'
 
 import { toCssValue as convertEasingFunction } from '../components/EasingFunction/convert'
 import { toCssValue as convertBoxShadow } from '../components/BoxShadow/convert'
 import { toCssValue as convertTextShadow } from '../components/TextShadow/convert'
+import { stringifyUnit } from './stringify'
 import { has } from 'lodash-es'
 
-const DEFAULT_LENGTH_UNIT = AbsoluteLengthUnits.Px
-export const stringifyUnit = (
+export const stringifyProperty = (
   property?: string, // In the future the property might determine how we stringify
   value?: unknown
 ): Array<string | null> | string | number | null => {
@@ -26,7 +19,9 @@ export const stringifyUnit = (
 
   if (Array.isArray(value)) {
     // @ts-ignore
-    return value.map((v: Length | string | null) => stringifyUnit(property, v))
+    return value.map((v: Length | string | null) =>
+      stringifyProperty(property, v)
+    )
   }
 
   if (
@@ -40,24 +35,7 @@ export const stringifyUnit = (
   if (!isCSSUnitValue(value)) {
     return String(value) ?? null
   }
-
-  if (value.value === undefined) {
-    return null
-  }
-
-  if (
-    value.unit === ThemeUnits.Theme ||
-    value.unit === 'raw' ||
-    value.unit === KeywordUnits.Keyword
-  ) {
-    return value.value
-  }
-
-  if (value.unit === 'number') {
-    return String(value.value)
-  }
-
-  return `${value.value}${value.unit || DEFAULT_LENGTH_UNIT}`
+  return stringifyUnit(value)
 }
 
 type StyleEntry = [string, Length | string | null | undefined]
@@ -66,7 +44,7 @@ export const toCSSObject = (styles: Styles) => {
     const [property, value] = curr
     return {
       ...acc,
-      [property]: stringifyUnit(property, value),
+      [property]: stringifyProperty(property, value),
     }
   }, {})
 }

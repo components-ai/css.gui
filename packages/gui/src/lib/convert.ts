@@ -26,7 +26,10 @@ export const convertLengthUnits = (
     return 16
   }
 
-  if (newUnit === FontRelativeLengthUnits.Em || newUnit === FontRelativeLengthUnits.Rem) {
+  if (
+    newUnit === FontRelativeLengthUnits.Em ||
+    newUnit === FontRelativeLengthUnits.Rem
+  ) {
     if (value.unit === AbsoluteLengthUnits.Px) {
       //@ts-ignore
       return value.value / BASE_FONT_SIZE
