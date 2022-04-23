@@ -2,8 +2,8 @@ import { useId } from 'react'
 import { ColorPopover, Label } from '../primitives'
 import { useTheme } from '../providers/ThemeContext'
 import { ColorEditorProps } from './types'
-import { properties } from '../../data/properties'
-import { lowerCase, mapValues, pickBy, upperFirst } from 'lodash-es'
+import { properties, getPropertyLabel } from '../../data/properties'
+import { mapValues, pickBy } from 'lodash-es'
 
 const colorProperties = pickBy(
   properties,
@@ -17,7 +17,7 @@ export const colorInputs = mapValues(colorProperties, (property, name) => {
     const fullId = `${id}-${name}`
     return (
       <>
-        <Label htmlFor={fullId}>{getLabel(name)}</Label>
+        <Label htmlFor={fullId}>{getPropertyLabel(name)}</Label>
         <ColorPopover
           id={fullId}
           value={value || property.defaultValue || '#000'}
@@ -33,8 +33,3 @@ export const BackgroundColorInput = colorInputs.backgroundColor
 export const ColorInput = colorInputs.color
 export const BorderColorInput = colorInputs.borderColor
 export const CaretColorInput = colorInputs.caretColor
-
-// Convert a css keyword to display string
-function getLabel(keyword: string) {
-  return upperFirst(lowerCase(keyword))
-}

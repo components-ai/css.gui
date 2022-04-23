@@ -1,6 +1,6 @@
-import { lowerCase, mapValues, pickBy, upperFirst } from 'lodash-es'
+import { mapValues, pickBy } from 'lodash-es'
 import { ChangeEvent, useId } from 'react'
-import { properties } from '../../data/properties'
+import { properties, getPropertyLabel } from '../../data/properties'
 import { Label } from '../primitives'
 import { KeywordEditorProps } from './types'
 import { GLOBAL_KEYWORDS } from '../../data/global-keywords'
@@ -19,7 +19,7 @@ export const keywordInputs = mapValues(keywordProperties, (property, name) => {
     const fullId = `${id}-${name}`
     return (
       <>
-        <Label htmlFor={fullId}>{getLabel(name)}</Label>
+        <Label htmlFor={fullId}>{getPropertyLabel(name)}</Label>
         <Select
           id={fullId}
           value={value || DEFAULT_KEYWORD}
@@ -70,9 +70,4 @@ export const Select = ({ value, onChange, id, values }: SelectProps): any => {
       })}
     </select>
   )
-}
-
-// Convert a css keyword to display string
-function getLabel(keyword: string) {
-  return upperFirst(lowerCase(keyword))
 }

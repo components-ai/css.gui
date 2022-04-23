@@ -1,5 +1,5 @@
-import { lowerCase, mapValues, pickBy, upperFirst } from 'lodash-es'
-import { properties } from '../../data/properties'
+import { mapValues, pickBy } from 'lodash-es'
+import { properties, getPropertyLabel } from '../../data/properties'
 import { LengthInput } from '../Length'
 import { ResponsiveInput } from '../Responsive'
 import { LengthEditorProps } from './types'
@@ -13,7 +13,7 @@ export const lengthInputs = mapValues(lengthProperties, (property, name) => {
   return ({ value, onChange }: LengthEditorProps) => {
     return (
       <ResponsiveInput
-        label={getLabel(name)}
+        label={getPropertyLabel(name)}
         property={name}
         value={value}
         onChange={onChange}
@@ -31,8 +31,3 @@ export const WidthInput = lengthInputs.width
 export const HeightInput = lengthInputs.height
 export const FontSizeInput = lengthInputs.fontSize
 export const LineHeightInput = lengthInputs.lineHeight
-
-// Convert a css keyword to display string
-function getLabel(keyword: string) {
-  return upperFirst(lowerCase(keyword))
-}
