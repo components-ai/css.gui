@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { getPropertyData } from '../../data/properties'
 import {
   AbsoluteLengthUnits,
   CSSUnitValue,
@@ -7,17 +6,12 @@ import {
   FullLengthUnit,
   Length,
   ThemeUnits,
-  UnitlessUnits,
-  PercentageLengthUnits,
 } from '../../types/css'
 import { GLOBAL_KEYWORDS } from '../../data/global-keywords'
 import { Label, Number, UnitSelect, ValueSelect } from '../primitives'
 import { reducer } from './reducer'
 import { State } from './types'
 import { useThemeProperty } from '../providers/ThemeContext'
-import { isThemeable } from '../../lib/theme'
-import { UNITS } from '../../lib/constants'
-import { compact } from 'lodash-es'
 
 type UnitRanges = Record<string, [number, number]>
 
@@ -27,6 +21,8 @@ export type LengthInputProps = {
   property?: string
   onChange: (length: Length) => void
   range?: UnitRanges
+  keywords?: string[]
+  units?: string[]
 }
 export const LengthInput = ({
   value: providedValue,
@@ -34,6 +30,8 @@ export const LengthInput = ({
   label,
   property,
   range,
+  keywords,
+  units = [],
 }: LengthInputProps) => {
   const id = React.useId()
   const fullId = `${id}-${property || 'length'}`
@@ -65,15 +63,7 @@ export const LengthInput = ({
   }, [state])
 
   const propertyValues = useThemeProperty(property)
-  const propertyData = getPropertyData(property)
-  const keywords = [...(propertyData?.keywords ?? []), ...GLOBAL_KEYWORDS]
-
-  const units = compact([
-    isThemeable(property) && ThemeUnits.Theme,
-    propertyData?.number && UnitlessUnits.Number,
-    ...UNITS,
-    propertyData?.percentage && PercentageLengthUnits.Pct,
-  ])
+  const allKeywords = [...(keywords ?? []), ...GLOBAL_KEYWORDS]
 
   return (
     <div
@@ -97,7 +87,7 @@ export const LengthInput = ({
 
         {state.unit === KeywordUnits.Keyword && (
           <ValueSelect
-            values={keywords}
+            values={allKeywords}
             onChange={(e: any) => {
               dispatch({
                 type: 'CHANGED_INPUT_VALUE',
@@ -162,7 +152,7 @@ export const LengthInput = ({
           if (newUnit === KeywordUnits.Keyword) {
             dispatch({
               type: 'CHANGED_INPUT_VALUE',
-              value: keywords[0],
+              value: allKeywords[0],
             })
           }
 
