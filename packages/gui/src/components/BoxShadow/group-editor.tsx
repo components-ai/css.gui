@@ -15,26 +15,10 @@ export const BoxShadowEditor = ({ value, onChange }: LayerProps<BoxShadow>) => {
         </div>
         {/* <CheckboxField label="Inset" field={[...path, 'inset']} /> */}
       </section>
-      <LengthField
-        label="Offset X"
-        field={[...path, 'offsetX']}
-        units={units.offsetXUnits}
-      />
-      <LengthField
-        label="Offset Y"
-        field={[...path, 'offsetY']}
-        units={units.offsetYUnits}
-      />
-      <LengthField
-        label="Spread"
-        field={[...path, 'spread']}
-        units={units.spreadUnits}
-      />
-      <LengthField
-        label="Blur"
-        field={[...path, 'blur']}
-        units={units.blurUnits}
-      />
+      <LengthField label="Offset X" field={[...path, 'offsetX']} />
+      <LengthField label="Offset Y" field={[...path, 'offsetY']} />
+      <LengthField label="Spread" field={[...path, 'spread']} />
+      <LengthField label="Blur" field={[...path, 'blur']} />
     </div>
   )
 }
