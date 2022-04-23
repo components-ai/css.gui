@@ -45,6 +45,7 @@ export default function EasingFunctionPicker({ value, onChange }: Props) {
           border: '1px solid',
           borderColor: 'border',
           borderRadius: '0.5rem',
+          maxWidth: '32rem',
         }}
       >
         <EasingFunctionField value={value} onChange={onChange} />

@@ -54,6 +54,7 @@ export const DraggableInput = ({
       sx={{
         cursor: dragging ? 'ew-resize' : 'default',
         minHeight: '1.6em',
+        width: '100%',
       }}
       {...bind()}
     />

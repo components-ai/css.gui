@@ -8,7 +8,7 @@ import {
 } from '../types/css'
 
 import { toCssValue as convertEasingFunction } from '../components/EasingFunction/convert'
-import { has } from 'immer/dist/internal'
+import { has } from 'lodash-es'
 
 const DEFAULT_LENGTH_UNIT = AbsoluteLengthUnits.Px
 export const stringifyUnit = (

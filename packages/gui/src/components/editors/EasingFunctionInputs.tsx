@@ -1,45 +1,27 @@
 import { mapValues, pickBy } from 'lodash-es'
-import { ChangeEvent } from 'react'
-import { properties } from '../../data/properties'
+import { getPropertyLabel, properties } from '../../data/properties'
 import { EditorProps } from './types'
 import { EasingFunctionEditor } from '../EasingFunction'
 import { EasingFunction } from '../EasingFunction/types'
+import { useId } from 'react'
+import { Label } from '../primitives'
 
 const easingFunctionProperties = pickBy(
   properties,
-  (property) => property.type === 'keyword'
+  (property) => property.type === 'easing-function'
 )
 
 export const easingFunctionInputs = mapValues(
   easingFunctionProperties,
   (property, name) => {
     return ({ value, onChange }: EditorProps<EasingFunction>) => {
-      return <EasingFunctionEditor value={value} onChange={onChange} />
+      const id = `${useId()}-easing-function`
+      return (
+        <>
+          <Label htmlFor={id}>{getPropertyLabel(name)}</Label>
+          <EasingFunctionEditor value={value} onChange={onChange} />
+        </>
+      )
     }
   }
 )
-
-type SelectProps = {
-  id: string
-  onChange: (newValue: string) => void
-  values: string[]
-  value: string
-}
-export const Select = ({ value, onChange, id, values }: SelectProps): any => {
-  return (
-    <select
-      id={id}
-      value={value}
-      onChange={(e: ChangeEvent<HTMLSelectElement>) => onChange(e.target.value)}
-      sx={{ width: '100%', minHeight: '1.6em' }}
-    >
-      {values.map((v) => {
-        return (
-          <option key={v} value={v}>
-            {v}
-          </option>
-        )
-      })}
-    </select>
-  )
-}

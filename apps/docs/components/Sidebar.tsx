@@ -30,6 +30,8 @@ export const Sidebar = () => {
       <NavItem href="/utilities/random-color">Random Color</NavItem>
       <NavItem href="/utilities/transformers">Transformers</NavItem>
       <NavItem href="/utilities/codegen">Codegen</NavItem>
+      <NavSectionTitle>Examples</NavSectionTitle>
+      <NavItem href="/examples/transitions">Transitions</NavItem>
       <NavSectionTitle>Community</NavSectionTitle>
       <NavItem href="https://github.com/components-ai/css.gui">GitHub</NavItem>
       <NavItem href="https://twitter.com/components_ai">Twitter</NavItem>
