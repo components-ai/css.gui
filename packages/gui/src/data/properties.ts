@@ -77,6 +77,23 @@ export const properties: Record<string, PropertyData> = {
     defaultValue: '#fff',
     keywords: ['currentcolor', 'transparent'],
   },
+  backgroundClip: {
+    type: 'keyword',
+    keywords: [
+      'border-box',
+      'padding-box',
+      'content-box',
+      'text',
+    ],
+  },
+  backgroundOrigin: {
+    type: 'keyword',
+    keywords: [
+      'border-box',
+      'padding-box',
+      'content-box',
+    ],
+  },
   borderColor: {
     type: 'color',
     keywords: ['currentcolor', 'transparent'],
@@ -85,14 +102,153 @@ export const properties: Record<string, PropertyData> = {
     type: 'length',
     keywords: ['thin', 'medium', 'thick'],
   },
+  boxSizing: {
+    type: 'keyword',
+    keywords: [
+      'border-box',
+      'content-box',
+    ],
+  },
+  breakAfter: {
+    type: 'keyword',
+    keywords: [
+      'auto',
+      'avoid',
+      'always',
+      'all',
+      'avoid-page',
+      'page',
+      'left',
+      'right',
+      'recto',
+      'verso',
+      'avoid-column',
+      'column',
+      'avoid-region',
+      'region',
+    ],
+  },
+  breakBefore: {
+    type: 'keyword',
+    keywords: [
+      'auto',
+      'avoid',
+      'always',
+      'all',
+      'avoid-page',
+      'page',
+      'left',
+      'right',
+      'recto',
+      'verso',
+      'avoid-column',
+      'column',
+      'avoid-region',
+      'region',
+    ],
+  },
+  breakInside: {
+    type: 'keyword',
+    keywords: [
+      'auto',
+      'avoid',
+      'avoid-page',
+      'avoid-column',
+      'avoid-region',
+    ],
+  },
+  captionSide: {
+    type: 'keyword',
+    keywords: [
+      'top', 
+      'bottom', 
+      'block-start', 
+      'block-end', 
+      'inline-start', 
+      'inline-end', 
+    ]
+  },
   caretColor: {
     type: 'color',
     keywords: ['currentcolor', 'transparent'],
+  },
+  clear: {
+    type: 'keyword',
+    keywords: [
+      'none',
+      'left',
+      'right',
+      'both',
+      'inline-start',
+      'inline-end',
+    ],
   },
   color: {
     type: 'color',
     keywords: ['currentcolor', 'transparent'],
   },
+  columnFill: {
+    type: 'keyword',
+    keywords: [
+      'auto',
+      'balance',
+      'balance-all',
+    ],
+  },
+  columnRuleStyle: {
+    type: 'keyword',
+    keywords: [
+      'none',
+      'hidden',
+      'dotted',
+      'dashed',
+      'solid',
+      'double',
+      'groove',
+      'ridge',
+      'inset',
+      'outset',
+    ],
+  },
+  columnSpan: {
+    type: 'keyword',
+    keywords: [
+      'none',
+      'all',
+    ],
+  },
+  contain: {
+    type: 'keyword',
+    keywords: [
+      'none',
+      'strict',
+      'content',
+      'size',
+      'layout',
+      'style',
+      'paint',
+      'size paint',
+      'size layout paint',
+      'size layout paint style',
+      'size layout paint style content',
+    ],
+  },
+  contentVisibility: {
+    type: 'keyword',
+    keywords: [
+      'visible',
+      'hidden',
+      'auto',
+    ],
+  },
+  direction: {
+    type: 'keyword',
+    keywords: [
+      'ltr',
+      'rtl',
+    ],
+  },
+  
   display: {
     type: 'keyword',
     keywords: [
