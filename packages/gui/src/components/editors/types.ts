@@ -1,4 +1,4 @@
 export interface EditorProps<T> {
-  value?: T
+  value: T
   onChange(newValue: T): void
 }
