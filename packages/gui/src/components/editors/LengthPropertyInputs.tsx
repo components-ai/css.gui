@@ -52,16 +52,14 @@ export const percentageInputs = mapValues(
   (property, name) => {
     return ({ value, onChange }: EditorProps<CSSUnitValue>) => {
       return (
-        <div>
-          <DimensionInput
-            value={value}
-            label={getPropertyLabel(name)}
-            onChange={onChange}
-            property={name}
-            units={['%', 'keyword']}
-            {...property}
-          />
-        </div>
+        <DimensionInput
+          value={value}
+          label={getPropertyLabel(name)}
+          onChange={onChange}
+          property={name}
+          units={['%', 'keyword']}
+          {...property}
+        />
       )
     }
   }
@@ -75,16 +73,14 @@ const numberProperties = pickBy(
 export const numberInputs = mapValues(numberProperties, (property, name) => {
   return ({ value, onChange }: EditorProps<CSSUnitValue>) => {
     return (
-      <div>
-        <DimensionInput
-          value={value}
-          label={getPropertyLabel(name)}
-          onChange={onChange}
-          property={name}
-          units={['number', 'keyword']}
-          {...property}
-        />
-      </div>
+      <DimensionInput
+        value={value}
+        label={getPropertyLabel(name)}
+        onChange={onChange}
+        property={name}
+        units={['number', 'keyword']}
+        {...property}
+      />
     )
   }
 })
