@@ -8,6 +8,7 @@ import {
 } from '../types/css'
 
 import { toCssValue as convertEasingFunction } from '../components/EasingFunction/convert'
+import { toCssValue as convertBoxShadow } from '../components/BoxShadow/convert'
 import { has } from 'lodash-es'
 
 const DEFAULT_LENGTH_UNIT = AbsoluteLengthUnits.Px
@@ -26,6 +27,10 @@ export const stringifyUnit = (
     )
   ) {
     return convertEasingFunction(value as any)
+  }
+
+  if (property === 'boxShadow') {
+    return convertBoxShadow(value as any)
   }
 
   if (!isCSSUnitValue(value)) {
