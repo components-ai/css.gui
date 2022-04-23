@@ -15,6 +15,7 @@ const initialStyles = {
 
 export default function Shadows() {
   const [styles, setStyles] = useState<any>(initialStyles)
+  console.log(styles)
   return (
     <div>
       <h2>Box shadows</h2>

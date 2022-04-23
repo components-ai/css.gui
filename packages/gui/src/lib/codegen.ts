@@ -16,6 +16,10 @@ export const stringifyUnit = (
   property?: string, // In the future the property might determine how we stringify
   value?: unknown
 ): Array<string | null> | string | number | null => {
+  if (property === 'boxShadow') {
+    return convertBoxShadow(value as any)
+  }
+
   if (Array.isArray(value)) {
     // @ts-ignore
     return value.map((v: Length | string | null) => stringifyUnit(property, v))
@@ -27,10 +31,6 @@ export const stringifyUnit = (
     )
   ) {
     return convertEasingFunction(value as any)
-  }
-
-  if (property === 'boxShadow') {
-    return convertBoxShadow(value as any)
   }
 
   if (!isCSSUnitValue(value)) {
