@@ -9,6 +9,7 @@ import {
 
 import { toCssValue as convertEasingFunction } from '../components/EasingFunction/convert'
 import { toCssValue as convertBoxShadow } from '../components/BoxShadow/convert'
+import { toCssValue as convertTextShadow } from '../components/TextShadow/convert'
 import { has } from 'lodash-es'
 
 const DEFAULT_LENGTH_UNIT = AbsoluteLengthUnits.Px
@@ -18,6 +19,9 @@ export const stringifyUnit = (
 ): Array<string | null> | string | number | null => {
   if (property === 'boxShadow') {
     return convertBoxShadow(value as any)
+  }
+  if (property === 'textShadow') {
+    return convertTextShadow(value as any)
   }
 
   if (Array.isArray(value)) {

@@ -11,14 +11,20 @@ const initialStyles = {
       color: '#f00',
     },
   ],
+  textShadow: [
+    {
+      blur: { value: 0, unit: 'px' },
+      offsetX: { value: 0, unit: 'px' },
+      offsetY: { value: 0, unit: 'px' },
+      color: '#f00',
+    },
+  ],
 }
 
 export default function Shadows() {
   const [styles, setStyles] = useState<any>(initialStyles)
-  console.log(styles)
   return (
     <div>
-      <h2>Box shadows</h2>
       <Editor styles={styles} onChange={setStyles} />
       <div
         sx={{
@@ -32,10 +38,11 @@ export default function Shadows() {
           styles={{
             width: '64px',
             height: '64px',
-            backgroundColor: '#fff',
             ...styles,
           }}
-        />
+        >
+          Fun with shadows
+        </RenderElement>
       </div>
     </div>
   )

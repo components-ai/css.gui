@@ -5,6 +5,7 @@ import { colorInputs } from '../editors/ColorInputs'
 import { easingFunctionInputs } from '../editors/EasingFunctionInputs'
 import { keywordInputs } from '../editors/KeywordInputs'
 import { timeInputs } from '../editors/TimePropertyInputs'
+import TextShadowPicker from '../TextShadow/picker'
 
 export const controlMap: Record<string, ComponentType<any>> = {
   ...keywordInputs,
@@ -15,4 +16,5 @@ export const controlMap: Record<string, ComponentType<any>> = {
   ...timeInputs,
   ...easingFunctionInputs,
   boxShadow: BoxShadowPicker,
+  textShadow: TextShadowPicker,
 }
