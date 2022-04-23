@@ -4,6 +4,7 @@ import {
   FontRelativeLengthUnits,
   PercentageLengthUnits,
 } from '../types/css'
+import { ANIMATABLE_PROPERTIES } from './animatable'
 
 type PropertyData = {
   type: string
@@ -90,6 +91,8 @@ export const properties: Record<string, PropertyData> = {
   // TODO array of time values
   animationDelay: { type: 'time' },
   animationDuration: { type: 'time' },
+  // TODO this should be a combobox
+  animationProperty: { type: 'keyword', keywords: ANIMATABLE_PROPERTIES },
   appearance: {
     type: 'keyword',
     keywords: [
@@ -554,6 +557,8 @@ export const properties: Record<string, PropertyData> = {
   // TODO array of time values
   transitionDelay: { type: 'time' },
   transitionDuration: { type: 'time' },
+  // TODO this should be a combobox
+  transitionProperty: { type: 'keyword', keywords: ANIMATABLE_PROPERTIES },
   visibility: {
     type: 'keyword',
     keywords: ['visible', 'hidden', 'collapse'],
