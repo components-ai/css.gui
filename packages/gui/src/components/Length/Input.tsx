@@ -7,8 +7,8 @@ import {
   FullLengthUnit,
   Length,
   ThemeUnits,
-  UnitlessUnits,
 } from '../../types/css'
+import { GLOBAL_KEYWORDS } from '../../data/global-keywords'
 import { Label, Number, UnitSelect, ValueSelect } from '../primitives'
 import { reducer } from './reducer'
 import { State } from './types'
@@ -60,6 +60,10 @@ export const LengthInput = ({
   }, [state])
 
   const propertyValues = useThemeProperty(property)
+  const keywords = [
+    ...(getPropertyData(property)?.keywords ?? []),
+    ...GLOBAL_KEYWORDS,
+  ]
 
   return (
     <div
@@ -83,7 +87,7 @@ export const LengthInput = ({
 
         {state.unit === KeywordUnits.Keyword && (
           <ValueSelect
-            values={getPropertyData(property)?.keywords ?? []}
+            values={keywords}
             onChange={(e: any) => {
               dispatch({
                 type: 'CHANGED_INPUT_VALUE',
@@ -148,7 +152,7 @@ export const LengthInput = ({
           if (newUnit === KeywordUnits.Keyword) {
             dispatch({
               type: 'CHANGED_INPUT_VALUE',
-              value: getPropertyData(property)?.keywords[0]!,
+              value: keywords[0],
             })
           }
 

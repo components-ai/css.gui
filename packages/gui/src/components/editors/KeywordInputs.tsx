@@ -3,6 +3,7 @@ import { ChangeEvent, useId } from 'react'
 import { properties } from '../../data/properties'
 import { Label } from '../primitives'
 import { KeywordEditorProps } from './types'
+import { GLOBAL_KEYWORDS } from '../../data/global-keywords'
 
 const keywordProperties = pickBy(
   properties,
@@ -23,7 +24,7 @@ export const keywordInputs = mapValues(keywordProperties, (property, name) => {
           id={fullId}
           value={value || DEFAULT_KEYWORD}
           onChange={onChange}
-          values={property.keywords}
+          values={[...(property.keywords ?? []), ...GLOBAL_KEYWORDS]}
         />
       </>
     )

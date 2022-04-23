@@ -1,4 +1,3 @@
-import { GLOBAL_KEYWORDS } from './global-keywords'
 import {
   AbsoluteLengthUnits,
   FontRelativeLengthUnits,
@@ -9,7 +8,7 @@ type PropertyData = {
   type: string
   percentage?: boolean
   number?: boolean
-  keywords: Array<string>
+  keywords?: Array<string>
   minValue?: number
   maxValue?: number
   range?: UnitRanges
@@ -43,12 +42,11 @@ export const properties: Record<string, PropertyData> = {
       'listbox',
       'meter',
       'progress-bar',
-      ...GLOBAL_KEYWORDS,
     ],
   },
   backfaceVisibility: {
     type: 'keyword',
-    keywords: ['visible', 'hidden', ...GLOBAL_KEYWORDS],
+    keywords: ['visible', 'hidden'],
   },
   backgroundBlendMode: {
     type: 'keyword',
@@ -57,41 +55,40 @@ export const properties: Record<string, PropertyData> = {
       'multiply',
       'screen',
       'overlay',
-      'darken', 
-      'lighten', 
-      'color-dodge', 
-      'color-burn', 
-      'hard-light', 
-      'soft-light', 
-      'difference', 
-      'exclusion', 
-      'hue', 
+      'darken',
+      'lighten',
+      'color-dodge',
+      'color-burn',
+      'hard-light',
+      'soft-light',
+      'difference',
+      'exclusion',
+      'hue',
       'saturation',
       'color',
       'luminosity',
-      ...GLOBAL_KEYWORDS,
     ],
   },
   backgroundColor: {
     type: 'color',
     defaultValue: '#fff',
-    keywords: ['currentcolor', 'transparent', ...GLOBAL_KEYWORDS],
+    keywords: ['currentcolor', 'transparent'],
   },
   borderColor: {
     type: 'color',
-    keywords: ['currentcolor', 'transparent', ...GLOBAL_KEYWORDS],
+    keywords: ['currentcolor', 'transparent'],
   },
   borderWidth: {
     type: 'length',
-    keywords: ['thin', 'medium', 'thick', ...GLOBAL_KEYWORDS],
+    keywords: ['thin', 'medium', 'thick'],
   },
   caretColor: {
     type: 'color',
-    keywords: ['currentcolor', 'transparent', ...GLOBAL_KEYWORDS],
+    keywords: ['currentcolor', 'transparent'],
   },
   color: {
     type: 'color',
-    keywords: ['currentcolor', 'transparent', ...GLOBAL_KEYWORDS],
+    keywords: ['currentcolor', 'transparent'],
   },
   display: {
     type: 'keyword',
@@ -116,7 +113,6 @@ export const properties: Record<string, PropertyData> = {
       'block grid',
       'inline grid',
       'block flow-root',
-      ...GLOBAL_KEYWORDS,
     ],
   },
   alignContent: {
@@ -137,7 +133,6 @@ export const properties: Record<string, PropertyData> = {
       'stretch',
       'safe center',
       'unsafe center',
-      ...GLOBAL_KEYWORDS,
     ],
   },
   alignItems: {
@@ -158,7 +153,6 @@ export const properties: Record<string, PropertyData> = {
       'space-evenly',
       'safe center',
       'unsafe center',
-      ...GLOBAL_KEYWORDS,
     ],
   },
   alignSelf: {
@@ -180,19 +174,11 @@ export const properties: Record<string, PropertyData> = {
       'space-evenly',
       'safe center',
       'unsafe center',
-      ...GLOBAL_KEYWORDS,
     ],
   },
   float: {
     type: 'keyword',
-    keywords: [
-      'left',
-      'right',
-      'none',
-      'inline-start',
-      'inline-end',
-      ...GLOBAL_KEYWORDS,
-    ],
+    keywords: ['left', 'right', 'none', 'inline-start', 'inline-end'],
   },
   fontSize: {
     type: 'length',
@@ -214,7 +200,6 @@ export const properties: Record<string, PropertyData> = {
       'xxx-large',
       'smaller',
       'larger',
-      ...GLOBAL_KEYWORDS,
     ],
   },
   fontStretch: {
@@ -229,7 +214,6 @@ export const properties: Record<string, PropertyData> = {
       'expanded',
       'extra-expanded',
       'ultra-expanded',
-      ...GLOBAL_KEYWORDS,
     ],
     minValue: 50,
     maxValue: 200,
@@ -237,23 +221,21 @@ export const properties: Record<string, PropertyData> = {
   height: {
     type: 'length',
     percentage: true,
-    keywords: ['max-content', 'min-content', 'auto', ...GLOBAL_KEYWORDS],
+    keywords: ['max-content', 'min-content', 'auto'],
   },
   lineHeight: {
     type: 'length',
     percentage: true,
     number: true,
-    keywords: ['normal', ...GLOBAL_KEYWORDS],
+    keywords: ['normal'],
   },
   margin: {
     type: 'length',
     percentage: true,
-    keywords: GLOBAL_KEYWORDS,
   },
   padding: {
     type: 'length',
     percentage: true,
-    keywords: GLOBAL_KEYWORDS,
   },
   textAlign: {
     type: 'keyword',
@@ -266,12 +248,11 @@ export const properties: Record<string, PropertyData> = {
       'justify',
       'justify-all',
       'match-parent',
-      ...GLOBAL_KEYWORDS,
     ],
   },
   visibility: {
     type: 'keyword',
-    keywords: ['visible', 'hidden', 'collapse', ...GLOBAL_KEYWORDS],
+    keywords: ['visible', 'hidden', 'collapse'],
   },
   whiteSpace: {
     type: 'keyword',
@@ -282,35 +263,23 @@ export const properties: Record<string, PropertyData> = {
       'pre-wrap',
       'pre-line',
       'break-spaces',
-      ...GLOBAL_KEYWORDS,
     ],
   },
   wordBreak: {
     type: 'keyword',
-    keywords: [
-      'normal',
-      'break-all',
-      'keep-all',
-      'break-word',
-      ...GLOBAL_KEYWORDS,
-    ],
+    keywords: ['normal', 'break-all', 'keep-all', 'break-word'],
   },
   writingMode: {
     type: 'keyword',
-    keywords: [
-      'horizontal-tb',
-      'vertical-rl',
-      'vertical-lr',
-      ...GLOBAL_KEYWORDS,
-    ],
+    keywords: ['horizontal-tb', 'vertical-rl', 'vertical-lr'],
   },
   width: {
     type: 'length',
     percentage: true,
-    keywords: ['max-content', 'min-content', 'auto', ...GLOBAL_KEYWORDS],
+    keywords: ['max-content', 'min-content', 'auto'],
   },
   zIndex: {
     type: 'number',
-    keywords: ['auto', ...GLOBAL_KEYWORDS],
+    keywords: ['auto'],
   },
 }
