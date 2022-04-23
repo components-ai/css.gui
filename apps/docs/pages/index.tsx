@@ -79,7 +79,7 @@ export default function Docs() {
         <div sx={{ px: [2, 3, 4] }}>
           <Editor styles={styles} onChange={setStyles} theme={DEFAULT_THEME}>
             <>
-              <h3>Typography</h3>
+              <h3 sx={{ m: 0 }}>Typography</h3>
               <Inputs.FontSize />
               <Inputs.LineHeight />
               <Inputs.TextAlign />

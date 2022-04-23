@@ -42,9 +42,15 @@ export const stringifyProperty = (
 }
 
 type StyleEntry = [string, Length | string | null | undefined]
-export const toCSSObject = (styles: Styles) => {
+export const toCSSObject = (styles: Styles): any => {
   return Object.entries(styles).reduce((acc: Styles, curr: StyleEntry) => {
     const [property, value] = curr
+    if (property.startsWith('::')) {
+      return {
+        ...acc,
+        [property]: toCSSObject(value as Styles),
+      }
+    }
     return {
       ...acc,
       [property]: stringifyProperty(property, value),
