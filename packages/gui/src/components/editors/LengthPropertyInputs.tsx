@@ -12,6 +12,7 @@ import {
   PercentageLengthUnits,
   ThemeUnits,
   UnitlessUnits,
+  CSSUnitValue,
 } from '../../types/css'
 import { DimensionInput } from '../Dimension'
 import { ResponsiveInput } from '../Responsive'
@@ -49,11 +50,11 @@ const percentageProperties = pickBy(
 export const percentageInputs = mapValues(
   percentageProperties,
   (property, name) => {
-    return ({ value, onChange }: LengthEditorProps) => {
+    return ({ value, onChange }: EditorProps<CSSUnitValue>) => {
       return (
         <div>
           <DimensionInput
-            value={value as any}
+            value={value}
             label={getPropertyLabel(name)}
             onChange={onChange}
             property={name}
@@ -72,11 +73,11 @@ const numberProperties = pickBy(
 )
 
 export const numberInputs = mapValues(numberProperties, (property, name) => {
-  return ({ value, onChange }: LengthEditorProps) => {
+  return ({ value, onChange }: EditorProps<CSSUnitValue>) => {
     return (
       <div>
         <DimensionInput
-          value={value as any}
+          value={value}
           label={getPropertyLabel(name)}
           onChange={onChange}
           property={name}
@@ -101,6 +102,7 @@ function LengthInput({
   property,
   number,
   percentage,
+  value: providedValue,
   ...props
 }: LengthInputProps) {
   const propertyData = getPropertyData(property)
@@ -110,5 +112,7 @@ function LengthInput({
     ...UNITS,
     propertyData?.percentage && PercentageLengthUnits.Pct,
   ])
-  return <DimensionInput units={units} {...props} />
+  const value =
+    providedValue === '0' ? { value: 0, unit: 'number' } : providedValue
+  return <DimensionInput value={value} units={units} {...props} />
 }

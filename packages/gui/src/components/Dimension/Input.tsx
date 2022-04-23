@@ -4,7 +4,6 @@ import {
   CSSUnitValue,
   KeywordUnits,
   FullLengthUnit,
-  Length,
   ThemeUnits,
 } from '../../types/css'
 import { GLOBAL_KEYWORDS } from '../../data/global-keywords'
@@ -12,20 +11,19 @@ import { Label, Number, UnitSelect, ValueSelect } from '../primitives'
 import { reducer } from './reducer'
 import { State } from './types'
 import { useThemeProperty } from '../providers/ThemeContext'
+import { EditorProps } from '../editors/types'
 
 type UnitRanges = Record<string, [number, number]>
 
-export type DimensionInputProps = {
-  value: Length
+export interface DimensionInputProps extends EditorProps<CSSUnitValue> {
   label?: string
   property?: string
-  onChange: (length: Length) => void
   range?: UnitRanges
   keywords?: string[]
   units?: string[]
 }
 export const DimensionInput = ({
-  value: providedValue,
+  value,
   onChange,
   label,
   property,
@@ -35,8 +33,6 @@ export const DimensionInput = ({
 }: DimensionInputProps) => {
   const id = React.useId()
   const fullId = `${id}-${property || 'length'}`
-  const value: CSSUnitValue =
-    providedValue === '0' ? { value: 0, unit: 'number' } : providedValue
   const [state, dispatch] = React.useReducer(reducer, {
     value: value?.value || AbsoluteLengthUnits.Px,
     unit: value?.unit || 0,
@@ -51,7 +47,7 @@ export const DimensionInput = ({
       state.unit !== value?.unit ||
       state.themeId !== value?.themeId
     ) {
-      const newValue: Length = {
+      const newValue: CSSUnitValue = {
         value: state.value,
         unit: state.unit,
       }
