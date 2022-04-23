@@ -17,16 +17,25 @@ export default function Shadows() {
   const [styles, setStyles] = useState<any>(initialStyles)
   return (
     <div>
+      <h2>Box shadows</h2>
       <Editor styles={styles} onChange={setStyles} />
-      <RenderElement
-        tagName="div"
-        styles={{
-          width: '32px',
-          height: '32px',
-          backgroundColor: '#fff',
-          ...styles,
+      <div
+        sx={{
+          m: 4,
+          display: 'flex',
+          justifyContent: 'center',
         }}
-      />
+      >
+        <RenderElement
+          tagName="div"
+          styles={{
+            width: '64px',
+            height: '64px',
+            backgroundColor: '#fff',
+            ...styles,
+          }}
+        />
+      </div>
     </div>
   )
 }
