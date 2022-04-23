@@ -1,10 +1,8 @@
 import { Color } from '../../types/css'
-import { useId } from 'react'
-import { ColorPopover, Label } from '../primitives'
-import { useTheme } from '../providers/ThemeContext'
 import { EditorProps } from './types'
-import { properties, getPropertyLabel } from '../../data/properties'
+import { getPropertyLabel, properties } from '../../data/properties'
 import { mapValues, pickBy } from 'lodash-es'
+import { ColorInput } from '../ColorInput'
 
 const colorProperties = pickBy(
   properties,
@@ -13,19 +11,13 @@ const colorProperties = pickBy(
 
 export const colorInputs = mapValues(colorProperties, (property, name) => {
   return ({ value, onChange }: EditorProps<Color>) => {
-    const theme = useTheme()
-    const id = useId()
-    const fullId = `${id}-${name}`
     return (
-      <>
-        <Label htmlFor={fullId}>{getPropertyLabel(name)}</Label>
-        <ColorPopover
-          id={fullId}
-          value={value || property.defaultValue || '#000'}
-          onChange={onChange}
-          theme={theme}
-        />
-      </>
+      <ColorInput
+        label={getPropertyLabel(name)}
+        value={value}
+        onChange={onChange}
+        defaultValue={property.defaultValue}
+      />
     )
   }
 })

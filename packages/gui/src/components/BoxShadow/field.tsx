@@ -1,6 +1,6 @@
 import { LayerProps } from '../layers'
-import { ColorPopover as ColorField } from '../primitives'
-import { LengthInput as LengthField } from '../LengthInput'
+import { ColorInput } from '../ColorInput'
+import { LengthInput } from '../LengthInput'
 import Layers from '../layers'
 import LayerHeader from '../LayerHeader'
 
@@ -14,10 +14,10 @@ export default function BoxShadowsField({
 }: EditorProps<BoxShadow[]>) {
   const newItem = () => {
     return {
-      spread: '0',
-      blur: '0',
-      offsetX: '0',
-      offsetY: '0',
+      spread: { value: 0, unit: 'px' },
+      blur: { value: 0, unit: 'px' },
+      offsetX: { value: 0, unit: 'px' },
+      offsetY: { value: 0, unit: 'px' },
       color: '#000',
     } as const
   }
@@ -38,33 +38,33 @@ export const BoxShadowEditor = ({ value, onChange }: LayerProps<BoxShadow>) => {
     <div sx={{ margin: 3 }}>
       <section sx={{ display: 'flex', alignItems: 'center' }}>
         <div sx={{ width: '50%' }}>
-          <ColorField
-            // label="Color"
+          <ColorInput
+            label="Color"
             value={value.color}
             onChange={(color) => onChange({ ...value, color })}
           />
         </div>
         {/* <CheckboxField label="Inset" field={[...path, 'inset']} /> */}
       </section>
-      <LengthField
+      <LengthInput
         label="Offset X"
         value={value.offsetX}
         onChange={(offsetX) => onChange({ ...value, offsetX })}
         keyword={false}
       />
-      <LengthField
+      <LengthInput
         label="Offset Y"
         value={value.offsetY}
         onChange={(offsetY) => onChange({ ...value, offsetY })}
         keyword={false}
       />
-      <LengthField
+      <LengthInput
         label="Spread"
         value={value.spread}
         onChange={(spread) => onChange({ ...value, spread })}
         keyword={false}
       />
-      <LengthField
+      <LengthInput
         label="Blur"
         value={value.blur}
         onChange={(blur) => onChange({ ...value, blur })}
@@ -74,7 +74,7 @@ export const BoxShadowEditor = ({ value, onChange }: LayerProps<BoxShadow>) => {
   )
 }
 
-export function Header({ value }: { value: BoxShadow }) {
+export function Header({ value }: { value: BoxShadow | BoxShadow[] }) {
   const style = toCssValue(value)
   return (
     <LayerHeader
