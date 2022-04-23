@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import { DimensionInput, Length, stringifyUnit } from '@compai/css-gui'
+import { CSSUnitValue, DimensionInput, stringifyUnit } from '@compai/css-gui'
 
 export const DimensionExample = () => {
-  const [value, setValue] = useState<Length>({
+  const [value, setValue] = useState<CSSUnitValue>({
     value: 16,
     unit: 'px',
   })
