@@ -1,23 +1,34 @@
-import { isObject } from 'lodash-es'
 import {
   Styles,
   AbsoluteLengthUnits,
   Length,
   ThemeUnits,
-  ResponsiveLength,
   KeywordUnits,
+  CSSUnitValue,
 } from '../types/css'
+
+import { toCssValue as convertEasingFunction } from '../components/EasingFunction/convert'
+import { has } from 'immer/dist/internal'
 
 const DEFAULT_LENGTH_UNIT = AbsoluteLengthUnits.Px
 export const stringifyUnit = (
   property?: string, // In the future the property might determine how we stringify
-  value?: ResponsiveLength | Length | string | null
+  value?: unknown
 ): Array<string | null> | string | number | null => {
   if (Array.isArray(value)) {
     // @ts-ignore
     return value.map((v: Length | string | null) => stringifyUnit(property, v))
   }
-  if (!value || !isObject(value) || value.value === undefined) {
+
+  if (
+    ['transitionTimingFunction', 'animationTimingFunction'].includes(
+      property || ''
+    )
+  ) {
+    return convertEasingFunction(value as any)
+  }
+
+  if (!isCSSUnitValue(value)) {
     return String(value) ?? null
   }
 
@@ -26,7 +37,7 @@ export const stringifyUnit = (
   }
 
   if (
-    value.unit === ThemeUnits.Theme || 
+    value.unit === ThemeUnits.Theme ||
     value.unit === 'raw' ||
     value.unit === KeywordUnits.Keyword
   ) {
@@ -49,4 +60,16 @@ export const toCSSObject = (styles: Styles) => {
       [property]: stringifyUnit(property, value),
     }
   }, {})
+}
+
+function isCSSUnitValue(value: any): value is CSSUnitValue {
+  if (typeof value !== 'object') {
+    return false
+  }
+
+  if (!has(value, 'value') || !has(value, 'unit')) {
+    return false
+  }
+
+  return true
 }

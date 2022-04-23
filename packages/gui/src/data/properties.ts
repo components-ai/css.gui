@@ -92,7 +92,11 @@ export const properties: Record<string, PropertyData> = {
   animationDelay: { type: 'time' },
   animationDuration: { type: 'time' },
   // TODO this should be a combobox
-  animationProperty: { type: 'keyword', keywords: ANIMATABLE_PROPERTIES },
+  animationProperty: {
+    type: 'keyword',
+    keywords: ANIMATABLE_PROPERTIES,
+  },
+  animationTimingFunction: { type: 'easing-function' },
   appearance: {
     type: 'keyword',
     keywords: [
@@ -202,15 +206,9 @@ export const properties: Record<string, PropertyData> = {
       'region',
     ],
   },
-  breakInside: { 
+  breakInside: {
     type: 'keyword',
-    keywords: [
-      'auto',
-      'avoid',
-      'avoid-page',
-      'avoid-column',
-      'avoid-region',
-    ],
+    keywords: ['auto', 'avoid', 'avoid-page', 'avoid-column', 'avoid-region'],
   },
   captionSide: {
     type: 'keyword',
@@ -379,11 +377,7 @@ export const properties: Record<string, PropertyData> = {
   },
   flexWrap: {
     type: 'keyword',
-    keywords: [
-      'nowrap',
-      'wrap',
-      'wrap-reverse',
-    ],
+    keywords: ['nowrap', 'wrap', 'wrap-reverse'],
   },
   float: {
     type: 'keyword',
@@ -413,11 +407,7 @@ export const properties: Record<string, PropertyData> = {
   },
   fontKerning: {
     type: 'keyword',
-    keywords: [
-      'auto',
-      'normal',
-      'none',
-    ],
+    keywords: ['auto', 'normal', 'none'],
   },
   fontOpticalSizing: {
     type: 'keyword',
@@ -612,20 +602,11 @@ export const properties: Record<string, PropertyData> = {
   },
   lineBreak: {
     type: 'keyword',
-    keywords: [
-      'auto',
-      'loose',
-      'normal',
-      'strict',
-      'anywhere',
-    ],
+    keywords: ['auto', 'loose', 'normal', 'strict', 'anywhere'],
   },
   listStylePosition: {
     type: 'keyword',
-    keywords: [
-      'inside',
-      'outside',
-    ],
+    keywords: ['inside', 'outside'],
   },
   lineHeight: {
     type: 'length',
@@ -652,12 +633,7 @@ export const properties: Record<string, PropertyData> = {
   },
   maskComposite: {
     type: 'keyword',
-    keywords: [
-      'add',
-      'subtract',
-      'intersect',
-      'exclude',
-    ],
+    keywords: ['add', 'subtract', 'intersect', 'exclude'],
   },
   maskMode: {
     type: 'keyword',
@@ -669,7 +645,7 @@ export const properties: Record<string, PropertyData> = {
       'alpha match-source',
       'alpha match-source luminance',
       'match-source luminance',
-    ]
+    ],
   },
   maskOrigin: {
     type: 'keyword',
@@ -683,7 +659,6 @@ export const properties: Record<string, PropertyData> = {
       'view-box',
       'padding-box, content-box',
       'vew-box, fill-box, border-box',
-
     ],
   },
   mixBlendMode: {
@@ -709,13 +684,7 @@ export const properties: Record<string, PropertyData> = {
   },
   objectFit: {
     type: 'keyword',
-    keywords: [
-      'contain',
-      'cover',
-      'fill',
-      'none',
-      'scale-down',
-    ],
+    keywords: ['contain', 'cover', 'fill', 'none', 'scale-down'],
   },
   outlineStyle: {
     type: 'keyword',
@@ -733,108 +702,51 @@ export const properties: Record<string, PropertyData> = {
   },
   overflow: {
     type: 'keyword',
-    keywords: [
-      'visible',
-      'hidden',
-      'clip',
-      'scroll',
-      'auto',
-      'hidden visible',
-    ],
+    keywords: ['visible', 'hidden', 'clip', 'scroll', 'auto', 'hidden visible'],
   },
   overflowAnchor: {
     type: 'keyword',
-    keywords: [
-      'auto',
-      'none',
-    ],
+    keywords: ['auto', 'none'],
   },
   overflowBlock: {
     type: 'keyword',
-    keywords: [
-      'visible',
-      'hidden',
-      'scroll',
-      'auto',
-    ],
+    keywords: ['visible', 'hidden', 'scroll', 'auto'],
   },
   overflowInline: {
     type: 'keyword',
-    keywords: [
-      'visible',
-      'hidden',
-      'scroll',
-      'auto',
-    ],
+    keywords: ['visible', 'hidden', 'scroll', 'auto'],
   },
   overflowWrap: {
     type: 'keyword',
-    keywords: [
-      'normal',
-      'break-word',
-      'anywhere',
-    ],
+    keywords: ['normal', 'break-word', 'anywhere'],
   },
   overflowX: {
     type: 'keyword',
-    keywords: [
-      'visible',
-      'hidden',
-      'clip',
-      'scroll',
-      'auto',
-    ],
+    keywords: ['visible', 'hidden', 'clip', 'scroll', 'auto'],
   },
   overflowY: {
     type: 'keyword',
-    keywords: [
-      'visible',
-      'hidden',
-      'clip',
-      'scroll',
-      'auto',
-    ],
+    keywords: ['visible', 'hidden', 'clip', 'scroll', 'auto'],
   },
   overscrollBehavior: {
     type: 'keyword',
-    keywords: [
-      'auto',
-      'contain',
-      'none',
-      'auto contain',
-    ],
+    keywords: ['auto', 'contain', 'none', 'auto contain'],
   },
   overscrollBehaviorBlock: {
     type: 'keyword',
-    keywords: [
-      'auto',
-      'contain',
-      'none',
-    ],
+    keywords: ['auto', 'contain', 'none'],
   },
   overscrollBehaviorInline: {
     type: 'keyword',
-    keywords: [
-      'auto',
-      'contain',
-      'none',
-    ],
+    keywords: ['auto', 'contain', 'none'],
   },
   overscrollBehaviorX: {
     type: 'keyword',
-    keywords: [
-      'auto',
-      'contain',
-      'none',
-    ],
+    keywords: ['auto', 'contain', 'none'],
   },
   overscrollBehaviorY: {
     type: 'keyword',
-    keywords: [
-      'auto',
-      'contain',
-      'none',
-    ],
+    keywords: ['auto', 'contain', 'none'],
   },
   padding: {
     type: 'length',
@@ -898,71 +810,36 @@ export const properties: Record<string, PropertyData> = {
   },
   position: {
     type: 'keyword',
-    keywords: [
-      'static',
-      'relative',
-      'asbolsute',
-      'fixed',
-      'sticky',
-    ],
+    keywords: ['static', 'relative', 'asbolsute', 'fixed', 'sticky'],
   },
   printColorAdjust: {
     type: 'keyword',
-    keywords: [
-      'economy',
-      'exact',
-    ],
+    keywords: ['economy', 'exact'],
   },
   resize: {
     type: 'keyword',
-    keywords: [
-      'none',
-      'both',
-      'horizontal',
-      'vertical',
-      'block',
-      'inline',
-    ],
+    keywords: ['none', 'both', 'horizontal', 'vertical', 'block', 'inline'],
   },
   rubyAlign: {
     type: 'keyword',
-    keywords: [
-      'start',
-      'center',
-      'space-between',
-      'space-around',
-    ],
+    keywords: ['start', 'center', 'space-between', 'space-around'],
   },
   rubyPosition: {
     type: 'keyword',
-    keywords: [
-      'over',
-      'under',
-      'inter-character',
-      'alternate',
-    ],
+    keywords: ['over', 'under', 'inter-character', 'alternate'],
   },
   scrollBehavior: {
     type: 'keyword',
-    keywords: [
-      'auto',
-      'smooth',
-    ],
+    keywords: ['auto', 'smooth'],
   },
   scrollbarWIdth: {
     type: 'keyword',
-    keywords: [
-      'auto',
-      'thin',
-      'none',
-    ],
+    keywords: ['auto', 'thin', 'none'],
   },
-  tableLayout: { // TODO: Only have control appear when display: table
+  tableLayout: {
+    // TODO: Only have control appear when display: table
     type: 'keyword',
-    keywords: [
-      'auto',
-      'fixed',
-    ],
+    keywords: ['auto', 'fixed'],
   },
   textAlign: {
     type: 'keyword',
@@ -1007,21 +884,11 @@ export const properties: Record<string, PropertyData> = {
   },
   textDecorationSkipInk: {
     type: 'keyword',
-    keywords: [
-      'none',
-      'auto',
-      'all',
-    ],
+    keywords: ['none', 'auto', 'all'],
   },
   textDecorationStyle: {
     type: 'keyword',
-    keywords: [
-      'solid',
-      'double',
-      'dotted',
-      'dashed',
-      'wavy',
-    ],
+    keywords: ['solid', 'double', 'dotted', 'dashed', 'wavy'],
   },
   textEmphasisPosition: {
     type: 'keyword',
@@ -1037,13 +904,7 @@ export const properties: Record<string, PropertyData> = {
   },
   textJustify: {
     type: 'keyword',
-    keywords: [
-      'none',
-      'auto',
-      'inter-word',
-      'inter-character',
-      'distribute',
-    ],
+    keywords: ['none', 'auto', 'inter-word', 'inter-character', 'distribute'],
   },
   textOrientation: {
     type: 'keyword',
@@ -1077,14 +938,7 @@ export const properties: Record<string, PropertyData> = {
   },
   textUnderlinePosition: {
     type: 'keyword',
-    keywords: [
-      'auto',
-      'under',
-      'left',
-      'right',
-      'under left',
-      'right under',
-    ],
+    keywords: ['auto', 'under', 'left', 'right', 'under left', 'right under'],
   },
   touchAction: {
     type: 'keyword',
@@ -1113,16 +967,14 @@ export const properties: Record<string, PropertyData> = {
   },
   transformStyle: {
     type: 'keyword',
-    keywords: [
-      'flat',
-      'preserve-3d',
-    ],
+    keywords: ['flat', 'preserve-3d'],
   },
   // TODO array of time values
   transitionDelay: { type: 'time' },
   transitionDuration: { type: 'time' },
   // TODO this should be a combobox
   transitionProperty: { type: 'keyword', keywords: ANIMATABLE_PROPERTIES },
+  transitionTimingFunction: { type: 'easing-function' },
   unicodeBidi: {
     type: 'keyword',
     keywords: [
@@ -1132,17 +984,11 @@ export const properties: Record<string, PropertyData> = {
       'bidi-override',
       'isolate-override',
       'plaintext',
-    ]
+    ],
   },
   userSelect: {
     type: 'keyword',
-    keywords: [
-      'none',
-      'auto',
-      'text',
-      'contain',
-      'all',
-    ]
+    keywords: ['none', 'auto', 'text', 'contain', 'all'],
   },
   visibility: {
     type: 'keyword',
