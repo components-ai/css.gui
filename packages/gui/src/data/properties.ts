@@ -10,8 +10,6 @@ type PropertyData = {
   percentage?: boolean
   number?: boolean
   keywords?: Array<string>
-  minValue?: number
-  maxValue?: number
   range?: UnitRanges
   defaultValue?: string
 }
@@ -220,8 +218,7 @@ export const properties: Record<string, PropertyData> = {
       'extra-expanded',
       'ultra-expanded',
     ],
-    minValue: 50,
-    maxValue: 200,
+    range: { [PercentageLengthUnits.Pct]: [50, 200] },
   },
   height: {
     type: 'length',
