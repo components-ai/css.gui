@@ -5,7 +5,7 @@ import Layers, { LayerProps } from '../Layers'
 import LayerHeader from '../LayerHeader'
 
 import { BoxShadow } from './types'
-import { toCssValue } from './convert'
+import { stringifyBoxShadow } from './stringify'
 import { EditorProps } from '../editors/types'
 
 export default function BoxShadowsField({
@@ -75,7 +75,7 @@ export const BoxShadowEditor = ({ value, onChange }: LayerProps<BoxShadow>) => {
 }
 
 export function Header({ value }: { value: BoxShadow | BoxShadow[] }) {
-  const style = toCssValue(value)
+  const style = stringifyBoxShadow(value)
   return (
     <LayerHeader
       text={style}

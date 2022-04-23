@@ -1,8 +1,8 @@
 import { Styles, Length, CSSUnitValue } from '../types/css'
 
-import { toCssValue as convertEasingFunction } from '../components/EasingFunction/convert'
-import { toCssValue as convertBoxShadow } from '../components/BoxShadow/convert'
-import { toCssValue as convertTextShadow } from '../components/TextShadow/convert'
+import { stringifyEasingFunction } from '../components/EasingFunction/stringify'
+import { stringifyBoxShadow } from '../components/BoxShadow/stringify'
+import { stringifyTextShadow } from '../components/TextShadow/stringify'
 import { stringifyUnit } from './stringify'
 import { has } from 'lodash-es'
 
@@ -11,10 +11,17 @@ export const stringifyProperty = (
   value?: unknown
 ): Array<string | null> | string | number | null => {
   if (property === 'boxShadow') {
-    return convertBoxShadow(value as any)
+    return stringifyBoxShadow(value as any)
   }
   if (property === 'textShadow') {
-    return convertTextShadow(value as any)
+    return stringifyTextShadow(value as any)
+  }
+  if (
+    ['transitionTimingFunction', 'animationTimingFunction'].includes(
+      property || ''
+    )
+  ) {
+    return stringifyEasingFunction(value as any)
   }
 
   if (Array.isArray(value)) {
@@ -22,14 +29,6 @@ export const stringifyProperty = (
     return value.map((v: Length | string | null) =>
       stringifyProperty(property, v)
     )
-  }
-
-  if (
-    ['transitionTimingFunction', 'animationTimingFunction'].includes(
-      property || ''
-    )
-  ) {
-    return convertEasingFunction(value as any)
   }
 
   if (!isCSSUnitValue(value)) {

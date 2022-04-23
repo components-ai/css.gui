@@ -1,15 +1,15 @@
 import { BoxShadow } from './types'
 import { stringifyUnit } from '../../lib/stringify'
 
-export function toCssValue(boxShadow: BoxShadow | BoxShadow[]): string {
+export function stringifyBoxShadow(boxShadow: BoxShadow | BoxShadow[]): string {
   if (Array.isArray(boxShadow)) {
-    return boxShadow.filter(Boolean).map(toCssValue).join(', ')
+    return boxShadow.filter(Boolean).map(stringifyBoxShadow).join(', ')
   }
 
-  return getBoxShadow(boxShadow)
+  return stringifyEntry(boxShadow)
 }
 
-export const getBoxShadow = (boxShadow: BoxShadow) => {
+const stringifyEntry = (boxShadow: BoxShadow) => {
   return [
     boxShadow.inset && 'inset',
     stringifyUnit(boxShadow.offsetX),

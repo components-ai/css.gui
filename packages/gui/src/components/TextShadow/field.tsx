@@ -3,7 +3,7 @@ import { LengthInput } from '../LengthInput'
 import { EditorProps } from '../editors/types'
 import { TextShadow } from './types'
 
-import { toCssValue } from './convert'
+import { stringifyTextShadow } from './stringify'
 
 import LayerHeader from '../LayerHeader'
 import Layers from '../Layers'
@@ -65,7 +65,7 @@ export const TextShadowEditor = ({
 }
 
 export function Header({ value }: { value: TextShadow | TextShadow[] }) {
-  const style = toCssValue(value)
+  const style = stringifyTextShadow(value)
   return (
     <LayerHeader
       text={style}

@@ -2,7 +2,7 @@ import { getKeywordFromValue } from './keywords'
 import { EasingFunction } from './types'
 
 // Convert the transition function to a CSS Value
-export function toCssValue(value: EasingFunction) {
+export function stringifyEasingFunction(value: EasingFunction) {
   const keyword = getKeywordFromValue(value)
   if (keyword) {
     return keyword

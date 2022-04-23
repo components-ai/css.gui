@@ -1,15 +1,17 @@
 import { TextShadow } from './types'
 import { stringifyUnit } from '../../lib/stringify'
 
-export function toCssValue(textShadow: TextShadow | TextShadow[]): string {
+export function stringifyTextShadow(
+  textShadow: TextShadow | TextShadow[]
+): string {
   if (Array.isArray(textShadow)) {
-    return textShadow.filter(Boolean).map(toCssValue).join(', ')
+    return textShadow.filter(Boolean).map(stringifyTextShadow).join(', ')
   }
 
-  return getTextShadow(textShadow)
+  return stringifyEntry(textShadow)
 }
 
-export const getTextShadow = (textShadow: TextShadow) => {
+const stringifyEntry = (textShadow: TextShadow) => {
   return [
     stringifyUnit(textShadow?.offsetX),
     stringifyUnit(textShadow?.offsetY),

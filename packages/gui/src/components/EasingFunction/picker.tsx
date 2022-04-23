@@ -5,7 +5,7 @@ import EasingFunctionField from './input'
 
 // A compact wrapper for the easing function field that is suitable for use in other contexts
 
-import { toCssValue } from './convert'
+import { stringifyEasingFunction } from './stringify'
 import { EasingFunctionGraph } from './graphs'
 
 type Props = EditorProps<EasingFunction>
@@ -36,7 +36,7 @@ export default function EasingFunctionPicker({ value, onChange }: Props) {
         >
           <EasingFunctionGraph value={value!} />
         </svg>
-        {toCssValue(value!)}
+        {stringifyEasingFunction(value!)}
       </Collapsible.Trigger>
       <Collapsible.Content
         sx={{
