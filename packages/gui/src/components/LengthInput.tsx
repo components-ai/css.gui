@@ -24,7 +24,7 @@ export function LengthInput({
   theme,
   number,
   percentage,
-  keyword = true,
+  keyword,
   value: providedValue,
   ...props
 }: LengthInputProps) {

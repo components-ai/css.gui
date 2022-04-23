@@ -54,25 +54,21 @@ export const BoxShadowEditor = ({ value, onChange }: LayerProps<BoxShadow>) => {
         label="Offset X"
         value={value.offsetX}
         onChange={(offsetX) => onChange({ ...value, offsetX })}
-        keyword={false}
       />
       <LengthInput
         label="Offset Y"
         value={value.offsetY}
         onChange={(offsetY) => onChange({ ...value, offsetY })}
-        keyword={false}
       />
       <LengthInput
         label="Spread"
         value={value.spread}
         onChange={(spread) => onChange({ ...value, spread })}
-        keyword={false}
       />
       <LengthInput
         label="Blur"
         value={value.blur}
         onChange={(blur) => onChange({ ...value, blur })}
-        keyword={false}
       />
     </div>
   )
