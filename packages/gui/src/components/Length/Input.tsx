@@ -7,12 +7,17 @@ import {
   FullLengthUnit,
   Length,
   ThemeUnits,
+  UnitlessUnits,
+  PercentageLengthUnits,
 } from '../../types/css'
 import { GLOBAL_KEYWORDS } from '../../data/global-keywords'
 import { Label, Number, UnitSelect, ValueSelect } from '../primitives'
 import { reducer } from './reducer'
 import { State } from './types'
 import { useThemeProperty } from '../providers/ThemeContext'
+import { isThemeable } from '../../lib/theme'
+import { UNITS } from '../../lib/constants'
+import { compact } from 'lodash-es'
 
 type UnitRanges = Record<string, [number, number]>
 
@@ -60,10 +65,15 @@ export const LengthInput = ({
   }, [state])
 
   const propertyValues = useThemeProperty(property)
-  const keywords = [
-    ...(getPropertyData(property)?.keywords ?? []),
-    ...GLOBAL_KEYWORDS,
-  ]
+  const propertyData = getPropertyData(property)
+  const keywords = [...(propertyData?.keywords ?? []), ...GLOBAL_KEYWORDS]
+
+  const units = compact([
+    isThemeable(property) && ThemeUnits.Theme,
+    propertyData?.number && UnitlessUnits.Number,
+    ...UNITS,
+    propertyData?.percentage && PercentageLengthUnits.Pct,
+  ])
 
   return (
     <div
@@ -134,8 +144,8 @@ export const LengthInput = ({
           )}
       </div>
       <UnitSelect
+        units={units}
         value={state.themeId ? ThemeUnits.Theme : state.unit}
-        property={property}
         onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
           const newUnit = e.target.value as FullLengthUnit
 
