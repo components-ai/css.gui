@@ -62,7 +62,7 @@ export const toCSSObject = (styles: Styles) => {
   }, {})
 }
 
-function isCSSUnitValue(value: any): value is CSSUnitValue {
+function isCSSUnitValue(value: unknown): value is CSSUnitValue {
   if (typeof value !== 'object') {
     return false
   }
