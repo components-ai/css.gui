@@ -8,18 +8,22 @@ import { UNITS } from '../../lib/constants'
 import { isThemeable } from '../../lib/theme'
 import {
   Length,
+  ResponsiveLength,
   PercentageLengthUnits,
   ThemeUnits,
   UnitlessUnits,
+  CSSUnitValue,
 } from '../../types/css'
 import { DimensionInput } from '../Dimension'
 import { ResponsiveInput } from '../Responsive'
-import { LengthEditorProps } from './types'
+import { EditorProps } from './types'
 
 const lengthProperties = pickBy(
   properties,
   (property) => property.type === 'length'
 )
+
+export type LengthEditorProps = EditorProps<Length | ResponsiveLength>
 
 export const lengthInputs = mapValues(lengthProperties, (property, name) => {
   return ({ value, onChange }: LengthEditorProps) => {
@@ -46,18 +50,16 @@ const percentageProperties = pickBy(
 export const percentageInputs = mapValues(
   percentageProperties,
   (property, name) => {
-    return ({ value, onChange }: LengthEditorProps) => {
+    return ({ value, onChange }: EditorProps<CSSUnitValue>) => {
       return (
-        <div>
-          <DimensionInput
-            value={value as any}
-            label={getPropertyLabel(name)}
-            onChange={onChange}
-            property={name}
-            units={['%', 'keyword']}
-            {...property}
-          />
-        </div>
+        <DimensionInput
+          value={value}
+          label={getPropertyLabel(name)}
+          onChange={onChange}
+          property={name}
+          units={['%', 'keyword']}
+          {...property}
+        />
       )
     }
   }
@@ -69,18 +71,16 @@ const numberProperties = pickBy(
 )
 
 export const numberInputs = mapValues(numberProperties, (property, name) => {
-  return ({ value, onChange }: LengthEditorProps) => {
+  return ({ value, onChange }: EditorProps<CSSUnitValue>) => {
     return (
-      <div>
-        <DimensionInput
-          value={value as any}
-          label={getPropertyLabel(name)}
-          onChange={onChange}
-          property={name}
-          units={['number', 'keyword']}
-          {...property}
-        />
-      </div>
+      <DimensionInput
+        value={value}
+        label={getPropertyLabel(name)}
+        onChange={onChange}
+        property={name}
+        units={['number', 'keyword']}
+        {...property}
+      />
     )
   }
 })
@@ -98,6 +98,7 @@ function LengthInput({
   property,
   number,
   percentage,
+  value: providedValue,
   ...props
 }: LengthInputProps) {
   const propertyData = getPropertyData(property)
@@ -107,5 +108,7 @@ function LengthInput({
     ...UNITS,
     propertyData?.percentage && PercentageLengthUnits.Pct,
   ])
-  return <DimensionInput units={units} {...props} />
+  const value =
+    providedValue === '0' ? { value: 0, unit: 'number' } : providedValue
+  return <DimensionInput value={value} units={units} {...props} />
 }

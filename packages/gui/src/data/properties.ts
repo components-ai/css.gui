@@ -4,6 +4,7 @@ import {
   FontRelativeLengthUnits,
   PercentageLengthUnits,
 } from '../types/css'
+import { ANIMATABLE_PROPERTIES } from './animatable'
 
 type PropertyData = {
   type: string
@@ -87,6 +88,11 @@ export const properties: Record<string, PropertyData> = {
       'unsafe center',
     ],
   },
+  // TODO array of time values
+  animationDelay: { type: 'time' },
+  animationDuration: { type: 'time' },
+  // TODO this should be a combobox
+  animationProperty: { type: 'keyword', keywords: ANIMATABLE_PROPERTIES },
   appearance: {
     type: 'keyword',
     keywords: [
@@ -140,20 +146,11 @@ export const properties: Record<string, PropertyData> = {
   },
   backgroundClip: {
     type: 'keyword',
-    keywords: [
-      'border-box',
-      'padding-box',
-      'content-box',
-      'text',
-    ],
+    keywords: ['border-box', 'padding-box', 'content-box', 'text'],
   },
   backgroundOrigin: {
     type: 'keyword',
-    keywords: [
-      'border-box',
-      'padding-box',
-      'content-box',
-    ],
+    keywords: ['border-box', 'padding-box', 'content-box'],
   },
   borderColor: {
     type: 'color',
@@ -165,10 +162,7 @@ export const properties: Record<string, PropertyData> = {
   },
   boxSizing: {
     type: 'keyword',
-    keywords: [
-      'border-box',
-      'content-box',
-    ],
+    keywords: ['border-box', 'content-box'],
   },
   breakAfter: {
     type: 'keyword',
@@ -208,7 +202,8 @@ export const properties: Record<string, PropertyData> = {
       'region',
     ],
   },
-  breakInside: { type: 'keyword',
+  breakInside: { 
+    type: 'keyword',
     keywords: [
       'auto',
       'avoid',
@@ -220,13 +215,13 @@ export const properties: Record<string, PropertyData> = {
   captionSide: {
     type: 'keyword',
     keywords: [
-      'top', 
-      'bottom', 
-      'block-start', 
-      'block-end', 
-      'inline-start', 
-      'inline-end', 
-    ]
+      'top',
+      'bottom',
+      'block-start',
+      'block-end',
+      'inline-start',
+      'inline-end',
+    ],
   },
   caretColor: {
     type: 'color',
@@ -234,14 +229,7 @@ export const properties: Record<string, PropertyData> = {
   },
   clear: {
     type: 'keyword',
-    keywords: [
-      'none',
-      'left',
-      'right',
-      'both',
-      'inline-start',
-      'inline-end',
-    ],
+    keywords: ['none', 'left', 'right', 'both', 'inline-start', 'inline-end'],
   },
   color: {
     type: 'color',
@@ -249,11 +237,7 @@ export const properties: Record<string, PropertyData> = {
   },
   columnFill: {
     type: 'keyword',
-    keywords: [
-      'auto',
-      'balance',
-      'balance-all',
-    ],
+    keywords: ['auto', 'balance', 'balance-all'],
   },
   columnRuleStyle: {
     type: 'keyword',
@@ -272,10 +256,7 @@ export const properties: Record<string, PropertyData> = {
   },
   columnSpan: {
     type: 'keyword',
-    keywords: [
-      'none',
-      'all',
-    ],
+    keywords: ['none', 'all'],
   },
   contain: {
     type: 'keyword',
@@ -295,11 +276,7 @@ export const properties: Record<string, PropertyData> = {
   },
   contentVisibility: {
     type: 'keyword',
-    keywords: [
-      'visible',
-      'hidden',
-      'auto',
-    ],
+    keywords: ['visible', 'hidden', 'auto'],
   },
   // TODO: Add url() for images to cursor
   cursor: {
@@ -345,10 +322,7 @@ export const properties: Record<string, PropertyData> = {
   },
   direction: {
     type: 'keyword',
-    keywords: [
-      'ltr',
-      'rtl',
-    ],
+    keywords: ['ltr', 'rtl'],
   },
   display: {
     type: 'keyword',
@@ -377,19 +351,11 @@ export const properties: Record<string, PropertyData> = {
   },
   emptyCells: {
     type: 'keyword',
-    keywords: [
-      'show',
-      'hide',
-    ],
+    keywords: ['show', 'hide'],
   },
   flexDirection: {
     type: 'keyword',
-    keywords: [
-      'row',
-      'row-reverse',
-      'column',
-      'column-reverse',
-    ],
+    keywords: ['row', 'row-reverse', 'column', 'column-reverse'],
   },
   flexFlow: {
     type: 'keyword',
@@ -455,10 +421,7 @@ export const properties: Record<string, PropertyData> = {
   },
   fontOpticalSizing: {
     type: 'keyword',
-    keywords: [
-      'auto',
-      'none',
-    ],
+    keywords: ['auto', 'none'],
   },
   fontStretch: {
     type: 'percentage',
@@ -559,28 +522,15 @@ export const properties: Record<string, PropertyData> = {
   },
   fontVariantPosition: {
     type: 'keyword',
-    keywords: [
-      'normal',
-      'sub',
-      'super',
-    ],
+    keywords: ['normal', 'sub', 'super'],
   },
   forceColorAdjust: {
     type: 'keyword',
-    keywords: [
-      'auto',
-      'none',
-    ],
+    keywords: ['auto', 'none'],
   },
   gridAutoFlow: {
     type: 'keyword',
-    keywords: [
-      'row',
-      'column'
-      'dense',
-      'row dense',
-      'column dense',
-    ],
+    keywords: ['row', 'column', 'dense', 'row dense', 'column dense'],
   },
   height: {
     type: 'length',
@@ -589,26 +539,15 @@ export const properties: Record<string, PropertyData> = {
   },
   hyphens: {
     type: 'keyword',
-    keywords: [
-      'none',
-      'manual',
-      'auto',
-    ],
+    keywords: ['none', 'manual', 'auto'],
   },
   imageRendering: {
     type: 'keyword',
-    keywords: [
-      'auto',
-      'crisp-edges',
-      'pixelated',
-    ],
+    keywords: ['auto', 'crisp-edges', 'pixelated'],
   },
   isolation: {
     type: 'keyword',
-    keywords: [
-      'auto',
-      'isolate',
-    ],
+    keywords: ['auto', 'isolate'],
   },
   justifyContent: {
     type: 'keyword',
@@ -1179,6 +1118,11 @@ export const properties: Record<string, PropertyData> = {
       'preserve-3d',
     ],
   },
+  // TODO array of time values
+  transitionDelay: { type: 'time' },
+  transitionDuration: { type: 'time' },
+  // TODO this should be a combobox
+  transitionProperty: { type: 'keyword', keywords: ANIMATABLE_PROPERTIES },
   unicodeBidi: {
     type: 'keyword',
     keywords: [

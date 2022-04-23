@@ -15,7 +15,7 @@ type ResponsiveInputProps = {
   label: string
   property?: string
   // TODO: Type this component
-  Component: React.ComponentType<DimensionInputProps>
+  Component: React.ComponentType<any>
   componentProps?: any
 }
 export const ResponsiveInput = ({
