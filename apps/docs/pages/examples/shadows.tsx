@@ -4,10 +4,10 @@ import { useState } from 'react'
 const initialStyles = {
   boxShadow: [
     {
-      blur: '0',
-      spread: '0',
-      offsetX: '0',
-      offsetY: '0',
+      spread: { value: 0, unit: 'px' },
+      blur: { value: 0, unit: 'px' },
+      offsetX: { value: 0, unit: 'px' },
+      offsetY: { value: 0, unit: 'px' },
       color: '#f00',
     },
   ],

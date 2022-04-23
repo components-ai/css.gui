@@ -1,5 +1,6 @@
 import { LayerProps } from '../layers'
 import { ColorInput } from '../ColorInput'
+import { CheckboxInput } from '../CheckboxInput'
 import { LengthInput } from '../LengthInput'
 import Layers from '../layers'
 import LayerHeader from '../LayerHeader'
@@ -44,7 +45,11 @@ export const BoxShadowEditor = ({ value, onChange }: LayerProps<BoxShadow>) => {
             onChange={(color) => onChange({ ...value, color })}
           />
         </div>
-        {/* <CheckboxField label="Inset" field={[...path, 'inset']} /> */}
+        <CheckboxInput
+          label="Inset"
+          value={!!value.inset}
+          onChange={(inset) => onChange({ ...value, inset })}
+        />
       </section>
       <LengthInput
         label="Offset X"
