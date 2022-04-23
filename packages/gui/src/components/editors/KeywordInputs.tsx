@@ -31,22 +31,6 @@ export const keywordInputs = mapValues(keywordProperties, (property, name) => {
   }
 })
 
-// Inputs have to be manually added here to get exports working
-export const AlignContentInput = keywordInputs.alignContent
-export const AlignItemsInput = keywordInputs.alignItems
-export const AlignSelfInput = keywordInputs.alignSelf
-export const AppearanceInput = keywordInputs.appearance
-export const BackfaceVisibilityInput = keywordInputs.backfaceVisibility
-export const BackgroundBlendMode = keywordInputs.backgroundBlendMode
-export const DisplayInput = keywordInputs.display
-export const FloatInput = keywordInputs.float
-export const VisibilityInput = keywordInputs.visibility
-// Typography
-export const TextAlignInput = keywordInputs.textAlign
-export const WritingModeInput = keywordInputs.writingMode
-export const WhiteSpaceInput = keywordInputs.whiteSpace
-export const WordBreakInput = keywordInputs.wordBreak
-
 type SelectProps = {
   id: string
   onChange: (newValue: string) => void

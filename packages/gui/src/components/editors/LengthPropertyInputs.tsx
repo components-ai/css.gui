@@ -25,9 +25,3 @@ export const lengthInputs = mapValues(lengthProperties, (property, name) => {
     )
   }
 })
-
-export const BorderWidthInput = lengthInputs.borderWidth
-export const WidthInput = lengthInputs.width
-export const HeightInput = lengthInputs.height
-export const FontSizeInput = lengthInputs.fontSize
-export const LineHeightInput = lengthInputs.lineHeight
