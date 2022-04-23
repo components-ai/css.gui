@@ -1,6 +1,18 @@
-import { mapValues, pickBy } from 'lodash-es'
-import { properties, getPropertyLabel } from '../../data/properties'
-import { LengthInput } from '../Length'
+import { compact, mapValues, pickBy } from 'lodash-es'
+import {
+  properties,
+  getPropertyLabel,
+  getPropertyData,
+} from '../../data/properties'
+import { UNITS } from '../../lib/constants'
+import { isThemeable } from '../../lib/theme'
+import {
+  Length,
+  PercentageLengthUnits,
+  ThemeUnits,
+  UnitlessUnits,
+} from '../../types/css'
+import { LengthInput as DimensionInput } from '../Length'
 import { ResponsiveInput } from '../Responsive'
 import { LengthEditorProps } from './types'
 
@@ -19,9 +31,35 @@ export const lengthInputs = mapValues(lengthProperties, (property, name) => {
         onChange={onChange}
         Component={LengthInput}
         componentProps={{
-          range: property.range,
+          property: name,
+          ...property,
         }}
       />
     )
   }
 })
+
+interface LengthInputProps {
+  value: Length
+  onChange: (value: Length) => void
+  property?: string
+  keywords?: string[]
+  number?: boolean
+  percentage?: boolean
+}
+
+function LengthInput({
+  property,
+  number,
+  percentage,
+  ...props
+}: LengthInputProps) {
+  const propertyData = getPropertyData(property)
+  const units = compact([
+    isThemeable(property) && ThemeUnits.Theme,
+    propertyData?.number && UnitlessUnits.Number,
+    ...UNITS,
+    propertyData?.percentage && PercentageLengthUnits.Pct,
+  ])
+  return <DimensionInput units={units} {...props} />
+}
