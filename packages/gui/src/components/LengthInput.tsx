@@ -11,6 +11,7 @@ import { DimensionInput } from './Dimension'
 interface LengthInputProps {
   value: Length
   onChange: (value: Length) => void
+  label: string
   property?: string
   keywords?: string[]
   theme?: boolean
