@@ -2,9 +2,9 @@ export type EasingFunction = CubicBezier | Steps
 
 export type EasingType = 'cubic-bezier' | 'steps'
 
+// TODO support standalone keywords
 export interface CubicBezier {
   type: 'cubic-bezier'
-  // keyword?: CubicBezierKeyword
   p1: number
   p2: number
   p3: number
@@ -20,7 +20,6 @@ export type CubicBezierKeyword =
 
 export interface Steps {
   type: 'steps'
-  // keyword?: StepsKeyword
   stops: number
   jumpTerm: JumpTerm
 }
