@@ -55,6 +55,7 @@ export const DraggableInput = ({
         cursor: dragging ? 'ew-resize' : 'default',
         minHeight: '1.6em',
         width: '100%',
+        textAlign: 'right',
       }}
       {...bind()}
     />
