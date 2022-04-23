@@ -8,7 +8,7 @@ import {
 
 const BASE_FONT_SIZE = 16
 export const convertLengthUnits = (
-  newUnit: FullLengthUnit,
+  newUnit: string,
   providedValue: Length
 ): number | string => {
   const value: CSSUnitValue =
@@ -36,6 +36,14 @@ export const convertLengthUnits = (
     }
 
     return 1
+  }
+
+  if (newUnit === 's' && value.unit === 'ms') {
+    return +value.value / 1000
+  }
+
+  if (newUnit === 'ms' && value.unit === 's') {
+    return +value.value * 1000
   }
 
   //@ts-ignore
