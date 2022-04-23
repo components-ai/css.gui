@@ -1,5 +1,9 @@
 import { useState } from 'react'
-import { CSSUnitValue, DimensionInput, stringifyUnit } from '@compai/css-gui'
+import {
+  CSSUnitValue,
+  DimensionInput,
+  stringifyProperty,
+} from '@compai/css-gui'
 
 export const DimensionExample = () => {
   const [value, setValue] = useState<CSSUnitValue>({
@@ -20,7 +24,7 @@ export const DimensionExample = () => {
         sx={{
           m: 0,
           lineHeight: 1.2,
-          fontSize: stringifyUnit('fontSize', value),
+          fontSize: stringifyProperty('fontSize', value),
         }}
       >
         Aa

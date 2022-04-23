@@ -2,7 +2,6 @@ import {
   AbsoluteLengthUnits,
   CSSUnitValue,
   FontRelativeLengthUnits,
-  FullLengthUnit,
   Length,
 } from '../types/css'
 
