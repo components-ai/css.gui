@@ -1,4 +1,9 @@
 import { GLOBAL_KEYWORDS } from './global-keywords'
+import {
+  AbsoluteLengthUnits,
+  FontRelativeLengthUnits,
+  PercentageLengthUnits,
+} from '../types/css'
 
 type PropertyData = {
   type: string
@@ -7,8 +12,11 @@ type PropertyData = {
   keywords: Array<string>
   minValue?: number
   maxValue?: number
+  range?: UnitRanges
   defaultValue?: string
 }
+
+type UnitRanges = Record<string, [number, number]>
 
 export const getPropertyData = (property?: string): PropertyData | null => {
   const propertyData = properties[property || '']
@@ -40,11 +48,7 @@ export const properties: Record<string, PropertyData> = {
   },
   backfaceVisibility: {
     type: 'keyword',
-    keywords: [
-      'visible',
-      'hidden',
-      ...GLOBAL_KEYWORDS,
-    ],
+    keywords: ['visible', 'hidden', ...GLOBAL_KEYWORDS],
   },
   backgroundBlendMode: {
     type: 'keyword',
@@ -160,7 +164,7 @@ export const properties: Record<string, PropertyData> = {
   alignSelf: {
     type: 'keyword',
     keywords: [
-      'auto'
+      'auto',
       'center',
       'start',
       'end',
@@ -193,6 +197,12 @@ export const properties: Record<string, PropertyData> = {
   fontSize: {
     type: 'length',
     percentage: true,
+    range: {
+      [AbsoluteLengthUnits.Px]: [0, 512],
+      [FontRelativeLengthUnits.Em]: [0, 16],
+      [FontRelativeLengthUnits.Rem]: [0, 16],
+      [PercentageLengthUnits.Pct]: [0.1, 100],
+    },
     keywords: [
       'xx-small',
       'x-small',
@@ -261,12 +271,7 @@ export const properties: Record<string, PropertyData> = {
   },
   visibility: {
     type: 'keyword',
-    keywords: [
-      'visible',
-      'hidden',
-      'collapse',
-      ...GLOBAL_KEYWORDS,
-    ],
+    keywords: ['visible', 'hidden', 'collapse', ...GLOBAL_KEYWORDS],
   },
   whiteSpace: {
     type: 'keyword',
