@@ -38,7 +38,7 @@ export const enum ThemeUnits {
   Theme = 'theme',
 }
 export const enum KeywordUnits {
-  Keyword = 'keyword'
+  Keyword = 'keyword',
 }
 // Only use a subset for now to keep things simpler
 export type LengthUnit =
@@ -47,6 +47,8 @@ export type LengthUnit =
   | AbsoluteLengthUnits.Px
   | KeywordUnits.Keyword
 export type LengthPercentageUnit = LengthUnit | PercentageLengthUnits.Pct
+export type TimeUnit = 'ms' | 's'
+
 export type FullLengthUnit =
   | FontRelativeLengthUnits.Em
   | FontRelativeLengthUnits.Rem
@@ -56,9 +58,11 @@ export type FullLengthUnit =
   | ThemeUnits.Theme
   | KeywordUnits.Keyword
 
+export type CSSUnit = FullLengthUnit | TimeUnit
+
 export type CSSUnitValue = {
   value: number | string
-  unit: string,
+  unit: string
   themeId?: string
 }
 export type GenericLength = '0'
