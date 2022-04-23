@@ -2,7 +2,7 @@ import { mapValues, pickBy } from 'lodash-es'
 import { ChangeEvent, useId } from 'react'
 import { properties, getPropertyLabel } from '../../data/properties'
 import { Label } from '../primitives'
-import { KeywordEditorProps } from './types'
+import { EditorProps } from './types'
 import { GLOBAL_KEYWORDS } from '../../data/global-keywords'
 
 const keywordProperties = pickBy(
@@ -14,7 +14,7 @@ const keywordProperties = pickBy(
 // If we need to support different defaults, we can add them to the data definition.
 const DEFAULT_KEYWORD = 'inherit'
 export const keywordInputs = mapValues(keywordProperties, (property, name) => {
-  return ({ value, onChange }: KeywordEditorProps) => {
+  return ({ value, onChange }: EditorProps<string>) => {
     const id = useId()
     const fullId = `${id}-${name}`
     return (

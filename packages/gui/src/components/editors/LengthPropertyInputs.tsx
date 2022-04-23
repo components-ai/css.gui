@@ -8,18 +8,21 @@ import { UNITS } from '../../lib/constants'
 import { isThemeable } from '../../lib/theme'
 import {
   Length,
+  ResponsiveLength,
   PercentageLengthUnits,
   ThemeUnits,
   UnitlessUnits,
 } from '../../types/css'
 import { DimensionInput } from '../Dimension'
 import { ResponsiveInput } from '../Responsive'
-import { LengthEditorProps } from './types'
+import { EditorProps } from './types'
 
 const lengthProperties = pickBy(
   properties,
   (property) => property.type === 'length'
 )
+
+export type LengthEditorProps = EditorProps<Length | ResponsiveLength>
 
 export const lengthInputs = mapValues(lengthProperties, (property, name) => {
   return ({ value, onChange }: LengthEditorProps) => {
