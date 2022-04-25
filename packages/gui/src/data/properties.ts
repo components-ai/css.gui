@@ -127,6 +127,16 @@ export const properties: Record<string, PropertyData> = {
     type: 'keyword',
     keywords: ['visible', 'hidden'],
   },
+  backgroundAttachment: {
+    type: 'keyword',
+    keywords: [
+      'scroll',
+      'fixed',
+      'local',
+      'local, scroll',
+      'scroll, local',
+    ],
+  },
   backgroundBlendMode: {
     type: 'keyword',
     keywords: [
