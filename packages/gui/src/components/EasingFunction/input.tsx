@@ -1,7 +1,7 @@
 import { clamp } from 'lodash-es'
 import { useRef, useCallback, useId } from 'react'
 import { useSvgDrag } from '../useSvgDrag'
-import { CubicBezier, EasingFunction, JumpTerm, Keyword, Steps } from './types'
+import { CubicBezier, EasingFunction, Keyword, Steps } from './types'
 import { CubicBezierGraph, StepsGraph, EasingFunctionGraph } from './graphs'
 import { Number } from '../primitives/Number'
 import { getKeywordValue } from './keywords'
