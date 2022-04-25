@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.3
+
+### Patch Changes
+
+- 7a4f4cf: Add readme and changelog to published files
+
 ## 0.0.2
 
 ### Patch Changes
