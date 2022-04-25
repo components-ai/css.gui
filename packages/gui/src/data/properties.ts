@@ -674,7 +674,14 @@ export const properties: Record<string, PropertyData> = {
       'stroke-box',
       'view-box',
       'padding-box, content-box',
-      'vew-box, fill-box, border-box',
+      'view-box, fill-box, border-box',
+    ],
+  },
+  maskType: {
+    type: 'keyword',
+    keywords: [
+      'luminance,'
+      'alpha',
     ],
   },
   // TODO: add fit-content function
@@ -725,6 +732,26 @@ export const properties: Record<string, PropertyData> = {
     type: 'keyword',
     keywords: ['contain', 'cover', 'fill', 'none', 'scale-down'],
   },
+  offsetDistance: {
+    type: 'length',
+    percentage: true,
+  },
+  order: {
+    type: 'number',
+    defaultValue: 0,
+  },
+  orphans: {
+    type: 'number',
+    defaultValue: 2,
+  },
+  outlineColor: {
+    type: 'color',
+    keywords: ['invert'],
+  },
+  outlineOffset: {
+    type: 'length',
+    percentage: true,
+  },
   outlineStyle: {
     type: 'keyword',
     keywords: [
@@ -738,6 +765,11 @@ export const properties: Record<string, PropertyData> = {
       'inset',
       'outset',
     ],
+  },
+  outlineWidth: {
+    type: 'length',
+    percentage: true,
+    keywords: ['thin', 'medium', 'thick'],
   },
   overflow: {
     type: 'keyword',
