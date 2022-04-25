@@ -2,19 +2,19 @@ import { kebabCase } from 'lodash-es'
 import { useId } from 'react'
 import { Label } from 'theme-ui'
 
-interface Props {
+interface Props<T extends string> {
   label: string
-  onChange: (newValue: string) => void
-  value: string
-  options: string[]
+  onChange: (newValue: T) => void
+  value: T
+  options: T[]
 }
 // A select input with a label
-export const SelectInput = ({
+export function SelectInput<T extends string>({
   label,
   value,
   onChange,
   options,
-}: Props): any => {
+}: Props<T>) {
   const id = `${useId()}-${kebabCase(label)}`
 
   return (
@@ -23,7 +23,7 @@ export const SelectInput = ({
       <select
         id={id}
         value={value}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={(e) => onChange(e.target.value as T)}
         sx={{ width: '100%', minHeight: '1.6em' }}
       >
         {options.map((v) => {

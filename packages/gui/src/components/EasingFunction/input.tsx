@@ -7,6 +7,7 @@ import { Number } from '../primitives/Number'
 import { getKeywordValue } from './keywords'
 import * as Tabs from '@radix-ui/react-tabs'
 import { EditorProps } from '../editors/types'
+import { SelectInput } from '../SelectInput'
 
 type Props = EditorProps<EasingFunction>
 
@@ -211,10 +212,10 @@ function StepsEditor({ value = DEFAULT_STEPS, onChange }: EditorProps<Steps>) {
         min={0}
         max={20}
       />
-      <SelectField
+      <SelectInput
         label="Jump term"
         value={value.jumpTerm}
-        onChange={(jumpTerm: JumpTerm) => onChange({ ...value, jumpTerm })}
+        onChange={(jumpTerm) => onChange({ ...value, jumpTerm })}
         options={['jump-start', 'jump-end', 'jump-both', 'jump-none']}
       />
       <Presets
@@ -290,25 +291,6 @@ function NumberField({ label, value, ...props }: NumberProps) {
     <>
       <label htmlFor={id}>{label}</label>
       <Number id={id} value={value} {...props} />
-    </>
-  )
-}
-
-interface SelectProps extends EditorProps<string> {
-  label: string
-  options: string[]
-}
-
-function SelectField({ label, value, onChange, options }: SelectProps) {
-  const id = useId()
-  return (
-    <>
-      <label htmlFor={id}>{label}</label>
-      <select id={id} value={value} onChange={(e) => onChange(e.target.value)}>
-        {options.map((option) => (
-          <option value={option}>{option}</option>
-        ))}
-      </select>
     </>
   )
 }
