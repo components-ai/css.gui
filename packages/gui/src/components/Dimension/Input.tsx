@@ -21,7 +21,7 @@ export interface DimensionInputProps extends EditorProps<CSSUnitValue> {
   property?: string
   range?: UnitRanges
   keywords?: string[]
-  units?: string[]
+  units?: readonly string[]
   conversions?: UnitConversions
 }
 export const DimensionInput = ({

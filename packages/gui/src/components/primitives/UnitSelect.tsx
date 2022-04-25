@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 type UnitSelectProps = React.SelectHTMLAttributes<HTMLSelectElement> & {
-  units: string[]
+  units: readonly string[]
 }
 export const UnitSelect = ({ units, ...props }: UnitSelectProps) => {
   return (
