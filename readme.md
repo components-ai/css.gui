@@ -105,7 +105,7 @@ export const MyEditor = () => {
 ### Installation
 
 ```sh
-git clone https://github.com/components-ai/css-gui
+git clone https://github.com/components-ai/css.gui
 cd css-gui
 yarn
 ```
@@ -114,7 +114,6 @@ yarn
 
 ```sh
 yarn dev
-open http://localhost:3001
 ```
 
 ### Running the tests
