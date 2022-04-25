@@ -143,6 +143,11 @@ export const properties: Record<string, PropertyData> = {
       'luminosity',
     ],
   },
+  accentColor: {
+    type: 'color',
+    defaultValue: 'auto',
+    keywords: ['auto', 'currentcolor', 'transparent'],
+  },
   backgroundColor: {
     type: 'color',
     defaultValue: '#fff',
@@ -223,6 +228,7 @@ export const properties: Record<string, PropertyData> = {
   },
   caretColor: {
     type: 'color',
+    defaultValue: 'auto',
     keywords: ['currentcolor', 'transparent'],
   },
   clear: {
