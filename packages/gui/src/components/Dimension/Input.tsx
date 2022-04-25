@@ -122,7 +122,6 @@ export const DimensionInput = ({
               step={state.step}
               min={range?.[state.unit]?.[0]}
               max={range?.[state.unit]?.[1]}
-              property={property}
               onChange={(newValue: number) => {
                 dispatch({
                   type: 'CHANGED_INPUT_VALUE',
