@@ -1,67 +1,35 @@
 import { Angle, Color, Length, NumberPercentage } from '../../types/css'
 
 // TODO URLs
-export type Filter =
-  | Blur
-  | Brightness
-  | Contrast
-  | DropShadow
-  | Grayscale
-  | HueRotate
-  | Invert
-  | Opacity
-  | Saturate
-  | Sepia
+export type Filter = Blur | DropShadow | HueRotate | AmountFilter
 
-interface Blur {
+export interface Blur {
   type: 'blur'
   radius: Length
 }
 
-interface Brightness {
-  type: 'brightness'
-  amount: NumberPercentage
-}
-
-interface Contrast {
-  type: 'contrast'
-  amount: NumberPercentage
-}
-
-interface DropShadow {
+export interface DropShadow {
   type: 'drop-shadow'
   offsetX: Length
   offsetY: Length
-  blurRadius?: Length
-  color?: Color
+  blurRadius: Length
+  color: Color
 }
 
-interface Grayscale {
-  type: 'grayscale'
-  amount: NumberPercentage
-}
-
-interface HueRotate {
+export interface HueRotate {
   type: 'hue-rotate'
   angle: Angle
 }
 
-interface Invert {
-  type: 'invert'
-  amount: NumberPercentage
-}
-
-interface Opacity {
-  type: 'opacity'
-  amount: NumberPercentage
-}
-
-interface Saturate {
-  type: 'saturate'
-  amount: NumberPercentage
-}
-
-interface Sepia {
-  type: 'sepia'
+// A filter with a single number-percentage amount
+export interface AmountFilter {
+  type:
+    | 'brightness'
+    | 'contrast'
+    | 'grayscale'
+    | 'invert'
+    | 'opacity'
+    | 'saturate'
+    | 'sepia'
   amount: NumberPercentage
 }

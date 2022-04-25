@@ -2,7 +2,7 @@ import { LengthInput } from '../LengthInput'
 import Layers, { LayerProps } from '../Layers'
 import LayerHeader from '../LayerHeader'
 
-import { Filter } from './types'
+import { Filter, Blur, DropShadow, HueRotate, AmountFilter } from './types'
 import { stringifyFilter } from './stringify'
 import { EditorProps } from '../editors/types'
 import { getInputProps } from '../../lib/util'
@@ -57,24 +57,30 @@ const filterTypes = [
 
 function FilterSwitch(props: LayerProps<Filter>) {
   switch (props.value.type) {
-    case 'blur':
-      return <LengthInput {...getInputProps(props, 'radius' as any)} />
-    case 'drop-shadow':
+    case 'blur': {
+      const _props = props as EditorProps<Blur>
+      return <LengthInput {...getInputProps(_props, 'radius')} />
+    }
+    case 'drop-shadow': {
+      const _props = props as EditorProps<DropShadow>
       return (
         <div>
-          <LengthInput {...getInputProps(props, 'offsetX' as any)} />
-          <LengthInput {...getInputProps(props, 'offsetY' as any)} />
-          <LengthInput {...getInputProps(props, 'blurRadius' as any)} />
-          <ColorInput {...getInputProps(props, 'color' as any)} />
+          <LengthInput {...getInputProps(_props, 'offsetX')} />
+          <LengthInput {...getInputProps(_props, 'offsetY')} />
+          <LengthInput {...getInputProps(_props, 'blurRadius')} />
+          <ColorInput {...getInputProps(_props, 'color')} />
         </div>
       )
-    case 'hue-rotate':
-      return <AngleInput {...getInputProps(props, 'angle' as any)} />
-    default:
+    }
+    case 'hue-rotate': {
+      const _props = props as EditorProps<HueRotate>
+      return <AngleInput {...getInputProps(_props, 'angle')} />
+    }
+    default: {
+      const _props = props as EditorProps<AmountFilter>
       // TODO some of the filters have different boundaries
-      return (
-        <NumberPercentageInput {...getInputProps(props, 'amount' as any)} />
-      )
+      return <NumberPercentageInput {...getInputProps(_props, 'amount')} />
+    }
   }
 }
 
