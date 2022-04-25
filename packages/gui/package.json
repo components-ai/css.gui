@@ -11,7 +11,9 @@
     "clean": "rm -rf .turbo node_modules dist"
   },
   "files": [
-    "dist/**"
+    "dist/**",
+    "readme.md",
+    "CHANGELOG.md"
   ],
   "devDependencies": {
     "@types/lodash-es": "^4.17.6",
