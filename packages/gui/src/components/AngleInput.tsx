@@ -3,11 +3,16 @@ import { DimensionInput } from './Dimension'
 import { EditorProps } from './editors/types'
 
 // TODO allow optional percentage for conic gradients
-export function AngleInput({ value, onChange }: EditorProps<CSSUnitValue>) {
+export function AngleInput({
+  value,
+  onChange,
+  label,
+}: EditorProps<CSSUnitValue> & { label: string }) {
   return (
     <DimensionInput
       value={value}
       onChange={onChange}
+      label={label}
       units={ANGLE_UNITS}
       conversions={angleConversions}
     />

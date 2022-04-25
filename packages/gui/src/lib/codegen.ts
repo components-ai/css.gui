@@ -5,11 +5,15 @@ import { stringifyBoxShadow } from '../components/BoxShadow/stringify'
 import { stringifyTextShadow } from '../components/TextShadow/stringify'
 import { stringifyUnit } from './stringify'
 import { has } from 'lodash-es'
+import { stringifyFilter } from '../components/Filter/stringify'
 
 export const stringifyProperty = (
   property?: string, // In the future the property might determine how we stringify
   value?: unknown
 ): Array<string | null> | string | number | null => {
+  if (property === 'filter') {
+    return stringifyFilter(value as any)
+  }
   if (property === 'boxShadow') {
     return stringifyBoxShadow(value as any)
   }

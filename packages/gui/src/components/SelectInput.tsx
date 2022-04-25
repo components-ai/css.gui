@@ -6,7 +6,7 @@ interface Props<T extends string> {
   label: string
   onChange: (newValue: T) => void
   value: T
-  options: T[]
+  options: readonly T[]
 }
 // A select input with a label
 export function SelectInput<T extends string>({
