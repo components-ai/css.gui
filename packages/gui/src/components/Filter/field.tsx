@@ -2,7 +2,7 @@ import { LengthInput } from '../LengthInput'
 import Layers, { LayerProps } from '../Layers'
 import LayerHeader from '../LayerHeader'
 
-import { CSSFilter } from './types'
+import { Filter } from './types'
 import { stringifyFilter } from './stringify'
 import { EditorProps } from '../editors/types'
 import { getInputProps } from '../../lib/util'
@@ -14,7 +14,7 @@ import { ColorInput } from '../ColorInput'
 export default function FilterContent({
   value,
   onChange,
-}: EditorProps<CSSFilter[]>) {
+}: EditorProps<Filter[]>) {
   const newItem = () => {
     return {
       type: 'blur',
@@ -22,18 +22,18 @@ export default function FilterContent({
     } as const
   }
   return (
-    <Layers<CSSFilter>
+    <Layers<Filter>
       value={value}
       onChange={onChange}
       newItem={newItem}
-      addLabel="+ Add box shadow"
+      addLabel="+ Add filter"
       header={Header}
       content={FilterEditor}
     />
   )
 }
 
-export const FilterEditor = (props: LayerProps<CSSFilter>) => {
+export const FilterEditor = (props: LayerProps<Filter>) => {
   return (
     <div>
       <SelectInput {...getInputProps(props, 'type')} options={filterTypes} />
@@ -55,7 +55,7 @@ const filterTypes = [
   'sepia',
 ] as const
 
-function FilterSwitch(props: LayerProps<CSSFilter>) {
+function FilterSwitch(props: LayerProps<Filter>) {
   switch (props.value.type) {
     case 'blur':
       return <LengthInput {...getInputProps(props, 'radius' as any)} />
@@ -78,7 +78,7 @@ function FilterSwitch(props: LayerProps<CSSFilter>) {
   }
 }
 
-export function Header({ value }: { value: CSSFilter | CSSFilter[] }) {
+export function Header({ value }: { value: Filter | Filter[] }) {
   const style = stringifyFilter(value)
   return (
     <LayerHeader
@@ -93,7 +93,16 @@ export function Header({ value }: { value: CSSFilter | CSSFilter[] }) {
             justifyContent: 'center',
           }}
         >
-          <div sx={{ width: '1rem', height: '1rem', boxShadow: style }} />
+          <div
+            sx={{
+              width: '1rem',
+              height: '1rem',
+              filter: style,
+              borderRadius: '9999px',
+              backgroundImage:
+                'conic-gradient(#f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00)',
+            }}
+          />
         </div>
       }
     />

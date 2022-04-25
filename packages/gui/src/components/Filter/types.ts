@@ -1,7 +1,7 @@
 import { Angle, Color, Length, NumberPercentage } from '../../types/css'
 
 // TODO URLs
-export type CSSFilter =
+export type Filter =
   | Blur
   | Brightness
   | Contrast

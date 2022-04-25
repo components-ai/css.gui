@@ -1,14 +1,14 @@
 import { stringifyUnit } from '../../lib/stringify'
-import { CSSFilter } from './types'
+import { Filter } from './types'
 
-export function stringifyFilter(filter: CSSFilter | CSSFilter[]) {
+export function stringifyFilter(filter: Filter | Filter[]) {
   if (Array.isArray(filter)) {
     return filter.map(stringifyEntry).join(' ')
   }
   return stringifyEntry(filter)
 }
 
-function stringifyEntry(filter: CSSFilter) {
+function stringifyEntry(filter: Filter) {
   const { type } = filter
   switch (type) {
     case 'blur':

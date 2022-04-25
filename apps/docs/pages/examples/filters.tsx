@@ -20,9 +20,15 @@ export default function Filters() {
         <RenderElement
           tagName="div"
           styles={{
-            width: '64px',
-            height: '64px',
-            background: 'linear-gradient(to right, red, blue)',
+            width: '24rem',
+            height: '24rem',
+            backgroundImage:
+              'linear-gradient(to right, #f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: 4,
+            color: 'black',
             ...styles,
           }}
         >

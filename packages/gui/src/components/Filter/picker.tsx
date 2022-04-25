@@ -1,11 +1,11 @@
 import * as Collapsible from '@radix-ui/react-collapsible'
-import { CSSFilter } from './types'
+import { Filter } from './types'
 import { EditorProps } from '../editors/types'
 import FilterContent, { Header } from './field'
 import { Label } from '../primitives'
 import { useId } from 'react'
 
-type Props = EditorProps<CSSFilter[]>
+type Props = EditorProps<Filter[]>
 export default function FilterPicker({ value, onChange }: Props) {
   const id = `${useId()}-filter`
   return (

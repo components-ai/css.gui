@@ -4,7 +4,7 @@ export function stringifyUnit(value: Length) {
   if (value === '0') {
     return value
   }
-  if (value.value === undefined) {
+  if (!value || value.value === undefined) {
     return null
   }
 
