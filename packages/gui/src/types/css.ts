@@ -49,13 +49,13 @@ export type LengthUnit =
 export type LengthPercentageUnit = LengthUnit | PercentageLengthUnits.Pct
 
 export const TIME_UNITS = ['ms', 's'] as const
-export type TimeUnit = typeof TIME_UNITS
+export type TimeUnit = typeof TIME_UNITS[number]
 
 export const ANGLE_UNITS = ['deg', 'turn', 'rad', 'grad'] as const
-export type AngleUnit = typeof ANGLE_UNITS
+export type AngleUnit = typeof ANGLE_UNITS[number]
 
 export const NUMBER_PERCENTAGE_UNITS = ['number', '%'] as const
-export type NumberPercentageUnit = typeof NUMBER_PERCENTAGE_UNITS
+export type NumberPercentageUnit = typeof NUMBER_PERCENTAGE_UNITS[number]
 
 export type FullLengthUnit =
   | FontRelativeLengthUnits.Em
