@@ -47,7 +47,9 @@ export type LengthUnit =
   | AbsoluteLengthUnits.Px
   | KeywordUnits.Keyword
 export type LengthPercentageUnit = LengthUnit | PercentageLengthUnits.Pct
-export type TimeUnit = 'ms' | 's'
+
+export const TIME_UNITS = ['ms', 's'] as const
+export type TimeUnit = typeof TIME_UNITS
 
 export type FullLengthUnit =
   | FontRelativeLengthUnits.Em
