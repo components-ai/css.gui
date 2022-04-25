@@ -1,3 +1,4 @@
+import { UnitConversions } from '../../lib'
 import { FullLengthUnit } from '../../types/css'
 
 export type State = {
@@ -19,6 +20,7 @@ export type Action =
   | {
       type: 'CHANGED_UNIT_VALUE'
       unit: FullLengthUnit
+      conversions: UnitConversions
     }
   | {
       type: 'CHANGED_INPUT_TO_THEME_VALUE'

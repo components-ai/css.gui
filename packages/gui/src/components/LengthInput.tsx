@@ -39,5 +39,18 @@ export function LengthInput({
   ])
   const value =
     providedValue === '0' ? { value: 0, unit: 'number' } : providedValue
-  return <DimensionInput value={value} units={units} {...props} />
+  return (
+    <DimensionInput
+      value={value}
+      units={units}
+      conversions={lengthConversions}
+      {...props}
+    />
+  )
+}
+
+const lengthConversions = {
+  px: 16,
+  rem: 1,
+  em: 1,
 }

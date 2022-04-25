@@ -1,50 +1,29 @@
-import {
-  AbsoluteLengthUnits,
-  CSSUnitValue,
-  FontRelativeLengthUnits,
-  Length,
-} from '../types/css'
+import { CSSUnitValue, Length } from '../types/css'
 
-const BASE_FONT_SIZE = 16
+/**
+ * A mapping of units to their values relative to each other.
+ */
+export type UnitConversions = Record<string, number>
+
 export const convertLengthUnits = (
   newUnit: string,
-  providedValue: Length
+  providedValue: Length,
+  conversions: UnitConversions = {}
 ): number | string => {
   const value: CSSUnitValue =
     providedValue === '0' ? { value: 0, unit: 'number' } : providedValue
 
-  if (newUnit === AbsoluteLengthUnits.Px) {
-    if (
-      value.unit === FontRelativeLengthUnits.Em ||
-      value.unit === FontRelativeLengthUnits.Rem
-    ) {
-      //@ts-ignore
-      return value.value * BASE_FONT_SIZE
-    }
-
-    return 16
+  // If both the new and old units have mappings,
+  // run the conversion logic
+  if (conversions[value.unit] && conversions[newUnit]) {
+    return (+value.value / conversions[value.unit]) * conversions[newUnit]
   }
 
-  if (
-    newUnit === FontRelativeLengthUnits.Em ||
-    newUnit === FontRelativeLengthUnits.Rem
-  ) {
-    if (value.unit === AbsoluteLengthUnits.Px) {
-      //@ts-ignore
-      return value.value / BASE_FONT_SIZE
-    }
-
-    return 1
+  // If the new unit has a value but the old one doesn't, return the new one
+  if (conversions[newUnit]) {
+    return conversions[newUnit]
   }
 
-  if (newUnit === 's' && value.unit === 'ms') {
-    return +value.value / 1000
-  }
-
-  if (newUnit === 'ms' && value.unit === 's') {
-    return +value.value * 1000
-  }
-
-  //@ts-ignore
+  // Otherwise, we perform no conversions and return the value as-is
   return value.value
 }

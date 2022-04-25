@@ -12,6 +12,7 @@ import { reducer } from './reducer'
 import { State } from './types'
 import { useThemeProperty } from '../providers/ThemeContext'
 import { EditorProps } from '../editors/types'
+import { UnitConversions } from '../../lib/convert'
 
 type UnitRanges = Record<string, [number, number]>
 
@@ -21,6 +22,7 @@ export interface DimensionInputProps extends EditorProps<CSSUnitValue> {
   range?: UnitRanges
   keywords?: string[]
   units?: string[]
+  conversions?: UnitConversions
 }
 export const DimensionInput = ({
   value,
@@ -30,6 +32,7 @@ export const DimensionInput = ({
   range,
   keywords,
   units = [],
+  conversions = {},
 }: DimensionInputProps) => {
   const id = React.useId()
   const fullId = `${id}-${property || 'length'}`
@@ -155,6 +158,7 @@ export const DimensionInput = ({
           dispatch({
             type: 'CHANGED_UNIT_VALUE',
             unit: newUnit,
+            conversions,
           })
         }}
         sx={{ marginLeft: 1, minHeight: '1.6em', width: 72 }}
