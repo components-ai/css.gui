@@ -1,4 +1,4 @@
-import { mapValues, pickBy } from 'lodash-es'
+import { mapValues, pickBy, property } from 'lodash-es'
 import { properties, getPropertyLabel } from '../../data/properties'
 import { isThemeable } from '../../lib/theme'
 import { Length, ResponsiveLength, CSSUnitValue } from '../../types/css'
@@ -14,6 +14,17 @@ const lengthProperties = pickBy(
 
 export type LengthEditorProps = EditorProps<Length | ResponsiveLength>
 
+const positionalProperties = pickBy(
+  properties,
+  (property) => property.type === 'dimensional'
+)
+export const positionalInputs = mapValues(positionalProperties, (property, name) => {
+  return ({ value, onChange }: LengthEditorProps) => {
+    return (
+      <div>This is my positional div</div>
+    )
+  }
+})
 export const lengthInputs = mapValues(lengthProperties, (property, name) => {
   return ({ value, onChange }: LengthEditorProps) => {
     return (
