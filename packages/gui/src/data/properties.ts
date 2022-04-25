@@ -653,6 +653,11 @@ export const properties: Record<string, PropertyData> = {
     percentage: true,
     keywords: ['auto'],
   },
+  letterSpacing: {
+    type: 'length',
+    percentage: true,
+    keywords: ['normal'],
+  },
   lineBreak: {
     type: 'keyword',
     keywords: ['auto', 'loose', 'normal', 'strict', 'anywhere'],
@@ -660,6 +665,20 @@ export const properties: Record<string, PropertyData> = {
   listStylePosition: {
     type: 'keyword',
     keywords: ['inside', 'outside'],
+  },
+  listStyleType: {
+    type: 'keyword',
+    keywords: [
+      'none', 
+      'disc', 
+      'circle',
+      'square',
+      'decimal',
+      'georgian',
+      'trad-chinese-informal',
+      'kannada',
+      'custom-counter-style',
+    ],
   },
   lineHeight: {
     type: 'length',
@@ -670,6 +689,13 @@ export const properties: Record<string, PropertyData> = {
   margin: {
     type: 'length',
     percentage: true,
+  },
+  maskBorderMode: {
+    type: 'keyword',
+    keywords: [
+      'luminance',
+      'alpha',
+    ],
   },
   maskClip: {
     type: 'keyword',
