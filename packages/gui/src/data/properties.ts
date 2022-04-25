@@ -171,6 +171,39 @@ export const properties: Record<string, PropertyData> = {
     type: 'keyword',
     keywords: ['border-box', 'padding-box', 'content-box'],
   },
+  backgroundPositionY: {
+    // TOO: Add side relative values option and multiple values option
+    type: 'length',
+    percentage: true,
+    keywords: ['top', 'center', 'bottom'],
+  },
+  backgroundPositionX: {
+    // TODO: Add side relative values option and multiple values option
+    type: 'length',
+    percentage: true,
+    keywords: ['top', 'left', 'center'],
+  },
+  backgroundRepeat: {
+    type: 'keyword',
+    keywords: [
+      'repeat-x',
+      'repeat-y',
+      'repeat',
+      'space',
+      'round',
+      'no-repeat',
+      'repeat space',
+      'repeat repeat',
+      'round space',
+      'no-repeat round',
+    ],
+  },
+  backgroundSize: {
+    // TODO: Add two value syntax
+    type: 'length',
+    percentage: true,
+    keywords: ['cover', 'contain', 'auto',],
+  },
   borderColor: {
     type: 'color',
     keywords: ['currentcolor', 'transparent'],
