@@ -98,7 +98,7 @@ export const MyEditor = () => {
 }
 ```
 
-[Read the full getting started guide &rarr;](https://components.ai/open-source/css-gui/getting-started)
+[Read the full getting started guide &rarr;](https://github.com/components-ai/css.gui/blob/main/apps/docs/pages/getting-started.mdx)
 
 ## Development
 
