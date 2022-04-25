@@ -5,14 +5,11 @@ import { CSSUnitValue, Length } from '../types/css'
  */
 export type UnitConversions = Record<string, number>
 
-export const convertLengthUnits = (
+export const convertUnits = (
   newUnit: string,
-  providedValue: Length,
+  value: CSSUnitValue,
   conversions: UnitConversions = {}
 ): number | string => {
-  const value: CSSUnitValue =
-    providedValue === '0' ? { value: 0, unit: 'number' } : providedValue
-
   // If both the new and old units have mappings,
   // run the conversion logic
   if (conversions[value.unit] && conversions[newUnit]) {
