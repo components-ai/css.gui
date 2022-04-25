@@ -161,6 +161,7 @@ export const DimensionInput = ({
           dispatch({
             type: 'CHANGED_UNIT_VALUE',
             unit: newUnit,
+            steps: steps,
             conversions,
           })
         }}
