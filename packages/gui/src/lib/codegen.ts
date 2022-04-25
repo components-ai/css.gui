@@ -3,9 +3,10 @@ import { Styles, Length, CSSUnitValue } from '../types/css'
 import { stringifyEasingFunction } from '../components/EasingFunction/stringify'
 import { stringifyBoxShadow } from '../components/BoxShadow/stringify'
 import { stringifyTextShadow } from '../components/TextShadow/stringify'
-import { stringifyUnit } from './stringify'
+import { stringifySelector, stringifyUnit } from './stringify'
 import { has } from 'lodash-es'
 import { stringifyFilter } from '../components/Filter/stringify'
+import { isNestedSelector } from './util'
 
 export const stringifyProperty = (
   property?: string, // In the future the property might determine how we stringify
@@ -42,9 +43,16 @@ export const stringifyProperty = (
 }
 
 type StyleEntry = [string, Length | string | null | undefined]
-export const toCSSObject = (styles: Styles) => {
+export const toCSSObject = (styles: Styles): any => {
+  // @ts-ignore
   return Object.entries(styles).reduce((acc: Styles, curr: StyleEntry) => {
     const [property, value] = curr
+    if (isNestedSelector(property)) {
+      return {
+        ...acc,
+        [stringifySelector(property)]: toCSSObject(value as Styles),
+      }
+    }
     return {
       ...acc,
       [property]: stringifyProperty(property, value),

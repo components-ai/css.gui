@@ -1,0 +1,52 @@
+import { FirstParagraph } from '../../components/FirstParagraph'
+
+# Color
+
+<FirstParagraph>
+  A fully-featured color input for all color spaces on the web.
+</FirstParagraph>
+
+There are two color inputs that are available, the popover and the picker.
+The popover is a collapsed input that exposes the picker on click, while
+the picker is the exposed controls.
+
+## Usage
+
+You can import either the `ColorPopover` or the `ColorPicker` based on your
+needs. They have the same `color`/`onChange` props API.
+
+### Color popover
+
+```js
+import { useState } from 'react'
+import { ColorPopover } from '@compai/css-gui'
+
+const MyEditor = () => {
+  const [color, setColor] = useState('tomato')
+
+  return (
+    <>
+      <ColorPopover color={color} onChange={setColor} />
+      <p style={{ color }}>I am {color}!</p>
+    </>
+  )
+}
+```
+
+### Color picker
+
+```js
+import { useState } from 'react'
+import { ColorPicker } from '@compai/css-gui'
+
+const MyEditor = () => {
+  const [color, setColor] = useState('tomato')
+
+  return (
+    <>
+      <ColorPicker color={color} onChange={setColor} />
+      <p style={{ color }}>I am {color}!</p>
+    </>
+  )
+}
+```

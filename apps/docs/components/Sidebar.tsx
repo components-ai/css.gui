@@ -17,11 +17,11 @@ export const Sidebar = () => {
       <NavItem href="/getting-started">Getting Started</NavItem>
       <NavSectionTitle>Components</NavSectionTitle>
       <NavItem href="/components/editor">Editor</NavItem>
+      <NavItem href="/components/fieldset">Fieldset</NavItem>
       <NavSectionTitle>Inputs</NavSectionTitle>
-      <NavItem href="/inputs/color-picker">Color Picker</NavItem>
-      <NavItem href="/inputs/color-popover">Color Popover</NavItem>
+      <NavItem href="/inputs/color">Color</NavItem>
       <NavItem href="/inputs/number">Number</NavItem>
-      <NavItem href="/inputs/length">Length</NavItem>
+      <NavItem href="/inputs/dimension">Dimension</NavItem>
       <NavSectionTitle>Guides</NavSectionTitle>
       <NavItem href="/guides/style-schema">Style Schema</NavItem>
       <NavItem href="/guides/theming">Theming</NavItem>

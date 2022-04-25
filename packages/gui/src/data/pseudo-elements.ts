@@ -1,0 +1,15 @@
+export const pseudoElements = [
+  'after',
+  'before',
+  'cue',
+  'cue-region',
+  'first-letter',
+  'first-line',
+  'file-selector-button',
+  'grammar-error',
+  'marker',
+  'placeholder',
+  'selection',
+  'spelling-error',
+  'target-text',
+] as const

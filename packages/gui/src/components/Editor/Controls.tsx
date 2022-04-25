@@ -6,12 +6,15 @@ import { Theme } from '../../types/theme'
 import { EditorProvider, useEditor } from '../providers/EditorContext'
 import { EditorData, KeyArg, Recipe } from '../providers/types'
 import { controlMap } from './map'
+import { useFieldset } from './Fieldset'
+import { joinPath } from '../providers/util'
 
 type ControlProps = {
   field: KeyArg
 }
 const Control = ({ field }: ControlProps) => {
   const { getField, setField } = useEditor()
+  const fieldset = useFieldset()
   const Component = controlMap[field.toString()]
 
   if (!Component) {
@@ -19,12 +22,14 @@ const Control = ({ field }: ControlProps) => {
     return null
   }
 
+  const fullField = fieldset ? joinPath(fieldset.name, field) : field
+
   return (
     <>
       <Component
-        value={getField(field)}
+        value={getField(fullField)}
         onChange={(newValue: any) => {
-          setField(field, newValue)
+          setField(fullField, newValue)
         }}
       />
     </>

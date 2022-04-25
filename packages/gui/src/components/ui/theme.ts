@@ -444,6 +444,7 @@ export const theme: Theme = {
       color: '#111',
       p: 3,
       borderRadius: 4,
+      overflow: 'scroll',
       '> code': {
         px: 0,
       },
