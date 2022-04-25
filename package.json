@@ -16,7 +16,6 @@
     "test": "yarn pkg:test && turbo run test",
     "pkg:test": "manypkg check",
     "pkg:fix": "manypkg fix",
-    "changeset": "yarn changeset",
     "version": "yarn changeset version",
     "release": "yarn build && yarn changeset publish"
   },
