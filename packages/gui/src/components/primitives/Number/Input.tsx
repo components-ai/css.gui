@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { NumberInputProps } from './types'
 import { useDrag } from 'react-use-gesture'
+import { roundToStep } from '../../../lib/math'
 
 type DraggableLabelProps = {
   step: number
@@ -30,8 +31,8 @@ export const DraggableInput = ({
         initialValue.current = parsedValue
       }
 
-      const deltaValue = Math.round(dx) * step
-      let newValue = initialValue.current + deltaValue
+      const deltaValue = dx * step
+      let newValue = roundToStep(initialValue.current + deltaValue, step)
       if (min || min === 0) newValue = Math.max(newValue, min)
       if (max) newValue = Math.min(newValue, max)
 
