@@ -53,9 +53,17 @@ export type TimeUnit = typeof TIME_UNITS[number]
 
 export const ANGLE_UNITS = ['deg', 'turn', 'rad', 'grad'] as const
 export type AngleUnit = typeof ANGLE_UNITS[number]
+export interface Angle {
+  value: number
+  unit: AngleUnit
+}
 
 export const NUMBER_PERCENTAGE_UNITS = ['number', '%'] as const
 export type NumberPercentageUnit = typeof NUMBER_PERCENTAGE_UNITS[number]
+export interface NumberPercentage {
+  value: number
+  unit: NumberPercentageUnit
+}
 
 export type FullLengthUnit =
   | FontRelativeLengthUnits.Em
