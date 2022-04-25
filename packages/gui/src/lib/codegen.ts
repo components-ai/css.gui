@@ -40,13 +40,33 @@ export const stringifyUnit = (
   return `${value.value}${value.unit || DEFAULT_LENGTH_UNIT}`
 }
 
-type StyleEntry = [string, Length | string | null | undefined]
+const stringifyStyleObject = (property: string, styles: Styles) => {
+  return Object.entries(styles).reduce((acc: any, [subProp, value]: any) => {
+    const newPropName = `${property}${subProp}`
+    return {
+      ...acc,
+      [newPropName]: stringifyUnit(newPropName, value)
+    }
+  }, {})
+}
+
+type StyleEntry = [string, Length | string | null | undefined | any]
 export const toCSSObject = (styles: Styles) => {
   return Object.entries(styles).reduce((acc: Styles, curr: StyleEntry) => {
     const [property, value] = curr
-    return {
-      ...acc,
-      [property]: stringifyUnit(property, value),
+
+    //@ts-ignore
+    if (value && isObject(value) && value.value === undefined) {
+      return {
+        ...acc,
+        ...stringifyStyleObject(property, value)
+      }
+    } else {
+      return {
+        ...acc,
+        [property]: stringifyUnit(property, value),
+      }
     }
+    
   }, {})
 }

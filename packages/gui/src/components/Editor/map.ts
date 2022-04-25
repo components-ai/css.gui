@@ -1,4 +1,4 @@
-import { FontSizeInput, LineHeightInput } from '../editors'
+import { FontSizeInput, LineHeightInput, MarginInput, PaddingInput } from '../editors'
 import { BackgroundColorInput, ColorInput } from '../editors/ColorInputs'
 
 export const controlMap: Record<string, any> = {
@@ -6,4 +6,6 @@ export const controlMap: Record<string, any> = {
   lineHeight: LineHeightInput,
   color: ColorInput,
   backgroundColor: BackgroundColorInput,
+  margin: MarginInput,
+  padding: PaddingInput,
 }

@@ -1,8 +1,30 @@
 import { FONT_SIZE_MAX, FONT_SIZE_MIN } from '../../lib/constants'
 import { AbsoluteLengthUnits, FontRelativeLengthUnits, PercentageLengthUnits } from '../../types/css'
 import { LengthInput } from '../Length'
-import { ResponsiveInput } from '../Responsive'
+import { ResponsiveInput, DimensionsInput } from '../Responsive'
 import { LengthEditorProps } from './types'
+
+// should MarginInput or PaddingInput
+export const MarginInput = ({ value, onChange }: LengthEditorProps) => {
+
+  return (
+    <DimensionsInput
+      property='margin'
+      value={value}
+      onChange={onChange}
+      componentProps={{}}
+      label="Margin"
+    />
+
+  )
+}
+
+export const PaddingInput = ({ value, onChange }: LengthEditorProps) => {
+  return (
+    <div>This is my padding div</div>
+  )
+}
+
 
 export const BorderWidthInput = ({ value, onChange }: LengthEditorProps) => {
   return (

@@ -10,6 +10,8 @@ const initialStyles: any = {
   color: 'tomato',
   backgroundColor: 'black',
   textAlign: 'inherit',
+  margin: { value: 16, unit: 'px' },
+  padding: { value: 16, unit: 'px' },
 }
 const DEFAULT_THEME: Theme = {
   fontSizes: [

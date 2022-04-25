@@ -12,8 +12,8 @@ export const RenderElement = ({
   ...props
 }: RenderElementProps) => {
   const Component = tagName
-  const styleObject = toCSSObject(styles)
-
+  const styleObject = {...toCSSObject(styles), paddingX: '32px'}
+  console.log(styleObject, "style object")
   // @ts-ignore
   return <Component {...props} sx={styleObject} />
 }
