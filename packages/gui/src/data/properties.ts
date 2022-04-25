@@ -27,6 +27,11 @@ export const getPropertyLabel = (property: string) => {
 }
 
 export const properties: Record<string, PropertyData> = {
+  accentColor: {
+    type: 'color',
+    defaultValue: 'auto',
+    keywords: ['auto', 'currentcolor', 'transparent'],
+  },
   alignContent: {
     type: 'keyword',
     keywords: [
@@ -143,11 +148,6 @@ export const properties: Record<string, PropertyData> = {
       'luminosity',
     ],
   },
-  accentColor: {
-    type: 'color',
-    defaultValue: 'auto',
-    keywords: ['auto', 'currentcolor', 'transparent'],
-  },
   backgroundColor: {
     type: 'color',
     defaultValue: '#fff',
@@ -168,6 +168,11 @@ export const properties: Record<string, PropertyData> = {
   borderWidth: {
     type: 'length',
     keywords: ['thin', 'medium', 'thick'],
+  },
+  bottom: {
+    type: 'length',
+    percentage: true,
+    keywords: ['auto'],
   },
   boxSizing: {
     type: 'keyword',
@@ -606,6 +611,11 @@ export const properties: Record<string, PropertyData> = {
       'unsafe center',
     ],
   },
+  left: {
+    type: 'length',
+    percentage: true,
+    keywords: ['auto'],
+  },
   lineBreak: {
     type: 'keyword',
     keywords: ['auto', 'loose', 'normal', 'strict', 'anywhere'],
@@ -741,6 +751,11 @@ export const properties: Record<string, PropertyData> = {
     type: 'keyword',
     keywords: ['visible', 'hidden', 'scroll', 'auto'],
   },
+  overflowClipMargin: {
+    // TODO: Add ranges
+    type: 'length',
+    percentage: true,
+  },
   overflowInline: {
     type: 'keyword',
     keywords: ['visible', 'hidden', 'scroll', 'auto'],
@@ -780,6 +795,11 @@ export const properties: Record<string, PropertyData> = {
   padding: {
     type: 'length',
     percentage: true,
+  },
+  perspective: {
+    type: 'length',
+    percentage: true,
+    keywords: ['none'],
   },
   placeItems: {
     type: 'keyword',
@@ -826,7 +846,7 @@ export const properties: Record<string, PropertyData> = {
     keywords: [
       'auto',
       'none',
-      // svg only
+      // Add inticator to UI these are svg only
       'visiblePainted',
       'visibleFill',
       'visibleStroke',
@@ -849,6 +869,15 @@ export const properties: Record<string, PropertyData> = {
     type: 'keyword',
     keywords: ['none', 'both', 'horizontal', 'vertical', 'block', 'inline'],
   },
+  right: {
+    type: 'length',
+    percentage: true,
+    keywords: ['auto'],
+  },
+  rowGap: {
+    type: 'length',
+    percentage: true,
+  },
   rubyAlign: {
     type: 'keyword',
     keywords: ['start', 'center', 'space-between', 'space-around'],
@@ -861,9 +890,37 @@ export const properties: Record<string, PropertyData> = {
     type: 'keyword',
     keywords: ['auto', 'smooth'],
   },
-  scrollbarWIdth: {
+  scrollbarColor: {
+    type: 'color',
+    keywords: ['auto', 'currentcolor', 'transparent'],
+  },
+  scrollbarWidth: {
     type: 'keyword',
     keywords: ['auto', 'thin', 'none'],
+  },
+  scrollSnapType: {
+    type: 'keyword',
+    keywords: [
+      'none',
+      'x',
+      'y',
+      'block',
+      'inline',
+      'both',
+      'x mandatory',
+      'y proximity',
+      'both mandatory',
+
+    ],
+  },
+  shapeMargin: {
+    type: 'length',
+    percentage: true,
+  },
+  tabSize: {
+    type: 'length',
+    percentage: true,
+    number: true,
   },
   tableLayout: {
     // TODO: Only have control appear when display: table
@@ -897,6 +954,10 @@ export const properties: Record<string, PropertyData> = {
       'match-parent',
     ],
   },
+  textDecorationColor: {
+    type: 'color',
+    keywords: ['currentcolor', 'transparent'],
+  },
   textDecorationLine: {
     type: 'keyword',
     keywords: [
@@ -911,6 +972,12 @@ export const properties: Record<string, PropertyData> = {
       'underline overline line-through',
     ],
   },
+  textDecorationThickness: {
+    //TODO: Add value ranges
+    type: 'length',
+    percentage: true,
+    keywords: ['auto', 'from-font'],
+  },
   textDecorationSkipInk: {
     type: 'keyword',
     keywords: ['none', 'auto', 'all'],
@@ -918,6 +985,10 @@ export const properties: Record<string, PropertyData> = {
   textDecorationStyle: {
     type: 'keyword',
     keywords: ['solid', 'double', 'dotted', 'dashed', 'wavy'],
+  },
+  textEmphasisColor: {
+    type: 'color',
+    keywords: ['currentcolor', 'transparent'],
   },
   textEmphasisPosition: {
     type: 'keyword',
@@ -930,6 +1001,25 @@ export const properties: Record<string, PropertyData> = {
       'right under',
       'left under',
     ],
+  },
+  textEmphasisStyle: {
+    // TODO: Add string input option
+    type: 'keyword',
+    keywords: [
+      'filled',
+      'open',
+      'dot',
+      'circle',
+      'double-circle',
+      'triangle',
+      'filled sesame',
+      'open sesame',
+    ],
+  },
+  textIndent: {
+    type: 'length',
+    percentage: true,
+    keywords: ['auto'],
   },
   textJustify: {
     type: 'keyword',
@@ -968,6 +1058,11 @@ export const properties: Record<string, PropertyData> = {
   textUnderlinePosition: {
     type: 'keyword',
     keywords: ['auto', 'under', 'left', 'right', 'under left', 'right under'],
+  },
+  top: {
+    type: 'length',
+    percentage: true,
+    keywords: ['auto'],
   },
   touchAction: {
     type: 'keyword',
@@ -1019,6 +1114,26 @@ export const properties: Record<string, PropertyData> = {
     type: 'keyword',
     keywords: ['none', 'auto', 'text', 'contain', 'all'],
   },
+  verticalAlign: {
+    type: 'length',
+    percentage: true,
+    range: {
+      [AbsoluteLengthUnits.Px]: [0, 512],
+      [FontRelativeLengthUnits.Em]: [0, 16],
+      [FontRelativeLengthUnits.Rem]: [0, 16],
+      [PercentageLengthUnits.Pct]: [0.1, 100],
+    },
+    keywords: [
+      'baseline',
+      'sub',
+      'super',
+      'text-top',
+      'text-bottom',
+      'middle',
+      'top',
+      'bottom',
+    ],
+  },
   visibility: {
     type: 'keyword',
     keywords: ['visible', 'hidden', 'collapse'],
@@ -1033,6 +1148,11 @@ export const properties: Record<string, PropertyData> = {
       'pre-line',
       'break-spaces',
     ],
+  },
+  // TODO: Add range
+  widows: {
+    type: 'number',
+    defaultValue: 2,
   },
   width: {
     type: 'length',
