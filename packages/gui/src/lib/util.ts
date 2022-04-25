@@ -1,5 +1,7 @@
 import { EditorProps } from '../components/editors/types'
 import { getPropertyLabel } from '../data/properties'
+import { isPseudoClass, isPseudoElement } from './pseudos'
+import { isElement } from './elements'
 
 type EditorPropsWithLabel<T> = EditorProps<T> & { label: string }
 /**
@@ -21,4 +23,13 @@ export function getInputProps<T extends object, K extends keyof T>(
     label: getPropertyLabel('' + key),
     onChange: (newValue) => props.onChange({ ...props.value, [key]: newValue }),
   }
+}
+
+export function isNestedSelector(selector: string): boolean {
+  return (
+    isElement(selector) ||
+    isPseudoClass(selector) ||
+    isPseudoElement(selector) ||
+    false
+  )
 }

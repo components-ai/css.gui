@@ -17,6 +17,7 @@ export const Sidebar = () => {
       <NavItem href="/getting-started">Getting Started</NavItem>
       <NavSectionTitle>Components</NavSectionTitle>
       <NavItem href="/components/editor">Editor</NavItem>
+      <NavItem href="/components/fieldset">Fieldset</NavItem>
       <NavSectionTitle>Inputs</NavSectionTitle>
       <NavItem href="/inputs/color-picker">Color Picker</NavItem>
       <NavItem href="/inputs/color-popover">Color Popover</NavItem>

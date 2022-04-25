@@ -1,0 +1,49 @@
+import { FirstParagraph } from '../../components/FirstParagraph'
+import { Fieldset } from '../../components/examples/Fieldset'
+
+# Fieldset
+
+<FirstParagraph>
+  Apply nested styles to elements, pseudo-elements, or pseudo-classes.
+</FirstParagraph>
+
+When you want to create a nested selector, like `.some-class p a` you can
+use the `Fieldset` component. It has support for nested elements and
+all pseudo-elements and pseudo-selectors so you can also target
+`.some-class p a:link`.
+
+## Usage
+
+```js
+import { useState } from 'react'
+import { Editor, RenderElement, Fieldset, Inputs } from '@compai/css-gui'
+
+const MyEditor = () => {
+  const [styles, setStyles] = useState({})
+
+  return (
+    <>
+      <Editor styles={styles} onChange={setStyles}>
+        <>
+          <Inputs.FontSize />
+          <Fieldset type="pseudo-element" name="first-letter">
+            <>
+              <h2>First letter</h2>
+              <Inputs.FontSize />
+            </>
+          </Fieldset>
+        </>
+      </Editor>
+      <RenderElement tagName="p" styles={styles}>
+        Hello, world!
+      </RenderElement>
+    </>
+  )
+}
+
+export default MyEditor
+```
+
+## Example
+
+<Fieldset />

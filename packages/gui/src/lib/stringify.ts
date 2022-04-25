@@ -1,4 +1,14 @@
-import { CSSUnitValue, Length } from '../types/css'
+import { isElement } from 'lodash-es'
+import { Length } from '../types/css'
+import { addPseudoSyntax, isPseudoClass } from './pseudos'
+
+export function stringifySelector(selector: string): string {
+  if (isElement(selector)) {
+    return selector
+  }
+
+  return addPseudoSyntax(selector)
+}
 
 export function stringifyUnit(value: Length) {
   if (value === '0') {
