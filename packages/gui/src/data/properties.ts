@@ -667,6 +667,29 @@ export const properties: Record<string, PropertyData> = {
       'vew-box, fill-box, border-box',
     ],
   },
+  // TODO: add fit-content function
+  maxHeight: {
+    type: 'length',
+    percentage: true,
+    keywords: ['none', 'max-content', 'min-content', 'auto'],
+  },
+  // TODO: add fit-content function
+  maxWidth: {
+    type: 'length',
+    percentage: true,
+    keywords: ['none', 'max-content', 'min-content', 'auto'],
+  },
+  minHeight: {
+    type: 'length',
+    percentage: true,
+    keywords: ['max-content', 'min-content', 'auto'],
+  },
+  // TODO: add fit-content function
+  minWidth: {
+    type: 'length',
+    percentage: true,
+    keywords: ['max-content', 'min-content', 'auto'],
+  },
   mixBlendMode: {
     type: 'keyword',
     keywords: [
@@ -1011,6 +1034,11 @@ export const properties: Record<string, PropertyData> = {
       'break-spaces',
     ],
   },
+  width: {
+    type: 'length',
+    percentage: true,
+    keywords: ['max-content', 'min-content', 'auto'],
+  },
   wordBreak: {
     type: 'keyword',
     keywords: ['normal', 'break-all', 'keep-all', 'break-word'],
@@ -1018,11 +1046,6 @@ export const properties: Record<string, PropertyData> = {
   writingMode: {
     type: 'keyword',
     keywords: ['horizontal-tb', 'vertical-rl', 'vertical-lr'],
-  },
-  width: {
-    type: 'length',
-    percentage: true,
-    keywords: ['max-content', 'min-content', 'auto'],
   },
   zIndex: {
     type: 'number',
