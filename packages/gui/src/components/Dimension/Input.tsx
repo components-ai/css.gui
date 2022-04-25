@@ -13,6 +13,7 @@ import { State } from './types'
 import { useThemeProperty } from '../providers/ThemeContext'
 import { EditorProps } from '../editors/types'
 import { UnitConversions } from '../../lib/convert'
+import { UNIT_STEPS } from '../../lib/constants'
 
 type UnitRanges = Record<string, [number, number]>
 
@@ -41,7 +42,6 @@ export const DimensionInput = ({
     unit: value?.unit || 0,
     themeId: value?.themeId,
     key: 0,
-    step: 1,
   } as State)
   React.useEffect(() => {
     if (
@@ -119,7 +119,7 @@ export const DimensionInput = ({
               id={fullId}
               key={state.key}
               value={state.value}
-              step={state.step}
+              step={UNIT_STEPS[state.unit] ?? 1}
               min={range?.[state.unit]?.[0]}
               max={range?.[state.unit]?.[1]}
               onChange={(newValue: number) => {
