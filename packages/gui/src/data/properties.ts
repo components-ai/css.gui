@@ -615,7 +615,7 @@ export const properties: Record<string, PropertyData> = {
     keywords: ['normal'],
   },
   margin: {
-    type: 'dimensional',
+    type: 'positional',
     percentage: true,
   },
   maskClip: {

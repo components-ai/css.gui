@@ -16,7 +16,7 @@ export type LengthEditorProps = EditorProps<Length | ResponsiveLength>
 
 const positionalProperties = pickBy(
   properties,
-  (property) => property.type === 'dimensional'
+  (property) => property.type === 'positional'
 )
 export const positionalInputs = mapValues(positionalProperties, (property, name) => {
   return ({ value, onChange }: LengthEditorProps) => {
