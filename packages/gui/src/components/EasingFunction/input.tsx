@@ -8,6 +8,7 @@ import { getKeywordValue } from './keywords'
 import * as Tabs from '@radix-ui/react-tabs'
 import { EditorProps } from '../editors/types'
 import { SelectInput } from '../SelectInput'
+import { getInputProps } from '../../lib/util'
 
 type Props = EditorProps<EasingFunction>
 
@@ -63,10 +64,8 @@ export default function EasingFunctionField({
   )
 }
 
-function CubicBezierEditor({
-  value = DEFAULT,
-  onChange,
-}: EditorProps<CubicBezier>) {
+function CubicBezierEditor(props: EditorProps<CubicBezier>) {
+  const { value = DEFAULT, onChange } = props
   const { p1 = 0, p2 = 0, p3 = 1, p4 = 1 } = value
   const svg = useRef<SVGSVGElement>(null)
   // Use a callback for the CTM so we always get the current version
@@ -127,33 +126,29 @@ function CubicBezierEditor({
       </svg>
       <div sx={{ display: 'flex', gap: 3 }}>
         <NumberField
+          {...getInputProps(props, 'p1')}
           label="p1"
-          value={value.p1}
-          onChange={(p1) => onChange({ ...value, p1 })}
           min={0}
           max={1}
           step={0.001}
         />
         <NumberField
+          {...getInputProps(props, 'p2')}
           label="p2"
-          value={value.p2}
-          onChange={(p2) => onChange({ ...value, p2 })}
           min={-1}
           max={2}
           step={0.001}
         />
         <NumberField
+          {...getInputProps(props, 'p3')}
           label="p3"
-          value={value.p3}
-          onChange={(p3) => onChange({ ...value, p3 })}
           min={0}
           max={1}
           step={0.001}
         />
         <NumberField
+          {...getInputProps(props, 'p4')}
           label="p4"
-          value={value.p4}
-          onChange={(p4) => onChange({ ...value, p4 })}
           min={-1}
           max={2}
           step={0.001}
@@ -189,7 +184,8 @@ function ControlPoint({ x, y, ctm, onChange }: ControlPointProps) {
   )
 }
 
-function StepsEditor({ value = DEFAULT_STEPS, onChange }: EditorProps<Steps>) {
+function StepsEditor(props: EditorProps<Steps>) {
+  const { value = DEFAULT_STEPS, onChange } = props
   return (
     <div>
       <svg
@@ -205,17 +201,9 @@ function StepsEditor({ value = DEFAULT_STEPS, onChange }: EditorProps<Steps>) {
       >
         <StepsGraph value={value} />
       </svg>
-      <NumberField
-        label="Stops"
-        value={value.stops}
-        onChange={(stops) => onChange({ ...value, stops })}
-        min={0}
-        max={20}
-      />
+      <NumberField {...getInputProps(props, 'stops')} min={0} max={20} />
       <SelectInput
-        label="Jump term"
-        value={value.jumpTerm}
-        onChange={(jumpTerm) => onChange({ ...value, jumpTerm })}
+        {...getInputProps(props, 'jumpTerm')}
         options={['jump-start', 'jump-end', 'jump-both', 'jump-none']}
       />
       <Presets
