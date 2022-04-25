@@ -129,13 +129,7 @@ export const properties: Record<string, PropertyData> = {
   },
   backgroundAttachment: {
     type: 'keyword',
-    keywords: [
-      'scroll',
-      'fixed',
-      'local',
-      'local, scroll',
-      'scroll, local',
-    ],
+    keywords: ['scroll', 'fixed', 'local', 'local, scroll', 'scroll, local'],
   },
   backgroundBlendMode: {
     type: 'keyword',
@@ -202,7 +196,7 @@ export const properties: Record<string, PropertyData> = {
     // TODO: Add two value syntax
     type: 'length',
     percentage: true,
-    keywords: ['cover', 'contain', 'auto',],
+    keywords: ['cover', 'contain', 'auto'],
   },
   borderColor: {
     type: 'color',
@@ -722,10 +716,7 @@ export const properties: Record<string, PropertyData> = {
   },
   maskType: {
     type: 'keyword',
-    keywords: [
-      'luminance,'
-      'alpha',
-    ],
+    keywords: ['luminance', 'alpha'],
   },
   // TODO: add fit-content function
   maxHeight: {
@@ -985,7 +976,6 @@ export const properties: Record<string, PropertyData> = {
       'x mandatory',
       'y proximity',
       'both mandatory',
-
     ],
   },
   shapeMargin: {
