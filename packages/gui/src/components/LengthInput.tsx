@@ -44,6 +44,7 @@ export function LengthInput({
       value={value}
       units={units}
       conversions={lengthConversions}
+      steps={lengthSteps}
       {...props}
     />
   )
@@ -53,4 +54,13 @@ const lengthConversions = {
   px: 16,
   rem: 1,
   em: 1,
+}
+
+const lengthSteps = {
+  number: 0.1,
+  theme: 1,
+  px: 1,
+  em: 0.125,
+  rem: 0.125,
+  '%': 0.1,
 }

@@ -21,18 +21,6 @@ export const UNITS_WITH_PERCENTAGE: LengthPercentageUnit[] = [
   ...UNITS,
   PercentageLengthUnits.Pct,
 ]
-export const UNIT_STEPS: Record<CSSUnit, number> = {
-  [UnitlessUnits.Number]: 1,
-  [ThemeUnits.Theme]: 1,
-  [AbsoluteLengthUnits.Px]: 1,
-  [FontRelativeLengthUnits.Em]: 0.125,
-  [FontRelativeLengthUnits.Rem]: 0.125,
-  [PercentageLengthUnits.Pct]: 0.1,
-  [KeywordUnits.Keyword]: 1,
-  ms: 25,
-  s: 0.025,
-}
-
 export const THEME_ALIASES: Record<string, string> = {
   bg: 'backgroundColor',
   m: 'margin',

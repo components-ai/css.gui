@@ -13,14 +13,17 @@ import { State } from './types'
 import { useThemeProperty } from '../providers/ThemeContext'
 import { EditorProps } from '../editors/types'
 import { UnitConversions } from '../../lib/convert'
-import { UNIT_STEPS } from '../../lib/constants'
 
-type UnitRanges = Record<string, [number, number]>
+// Mapping of units to [min, max] tuple
+type UnitRanges = Record<string, [min: number, max: number]>
+// Mapping of units to steps
+type UnitSteps = Record<string, number>
 
 export interface DimensionInputProps extends EditorProps<CSSUnitValue> {
   label?: string
   property?: string
   range?: UnitRanges
+  steps?: UnitSteps
   keywords?: string[]
   units?: readonly string[]
   conversions?: UnitConversions
@@ -33,6 +36,7 @@ export const DimensionInput = ({
   range,
   keywords,
   units = [],
+  steps,
   conversions = {},
 }: DimensionInputProps) => {
   const id = React.useId()
@@ -119,7 +123,7 @@ export const DimensionInput = ({
               id={fullId}
               key={state.key}
               value={state.value}
-              step={UNIT_STEPS[state.unit] ?? 1}
+              step={steps?.[state.unit]}
               min={range?.[state.unit]?.[0]}
               max={range?.[state.unit]?.[1]}
               onChange={(newValue: number) => {
