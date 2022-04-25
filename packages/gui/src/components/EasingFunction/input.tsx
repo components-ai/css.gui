@@ -256,7 +256,13 @@ function Presets({ keywords, onChange }: PresetsProps) {
               onChange(keyword)
             }}
           >
-            <svg width="4rem" height="4rem" viewBox="0 0 1 1">
+            <svg
+              viewBox="0 0 1 1"
+              sx={{
+                width: '4rem',
+                height: '4rem',
+              }}
+            >
               <EasingFunctionGraph value={getKeywordValue(keyword)} />
             </svg>
           </button>
