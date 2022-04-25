@@ -9,9 +9,12 @@ It's theme-aware, performant, and can be composed into any React app.
 
 This project is a work in (rapid) progress.
 
-Please bear with us as the API stabilizes and more (missing) functionality is added.
-We welcome any and all contributions and would love it if you try to experiment with
-CSS GUI and report bugs or open up feature requests.
+Over the next few weeks the API will be stabilizing as more functionality is added.
+CSS GUI only supports a portion of the CSS spec currently, but the intention is to
+support it all in the future.
+
+We welcome any and all contributions. We'd love it if you try to experiment with
+CSS GUI. Please feel free to report bugs or open up feature requests.
 
 ## Why?
 
