@@ -7,6 +7,7 @@ import { stringifyTextShadow } from './stringify'
 
 import LayerHeader from '../LayerHeader'
 import Layers from '../Layers'
+import { getInputProps } from '../../lib/util'
 
 export default function TextShadowField({
   value,
@@ -34,32 +35,13 @@ export default function TextShadowField({
   )
 }
 
-export const TextShadowEditor = ({
-  value,
-  onChange,
-}: EditorProps<TextShadow>) => {
+export const TextShadowEditor = (props: EditorProps<TextShadow>) => {
   return (
     <div sx={{ margin: 3 }}>
-      <ColorInput
-        label="Color"
-        value={value.color}
-        onChange={(color) => onChange({ ...value, color })}
-      />
-      <LengthInput
-        label="Offset X"
-        value={value.offsetX}
-        onChange={(offsetX) => onChange({ ...value, offsetX })}
-      />
-      <LengthInput
-        label="Offset Y"
-        value={value.offsetY}
-        onChange={(offsetY) => onChange({ ...value, offsetY })}
-      />
-      <LengthInput
-        label="Blur"
-        value={value.blur}
-        onChange={(blur) => onChange({ ...value, blur })}
-      />
+      <ColorInput {...getInputProps(props, 'color')} />
+      <LengthInput {...getInputProps(props, 'offsetX')} label="Offset X" />
+      <LengthInput {...getInputProps(props, 'offsetY')} label="Offset Y" />
+      <LengthInput {...getInputProps(props, 'blur')} />
     </div>
   )
 }

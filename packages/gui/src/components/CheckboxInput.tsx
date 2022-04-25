@@ -5,9 +5,9 @@ import { Label } from './primitives'
 
 export function CheckboxInput({
   label,
-  value,
+  value = false,
   onChange,
-}: EditorProps<boolean> & { label: string }) {
+}: EditorProps<boolean | undefined> & { label: string }) {
   const id = `${useId()}-${kebabCase(label)}`
   return (
     <>
