@@ -2,6 +2,7 @@ import { Angle, Color, Length, NumberPercentage } from '../../types/css'
 
 // TODO URLs
 export type Filter = Blur | DropShadow | HueRotate | AmountFilter
+export type FilterType = Filter['type']
 
 export interface Blur {
   type: 'blur'
