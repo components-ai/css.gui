@@ -1,13 +1,15 @@
 import * as React from 'react'
+import { elements } from '../../data/elements'
 import { pseudoClasses } from '../../data/pseudo-classes'
 import { pseudoElements } from '../../data/pseudo-elements'
 
 type PseudoElementTypes = typeof pseudoElements[number]
 type PseudoClassTypes = typeof pseudoClasses[number]
+type ElementTypes = typeof elements[number]
 
 type FieldsetContextProps = {
   type: 'pseudo-element' | 'pseudo-class' | 'element'
-  name: PseudoElementTypes | PseudoClassTypes
+  name: PseudoElementTypes | PseudoClassTypes | ElementTypes
 }
 
 const FieldsetContext = React.createContext<FieldsetContextProps | null>(null)
