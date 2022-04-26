@@ -59,12 +59,7 @@ interface Skew {
 }
 
 interface Translate {
-  type:
-    | 'translate'
-    | 'translate3d'
-    | 'translateX'
-    | 'transtlateY'
-    | 'translateZ'
+  type: 'translate' | 'translate3d' | 'translateX' | 'translateY' | 'translateZ'
   tx: LengthPercentage
   ty: LengthPercentage
   tz: Length
