@@ -1,7 +1,13 @@
 import { clamp } from 'lodash-es'
 import { useRef, useCallback, useId } from 'react'
 import { useSvgDrag } from '../useSvgDrag'
-import { CubicBezier, EasingFunction, Keyword, Steps } from './types'
+import {
+  CubicBezier,
+  EasingFunction,
+  EasingType,
+  Keyword,
+  Steps,
+} from './types'
 import { CubicBezierGraph, StepsGraph, EasingFunctionGraph } from './graphs'
 import { Number } from '../primitives/Number'
 import { getKeywordValue } from './keywords'
@@ -9,6 +15,7 @@ import * as Tabs from '@radix-ui/react-tabs'
 import { EditorProps } from '../editors/types'
 import { SelectInput } from '../SelectInput'
 import { getInputProps } from '../../lib/util'
+import { Label } from '../primitives'
 
 type Props = EditorProps<EasingFunction>
 
@@ -33,7 +40,9 @@ export default function EasingFunctionField({
   return (
     <Tabs.Root
       value={value.type}
-      onValueChange={(type: any) => onChange({ ...value, type })}
+      onValueChange={(type: any) => {
+        onChange(convertValue(value, type))
+      }}
     >
       <Tabs.List
         sx={{
@@ -132,13 +141,7 @@ function CubicBezierEditor(props: EditorProps<CubicBezier>) {
           max={1}
           step={0.001}
         />
-        <NumberField
-          {...getInputProps(props, 'p2')}
-          label="p2"
-          min={-1}
-          max={2}
-          step={0.001}
-        />
+        <NumberField {...getInputProps(props, 'p2')} label="p2" step={0.001} />
         <NumberField
           {...getInputProps(props, 'p3')}
           label="p3"
@@ -146,13 +149,7 @@ function CubicBezierEditor(props: EditorProps<CubicBezier>) {
           max={1}
           step={0.001}
         />
-        <NumberField
-          {...getInputProps(props, 'p4')}
-          label="p4"
-          min={-1}
-          max={2}
-          step={0.001}
-        />
+        <NumberField {...getInputProps(props, 'p4')} label="p4" step={0.001} />
       </div>
       <Presets
         keywords={cubicBezierKeywords}
@@ -201,7 +198,7 @@ function StepsEditor(props: EditorProps<Steps>) {
       >
         <StepsGraph value={value} />
       </svg>
-      <NumberField {...getInputProps(props, 'stops')} min={0} max={20} />
+      <NumberField {...getInputProps(props, 'stops')} min={0} />
       <SelectInput
         {...getInputProps(props, 'jumpTerm')}
         options={['jump-start', 'jump-end', 'jump-both', 'jump-none']}
@@ -283,8 +280,29 @@ function NumberField({ label, value, ...props }: NumberProps) {
   const id = useId()
   return (
     <>
-      <label htmlFor={id}>{label}</label>
+      <Label htmlFor={id}>{label}</Label>
       <Number id={id} value={value} {...props} />
     </>
   )
+}
+
+function convertValue(
+  value: EasingFunction,
+  newType: EasingType
+): EasingFunction {
+  if (newType === value.type) {
+    return value
+  }
+  return getDefault(newType)
+}
+
+function getDefault(type: EasingType): EasingFunction {
+  switch (type) {
+    case 'cubic-bezier': {
+      return getKeywordValue('linear')
+    }
+    case 'steps': {
+      return getKeywordValue('step-start')
+    }
+  }
 }
