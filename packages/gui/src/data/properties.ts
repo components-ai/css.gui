@@ -643,6 +643,23 @@ export const properties: Record<string, PropertyData> = {
     type: 'keyword',
     keywords: ['row', 'column', 'dense', 'row dense', 'column dense'],
   },
+  hangingPunctuation: {
+    type: 'keyword',
+    keywords: [
+      'none', 
+      'first',
+      'last',
+      'force-end',
+      'allow-end',
+      'first force-end',
+      'first allow-end',
+      'first last',
+      'last force-end',
+      'last allow-end',
+      'first force-end last',
+      'first allow-end last',
+    ],
+  },
   height: {
     type: 'length',
     percentage: true,
