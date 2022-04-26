@@ -3,7 +3,7 @@ import { getPropertyLabel } from '../data/properties'
 import { isPseudoClass, isPseudoElement } from './pseudos'
 import { isElement } from './elements'
 
-type EditorPropsWithLabel<T> = EditorProps<T> & { label: string }
+export type EditorPropsWithLabel<T> = EditorProps<T> & { label: string }
 /**
  * Populate props to be used for an input control for a subproperty of a value.
  *

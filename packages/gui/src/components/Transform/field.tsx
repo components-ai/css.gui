@@ -3,20 +3,27 @@ import Layers, { LayerProps } from '../Layers'
 import LayerHeader from '../LayerHeader'
 
 import {
+  Matrix,
   Perspective,
   Rotate,
   Rotate3D,
+  Scale,
+  Skew,
   Transform,
   TransformType,
+  Translate,
 } from './types'
 import { EditorProps } from '../editors/types'
-import { getInputProps } from '../../lib/util'
+import {
+  EditorPropsWithLabel,
+  getInputProps as _getInputProps,
+} from '../../lib/util'
 import { SelectInput } from '../SelectInput'
-import { NumberPercentageInput } from '../NumberPercentageInput'
 import { AngleInput } from '../AngleInput'
-import { ColorInput } from '../ColorInput'
 import { stringifyTransform } from './stringify'
 import { Angle, Length } from '../../types/css'
+import { NumberInput } from '../NumberInput'
+import { range } from 'lodash-es'
 
 export default function TransformContent({
   value,
@@ -78,6 +85,52 @@ const filterTypes = [
 
 function TransformSwitch(props: LayerProps<Transform>) {
   switch (props.value.type) {
+    case 'matrix': {
+      const _props = props as EditorProps<Matrix>
+
+      return (
+        <div
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(3, 1fr)',
+          }}
+        >
+          {(['a', 'c', 'tx', 'b', 'd', 'ty'] as const).map((item) => {
+            return <NumberInput {...getInputProps(_props, item)} />
+          })}{' '}
+        </div>
+      )
+    }
+    case 'matrix3d': {
+      const { value, onChange } = props
+      const { values } = value
+      return (
+        <div
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(4, 1fr)',
+          }}
+        >
+          {range(0, 4).flatMap((i) => {
+            return range(0, 4).map((j) => {
+              const index = j * 4 + i
+              const label = `${'abcd'[j]}${i}`
+              return (
+                <NumberInput
+                  label={label}
+                  value={values[index]}
+                  onChange={(newValue) => {
+                    const copy = [...values]
+                    copy.splice(index, 1, newValue)
+                    onChange({ ...value, values: copy })
+                  }}
+                />
+              )
+            })
+          })}
+        </div>
+      )
+    }
     case 'perspective': {
       return (
         <LengthInput
@@ -97,11 +150,103 @@ function TransformSwitch(props: LayerProps<Transform>) {
       return (
         <>
           <AngleInput {...getInputProps(_props, 'a')} />
+          <NumberInput {...getInputProps(_props, 'x')} />
+          <NumberInput {...getInputProps(_props, 'y')} />
+          <NumberInput {...getInputProps(_props, 'z')} />
         </>
       )
     }
+    case 'scale': {
+      const _props = props as EditorProps<Scale>
+      return (
+        <>
+          <NumberInput {...getInputProps(_props, 'sx')} />
+          <NumberInput {...getInputProps(_props, 'sy')} />
+        </>
+      )
+    }
+    case 'scale3d': {
+      const _props = props as EditorProps<Scale>
+      return (
+        <>
+          <NumberInput {...getInputProps(_props, 'sx')} />
+          <NumberInput {...getInputProps(_props, 'sy')} />
+          <NumberInput {...getInputProps(_props, 'sz')} />
+        </>
+      )
+    }
+    case 'scaleX': {
+      const _props = props as EditorProps<Scale>
+      return <NumberInput {...getInputProps(_props, 'sx')} />
+    }
+    case 'scaleY': {
+      const _props = props as EditorProps<Scale>
+      return <NumberInput {...getInputProps(_props, 'sy')} />
+    }
+    case 'scaleZ': {
+      const _props = props as EditorProps<Scale>
+      return <NumberInput {...getInputProps(_props, 'sz')} />
+    }
+    case 'skew': {
+      const _props = props as EditorProps<Skew>
+      return (
+        <>
+          <AngleInput {...getInputProps(_props, 'ax')} />
+          <AngleInput {...getInputProps(_props, 'ay')} />
+        </>
+      )
+    }
+    case 'skewX': {
+      const _props = props as EditorProps<Skew>
+      return <AngleInput {...getInputProps(_props, 'ax')} />
+    }
+    case 'skewY': {
+      const _props = props as EditorProps<Skew>
+      return <AngleInput {...getInputProps(_props, 'ay')} />
+    }
+    case 'translate': {
+      const _props = props as EditorProps<Translate>
+      return (
+        <>
+          <LengthInput percentage {...getInputProps(_props, 'tx')} />
+          <LengthInput percentage {...getInputProps(_props, 'ty')} />
+        </>
+      )
+    }
+    case 'translate3d': {
+      const _props = props as EditorProps<Translate>
+      return (
+        <>
+          <LengthInput percentage {...getInputProps(_props, 'tx')} />
+          <LengthInput percentage {...getInputProps(_props, 'ty')} />
+          <LengthInput {...getInputProps(_props, 'tz')} />
+        </>
+      )
+    }
+    case 'translateX': {
+      const _props = props as EditorProps<Translate>
+      return <LengthInput percentage {...getInputProps(_props, 'tx')} />
+    }
+    case 'translateY': {
+      const _props = props as EditorProps<Translate>
+      return <LengthInput percentage {...getInputProps(_props, 'ty')} />
+    }
+    case 'translateZ': {
+      const _props = props as EditorProps<Translate>
+      return <LengthInput {...getInputProps(_props, 'tz')} />
+    }
   }
   return null
+}
+
+function getInputProps<T extends object, K extends keyof T>(
+  props: EditorProps<T>,
+  property: K
+): EditorPropsWithLabel<T[typeof property]> {
+  return {
+    ..._getInputProps(props, property),
+    label: '' + property, // don't capitalize label
+  }
 }
 
 export function Header({ value }: { value: Transform | Transform[] }) {
@@ -123,10 +268,8 @@ export function Header({ value }: { value: Transform | Transform[] }) {
             sx={{
               width: '1rem',
               height: '1rem',
-              filter: style,
-              borderRadius: '9999px',
-              backgroundImage:
-                'conic-gradient(#f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00)',
+              transform: style,
+              backgroundColor: '#f00',
             }}
           />
         </div>
