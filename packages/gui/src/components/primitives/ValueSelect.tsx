@@ -8,9 +8,9 @@ export const ValueSelect = ({ onChange, values }: ValueInputProps): any => {
     <select onChange={onChange} sx={{ width: '100%', minHeight: '1.6em' }}>
       {values.map((v) => {
         return typeof v === 'string' ? (
-          <option>{v}</option>
+          <option key={v}>{v}</option>
         ) : (
-          <option value={v.id}>
+          <option key={v} value={v.id}>
             {v.value}
             {v.unit}
           </option>
