@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { Editor, Inputs, RenderElement } from '@compai/css-gui'
-import { FirstParagraph } from './FirstParagraph'
+import { FirstParagraph } from '../components/FirstParagraph'
 import { Theme } from '@emotion/react'
 
 const initialStyles: any = {
@@ -53,6 +53,7 @@ const DEFAULT_THEME: Theme = {
     },
   ],
 }
+
 export default function Docs() {
   const [styles, setStyles] = useState<any>(initialStyles)
 
