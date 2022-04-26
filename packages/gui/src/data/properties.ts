@@ -431,6 +431,14 @@ export const properties: Record<string, PropertyData> = {
     type: 'keyword',
     keywords: ['left', 'right', 'none', 'inline-start', 'inline-end'],
   },
+  fontKerning: {
+    type: 'keyword',
+    keywords: ['auto', 'normal', 'none'],
+  },
+  fontOpticalSizing: {
+    type: 'keyword',
+    keywords: ['auto', 'none'],
+  },
   fontSize: {
     type: 'length',
     percentage: true,
@@ -452,14 +460,6 @@ export const properties: Record<string, PropertyData> = {
       'smaller',
       'larger',
     ],
-  },
-  fontKerning: {
-    type: 'keyword',
-    keywords: ['auto', 'normal', 'none'],
-  },
-  fontOpticalSizing: {
-    type: 'keyword',
-    keywords: ['auto', 'none'],
   },
   fontStretch: {
     type: 'percentage',
