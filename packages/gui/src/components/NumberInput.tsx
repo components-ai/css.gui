@@ -1,6 +1,6 @@
 import { kebabCase } from 'lodash-es'
 import { useId } from 'react'
-import { Label } from 'theme-ui'
+import { Label } from './primitives'
 import { EditorProps } from './editors/types'
 import { Number } from './primitives'
 
@@ -14,9 +14,9 @@ interface Props extends EditorProps<number> {
 export function NumberInput({ label, value, ...props }: Props) {
   const id = `${useId()}-${kebabCase(label)}`
   return (
-    <>
+    <div>
       <Label htmlFor={id}>{label}</Label>
       <Number id={id} value={value} {...props} />
-    </>
+    </div>
   )
 }

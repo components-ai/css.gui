@@ -1,4 +1,4 @@
-import { isElement } from 'lodash-es'
+import { isElement, isNil } from 'lodash-es'
 import { Color, Length } from '../types/css'
 import { addPseudoSyntax } from './pseudos'
 
@@ -41,7 +41,7 @@ export function stringifyFunction(
   separator: string = ', '
 ) {
   return `${name}(${properties
-    .filter(Boolean)
+    .filter((x) => !isNil(x))
     .map(stringifyPrimitive)
     .join(separator)})`
 }

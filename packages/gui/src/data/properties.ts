@@ -300,9 +300,7 @@ export const properties: Record<string, PropertyData> = {
       [FontRelativeLengthUnits.Rem]: [0, 8],
       [PercentageLengthUnits.Pct]: [0.1, 100],
     },
-    keywords: [
-      'normal',
-    ],
+    keywords: ['normal'],
   },
   columnRuleColor: {
     type: 'color',
@@ -332,11 +330,7 @@ export const properties: Record<string, PropertyData> = {
       [FontRelativeLengthUnits.Rem]: [0, 2],
       [PercentageLengthUnits.Pct]: [0.1, 100],
     },
-    keywords: [
-      'thin',
-      'medium',
-      'thick',
-    ],
+    keywords: ['thin', 'medium', 'thick'],
   },
   columnSpan: {
     type: 'keyword',
@@ -351,9 +345,7 @@ export const properties: Record<string, PropertyData> = {
       [FontRelativeLengthUnits.Rem]: [0, 16],
       [PercentageLengthUnits.Pct]: [0.1, 100],
     },
-    keywords: [
-      'auto',
-    ],
+    keywords: ['auto'],
   },
   contain: {
     type: 'keyword',
@@ -460,12 +452,12 @@ export const properties: Record<string, PropertyData> = {
       [PercentageLengthUnits.Pct]: [0.1, 100],
     },
     keywords: [
-    'auto',
-    'fill',
-    'max-content',
-    'min-content',
-    'fit-content',
-    'content',
+      'auto',
+      'fill',
+      'max-content',
+      'min-content',
+      'fit-content',
+      'content',
     ],
   },
   flexDirection: {
@@ -646,7 +638,7 @@ export const properties: Record<string, PropertyData> = {
   hangingPunctuation: {
     type: 'keyword',
     keywords: [
-      'none', 
+      'none',
       'first',
       'last',
       'force-end',
@@ -1088,7 +1080,6 @@ export const properties: Record<string, PropertyData> = {
   },
   perspective: {
     type: 'length',
-    percentage: true,
     keywords: ['none'],
   },
   placeItems: {

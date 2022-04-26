@@ -282,26 +282,21 @@ function convertTransformValue(
   value: Transform,
   newType: TransformType
 ): Transform {
-  //   if (value.type === newType) {
-  //     return value
-  //   }
-
-  //   // // When converting between two values that take a number-percentage amount
-  //   // // keep the amount
-  //   // if (isAmountFilter(value.type) && isAmountFilter(newType)) {
-  //   //   return { ...value, type: newType } as any
-  //   // }
-
-  //   // Otherwise, reset to the default of that filter type
+  // TODO handle transforms between different values
   return getDefault(newType)
 }
 
 function getDefault(type: TransformType): Transform {
   switch (type) {
     case 'matrix':
-      return { type, a: 0, b: 0, c: 0, d: 0, tx: 0, ty: 0 }
+      return { type, a: 1, b: 0, c: 0, d: 1, tx: 0, ty: 0 }
     case 'matrix3d':
-      return { type, values: [...Array(16)].map((x) => 0) }
+      const values = [...Array(16)].map((x) => 0)
+      values[0] = 1
+      values[5] = 1
+      values[10] = 1
+      values[15] = 1
+      return { type, values }
     case 'perspective':
       return { type, d: ZERO }
     case 'rotate':
@@ -328,7 +323,6 @@ function getDefault(type: TransformType): Transform {
     case 'translateZ':
       return { type, tx: ZERO, ty: ZERO, tz: ZERO }
   }
-  // return { type: 'perspective', value: undefined }
 }
 
 const ZERO: Length = { value: 0, unit: 'px' }

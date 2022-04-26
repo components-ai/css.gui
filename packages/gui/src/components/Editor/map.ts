@@ -7,6 +7,7 @@ import { keywordInputs } from '../editors/KeywordInputs'
 import { timeInputs } from '../editors/TimePropertyInputs'
 import FilterPicker from '../Filter/picker'
 import TextShadowPicker from '../TextShadow/picker'
+import TransformPicker from '../Transform/picker'
 
 export const controlMap: Record<string, ComponentType<any>> = {
   ...keywordInputs,
@@ -19,4 +20,5 @@ export const controlMap: Record<string, ComponentType<any>> = {
   boxShadow: BoxShadowPicker,
   textShadow: TextShadowPicker,
   filter: FilterPicker,
+  transform: TransformPicker,
 }

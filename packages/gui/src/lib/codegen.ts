@@ -7,6 +7,7 @@ import { stringifySelector, stringifyUnit } from './stringify'
 import { has } from 'lodash-es'
 import { stringifyFilter } from '../components/Filter/stringify'
 import { isNestedSelector } from './util'
+import { stringifyTransform } from '../components/Transform/stringify'
 
 export const stringifyProperty = (
   property?: string, // In the future the property might determine how we stringify
@@ -20,6 +21,9 @@ export const stringifyProperty = (
   }
   if (property === 'textShadow') {
     return stringifyTextShadow(value as any)
+  }
+  if (property === 'transform') {
+    return stringifyTransform(value as any)
   }
   if (
     ['transitionTimingFunction', 'animationTimingFunction'].includes(
