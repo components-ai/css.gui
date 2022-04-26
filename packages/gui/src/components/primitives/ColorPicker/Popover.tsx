@@ -28,7 +28,6 @@ export default function ColorPopover({
         sx={{
           display: 'flex',
           gap: 2,
-          padding: 0,
           alignItems: 'center',
           color: 'text',
           backgroundColor: 'transparent',
@@ -77,11 +76,10 @@ function Swatch({ value }: { value: string }) {
       {/* The checkerboard causes weird aliasing to occur on Firefox,
        * so we only show it when there is a transparency */}
       {isTransparent && (
-        <Checkerboard sx={{ position: 'absolute', inset: 0 }} />
+        <Checkerboard sx={{ inset: 0 }} />
       )}
       <div
         sx={{
-          position: 'absolute',
           inset: 0,
           ...withFallback(value, (color) => ({ backgroundColor: color })),
         }}
