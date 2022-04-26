@@ -8,6 +8,8 @@
   ],
   "scripts": {
     "build": "turbo run build",
+    "build:docs": "turbo run build --filter./apps/docs",
+    "build:packages": "turbo run build --filter=./packages/*",
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
@@ -17,7 +19,7 @@
     "pkg:test": "manypkg check",
     "pkg:fix": "manypkg fix",
     "version": "yarn changeset version",
-    "release": "yarn build && yarn changeset publish"
+    "release": "yarn build:packages && yarn changeset publish"
   },
   "engines": {
     "npm": ">=7.0.0",
