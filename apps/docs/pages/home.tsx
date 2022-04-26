@@ -18,6 +18,7 @@ const initialStyles: any = {
     value: 'auto',
     unit: 'keyword',
   },
+  fontFamily: 'ABeeZee',
 }
 const DEFAULT_THEME: Theme = {
   fontSizes: [
@@ -59,7 +60,7 @@ export default function Docs() {
 
   return (
     <>
-      <h1>Visual styling controls for the web</h1>
+      <h1>styling controls for the web</h1>
       <FirstParagraph>
         <p>
           A powerful, extensible, and themeable CSS editor for creative coding
@@ -85,7 +86,7 @@ export default function Docs() {
               <Inputs.LineHeight />
               <Inputs.TextAlign />
               <Inputs.FontStretch />
-              <Inputs.Margin />
+              <Inputs.FontFamily />
               <h3>Colors</h3>
               <div sx={{ display: 'flex' }}>
                 <div sx={{ mr: 2 }}>
@@ -98,6 +99,7 @@ export default function Docs() {
               <h3>Size</h3>
               <Inputs.Width />
               <Inputs.Height />
+            
             </>
           </Editor>
         </div>
