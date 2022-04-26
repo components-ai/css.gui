@@ -1,9 +1,11 @@
-# CSS GUI
+# [CSS GUI](https://components.ai/open-source/css-gui)
 
 **_Visual development environment for CSS._**
 
 CSS GUI is a visual toolkit for editing element styles on the web.
 It's theme-aware, performant, and can be composed into any React app.
+
+[See the docs &rarr;](https://components.ai/open-source/css-gui)
 
 ## ⚠️ CSS GUI is currently under active development
 
@@ -103,7 +105,7 @@ export const MyEditor = () => {
 }
 ```
 
-[Read the full getting started guide &rarr;](https://github.com/components-ai/css.gui/blob/main/apps/docs/pages/getting-started.mdx)
+[Read the full getting started guide &rarr;](https://components.ai/open-source/css-gui/getting-started)
 
 ## Development
 
