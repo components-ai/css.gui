@@ -9,13 +9,13 @@ import {
   Steps,
 } from './types'
 import { CubicBezierGraph, StepsGraph, EasingFunctionGraph } from './graphs'
-import { Number } from '../primitives/Number'
 import { getKeywordValue } from './keywords'
 import * as Tabs from '@radix-ui/react-tabs'
 import { EditorProps } from '../editors/types'
 import { SelectInput } from '../SelectInput'
 import { getInputProps } from '../../lib/util'
 import { Label } from '../primitives'
+import { NumberInput as NumberField } from '../NumberInput'
 
 type Props = EditorProps<EasingFunction>
 
@@ -266,23 +266,6 @@ function Presets({ keywords, onChange }: PresetsProps) {
         ))}
       </div>
     </div>
-  )
-}
-
-interface NumberProps extends EditorProps<number> {
-  label: string
-  min?: number
-  max?: number
-  step?: number
-}
-
-function NumberField({ label, value, ...props }: NumberProps) {
-  const id = useId()
-  return (
-    <>
-      <Label htmlFor={id}>{label}</Label>
-      <Number id={id} value={value} {...props} />
-    </>
   )
 }
 
