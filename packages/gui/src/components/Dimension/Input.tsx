@@ -42,8 +42,8 @@ export const DimensionInput = ({
   const id = React.useId()
   const fullId = `${id}-${property || 'length'}`
   const [state, dispatch] = React.useReducer(reducer, {
-    value: value?.value || AbsoluteLengthUnits.Px,
-    unit: value?.unit || 0,
+    value: value?.value || 0,
+    unit: value?.unit || AbsoluteLengthUnits.Px,
     themeId: value?.themeId,
     key: 0,
   } as State)
