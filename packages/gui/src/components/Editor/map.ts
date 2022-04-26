@@ -15,7 +15,7 @@ export const controlMap: Record<string, ComponentType<any>> = {
   ...percentageInputs,
   ...numberInputs,
   ...timeInputs,
-  ...easingFunctionInputs,  
+  ...easingFunctionInputs,
   boxShadow: BoxShadowPicker,
   textShadow: TextShadowPicker,
   filter: FilterPicker,

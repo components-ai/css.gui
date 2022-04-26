@@ -84,7 +84,7 @@ export default function Docs() {
               <Inputs.LineHeight />
               <Inputs.TextAlign />
               <Inputs.FontStretch />
-              {/* <Inputs.Margin /> */}
+              <Inputs.Margin />
               <h3>Colors</h3>
               <div sx={{ display: 'flex' }}>
                 <div sx={{ mr: 2 }}>

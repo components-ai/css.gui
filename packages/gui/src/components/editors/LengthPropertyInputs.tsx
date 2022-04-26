@@ -1,4 +1,4 @@
-import { mapValues, pickBy, property } from 'lodash-es'
+import { mapValues, pickBy } from 'lodash-es'
 import { properties, getPropertyLabel } from '../../data/properties'
 import { isThemeable } from '../../lib/theme'
 import { Length, ResponsiveLength, CSSUnitValue } from '../../types/css'
