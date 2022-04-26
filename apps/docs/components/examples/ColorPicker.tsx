@@ -7,7 +7,7 @@ export const ColorPickerExample = () => {
 
   return (
     <>
-      <ColorPopover color={color} onChange={setColor}/>
+      <ColorPopover value={color} onChange={setColor}/>
       <p style={{ color }}>I am {color}!</p>
     </>
   )

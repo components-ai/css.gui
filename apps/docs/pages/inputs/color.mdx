@@ -27,7 +27,7 @@ const MyEditor = () => {
 
   return (
     <>
-      <ColorPopover color={color} onChange={setColor} />
+      <ColorPopover value={color} onChange={setColor} />
       <p style={{ color }}>I am {color}!</p>
     </>
   )
@@ -45,7 +45,7 @@ const MyEditor = () => {
 
   return (
     <>
-      <ColorPicker color={color} onChange={setColor} />
+      <ColorPicker value={color} onChange={setColor} />
       <p style={{ color }}>I am {color}!</p>
     </>
   )
