@@ -697,6 +697,34 @@ export const properties: Record<string, PropertyData> = {
       'alpha',
     ],
   },
+  maskBorderWidth: {
+    // TODO: add multiple sides (top, bottom, left, right)
+    type: 'length',
+    percentage: true,
+    number: true,
+    keywords: ['auto'],
+  },
+  maskBorderRepeat: {
+    type: 'keyword',
+    keywords: [
+      'stretch',
+      'repeat',
+      'round',
+      'space',
+      'round stretch',
+      'round repeat',
+      'round space',
+      'stretch repeat',
+      'stretch round',
+      'stretch space',
+      'repeat stretch',
+      'repeat round',
+      'repeat space',
+      'space stretch',
+      'space round',
+      'space repeat',
+    ],
+  },
   maskClip: {
     type: 'keyword',
     keywords: [
@@ -720,10 +748,10 @@ export const properties: Record<string, PropertyData> = {
       'alpha',
       'luminance',
       'match-source',
-      'alpha luminance',
-      'alpha match-source',
-      'alpha match-source luminance',
-      'match-source luminance',
+      'alpha, luminance',
+      'alpha, match-source',
+      'alpha, match-source, luminance',
+      'match-source, luminance',
     ],
   },
   maskOrigin: {
@@ -740,15 +768,40 @@ export const properties: Record<string, PropertyData> = {
       'view-box, fill-box, border-box',
     ],
   },
+  maskRepeat: {
+    type: 'keyword',
+    keywords: [
+      'repeat-x',
+      'repeat-y',
+      'repeat',
+      'space',
+      'round',
+      'no-repeat',
+      'repeat space',
+      'repeat repeat',
+      'round space',
+      'no-repeat round',
+    ],
+  },
   maskType: {
     type: 'keyword',
     keywords: ['luminance', 'alpha'],
   },
   // TODO: add fit-content function
+  maxBlockSize: {
+    type: 'length',
+    percentage: true,
+    keywords: ['none', 'max-content', 'min-content'],
+  },
   maxHeight: {
     type: 'length',
     percentage: true,
     keywords: ['none', 'max-content', 'min-content', 'auto'],
+  },
+  maxInlineSize: {
+    type: 'length',
+    percentage: true,
+    keywords: ['none', 'max-content', 'min-content'],
   },
   // TODO: add fit-content function
   maxWidth: {
@@ -760,6 +813,16 @@ export const properties: Record<string, PropertyData> = {
     type: 'length',
     percentage: true,
     keywords: ['max-content', 'min-content', 'auto'],
+  },
+  minBlockSize: {
+    type: 'length',
+    percentage: true,
+    keywords: ['max-content', 'min-content'],
+  },
+  minInlineSize: {
+    type: 'length',
+    percentage: true,
+    keywords: ['max-content', 'min-content'],
   },
   // TODO: add fit-content function
   minWidth: {
@@ -1110,7 +1173,6 @@ export const properties: Record<string, PropertyData> = {
   textIndent: {
     type: 'length',
     percentage: true,
-    keywords: ['auto'],
   },
   textJustify: {
     type: 'keyword',
