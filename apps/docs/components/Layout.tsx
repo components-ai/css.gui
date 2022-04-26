@@ -15,6 +15,11 @@ export const Layout = (props: Props) => {
           px: [2, 3, 4],
           py: 2,
           fontSize: [2, 3],
+          position: 'sticky',
+          width: '100%',
+          backgroundColor: 'background',
+          zIndex: 999,
+          top: 0,
         }}
       >
         <Link href="/home" passHref={true}>

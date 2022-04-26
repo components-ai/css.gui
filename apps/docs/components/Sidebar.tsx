@@ -10,6 +10,11 @@ export const Sidebar = () => {
         borderRight: 'thin solid',
         borderColor: 'border',
         pt: [2, 3],
+        position: ['relative', 'sticky'],
+        overflowY: 'auto',
+        top: 0,
+        left: 0,
+        bottom: 0,
       }}
     >
       <NavSectionTitle>Overview</NavSectionTitle>
@@ -22,6 +27,7 @@ export const Sidebar = () => {
       <NavItem href="/inputs/color">Color</NavItem>
       <NavItem href="/inputs/number">Number</NavItem>
       <NavItem href="/inputs/dimension">Dimension</NavItem>
+      <NavItem href="/inputs/responsive">Responsive</NavItem>
       <NavSectionTitle>Examples</NavSectionTitle>
       <NavItem href="/examples/transitions">Transitions</NavItem>
       <NavItem href="/examples/shadows">Shadows</NavItem>

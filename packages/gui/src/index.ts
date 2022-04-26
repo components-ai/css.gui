@@ -1,8 +1,8 @@
-export * from './types/css'
 export * from './components/Editor'
 export { RenderElement } from './components/RenderElement'
 export * from './components/editors'
 
+export { LengthInput } from './components/LengthInput'
 export { Number as NumberInput } from './components/primitives'
 export { DimensionInput } from './components/Dimension'
 export { ResponsiveInput } from './components/Responsive'

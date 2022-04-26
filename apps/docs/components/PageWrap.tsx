@@ -7,6 +7,7 @@ export const PageWrap = (props: Props) => {
       sx={{
         py: [3, 4, 5],
         width: '100%',
+        position: 'relative',
         '> *': {
           px: [3, 4, 5],
           maxWidth: 800,
