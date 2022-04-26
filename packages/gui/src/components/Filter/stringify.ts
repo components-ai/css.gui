@@ -1,4 +1,4 @@
-import { stringifyUnit } from '../../lib/stringify'
+import { stringifyFunction, stringifyUnit } from '../../lib/stringify'
 import { Filter } from './types'
 
 export function stringifyFilter(filter: Filter | Filter[]) {
@@ -12,18 +12,14 @@ function stringifyEntry(filter: Filter) {
   const { type } = filter
   switch (type) {
     case 'blur':
-      return `${type}(${stringifyUnit(filter.radius)})`
+      return stringifyFunction(type, [filter.radius])
     case 'drop-shadow': {
       const { offsetX, offsetY, blurRadius, color } = filter
-      const blurRadiusString = blurRadius ? ` ${stringifyUnit(blurRadius)}` : ''
-      const colorString = color ? ' ' + color : ''
-      return `${type}(${stringifyUnit(offsetX)} ${stringifyUnit(
-        offsetY
-      )}${blurRadiusString}${colorString})`
+      return stringifyFunction(type, [offsetX, offsetY, blurRadius, color], ' ')
     }
     case 'hue-rotate':
-      return `${type}(${stringifyUnit(filter.angle)})`
+      return stringifyFunction(type, [filter.angle])
     default:
-      return `${type}(${stringifyUnit(filter.amount)})`
+      return stringifyFunction(type, [filter.amount])
   }
 }
