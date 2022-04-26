@@ -24,7 +24,6 @@ import { stringifyTransform } from './stringify'
 import { Angle, Length } from '../../types/css'
 import { NumberInput } from '../NumberInput'
 import { range } from 'lodash-es'
-import { NumberInputProps } from '../primitives/Number/types'
 
 export default function TransformContent({
   value,
