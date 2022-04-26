@@ -7,9 +7,11 @@ type PseudoElementTypes = typeof pseudoElements[number]
 type PseudoClassTypes = typeof pseudoClasses[number]
 type ElementTypes = typeof elements[number]
 
+type FieldsetNames = PseudoElementTypes | PseudoClassTypes | ElementTypes
+
 type FieldsetContextProps = {
   type: 'pseudo-element' | 'pseudo-class' | 'element'
-  name: PseudoElementTypes | PseudoClassTypes | ElementTypes
+  name: FieldsetNames | FieldsetNames[]
 }
 
 const FieldsetContext = React.createContext<FieldsetContextProps | null>(null)
@@ -19,9 +21,14 @@ export const useFieldset = (): FieldsetContextProps | null =>
 
 type FieldsetProps = FieldsetContextProps & { children: any }
 export const Fieldset = ({ type, name, children }: FieldsetProps) => {
-  // TODO: Merge fieldset
+  const outerFieldset = useFieldset()
+  const outerNames = outerFieldset ? outerFieldset.name : []
+  const fullName = outerNames.length
+    ? [...outerNames, name]
+    : (name as FieldsetNames)
   return (
-    <FieldsetContext.Provider value={{ type, name }}>
+    // @ts-ignore
+    <FieldsetContext.Provider value={{ type, name: fullName }}>
       {children}
     </FieldsetContext.Provider>
   )
