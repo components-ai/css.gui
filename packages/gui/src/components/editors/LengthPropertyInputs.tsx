@@ -14,17 +14,6 @@ const lengthProperties = pickBy(
 
 export type LengthEditorProps = EditorProps<Length | ResponsiveLength>
 
-const positionalProperties = pickBy(
-  properties,
-  (property) => property.type === 'positional'
-)
-export const positionalInputs = mapValues(positionalProperties, (property, name) => {
-  return ({ value, onChange }: LengthEditorProps) => {
-    return (
-      <div>This is my positional div</div>
-    )
-  }
-})
 export const lengthInputs = mapValues(lengthProperties, (property, name) => {
   return ({ value, onChange }: LengthEditorProps) => {
     return (
@@ -36,7 +25,7 @@ export const lengthInputs = mapValues(lengthProperties, (property, name) => {
         Component={LengthInput}
         componentProps={{
           property: name,
-          thmeme: isThemeable(name),
+          theme: isThemeable(name),
           keyword: true,
           ...property,
         }}

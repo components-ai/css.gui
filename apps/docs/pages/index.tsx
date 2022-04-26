@@ -18,7 +18,9 @@ const initialStyles: any = {
     value: 'auto',
     unit: 'keyword',
   },
-  margin: { value: 21, unit: 'px'}
+  margin: { value: 16, unit: 'px'},
+  marginX: { value: 21, unit: 'px'},
+  marginY: { value: 28, unit: 'px'}
 }
 const DEFAULT_THEME: Theme = {
   fontSizes: [
@@ -85,7 +87,8 @@ export default function Docs() {
               <Inputs.LineHeight />
               <Inputs.TextAlign />
               <Inputs.FontStretch />
-              <Inputs.Margin />
+              <Inputs.MarginX />
+              <Inputs.MarginY />
               <h3>Colors</h3>
               <div sx={{ display: 'flex' }}>
                 <div sx={{ mr: 2 }}>
