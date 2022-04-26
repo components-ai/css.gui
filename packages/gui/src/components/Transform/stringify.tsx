@@ -1,4 +1,3 @@
-import { X } from 'react-feather'
 import { stringifyFunction } from '../../lib/stringify'
 import { Transform } from './types'
 
