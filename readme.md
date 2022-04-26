@@ -5,11 +5,16 @@
 CSS GUI is a visual toolkit for editing element styles on the web.
 It's theme-aware, performant, and can be composed into any React app.
 
-## ⚠️ CSS GUI is currently under active development (contributions are welcome)
+## ⚠️ CSS GUI is currently under active development
 
-Please bear with us as the API stabilizes and more (missing) functionality is added.
-We welcome any and all contributions and would love it if you try to experiment with
-CSS GUI and report bugs or open up feature requests.
+This project is a work in (rapid) progress.
+
+Over the next few weeks the API will be stabilizing as more functionality is added.
+CSS GUI only supports a portion of the CSS spec currently, but the intention is to
+support it all in the future.
+
+We welcome any and all contributions. We'd love it if you try to experiment with
+CSS GUI. Please feel free to report bugs or open up feature requests.
 
 ## Why?
 

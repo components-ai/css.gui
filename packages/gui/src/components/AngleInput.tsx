@@ -14,6 +14,7 @@ export function AngleInput({
       onChange={onChange}
       label={label}
       units={ANGLE_UNITS}
+      steps={angleSteps}
       conversions={angleConversions}
     />
   )
@@ -24,4 +25,11 @@ const angleConversions = {
   turn: 1,
   rad: 2 * Math.PI,
   grad: 400,
+}
+
+const angleSteps = {
+  deg: 1,
+  turn: 0.01,
+  rad: 0.01,
+  grad: 1,
 }

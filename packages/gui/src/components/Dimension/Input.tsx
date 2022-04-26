@@ -14,12 +14,16 @@ import { useThemeProperty } from '../providers/ThemeContext'
 import { EditorProps } from '../editors/types'
 import { UnitConversions } from '../../lib/convert'
 
-type UnitRanges = Record<string, [number, number]>
+// Mapping of units to [min, max] tuple
+type UnitRanges = Record<string, [min: number, max: number]>
+// Mapping of units to steps
+type UnitSteps = Record<string, number>
 
 export interface DimensionInputProps extends EditorProps<CSSUnitValue> {
   label?: string
   property?: string
   range?: UnitRanges
+  steps?: UnitSteps
   keywords?: string[]
   units?: readonly string[]
   conversions?: UnitConversions
@@ -32,16 +36,16 @@ export const DimensionInput = ({
   range,
   keywords,
   units = [],
+  steps,
   conversions = {},
 }: DimensionInputProps) => {
   const id = React.useId()
   const fullId = `${id}-${property || 'length'}`
   const [state, dispatch] = React.useReducer(reducer, {
-    value: value?.value || AbsoluteLengthUnits.Px,
-    unit: value?.unit || 0,
+    value: value?.value || 0,
+    unit: value?.unit || AbsoluteLengthUnits.Px,
     themeId: value?.themeId,
     key: 0,
-    step: 1,
   } as State)
   React.useEffect(() => {
     if (
@@ -119,7 +123,7 @@ export const DimensionInput = ({
               id={fullId}
               key={state.key}
               value={state.value}
-              step={state.step}
+              step={steps?.[state.unit]}
               min={range?.[state.unit]?.[0]}
               max={range?.[state.unit]?.[1]}
               onChange={(newValue: number) => {
@@ -157,6 +161,7 @@ export const DimensionInput = ({
           dispatch({
             type: 'CHANGED_UNIT_VALUE',
             unit: newUnit,
+            steps: steps,
             conversions,
           })
         }}

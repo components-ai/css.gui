@@ -1,6 +1,6 @@
 {
   "name": "@compai/css-gui",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "type": "module",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -11,7 +11,9 @@
     "clean": "rm -rf .turbo node_modules dist"
   },
   "files": [
-    "dist/**"
+    "dist/**",
+    "readme.md",
+    "CHANGELOG.md"
   ],
   "devDependencies": {
     "@types/lodash-es": "^4.17.6",

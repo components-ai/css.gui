@@ -22,14 +22,6 @@ export const Sidebar = () => {
       <NavItem href="/inputs/color">Color</NavItem>
       <NavItem href="/inputs/number">Number</NavItem>
       <NavItem href="/inputs/dimension">Dimension</NavItem>
-      <NavSectionTitle>Guides</NavSectionTitle>
-      <NavItem href="/guides/style-schema">Style Schema</NavItem>
-      <NavItem href="/guides/theming">Theming</NavItem>
-      <NavItem href="/guides/typescript">TypeScript</NavItem>
-      <NavSectionTitle>Utilities</NavSectionTitle>
-      <NavItem href="/utilities/random-color">Random Color</NavItem>
-      <NavItem href="/utilities/transformers">Transformers</NavItem>
-      <NavItem href="/utilities/codegen">Codegen</NavItem>
       <NavSectionTitle>Examples</NavSectionTitle>
       <NavItem href="/examples/transitions">Transitions</NavItem>
       <NavItem href="/examples/shadows">Shadows</NavItem>

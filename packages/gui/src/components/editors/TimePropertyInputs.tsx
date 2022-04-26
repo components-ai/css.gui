@@ -20,6 +20,7 @@ export const timeInputs = mapValues(timeProperties, (property, name) => {
         onChange={onChange}
         property={name}
         units={[...TIME_UNITS, 'keyword']}
+        steps={timeSteps}
         conversions={timeConversions}
         {...property}
       />
@@ -30,4 +31,9 @@ export const timeInputs = mapValues(timeProperties, (property, name) => {
 const timeConversions = {
   ms: 1000,
   s: 1,
+}
+
+const timeSteps = {
+  ms: 25,
+  s: 0.025,
 }

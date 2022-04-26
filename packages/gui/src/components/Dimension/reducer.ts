@@ -1,4 +1,3 @@
-import { UNIT_STEPS } from '../../lib/constants'
 import { convertUnits } from '../../lib/convert'
 import { State, Action } from './types'
 
@@ -14,10 +13,14 @@ export const reducer = (state: State, action: Action): State => {
     case 'CHANGED_UNIT_VALUE': {
       return {
         ...state,
-        value: convertUnits(action.unit, state, action.conversions),
+        value: convertUnits(
+          action.unit,
+          state,
+          action.conversions,
+          action.steps
+        ),
         unit: action.unit,
         key: state.key + 1, // Force number scrubber re-render
-        step: UNIT_STEPS[action.unit],
         themeId: undefined,
       }
     }

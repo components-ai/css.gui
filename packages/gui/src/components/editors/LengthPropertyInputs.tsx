@@ -49,6 +49,7 @@ export const percentageInputs = mapValues(
           onChange={onChange}
           property={name}
           units={['%', 'keyword']}
+          steps={{ '%': 0.1 }}
           {...property}
         />
       )
@@ -70,6 +71,7 @@ export const numberInputs = mapValues(numberProperties, (property, name) => {
         onChange={onChange}
         property={name}
         units={['number', 'keyword']}
+        steps={{ number: 1 }}
         {...property}
       />
     )

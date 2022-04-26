@@ -17,7 +17,7 @@ export const Layout = (props: Props) => {
           fontSize: [2, 3],
         }}
       >
-        <Link href="/" passHref={true}>
+        <Link href="/introduction" passHref={true}>
           <a sx={{ fontWeight: 500, color: 'text', textDecoration: 'none' }}>
             CSS GUI
           </a>

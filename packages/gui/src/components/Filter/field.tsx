@@ -2,7 +2,14 @@ import { LengthInput } from '../LengthInput'
 import Layers, { LayerProps } from '../Layers'
 import LayerHeader from '../LayerHeader'
 
-import { Filter } from './types'
+import {
+  Filter,
+  FilterType,
+  Blur,
+  DropShadow,
+  HueRotate,
+  AmountFilter,
+} from './types'
 import { stringifyFilter } from './stringify'
 import { EditorProps } from '../editors/types'
 import { getInputProps } from '../../lib/util'
@@ -16,10 +23,7 @@ export default function FilterContent({
   onChange,
 }: EditorProps<Filter[]>) {
   const newItem = () => {
-    return {
-      type: 'blur',
-      radius: { value: 0, unit: 'px' },
-    } as const
+    return getDefault('blur')
   }
   return (
     <Layers<Filter>
@@ -36,7 +40,13 @@ export default function FilterContent({
 export const FilterEditor = (props: LayerProps<Filter>) => {
   return (
     <div>
-      <SelectInput {...getInputProps(props, 'type')} options={filterTypes} />
+      <SelectInput
+        {...getInputProps(props, 'type')}
+        options={filterTypes}
+        onChange={(newType) => {
+          props.onChange(convertFilterValue(props.value, newType))
+        }}
+      />
       <FilterSwitch {...props} />
     </div>
   )
@@ -57,24 +67,30 @@ const filterTypes = [
 
 function FilterSwitch(props: LayerProps<Filter>) {
   switch (props.value.type) {
-    case 'blur':
-      return <LengthInput {...getInputProps(props, 'radius' as any)} />
-    case 'drop-shadow':
+    case 'blur': {
+      const _props = props as EditorProps<Blur>
+      return <LengthInput {...getInputProps(_props, 'radius')} />
+    }
+    case 'drop-shadow': {
+      const _props = props as EditorProps<DropShadow>
       return (
         <div>
-          <LengthInput {...getInputProps(props, 'offsetX' as any)} />
-          <LengthInput {...getInputProps(props, 'offsetY' as any)} />
-          <LengthInput {...getInputProps(props, 'blurRadius' as any)} />
-          <ColorInput {...getInputProps(props, 'color' as any)} />
+          <LengthInput {...getInputProps(_props, 'offsetX')} />
+          <LengthInput {...getInputProps(_props, 'offsetY')} />
+          <LengthInput {...getInputProps(_props, 'blurRadius')} />
+          <ColorInput {...getInputProps(_props, 'color')} />
         </div>
       )
-    case 'hue-rotate':
-      return <AngleInput {...getInputProps(props, 'angle' as any)} />
-    default:
+    }
+    case 'hue-rotate': {
+      const _props = props as EditorProps<HueRotate>
+      return <AngleInput {...getInputProps(_props, 'angle')} />
+    }
+    default: {
+      const _props = props as EditorProps<AmountFilter>
       // TODO some of the filters have different boundaries
-      return (
-        <NumberPercentageInput {...getInputProps(props, 'amount' as any)} />
-      )
+      return <NumberPercentageInput {...getInputProps(_props, 'amount')} />
+    }
   }
 }
 
@@ -107,4 +123,42 @@ export function Header({ value }: { value: Filter | Filter[] }) {
       }
     />
   )
+}
+
+function convertFilterValue(value: Filter, newType: FilterType): Filter {
+  if (value.type === newType) {
+    return value
+  }
+
+  // When converting between two values that take a number-percentage amount
+  // keep the amount
+  if (isAmountFilter(value.type) && isAmountFilter(newType)) {
+    return { ...value, type: newType } as any
+  }
+
+  // Otherwise, reset to the default of that filter type
+  return getDefault(newType)
+}
+
+function getDefault(type: FilterType): Filter {
+  switch (type) {
+    case 'hue-rotate':
+      return { type, angle: { value: 0, unit: 'deg' } }
+    case 'blur':
+      return { type, radius: { value: 0, unit: 'px' } }
+    case 'drop-shadow':
+      return {
+        type,
+        offsetX: { value: 0, unit: 'px' },
+        offsetY: { value: 0, unit: 'px' },
+        blurRadius: { value: 0, unit: 'px' },
+        color: '#000',
+      }
+    default:
+      return { type, amount: { value: 0, unit: 'number' } }
+  }
+}
+
+function isAmountFilter(type: FilterType) {
+  return !['hue-rotate', 'blur', 'drop-shadow'].includes(type)
 }

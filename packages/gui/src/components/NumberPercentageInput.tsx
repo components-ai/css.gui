@@ -17,6 +17,7 @@ export function NumberPercentageInput({
       onChange={onChange}
       label={label}
       units={NUMBER_PERCENTAGE_UNITS}
+      steps={numberPercentSteps}
       conversions={numberPercentConversions}
     />
   )
@@ -25,4 +26,9 @@ export function NumberPercentageInput({
 const numberPercentConversions = {
   number: 1,
   '%': 100,
+}
+
+const numberPercentSteps = {
+  number: 0.01,
+  '%': 1,
 }
