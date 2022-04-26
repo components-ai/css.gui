@@ -4,7 +4,13 @@ interface FirstParagraphProps extends HTMLAttributes<HTMLDivElement> {}
 export const FirstParagraph = (props: FirstParagraphProps) => {
   return (
     <div
-      sx={{ fontSize: [2, 3, 4], color: 'muted', lineHeight: 1.4 }}
+      sx={{
+        p: {
+          fontSize: [2, 3, 3],
+          color: 'muted',
+          lineHeight: 1.4,
+        },
+      }}
       {...props}
     />
   )
