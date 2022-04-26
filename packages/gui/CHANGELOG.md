@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.4
+
+### Patch Changes
+
+- aec9106: Allow for nested fieldsets, add lots of new fields
+
 ## 0.0.3
 
 ### Patch Changes
