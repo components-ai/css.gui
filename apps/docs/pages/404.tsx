@@ -7,7 +7,7 @@ const Page = () => {
     router.push('/home')
   }
 
-  return <h1>404: We couldn't find that page</h1>
+  return <h1>404: We couldn&apos;t find that page</h1>
 }
 
 export default Page
