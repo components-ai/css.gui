@@ -9,8 +9,9 @@ export type Transform =
   | Scale
   | Skew
   | Translate
+export type TransformType = Transform['type']
 
-interface Matrix {
+export interface Matrix {
   type: 'matrix'
   a: number
   b: number
@@ -20,22 +21,22 @@ interface Matrix {
   ty: number
 }
 
-interface Matrix3D {
+export interface Matrix3D {
   type: 'matrix3d'
   values: number[] // should be 16 length
 }
 
-interface Perspective {
+export interface Perspective {
   type: 'perspective'
   d: Length
 }
 
-interface Rotate {
+export interface Rotate {
   type: 'rotate' | 'rotateX' | 'rotateY' | 'rotateZ'
   a: Angle
 }
 
-interface Rotate3D {
+export interface Rotate3D {
   type: 'rotate3d'
   a: Angle
   // All these should be between 0 and 1
@@ -44,7 +45,7 @@ interface Rotate3D {
   z: number
 }
 
-interface Scale {
+export interface Scale {
   type: 'scale' | 'scale3d' | 'scaleX' | 'scaleY' | 'scaleZ'
   // TODO apparently this might be allowed to be percentages?
   sx: number
@@ -52,13 +53,13 @@ interface Scale {
   sz: number
 }
 
-interface Skew {
+export interface Skew {
   type: 'skew' | 'skewX' | 'skewY'
   ax: Angle
   ay: Angle
 }
 
-interface Translate {
+export interface Translate {
   type: 'translate' | 'translate3d' | 'translateX' | 'translateY' | 'translateZ'
   tx: LengthPercentage
   ty: LengthPercentage
