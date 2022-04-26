@@ -780,6 +780,30 @@ export const properties: Record<string, PropertyData> = {
     type: 'length',
     percentage: true,
   },
+  marginX: {
+    type: 'length',
+    percentage: true,
+  },
+  marginY: {
+    type: 'length',
+    percentage: true,
+  },
+  marginTop: {
+    type: 'length',
+    percentage: true,
+  },
+  marginLeft: {
+    type: 'length',
+    percentage: true,
+  },
+  marginBottom: {
+    type: 'length',
+    percentage: true,
+  },
+  marginRight: {
+    type: 'length',
+    percentage: true,
+  },
   maskBorderMode: {
     type: 'keyword',
     keywords: ['luminance', 'alpha'],
@@ -1035,6 +1059,30 @@ export const properties: Record<string, PropertyData> = {
     keywords: ['auto', 'contain', 'none'],
   },
   padding: {
+    type: 'length',
+    percentage: true,
+  },
+  paddingX: {
+    type: 'length',
+    percentage: true,
+  },
+  paddingY: {
+    type: 'length',
+    percentage: true,
+  },
+  paddingTop: {
+    type: 'length',
+    percentage: true,
+  },
+  paddingLeft: {
+    type: 'length',
+    percentage: true,
+  },
+  paddingBottom: {
+    type: 'length',
+    percentage: true,
+  },
+  paddingRight: {
     type: 'length',
     percentage: true,
   },

@@ -25,7 +25,7 @@ export const lengthInputs = mapValues(lengthProperties, (property, name) => {
         Component={LengthInput}
         componentProps={{
           property: name,
-          thmeme: isThemeable(name),
+          theme: isThemeable(name),
           keyword: true,
           ...property,
         }}
