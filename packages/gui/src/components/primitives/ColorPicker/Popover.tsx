@@ -28,7 +28,6 @@ export default function ColorPopover({
         sx={{
           display: 'flex',
           gap: 2,
-          padding: 0,
           alignItems: 'center',
           color: 'text',
           backgroundColor: 'transparent',
@@ -81,7 +80,7 @@ function Swatch({ value }: { value: string }) {
       )}
       <div
         sx={{
-          position: 'absolute',
+          // position: 'absolute',
           inset: 0,
           ...withFallback(value, (color) => ({ backgroundColor: color })),
         }}

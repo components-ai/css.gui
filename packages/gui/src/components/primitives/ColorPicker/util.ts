@@ -16,17 +16,17 @@ export function isValidColor(value: Color) {
 }
 
 export function getColorMode(color: string) {
-  if (color.startsWith('#')) {
+  if (color?.startsWith('#')) {
     return 'hex'
-  } else if (color.startsWith('rgb')) {
+  } else if (color?.startsWith('rgb')) {
     return 'rgb'
-  } else if (color.startsWith('hsl')) {
+  } else if (color?.startsWith('hsl')) {
     return 'hsl'
-  } else if (color.startsWith('color(display-p3')) {
+  } else if (color?.startsWith('color(display-p3')) {
     return 'p3'
-  } else if (color.startsWith('lab')) {
+  } else if (color?.startsWith('lab')) {
     return 'lab'
-  } else if (color.startsWith('lch')) {
+  } else if (color?.startsWith('lch')) {
     return 'lch'
   }
   return 'hex'

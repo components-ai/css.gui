@@ -8,6 +8,7 @@ export { DimensionInput } from './components/Dimension'
 export { ResponsiveInput } from './components/Responsive'
 export { UnitSelect } from './components/primitives/UnitSelect'
 export { ValueSelect } from './components/primitives/ValueSelect'
+export { ColorPicker, ColorPopover } from './components/primitives/ColorPicker'
 export {
   ThemeProvider,
   useTheme,
