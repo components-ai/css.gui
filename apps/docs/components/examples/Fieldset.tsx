@@ -36,7 +36,7 @@ export const Fieldset = () => {
         </>
       </Editor>
       <RenderElement tagName="p" styles={styles}>
-        Hello, world! <b>Slam!</b>
+        Hello, <b>world!</b>
       </RenderElement>
       <pre>{JSON.stringify(toCSSObject(styles), null, 2)}</pre>
     </>
