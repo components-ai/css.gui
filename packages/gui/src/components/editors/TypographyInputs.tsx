@@ -1,8 +1,8 @@
 import { mapValues, pickBy } from "lodash-es";
 import { getPropertyLabel, properties } from "../../data/properties";
 import { EditorProps } from './types'
-import { FontFamily } from '../../types/css'
-import { FontFamilyInput } from "../FontFamilyInput";
+import { FontFam } from '../../types/css'
+import { FontFamilyInput } from '../../components/FontFamily/FontFamilyInput'
 
 const typographyProperties = pickBy(
   properties,
@@ -10,7 +10,7 @@ const typographyProperties = pickBy(
 )
 
 export const typographyInputs = mapValues(typographyProperties, (property, name) => {
-  return ({ value, onChange }: EditorProps<FontFamily>) => {
+  return ({ value, onChange }: EditorProps<FontFam>) => {
     return (
       <FontFamilyInput
         label={getPropertyLabel(name)}
