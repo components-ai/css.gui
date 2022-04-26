@@ -24,6 +24,7 @@ import { stringifyTransform } from './stringify'
 import { Angle, Length } from '../../types/css'
 import { NumberInput } from '../NumberInput'
 import { range } from 'lodash-es'
+import { NumberInputProps } from '../primitives/Number/types'
 
 export default function TransformContent({
   value,
@@ -96,7 +97,7 @@ function TransformSwitch(props: LayerProps<Transform>) {
           }}
         >
           {(['a', 'c', 'tx', 'b', 'd', 'ty'] as const).map((item) => {
-            return <NumberInput {...getInputProps(_props, item)} />
+            return <IncNumberInput {...getInputProps(_props, item)} />
           })}{' '}
         </div>
       )
@@ -116,7 +117,7 @@ function TransformSwitch(props: LayerProps<Transform>) {
               const index = j * 4 + i
               const label = `${'abcd'[j]}${i}`
               return (
-                <NumberInput
+                <IncNumberInput
                   label={label}
                   value={values[index]}
                   onChange={(newValue) => {
@@ -150,9 +151,9 @@ function TransformSwitch(props: LayerProps<Transform>) {
       return (
         <>
           <AngleInput {...getInputProps(_props, 'a')} />
-          <NumberInput {...getInputProps(_props, 'x')} />
-          <NumberInput {...getInputProps(_props, 'y')} />
-          <NumberInput {...getInputProps(_props, 'z')} />
+          <IncNumberInput {...getInputProps(_props, 'x')} />
+          <IncNumberInput {...getInputProps(_props, 'y')} />
+          <IncNumberInput {...getInputProps(_props, 'z')} />
         </>
       )
     }
@@ -160,8 +161,8 @@ function TransformSwitch(props: LayerProps<Transform>) {
       const _props = props as EditorProps<Scale>
       return (
         <>
-          <NumberInput {...getInputProps(_props, 'sx')} />
-          <NumberInput {...getInputProps(_props, 'sy')} />
+          <IncNumberInput {...getInputProps(_props, 'sx')} />
+          <IncNumberInput {...getInputProps(_props, 'sy')} />
         </>
       )
     }
@@ -169,23 +170,23 @@ function TransformSwitch(props: LayerProps<Transform>) {
       const _props = props as EditorProps<Scale>
       return (
         <>
-          <NumberInput {...getInputProps(_props, 'sx')} />
-          <NumberInput {...getInputProps(_props, 'sy')} />
-          <NumberInput {...getInputProps(_props, 'sz')} />
+          <IncNumberInput {...getInputProps(_props, 'sx')} />
+          <IncNumberInput {...getInputProps(_props, 'sy')} />
+          <IncNumberInput {...getInputProps(_props, 'sz')} />
         </>
       )
     }
     case 'scaleX': {
       const _props = props as EditorProps<Scale>
-      return <NumberInput {...getInputProps(_props, 'sx')} />
+      return <IncNumberInput {...getInputProps(_props, 'sx')} />
     }
     case 'scaleY': {
       const _props = props as EditorProps<Scale>
-      return <NumberInput {...getInputProps(_props, 'sy')} />
+      return <IncNumberInput {...getInputProps(_props, 'sy')} />
     }
     case 'scaleZ': {
       const _props = props as EditorProps<Scale>
-      return <NumberInput {...getInputProps(_props, 'sz')} />
+      return <IncNumberInput {...getInputProps(_props, 'sz')} />
     }
     case 'skew': {
       const _props = props as EditorProps<Skew>
@@ -327,3 +328,8 @@ function getDefault(type: TransformType): Transform {
 
 const ZERO: Length = { value: 0, unit: 'px' }
 const ZERO_DEG: Angle = { value: 0, unit: 'deg' }
+
+// Override the number input with more incremental steps for this one
+function IncNumberInput(props: Parameters<typeof NumberInput>[0]) {
+  return <NumberInput {...props} step={0.1} />
+}
