@@ -198,6 +198,12 @@ export const properties: Record<string, PropertyData> = {
     percentage: true,
     keywords: ['cover', 'contain', 'auto'],
   },
+  blockSize: {
+    // TODO: Add fit-content function
+    type: 'length',
+    percentage: true,
+    keywords: ['max-content', 'min-content', 'auto'],
+  },
   borderColor: {
     type: 'color',
     keywords: ['currentcolor', 'transparent'],
@@ -285,6 +291,23 @@ export const properties: Record<string, PropertyData> = {
     type: 'keyword',
     keywords: ['auto', 'balance', 'balance-all'],
   },
+  columnGap: {
+    type: 'length',
+    percentage: true,
+    range: {
+      [AbsoluteLengthUnits.Px]: [0, 128],
+      [FontRelativeLengthUnits.Em]: [0, 8],
+      [FontRelativeLengthUnits.Rem]: [0, 8],
+      [PercentageLengthUnits.Pct]: [0.1, 100],
+    },
+    keywords: [
+      'normal',
+    ],
+  },
+  columnRuleColor: {
+    type: 'color',
+    keywords: ['currentcolor', 'transparent'],
+  },
   columnRuleStyle: {
     type: 'keyword',
     keywords: [
@@ -300,9 +323,37 @@ export const properties: Record<string, PropertyData> = {
       'outset',
     ],
   },
+  columnRuleWidth: {
+    type: 'length',
+    percentage: true,
+    range: {
+      [AbsoluteLengthUnits.Px]: [0, 32],
+      [FontRelativeLengthUnits.Em]: [0, 2],
+      [FontRelativeLengthUnits.Rem]: [0, 2],
+      [PercentageLengthUnits.Pct]: [0.1, 100],
+    },
+    keywords: [
+      'thin',
+      'medium',
+      'thick',
+    ],
+  },
   columnSpan: {
     type: 'keyword',
     keywords: ['none', 'all'],
+  },
+  columnWidth: {
+    type: 'length',
+    percentage: true,
+    range: {
+      [AbsoluteLengthUnits.Px]: [0, 512],
+      [FontRelativeLengthUnits.Em]: [0, 16],
+      [FontRelativeLengthUnits.Rem]: [0, 16],
+      [PercentageLengthUnits.Pct]: [0.1, 100],
+    },
+    keywords: [
+      'auto',
+    ],
   },
   contain: {
     type: 'keyword',
@@ -399,6 +450,24 @@ export const properties: Record<string, PropertyData> = {
     type: 'keyword',
     keywords: ['show', 'hide'],
   },
+  flexBasis: {
+    type: 'length',
+    percentage: true,
+    range: {
+      [AbsoluteLengthUnits.Px]: [0, 512],
+      [FontRelativeLengthUnits.Em]: [0, 16],
+      [FontRelativeLengthUnits.Rem]: [0, 16],
+      [PercentageLengthUnits.Pct]: [0.1, 100],
+    },
+    keywords: [
+    'auto',
+    'fill',
+    'max-content',
+    'min-content',
+    'fit-content',
+    'content',
+    ],
+  },
   flexDirection: {
     type: 'keyword',
     keywords: ['row', 'row-reverse', 'column', 'column-reverse'],
@@ -422,6 +491,10 @@ export const properties: Record<string, PropertyData> = {
       'row-reverse wrap',
       'column-reverse wrap',
     ],
+  },
+  flexGrow: {
+    type: 'number',
+    defaultValue: 0,
   },
   flexWrap: {
     type: 'keyword',
