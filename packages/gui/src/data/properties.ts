@@ -669,8 +669,8 @@ export const properties: Record<string, PropertyData> = {
   listStyleType: {
     type: 'keyword',
     keywords: [
-      'none', 
-      'disc', 
+      'none',
+      'disc',
       'circle',
       'square',
       'decimal',
@@ -692,10 +692,7 @@ export const properties: Record<string, PropertyData> = {
   },
   maskBorderMode: {
     type: 'keyword',
-    keywords: [
-      'luminance',
-      'alpha',
-    ],
+    keywords: ['luminance', 'alpha'],
   },
   maskBorderWidth: {
     // TODO: add multiple sides (top, bottom, left, right)
@@ -1073,7 +1070,6 @@ export const properties: Record<string, PropertyData> = {
   },
   tabSize: {
     type: 'length',
-    percentage: true,
     number: true,
   },
   tableLayout: {
