@@ -45,3 +45,11 @@ export const sentenceCase = (property: string) => {
  * Converts a string to be plus spaced. Abhaya Libre -> Abhaya+Libre
  */
 export const plusify = (name: string) => name.replace(/\s/g, '+')
+
+export function squeeze(s: string) {
+  return s.replace(/\s+/g, ' ').trim()
+}
+
+export function randomInt(min: number, max: number) {
+  return Math.floor(Math.random() * (max - min + 1) + min)
+}

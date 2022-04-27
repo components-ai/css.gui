@@ -22,6 +22,7 @@ const initialStyles: any = {
     unit: 'keyword',
   },
   fontFamily: 'ABeeZee',
+  gradient: [],
 }
 const DEFAULT_THEME: Theme = {
   fontSizes: [
@@ -91,9 +92,14 @@ export default function Docs() {
               <Inputs.TextAlign />
               <Inputs.FontStretch />
               <Inputs.Margin />
+<<<<<<< HEAD
               <Inputs.FontFamily />
               <h3>Colors</h3>
+=======
+              <Inputs.Gradient />
+>>>>>>> 37d6e9f (Add gradient control)
               <h3 sx={{ mt: 4, mb: 0 }}>Colors</h3>
+              <h3>Colors</h3>
               <div sx={{ display: 'flex' }}>
                 <div sx={{ mr: 2 }}>
                   <Inputs.Color />
