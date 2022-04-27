@@ -69,29 +69,22 @@ export const DimensionInput = ({
   const allKeywords = [...(keywords ?? []), ...GLOBAL_KEYWORDS]
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        width: '100%',
-      }}
-    >
+    <div>
+      {label && (
+        <Label htmlFor={fullId} sx={{ display: 'block' }}>
+          {label}
+        </Label>
+      )}
       <div
         sx={{
           display: 'flex',
-          flexGrow: 1,
+          width: '100%',
           alignItems: 'center',
-          marginRight: 'auto',
         }}
       >
-        {label && (
-          <Label htmlFor={fullId} sx={{ marginRight: 1, minWidth: 16 }}>
-            {label ?? 'Number'}
-          </Label>
-        )}
-
         {state.unit === KeywordUnits.Keyword && (
           <ValueSelect
+            value={state.value}
             values={allKeywords}
             onChange={(e: any) => {
               dispatch({
@@ -101,7 +94,6 @@ export const DimensionInput = ({
             }}
           />
         )}
-
         {state.themeId && (
           <ValueSelect
             onChange={(e: any) => {
@@ -118,7 +110,6 @@ export const DimensionInput = ({
             values={propertyValues ?? []}
           />
         )}
-
         {state.unit !== ThemeUnits.Theme &&
           state.unit !== KeywordUnits.Keyword && (
             <Number
@@ -136,39 +127,39 @@ export const DimensionInput = ({
               }}
             />
           )}
-      </div>
-      <UnitSelect
-        units={units}
-        value={state.themeId ? ThemeUnits.Theme : state.unit}
-        onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-          const newUnit = e.target.value as FullLengthUnit
+        <UnitSelect
+          units={units}
+          value={state.themeId ? ThemeUnits.Theme : state.unit}
+          onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+            const newUnit = e.target.value as FullLengthUnit
 
-          if (newUnit === ThemeUnits.Theme) {
-            const themeValue = propertyValues[0]
-            return dispatch({
-              type: 'CHANGED_INPUT_TO_THEME_VALUE',
-              value: themeValue.value,
-              unit: themeValue.unit,
-              themeId: themeValue.id,
-            })
-          }
+            if (newUnit === ThemeUnits.Theme) {
+              const themeValue = propertyValues[0]
+              return dispatch({
+                type: 'CHANGED_INPUT_TO_THEME_VALUE',
+                value: themeValue.value,
+                unit: themeValue.unit,
+                themeId: themeValue.id,
+              })
+            }
 
-          if (newUnit === KeywordUnits.Keyword) {
+            if (newUnit === KeywordUnits.Keyword) {
+              dispatch({
+                type: 'CHANGED_INPUT_VALUE',
+                value: allKeywords[0],
+              })
+            }
+
             dispatch({
-              type: 'CHANGED_INPUT_VALUE',
-              value: allKeywords[0],
+              type: 'CHANGED_UNIT_VALUE',
+              unit: newUnit,
+              steps: steps,
+              conversions,
             })
-          }
-
-          dispatch({
-            type: 'CHANGED_UNIT_VALUE',
-            unit: newUnit,
-            steps: steps,
-            conversions,
-          })
-        }}
-        sx={{ marginLeft: 1, minHeight: '1.6em', width: 72 }}
-      />
+          }}
+          sx={{ marginLeft: 1, minHeight: '1.6em', width: 72 }}
+        />
+      </div>
     </div>
   )
 }

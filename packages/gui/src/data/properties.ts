@@ -525,7 +525,7 @@ export const properties: Record<string, PropertyData> = {
       [AbsoluteLengthUnits.Px]: [0, 512],
       [FontRelativeLengthUnits.Em]: [0, 16],
       [FontRelativeLengthUnits.Rem]: [0, 16],
-      [PercentageLengthUnits.Pct]: [0.1, 100],
+      [PercentageLengthUnits.Pct]: [0.1, 200],
     },
     keywords: [
       'xx-small',
@@ -670,6 +670,7 @@ export const properties: Record<string, PropertyData> = {
     type: 'length',
     percentage: true,
     keywords: ['max-content', 'min-content', 'auto'],
+    defaultValue: 'auto',
   },
   hyphens: {
     type: 'keyword',
@@ -780,6 +781,7 @@ export const properties: Record<string, PropertyData> = {
     type: 'length',
     percentage: true,
     number: true,
+    range: { number: [0, 2] },
     keywords: ['normal'],
   },
   margin: {
@@ -983,7 +985,7 @@ export const properties: Record<string, PropertyData> = {
   orphans: {
     type: 'number',
     defaultValue: 2,
-    range: { number: [1, Infinity] },
+    range: { number: [1, 10] },
   },
   outlineColor: {
     type: 'color',
@@ -1463,6 +1465,7 @@ export const properties: Record<string, PropertyData> = {
     type: 'length',
     percentage: true,
     keywords: ['max-content', 'min-content', 'auto'],
+    defaultValue: '100%',
   },
   wordBreak: {
     type: 'keyword',

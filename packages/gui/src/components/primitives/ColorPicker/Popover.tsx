@@ -75,12 +75,12 @@ function Swatch({ value }: { value: string }) {
     >
       {/* The checkerboard causes weird aliasing to occur on Firefox,
        * so we only show it when there is a transparency */}
-      {isTransparent && (
-        <Checkerboard sx={{ inset: 0 }} />
-      )}
+      {isTransparent && <Checkerboard sx={{ inset: 0 }} />}
       <div
         sx={{
           inset: 0,
+          height: '100%',
+          width: '100%',
           ...withFallback(value, (color) => ({ backgroundColor: color })),
         }}
       />
