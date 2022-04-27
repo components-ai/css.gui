@@ -88,7 +88,6 @@ export function FontFamilyInput({
             handleFilterItems('')
           }
         }}
-        // value={value}
         sx={{ width: '100%' }}
       />
       <div>
