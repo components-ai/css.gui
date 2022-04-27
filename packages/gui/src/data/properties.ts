@@ -17,11 +17,6 @@ type PropertyData = {
 
 type UnitRanges = Record<string, [number, number]>
 
-export const getPropertyData = (property?: string): PropertyData | null => {
-  const propertyData = properties[property || '']
-  return propertyData ?? null
-}
-
 export const getPropertyLabel = (property: string) => {
   return upperFirst(lowerCase(property))
 }
