@@ -14,14 +14,12 @@ export const RenderElement = ({
 }: RenderElementProps) => {
   const Component = tagName
   const styleObject = toCSSObject(styles)
-
+  
   // @ts-ignore
-  return (
-    <>
-      <Fonts fontFamily={styles.fontFamily}/>
-      <Component {...props} sx={styleObject} />
-    </>
-  )
+  return <>
+    <Fonts fontFamily={styles.fontFamily}/>
+    <Component {...props} sx={styleObject} />
+  </>
 }
 
 export const Fonts = ({fontFamily}: any) => {

@@ -60,7 +60,7 @@ export default function Docs() {
 
   return (
     <>
-      <h1>styling controls for the web</h1>
+      <h1>Visual styling controls for the web</h1>
       <FirstParagraph>
         <p>
           A powerful, extensible, and themeable CSS editor for creative coding
