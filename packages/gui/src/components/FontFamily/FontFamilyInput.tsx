@@ -93,9 +93,6 @@ export function FontFamilyInput({
             handleFilterItems('')
           }
         }}
-        // onKeyDown={(e: any) => {
-        //   if (e.keyCode === 13) closeMenu()
-        // }}
         sx={{ width: '100%' }}
       />
       <div
