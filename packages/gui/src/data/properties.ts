@@ -504,9 +504,6 @@ export const properties: Record<string, PropertyData> = {
     type: 'keyword',
     keywords: ['left', 'right', 'none', 'inline-start', 'inline-end'],
   },
-  fontFamily: {
-    type: 'typography',
-  },
   fontKerning: {
     type: 'keyword',
     keywords: ['auto', 'normal', 'none'],
