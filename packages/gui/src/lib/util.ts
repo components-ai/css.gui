@@ -1,7 +1,7 @@
 import { EditorProps } from '../components/editors/types'
-import { getPropertyLabel } from '../data/properties'
 import { isPseudoClass, isPseudoElement } from './pseudos'
 import { isElement } from './elements'
+import { lowerCase, upperFirst } from 'lodash-es'
 
 export type EditorPropsWithLabel<T> = EditorProps<T> & { label: string }
 /**
@@ -20,7 +20,7 @@ export function getInputProps<T extends object, K extends keyof T>(
 ): EditorPropsWithLabel<T[typeof key]> {
   return {
     value: props.value[key],
-    label: getPropertyLabel('' + key),
+    label: sentenceCase('' + key),
     onChange: (newValue) => props.onChange({ ...props.value, [key]: newValue }),
   }
 }
@@ -32,4 +32,11 @@ export function isNestedSelector(selector: string): boolean {
     isPseudoElement(selector) ||
     false
   )
+}
+
+/**
+ * Convert a string to words such that only the first word is capitalized.
+ */
+export const sentenceCase = (property: string) => {
+  return upperFirst(lowerCase(property))
 }
