@@ -28,13 +28,3 @@ export const timeInputs = mapValues(timeProperties, (property, name) => {
     )
   }
 })
-
-const timeConversions = {
-  ms: 1000,
-  s: 1,
-}
-
-const timeSteps = {
-  ms: 25,
-  s: 0.025,
-}

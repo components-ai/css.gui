@@ -1,13 +1,30 @@
 import produce from 'immer'
-import { ReactChild } from 'react'
+import { ComponentType, ReactChild, useId } from 'react'
 import pascal from 'pascalcase'
-import { Styles } from '../../types/css'
+import {
+  CSSUnitValue,
+  Length,
+  ResponsiveLength,
+  Styles,
+  TIME_UNITS,
+} from '../../types/css'
 import { Theme } from '../../types/theme'
 import { EditorProvider, useEditor } from '../providers/EditorContext'
 import { EditorData, KeyArg, Recipe } from '../providers/types'
-import { controlMap } from './map'
 import { useFieldset } from './Fieldset'
 import { joinPath } from '../providers/util'
+import { properties } from '../../data/properties'
+import { ColorInput } from '../ColorInput'
+import { LengthInput } from '../LengthInput'
+import { ResponsiveInput } from '../Responsive'
+import { sentenceCase } from '../../lib/util'
+// import { isThemeable } from '../../lib/theme'
+import { EditorProps } from '../editors/types'
+import { DimensionInput } from '../Dimension'
+import { SelectInput } from '../SelectInput'
+import { GLOBAL_KEYWORDS } from '../../data/global-keywords'
+import { Label } from '../primitives'
+import { kebabCase } from 'lodash-es'
 
 type ControlProps = {
   field: KeyArg
@@ -15,7 +32,9 @@ type ControlProps = {
 const Control = ({ field }: ControlProps) => {
   const { getField, setField } = useEditor()
   const fieldset = useFieldset()
-  const Component = controlMap[field.toString()]
+  const property = field.toString()
+  // const Component = controlMap[field.toString()]
+  const Component: ComponentType<any> = getInputComponent(property)
 
   if (!Component) {
     console.error(`Unknown field: ${field}, ignoring`)
@@ -25,19 +44,19 @@ const Control = ({ field }: ControlProps) => {
   const fullField = fieldset ? joinPath(fieldset.name, field) : field
 
   return (
-    <>
-      <Component
-        value={getField(fullField)}
-        onChange={(newValue: any) => {
-          setField(fullField, newValue)
-        }}
-      />
-    </>
+    <Component
+      label={sentenceCase(property)}
+      value={getField(fullField)}
+      onChange={(newValue: any) => {
+        setField(fullField, newValue)
+      }}
+      {...properties[property]}
+    />
   )
 }
 
 export const Inputs: Record<string, any> = {}
-Object.keys(controlMap).forEach((field: string) => {
+Object.keys(properties).forEach((field: string) => {
   Inputs[pascal(field)] = () => <Control field={field} />
 })
 
@@ -83,5 +102,128 @@ export const Editor = ({
     <EditorProvider theme={theme} value={styles} onChange={handleStylesChange}>
       {controls}
     </EditorProvider>
+  )
+}
+
+function getInputComponent(property: string) {
+  const propertyData = properties[property]
+  if (typeof propertyData.type === 'function') {
+    return propertyData.type
+  }
+  return getPrimitiveInput(propertyData.type)
+}
+
+function getPrimitiveInput(type: string) {
+  switch (type) {
+    case 'keyword':
+      return KeywordInput
+    case 'number':
+      return NumberInput
+    case 'length':
+      return ResponsiveLengthInput
+    case 'time':
+      return TimeInput
+    case 'color':
+      return ColorInput
+    default:
+      return TextInput
+  }
+}
+
+type EditorPropsWithLabel<T> = EditorProps<T> & { label: string }
+const NumberInput = ({
+  value,
+  onChange,
+  label,
+  ...props
+}: EditorPropsWithLabel<CSSUnitValue>) => {
+  return (
+    <DimensionInput
+      value={value}
+      label={label}
+      onChange={onChange}
+      units={['number', 'keyword']}
+      steps={{ number: 1 }}
+      {...props}
+    />
+  )
+}
+
+const ResponsiveLengthInput = ({
+  value,
+  onChange,
+  label,
+  ...props
+}: EditorPropsWithLabel<Length | ResponsiveLength>) => {
+  return (
+    <ResponsiveInput
+      label={label}
+      value={value}
+      onChange={onChange}
+      Component={LengthInput}
+      componentProps={{ ...props, keyword: true }}
+    />
+  )
+}
+
+const TimeInput = ({
+  value,
+  onChange,
+  label,
+}: EditorPropsWithLabel<CSSUnitValue>) => {
+  return (
+    <DimensionInput
+      value={value}
+      label={label}
+      onChange={onChange}
+      units={[...TIME_UNITS, 'keyword']}
+      steps={timeSteps}
+      conversions={timeConversions}
+    />
+  )
+}
+
+const DEFAULT_KEYWORD = 'inherit'
+const KeywordInput = ({
+  value,
+  onChange,
+  label,
+  keywords,
+}: EditorPropsWithLabel<string> & { keywords: string[] }) => {
+  return (
+    <SelectInput
+      label={label}
+      value={value || DEFAULT_KEYWORD}
+      onChange={onChange}
+      options={[...(keywords ?? []), ...GLOBAL_KEYWORDS]}
+    />
+  )
+}
+
+const timeConversions = {
+  ms: 1000,
+  s: 1,
+}
+
+const timeSteps = {
+  ms: 25,
+  s: 0.025,
+}
+
+const TextInput = ({
+  value,
+  onChange,
+  label,
+}: EditorPropsWithLabel<string>) => {
+  const id = `${useId()}-${kebabCase(label)}`
+  return (
+    <div>
+      <Label htmlFor={id}>{label}</Label>
+      <input
+        type="text"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+      />
+    </div>
   )
 }
