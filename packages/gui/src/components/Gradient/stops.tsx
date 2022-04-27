@@ -1,26 +1,27 @@
 import { getInputProps, randomInt } from '../../lib/util'
-import { useEditor } from '../providers/EditorContext'
 import { GradientStop as GradientStopValue } from './types'
 import { getDeclarationValue } from './get-styles'
 import { HTMLAttributes, useCallback, useEffect, useRef, useState } from 'react'
 import { clamp } from 'lodash-es'
 import { Minus, Plus } from 'react-feather'
-import { KeyPath } from '../providers/types'
 import { randomColor } from '../../lib/color'
 import { ColorInput } from '../ColorInput'
 import { NumberInput } from '../NumberInput'
 
 interface StopsProps {
-  path: KeyPath
+  value: GradientStopValue[]
+  onChange: any
   repeating: boolean
 }
 
-export default function GradientStopsField({ path, repeating }: StopsProps) {
-  const { getField, setField } = useEditor()
+export default function GradientStopsField({
+  onChange,
+  value,
+  repeating,
+}: StopsProps) {
   const track = useRef<any>(null)
   const [selected, setSelected] = useState(-1)
   const [dragIndex, setDragIndex] = useState(-1)
-  const value: GradientStopValue[] = getField(path)
 
   const onMouseMove = useCallback(
     (e: any) => {
@@ -32,7 +33,10 @@ export default function GradientStopsField({ path, repeating }: StopsProps) {
           0,
           100
         )
-        setField([...path, dragIndex, 'hinting'], updated)
+
+        const newValue = [...value]
+        newValue[dragIndex].hinting = updated
+        onChange(newValue)
       }
     },
     [dragIndex]
@@ -60,23 +64,23 @@ export default function GradientStopsField({ path, repeating }: StopsProps) {
     <div>
       <label>Stops</label>
       <Toolbar
-        path={path}
         onAdd={() => {
           setSelected(value.length)
-          setField<GradientStopValue[]>(path, (draft: any) => {
-            draft?.push?.({
+          onChange([
+            ...value,
+            {
               color: randomColor(),
-              hinting: randomInt(0, 100),
-            })
-          })
+              hinting: 69,
+            },
+          ])
         }}
         onDelete={() => {
           if (selected === value.length - 1) {
             setSelected((selected) => selected - 1)
           }
-          setField<GradientStopValue[]>(path, (draft: any) => {
-            draft?.splice?.(selected, 1)
-          })
+          const newValue = [...value]
+          newValue.splice(selected, 1)
+          onChange(newValue)
         }}
       />
       <div
@@ -104,16 +108,18 @@ export default function GradientStopsField({ path, repeating }: StopsProps) {
               }}
               onKeyDown={(e) => {
                 switch (e.key) {
-                  case 'ArrowLeft':
-                    setField<GradientStopValue>([...path, i], (draft: any) => {
-                      draft.hinting--
-                    })
+                  case 'ArrowLeft': {
+                    const newValue = [...value]
+                    newValue[i].hinting = newValue[i].hinting - 1
+                    onChange(newValue)
                     break
-                  case 'ArrowRight':
-                    setField<GradientStopValue>([...path, i], (draft: any) => {
-                      draft.hinting++
-                    })
+                  }
+                  case 'ArrowRight': {
+                    const newValue = [...value]
+                    newValue[i].hinting = newValue[i].hinting + 1
+                    onChange(newValue)
                     break
+                  }
                 }
                 e.stopPropagation()
               }}
@@ -121,18 +127,19 @@ export default function GradientStopsField({ path, repeating }: StopsProps) {
           )
         })}
       </div>
-      {selected !== -1 && <StopFields path={[...path, selected]} />}
+      {selected !== -1 && value[selected] && (
+        <StopFields {...getInputProps({ value, onChange }, selected)} />
+      )}
     </div>
   )
 }
 
 interface ToolbarProps {
-  path: KeyPath
   onAdd(): void
   onDelete(): void
 }
 
-function Toolbar({ path, onAdd, onDelete }: ToolbarProps) {
+function Toolbar({ onAdd, onDelete }: ToolbarProps) {
   return (
     <div
       sx={{

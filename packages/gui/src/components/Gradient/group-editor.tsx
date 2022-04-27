@@ -21,14 +21,12 @@ export const GradientEditor = (props: any) => {
       </div>
       <Gradient {...props} />
 
-      {/** 
       <div sx={{ mt: 3 }}>
         <GradientStopsField
           {...getInputProps(props, 'stops')}
           repeating={props.value.type?.startsWith('repeating-')}
         />
       </div>
-      */}
     </div>
   )
 }

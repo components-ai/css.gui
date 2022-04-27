@@ -14,6 +14,7 @@ export default function GradientsEditor({
   const newItem = async () => {
     return {
       type: 'linear',
+      stops: [],
     }
   }
 
