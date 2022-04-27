@@ -8,11 +8,16 @@ import { has } from 'lodash-es'
 import { stringifyFilter } from '../components/Filter/stringify'
 import { isNestedSelector } from './util'
 import { stringifyTransform } from '../components/Transform/stringify'
+import { properties } from '../data/properties'
 
 export const stringifyProperty = (
-  property?: string, // In the future the property might determine how we stringify
+  property: string = '', // In the future the property might determine how we stringify
   value?: unknown
 ): Array<string | null> | string | number | null => {
+  const stringify = properties[property].stringify
+  if (stringify) {
+    return stringify(value)
+  }
   if (property === 'filter') {
     return stringifyFilter(value as any)
   }

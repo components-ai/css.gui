@@ -1,5 +1,6 @@
 import { ComponentType } from 'react'
 import EasingFunctionPicker from '../components/EasingFunction/picker'
+import { stringifyEasingFunction } from '../components/EasingFunction/stringify'
 import {
   AbsoluteLengthUnits,
   FontRelativeLengthUnits,
@@ -14,6 +15,7 @@ type PropertyData = {
   keywords?: Array<string>
   range?: UnitRanges
   defaultValue?: string | number
+  stringify?: (value: any) => string
 }
 
 type UnitRanges = Record<string, [number, number]>
@@ -93,7 +95,10 @@ export const properties: Record<string, PropertyData> = {
     type: 'keyword',
     keywords: ANIMATABLE_PROPERTIES,
   },
-  animationTimingFunction: { type: EasingFunctionPicker },
+  animationTimingFunction: {
+    type: EasingFunctionPicker,
+    stringify: stringifyEasingFunction,
+  },
   appearance: {
     type: 'keyword',
     keywords: [
@@ -1370,7 +1375,10 @@ export const properties: Record<string, PropertyData> = {
   transitionDuration: { type: 'time' },
   // TODO this should be a combobox
   transitionProperty: { type: 'keyword', keywords: ANIMATABLE_PROPERTIES },
-  transitionTimingFunction: { type: EasingFunctionPicker },
+  transitionTimingFunction: {
+    type: EasingFunctionPicker,
+    stringify: stringifyEasingFunction,
+  },
   unicodeBidi: {
     type: 'keyword',
     keywords: [
