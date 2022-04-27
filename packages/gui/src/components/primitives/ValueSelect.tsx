@@ -1,3 +1,5 @@
+import { stringifyUnit } from '../../lib/stringify'
+
 interface ValueInputProps {
   onChange: (e: any) => void
   value?: number | string
@@ -20,8 +22,7 @@ export const ValueSelect = ({
           <option key={v}>{v}</option>
         ) : (
           <option key={v} value={v.id}>
-            {v.value}
-            {v.unit}
+            {stringifyUnit(v)}
           </option>
         )
       })}

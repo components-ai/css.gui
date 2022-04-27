@@ -1,5 +1,6 @@
 import { compact } from 'lodash-es'
 import {
+  CSSUnitValue,
   Length,
   PercentageLengthUnits,
   ThemeUnits,
@@ -13,15 +14,15 @@ interface LengthInputProps {
   label: string
   property?: string
   keywords?: string[]
-  theme?: boolean
   number?: boolean
   percentage?: boolean
   keyword?: boolean
+  themeValues?: (CSSUnitValue & { id: string })[]
 }
 
 export function LengthInput({
   property,
-  theme,
+  themeValues = [],
   number,
   percentage,
   keyword,
@@ -29,7 +30,7 @@ export function LengthInput({
   ...props
 }: LengthInputProps) {
   const units = compact([
-    theme && ThemeUnits.Theme,
+    themeValues.length > 0 && ThemeUnits.Theme,
     number && UnitlessUnits.Number,
     'px',
     'em',
@@ -45,6 +46,7 @@ export function LengthInput({
       units={units}
       conversions={lengthConversions}
       steps={lengthSteps}
+      themeValues={themeValues}
       {...props}
     />
   )

@@ -24,7 +24,7 @@ import { SelectInput } from '../SelectInput'
 import { GLOBAL_KEYWORDS } from '../../data/global-keywords'
 import { Label } from '../primitives'
 import { kebabCase } from 'lodash-es'
-import { isThemeable } from '../../lib/theme'
+import { useThemeProperty } from '../providers/ThemeContext'
 
 type ControlProps = {
   field: KeyArg
@@ -34,6 +34,7 @@ const Control = ({ field }: ControlProps) => {
   const fieldset = useFieldset()
   const property = field.toString()
   const Component: ComponentType<any> = getInputComponent(property)
+  const themeValues = useThemeProperty(property)
 
   if (!Component) {
     console.error(`Unknown field: ${field}, ignoring`)
@@ -49,7 +50,7 @@ const Control = ({ field }: ControlProps) => {
       onChange={(newValue: any) => {
         setField(fullField, newValue)
       }}
-      property={property}
+      themeValues={themeValues}
       {...properties[property]}
     />
   )
@@ -173,7 +174,6 @@ const ResponsiveLengthInput = ({
   value,
   onChange,
   label,
-  property,
   ...props
 }: EditorPropsWithLabel<Length | ResponsiveLength> & { property: string }) => {
   return (
@@ -184,8 +184,6 @@ const ResponsiveLengthInput = ({
       Component={LengthInput}
       componentProps={{
         ...props,
-        property,
-        theme: isThemeable(property),
         keyword: true,
       }}
     />

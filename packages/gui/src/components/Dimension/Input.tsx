@@ -10,9 +10,9 @@ import { GLOBAL_KEYWORDS } from '../../data/global-keywords'
 import { Label, Number, UnitSelect, ValueSelect } from '../primitives'
 import { reducer } from './reducer'
 import { State } from './types'
-import { useThemeProperty } from '../providers/ThemeContext'
 import { EditorProps } from '../../types/editor'
 import { UnitConversions } from '../../lib/convert'
+import { kebabCase } from 'lodash-es'
 
 // Mapping of units to [min, max] tuple
 type UnitRanges = Record<string, [min: number, max: number]>
@@ -21,26 +21,25 @@ type UnitSteps = Record<string, number>
 
 export interface DimensionInputProps extends EditorProps<CSSUnitValue> {
   label?: string
-  property?: string
   range?: UnitRanges
   steps?: UnitSteps
   keywords?: string[]
   units?: readonly string[]
+  themeValues?: (CSSUnitValue & { id: string })[]
   conversions?: UnitConversions
 }
 export const DimensionInput = ({
   value,
   onChange,
   label,
-  property,
   range,
   keywords,
   units = [],
+  themeValues,
   steps,
   conversions = {},
 }: DimensionInputProps) => {
-  const id = React.useId()
-  const fullId = `${id}-${property || 'length'}`
+  const id = `${React.useId()}-${kebabCase(label)}`
   const [state, dispatch] = React.useReducer(reducer, {
     value: value?.value || 0,
     unit: value?.unit || AbsoluteLengthUnits.Px,
@@ -65,13 +64,12 @@ export const DimensionInput = ({
     }
   }, [state])
 
-  const propertyValues = useThemeProperty(property)
   const allKeywords = [...(keywords ?? []), ...GLOBAL_KEYWORDS]
 
   return (
     <div>
       {label && (
-        <Label htmlFor={fullId} sx={{ display: 'block' }}>
+        <Label htmlFor={id} sx={{ display: 'block' }}>
           {label}
         </Label>
       )}
@@ -82,7 +80,7 @@ export const DimensionInput = ({
           alignItems: 'center',
         }}
       >
-        {state.unit === KeywordUnits.Keyword && (
+        {state.unit === KeywordUnits.Keyword ? (
           <ValueSelect
             value={state.value}
             values={allKeywords}
@@ -93,40 +91,37 @@ export const DimensionInput = ({
               })
             }}
           />
-        )}
-        {state.themeId && (
+        ) : state.themeId ? (
           <ValueSelect
             onChange={(e: any) => {
-              const themeValue = propertyValues?.find(
+              const themeValue = themeValues?.find(
                 (p) => p.id === e.target.value
               )
               dispatch({
                 type: 'CHANGED_INPUT_TO_THEME_VALUE',
-                value: themeValue.value,
-                unit: themeValue.unit,
+                value: themeValue?.value ?? 0,
+                unit: (themeValue?.unit as any) ?? 'px',
                 themeId: e.target.value,
               })
             }}
-            values={propertyValues ?? []}
+            values={themeValues ?? []}
+          />
+        ) : (
+          <Number
+            id={id}
+            key={state.key}
+            value={state.value}
+            step={steps?.[state.unit]}
+            min={range?.[state.unit]?.[0]}
+            max={range?.[state.unit]?.[1]}
+            onChange={(newValue: number) => {
+              dispatch({
+                type: 'CHANGED_INPUT_VALUE',
+                value: newValue,
+              })
+            }}
           />
         )}
-        {state.unit !== ThemeUnits.Theme &&
-          state.unit !== KeywordUnits.Keyword && (
-            <Number
-              id={fullId}
-              key={state.key}
-              value={state.value}
-              step={steps?.[state.unit]}
-              min={range?.[state.unit]?.[0]}
-              max={range?.[state.unit]?.[1]}
-              onChange={(newValue: number) => {
-                dispatch({
-                  type: 'CHANGED_INPUT_VALUE',
-                  value: newValue,
-                })
-              }}
-            />
-          )}
         <UnitSelect
           units={units}
           value={state.themeId ? ThemeUnits.Theme : state.unit}
@@ -134,12 +129,12 @@ export const DimensionInput = ({
             const newUnit = e.target.value as FullLengthUnit
 
             if (newUnit === ThemeUnits.Theme) {
-              const themeValue = propertyValues[0]
+              const themeValue = themeValues?.[0]
               return dispatch({
                 type: 'CHANGED_INPUT_TO_THEME_VALUE',
-                value: themeValue.value,
-                unit: themeValue.unit,
-                themeId: themeValue.id,
+                value: themeValue?.value ?? 0,
+                unit: (themeValue?.unit as any) ?? 'px',
+                themeId: themeValue?.id,
               })
             }
 
