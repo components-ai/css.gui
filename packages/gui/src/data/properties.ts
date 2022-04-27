@@ -1,6 +1,14 @@
 import { ComponentType } from 'react'
+import BoxShadowPicker from '../components/BoxShadow/picker'
+import { stringifyBoxShadow } from '../components/BoxShadow/stringify'
 import EasingFunctionPicker from '../components/EasingFunction/picker'
 import { stringifyEasingFunction } from '../components/EasingFunction/stringify'
+import FilterPicker from '../components/Filter/picker'
+import { stringifyFilter } from '../components/Filter/stringify'
+import TextShadowPicker from '../components/TextShadow/picker'
+import { stringifyTextShadow } from '../components/TextShadow/stringify'
+import TransformPicker from '../components/Transform/picker'
+import { stringifyTransform } from '../components/Transform/stringify'
 import {
   AbsoluteLengthUnits,
   FontRelativeLengthUnits,
@@ -213,6 +221,10 @@ export const properties: Record<string, PropertyData> = {
     type: 'length',
     percentage: true,
     keywords: ['auto'],
+  },
+  boxShadow: {
+    type: BoxShadowPicker,
+    stringify: stringifyBoxShadow,
   },
   boxSizing: {
     type: 'keyword',
@@ -438,6 +450,10 @@ export const properties: Record<string, PropertyData> = {
   emptyCells: {
     type: 'keyword',
     keywords: ['show', 'hide'],
+  },
+  filter: {
+    type: FilterPicker,
+    stringify: stringifyFilter,
   },
   flexBasis: {
     type: 'length',
@@ -1321,6 +1337,10 @@ export const properties: Record<string, PropertyData> = {
       'geometricPrecision',
     ],
   },
+  textShadow: {
+    type: TextShadowPicker,
+    stringify: stringifyTextShadow,
+  },
   textTransform: {
     type: 'keyword',
     keywords: [
@@ -1355,6 +1375,10 @@ export const properties: Record<string, PropertyData> = {
       'pinch-zoom',
       'manipulation',
     ],
+  },
+  transform: {
+    type: TransformPicker,
+    stringify: stringifyTransform,
   },
   transformBox: {
     type: 'keyword',
