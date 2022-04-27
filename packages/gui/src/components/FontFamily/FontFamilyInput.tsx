@@ -127,7 +127,7 @@ export function FontFamilyInput({
             zIndex: 10,
           }}
         >
-          {isOpen && (
+          {isOpen && inputItems.length > 0 && (
             <div>
               <label sx={{ whiteSpace: 'nowrap', pr: 2 }}>
                 <input
@@ -155,7 +155,7 @@ export function FontFamilyInput({
               </label>
             </div>
           )}
-          {/* {inputItems.length === 0 && (
+          {isOpen && inputItems.length === 0 && (
             <div
               sx={{
                 display: 'flex',
@@ -185,7 +185,7 @@ export function FontFamilyInput({
                 <span sx={{ mr: 2 }}>Clear</span>  
               </button>
             </div>
-          )} */}
+          )}
           {isOpen && inputItems.map((item, index) => {
             return (
               <li
