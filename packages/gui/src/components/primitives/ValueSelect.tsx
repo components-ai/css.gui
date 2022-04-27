@@ -1,11 +1,20 @@
 interface ValueInputProps {
   onChange: (e: any) => void
+  value?: string
   values: any[]
 }
 
-export const ValueSelect = ({ onChange, values }: ValueInputProps): any => {
+export const ValueSelect = ({
+  onChange,
+  value,
+  values,
+}: ValueInputProps): any => {
   return (
-    <select onChange={onChange} sx={{ width: '100%', minHeight: '1.6em' }}>
+    <select
+      value={value}
+      onChange={onChange}
+      sx={{ width: '100%', minHeight: '1.6em' }}
+    >
       {values.map((v) => {
         return typeof v === 'string' ? (
           <option key={v}>{v}</option>
