@@ -1,6 +1,6 @@
 interface ValueInputProps {
   onChange: (e: any) => void
-  value?: string
+  value?: number | string
   values: any[]
 }
 
