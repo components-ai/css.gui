@@ -12,7 +12,7 @@ type PropertyData = {
   number?: boolean
   keywords?: Array<string>
   range?: UnitRanges
-  defaultValue?: string
+  defaultValue?: string | number
 }
 
 type UnitRanges = Record<string, [number, number]>
