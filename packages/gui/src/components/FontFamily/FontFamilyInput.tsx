@@ -84,8 +84,10 @@ export function FontFamilyInput({
       <input
         type='text'
         value={value}
-        {...getInputProps({ ref: inputRef })}
-        onChange={(e) => onChange(e.target.value)}
+        {...getInputProps({ 
+          ref: inputRef,
+          onChange: (e: any) => onChange(e.target.value)
+        })}
         onFocus={() => {
           if (!isOpen) {
             toggleMenu()
