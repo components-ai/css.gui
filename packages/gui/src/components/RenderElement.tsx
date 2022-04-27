@@ -76,6 +76,8 @@ export const getFontFamilyHref = async (font: string) => {
 }
 
 import * as React from 'react'
+import { debounce } from 'lodash-es'
+const debouncedGetFontFamilyHref = debounce(getFontFamilyHref, 1500)
 export const Fonts = ({fontFamily}: any) => {
   
   const [styleSheet, setStyleSheet] = React.useState<string | null>('')
@@ -83,6 +85,7 @@ export const Fonts = ({fontFamily}: any) => {
     // debounce
     const getStyleSheet = async () => {
       const ss = await getFontFamilyHref(fontFamily)
+      console.log(ss, "sss")
       setStyleSheet(ss)
     }
 
