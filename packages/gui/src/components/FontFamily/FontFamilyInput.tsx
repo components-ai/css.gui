@@ -61,7 +61,6 @@ export function FontFamilyInput({
   })
 
   const handleFilterItems = (inputValue: string) => {
-    console.log(inputValue, "inputValue")
     const filteredOptions = allOptions.filter((item) => {
       if (item.fontName.toLowerCase().startsWith(inputValue?.toLowerCase() || '')) {
         return (
@@ -86,7 +85,7 @@ export function FontFamilyInput({
         value={value}
         {...getInputProps({ 
           ref: inputRef,
-          onChange: (e: any) => onChange(e.target.value)
+          onChange: (e: any) => onChange(e.target.value),
         })}
         onFocus={() => {
           if (!isOpen) {
@@ -94,6 +93,9 @@ export function FontFamilyInput({
             handleFilterItems('')
           }
         }}
+        // onKeyDown={(e: any) => {
+        //   if (e.keyCode === 13) closeMenu()
+        // }}
         sx={{ width: '100%' }}
       />
       <div

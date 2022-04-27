@@ -33,7 +33,7 @@ type FontFamily = {
   weights: (string | number)[]
   styles: string[]
 }
-export const toGoogleFontUrl = async (families: FontFamily[]) => {
+export const toGoogleFontUrl = (families: FontFamily[]) => {
   if (!families?.length) return null
 
   let familiesFmt: any[] = []
@@ -57,56 +57,46 @@ export const toGoogleFontUrl = async (families: FontFamily[]) => {
 }
 
 export const getFontFamilyHref = async (font: string) => {
-  // const fontArr = fonts.split(',') // remove preceeding ' 's
-  // const fontFamilies = fontArr.map((v: any) => v?.stack || v).join(',')
-
-  const res = await fetch(`https://components.ai/api/v1/typefaces/${font}`)
-  const rawFontData = await res.json()
-  
-  //TODO: this will break for system fonts
-  const styles = Object.keys(rawFontData?.variants)
-  const weights = Object.keys(rawFontData?.variants[styles[0]])
-  const fontData: FontFamily = {
-    name: font,
-    weights,
-    styles
+  try {
+    const res = await fetch(`https://components.ai/api/v1/typefaces/${font}`)
+    const rawFontData = await res.json()
+    
+    const styles = Object.keys(rawFontData?.variants)
+    const weights = Object.keys(rawFontData?.variants[styles[0]])
+    const fontData: FontFamily = {
+      name: rawFontData?.name,
+      weights,
+      styles
+    }
+    
+    return toGoogleFontUrl([fontData])
+  } catch (e) {
+    console.log(`failed to fetch ${font} font`)
+    return null
   }
-  
-  return await toGoogleFontUrl([fontData])
 }
 
 import * as React from 'react'
 import { debounce } from 'lodash-es'
-const debouncedGetFontFamilyHref = debounce(getFontFamilyHref, 1500)
+
+const getStyleSheet = async (fontFamily: string, setStyleSheet: Function) => {
+  const sheet = await getFontFamilyHref(fontFamily)
+  if (sheet) setStyleSheet(sheet)
+}
+const debouncedGetStyleSheet = debounce(getStyleSheet, 1000)
+
 export const Fonts = ({fontFamily}: any) => {
-  
   const [styleSheet, setStyleSheet] = React.useState<string | null>('')
-  React.useEffect(() => {
-    // debounce
-    const getStyleSheet = async () => {
-      const ss = await getFontFamilyHref(fontFamily)
-      console.log(ss, "sss")
-      setStyleSheet(ss)
-    }
-
-    getStyleSheet()
-  }, [fontFamily])
-
   
-  console.log(styleSheet, "family")
+  React.useEffect(() => {
+    debouncedGetStyleSheet(fontFamily, setStyleSheet)
+  }, [fontFamily])
+ 
   return (
     <>
       {styleSheet ? (
         <link rel="stylesheet" href={styleSheet} />
       ) : null}
     </>
-  )
-  // const variableFontsStylesheetHref = getVariableFontFamilyHref(
-  //   fonts,
-  //   textStyles
-  // )
-
-  return (
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=ABeeZee:ital,wght@1,400&amp;family=ABeeZee:wght@400&amp;family=PT+Mono:wght@400" />
   )
 }
