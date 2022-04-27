@@ -15,6 +15,10 @@ const initialStyles: any = {
     unit: 'keyword',
   },
   width: {
+    value: '100',
+    unit: '%',
+  },
+  maxWidth: {
     value: 'auto',
     unit: 'keyword',
   },
@@ -80,7 +84,7 @@ export default function Docs() {
       >
         <div sx={{ px: [2, 3, 4] }}>
           <Editor styles={styles} onChange={setStyles} theme={DEFAULT_THEME}>
-            <div sx={{ display: 'grid', gap: '.5rem', width: '240px' }} >
+            <div sx={{ display: 'grid', gap: '.5rem', width: '240px' }}>
               <h3 sx={{ my: 0 }}>Typography</h3>
               <Inputs.FontSize />
               <Inputs.LineHeight />
@@ -103,24 +107,26 @@ export default function Docs() {
             </div>
           </Editor>
         </div>
-        <RenderElement tagName="p" styles={styles}>
-          “The parameters comprise sequences which are theoretically infinite
-          but limits are, of course, set to them in practice. There is an upward
-          limit to size and certainly a downward one... Within these sequences
-          there are reasonable bounds; extremes set by technical and functional
-          experience”
-          <br /> <br />
-          <em>
-            In{' '}
-            <Link
-              href="https://www.lars-mueller-publishers.com/designing-programmes-0"
-              passHref={true}
-            >
-              <a style={{ color: styles.color }}>Designing Programmes</a>
-            </Link>{' '}
-            by Karl Gerstner
-          </em>
-        </RenderElement>
+        <div sx={{ flexGrow: 1 }}>
+          <RenderElement tagName="p" styles={styles}>
+            “The parameters comprise sequences which are theoretically infinite
+            but limits are, of course, set to them in practice. There is an
+            upward limit to size and certainly a downward one... Within these
+            sequences there are reasonable bounds; extremes set by technical and
+            functional experience”
+            <br /> <br />
+            <em>
+              In{' '}
+              <Link
+                href="https://www.lars-mueller-publishers.com/designing-programmes-0"
+                passHref={true}
+              >
+                <a style={{ color: styles.color }}>Designing Programmes</a>
+              </Link>{' '}
+              by Karl Gerstner
+            </em>
+          </RenderElement>
+        </div>
       </div>
       <div className="full-bleed">
         <pre
