@@ -18,13 +18,13 @@ import { ColorInput } from '../ColorInput'
 import { LengthInput } from '../LengthInput'
 import { ResponsiveInput } from '../Responsive'
 import { sentenceCase } from '../../lib/util'
-// import { isThemeable } from '../../lib/theme'
 import { EditorProps } from '../../types/editor'
 import { DimensionInput } from '../Dimension'
 import { SelectInput } from '../SelectInput'
 import { GLOBAL_KEYWORDS } from '../../data/global-keywords'
 import { Label } from '../primitives'
 import { kebabCase } from 'lodash-es'
+import { isThemeable } from '../../lib/theme'
 
 type ControlProps = {
   field: KeyArg
@@ -49,6 +49,7 @@ const Control = ({ field }: ControlProps) => {
       onChange={(newValue: any) => {
         setField(fullField, newValue)
       }}
+      property={property}
       {...properties[property]}
     />
   )
@@ -152,15 +153,21 @@ const ResponsiveLengthInput = ({
   value,
   onChange,
   label,
+  property,
   ...props
-}: EditorPropsWithLabel<Length | ResponsiveLength>) => {
+}: EditorPropsWithLabel<Length | ResponsiveLength> & { property: string }) => {
   return (
     <ResponsiveInput
       label={label}
       value={value}
       onChange={onChange}
       Component={LengthInput}
-      componentProps={{ ...props, keyword: true }}
+      componentProps={{
+        ...props,
+        property,
+        theme: isThemeable(property),
+        keyword: true,
+      }}
     />
   )
 }
