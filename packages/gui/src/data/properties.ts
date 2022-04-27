@@ -512,7 +512,7 @@ export const properties: Record<string, PropertyData> = {
       [AbsoluteLengthUnits.Px]: [0, 512],
       [FontRelativeLengthUnits.Em]: [0, 16],
       [FontRelativeLengthUnits.Rem]: [0, 16],
-      [PercentageLengthUnits.Pct]: [0.1, 100],
+      [PercentageLengthUnits.Pct]: [0.1, 200],
     },
     keywords: [
       'xx-small',
