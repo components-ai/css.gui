@@ -26,11 +26,12 @@ const DEFAULT_THEME: Theme = {
     { id: '3', value: 32, unit: 'px' },
     { id: '4', value: 48, unit: 'px' },
     { id: '5', value: 64, unit: 'px' },
+    { id: '6', value: 96, unit: 'px' },
   ],
   lineHeights: [
     { id: '1', value: 1, unit: 'number' },
-    { id: '2', value: 1.2, unit: 'number' },
-    { id: '3', value: 1.4, unit: 'number' },
+    { id: '2', value: 1.25, unit: 'number' },
+    { id: '3', value: 1.5, unit: 'number' },
   ],
   colors: [
     {
