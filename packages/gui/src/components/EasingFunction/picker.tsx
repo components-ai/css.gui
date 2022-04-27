@@ -1,6 +1,6 @@
 import * as Collapsible from '@radix-ui/react-collapsible'
 import { EasingFunction } from './types'
-import { EditorProps } from '../editors/types'
+import { EditorProps } from '../../types/editor'
 import EasingFunctionField from './input'
 
 // A compact wrapper for the easing function field that is suitable for use in other contexts

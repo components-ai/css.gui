@@ -1,7 +1,7 @@
 import { kebabCase } from 'lodash-es'
 import { useId } from 'react'
 import { Label } from './primitives'
-import { EditorProps } from './editors/types'
+import { EditorProps } from '../types/editor'
 import { Number } from './primitives'
 
 interface Props extends EditorProps<number> {

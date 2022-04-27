@@ -1,6 +1,6 @@
 import * as Collapsible from '@radix-ui/react-collapsible'
 import { Filter } from './types'
-import { EditorProps } from '../editors/types'
+import { EditorProps } from '../../types/editor'
 import FilterContent, { Header } from './field'
 import { Label } from '../primitives'
 import { useId } from 'react'

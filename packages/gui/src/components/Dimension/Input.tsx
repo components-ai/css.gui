@@ -11,7 +11,7 @@ import { Label, Number, UnitSelect, ValueSelect } from '../primitives'
 import { reducer } from './reducer'
 import { State } from './types'
 import { useThemeProperty } from '../providers/ThemeContext'
-import { EditorProps } from '../editors/types'
+import { EditorProps } from '../../types/editor'
 import { UnitConversions } from '../../lib/convert'
 
 // Mapping of units to [min, max] tuple
@@ -84,11 +84,11 @@ export const DimensionInput = ({
           marginRight: 'auto',
         }}
       >
-       {label &&
-        <Label htmlFor={fullId} sx={{ marginRight: 1, minWidth: 16 }}>
-          {label ?? 'Number'}
-        </Label>
-       }
+        {label && (
+          <Label htmlFor={fullId} sx={{ marginRight: 1, minWidth: 16 }}>
+            {label ?? 'Number'}
+          </Label>
+        )}
 
         {state.unit === KeywordUnits.Keyword && (
           <ValueSelect

@@ -1,6 +1,6 @@
 import { ANGLE_UNITS, CSSUnitValue } from '../types/css'
 import { DimensionInput } from './Dimension'
-import { EditorProps } from './editors/types'
+import { EditorProps } from '../types/editor'
 
 // TODO allow optional percentage for conic gradients
 export function AngleInput({

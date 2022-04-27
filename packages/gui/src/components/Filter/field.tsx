@@ -11,7 +11,7 @@ import {
   AmountFilter,
 } from './types'
 import { stringifyFilter } from './stringify'
-import { EditorProps } from '../editors/types'
+import { EditorProps } from '../../types/editor'
 import { getInputProps } from '../../lib/util'
 import { SelectInput } from '../SelectInput'
 import { NumberPercentageInput } from '../NumberPercentageInput'

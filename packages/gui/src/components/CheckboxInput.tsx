@@ -1,6 +1,6 @@
 import { kebabCase } from 'lodash-es'
 import { useId } from 'react'
-import { EditorProps } from './editors/types'
+import { EditorProps } from '../types/editor'
 import { Label } from './primitives'
 
 export function CheckboxInput({

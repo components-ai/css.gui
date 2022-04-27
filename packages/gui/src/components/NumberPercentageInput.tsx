@@ -1,6 +1,6 @@
 import { NUMBER_PERCENTAGE_UNITS, CSSUnitValue } from '../types/css'
 import { DimensionInput } from './Dimension'
-import { EditorProps } from './editors/types'
+import { EditorProps } from '../types/editor'
 
 /**
  * Input usually representing a ratio that can be expressed as either

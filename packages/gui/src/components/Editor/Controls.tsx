@@ -19,7 +19,7 @@ import { LengthInput } from '../LengthInput'
 import { ResponsiveInput } from '../Responsive'
 import { sentenceCase } from '../../lib/util'
 // import { isThemeable } from '../../lib/theme'
-import { EditorProps } from '../editors/types'
+import { EditorProps } from '../../types/editor'
 import { DimensionInput } from '../Dimension'
 import { SelectInput } from '../SelectInput'
 import { GLOBAL_KEYWORDS } from '../../data/global-keywords'
@@ -33,7 +33,6 @@ const Control = ({ field }: ControlProps) => {
   const { getField, setField } = useEditor()
   const fieldset = useFieldset()
   const property = field.toString()
-  // const Component = controlMap[field.toString()]
   const Component: ComponentType<any> = getInputComponent(property)
 
   if (!Component) {

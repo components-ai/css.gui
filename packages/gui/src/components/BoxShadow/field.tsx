@@ -6,7 +6,7 @@ import LayerHeader from '../LayerHeader'
 
 import { BoxShadow } from './types'
 import { stringifyBoxShadow } from './stringify'
-import { EditorProps } from '../editors/types'
+import { EditorProps } from '../../types/editor'
 import { getInputProps } from '../../lib/util'
 
 export default function BoxShadowsField({

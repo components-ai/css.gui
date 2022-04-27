@@ -1,6 +1,6 @@
 import { useId } from 'react'
 import { Color } from '../types/css'
-import { EditorProps } from './editors/types'
+import { EditorProps } from '../types/editor'
 import { ColorPopover, Label } from './primitives'
 import { useTheme } from './providers/ThemeContext'
 

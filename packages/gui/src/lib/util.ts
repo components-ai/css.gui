@@ -1,4 +1,4 @@
-import { EditorProps } from '../components/editors/types'
+import { EditorProps } from '../types/editor'
 import { isPseudoClass, isPseudoElement } from './pseudos'
 import { isElement } from './elements'
 import { lowerCase, upperFirst } from 'lodash-es'

@@ -1,6 +1,6 @@
 import { ColorInput } from '../ColorInput'
 import { LengthInput } from '../LengthInput'
-import { EditorProps } from '../editors/types'
+import { EditorProps } from '../../types/editor'
 import { TextShadow } from './types'
 
 import { stringifyTextShadow } from './stringify'

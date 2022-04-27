@@ -13,7 +13,7 @@ import {
   TransformType,
   Translate,
 } from './types'
-import { EditorProps } from '../editors/types'
+import { EditorProps } from '../../types/editor'
 import {
   EditorPropsWithLabel,
   getInputProps as _getInputProps,

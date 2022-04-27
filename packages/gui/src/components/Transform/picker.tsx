@@ -1,6 +1,6 @@
 import * as Collapsible from '@radix-ui/react-collapsible'
 import { Transform } from './types'
-import { EditorProps } from '../editors/types'
+import { EditorProps } from '../../types/editor'
 import TransformContent, { Header } from './field'
 import { Label } from '../primitives'
 import { useId } from 'react'

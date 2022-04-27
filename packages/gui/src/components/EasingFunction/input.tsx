@@ -11,7 +11,7 @@ import {
 import { CubicBezierGraph, StepsGraph, EasingFunctionGraph } from './graphs'
 import { getKeywordValue } from './keywords'
 import * as Tabs from '@radix-ui/react-tabs'
-import { EditorProps } from '../editors/types'
+import { EditorProps } from '../../types/editor'
 import { SelectInput } from '../SelectInput'
 import { getInputProps } from '../../lib/util'
 import { Label } from '../primitives'
