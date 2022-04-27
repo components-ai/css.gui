@@ -1,6 +1,6 @@
 import { kebabCase } from 'lodash-es'
 import { useId } from 'react'
-import { Label } from 'theme-ui'
+import { Label } from './primitives'
 
 interface Props<T extends string> {
   label: string
