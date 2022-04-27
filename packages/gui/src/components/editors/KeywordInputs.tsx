@@ -1,8 +1,9 @@
 import { mapValues, pickBy } from 'lodash-es'
-import { properties, getPropertyLabel } from '../../data/properties'
+import { properties } from '../../data/properties'
 import { EditorProps } from './types'
 import { GLOBAL_KEYWORDS } from '../../data/global-keywords'
 import { SelectInput } from '../SelectInput'
+import { sentenceCase } from '../../lib/util'
 
 const keywordProperties = pickBy(
   properties,
@@ -16,7 +17,7 @@ export const keywordInputs = mapValues(keywordProperties, (property, name) => {
   return ({ value, onChange }: EditorProps<string>) => {
     return (
       <SelectInput
-        label={getPropertyLabel(name)}
+        label={sentenceCase(name)}
         value={value || DEFAULT_KEYWORD}
         onChange={onChange}
         options={[...(property.keywords ?? []), ...GLOBAL_KEYWORDS]}

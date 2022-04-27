@@ -1,11 +1,12 @@
 import { mapValues, pickBy } from 'lodash-es'
-import { properties, getPropertyLabel } from '../../data/properties'
+import { properties } from '../../data/properties'
 import { isThemeable } from '../../lib/theme'
 import { Length, ResponsiveLength, CSSUnitValue } from '../../types/css'
 import { DimensionInput } from '../Dimension'
 import { ResponsiveInput } from '../Responsive'
 import { EditorProps } from './types'
 import { LengthInput } from '../LengthInput'
+import { sentenceCase } from '../../lib/util'
 
 const lengthProperties = pickBy(
   properties,
@@ -18,7 +19,7 @@ export const lengthInputs = mapValues(lengthProperties, (property, name) => {
   return ({ value, onChange }: LengthEditorProps) => {
     return (
       <ResponsiveInput
-        label={getPropertyLabel(name)}
+        label={sentenceCase(name)}
         property={name}
         value={value}
         onChange={onChange}
@@ -45,7 +46,7 @@ export const percentageInputs = mapValues(
       return (
         <DimensionInput
           value={value}
-          label={getPropertyLabel(name)}
+          label={sentenceCase(name)}
           onChange={onChange}
           property={name}
           units={['%', 'keyword']}
@@ -67,7 +68,7 @@ export const numberInputs = mapValues(numberProperties, (property, name) => {
     return (
       <DimensionInput
         value={value}
-        label={getPropertyLabel(name)}
+        label={sentenceCase(name)}
         onChange={onChange}
         property={name}
         units={['number', 'keyword']}

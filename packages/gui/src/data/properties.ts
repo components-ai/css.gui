@@ -1,4 +1,3 @@
-import { lowerCase, upperFirst } from 'lodash-es'
 import {
   AbsoluteLengthUnits,
   FontRelativeLengthUnits,
@@ -16,10 +15,6 @@ type PropertyData = {
 }
 
 type UnitRanges = Record<string, [number, number]>
-
-export const getPropertyLabel = (property: string) => {
-  return upperFirst(lowerCase(property))
-}
 
 export const properties: Record<string, PropertyData> = {
   accentColor: {

@@ -1,8 +1,9 @@
 import { mapValues, pickBy } from 'lodash-es'
-import { properties, getPropertyLabel } from '../../data/properties'
+import { properties } from '../../data/properties'
 import { EditorProps } from './types'
 import { DimensionInput } from '../Dimension'
 import { TIME_UNITS, CSSUnitValue } from '../../types/css'
+import { sentenceCase } from '../../lib/util'
 
 const timeProperties = pickBy(
   properties,
@@ -16,7 +17,7 @@ export const timeInputs = mapValues(timeProperties, (property, name) => {
     return (
       <DimensionInput
         value={value}
-        label={getPropertyLabel(name)}
+        label={sentenceCase(name)}
         onChange={onChange}
         property={name}
         units={[...TIME_UNITS, 'keyword']}

@@ -1,10 +1,11 @@
 import { mapValues, pickBy } from 'lodash-es'
-import { getPropertyLabel, properties } from '../../data/properties'
+import { properties } from '../../data/properties'
 import { EditorProps } from './types'
 import { EasingFunctionEditor } from '../EasingFunction'
 import { EasingFunction } from '../EasingFunction/types'
 import { useId } from 'react'
 import { Label } from '../primitives'
+import { sentenceCase } from '../../lib/util'
 
 const easingFunctionProperties = pickBy(
   properties,
@@ -18,7 +19,7 @@ export const easingFunctionInputs = mapValues(
       const id = `${useId()}-easing-function`
       return (
         <>
-          <Label htmlFor={id}>{getPropertyLabel(name)}</Label>
+          <Label htmlFor={id}>{sentenceCase(name)}</Label>
           <EasingFunctionEditor value={value} onChange={onChange} />
         </>
       )
