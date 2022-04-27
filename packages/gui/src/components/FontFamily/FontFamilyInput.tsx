@@ -96,7 +96,13 @@ export function FontFamilyInput({
         }}
         sx={{ width: '100%' }}
       />
-      <div>
+      <div
+        sx={{
+          position: 'relative',
+          width: '100%',
+          display: isOpen ? 'block' : 'none',
+        }}
+      >
         <ul
           {...getMenuProps()}
           sx={{
@@ -111,6 +117,7 @@ export function FontFamilyInput({
             marginRight: 0,
             top: 0,
             left: '-1px',
+            position: 'absolute',
             right: 0,
             width: 'calc(100% + 2px)',
             listStyleType: 'none',
