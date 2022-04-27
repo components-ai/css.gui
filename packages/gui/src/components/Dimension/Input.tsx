@@ -84,9 +84,11 @@ export const DimensionInput = ({
           marginRight: 'auto',
         }}
       >
+       {label &&
         <Label htmlFor={fullId} sx={{ marginRight: 1, minWidth: 16 }}>
           {label ?? 'Number'}
         </Label>
+       }
 
         {state.unit === KeywordUnits.Keyword && (
           <ValueSelect

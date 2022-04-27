@@ -74,7 +74,6 @@ export const ResponsiveInput = ({
     <Component
       value={value}
       onChange={handleChange}
-      label="All"
       property={property}
       {...componentProps}
     />
