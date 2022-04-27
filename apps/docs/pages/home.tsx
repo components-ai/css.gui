@@ -80,14 +80,14 @@ export default function Docs() {
       >
         <div sx={{ px: [2, 3, 4] }}>
           <Editor styles={styles} onChange={setStyles} theme={DEFAULT_THEME}>
-            <>
-              <h3 sx={{ m: 0 }}>Typography</h3>
+            <div sx={{ display: 'grid', gap: '.5rem', width: '240px' }} >
+              <h3 sx={{ my: 0 }}>Typography</h3>
               <Inputs.FontSize />
               <Inputs.LineHeight />
               <Inputs.TextAlign />
               <Inputs.FontStretch />
               <Inputs.Margin />
-              <h3>Colors</h3>
+              <h3 sx={{ mt: 4, mb: 0 }}>Colors</h3>
               <div sx={{ display: 'flex' }}>
                 <div sx={{ mr: 2 }}>
                   <Inputs.Color />
@@ -96,10 +96,11 @@ export default function Docs() {
                   <Inputs.BackgroundColor />
                 </div>
               </div>
-              <h3>Size</h3>
+              <h3 sx={{ mt: 4, mb: 0 }}>Size</h3>
               <Inputs.Width />
+              <Inputs.MaxWidth />
               <Inputs.Height />
-            </>
+            </div>
           </Editor>
         </div>
         <RenderElement tagName="p" styles={styles}>

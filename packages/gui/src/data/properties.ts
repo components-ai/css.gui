@@ -657,6 +657,7 @@ export const properties: Record<string, PropertyData> = {
     type: 'length',
     percentage: true,
     keywords: ['max-content', 'min-content', 'auto'],
+    defaultValue: 'auto',
   },
   hyphens: {
     type: 'keyword',
@@ -767,6 +768,7 @@ export const properties: Record<string, PropertyData> = {
     type: 'length',
     percentage: true,
     number: true,
+    range: { number: [0, 2] },
     keywords: ['normal'],
   },
   margin: {
@@ -970,7 +972,7 @@ export const properties: Record<string, PropertyData> = {
   orphans: {
     type: 'number',
     defaultValue: 2,
-    range: { number: [1, Infinity] },
+    range: { number: [1, 10] },
   },
   outlineColor: {
     type: 'color',
@@ -1439,6 +1441,7 @@ export const properties: Record<string, PropertyData> = {
     type: 'length',
     percentage: true,
     keywords: ['max-content', 'min-content', 'auto'],
+    defaultValue: '100%',
   },
   wordBreak: {
     type: 'keyword',

@@ -69,27 +69,17 @@ export const DimensionInput = ({
   const allKeywords = [...(keywords ?? []), ...GLOBAL_KEYWORDS]
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        alignItems: 'center',
+    <div>
+      {label &&
+       <Label htmlFor={fullId} sx={{ display: 'block', }}>
+         {label}
+       </Label>
+      }
+      <div sx={{
+        display: 'flex', 
         width: '100%',
-      }}
-    >
-      <div
-        sx={{
-          display: 'flex',
-          flexGrow: 1,
-          alignItems: 'center',
-          marginRight: 'auto',
-        }}
-      >
-       {label &&
-        <Label htmlFor={fullId} sx={{ marginRight: 1, minWidth: 16 }}>
-          {label ?? 'Number'}
-        </Label>
-       }
-
+        alignItems: 'center',
+        }}>
         {state.unit === KeywordUnits.Keyword && (
           <ValueSelect
             values={allKeywords}
@@ -101,7 +91,6 @@ export const DimensionInput = ({
             }}
           />
         )}
-
         {state.themeId && (
           <ValueSelect
             onChange={(e: any) => {
@@ -118,7 +107,6 @@ export const DimensionInput = ({
             values={propertyValues ?? []}
           />
         )}
-
         {state.unit !== ThemeUnits.Theme &&
           state.unit !== KeywordUnits.Keyword && (
             <Number
@@ -136,7 +124,6 @@ export const DimensionInput = ({
               }}
             />
           )}
-      </div>
       <UnitSelect
         units={units}
         value={state.themeId ? ThemeUnits.Theme : state.unit}
@@ -169,6 +156,7 @@ export const DimensionInput = ({
         }}
         sx={{ marginLeft: 1, minHeight: '1.6em', width: 72 }}
       />
+      </div>
     </div>
   )
 }
