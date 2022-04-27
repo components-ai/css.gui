@@ -1,3 +1,5 @@
+import { ComponentType } from 'react'
+import EasingFunctionPicker from '../components/EasingFunction/picker'
 import {
   AbsoluteLengthUnits,
   FontRelativeLengthUnits,
@@ -6,7 +8,7 @@ import {
 import { ANIMATABLE_PROPERTIES } from './animatable'
 
 type PropertyData = {
-  type: string
+  type: string | ComponentType<any>
   percentage?: boolean
   number?: boolean
   keywords?: Array<string>
@@ -91,7 +93,7 @@ export const properties: Record<string, PropertyData> = {
     type: 'keyword',
     keywords: ANIMATABLE_PROPERTIES,
   },
-  animationTimingFunction: { type: 'easing-function' },
+  animationTimingFunction: { type: EasingFunctionPicker },
   appearance: {
     type: 'keyword',
     keywords: [
@@ -1368,7 +1370,7 @@ export const properties: Record<string, PropertyData> = {
   transitionDuration: { type: 'time' },
   // TODO this should be a combobox
   transitionProperty: { type: 'keyword', keywords: ANIMATABLE_PROPERTIES },
-  transitionTimingFunction: { type: 'easing-function' },
+  transitionTimingFunction: { type: EasingFunctionPicker },
   unicodeBidi: {
     type: 'keyword',
     keywords: [
