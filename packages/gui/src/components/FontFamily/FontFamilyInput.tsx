@@ -14,15 +14,12 @@ export function FontFamilyInput({
   label,
   value,
   onChange,
-}: Props) {
-  const theme = useTheme()
+}: Props) {  
   const id = React.useId()
   const fullId = `${id}-${property || 'fontfamily'}`
 
-  const inputRef = React.useRef(null)
   const [allOptions, setAllOptions] = React.useState<Font[]>([])
   const [inputItems, setInputItems] = React.useState<string[]>([])
-
 
   React.useEffect(() => {
     const getFontData = async () => {
@@ -34,9 +31,18 @@ export function FontFamilyInput({
     getFontData()
   }, [])
 
+  // TODO use reducer pattern
+  const [includeSans, setIncSans] = React.useState<boolean>(true)
+  const [includeSerif, setIncSerif] = React.useState<boolean>(true)
+  const [includeMono, setIncMono] = React.useState<boolean>(true)
+  React.useEffect(() => {
+    handleFilterItems(value)
+  }, [includeMono, includeSans, includeSerif])
+
   const {
     isOpen,
     closeMenu,
+    toggleMenu,
     getMenuProps,
     getInputProps,
     getComboboxProps,
@@ -54,14 +60,14 @@ export function FontFamilyInput({
   })
 
   const handleFilterItems = (inputValue: string) => {
+    console.log(inputValue, "inputValue")
     const filteredOptions = allOptions.filter((item) => {
       if (item.fontName.toLowerCase().startsWith(inputValue?.toLowerCase() || '')) {
-        return item
-        // return (
-        //   (includeSans && item.category === 'sans-serif') ||
-        //   (includeSerif && item.category === 'serif') ||
-        //   (includeMono && item.category === 'monospace')
-        // )
+        return (
+          (includeSans && item.category === FontCategory.Sans) ||
+          (includeSerif && item.category === FontCategory.Serif) ||
+          (includeMono && item.category === FontCategory.Mono)
+        )
       }
     })
 
@@ -73,10 +79,17 @@ export function FontFamilyInput({
       <label>{label}</label>
       <input
         type='text'
-        onChange={(e) => onChange(e.target.value)}
         value={value}
-        sx={{ width: '100%' }}
         {...getInputProps()}
+        onChange={(e) => onChange(e.target.value)}
+        onFocus={() => {
+          if (!isOpen) {
+            toggleMenu()
+            handleFilterItems('')
+          }
+        }}
+        // value={value}
+        sx={{ width: '100%' }}
       />
       <div>
         <ul
@@ -89,10 +102,9 @@ export function FontFamilyInput({
             paddingBottom: 0,
             pl: 0,
             pr: 0,
-            // position: 'absolute',
             marginLeft: 0,
             marginRight: 0,
-            top: '0',
+            top: 0,
             left: '-1px',
             right: 0,
             width: 'calc(100% + 2px)',
@@ -105,16 +117,37 @@ export function FontFamilyInput({
             borderBottomColor: isOpen ? 'border' : 'transparent',
             maxHeight: 320,
             overflow: 'auto',
-            borderBottomRightRadius: 7,
-            borderBottomLeftRadius: 7,
             borderTopRightRadius: 0,
             borderTopLeftRadius: 0,
-            zIndex: 16,
+            zIndex: 10,
           }}
         >
-          {inputItems.length === 0 && (
+          {isOpen && (
             <div>
-              <span>No Results</span>
+              <label sx={{ whiteSpace: 'nowrap', pr: 2 }}>
+                <input
+                  type="checkbox"
+                  checked={includeSans}
+                  onChange={() => setIncSans(!includeSans)}
+                />
+                <span sx={{ fontWeight: 400, pl: 0 }}>Sans</span>
+              </label>
+              <label sx={{ whiteSpace: 'nowrap', pr: 2 }}>
+                <input
+                  type="checkbox"
+                  checked={includeSerif}
+                  onChange={() => setIncSerif(!includeSerif)}
+                />
+                <span sx={{ fontWeight: 400, pl: 0 }}>Serif</span>
+              </label>
+              <label sx={{ whiteSpace: 'nowrap', pr: 2 }}>
+                <input
+                  type="checkbox"
+                  checked={includeMono}
+                  onChange={() => setIncMono(!includeMono)}
+                />
+                <span sx={{ fontWeight: 400, pl: 0 }}>Monospace</span>
+              </label>
             </div>
           )}
           {isOpen && inputItems.map((item, index) => {
@@ -138,7 +171,7 @@ export function FontFamilyInput({
                 {...getItemProps({ item, index })}
                 onClick={() => {
                   onChange(inputItems[highlightedIndex])
-                  // toggleMenu()
+                  toggleMenu()
                 }}
               >
                 {item}
