@@ -8,7 +8,7 @@ export const stringifyProperty = (
   property: string = '', // In the future the property might determine how we stringify
   value?: unknown
 ): Array<string | null> | string | number | null => {
-  const stringify = properties[property].stringify
+  const stringify = properties[property]?.stringify
   if (stringify) {
     return stringify(value)
   }
