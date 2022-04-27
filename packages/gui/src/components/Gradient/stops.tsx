@@ -7,6 +7,7 @@ import { Minus, Plus } from 'react-feather'
 import { randomColor } from '../../lib/color'
 import { ColorInput } from '../ColorInput'
 import { NumberInput } from '../NumberInput'
+import produce from 'immer'
 
 interface StopsProps {
   value: GradientStopValue[]
@@ -34,8 +35,10 @@ export default function GradientStopsField({
           100
         )
 
-        const newValue = [...value]
-        newValue[dragIndex].hinting = updated
+        const newValue = produce(value, (draft: any) => {
+          draft[dragIndex].hinting = updated
+        })
+
         onChange(newValue)
       }
     },
@@ -78,8 +81,11 @@ export default function GradientStopsField({
           if (selected === value.length - 1) {
             setSelected((selected) => selected - 1)
           }
-          const newValue = [...value]
-          newValue.splice(selected, 1)
+
+          const newValue = produce(value, (draft: any) => {
+            draft.splice(selected, 1)
+          })
+
           onChange(newValue)
         }}
       />
@@ -109,14 +115,17 @@ export default function GradientStopsField({
               onKeyDown={(e) => {
                 switch (e.key) {
                   case 'ArrowLeft': {
-                    const newValue = [...value]
-                    newValue[i].hinting = newValue[i].hinting - 1
+                    const newValue = produce(value, (draft: any) => {
+                      draft[i].hinting = newValue[i].hinting - 1
+                    })
                     onChange(newValue)
                     break
                   }
                   case 'ArrowRight': {
-                    const newValue = [...value]
-                    newValue[i].hinting = newValue[i].hinting + 1
+                    const newValue = produce(value, (draft: any) => {
+                      draft[i].hinting = newValue[i].hinting + 1
+                    })
+
                     onChange(newValue)
                     break
                   }
@@ -128,6 +137,8 @@ export default function GradientStopsField({
         })}
       </div>
       {selected !== -1 && value[selected] && (
+        // TODO: Make this properly affect the _array_ value rather than turn it into
+        // number keys within an object.
         <StopFields {...getInputProps({ value, onChange }, selected)} />
       )}
     </div>
