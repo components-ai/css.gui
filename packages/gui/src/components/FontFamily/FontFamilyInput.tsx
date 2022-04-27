@@ -239,11 +239,25 @@ const enum FontCategory {
 
 const getAllOptions = async (): Promise<Font[]> => {
   const opts: Font[] = []
-  const res = await fetch('https://components.ai/api/v1/typefaces/list')
+  const rawGoogData = await fetch('https://components.ai/api/v1/typefaces/list')
+  // const rawSystemData = await fetch('https://components.ai/api/v1/typefaces/system')
 
   // system fonts 
-  const googFontsData = (await res.json()) as any
+  // const systemFonts = (await rawSystemData.json()) as any
+  // systemFonts.forEach(({ name, type }: any) => {
+  //   if (
+  //     type === FontCategory.Sans ||
+  //     type === FontCategory.Serif ||
+  //     type === FontCategory.Mono
+  //   ) {
+  //     opts.push({
+  //       fontName: name,
+  //       category: type,
+  //     })
+  //   }
+  // })
 
+  const googFontsData = (await rawGoogData.json()) as any
   googFontsData.forEach((font: any) => {
     const { category, name } = font
     if (
