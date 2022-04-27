@@ -119,6 +119,8 @@ function getPrimitiveInput(type: string) {
       return KeywordInput
     case 'number':
       return NumberInput
+    case 'percentage':
+      return PercentageInput
     case 'length':
       return ResponsiveLengthInput
     case 'time':
@@ -144,6 +146,24 @@ const NumberInput = ({
       onChange={onChange}
       units={['number', 'keyword']}
       steps={{ number: 1 }}
+      {...props}
+    />
+  )
+}
+
+const PercentageInput = ({
+  value,
+  onChange,
+  label,
+  ...props
+}: EditorPropsWithLabel<CSSUnitValue>) => {
+  return (
+    <DimensionInput
+      value={value}
+      label={label}
+      onChange={onChange}
+      units={['%', 'keyword']}
+      steps={{ '%': 0.1 }}
       {...props}
     />
   )
