@@ -487,6 +487,7 @@ export const properties: Record<string, PropertyData> = {
   flexGrow: {
     type: 'number',
     defaultValue: 0,
+    range: { number: [0, Infinity] },
   },
   flexWrap: {
     type: 'keyword',
@@ -969,6 +970,7 @@ export const properties: Record<string, PropertyData> = {
   orphans: {
     type: 'number',
     defaultValue: 2,
+    range: { number: [1, Infinity] },
   },
   outlineColor: {
     type: 'color',
@@ -1431,6 +1433,7 @@ export const properties: Record<string, PropertyData> = {
   widows: {
     type: 'number',
     defaultValue: 2,
+    range: { number: [1, Infinity] },
   },
   width: {
     type: 'length',
