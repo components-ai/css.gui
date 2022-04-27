@@ -21,6 +21,7 @@ export function FontFamilyInput({
   const [allOptions, setAllOptions] = React.useState<Font[]>([])
   const [inputItems, setInputItems] = React.useState<string[]>([])
 
+  const inputRef = React.useRef(null)
   React.useEffect(() => {
     const getFontData = async () => {
       const options = await getAllOptions()
@@ -75,12 +76,15 @@ export function FontFamilyInput({
     setInputItems(items)
   }
   return (
-    <div {...getComboboxProps()}>
+    <div 
+      {...getComboboxProps()}
+      id={fullId}
+    >
       <label>{label}</label>
       <input
         type='text'
         value={value}
-        {...getInputProps()}
+        {...getInputProps({ ref: inputRef })}
         onChange={(e) => onChange(e.target.value)}
         onFocus={() => {
           if (!isOpen) {
@@ -92,7 +96,7 @@ export function FontFamilyInput({
       />
       <div>
         <ul
-          {...getMenuProps}
+          {...getMenuProps()}
           sx={{
             bg: 'background',
             fontSize: 0,
@@ -149,6 +153,37 @@ export function FontFamilyInput({
               </label>
             </div>
           )}
+          {/* {inputItems.length === 0 && (
+            <div
+              sx={{
+                display: 'flex',
+                width: '100%',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                paddingY: 2,
+                paddingX: 3,
+                fontSize: 1,
+              }}
+            >
+              <span>No results</span>
+              <button
+                sx={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                }}
+                onClick={() => {
+                  onChange('')
+                  // @ts-ignore
+                  inputRef.current.focus()
+                  if (!isOpen) {
+                    toggleMenu()
+                  }
+                }}
+              >
+                <span sx={{ mr: 2 }}>Clear</span>  
+              </button>
+            </div>
+          )} */}
           {isOpen && inputItems.map((item, index) => {
             return (
               <li
