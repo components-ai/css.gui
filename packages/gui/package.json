@@ -15,6 +15,10 @@
     "readme.md",
     "CHANGELOG.md"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/components-ai/css.gui"
+  },
   "peerDependencies": {
     "react": ">= 18",
     "react-dom": ">= 18"
