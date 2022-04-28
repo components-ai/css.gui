@@ -3,7 +3,6 @@ import Link from 'next/link'
 import { Editor, Inputs, RenderElement, codegen } from '@compai/css-gui'
 import { initialStyles } from '../../data/initial-styles'
 import { defaultTheme } from '../../data/default-theme'
-import { Fieldset } from '@compai/css-gui'
 
 export function Demo() {
   const [styles, setStyles] = useState<any>(initialStyles)
@@ -31,12 +30,6 @@ export function Demo() {
               <Inputs.FontStretch />
               <Inputs.Margin />
               <Inputs.FontFamily />
-              <Fieldset type="element" name="a">
-                <Inputs.FontSize />
-                <Fieldset type="pseudo-class" name="link">
-                  <Inputs.FontSize />
-                </Fieldset>
-              </Fieldset>
               <h3 sx={{ mt: 4, mb: 0 }}>Colors</h3>
               <div sx={{ display: 'flex' }}>
                 <div sx={{ mr: 2 }}>
