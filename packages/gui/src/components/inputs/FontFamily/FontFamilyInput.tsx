@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { property } from 'lodash-es'
-import { FontType } from '../../../types/css'
+import { FontFamilyType } from '../../../types/css'
 import { EditorProps } from '../../../types/editor'
 import { Label } from '../../primitives'
 import { useCombobox } from 'downshift'
@@ -16,9 +16,9 @@ const enum FontCategory {
   Serif = 'serif',
 }
 
-interface Props extends EditorProps<FontType> {
+interface Props extends EditorProps<FontFamilyType> {
   label: string,
-  defaultValue?: FontType
+  defaultValue?: FontFamilyType
 }
 
 

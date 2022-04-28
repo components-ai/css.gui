@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { ColorPopover } from '@compai/css-gui'
 
-
 export const ColorPickerExample = () => {
   const [color, setColor] = useState('tomato')
 
