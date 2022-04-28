@@ -1,14 +1,26 @@
 import * as React from 'react'
 import { property } from 'lodash-es'
-import { FontFam } from '../../../types/css'
+import { FontType } from '../../../types/css'
 import { EditorProps } from '../../../types/editor'
 import { Label } from '../../primitives'
 import { useCombobox } from 'downshift'
 
-interface Props extends EditorProps<FontFam> {
-  label: string,
-  defaultValue?: FontFam
+type Font = {
+  fontName: string,
+  category: FontCategory
 }
+
+const enum FontCategory {
+  Sans = 'sans-serif',
+  Mono = 'monospace',
+  Serif = 'serif',
+}
+
+interface Props extends EditorProps<FontType> {
+  label: string,
+  defaultValue?: FontType
+}
+
 
 export function FontFamilyInput({
   label,
@@ -32,7 +44,6 @@ export function FontFamilyInput({
     getFontData()
   }, [])
 
-  // TODO use reducer pattern
   const [includeSans, setIncSans] = React.useState<boolean>(true)
   const [includeSerif, setIncSerif] = React.useState<boolean>(true)
   const [includeMono, setIncMono] = React.useState<boolean>(true)
@@ -42,7 +53,6 @@ export function FontFamilyInput({
 
   const {
     isOpen,
-    closeMenu,
     toggleMenu,
     getMenuProps,
     getInputProps,
@@ -228,17 +238,6 @@ export function FontFamilyInput({
       </div>
     </div>
   )
-}
-
-type Font = {
-  fontName: string,
-  category: FontCategory
-}
-
-const enum FontCategory {
-  Sans = 'sans-serif',
-  Mono = 'monospace',
-  Serif = 'serif',
 }
 
 const getAllOptions = async (): Promise<Font[]> => {

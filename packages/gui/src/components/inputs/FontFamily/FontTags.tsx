@@ -1,15 +1,14 @@
 import * as React from 'react'
 import { debounce } from 'lodash-es'
+import { plusify } from '../../../lib/util'
 
-const plusify = (name: string) => name.replace(/\s/g, '+')
-
-type FontFamily = {
+type FontFamilyData = {
   name: string
   weights: (string | number)[]
   styles: string[]
 }
 
-const toGoogleFontUrl = (families: FontFamily[]) => {
+const toGoogleFontUrl = (families: FontFamilyData[]) => {
   if (!families?.length) return null
 
   let familiesFmt: any[] = []
@@ -39,7 +38,7 @@ const getFontFamilyHref = async (font: string) => {
     
     const styles = Object.keys(rawFontData?.variants)
     const weights = Object.keys(rawFontData?.variants[styles[0]])
-    const fontData: FontFamily = {
+    const fontData: FontFamilyData = {
       name: rawFontData?.name,
       weights,
       styles
@@ -58,7 +57,7 @@ const getStyleSheet = async (fontFamily: string, setStyleSheet: Function) => {
 }
 const debouncedGetStyleSheet = debounce(getStyleSheet, 1000)
 
-export const Fonts = ({fontFamily}: any) => {
+export const FontTags = ({fontFamily}: any) => {
   const [styleSheet, setStyleSheet] = React.useState<string | null>('')
   
   React.useEffect(() => {

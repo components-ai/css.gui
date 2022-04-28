@@ -1,6 +1,6 @@
-import { EditorProps } from './types'
-import { FontFam } from '../../types/css'
-import { FontFamilyInput } from '../../components/FontFamily/FontFamilyInput'
+import { EditorProps } from '../types/editor'
+import { FontFam } from '../types/css'
+import { FontFamilyInput } from '../components/inputs/FontFamily/FontFamilyInput'
 
 export const FontFamily = ({value, onChange}: EditorProps<FontFam>) => {
   return (

@@ -1,7 +1,7 @@
 import { HTMLAttributes } from 'react'
 import { toCSSObject } from '../lib'
 import { Styles } from '../types/css'
-import { Fonts } from './inputs/FontFamily/FontTags'
+import { FontTags } from './inputs/FontFamily/FontTags'
 
 type RenderElementProps = HTMLAttributes<HTMLBaseElement> & {
   tagName: string
@@ -20,7 +20,7 @@ export const RenderElement = ({
   return (
     // @ts-ignore
     <>
-      <Fonts fontFamily={styles.fontFamily}/>
+      <FontTags fontFamily={styles.fontFamily}/>
       {/* @ts-ignore */}
       <Component {...props} sx={styleObject} />
     </>
