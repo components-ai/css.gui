@@ -22,8 +22,12 @@ export default function Filters() {
           styles={{
             width: '24rem',
             height: '24rem',
-            backgroundImage:
-              'linear-gradient(to right, #f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00)',
+            backgroundImage: [
+              {
+                type: 'url',
+                arguments: ['https://source.unsplash.com/random'],
+              },
+            ],
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',

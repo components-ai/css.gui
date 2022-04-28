@@ -1,6 +1,6 @@
-import { LengthInput } from '../../LengthInput'
-import Layers, { LayerProps } from '../../../Layers'
-import LayerHeader from '../../../LayerHeader'
+import { LengthInput } from '../LengthInput'
+import Layers, { LayerProps } from '../../Layers'
+import LayerHeader from '../../LayerHeader'
 
 import {
   Matrix,
@@ -13,16 +13,16 @@ import {
   TransformType,
   Translate,
 } from './types'
-import { EditorProps } from '../../../../types/editor'
+import { EditorProps } from '../../../types/editor'
 import {
   EditorPropsWithLabel,
   getInputProps as _getInputProps,
-} from '../../../../lib/util'
-import { SelectInput } from '../../SelectInput'
-import { AngleInput } from '../../AngleInput'
+} from '../../../lib/util'
+import { SelectInput } from '../SelectInput'
+import { AngleInput } from '../AngleInput'
 import { stringifyTransform } from './stringify'
-import { Angle, Length } from '../../../../types/css'
-import { NumberInput } from '../../NumberInput'
+import { Angle, Length } from '../../../types/css'
+import { NumberInput } from '../NumberInput'
 import { range } from 'lodash-es'
 
 export default function TransformContent({

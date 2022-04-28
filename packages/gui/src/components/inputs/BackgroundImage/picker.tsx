@@ -1,16 +1,16 @@
 import * as Collapsible from '@radix-ui/react-collapsible'
-import { Transform } from './types'
-import { EditorProps } from '../../../../types/editor'
-import TransformContent, { Header } from './field'
-import { Label } from '../../../primitives'
+import { BackgroundImage } from './types'
+import { EditorProps } from '../../../types/editor'
+import BackgroundImageContent, { Header } from './field'
+import { Label } from '../../primitives'
 import { useId } from 'react'
 
-type Props = EditorProps<Transform[]>
-export default function TransformPicker({ value, onChange }: Props) {
-  const id = `${useId()}-filter`
+type Props = EditorProps<BackgroundImage[]>
+export default function FilterPicker({ value, onChange }: Props) {
+  const id = `${useId()}-backgroundImage`
   return (
     <>
-      <Label htmlFor={id}>Filter</Label>
+      <Label htmlFor={id}>Background Image</Label>
       <Collapsible.Root id={id}>
         <Collapsible.Trigger
           sx={{
@@ -29,7 +29,7 @@ export default function TransformPicker({ value, onChange }: Props) {
             maxWidth: '32rem',
           }}
         >
-          <TransformContent value={value} onChange={onChange} />
+          <BackgroundImageContent value={value} onChange={onChange} />
         </Collapsible.Content>
       </Collapsible.Root>
     </>

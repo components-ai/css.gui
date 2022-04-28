@@ -1,4 +1,5 @@
 import * as CSS from 'csstype'
+import { functions } from '../data/functions'
 
 export type ColorObject = {
   id?: string
@@ -77,6 +78,17 @@ export type LengthPercentage = Length
 export type ResponsiveLength = Length[]
 export type CSSKeywordValue = {
   value: string
+}
+
+export type FunctionName = typeof functions[number]
+export type CSSFunctionArgument = string | number
+export type CSSFunction = {
+  type: FunctionName
+  arguments: CSSFunctionArgument[]
+}
+export type CSSFunctionURL = {
+  type: 'url'
+  arguments: [string]
 }
 
 export type Styles = CSS.PropertiesFallback

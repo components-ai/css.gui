@@ -1,4 +1,4 @@
-import { stringifyFunction } from '../../../../lib/stringify'
+import { stringifyFunction } from '../../../lib/stringify'
 import { Transform } from './types'
 
 export function stringifyTransform(transform: Transform | Transform[]) {

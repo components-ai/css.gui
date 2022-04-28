@@ -1,4 +1,4 @@
-import { Angle, Length } from '../../../../types/css'
+import { Angle, Length } from '../../../types/css'
 
 export type Transform =
   | Matrix
