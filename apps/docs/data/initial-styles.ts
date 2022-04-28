@@ -2,8 +2,8 @@ export const initialStyles: any = {
   fontSize: { value: 16, unit: 'px' },
   lineHeight: { value: 1.4, unit: 'number' },
   textAlign: 'inherit',
-  color: 'tomato',
-  backgroundColor: 'black',
+  color: '#000',
+  backgroundColor: '#fff',
   height: {
     value: 'auto',
     unit: 'keyword',
