@@ -6,7 +6,7 @@ import { stringifyEasingFunction } from '../components/inputs/EasingFunction/str
 import FilterPicker from '../components/inputs/Filter/picker'
 import { stringifyFilter } from '../components/inputs/Filter/stringify'
 import TextShadowPicker from '../components/inputs/TextShadow/picker'
-import { FontFamilyInput } from '../components/inputs/FontFamily/FontFamilyInput'
+import { FontFamily } from '../components/inputs/FontFamily'
 import { stringifyTextShadow } from '../components/inputs/TextShadow/stringify'
 import TransformPicker from '../components/inputs/BoxShadow/Transform/picker'
 import { stringifyTransform } from '../components/inputs/BoxShadow/Transform/stringify'
@@ -522,7 +522,7 @@ export const properties: Record<string, PropertyData> = {
     keywords: ['left', 'right', 'none', 'inline-start', 'inline-end'],
   },
   fontFamily: {
-    type: FontFamilyInput
+    type: FontFamily,
   },
   fontKerning: {
     type: 'keyword',
