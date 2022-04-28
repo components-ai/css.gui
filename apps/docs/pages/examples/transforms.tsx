@@ -4,6 +4,10 @@ import { useState } from 'react'
 const initialStyles = {
   transform: [{ type: 'rotate', amount: { value: 45, unit: 'deg' } }],
   perspective: { unit: 'keyword', value: 'none' },
+  perspectiveOrigin: {
+    x: { unit: 'keyword', value: 'center' },
+    y: { unit: 'keyword', value: 'center' },
+  },
 }
 
 export default function Transforms() {

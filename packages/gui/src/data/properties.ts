@@ -15,6 +15,10 @@ import {
   PercentageLengthUnits,
 } from '../types/css'
 import { ANIMATABLE_PROPERTIES } from './animatable'
+import {
+  PerspectiveOriginInput,
+  stringifyPerspectiveOrigin,
+} from '../components/inputs/PerspectiveOrigin'
 
 type PropertyData = {
   type: string | ComponentType<any>
@@ -1098,6 +1102,10 @@ export const properties: Record<string, PropertyData> = {
   perspective: {
     type: 'length',
     keywords: ['none'],
+  },
+  perspectiveOrigin: {
+    type: PerspectiveOriginInput,
+    stringify: stringifyPerspectiveOrigin,
   },
   placeItems: {
     type: 'keyword',

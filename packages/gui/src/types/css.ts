@@ -83,6 +83,9 @@ export type CSSUnitValue = {
 }
 export type GenericLength = '0'
 export type Length = CSSUnitValue | GenericLength
+// This isn't differentiated type-wise but it's good to keep track of
+// what actually accepts % values
+export type LengthPercentage = Length
 export type ResponsiveLength = Length[]
 export type CSSKeywordValue = {
   value: string
