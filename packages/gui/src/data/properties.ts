@@ -1488,7 +1488,6 @@ export const properties: Record<string, PropertyData> = {
       'break-spaces',
     ],
   },
-  // TODO: Add range
   widows: {
     type: 'number',
     defaultValue: 2,
