@@ -3,7 +3,6 @@ import {
   CSSUnitValue,
   Length,
   PercentageLengthUnits,
-  ThemeUnits,
   UnitlessUnits,
 } from '../types/css'
 import { DimensionInput } from './Dimension'
@@ -16,26 +15,21 @@ interface LengthInputProps {
   keywords?: string[]
   number?: boolean
   percentage?: boolean
-  keyword?: boolean
   themeValues?: (CSSUnitValue & { id: string })[]
 }
 
 export function LengthInput({
   property,
-  themeValues = [],
   number,
   percentage,
-  keyword,
   value: providedValue,
   ...props
 }: LengthInputProps) {
   const units = compact([
-    themeValues.length > 0 && ThemeUnits.Theme,
     number && UnitlessUnits.Number,
     'px',
     'em',
     'rem',
-    keyword && 'keyword',
     percentage && PercentageLengthUnits.Pct,
   ])
   const value =
@@ -46,7 +40,6 @@ export function LengthInput({
       units={units}
       conversions={lengthConversions}
       steps={lengthSteps}
-      themeValues={themeValues}
       {...props}
     />
   )

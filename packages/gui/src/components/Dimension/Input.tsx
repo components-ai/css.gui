@@ -12,7 +12,7 @@ import { reducer } from './reducer'
 import { State } from './types'
 import { EditorProps } from '../../types/editor'
 import { UnitConversions } from '../../lib/convert'
-import { kebabCase } from 'lodash-es'
+import { compact, kebabCase } from 'lodash-es'
 
 // Mapping of units to [min, max] tuple
 type UnitRanges = Record<string, [min: number, max: number]>
@@ -23,8 +23,10 @@ export interface DimensionInputProps extends EditorProps<CSSUnitValue> {
   label?: string
   range?: UnitRanges
   steps?: UnitSteps
-  keywords?: string[]
   units?: readonly string[]
+  /** The available keyword values for the property. If provided, 'keyword' will be appended as a unit */
+  keywords?: string[]
+  /** The available theme values for the property. If provided, 'theme' will be appended as a unit */
   themeValues?: (CSSUnitValue & { id: string })[]
   conversions?: UnitConversions
 }
@@ -33,9 +35,9 @@ export const DimensionInput = ({
   onChange,
   label,
   range,
-  keywords,
   units = [],
-  themeValues,
+  keywords = [],
+  themeValues = [],
   steps,
   conversions = {},
 }: DimensionInputProps) => {
@@ -64,7 +66,11 @@ export const DimensionInput = ({
     }
   }, [state])
 
-  const allKeywords = [...(keywords ?? []), ...GLOBAL_KEYWORDS]
+  const allUnits = compact([
+    themeValues.length > 0 && 'theme',
+    ...units,
+    keywords.length > 0 && 'keyword',
+  ])
 
   return (
     <div>
@@ -83,7 +89,7 @@ export const DimensionInput = ({
         {state.unit === KeywordUnits.Keyword ? (
           <ValueSelect
             value={state.value}
-            values={allKeywords}
+            values={keywords}
             onChange={(e: any) => {
               dispatch({
                 type: 'CHANGED_INPUT_VALUE',
@@ -123,7 +129,7 @@ export const DimensionInput = ({
           />
         )}
         <UnitSelect
-          units={units}
+          units={allUnits}
           value={state.themeId ? ThemeUnits.Theme : state.unit}
           onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
             const newUnit = e.target.value as FullLengthUnit
@@ -141,7 +147,7 @@ export const DimensionInput = ({
             if (newUnit === KeywordUnits.Keyword) {
               dispatch({
                 type: 'CHANGED_INPUT_VALUE',
-                value: allKeywords[0],
+                value: keywords[0],
               })
             }
 

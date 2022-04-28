@@ -35,6 +35,10 @@ const Control = ({ field }: ControlProps) => {
   const property = field.toString()
   const Component: ComponentType<any> = getInputComponent(property)
   const themeValues = useThemeProperty(property)
+  const keywords = [
+    ...(properties[property].keywords ?? []),
+    ...GLOBAL_KEYWORDS,
+  ]
 
   if (!Component) {
     console.error(`Unknown field: ${field}, ignoring`)
@@ -52,6 +56,7 @@ const Control = ({ field }: ControlProps) => {
       }}
       themeValues={themeValues}
       {...properties[property]}
+      keywords={keywords}
     />
   )
 }
@@ -145,7 +150,7 @@ const NumberInput = ({
       value={value}
       label={label}
       onChange={onChange}
-      units={['number', 'keyword']}
+      units={['number']}
       steps={{ number: 1 }}
       {...props}
     />
@@ -163,7 +168,7 @@ const PercentageInput = ({
       value={value}
       label={label}
       onChange={onChange}
-      units={['%', 'keyword']}
+      units={['%']}
       steps={{ '%': 0.1 }}
       {...props}
     />
@@ -190,19 +195,13 @@ const ResponsiveLengthInput = ({
   )
 }
 
-const TimeInput = ({
-  value,
-  onChange,
-  label,
-}: EditorPropsWithLabel<CSSUnitValue>) => {
+const TimeInput = (props: EditorPropsWithLabel<CSSUnitValue>) => {
   return (
     <DimensionInput
-      value={value}
-      label={label}
-      onChange={onChange}
-      units={[...TIME_UNITS, 'keyword']}
+      units={TIME_UNITS}
       steps={timeSteps}
       conversions={timeConversions}
+      {...props}
     />
   )
 }
@@ -219,7 +218,7 @@ const KeywordInput = ({
       label={label}
       value={value || DEFAULT_KEYWORD}
       onChange={onChange}
-      options={[...(keywords ?? []), ...GLOBAL_KEYWORDS]}
+      options={keywords}
     />
   )
 }
