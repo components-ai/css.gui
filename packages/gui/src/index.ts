@@ -7,7 +7,7 @@ export { DimensionInput } from './components/inputs/Dimension'
 export { ResponsiveInput } from './components/Responsive'
 export { UnitSelect } from './components/primitives/UnitSelect'
 export { ValueSelect } from './components/primitives/ValueSelect'
-export { FontFamily } from './components/inputs/FontFamily'
+export { FontFamily as FontFamilyInput } from './components/inputs/FontFamily'
 export { ColorPicker, ColorPopover } from './components/primitives/ColorPicker'
 export {
   ThemeProvider,
