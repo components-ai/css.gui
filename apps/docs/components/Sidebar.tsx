@@ -28,6 +28,7 @@ export const Sidebar = () => {
       <NavItem href="/inputs/number">Number</NavItem>
       <NavItem href="/inputs/dimension">Dimension</NavItem>
       <NavItem href="/inputs/responsive">Responsive</NavItem>
+      <NavItem href="/inputs/fontfamily">Font Family</NavItem>
       <NavSectionTitle>Examples</NavSectionTitle>
       <NavItem href="/examples/transitions">Transitions</NavItem>
       <NavItem href="/examples/shadows">Shadows</NavItem>

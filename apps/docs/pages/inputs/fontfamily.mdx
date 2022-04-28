@@ -1,0 +1,34 @@
+import { FirstParagraph } from '../../components/FirstParagraph'
+import { FontFamilyExample } from '../../components/examples/FontFamily'
+
+# Font Family
+
+<FirstParagraph>
+  A dynamically loaded font family input
+</FirstParagraph>
+
+This input supports all growing set of typefaces, which currently
+includes all Google Fonts and System Fonts. Style sheets are generated automatically.
+
+### Example
+
+<FontFamilyExample />
+
+## Usage
+
+```js
+import { useState } from 'react'
+import { FontFamilyInput, RenderElement } from '@compai/css-gui'
+
+const MyEditor = () => {
+  const [fontFamily, setFontFamily] = useState('Abel')
+
+  return (
+    <>
+      <RenderElement tagName='p' styles={{ fontFamily }}>
+        Fun with fonts!
+      </RenderElement>
+      <FontFamilyInput value={fontFamily} onChange={setFontFamily} />
+    </>
+  )
+}
