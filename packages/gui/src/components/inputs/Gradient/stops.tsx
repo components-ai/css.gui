@@ -137,9 +137,15 @@ export default function GradientStopsField({
         })}
       </div>
       {selected !== -1 && value[selected] && (
-        // TODO: Make this properly affect the _array_ value rather than turn it into
-        // number keys within an object.
-        <StopFields {...getInputProps({ value, onChange }, selected)} />
+        <StopFields
+          value={value[selected]}
+          onChange={(newStopValue: GradientStopValue) => {
+            const newValue = produce(value, (draft: any) => {
+              draft[selected] = newStopValue
+            })
+            onChange(newValue)
+          }}
+        />
       )}
     </div>
   )
