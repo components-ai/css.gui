@@ -40,3 +40,8 @@ export function isNestedSelector(selector: string): boolean {
 export const sentenceCase = (property: string) => {
   return upperFirst(lowerCase(property))
 }
+
+/**
+ * Converts a string to be plus spaced. Abhaya Libre -> Abhaya+Libre
+ */
+export const plusify = (name: string) => name.replace(/\s/g, '+')

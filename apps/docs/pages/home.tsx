@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
-import { Editor, Inputs, RenderElement } from '@compai/css-gui'
+import { Editor, Inputs, RenderElement, Theme } from '@compai/css-gui'
 import { FirstParagraph } from '../components/FirstParagraph'
-import { Theme } from '@emotion/react'
 
 const initialStyles: any = {
   fontSize: { value: 16, unit: 'px' },
@@ -22,6 +21,7 @@ const initialStyles: any = {
     value: 'auto',
     unit: 'keyword',
   },
+  fontFamily: 'ABeeZee',
 }
 const DEFAULT_THEME: Theme = {
   fontSizes: [
@@ -91,6 +91,8 @@ export default function Docs() {
               <Inputs.TextAlign />
               <Inputs.FontStretch />
               <Inputs.Margin />
+              <Inputs.FontFamily />
+              <h3>Colors</h3>
               <h3 sx={{ mt: 4, mb: 0 }}>Colors</h3>
               <div sx={{ display: 'flex' }}>
                 <div sx={{ mr: 2 }}>

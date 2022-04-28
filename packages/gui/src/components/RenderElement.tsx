@@ -1,11 +1,13 @@
 import { HTMLAttributes } from 'react'
 import { toCSSObject } from '../lib'
 import { Styles } from '../types/css'
+import { FontTags } from './inputs/FontFamily/FontTags'
 
 type RenderElementProps = HTMLAttributes<HTMLBaseElement> & {
   tagName: string
   styles: Styles
 }
+
 export const RenderElement = ({
   tagName,
   styles,
@@ -13,7 +15,14 @@ export const RenderElement = ({
 }: RenderElementProps) => {
   const Component = tagName
   const styleObject = toCSSObject(styles)
-
-  // @ts-ignore
-  return <Component {...props} sx={styleObject} />
+  
+  
+  return (
+    // @ts-ignore
+    <>
+      <FontTags fontFamily={styles.fontFamily}/>
+      {/* @ts-ignore */}
+      <Component {...props} sx={styleObject} />
+    </>
+  )
 }
