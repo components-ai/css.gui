@@ -1,13 +1,13 @@
-import { getDeclarationValue } from './get-styles'
-import { GradientEditor } from './group-editor'
-import Layers from '../Layers'
-import LayerHeader from '../LayerHeader'
+import { getDeclarationValue } from './stringify'
+import { GradientField } from './field'
+import Layers from '../../Layers'
+import LayerHeader from '../../LayerHeader'
 
 type GradientEditorProps = {
   value: any
   onChange: any
 }
-export default function GradientsEditor({
+export default function GradientPicker({
   value,
   onChange,
 }: GradientEditorProps) {
@@ -26,7 +26,7 @@ export default function GradientsEditor({
           newItem={newItem}
           addLabel="+ Add gradient"
           header={Header}
-          content={GradientEditor}
+          content={GradientField}
           value={value}
           onChange={async (newValuePromise: Promise<any>[]) => {
             const newValue = await Promise.all(newValuePromise)

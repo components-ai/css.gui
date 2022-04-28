@@ -26,6 +26,8 @@ import {
   textDecorationLines,
   textDecorationStyles,
 } from '../components/inputs/TextDecoration'
+import GradientPicker from '../components/inputs/Gradient/picker'
+import { stringifyGradient } from '../components/inputs/Gradient/stringify'
 
 type PropertyData = {
   type: string | ComponentType<any>
@@ -176,6 +178,10 @@ export const properties: Record<string, PropertyData> = {
   backgroundClip: {
     type: 'keyword',
     keywords: ['border-box', 'padding-box', 'content-box', 'text'],
+  },
+  backgroundImage: {
+    type: GradientPicker,
+    stringify: stringifyGradient,
   },
   backgroundOrigin: {
     type: 'keyword',

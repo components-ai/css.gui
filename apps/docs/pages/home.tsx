@@ -2,63 +2,8 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { Editor, Inputs, RenderElement, Theme } from '@compai/css-gui'
 import { FirstParagraph } from '../components/FirstParagraph'
-
-const initialStyles: any = {
-  fontSize: { value: 16, unit: 'px' },
-  lineHeight: { value: 1.4, unit: 'number' },
-  textAlign: 'inherit',
-  color: 'tomato',
-  backgroundColor: 'black',
-  height: {
-    value: 'auto',
-    unit: 'keyword',
-  },
-  width: {
-    value: '100',
-    unit: '%',
-  },
-  maxWidth: {
-    value: 'auto',
-    unit: 'keyword',
-  },
-  fontFamily: 'ABeeZee',
-  gradient: [],
-}
-const DEFAULT_THEME: Theme = {
-  fontSizes: [
-    { id: '1', value: 16, unit: 'px' },
-    { id: '2', value: 24, unit: 'px' },
-    { id: '3', value: 32, unit: 'px' },
-    { id: '4', value: 48, unit: 'px' },
-    { id: '5', value: 64, unit: 'px' },
-    { id: '6', value: 96, unit: 'px' },
-  ],
-  lineHeights: [
-    { id: '1', value: 1, unit: 'number' },
-    { id: '2', value: 1.25, unit: 'number' },
-    { id: '3', value: 1.5, unit: 'number' },
-  ],
-  colors: [
-    {
-      id: '1',
-      name: 'gray',
-      colors: [
-        { id: '2', value: '#000000' },
-        { id: '3', value: '#1c1c1c' },
-        { id: '4', value: '#303030' },
-        { id: '5', value: '#474747' },
-        { id: '6', value: '#5d5d5d' },
-        { id: '7', value: '#757575' },
-        { id: '8', value: '#8c8c8c' },
-        { id: '9', value: '#a3a3a3' },
-        { id: '10', value: '#bababa' },
-        { id: '11', value: '#d1d1d1' },
-        { id: '12', value: '#e8e8e8' },
-        { id: '13', value: '#ffffff' },
-      ],
-    },
-  ],
-}
+import { initialStyles } from '../data/initial-styles'
+import { defaultTheme } from '../data/default-theme'
 
 export default function Docs() {
   const [styles, setStyles] = useState<any>(initialStyles)
@@ -84,7 +29,7 @@ export default function Docs() {
         }}
       >
         <div sx={{ px: [2, 3, 4] }}>
-          <Editor styles={styles} onChange={setStyles} theme={DEFAULT_THEME}>
+          <Editor styles={styles} onChange={setStyles} theme={defaultTheme}>
             <div sx={{ display: 'grid', gap: '.5rem', width: '240px' }}>
               <h3 sx={{ my: 0 }}>Typography</h3>
               <Inputs.FontSize />
@@ -93,11 +38,15 @@ export default function Docs() {
               <Inputs.FontStretch />
               <Inputs.Margin />
 <<<<<<< HEAD
+<<<<<<< HEAD
               <Inputs.FontFamily />
               <h3>Colors</h3>
 =======
               <Inputs.Gradient />
 >>>>>>> 37d6e9f (Add gradient control)
+=======
+              <Inputs.BackgroundImage />
+>>>>>>> a7bf05f (Update gradient to use new property data-driven rendering)
               <h3 sx={{ mt: 4, mb: 0 }}>Colors</h3>
               <h3>Colors</h3>
               <div sx={{ display: 'flex' }}>

@@ -1,5 +1,5 @@
 import { sortBy } from 'lodash-es'
-import { squeeze } from '../../lib/util'
+import { squeeze } from '../../../lib/util'
 import {
   Gradient,
   LinearGradient,
@@ -68,34 +68,8 @@ export function getDeclarationValue(gradient: Gradient | Gradient[]): string {
   throw new Error('Unknown gradient type')
 }
 
-// TODO: This probably fits better in a typography package at some point
-export const getClipTextStyles = () => {
-  return {
-    WebkitTextFillColor: 'transparent',
-    WebkitBackgroundClip: 'text',
-  }
-}
-
-export const getStyles = (gradient: GradientList, metadata: any = {}) => {
-  const value = squeeze(getDeclarationValue(gradient))
-  const { relatedStyles, elementStyles } =
-    (gradient as any).metadata || metadata
-
-  let clipStyles = {}
-
-  if (
-    elementStyles &&
-    elementStyles.clipText &&
-    elementStyles.clipText === true
-  ) {
-    clipStyles = getClipTextStyles()
-  }
-
-  return {
-    ...relatedStyles,
-    ...clipStyles,
-    backgroundImage: value,
-  }
+export const stringifyGradient = (gradient: GradientList): string => {
+  return squeeze(getDeclarationValue(gradient))
 }
 
 const getStops = (gradient: Gradient, unit: string) => {

@@ -1,9 +1,9 @@
 import { SelectInput } from '../SelectInput'
-import { getInputProps } from '../../lib/util'
+import { getInputProps } from '../../../lib/util'
 import { NumberInput } from '../NumberInput'
 import GradientStopsField from './stops'
 
-export const GradientEditor = (props: any) => {
+export const GradientField = (props: any) => {
   return (
     <div sx={{ m: 0 }}>
       <div sx={{ py: 1, display: 'flex', alignItems: 'center' }}>

@@ -1,13 +1,13 @@
-import { getInputProps, randomInt } from '../../lib/util'
-import { GradientStop as GradientStopValue } from './types'
-import { getDeclarationValue } from './get-styles'
 import { HTMLAttributes, useCallback, useEffect, useRef, useState } from 'react'
 import { clamp } from 'lodash-es'
+import produce from 'immer'
 import { Minus, Plus } from 'react-feather'
-import { randomColor } from '../../lib/color'
+import { randomColor } from '../../../lib/color'
 import { ColorInput } from '../ColorInput'
 import { NumberInput } from '../NumberInput'
-import produce from 'immer'
+import { getInputProps } from '../../../lib/util'
+import { GradientStop as GradientStopValue } from './types'
+import { getDeclarationValue } from './stringify'
 
 interface StopsProps {
   value: GradientStopValue[]
