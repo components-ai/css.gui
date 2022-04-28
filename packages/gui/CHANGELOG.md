@@ -1,5 +1,12 @@
 # @compai/css-gui
 
+## 0.0.6
+
+### Patch Changes
+
+- fe518db: Adds font family control
+- 1820881: Add react 18+ as peer dep
+
 ## 0.0.5
 
 ### Patch Changes
