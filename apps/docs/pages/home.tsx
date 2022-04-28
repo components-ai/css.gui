@@ -31,24 +31,17 @@ export default function Docs() {
         <div sx={{ px: [2, 3, 4] }}>
           <Editor styles={styles} onChange={setStyles} theme={defaultTheme}>
             <div sx={{ display: 'grid', gap: '.5rem', width: '240px' }}>
+              <div sx={{ mb: 8 }}>
+                <Inputs.BackgroundImage />
+              </div>
               <h3 sx={{ my: 0 }}>Typography</h3>
               <Inputs.FontSize />
               <Inputs.LineHeight />
               <Inputs.TextAlign />
               <Inputs.FontStretch />
               <Inputs.Margin />
-<<<<<<< HEAD
-<<<<<<< HEAD
               <Inputs.FontFamily />
-              <h3>Colors</h3>
-=======
-              <Inputs.Gradient />
->>>>>>> 37d6e9f (Add gradient control)
-=======
-              <Inputs.BackgroundImage />
->>>>>>> a7bf05f (Update gradient to use new property data-driven rendering)
               <h3 sx={{ mt: 4, mb: 0 }}>Colors</h3>
-              <h3>Colors</h3>
               <div sx={{ display: 'flex' }}>
                 <div sx={{ mr: 2 }}>
                   <Inputs.Color />

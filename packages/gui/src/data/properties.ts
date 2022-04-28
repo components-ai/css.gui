@@ -8,8 +8,8 @@ import { stringifyFilter } from '../components/inputs/Filter/stringify'
 import TextShadowPicker from '../components/inputs/TextShadow/picker'
 import { FontFamily } from '../components/inputs/FontFamily'
 import { stringifyTextShadow } from '../components/inputs/TextShadow/stringify'
-import TransformPicker from '../components/inputs/BoxShadow/Transform/picker'
-import { stringifyTransform } from '../components/inputs/BoxShadow/Transform/stringify'
+import TransformPicker from '../components/inputs/Transform/picker'
+import { stringifyTransform } from '../components/inputs/Transform/stringify'
 import {
   AbsoluteLengthUnits,
   FontRelativeLengthUnits,
@@ -26,8 +26,8 @@ import {
   textDecorationLines,
   textDecorationStyles,
 } from '../components/inputs/TextDecoration'
-import GradientPicker from '../components/inputs/Gradient/picker'
-import { stringifyGradient } from '../components/inputs/Gradient/stringify'
+import BackgroundImagePicker from '../components/inputs/BackgroundImage/picker'
+import { stringifyBackgroundImage } from '../components/inputs/BackgroundImage/stringify'
 
 type PropertyData = {
   type: string | ComponentType<any>
@@ -180,8 +180,8 @@ export const properties: Record<string, PropertyData> = {
     keywords: ['border-box', 'padding-box', 'content-box', 'text'],
   },
   backgroundImage: {
-    type: GradientPicker,
-    stringify: stringifyGradient,
+    type: BackgroundImagePicker,
+    stringify: stringifyBackgroundImage,
   },
   backgroundOrigin: {
     type: 'keyword',
