@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Monitor, Smartphone, X } from 'react-feather'
 import { AbsoluteLengthUnits, Length, ResponsiveLength } from '../../types/css'
 import { Breakpoint } from '../../types/theme'
-import { DimensionInputProps } from '../Dimension/Input'
+import { DimensionInputProps } from '../inputs/Dimension/Input'
 import { useTheme } from '../providers/ThemeContext'
 import { Label } from '../primitives'
 
