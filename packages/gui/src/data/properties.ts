@@ -19,12 +19,18 @@ import {
   PerspectiveOriginInput,
   stringifyPerspectiveOrigin,
 } from '../components/inputs/PerspectiveOrigin'
+import {
+  stringifyTextDecoration,
+  TextDecorationInput,
+  textDecorationLines,
+  textDecorationStyles,
+} from '../components/inputs/TextDecoration'
 
 type PropertyData = {
   type: string | ComponentType<any>
   percentage?: boolean
   number?: boolean
-  keywords?: Array<string>
+  keywords?: readonly string[]
   range?: UnitRanges
   defaultValue?: string | number
   stringify?: (value: any) => string
@@ -1258,23 +1264,17 @@ export const properties: Record<string, PropertyData> = {
       'match-parent',
     ],
   },
+  textDecoration: {
+    type: TextDecorationInput,
+    stringify: stringifyTextDecoration,
+  },
   textDecorationColor: {
     type: 'color',
     keywords: ['currentcolor', 'transparent'],
   },
   textDecorationLine: {
     type: 'keyword',
-    keywords: [
-      'none',
-      'underline',
-      'overline',
-      'line-through',
-      'blink',
-      'underline line-through',
-      'underline overline',
-      'overline line-through',
-      'underline overline line-through',
-    ],
+    keywords: textDecorationLines,
   },
   textDecorationThickness: {
     //TODO: Add value ranges
@@ -1288,7 +1288,7 @@ export const properties: Record<string, PropertyData> = {
   },
   textDecorationStyle: {
     type: 'keyword',
-    keywords: ['solid', 'double', 'dotted', 'dashed', 'wavy'],
+    keywords: textDecorationStyles,
   },
   textEmphasisColor: {
     type: 'color',
