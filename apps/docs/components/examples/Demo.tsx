@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Link from 'next/link'
-import { Editor, Inputs, RenderElement } from '@compai/css-gui'
+import { Editor, Inputs, RenderElement, codegen } from '@compai/css-gui'
 import { initialStyles } from '../../data/initial-styles'
 import { defaultTheme } from '../../data/default-theme'
 
@@ -76,7 +76,7 @@ export function Demo() {
             width: '100%',
           }}
         >
-          {JSON.stringify(styles, null, 2)}
+          {codegen.css(styles)}
         </pre>
       </div>
     </>
