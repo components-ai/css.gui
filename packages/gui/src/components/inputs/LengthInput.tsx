@@ -2,6 +2,7 @@ import { compact } from 'lodash-es'
 import {
   CSSUnitValue,
   Length,
+  LENGTH_UNITS,
   PercentageLengthUnits,
   UnitlessUnits,
 } from '../../types/css'
@@ -27,9 +28,7 @@ export function LengthInput({
 }: LengthInputProps) {
   const units = compact([
     number && UnitlessUnits.Number,
-    'px',
-    'em',
-    'rem',
+    ...LENGTH_UNITS,
     percentage && PercentageLengthUnits.Pct,
   ])
   const value =

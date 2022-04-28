@@ -1,10 +1,9 @@
 import { UnitConversions, UnitSteps } from '../../../lib'
-import { FullLengthUnit } from '../../../types/css'
 
 export type State = {
   key: number
   value: number | string
-  unit: FullLengthUnit
+  unit: string
   themeId?: string
   min?: number
   max?: number
@@ -18,13 +17,13 @@ export type Action =
     }
   | {
       type: 'CHANGED_UNIT_VALUE'
-      unit: FullLengthUnit
+      unit: string
       conversions: UnitConversions
       steps?: UnitSteps
     }
   | {
       type: 'CHANGED_INPUT_TO_THEME_VALUE'
       value: number | string
-      unit: FullLengthUnit
+      unit: string
       themeId?: string
     }

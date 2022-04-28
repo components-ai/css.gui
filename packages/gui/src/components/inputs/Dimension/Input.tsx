@@ -3,10 +3,8 @@ import {
   AbsoluteLengthUnits,
   CSSUnitValue,
   KeywordUnits,
-  FullLengthUnit,
   ThemeUnits,
 } from '../../../types/css'
-import { GLOBAL_KEYWORDS } from '../../../data/global-keywords'
 import { Label, Number, UnitSelect, ValueSelect } from '../../primitives'
 import { reducer } from './reducer'
 import { State } from './types'
@@ -132,7 +130,7 @@ export const DimensionInput = ({
           units={allUnits}
           value={state.themeId ? ThemeUnits.Theme : state.unit}
           onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-            const newUnit = e.target.value as FullLengthUnit
+            const newUnit = e.target.value
 
             if (newUnit === ThemeUnits.Theme) {
               const themeValue = themeValues?.[0]
