@@ -10,7 +10,7 @@ import produce from 'immer'
 import GradientPicker from '../Gradient/picker'
 import { GradientList } from '../Gradient/types'
 
-const DEFAULT_IMAGE_URL = 'https://mrmrs.s3.us-west-2.amazonaws.com/plot-1.jpg'
+const DEFAULT_IMAGE_URL = ''
 export default function FilterContent({
   value,
   onChange,
