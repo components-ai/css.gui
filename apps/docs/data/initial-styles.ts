@@ -16,6 +16,11 @@ export const initialStyles: any = {
     value: 'auto',
     unit: 'keyword',
   },
-  backgroundImage: [],
+  backgroundImage: [
+    {
+      type: 'url',
+      arguments: ['https://source.unsplash.com/random'],
+    },
+  ],
   fontFamily: 'ABeeZee',
 }
