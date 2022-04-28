@@ -7,6 +7,84 @@ import { FirstParagraph } from '../../components/FirstParagraph'
   your rendering to create a full-fledged editable canvas.
 </FirstParagraph>
 
+This is the primary component you'll interact with in most usecases.
+
+If you pass a style object to the `Editor` it will generate the controls based
+on its contents.
+
 ```js
-import { Editor } from '@compai/css-gui'
+import { useState } from 'react'
+import { Editor, RenderElement } from '@compai/css-gui'
+
+export const MyEditor = () => {
+  const [styles, setStyles] = useState({
+    fontSize: { value: 16, unit: 'px' },
+    color: 'tomato',
+    backgroundColor: '#000',
+  })
+
+  return (
+    <>
+      <Editor styles={styles} onChange={setStyles} />
+      <RenderElement tagName="p" styles={styles}>
+        Hello, world!
+      </RenderElement>
+    </>
+  )
+}
+```
+
+## Composition Usage
+
+In some cases you might want more granular control of the `Editor` and the controls
+used. You can compose inputs yourselves in this scenario:
+
+```js
+import { useState } from 'react'
+import Link from 'next/link'
+import { Editor, Inputs, RenderElement, codegen } from '@compai/css-gui'
+
+export function Demo() {
+  const [styles, setStyles] = useState({})
+
+  return (
+    <>
+      <Editor styles={styles} onChange={setStyles}>
+        <div>
+          <h3>Typography</h3>
+          <Inputs.FontSize />
+          <Inputs.LineHeight />
+          <Inputs.TextAlign />
+          <Inputs.FontStretch />
+          <Inputs.Margin />
+          <Inputs.FontFamily />
+          <h3>Colors</h3>
+          <Inputs.Color />
+          <Inputs.BackgroundColor />
+          <h3>Size</h3>
+          <Inputs.Width />
+          <Inputs.MaxWidth />
+          <Inputs.Height />
+        </div>
+      </Editor>
+      <RenderElement tagName="p" styles={styles}>
+        “The parameters comprise sequences which are theoretically infinite but
+        limits are, of course, set to them in practice. There is an upward limit
+        to size and certainly a downward one... Within these sequences there are
+        reasonable bounds; extremes set by technical and functional experience”
+        <br /> <br />
+        <em>
+          In
+          <a
+            href="https://www.lars-mueller-publishers.com/designing-programmes-0"
+            style={{ color: styles.color }}
+          >
+            Designing Programmes
+          </a> by Karl Gerstner
+        </em>
+      </RenderElement>
+      <pre>{codegen.css(styles)}</pre>
+    </>
+  )
+}
 ```
