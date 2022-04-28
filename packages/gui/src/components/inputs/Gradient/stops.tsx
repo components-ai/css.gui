@@ -155,7 +155,6 @@ interface ToolbarProps {
   onAdd(): void
   onDelete(): void
 }
-
 function Toolbar({ onAdd, onDelete }: ToolbarProps) {
   return (
     <div
@@ -184,7 +183,6 @@ interface TrackProps {
   repeating: boolean
   value: GradientStopValue[]
 }
-
 function Track({ repeating, value }: TrackProps) {
   return (
     <div
@@ -213,7 +211,11 @@ function Track({ repeating, value }: TrackProps) {
   )
 }
 
-function StopFields(props: any) {
+interface StopFieldsProps {
+  value: GradientStopValue
+  onChange: (newValue: GradientStopValue) => void
+}
+function StopFields(props: StopFieldsProps) {
   return (
     <div sx={{ display: 'grid', gridTemplateColumns: '2fr 1fr', mt: 2 }}>
       <ColorInput {...getInputProps(props, 'color')} />
@@ -226,7 +228,6 @@ interface MarkerProps extends HTMLAttributes<HTMLDivElement> {
   value: GradientStopValue
   isSelected: boolean
 }
-
 function Marker({ value, isSelected, ...props }: MarkerProps) {
   return (
     <div

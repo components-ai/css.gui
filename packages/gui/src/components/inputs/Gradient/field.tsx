@@ -2,25 +2,35 @@ import { SelectInput } from '../SelectInput'
 import { getInputProps } from '../../../lib/util'
 import { NumberInput } from '../NumberInput'
 import GradientStopsField from './stops'
+import {
+  ConicGradient,
+  Gradient,
+  LinearGradient,
+  RadialGradient,
+} from './types'
 
-export const GradientField = (props: any) => {
+const gradientTypeOptions = [
+  'linear',
+  'radial',
+  'conic',
+  'repeating-linear',
+  'repeating-radial',
+  'repeating-conic',
+] as const
+type GradientFieldProps = {
+  value: Gradient
+  onChange: (newValue: Gradient) => void
+}
+export const GradientField = (props: GradientFieldProps) => {
   return (
-    <div sx={{ m: 0 }}>
+    <div sx={{ px: 3, pb: 2 }}>
       <div sx={{ py: 1, display: 'flex', alignItems: 'center' }}>
         <SelectInput
           {...getInputProps(props, 'type')}
-          options={[
-            'linear',
-            'radial',
-            'conic',
-            'repeating-linear',
-            'repeating-radial',
-            'repeating-conic',
-          ]}
+          options={gradientTypeOptions}
         />
       </div>
-      <Gradient {...props} />
-
+      <GradientEditor {...props} />
       <div sx={{ mt: 3 }}>
         <GradientStopsField
           {...getInputProps(props, 'stops')}
@@ -31,24 +41,27 @@ export const GradientField = (props: any) => {
   )
 }
 
-export const Gradient = (props: any) => {
-  const type = props.value.type
-  switch (type) {
+export const GradientEditor = ({ value, ...props }: GradientFieldProps) => {
+  switch (value.type) {
     case 'linear':
     case 'repeating-linear':
-      return <LinearGradient {...props} />
+      return <LinearGradientEditor {...props} value={value as LinearGradient} />
     case 'radial':
     case 'repeating-radial':
-      return <RadialGradient {...props} />
+      return <RadialGradientEditor {...props} value={value as RadialGradient} />
     case 'conic':
     case 'repeating-conic':
-      return <ConicGradient {...props} />
+      return <ConicGradientEditor {...props} value={value as ConicGradient} />
     default:
       return null
   }
 }
 
-export const RadialGradient = (props: any) => {
+type RadialGradientEditorProps = {
+  value: RadialGradient
+  onChange: (newValue: RadialGradient) => void
+}
+export const RadialGradientEditor = (props: RadialGradientEditorProps) => {
   return (
     <div>
       <div sx={{ display: 'flex' }}>
@@ -79,7 +92,11 @@ export const RadialGradient = (props: any) => {
   )
 }
 
-export const ConicGradient = (props: any) => {
+type ConicGradientEditorProps = {
+  value: ConicGradient
+  onChange: (newValue: ConicGradient) => void
+}
+export const ConicGradientEditor = (props: ConicGradientEditorProps) => {
   return (
     <div>
       <div sx={{ display: 'flex' }}>
@@ -105,6 +122,10 @@ export const ConicGradient = (props: any) => {
   )
 }
 
-export const LinearGradient = (props: any) => {
+type LinearGradientEditorProps = {
+  value: LinearGradient
+  onChange: (newValue: LinearGradient) => void
+}
+export const LinearGradientEditor = (props: LinearGradientEditorProps) => {
   return <NumberInput {...getInputProps(props, 'degrees')} min={0} max={360} />
 }
