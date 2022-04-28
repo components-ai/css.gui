@@ -7,7 +7,7 @@ export type ColorObject = {
 }
 
 export type Color = string
-export type FontFamily = string
+export type FontFamilyType = string
 
 export const enum FontRelativeLengthUnits {
   Ch = 'ch',
