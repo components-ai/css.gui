@@ -15,6 +15,10 @@
     "readme.md",
     "CHANGELOG.md"
   ],
+  "peerDependencies": {
+    "react": ">= 18",
+    "react-dom": ">= 18"
+  },
   "devDependencies": {
     "@types/lodash-es": "^4.17.6",
     "@types/pascalcase": "^1.0.1",
