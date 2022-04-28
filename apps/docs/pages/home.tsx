@@ -31,9 +31,6 @@ export default function Docs() {
         <div sx={{ px: [2, 3, 4] }}>
           <Editor styles={styles} onChange={setStyles} theme={defaultTheme}>
             <div sx={{ display: 'grid', gap: '.5rem', width: '240px' }}>
-              <div sx={{ mb: 8 }}>
-                <Inputs.BackgroundImage />
-              </div>
               <h3 sx={{ my: 0 }}>Typography</h3>
               <Inputs.FontSize />
               <Inputs.LineHeight />
