@@ -1,26 +1,3 @@
-import {
-  AbsoluteLengthUnits,
-  CSSUnit,
-  FontRelativeLengthUnits,
-  KeywordUnits,
-  LengthPercentageUnit,
-  LengthUnit,
-  PercentageLengthUnits,
-  ThemeUnits,
-  UnitlessUnits,
-} from '../types/css'
-
-export const THEME_UNITS: string = ThemeUnits.Theme
-export const UNITS: LengthUnit[] = [
-  AbsoluteLengthUnits.Px,
-  FontRelativeLengthUnits.Em,
-  FontRelativeLengthUnits.Rem,
-  KeywordUnits.Keyword,
-]
-export const UNITS_WITH_PERCENTAGE: LengthPercentageUnit[] = [
-  ...UNITS,
-  PercentageLengthUnits.Pct,
-]
 export const THEME_ALIASES: Record<string, string> = {
   bg: 'backgroundColor',
   m: 'margin',

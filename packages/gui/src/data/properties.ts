@@ -1,30 +1,42 @@
-import { lowerCase, upperFirst } from 'lodash-es'
+import { ComponentType } from 'react'
+import BoxShadowPicker from '../components/inputs/BoxShadow/picker'
+import { stringifyBoxShadow } from '../components/inputs/BoxShadow/stringify'
+import EasingFunctionPicker from '../components/inputs/EasingFunction/picker'
+import { stringifyEasingFunction } from '../components/inputs/EasingFunction/stringify'
+import FilterPicker from '../components/inputs/Filter/picker'
+import { stringifyFilter } from '../components/inputs/Filter/stringify'
+import TextShadowPicker from '../components/inputs/TextShadow/picker'
+import { stringifyTextShadow } from '../components/inputs/TextShadow/stringify'
+import TransformPicker from '../components/inputs/BoxShadow/Transform/picker'
+import { stringifyTransform } from '../components/inputs/BoxShadow/Transform/stringify'
 import {
   AbsoluteLengthUnits,
   FontRelativeLengthUnits,
   PercentageLengthUnits,
 } from '../types/css'
 import { ANIMATABLE_PROPERTIES } from './animatable'
+import {
+  PerspectiveOriginInput,
+  stringifyPerspectiveOrigin,
+} from '../components/inputs/PerspectiveOrigin'
+import {
+  stringifyTextDecoration,
+  TextDecorationInput,
+  textDecorationLines,
+  textDecorationStyles,
+} from '../components/inputs/TextDecoration'
 
 type PropertyData = {
-  type: string
+  type: string | ComponentType<any>
   percentage?: boolean
   number?: boolean
-  keywords?: Array<string>
+  keywords?: readonly string[]
   range?: UnitRanges
-  defaultValue?: string
+  defaultValue?: string | number
+  stringify?: (value: any) => string
 }
 
 type UnitRanges = Record<string, [number, number]>
-
-export const getPropertyData = (property?: string): PropertyData | null => {
-  const propertyData = properties[property || '']
-  return propertyData ?? null
-}
-
-export const getPropertyLabel = (property: string) => {
-  return upperFirst(lowerCase(property))
-}
 
 export const properties: Record<string, PropertyData> = {
   accentColor: {
@@ -101,7 +113,10 @@ export const properties: Record<string, PropertyData> = {
     type: 'keyword',
     keywords: ANIMATABLE_PROPERTIES,
   },
-  animationTimingFunction: { type: 'easing-function' },
+  animationTimingFunction: {
+    type: EasingFunctionPicker,
+    stringify: stringifyEasingFunction,
+  },
   appearance: {
     type: 'keyword',
     keywords: [
@@ -217,6 +232,10 @@ export const properties: Record<string, PropertyData> = {
     percentage: true,
     keywords: ['auto'],
   },
+  boxShadow: {
+    type: BoxShadowPicker,
+    stringify: stringifyBoxShadow,
+  },
   boxSizing: {
     type: 'keyword',
     keywords: ['border-box', 'content-box'],
@@ -300,9 +319,7 @@ export const properties: Record<string, PropertyData> = {
       [FontRelativeLengthUnits.Rem]: [0, 8],
       [PercentageLengthUnits.Pct]: [0.1, 100],
     },
-    keywords: [
-      'normal',
-    ],
+    keywords: ['normal'],
   },
   columnRuleColor: {
     type: 'color',
@@ -332,11 +349,7 @@ export const properties: Record<string, PropertyData> = {
       [FontRelativeLengthUnits.Rem]: [0, 2],
       [PercentageLengthUnits.Pct]: [0.1, 100],
     },
-    keywords: [
-      'thin',
-      'medium',
-      'thick',
-    ],
+    keywords: ['thin', 'medium', 'thick'],
   },
   columnSpan: {
     type: 'keyword',
@@ -351,9 +364,7 @@ export const properties: Record<string, PropertyData> = {
       [FontRelativeLengthUnits.Rem]: [0, 16],
       [PercentageLengthUnits.Pct]: [0.1, 100],
     },
-    keywords: [
-      'auto',
-    ],
+    keywords: ['auto'],
   },
   contain: {
     type: 'keyword',
@@ -450,6 +461,10 @@ export const properties: Record<string, PropertyData> = {
     type: 'keyword',
     keywords: ['show', 'hide'],
   },
+  filter: {
+    type: FilterPicker,
+    stringify: stringifyFilter,
+  },
   flexBasis: {
     type: 'length',
     percentage: true,
@@ -460,12 +475,12 @@ export const properties: Record<string, PropertyData> = {
       [PercentageLengthUnits.Pct]: [0.1, 100],
     },
     keywords: [
-    'auto',
-    'fill',
-    'max-content',
-    'min-content',
-    'fit-content',
-    'content',
+      'auto',
+      'fill',
+      'max-content',
+      'min-content',
+      'fit-content',
+      'content',
     ],
   },
   flexDirection: {
@@ -495,6 +510,7 @@ export const properties: Record<string, PropertyData> = {
   flexGrow: {
     type: 'number',
     defaultValue: 0,
+    range: { number: [0, Infinity] },
   },
   flexWrap: {
     type: 'keyword',
@@ -519,7 +535,7 @@ export const properties: Record<string, PropertyData> = {
       [AbsoluteLengthUnits.Px]: [0, 512],
       [FontRelativeLengthUnits.Em]: [0, 16],
       [FontRelativeLengthUnits.Rem]: [0, 16],
-      [PercentageLengthUnits.Pct]: [0.1, 100],
+      [PercentageLengthUnits.Pct]: [0.1, 200],
     },
     keywords: [
       'xx-small',
@@ -646,7 +662,7 @@ export const properties: Record<string, PropertyData> = {
   hangingPunctuation: {
     type: 'keyword',
     keywords: [
-      'none', 
+      'none',
       'first',
       'last',
       'force-end',
@@ -664,6 +680,7 @@ export const properties: Record<string, PropertyData> = {
     type: 'length',
     percentage: true,
     keywords: ['max-content', 'min-content', 'auto'],
+    defaultValue: 'auto',
   },
   hyphens: {
     type: 'keyword',
@@ -774,6 +791,7 @@ export const properties: Record<string, PropertyData> = {
     type: 'length',
     percentage: true,
     number: true,
+    range: { number: [0, 2] },
     keywords: ['normal'],
   },
   margin: {
@@ -977,6 +995,7 @@ export const properties: Record<string, PropertyData> = {
   orphans: {
     type: 'number',
     defaultValue: 2,
+    range: { number: [1, 10] },
   },
   outlineColor: {
     type: 'color',
@@ -1088,8 +1107,11 @@ export const properties: Record<string, PropertyData> = {
   },
   perspective: {
     type: 'length',
-    percentage: true,
     keywords: ['none'],
+  },
+  perspectiveOrigin: {
+    type: PerspectiveOriginInput,
+    stringify: stringifyPerspectiveOrigin,
   },
   placeItems: {
     type: 'keyword',
@@ -1242,23 +1264,17 @@ export const properties: Record<string, PropertyData> = {
       'match-parent',
     ],
   },
+  textDecoration: {
+    type: TextDecorationInput,
+    stringify: stringifyTextDecoration,
+  },
   textDecorationColor: {
     type: 'color',
     keywords: ['currentcolor', 'transparent'],
   },
   textDecorationLine: {
     type: 'keyword',
-    keywords: [
-      'none',
-      'underline',
-      'overline',
-      'line-through',
-      'blink',
-      'underline line-through',
-      'underline overline',
-      'overline line-through',
-      'underline overline line-through',
-    ],
+    keywords: textDecorationLines,
   },
   textDecorationThickness: {
     //TODO: Add value ranges
@@ -1272,7 +1288,7 @@ export const properties: Record<string, PropertyData> = {
   },
   textDecorationStyle: {
     type: 'keyword',
-    keywords: ['solid', 'double', 'dotted', 'dashed', 'wavy'],
+    keywords: textDecorationStyles,
   },
   textEmphasisColor: {
     type: 'color',
@@ -1331,6 +1347,10 @@ export const properties: Record<string, PropertyData> = {
       'geometricPrecision',
     ],
   },
+  textShadow: {
+    type: TextShadowPicker,
+    stringify: stringifyTextShadow,
+  },
   textTransform: {
     type: 'keyword',
     keywords: [
@@ -1366,6 +1386,10 @@ export const properties: Record<string, PropertyData> = {
       'manipulation',
     ],
   },
+  transform: {
+    type: TransformPicker,
+    stringify: stringifyTransform,
+  },
   transformBox: {
     type: 'keyword',
     keywords: [
@@ -1385,7 +1409,10 @@ export const properties: Record<string, PropertyData> = {
   transitionDuration: { type: 'time' },
   // TODO this should be a combobox
   transitionProperty: { type: 'keyword', keywords: ANIMATABLE_PROPERTIES },
-  transitionTimingFunction: { type: 'easing-function' },
+  transitionTimingFunction: {
+    type: EasingFunctionPicker,
+    stringify: stringifyEasingFunction,
+  },
   unicodeBidi: {
     type: 'keyword',
     keywords: [
@@ -1440,11 +1467,13 @@ export const properties: Record<string, PropertyData> = {
   widows: {
     type: 'number',
     defaultValue: 2,
+    range: { number: [1, Infinity] },
   },
   width: {
     type: 'length',
     percentage: true,
     keywords: ['max-content', 'min-content', 'auto'],
+    defaultValue: '100%',
   },
   wordBreak: {
     type: 'keyword',

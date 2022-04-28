@@ -2,8 +2,9 @@ import * as React from 'react'
 import { Monitor, Smartphone, X } from 'react-feather'
 import { AbsoluteLengthUnits, Length, ResponsiveLength } from '../../types/css'
 import { Breakpoint } from '../../types/theme'
-import { DimensionInputProps } from '../Dimension/Input'
+import { DimensionInputProps } from '../inputs/Dimension/Input'
 import { useTheme } from '../providers/ThemeContext'
+import { Label } from '../primitives'
 
 const DEFAULT_BREAKPOINT_COUNT = 3
 // TODO: Base this on the type of property
@@ -74,15 +75,14 @@ export const ResponsiveInput = ({
     <Component
       value={value}
       onChange={handleChange}
-      label="All"
       property={property}
       {...componentProps}
     />
   )
 
   return (
-    <div sx={{ py: 2 }}>
-      <h3
+    <div>
+      <Label
         sx={{ lineHeight: 1, pb: 1, margin: 0, fontSize: 0, fontWeight: 500 }}
       >
         <div
@@ -93,7 +93,7 @@ export const ResponsiveInput = ({
             width: '100%',
           }}
         >
-          {label}
+          <span>{label}</span>
           {isResponsiveControls ? (
             <button
               title="Remove responsive controls"
@@ -116,7 +116,7 @@ export const ResponsiveInput = ({
             </button>
           )}
         </div>
-      </h3>
+      </Label>
       {editors}
     </div>
   )

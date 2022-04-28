@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.5
+
+### Patch Changes
+
+- b1e2065: Fix some initialization bugs
+
 ## 0.0.4
 
 ### Patch Changes

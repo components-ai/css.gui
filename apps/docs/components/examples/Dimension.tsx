@@ -14,7 +14,6 @@ export const DimensionExample = () => {
     <div>
       <div sx={{ width: 256, ml: 0 }}>
         <DimensionInput
-          property="fontSize"
           value={value}
           onChange={setValue}
           units={['px', 'em', 'rem']}

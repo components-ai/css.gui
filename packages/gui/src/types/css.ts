@@ -42,12 +42,10 @@ export const enum KeywordUnits {
   Keyword = 'keyword',
 }
 // Only use a subset for now to keep things simpler
-export type LengthUnit =
-  | FontRelativeLengthUnits.Em
-  | FontRelativeLengthUnits.Rem
-  | AbsoluteLengthUnits.Px
-  | KeywordUnits.Keyword
 export type LengthPercentageUnit = LengthUnit | PercentageLengthUnits.Pct
+
+export const LENGTH_UNITS = ['em', 'rem', 'px'] as const
+export type LengthUnit = typeof LENGTH_UNITS[number]
 
 export const TIME_UNITS = ['ms', 's'] as const
 export type TimeUnit = typeof TIME_UNITS[number]
@@ -66,17 +64,6 @@ export interface NumberPercentage {
   unit: NumberPercentageUnit
 }
 
-export type FullLengthUnit =
-  | FontRelativeLengthUnits.Em
-  | FontRelativeLengthUnits.Rem
-  | AbsoluteLengthUnits.Px
-  | PercentageLengthUnits.Pct
-  | UnitlessUnits.Number
-  | ThemeUnits.Theme
-  | KeywordUnits.Keyword
-
-export type CSSUnit = FullLengthUnit | TimeUnit
-
 export type CSSUnitValue = {
   value: number | string
   unit: string
@@ -84,6 +71,9 @@ export type CSSUnitValue = {
 }
 export type GenericLength = '0'
 export type Length = CSSUnitValue | GenericLength
+// This isn't differentiated type-wise but it's good to keep track of
+// what actually accepts % values
+export type LengthPercentage = Length
 export type ResponsiveLength = Length[]
 export type CSSKeywordValue = {
   value: string

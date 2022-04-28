@@ -1,0 +1,29 @@
+import { UnitConversions, UnitSteps } from '../../../lib'
+
+export type State = {
+  key: number
+  value: number | string
+  unit: string
+  themeId?: string
+  min?: number
+  max?: number
+}
+
+export type Action =
+  | {
+      type: 'CHANGED_INPUT_VALUE'
+      value: number | string
+      themeId?: string
+    }
+  | {
+      type: 'CHANGED_UNIT_VALUE'
+      unit: string
+      conversions: UnitConversions
+      steps?: UnitSteps
+    }
+  | {
+      type: 'CHANGED_INPUT_TO_THEME_VALUE'
+      value: number | string
+      unit: string
+      themeId?: string
+    }

@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
-import { Editor, Inputs, RenderElement } from '@compai/css-gui'
+import { Editor, Inputs, RenderElement, Theme } from '@compai/css-gui'
 import { FirstParagraph } from '../components/FirstParagraph'
-import { Theme } from '@emotion/react'
 
 const initialStyles: any = {
   fontSize: { value: 16, unit: 'px' },
@@ -15,6 +14,10 @@ const initialStyles: any = {
     unit: 'keyword',
   },
   width: {
+    value: '100',
+    unit: '%',
+  },
+  maxWidth: {
     value: 'auto',
     unit: 'keyword',
   },
@@ -27,11 +30,12 @@ const DEFAULT_THEME: Theme = {
     { id: '3', value: 32, unit: 'px' },
     { id: '4', value: 48, unit: 'px' },
     { id: '5', value: 64, unit: 'px' },
+    { id: '6', value: 96, unit: 'px' },
   ],
   lineHeights: [
     { id: '1', value: 1, unit: 'number' },
-    { id: '2', value: 1.2, unit: 'number' },
-    { id: '3', value: 1.4, unit: 'number' },
+    { id: '2', value: 1.25, unit: 'number' },
+    { id: '3', value: 1.5, unit: 'number' },
   ],
   colors: [
     {
@@ -80,14 +84,16 @@ export default function Docs() {
       >
         <div sx={{ px: [2, 3, 4] }}>
           <Editor styles={styles} onChange={setStyles} theme={DEFAULT_THEME}>
-            <>
-              <h3 sx={{ m: 0 }}>Typography</h3>
+            <div sx={{ display: 'grid', gap: '.5rem', width: '240px' }}>
+              <h3 sx={{ my: 0 }}>Typography</h3>
               <Inputs.FontSize />
               <Inputs.LineHeight />
               <Inputs.TextAlign />
               <Inputs.FontStretch />
+              <Inputs.Margin />
               <Inputs.FontFamily />
               <h3>Colors</h3>
+              <h3 sx={{ mt: 4, mb: 0 }}>Colors</h3>
               <div sx={{ display: 'flex' }}>
                 <div sx={{ mr: 2 }}>
                   <Inputs.Color />
@@ -96,31 +102,33 @@ export default function Docs() {
                   <Inputs.BackgroundColor />
                 </div>
               </div>
-              <h3>Size</h3>
+              <h3 sx={{ mt: 4, mb: 0 }}>Size</h3>
               <Inputs.Width />
+              <Inputs.MaxWidth />
               <Inputs.Height />
-            
-            </>
+            </div>
           </Editor>
         </div>
-        <RenderElement tagName="p" styles={styles}>
-          “The parameters comprise sequences which are theoretically infinite
-          but limits are, of course, set to them in practice. There is an upward
-          limit to size and certainly a downward one... Within these sequences
-          there are reasonable bounds; extremes set by technical and functional
-          experience”
-          <br /> <br />
-          <em>
-            In{' '}
-            <Link
-              href="https://www.lars-mueller-publishers.com/designing-programmes-0"
-              passHref={true}
-            >
-              <a style={{ color: styles.color }}>Designing Programmes</a>
-            </Link>{' '}
-            by Karl Gerstner
-          </em>
-        </RenderElement>
+        <div sx={{ flexGrow: 1 }}>
+          <RenderElement tagName="p" styles={styles}>
+            “The parameters comprise sequences which are theoretically infinite
+            but limits are, of course, set to them in practice. There is an
+            upward limit to size and certainly a downward one... Within these
+            sequences there are reasonable bounds; extremes set by technical and
+            functional experience”
+            <br /> <br />
+            <em>
+              In{' '}
+              <Link
+                href="https://www.lars-mueller-publishers.com/designing-programmes-0"
+                passHref={true}
+              >
+                <a style={{ color: styles.color }}>Designing Programmes</a>
+              </Link>{' '}
+              by Karl Gerstner
+            </em>
+          </RenderElement>
+        </div>
       </div>
       <div className="full-bleed">
         <pre

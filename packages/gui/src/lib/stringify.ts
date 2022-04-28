@@ -1,6 +1,6 @@
-import { isElement } from 'lodash-es'
-import { Length } from '../types/css'
-import { addPseudoSyntax, isPseudoClass } from './pseudos'
+import { isElement, isNil } from 'lodash-es'
+import { Color, Length } from '../types/css'
+import { addPseudoSyntax } from './pseudos'
 
 export function stringifySelector(selector: string): string {
   if (isElement(selector)) {
@@ -34,3 +34,36 @@ export function stringifyUnit(value: Length) {
 }
 
 const DEFAULT_LENGTH_UNIT = 'px'
+
+export function stringifyFunction(
+  name: string,
+  properties: Primitive[],
+  separator: string = ', '
+) {
+  return `${name}(${properties
+    .filter((x) => !isNil(x))
+    .map(stringifyPrimitive)
+    .join(separator)})`
+}
+
+export function stringifyValues(
+  properties: Primitive[],
+  separator: string = ' '
+) {
+  return `${properties
+    .filter((x) => !isNil(x))
+    .map(stringifyPrimitive)
+    .join(separator)}`
+}
+
+export function stringifyPrimitive(value: Primitive) {
+  if (typeof value === 'number') {
+    return '' + value
+  }
+  if (typeof value === 'string') {
+    return value
+  }
+  return stringifyUnit(value)
+}
+
+type Primitive = Length | number | Color

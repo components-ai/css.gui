@@ -1,34 +1,17 @@
 import { Styles, Length, CSSUnitValue } from '../types/css'
-
-import { stringifyEasingFunction } from '../components/EasingFunction/stringify'
-import { stringifyBoxShadow } from '../components/BoxShadow/stringify'
-import { stringifyTextShadow } from '../components/TextShadow/stringify'
 import { stringifySelector, stringifyUnit } from './stringify'
 import { has } from 'lodash-es'
-import { stringifyFilter } from '../components/Filter/stringify'
 import { isNestedSelector } from './util'
+import { properties } from '../data/properties'
 
 export const stringifyProperty = (
-  property?: string, // In the future the property might determine how we stringify
+  property: string = '', // In the future the property might determine how we stringify
   value?: unknown
 ): Array<string | null> | string | number | null => {
-  if (property === 'filter') {
-    return stringifyFilter(value as any)
+  const stringify = properties[property]?.stringify
+  if (stringify) {
+    return stringify(value)
   }
-  if (property === 'boxShadow') {
-    return stringifyBoxShadow(value as any)
-  }
-  if (property === 'textShadow') {
-    return stringifyTextShadow(value as any)
-  }
-  if (
-    ['transitionTimingFunction', 'animationTimingFunction'].includes(
-      property || ''
-    )
-  ) {
-    return stringifyEasingFunction(value as any)
-  }
-
   if (Array.isArray(value)) {
     // @ts-ignore
     return value.map((v: Length | string | null) =>
