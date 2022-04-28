@@ -1,0 +1,77 @@
+import { FirstParagraph } from '../../components/FirstParagraph'
+
+# Exporting CSS
+
+<FirstParagraph>
+  Use built-in code generation to transform your style object to CSS.
+</FirstParagraph>
+
+CSS GUI exports a `codegen` module which can transform a styles object into
+CSS that can be embedded directly onto a page.
+
+```js
+import { codegen } from '@compai/css-gui'
+```
+
+You can pass it your styles object, and pass a selector and/or theme as options.
+
+```js
+codegen.css(
+  {
+    fontSize: [
+      { value: 16, unit: 'px' },
+      { value: 20, unit: 'px' },
+      { value: 24, unit: 'px' },
+    ],
+  },
+  {
+    selector: '.my-custom-selector',
+  }
+)
+```
+
+Which will output:
+
+```css
+.my-custom-selector {
+  font-size: 16px;
+}
+
+@media screen (min-width: 52em) {
+  .my-custom-selector {
+    font-size: 20px;
+  }
+}
+
+@media screen (min-width: 64em) {
+  .my-custom-selector {
+    font-size: 24px;
+  }
+}
+```
+
+## All together
+
+Below shows usage of React style state, the editor, and exporting
+the style object to CSS that's then displayed in a `pre` tag.
+
+```js
+import { useState } from 'react'
+import { Editor, RenderElement, codegen } from '@compai/css-gui'
+
+export const MyEditor = () => {
+  const [styles, setStyles] = useState({
+    fontSize: null,
+  })
+
+  return (
+    <>
+      <Editor styles={styles} onChange={setStyles} />
+      <RenderElement tagName="p" styles={styles}>
+        Hello, world!
+      </RenderElement>
+      <pre>{codegen.css(styles)}</pre>
+    </>
+  )
+}
+```

@@ -20,6 +20,7 @@ export const Sidebar = () => {
       <NavSectionTitle>Overview</NavSectionTitle>
       <NavItem href="/introduction">Introduction</NavItem>
       <NavItem href="/getting-started">Getting Started</NavItem>
+      <NavItem href="/exports/css">Exporting CSS</NavItem>
       <NavSectionTitle>Components</NavSectionTitle>
       <NavItem href="/components/editor">Editor</NavItem>
       <NavItem href="/components/fieldset">Fieldset</NavItem>
