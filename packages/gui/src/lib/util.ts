@@ -34,6 +34,11 @@ export function isNestedSelector(selector: string): boolean {
   )
 }
 
+export function isNestedSelectorWithSyntax(selector: string): boolean {
+  const rawSelector = selector.replace(/^:+/, '')
+  return isNestedSelector(rawSelector)
+}
+
 /**
  * Convert a string to words such that only the first word is capitalized.
  */

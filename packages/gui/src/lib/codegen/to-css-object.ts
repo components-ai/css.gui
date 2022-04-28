@@ -1,8 +1,8 @@
-import { Styles, Length, CSSUnitValue } from '../types/css'
-import { stringifySelector, stringifyUnit } from './stringify'
+import { Styles, Length, CSSUnitValue } from '../../types/css'
+import { stringifySelector, stringifyUnit } from '../stringify'
 import { has } from 'lodash-es'
-import { isNestedSelector } from './util'
-import { properties } from '../data/properties'
+import { isNestedSelector } from '../util'
+import { properties } from '../../data/properties'
 
 export const stringifyProperty = (
   property: string = '', // In the future the property might determine how we stringify
