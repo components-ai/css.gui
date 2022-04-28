@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Link from 'next/link'
-import { Editor, Inputs, RenderElement, Theme } from '@compai/css-gui'
+import { Editor, Inputs, RenderElement } from '@compai/css-gui'
 import { FirstParagraph } from '../components/FirstParagraph'
 import { initialStyles } from '../data/initial-styles'
 import { defaultTheme } from '../data/default-theme'
