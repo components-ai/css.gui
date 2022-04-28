@@ -230,6 +230,21 @@ export const properties: Record<string, PropertyData> = {
     type: 'color',
     keywords: ['currentcolor', 'transparent'],
   },
+  borderStyle: {
+    type: 'keyword',
+    keywords: [
+      'none',
+      'hidden',
+      'dotted',
+      'dashed',
+      'solid',
+      'double',
+      'groove',
+      'ridge',
+      'inset',
+      'outset',
+    ],
+  },
   borderWidth: {
     type: 'length',
     keywords: ['thin', 'medium', 'thick'],
