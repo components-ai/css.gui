@@ -1,8 +1,8 @@
 import * as React from 'react'
-import { useTheme } from '../providers/ThemeContext'
 import { property } from 'lodash-es'
-import { FontFam } from '../../types/css'
-import { EditorProps } from '../editors/types'
+import { FontFam } from '../../../types/css'
+import { EditorProps } from '../../../types/editor'
+import { Label } from '../../primitives'
 import { useCombobox } from 'downshift'
 
 interface Props extends EditorProps<FontFam> {
@@ -79,7 +79,11 @@ export function FontFamilyInput({
       {...getComboboxProps()}
       id={fullId}
     >
-      <label>{label}</label>
+      {label && (
+        <Label htmlFor={id} sx={{ display: 'block' }}>
+          {label}
+        </Label>
+      )}
       <input
         type='text'
         value={value}
@@ -242,7 +246,6 @@ const getAllOptions = async (): Promise<Font[]> => {
   const rawGoogData = await fetch('https://components.ai/api/v1/typefaces/list')
   const rawSystemData = await fetch('https://components.ai/api/v1/typefaces/system')
 
-  // system fonts 
   const systemFonts = (await rawSystemData.json()) as any
   systemFonts.forEach(({ name, type }: any) => {
     if (

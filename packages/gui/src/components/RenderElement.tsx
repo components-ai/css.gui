@@ -1,7 +1,7 @@
 import { HTMLAttributes } from 'react'
 import { toCSSObject } from '../lib'
 import { Styles } from '../types/css'
-import { Fonts } from '../components/FontFamily/FontTags'
+import { Fonts } from './inputs/FontFamily/FontTags'
 
 type RenderElementProps = HTMLAttributes<HTMLBaseElement> & {
   tagName: string
