@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.9
+
+### Patch Changes
+
+- f9cbcb1: Improve package config with basic readme and repo link
+
 ## 0.0.8
 
 ### Patch Changes
