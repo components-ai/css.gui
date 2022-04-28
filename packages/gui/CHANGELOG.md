@@ -1,5 +1,12 @@
 # @compai/css-gui
 
+## 0.0.7
+
+### Patch Changes
+
+- 9f86d88: Add background image input
+- 348bf9f: Add border style input
+
 ## 0.0.6
 
 ### Patch Changes
