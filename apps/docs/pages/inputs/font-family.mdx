@@ -3,12 +3,11 @@ import { FontFamilyExample } from '../../components/examples/FontFamily'
 
 # Font Family
 
-<FirstParagraph>
-  A dynamically loaded font family input
-</FirstParagraph>
+<FirstParagraph>A dynamically loaded font family input</FirstParagraph>
 
-This input supports all growing set of typefaces, which currently
-includes all Google Fonts and System Fonts. Style sheets are generated automatically.
+This input supports a growing set of typefaces, which currently includes all
+[Google Fonts](https://fonts.google.com) and system fonts. Style sheets links are
+generated automatically with `RenderElement`.
 
 ### Example
 
@@ -25,10 +24,11 @@ const MyEditor = () => {
 
   return (
     <>
-      <RenderElement tagName='p' styles={{ fontFamily }}>
+      <RenderElement tagName="p" styles={{ fontFamily }}>
         Fun with fonts!
       </RenderElement>
       <FontFamilyInput value={fontFamily} onChange={setFontFamily} />
     </>
   )
 }
+```
