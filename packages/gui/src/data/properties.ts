@@ -255,6 +255,10 @@ export const properties: Record<string, PropertyData> = {
     percentage: true,
     keywords: ['auto'],
   },
+  boxDecorationBreak: {
+    type: 'keyword',
+    keywords: ['slice', 'clone'],
+  },
   boxShadow: {
     type: BoxShadowPicker,
     stringify: stringifyBoxShadow,
