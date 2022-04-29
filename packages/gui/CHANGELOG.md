@@ -1,5 +1,12 @@
 # @compai/css-gui
 
+## 0.0.11
+
+### Patch Changes
+
+- 92b1177: Add border radius input
+- 8820f98: Add border image input
+
 ## 0.0.10
 
 ### Patch Changes
