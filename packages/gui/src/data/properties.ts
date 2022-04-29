@@ -1545,6 +1545,11 @@ export const properties: Record<string, PropertyData> = {
     type: 'keyword',
     keywords: ['normal', 'break-all', 'keep-all', 'break-word'],
   },
+  wordSpacing: {
+    type: 'length',
+    percentage: true,
+    keywords: ['normal'],
+  },
   writingMode: {
     type: 'keyword',
     keywords: ['horizontal-tb', 'vertical-rl', 'vertical-lr'],
