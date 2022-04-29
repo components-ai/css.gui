@@ -35,6 +35,7 @@ export const Sidebar = () => {
       <NavItem href="/examples/shadows">Shadows</NavItem>
       <NavItem href="/examples/filters">Filters</NavItem>
       <NavItem href="/examples/transforms">Transforms</NavItem>
+      <NavItem href="/examples/border-images">Border Images</NavItem>
       <NavSectionTitle>Community</NavSectionTitle>
       <NavItem href="https://github.com/components-ai/css.gui">GitHub</NavItem>
       <NavItem href="https://twitter.com/components_ai">Twitter</NavItem>

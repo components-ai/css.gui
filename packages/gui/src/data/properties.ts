@@ -26,10 +26,9 @@ import {
   textDecorationLines,
   textDecorationStyles,
 } from '../components/inputs/TextDecoration'
-import BackgroundImagePicker from '../components/inputs/BackgroundImage/picker'
-import { stringifyBackgroundImage } from '../components/inputs/BackgroundImage/stringify'
+import ImageSourcePicker from '../components/inputs/ImageSource/picker'
+import { stringifyImageSource } from '../components/inputs/ImageSource/stringify'
 import { allProperties } from './css-properties'
-import pascalcase from 'pascalcase'
 import { camelCase, uniqBy } from 'lodash-es'
 
 type PropertyData = {
@@ -40,6 +39,7 @@ type PropertyData = {
   range?: UnitRanges
   defaultValue?: string | number
   stringify?: (value: any) => string
+  label?: string
 }
 
 type UnitRanges = Record<string, [number, number]>
@@ -184,14 +184,24 @@ export const properties: Record<string, PropertyData> = {
     keywords: ['border-box', 'padding-box', 'content-box', 'text'],
   },
   backgroundImage: {
-    type: BackgroundImagePicker,
-    stringify: stringifyBackgroundImage,
+    type: ImageSourcePicker,
+    stringify: stringifyImageSource,
+    label: 'Background Image',
+  },
+  // TODO: 4-positional arguments separated by spaces
+  borderImageOutset: {
+    type: 'length',
+    number: true,
+  },
+  // TODO: 2-positional arguments separated by spaces
+  borderImageRepeat: {
+    type: 'keyword',
+    keywords: ['stretch', 'repeat', 'round', 'space'],
   },
   borderImageSlice: {
     type: 'length',
     number: true,
     percentage: true,
-    defaultValue: 1,
     range: {
       [AbsoluteLengthUnits.Px]: [0, 128],
       [FontRelativeLengthUnits.Em]: [0, 8],
@@ -200,8 +210,9 @@ export const properties: Record<string, PropertyData> = {
     },
   },
   borderImageSource: {
-    type: BackgroundImagePicker,
-    stringify: stringifyBackgroundImage,
+    type: ImageSourcePicker,
+    stringify: stringifyImageSource,
+    label: 'Border Image',
   },
   borderImageWidth: {
     type: 'length',
@@ -842,8 +853,9 @@ export const properties: Record<string, PropertyData> = {
     keywords: ['auto', 'loose', 'normal', 'strict', 'anywhere'],
   },
   listStyleImage: {
-    type: BackgroundImagePicker,
-    stringify: stringifyBackgroundImage,
+    type: ImageSourcePicker,
+    stringify: stringifyImageSource,
+    label: 'List Style Image',
   },
   listStylePosition: {
     type: 'keyword',
@@ -903,8 +915,9 @@ export const properties: Record<string, PropertyData> = {
     keywords: ['luminance', 'alpha'],
   },
   maskBorderSource: {
-    type: BackgroundImagePicker,
-    stringify: stringifyBackgroundImage,
+    type: ImageSourcePicker,
+    stringify: stringifyImageSource,
+    label: 'Mask Border Source',
   },
   maskBorderWidth: {
     // TODO: add multiple sides (top, bottom, left, right)
@@ -953,8 +966,9 @@ export const properties: Record<string, PropertyData> = {
     keywords: ['add', 'subtract', 'intersect', 'exclude'],
   },
   maskImage: {
-    type: BackgroundImagePicker,
-    stringify: stringifyBackgroundImage,
+    type: ImageSourcePicker,
+    stringify: stringifyImageSource,
+    label: 'Mask Image',
   },
   maskMode: {
     type: 'keyword',

@@ -1,37 +1,38 @@
 import Layers, { LayerProps } from '../../Layers'
 import LayerHeader from '../../LayerHeader'
-import { BackgroundImage, BackgroundImageType } from './types'
+import { ImageSource, ImageSourceType } from './types'
 import { EditorProps } from '../../../types/editor'
 import { getInputProps } from '../../../lib/util'
 import { SelectInput } from '../SelectInput'
-import { stringifyBackgroundImage } from './stringify'
+import { stringifyImageSource } from './stringify'
 import { URLInput } from '../../primitives/URLInput'
 import produce from 'immer'
 import GradientPicker from '../Gradient/picker'
 import { GradientList } from '../Gradient/types'
 
 const DEFAULT_IMAGE_URL = ''
-export default function FilterContent({
+export default function ImageSourceContent({
+  label,
   value,
   onChange,
-}: EditorProps<BackgroundImage[]>) {
+}: EditorProps<ImageSource[]>) {
   const newItem = () => {
     return getDefault('url')
   }
 
   return (
-    <Layers<BackgroundImage>
+    <Layers<ImageSource>
       value={value}
       onChange={onChange}
       newItem={newItem}
-      addLabel="+ Add border image"
+      addLabel={`+ Add ${label}`}
       header={Header}
-      content={BackgroundEditor}
+      content={ImageSourceEditor}
     />
   )
 }
 
-export const BackgroundEditor = (props: LayerProps<BackgroundImage>) => {
+export const ImageSourceEditor = (props: LayerProps<ImageSource>) => {
   return (
     <div sx={{ px: 3, pb: 3, pt: 2 }}>
       <SelectInput
@@ -66,12 +67,8 @@ export const BackgroundEditor = (props: LayerProps<BackgroundImage>) => {
   )
 }
 
-export function Header({
-  value,
-}: {
-  value: BackgroundImage | BackgroundImage[]
-}) {
-  const style = stringifyBackgroundImage(value)
+export function Header({ value }: { value: ImageSource | ImageSource[] }) {
+  const style = stringifyImageSource(value)
   return (
     <LayerHeader
       text={style}
@@ -101,9 +98,9 @@ export function Header({
 }
 
 function convertBackgroundImageValue(
-  value: BackgroundImage,
-  newType: BackgroundImageType
-): BackgroundImage {
+  value: ImageSource,
+  newType: ImageSourceType
+): ImageSource {
   if (value.type === newType) {
     return value
   }
@@ -112,7 +109,7 @@ function convertBackgroundImageValue(
   return getDefault(newType)
 }
 
-function getDefault(type: BackgroundImageType): BackgroundImage {
+function getDefault(type: ImageSourceType): ImageSource {
   switch (type) {
     case 'gradient':
       return { type, gradient: [] }

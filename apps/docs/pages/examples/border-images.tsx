@@ -17,8 +17,16 @@ const initialStyles = {
     value: 0,
     unit: 'px',
   },
-  borderImageSlice: 1,
-  borderImageSource: [],
+  borderImageSlice: {
+    value: 1,
+    unit: 'number',
+  },
+  borderImageSource: [
+    {
+      type: 'url',
+      arguments: ['https://dc28c2r6oodom.cloudfront.net/p/h/037.jpg'],
+    },
+  ],
 }
 
 export default function BorderImage() {
@@ -29,12 +37,9 @@ export default function BorderImage() {
       <div
         className="full-bleed"
         sx={{
-          mt: 5,
           display: 'flex',
           py: [2, 3, 4],
           borderTopWidth: 'thin',
-          borderTopStyle: 'solid',
-          borderColor: 'border',
         }}
       >
         <div sx={{ px: [2, 3, 4] }}>
