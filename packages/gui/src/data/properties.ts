@@ -1399,6 +1399,12 @@ export const properties: Record<string, PropertyData> = {
       'use-glyph-orientation',
     ],
   },
+  textOverflow: {
+    // TODO firefox supports two-value syntax and there are more experimental values
+    // but these are supported by all browsers
+    type: 'kewyord',
+    keywords: ['clip', 'ellipsis'],
+  },
   textRendering: {
     type: 'keyword',
     keywords: [
