@@ -794,6 +794,10 @@ export const properties: Record<string, PropertyData> = {
     type: 'keyword',
     keywords: ['auto', 'loose', 'normal', 'strict', 'anywhere'],
   },
+  listStyleImage: {
+    type: BackgroundImagePicker,
+    stringify: stringifyBackgroundImage,
+  },
   listStylePosition: {
     type: 'keyword',
     keywords: ['inside', 'outside'],
@@ -851,6 +855,10 @@ export const properties: Record<string, PropertyData> = {
     type: 'keyword',
     keywords: ['luminance', 'alpha'],
   },
+  maskBorderSource: {
+    type: BackgroundImagePicker,
+    stringify: stringifyBackgroundImage,
+  },
   maskBorderWidth: {
     // TODO: add multiple sides (top, bottom, left, right)
     type: 'length',
@@ -895,6 +903,10 @@ export const properties: Record<string, PropertyData> = {
   maskComposite: {
     type: 'keyword',
     keywords: ['add', 'subtract', 'intersect', 'exclude'],
+  },
+  maskImage: {
+    type: BackgroundImagePicker,
+    stringify: stringifyBackgroundImage,
   },
   maskMode: {
     type: 'keyword',
