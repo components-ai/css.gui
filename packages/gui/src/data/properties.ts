@@ -1320,6 +1320,11 @@ export const properties: Record<string, PropertyData> = {
       'match-parent',
     ],
   },
+  textCombineUpright: {
+    // note: there is a special `digits <number>` syntax that is only supported by Internet Explorer??
+    type: 'keyword',
+    keywords: ['none', 'all'],
+  },
   textDecoration: {
     type: TextDecorationInput,
     stringify: stringifyTextDecoration,
