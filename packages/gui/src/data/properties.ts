@@ -535,6 +535,11 @@ export const properties: Record<string, PropertyData> = {
     defaultValue: 0,
     range: { number: [0, Infinity] },
   },
+  flexShrink: {
+    type: 'number',
+    defaultValue: 1,
+    range: { number: [0, Infinity] },
+  },
   flexWrap: {
     type: 'keyword',
     keywords: ['nowrap', 'wrap', 'wrap-reverse'],
@@ -1027,11 +1032,11 @@ export const properties: Record<string, PropertyData> = {
     percentage: true,
   },
   order: {
-    type: 'number',
+    type: 'integer',
     defaultValue: 0,
   },
   orphans: {
-    type: 'number',
+    type: 'integer',
     defaultValue: 2,
     range: { number: [1, 10] },
   },
@@ -1502,7 +1507,7 @@ export const properties: Record<string, PropertyData> = {
     ],
   },
   widows: {
-    type: 'number',
+    type: 'integer',
     defaultValue: 2,
     range: { number: [1, Infinity] },
   },
@@ -1521,7 +1526,7 @@ export const properties: Record<string, PropertyData> = {
     keywords: ['horizontal-tb', 'vertical-rl', 'vertical-lr'],
   },
   zIndex: {
-    type: 'number',
+    type: 'integer',
     keywords: ['auto'],
   },
 }
