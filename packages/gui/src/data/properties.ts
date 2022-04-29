@@ -1402,7 +1402,7 @@ export const properties: Record<string, PropertyData> = {
   textOverflow: {
     // TODO firefox supports two-value syntax and there are more experimental values
     // but these are supported by all browsers
-    type: 'kewyord',
+    type: 'keyword',
     keywords: ['clip', 'ellipsis'],
   },
   textRendering: {
