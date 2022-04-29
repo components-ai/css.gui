@@ -28,6 +28,9 @@ import {
 } from '../components/inputs/TextDecoration'
 import BackgroundImagePicker from '../components/inputs/BackgroundImage/picker'
 import { stringifyBackgroundImage } from '../components/inputs/BackgroundImage/stringify'
+import { allProperties } from './css-properties'
+import pascalcase from 'pascalcase'
+import { camelCase, uniqBy } from 'lodash-es'
 
 type PropertyData = {
   type: string | ComponentType<any>
@@ -1559,3 +1562,9 @@ export const properties: Record<string, PropertyData> = {
     keywords: ['auto'],
   },
 }
+
+export const unsupportedProperties = uniqBy(allProperties, 'property').filter(
+  (property) => {
+    return !properties[camelCase(property.property)]
+  }
+)

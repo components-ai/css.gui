@@ -18,6 +18,7 @@ export { EditorProvider } from './components/providers/EditorContext'
 export { Layout } from './components/ui/Layout'
 
 export { theme } from './components/ui/theme'
+export { unsupportedProperties } from './data/properties'
 
 export * from './lib'
 export * from './types/theme'
