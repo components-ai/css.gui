@@ -1258,6 +1258,10 @@ export const properties: Record<string, PropertyData> = {
     type: 'color',
     keywords: ['auto', 'currentcolor', 'transparent'],
   },
+  scrollbarGutter: {
+    type: 'keyword',
+    keywords: ['auto', 'stable', 'stable both-edges'],
+  },
   scrollbarWidth: {
     type: 'keyword',
     keywords: ['auto', 'thin', 'none'],
