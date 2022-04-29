@@ -30,7 +30,7 @@ import BackgroundImagePicker from '../components/inputs/BackgroundImage/picker'
 import { stringifyBackgroundImage } from '../components/inputs/BackgroundImage/stringify'
 import { allProperties } from './css-properties'
 import pascalcase from 'pascalcase'
-import { camelCase } from 'lodash-es'
+import { camelCase, uniqBy } from 'lodash-es'
 
 type PropertyData = {
   type: string | ComponentType<any>
@@ -1534,6 +1534,8 @@ export const properties: Record<string, PropertyData> = {
   },
 }
 
-export const unsupportedProperties = allProperties.filter((property) => {
-  return !properties[camelCase(property)]
-})
+export const unsupportedProperties = uniqBy(allProperties, 'property').filter(
+  (property) => {
+    return !properties[camelCase(property.property)]
+  }
+)
