@@ -7,16 +7,17 @@ It's theme-aware, performant, and can be composed into any React app.
 
 [See the docs &rarr;](https://components.ai/open-source/css-gui)
 
-## ⚠️ CSS GUI is currently under active development
+## ⚠️ Under active development
 
 This project is a work in (rapid) progress.
 
 Over the next few weeks the API will be stabilizing as more functionality is added.
-CSS GUI only supports a portion of the CSS spec currently, but the intention is to
-support it all in the future.
+CSS GUI only [supports a portion](https://components.ai/open-source/css-gui/unsupported)
+of the CSS spec currently, but the intention is to support it all in the future.
 
-We welcome any and all contributions. We'd love it if you try to experiment with
-CSS GUI. Please feel free to report bugs or open up feature requests.
+[We welcome any and all contributions](https://github.com/components-ai/css.gui/blob/main/.github/contributing.md).
+We'd love it if you try to experiment with CSS GUI. Please feel free to report bugs
+or make feature requests.
 
 ## Why?
 
@@ -109,34 +110,7 @@ export const MyEditor = () => {
 
 ## Development
 
-### Installation
-
-```sh
-git clone https://github.com/components-ai/css.gui
-cd css-gui
-yarn
-```
-
-### Running the development server
-
-```sh
-yarn dev
-```
-
-### Running the tests
-
-```sh
-yarn test
-```
-
-### Reinstalling dependencies and clearing caches
-
-On rare ocassions, especially when changing configurations, you might
-need to clear the cache and reinstall the dependencies:
-
-```sh
-yarn nuke
-```
+[See the contributing guide &rarr;](https://github.com/components-ai/css.gui/blob/main/.github/contributing.md)
 
 ## Resources
 
