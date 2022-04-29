@@ -6,7 +6,7 @@ export default function UnsupportedProperties() {
       <h1>Unsupported properties</h1>
       <p>
         CSS GUI is a work in progress, below is an up to date listing of
-        properties that haven't been implemented yet.
+        properties that haven&apos;t been implemented yet.
       </p>
       <ul>
         {unsupportedProperties.map(({ property, url }) => {
