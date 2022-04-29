@@ -34,7 +34,10 @@ export const Layout = (props: Props) => {
               alignItems: 'center',
             }}
           >
-            <Logo seed={id} sx={{ mr: 2 }} /> CSS GUI
+            <span sx={{ mr: 2 }}>
+              <Logo seed={id} />
+            </span>
+            CSS GUI
           </a>
         </Link>
       </header>
