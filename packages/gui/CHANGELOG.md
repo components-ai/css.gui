@@ -1,5 +1,12 @@
 # @compai/css-gui
 
+## 0.0.10
+
+### Patch Changes
+
+- e5e27f5: Add react as dev dep
+- 0119a1a: Add full property list with unsupported properties export
+
 ## 0.0.9
 
 ### Patch Changes
