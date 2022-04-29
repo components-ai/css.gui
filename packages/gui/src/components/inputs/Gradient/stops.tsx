@@ -5,7 +5,7 @@ import { Minus, Plus } from 'react-feather'
 import { randomColor } from '../../../lib/color'
 import { ColorInput } from '../ColorInput'
 import { NumberInput } from '../NumberInput'
-import { getInputProps } from '../../../lib/util'
+import { getInputProps, randomInt } from '../../../lib/util'
 import { GradientStop as GradientStopValue } from './types'
 import { getDeclarationValue } from './stringify'
 
@@ -73,7 +73,7 @@ export default function GradientStopsField({
             ...value,
             {
               color: randomColor(),
-              hinting: 69,
+              hinting: randomInt(0, 100),
             },
           ])
         }}

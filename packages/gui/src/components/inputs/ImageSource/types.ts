@@ -6,9 +6,9 @@ import { GradientList } from '../Gradient/types'
 // For now, we'll hardcode the bg image as a single element stack which
 // we serialize, though in the future there's no reason why we can't expose
 // this as a proper stack/layer.
-export type BackgroundImageType = 'url' | 'gradient'
-export type BackgroundImageGradient = {
+export type ImageSourceType = 'url' | 'gradient'
+export type ImageSourceGradient = {
   type: 'gradient'
   gradient: GradientList
 }
-export type BackgroundImage = CSSFunctionURL | BackgroundImageGradient
+export type ImageSource = CSSFunctionURL | ImageSourceGradient

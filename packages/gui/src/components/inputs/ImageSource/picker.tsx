@@ -1,16 +1,20 @@
 import * as Collapsible from '@radix-ui/react-collapsible'
-import { BackgroundImage } from './types'
+import { ImageSource } from './types'
 import { EditorProps } from '../../../types/editor'
-import BackgroundImageContent, { Header } from './field'
+import ImageSourceContent, { Header } from './field'
 import { Label } from '../../primitives'
 import { useId } from 'react'
 
-type Props = EditorProps<BackgroundImage[]>
-export default function FilterPicker({ value, onChange }: Props) {
-  const id = `${useId()}-backgroundImage`
+type Props = EditorProps<ImageSource[]>
+export default function FilterPicker({
+  value,
+  onChange,
+  label = 'Image Source',
+}: Props) {
+  const id = `${useId()}-imageSource`
   return (
     <>
-      <Label htmlFor={id}>Background Image</Label>
+      <Label htmlFor={id}>{label}</Label>
       <Collapsible.Root id={id}>
         <Collapsible.Trigger
           sx={{
@@ -29,7 +33,7 @@ export default function FilterPicker({ value, onChange }: Props) {
             maxWidth: '32rem',
           }}
         >
-          <BackgroundImageContent value={value} onChange={onChange} />
+          <ImageSourceContent value={value} onChange={onChange} label={label} />
         </Collapsible.Content>
       </Collapsible.Root>
     </>
