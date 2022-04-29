@@ -1,9 +1,11 @@
-import { HTMLAttributes } from 'react'
+import { HTMLAttributes, useId } from 'react'
 import Link from 'next/link'
+import { Logo } from '@compai/logo'
 import { SyntaxHighlighting } from './SyntaxHighlighting'
 
 interface Props extends HTMLAttributes<HTMLDivElement> {}
 export const Layout = (props: Props) => {
+  const id = useId()
   return (
     <>
       <SyntaxHighlighting />
@@ -23,8 +25,16 @@ export const Layout = (props: Props) => {
         }}
       >
         <Link href="/home" passHref={true}>
-          <a sx={{ fontWeight: 500, color: 'text', textDecoration: 'none' }}>
-            CSS GUI
+          <a
+            sx={{
+              fontWeight: 500,
+              color: 'text',
+              textDecoration: 'none',
+              display: 'flex',
+              alignItems: 'center',
+            }}
+          >
+            <Logo seed={id} sx={{ mr: 2 }} /> CSS GUI
           </a>
         </Link>
       </header>
