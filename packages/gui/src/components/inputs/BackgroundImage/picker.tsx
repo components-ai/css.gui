@@ -10,7 +10,7 @@ export default function FilterPicker({ value, onChange }: Props) {
   const id = `${useId()}-backgroundImage`
   return (
     <>
-      <Label htmlFor={id}>Background Image</Label>
+      <Label htmlFor={id}>Border Image</Label>
       <Collapsible.Root id={id}>
         <Collapsible.Trigger
           sx={{

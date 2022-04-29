@@ -24,7 +24,7 @@ export default function FilterContent({
       value={value}
       onChange={onChange}
       newItem={newItem}
-      addLabel="+ Add background image"
+      addLabel="+ Add border image"
       header={Header}
       content={BackgroundEditor}
     />

@@ -187,6 +187,26 @@ export const properties: Record<string, PropertyData> = {
     type: BackgroundImagePicker,
     stringify: stringifyBackgroundImage,
   },
+  borderImageSlice: {
+    type: 'length',
+    number: true,
+    percentage: true,
+    defaultValue: 1,
+    range: {
+      [AbsoluteLengthUnits.Px]: [0, 128],
+      [FontRelativeLengthUnits.Em]: [0, 8],
+      [FontRelativeLengthUnits.Rem]: [0, 8],
+      [PercentageLengthUnits.Pct]: [0, 100],
+    },
+  },
+  borderImageSource: {
+    type: BackgroundImagePicker,
+    stringify: stringifyBackgroundImage,
+  },
+  borderImageWidth: {
+    type: 'length',
+    keywords: ['thin', 'medium', 'thick'],
+  },
   backgroundOrigin: {
     type: 'keyword',
     keywords: ['border-box', 'padding-box', 'content-box'],
@@ -202,6 +222,16 @@ export const properties: Record<string, PropertyData> = {
     type: 'length',
     percentage: true,
     keywords: ['top', 'left', 'center'],
+  },
+  borderRadius: {
+    type: 'length',
+    percentage: true,
+    range: {
+      [AbsoluteLengthUnits.Px]: [0, Infinity],
+      [FontRelativeLengthUnits.Em]: [0, 64],
+      [FontRelativeLengthUnits.Rem]: [0, 64],
+      [PercentageLengthUnits.Pct]: [0, 100],
+    },
   },
   backgroundRepeat: {
     type: 'keyword',
