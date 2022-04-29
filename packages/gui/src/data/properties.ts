@@ -150,6 +150,7 @@ export const properties: Record<string, PropertyData> = {
     keywords: ['scroll', 'fixed', 'local', 'local, scroll', 'scroll, local'],
   },
   backgroundBlendMode: {
+    // TODO multiple properties
     type: 'keyword',
     keywords: [
       'normal',
