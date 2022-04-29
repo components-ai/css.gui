@@ -40,6 +40,7 @@ export const Sidebar = () => {
       <NavItem href="https://github.com/components-ai/css.gui">GitHub</NavItem>
       <NavItem href="https://twitter.com/components_ai">Twitter</NavItem>
       <NavItem href="https://discord.gg/PYF52BEEf3">Discord</NavItem>
+      <NavItem href="/unsupported">Unsupported Properties</NavItem>
     </nav>
   )
 }
