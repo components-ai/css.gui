@@ -915,6 +915,7 @@ export const properties: Record<string, PropertyData> = {
     ],
   },
   maskComposite: {
+    // TODO should be an array of values
     type: 'keyword',
     keywords: ['add', 'subtract', 'intersect', 'exclude'],
   },
