@@ -17,7 +17,7 @@ export default function UnsupportedProperties() {
         properties that haven&apos;t been implemented yet.
       </p>
       <label htmlFor="progress" sx={{ fontWeight: 500 }}>
-        So far, we've implemented {implementedPropertiesCount} out of{' '}
+        So far, we&apos;ve implemented {implementedPropertiesCount} out of{' '}
         {allPropertiesCount} properties ({percentageComplete}%).
         <br />
         <progress
