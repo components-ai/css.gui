@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.12
+
+### Patch Changes
+
+- 32d67fb: Add all units to length input, begin incorporating new ranges
+
 ## 0.0.11
 
 ### Patch Changes
