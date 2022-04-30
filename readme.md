@@ -5,7 +5,7 @@
 CSS GUI is a visual toolkit for editing element styles on the web.
 It's theme-aware, performant, and can be composed into any React app.
 
-[See the docs &rarr;](https://components.ai/open-source/css-gui)
+[**Read the documentation &rarr;**](https://components.ai/open-source/css-gui)
 
 ## ⚠️ Under active development
 
@@ -43,7 +43,7 @@ stacks and grammars (think gradients, background-image, box shadow, etc.).
 ## Installation
 
 ```sh
-npm install --save css-gui
+npm install --save @compai/css-gui
 ```
 
 ## Usage
