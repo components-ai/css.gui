@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.17
+
+### Patch Changes
+
+- a2071e7: Add license
+
 ## 0.0.16
 
 ### Patch Changes
