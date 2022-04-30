@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.16
+
+### Patch Changes
+
+- c30697b: Add homepage to pkg
+
 ## 0.0.15
 
 ### Patch Changes
