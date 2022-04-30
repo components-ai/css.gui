@@ -110,6 +110,10 @@ export const properties: Record<string, PropertyData> = {
       'unsafe center',
     ],
   },
+  all: {
+    type: 'keyword',
+    keywords: [],
+  },
   // TODO array of time values
   animationDelay: { type: 'time' },
   animationDuration: { type: 'time' },
