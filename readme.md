@@ -92,11 +92,11 @@ export const MyEditor = () => {
         <Inputs.FontSize />
         <Inputs.LineHeight />
         <Inputs.Color />
-        <PseudoFieldset name="first-letter">
+        <Fieldset type="pseudo-element" name="first-letter">
           <Inputs.FontSize />
           <Inputs.FontWeight />
           <Inputs.Color />
-        </PseudoFieldset>
+        </Fieldset>
       </Editor>
       <RenderElement tagName="p" styles={styles}>
         Hello, world!
