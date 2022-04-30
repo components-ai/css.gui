@@ -9,7 +9,7 @@ export const Sidebar = () => {
         minWidth: ['100%', 256],
         borderRight: 'thin solid',
         borderColor: 'border',
-        pt: [2, 3],
+        py: [2, 3],
         position: ['relative', 'sticky'],
         overflowY: 'auto',
         top: 0,
