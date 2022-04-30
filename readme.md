@@ -48,7 +48,7 @@ npm install --save css-gui
 
 ## Usage
 
-By default, CSS GUI will provide controls based on the style properties you pass.
+By default, CSS GUI will generate controls based on the style properties you pass.
 
 ```js
 import { useState } from 'react'
@@ -106,11 +106,14 @@ export const MyEditor = () => {
 }
 ```
 
-[Read the full getting started guide &rarr;](https://components.ai/open-source/css-gui/getting-started)
+[**Read the full getting started guide &rarr;**](https://components.ai/open-source/css-gui/getting-started)
 
 ## Development
 
-[See the contributing guide &rarr;](https://github.com/components-ai/css.gui/blob/main/.github/contributing.md)
+CSS GUI is a TypeScript-based monorepo that contains the main `@compai/css-gui` package, a docs site,
+and its supporting packages.
+
+[**See the contributing guide &rarr;**](https://github.com/components-ai/css.gui/blob/main/.github/contributing.md)
 
 ## Resources
 
