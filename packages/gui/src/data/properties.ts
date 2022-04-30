@@ -1333,6 +1333,10 @@ export const properties: Record<string, PropertyData> = {
     type: 'length',
     percentage: true,
   },
+  strokeOpacity: {
+    type: 'percentage',
+    defaultValue: 1,
+  },
   tabSize: {
     type: 'length',
     number: true,
