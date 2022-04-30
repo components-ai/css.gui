@@ -1,6 +1,14 @@
-import { unsupportedProperties } from '@compai/css-gui'
+import { allProperties, unsupportedProperties } from '@compai/css-gui'
 
 export default function UnsupportedProperties() {
+  const allPropertiesCount = allProperties.length
+  const unsupportedPropertiesCount = unsupportedProperties.length
+  const implementedPropertiesCount =
+    allPropertiesCount - unsupportedPropertiesCount
+  const percentageComplete = Math.round(
+    (implementedPropertiesCount / allPropertiesCount) * 100
+  )
+
   return (
     <div>
       <h1>Unsupported properties</h1>
@@ -8,6 +16,20 @@ export default function UnsupportedProperties() {
         CSS GUI is a work in progress, below is an up to date listing of
         properties that haven&apos;t been implemented yet.
       </p>
+      <label htmlFor="progress" sx={{ fontWeight: 500 }}>
+        So far, we've implemented {implementedPropertiesCount} out of{' '}
+        {allPropertiesCount} properties ({percentageComplete}%).
+        <br />
+        <progress
+          id="progress"
+          max="100"
+          value={percentageComplete}
+          sx={{ width: '100%' }}
+        >
+          {percentageComplete}%
+        </progress>
+      </label>
+
       <ul>
         {unsupportedProperties.map(({ property, url }) => {
           return (

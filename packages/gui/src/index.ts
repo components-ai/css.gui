@@ -19,6 +19,7 @@ export { Layout } from './components/ui/Layout'
 
 export { theme } from './components/ui/theme'
 export { unsupportedProperties } from './data/properties'
+export { allProperties } from './data/css-properties'
 
 export * from './lib'
 export * from './types/theme'
