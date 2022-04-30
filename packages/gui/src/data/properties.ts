@@ -30,6 +30,7 @@ import ImageSourcePicker from '../components/inputs/ImageSource/picker'
 import { stringifyImageSource } from '../components/inputs/ImageSource/stringify'
 import { allProperties } from './css-properties'
 import { camelCase, uniqBy } from 'lodash-es'
+import { positiveRanges, UnitRanges } from './ranges'
 
 type PropertyData = {
   type: string | ComponentType<any>
@@ -41,8 +42,6 @@ type PropertyData = {
   stringify?: (value: any) => string
   label?: string
 }
-
-type UnitRanges = Record<string, [number, number]>
 
 export const properties: Record<string, PropertyData> = {
   accentColor: {
@@ -202,12 +201,7 @@ export const properties: Record<string, PropertyData> = {
     type: 'length',
     number: true,
     percentage: true,
-    range: {
-      [AbsoluteLengthUnits.Px]: [0, 128],
-      [FontRelativeLengthUnits.Em]: [0, 8],
-      [FontRelativeLengthUnits.Rem]: [0, 8],
-      [PercentageLengthUnits.Pct]: [0, 100],
-    },
+    range: positiveRanges(),
   },
   borderImageSource: {
     type: ImageSourcePicker,
@@ -238,10 +232,10 @@ export const properties: Record<string, PropertyData> = {
     type: 'length',
     percentage: true,
     range: {
+      ...positiveRanges(),
       [AbsoluteLengthUnits.Px]: [0, Infinity],
       [FontRelativeLengthUnits.Em]: [0, 64],
       [FontRelativeLengthUnits.Rem]: [0, 64],
-      [PercentageLengthUnits.Pct]: [0, 100],
     },
   },
   backgroundRepeat: {
