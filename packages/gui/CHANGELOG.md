@@ -1,5 +1,13 @@
 # @compai/css-gui
 
+## 0.0.13
+
+### Patch Changes
+
+- 9a6b880: Add all properties export
+- 2396616: Add opacity input
+- d251f4b: Add all keyword input
+
 ## 0.0.12
 
 ### Patch Changes
