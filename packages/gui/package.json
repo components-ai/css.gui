@@ -19,6 +19,7 @@
     "type": "git",
     "url": "https://github.com/components-ai/css.gui"
   },
+  "homepage": "https://components.ai/open-source/css-gui",
   "peerDependencies": {
     "react": ">= 18",
     "react-dom": ">= 18"
