@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.14
+
+### Patch Changes
+
+- a00f204: Add word-wrap even though its an overflow-wrap alias
+
 ## 0.0.13
 
 ### Patch Changes
