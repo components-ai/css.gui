@@ -115,7 +115,7 @@ export const MyEditor = () => {
 ## Resources
 
 - [**MDN data**](https://github.com/mdn/data/blob/main/css/properties.json): Provides amazing documentation of the CSS spec which we use to drive the development of our parametric controls
-- [csstype](https://github.com/frenic/csstype): Types for CSS properties and their values based on MDN data
+- [**csstype**](https://github.com/frenic/csstype): Types for CSS properties and their values based on MDN data
 
 ## Inspiration
 
