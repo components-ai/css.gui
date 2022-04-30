@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.15
+
+### Patch Changes
+
+- 80b0250: Add stroke-opacity
+
 ## 0.0.14
 
 ### Patch Changes
