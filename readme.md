@@ -114,12 +114,12 @@ export const MyEditor = () => {
 
 ## Resources
 
-- [MDN data](https://github.com/mdn/data/blob/main/css/properties.json)
-- [csstype](https://github.com/frenic/csstype)
+- [**MDN data**](https://github.com/mdn/data/blob/main/css/properties.json): Provides amazing documentation of the CSS spec which we use to drive the development of our parametric controls
+- [csstype](https://github.com/frenic/csstype): Types for CSS properties and their values based on MDN data
 
 ## Inspiration
 
-- [**dat.gui**](https://github.com/dataarts/dat.gui) well known, especially in the generative design/three space
-- [**leva**](https://github.com/pmndrs/leva) a React-based [pmndrs](https://pmnd.rs/) project that builds the entire control set from hooks
-- [**Blender**](https://blender.org) - Shader and Geometry nodes allow for rapid exploration withiin the available rendering space
-- [**MDN Docs**](https://developer.mozilla.org/en-US/) have long been an amazing introduction to how various CSS property values will affect the appearance of a DOM element.
+- [**dat.gui**](https://github.com/dataarts/dat.gui): well known, especially in the generative design/three space
+- [**leva**](https://github.com/pmndrs/leva): a React-based [pmndrs](https://pmnd.rs/) project that builds the entire control set from hooks
+- [**Blender**](https://blender.org): Shader and Geometry nodes allow for rapid exploration withiin the available rendering space
+- [**MDN Docs**](https://developer.mozilla.org/en-US/): have long been an amazing introduction to how various CSS property values will affect the appearance of a DOM element.
