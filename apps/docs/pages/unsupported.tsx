@@ -29,7 +29,7 @@ export default function UnsupportedProperties() {
           {percentageComplete}%
         </progress>
       </label>
-
+      <h2>The following properties are on our TODO list</h2>
       <ul>
         {unsupportedProperties.map(({ property, url }) => {
           return (
