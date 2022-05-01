@@ -22,7 +22,7 @@
     "theme-ui": "^0.14.2"
   },
   "devDependencies": {
-    "@types/node": "^17.0.25",
+    "@types/node": "^17.0.31",
     "@types/react": "18.0.5",
     "config": "*",
     "eslint": "8.13.0",
