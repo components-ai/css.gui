@@ -27,6 +27,6 @@
     "config": "*",
     "eslint": "8.13.0",
     "tsconfig": "*",
-    "typescript": "^4.6.3"
+    "typescript": "^4.6.4"
   }
 }
