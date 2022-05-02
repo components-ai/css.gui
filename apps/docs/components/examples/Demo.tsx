@@ -24,12 +24,11 @@ export function Demo() {
           <Editor styles={styles} onChange={setStyles} theme={defaultTheme}>
             <div sx={{ display: 'grid', gap: '.5rem', width: '240px' }}>
               <h3 sx={{ my: 0 }}>Typography</h3>
+              <Inputs.FontFamily />
               <Inputs.FontSize />
               <Inputs.LineHeight />
               <Inputs.TextAlign />
               <Inputs.FontStretch />
-              <Inputs.Margin />
-              <Inputs.FontFamily />
               <h3 sx={{ mt: 4, mb: 0 }}>Colors</h3>
               <div sx={{ display: 'flex' }}>
                 <div sx={{ mr: 2 }}>
@@ -39,6 +38,9 @@ export function Demo() {
                   <Inputs.BackgroundColor />
                 </div>
               </div>
+              <h3 sx={{ mt: 4, mb: 0 }}>Spacing</h3>
+              <Inputs.Margin />
+              <Inputs.Padding />
               <h3 sx={{ mt: 4, mb: 0 }}>Size</h3>
               <Inputs.Width />
               <Inputs.MaxWidth />

@@ -4,7 +4,7 @@ import { Demo } from '../components/examples/Demo'
 export default function Docs() {
   return (
     <>
-      <h1>Visual styling controls for the web</h1>
+      <h1 sx={{my: 0}}>Visual styling controls for the web</h1>
       <FirstParagraph>
         <p>
           A powerful, extensible, and themeable CSS editor for creative coding
