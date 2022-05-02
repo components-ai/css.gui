@@ -26,6 +26,11 @@ export function stringifyUnit(value: Length) {
     return value.value
   }
 
+  if (value.unit === 'string') {
+    // TODO handle string escapes
+    return `'${value.value}'`
+  }
+
   if (value.unit === 'number') {
     return String(value.value)
   }
