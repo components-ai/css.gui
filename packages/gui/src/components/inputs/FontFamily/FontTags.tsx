@@ -31,6 +31,94 @@ const toGoogleFontUrl = (families: FontFamilyData[]) => {
   return `https://fonts.googleapis.com/css2?${familiesFmt.join('&')}`
 }
 
+export const toGoogleVariableFontUrl = (variableFonts: any[]) => {
+  
+  if (!variableFonts?.length) return null
+  
+  let familyQueries: any[] = []
+
+  variableFonts.forEach((vFont) => {
+    let prependQuery = `family=${plusify(vFont.fontName)}:`
+    delete vFont['fontName']
+    
+    let orderedKeys = [
+      ...Object.keys(vFont)
+        .filter((k) => k === k.toLowerCase())
+        .sort(),
+      ...Object.keys(vFont)
+        .filter((k) => k === k.toUpperCase())
+        .sort(),
+    ]
+    
+    const queryParams = orderedKeys.join(',')
+    
+    const queryRange = orderedKeys
+      .map((key) => {
+        if (key === 'ital') return null
+        return `${vFont[key].min}..${vFont[key].max}`
+      })
+      .filter(Boolean)
+      .join(',')
+
+    const usesItal = orderedKeys.includes('ital')
+
+    familyQueries.push(
+      `${prependQuery}${queryParams}@${usesItal ? '0,' : ''}${queryRange}`
+    )
+    if (usesItal) {
+      familyQueries.push(`${prependQuery}${queryParams}@${'1,'}${queryRange}`)
+    }
+  })
+
+  console.log(familyQueries, "????")
+  const cssQueries = familyQueries.join('&')
+  return `https://fonts.googleapis.com/css2?${cssQueries}`
+}
+
+
+export const getVariableFontFamilyHref = (
+  fontFamily: string
+) => {
+  
+  const formattedName = fontFamily?.replace(/['"]+/g, '')
+  // api call here
+  const data: any = {
+    fontName: 'Recursive',
+    "slnt": {
+      "default": 0,
+      "min": -15,
+      "max": 0,
+      "step": 1
+    },
+    "wght": {
+      "default": 400,
+      "min": 300,
+      "max": 1000,
+      "step": 1
+    },
+    "CASL": {
+      "default": 0,
+      "min": 0,
+      "max": 1,
+      "step": 0.1
+    },
+    "CRSV": {
+      "default": 0.5,
+      "min": 0,
+      "max": 1,
+      "step": 0.1
+    },
+    "MONO": {
+      "default": 0,
+      "min": 0,
+      "max": 1,
+      "step": 0.01
+    }
+  }
+
+  return toGoogleVariableFontUrl([data])
+}
+
 const getFontFamilyHref = async (font: string) => {
   try {
     const res = await fetch(`https://components.ai/api/v1/typefaces/${font}`)
@@ -51,24 +139,28 @@ const getFontFamilyHref = async (font: string) => {
   }
 }
 
+const getVariableStyleSheet = (fontFamily: string, setVariableStyleSheet: Function) => {
+  const sheet = getVariableFontFamilyHref(fontFamily)
+  if (sheet) setVariableStyleSheet(sheet)
+}
+const debouncedVariableStyleSheet = debounce(getVariableStyleSheet, 1000)
+
 const getStyleSheet = async (fontFamily: string, setStyleSheet: Function) => {
   const sheet = await getFontFamilyHref(fontFamily)
   if (sheet) setStyleSheet(sheet)
 }
 const debouncedGetStyleSheet = debounce(getStyleSheet, 1000)
 
-export const FontTags = ({fontFamily}: any) => {
+export const FontTags = ({ fontFamily }: any) => {
   const [styleSheet, setStyleSheet] = React.useState<string | null>('')
+  const [variableStyleSheet, setVariableStyleSheet] = React.useState<string | null>('')
   
   React.useEffect(() => {
+    debouncedVariableStyleSheet(fontFamily, setVariableStyleSheet)
     debouncedGetStyleSheet(fontFamily, setStyleSheet)
   }, [fontFamily])
  
   return (
-    <>
-      {styleSheet ? (
-        <link rel="stylesheet" href={styleSheet} />
-      ) : null}
-    </>
+    <link rel="stylesheet" href={variableStyleSheet || styleSheet || ''} />
   )
 }

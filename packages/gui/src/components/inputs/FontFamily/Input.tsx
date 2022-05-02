@@ -1,13 +1,25 @@
 import * as React from 'react'
-import { property } from 'lodash-es'
-import { FontFamilyType } from '../../../types/css'
+import { debounce, property } from 'lodash-es'
+import { FontFamilyType, TempFontFamilyType } from '../../../types/css'
 import { EditorProps } from '../../../types/editor'
 import { Label } from '../../primitives'
 import { useCombobox } from 'downshift'
+import { NumberInput } from '../NumberInput'
 
 type Font = {
   fontName: string,
   category: FontCategory
+}
+
+type VariableFont = {
+  [k: string]: VariableAttribute | string
+}
+
+type VariableAttribute = {
+  min: number
+  max: number
+  default: number
+  step: number
 }
 
 const enum FontCategory {
@@ -16,11 +28,109 @@ const enum FontCategory {
   Serif = 'serif',
 }
 
-interface Props extends EditorProps<FontFamilyType> {
-  label: string,
-  defaultValue?: FontFamilyType
+const nameMap: any = {
+  opsz: 'Optical Size',
+  CASL: 'Casual',
+  CRSV: 'Cursive',
+  MONO: 'Monospace'
 }
 
+interface Props extends EditorProps<TempFontFamilyType> {
+  label: string,
+  defaultValue?: TempFontFamilyType
+}
+
+const getVariableFontData = (fontName: string): VariableFont => {
+  const mockData: {[k: string]: VariableFont} = {
+    "Inconsolata": {
+      fontName: 'Inconsolata',
+      "wdth": {
+        "default": 100,
+        "min": 50,
+        "max": 200,
+        "step": 0.1
+      },
+      "wght": {
+        "default": 400,
+        "min": 200,
+        "max": 900,
+        "step": 1
+      }
+    },
+    "Inter": {
+      fontName: 'Inter',
+      "slnt": {
+        "default": 0,
+        "min": -10,
+        "max": 0,
+        "step": 1
+      },
+      "wght": {
+        "default": 400,
+        "min": 100,
+        "max": 900,
+        "step": 1
+      }
+    },
+    "Literata": {
+      "ital": {
+        "default": 0,
+        "min": 0,
+        "max": 1,
+        "step": 1
+      },
+      "wght": {
+        "default": 400,
+        "min": 200,
+        "max": 900,
+        "step": 1
+      },
+      "opsz": {
+        "default": 14,
+        "min": 7,
+        "max": 72,
+        "step": 0.1
+      }
+    },
+    "Recursive": {
+      fontName: 'Recursive',
+      "slnt": {
+        "default": 0,
+        "min": -15,
+        "max": 0,
+        "step": 1
+      },
+      "wght": {
+        "default": 400,
+        "min": 300,
+        "max": 1000,
+        "step": 1
+      },
+      "CASL": {
+        "default": 0,
+        "min": 0,
+        "max": 1,
+        "step": 0.1
+      },
+      "CRSV": {
+        "default": 0.5,
+        "min": 0,
+        "max": 1,
+        "step": 0.1
+      },
+      "MONO": {
+        "default": 0,
+        "min": 0,
+        "max": 1,
+        "step": 0.01
+      }
+    },
+  }
+
+  return mockData[fontName]
+}
+
+const debouncedVariableFontData = debounce(getVariableFontData, 1000)
 
 export function FontFamilyInput({
   label,
@@ -32,13 +142,15 @@ export function FontFamilyInput({
 
   const [allOptions, setAllOptions] = React.useState<Font[]>([])
   const [inputItems, setInputItems] = React.useState<string[]>([])
+  const [variableFont, setVariableFont] = React.useState<VariableFont | undefined>()
 
   const inputRef = React.useRef(null)
   React.useEffect(() => {
     const getFontData = async () => {
       const options = await getAllOptions()
       setAllOptions(options)
-      handleFilterItems(value)
+      handleFilterItems(value?.fontfamily)
+      // handleVariableFonts(value?.fontfamily)
     }
 
     getFontData()
@@ -47,8 +159,9 @@ export function FontFamilyInput({
   const [includeSans, setIncSans] = React.useState<boolean>(true)
   const [includeSerif, setIncSerif] = React.useState<boolean>(true)
   const [includeMono, setIncMono] = React.useState<boolean>(true)
+
   React.useEffect(() => {
-    handleFilterItems(value)
+    handleFilterItems(value?.fontFamily)
   }, [includeMono, includeSans, includeSerif])
 
   const {
@@ -61,12 +174,13 @@ export function FontFamilyInput({
     getItemProps,
   } = useCombobox({
     items: inputItems,
-    selectedItem: value,
+    selectedItem: value.fontFamily,
     onInputValueChange: ({ inputValue }) => {
       handleFilterItems(inputValue!)
     },
     onSelectedItemChange: ({ selectedItem }) => {
-      onChange(selectedItem ?? '')
+      onChange({ ...value, fontFamily: selectedItem ?? ''})
+      handleVariableFonts(selectedItem ?? '')
     },
   })
 
@@ -84,6 +198,40 @@ export function FontFamilyInput({
     const items = filteredOptions.map((opt) => opt.fontName).sort()
     setInputItems(items)
   }
+
+  // const handleVariableFonts = async (fontName: string) => {
+    const handleVariableFonts = (fontName: string) => {
+    // const fontData = debouncedVariableFontData(fontName)
+    const fontData = getVariableFontData(fontName)
+    
+    setVariableFont(fontData)
+  }
+  
+  const parseFontStyleValue = (fontStyle: string) => {
+    const parsedNumericVal = fontStyle?.match(/\d/g)?.join('')
+    return parsedNumericVal ? parsedNumericVal : fontStyle
+  }
+
+  const handleCustomAxesChange = (axisKey: string, newValue: any) => {
+    
+    const axisDict: Record<string, any> = {}
+    value.fontVariationSettings?.split(',')
+      .forEach((axis: string) => {
+        const axisSplit = axis.split(' ')
+        const k = axisSplit[0]
+        const v = axisSplit[1]
+        axisDict[k] = v
+      })
+
+    axisDict[`'${axisKey}'`] = newValue
+
+    const fontVariationSettings = Object.entries(axisDict)
+      .map(([k, v]) => `${k} ${v}`)
+      .join(',')
+
+    onChange({ ...value, fontVariationSettings })
+  }
+
   return (
     <div 
       {...getComboboxProps()}
@@ -99,7 +247,11 @@ export function FontFamilyInput({
         value={value}
         {...getInputProps({ 
           ref: inputRef,
-          onChange: (e: any) => onChange(e.target.value),
+          onChange: (e: any) => {
+            const name = e.target.value
+            onChange({ ...value, fontFamily: name})
+            handleVariableFonts(name)
+          },
         })}
         onFocus={() => {
           if (!isOpen) {
@@ -194,7 +346,7 @@ export function FontFamilyInput({
                   alignItems: 'center',
                 }}
                 onClick={() => {
-                  onChange('')
+                  onChange({ ...value, fontFamily: '' })
                   // @ts-ignore
                   inputRef.current.focus()
                   if (!isOpen) {
@@ -226,7 +378,9 @@ export function FontFamilyInput({
                 key={`${item}${index}`}
                 {...getItemProps({ item, index })}
                 onClick={() => {
-                  onChange(inputItems[highlightedIndex])
+                  const name = inputItems[highlightedIndex]
+                  onChange({ ...value, fontFamily: name })
+                  handleVariableFonts(name)
                   toggleMenu()
                 }}
               >
@@ -236,7 +390,103 @@ export function FontFamilyInput({
           })}
         </ul>
       </div>
+      {variableFont && Object.entries(variableFont).map(([k, v]) => {
+        if (['fontName', 'ital'].includes(k)) return null
+        if (typeof(v) === 'string') return null
+
+        if (k === 'slnt') {
+          return (
+            <NumberInput
+              value={+parseFontStyleValue(
+                value.fontStyle ?? `oblique ${v.default} oblique`
+              )}
+              onChange={(v: number) => {                
+                onChange({
+                  ...value,
+                  fontStyle: `oblique ${v}deg`
+                })
+              }}
+              min={v.max}
+              max={-v.min}
+              step={v.step}
+              label='Slant'
+              sx={{ width: '100%' }}
+            />
+          )
+        }
+
+        if (k === 'wdth') {
+          return (
+            <NumberInput
+              value={value.fontStretch ?? v.default} 
+              onChange={(newVal: number) => onChange({ ...value, fontStretch: newVal })}
+              min={v.min}
+              max={v.max}
+              step={v.step}
+              label='Width'
+              sx={{ width: '100%' }}
+            />
+          )
+        }
+
+        if (k === 'wght') {
+          return (
+            <NumberInput
+              value={value.fontWeight ?? v.default} 
+              onChange={(newVal: number) => onChange({ ...value, fontWeight: newVal })}
+              min={v.min}
+              max={v.max}
+              step={v.step}
+              label='Font Weight'
+              sx={{ width: '100%' }}
+            />
+          )
+        }
+
+        return (
+          <CustomAxis
+            value={value.fontVariationSettings ?? `'${k}' ${v.default};`} 
+            onChange={(e: any) => handleCustomAxesChange(k, e)}
+            axisKey={k}
+            min={v.min}
+            max={v.max}
+            step={v.step}
+            label={nameMap[k] ?? k}
+            sx={{ width: '100%' }}
+          />
+        )
+      })}
     </div>
+  )
+}
+
+const CustomAxis = ({
+  defaultValue,
+  axisKey,
+  value,
+  onChange,
+  ...props
+}: any) => {
+  const parseCustomAxisValue = () => {
+    const splitAxis = value?.split(',')
+
+    if (splitAxis?.length > 0) {
+      for (const ax of splitAxis) {
+        if (ax.startsWith(`'${axisKey}'`)) {
+          return Number(ax.match(/[\d.]+/))
+        }
+      }
+    }
+
+    return defaultValue
+  }
+
+  return (
+    <NumberInput
+      {...props}
+      value={parseCustomAxisValue()}
+      onChange={onChange}
+    />
   )
 }
 

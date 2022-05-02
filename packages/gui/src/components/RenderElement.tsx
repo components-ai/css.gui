@@ -17,12 +17,21 @@ export const RenderElement = ({
   const styleObject = toCSSObject(styles)
   
   
+  // console.log(styles, "stttlses")
+  // TODO: change all this back
   return (
     // @ts-ignore
     <>
-      <FontTags fontFamily={styles.fontFamily}/>
       {/* @ts-ignore */}
-      <Component {...props} sx={styleObject} />
+      <FontTags fontFamily={styles.fontFamily.fontFamily}/>
+      {/* @ts-ignore */}
+      <Component {...props} sx={{ 
+        ...styleObject,
+        // @ts-ignore
+        fontFamily: styles.fontFamily.fontFamily,
+        // @ts-ignore
+        fontVariationSettings: styles.fontFamily?.fontVariationSettings
+      }} />
     </>
   )
 }
