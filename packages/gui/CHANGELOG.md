@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.21
+
+### Patch Changes
+
+- 0f46b0c: Remove x/y shorthands for spacing
+
 ## 0.0.20
 
 ### Patch Changes
