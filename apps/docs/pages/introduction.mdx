@@ -11,12 +11,12 @@ With CSS GUI you can quickly get up and running with parametric controls for sty
 You can use this to improve your creative coding workflow or build user interfaces
 where users get to control how their content looks.
 
-At its essence, CSS GUI exposes an `Editor` and a `RenderElement` component to display
+At its essence, CSS GUI exposes an `Editor` and a `styled` component to display
 your controls and canvas, respectively.
 
 ```js
 import { useState } from 'react'
-import { Editor, RenderElement } from '@compai/css-gui'
+import { Editor, styled } from '@compai/css-gui'
 
 export const MyEditor = () => {
   const [styles, setStyles] = useState({})
@@ -24,9 +24,7 @@ export const MyEditor = () => {
   return (
     <>
       <Editor styles={styles} onChange={setStyles} />
-      <RenderElement tagName="p" styles={styles}>
-        Hello, world!
-      </RenderElement>
+      <styled.p styles={styles}>Hello, world!</styled.p>
     </>
   )
 }

@@ -1,4 +1,4 @@
-import { RenderElement, Editor } from '@compai/css-gui'
+import { Editor, styled } from '@compai/css-gui'
 import { useState } from 'react'
 
 const initialStyles = {
@@ -17,8 +17,7 @@ export default function Filters() {
           justifyContent: 'center',
         }}
       >
-        <RenderElement
-          tagName="div"
+        <styled.div
           styles={{
             width: '24rem',
             height: '24rem',
@@ -37,7 +36,7 @@ export default function Filters() {
           }}
         >
           Fun with filters
-        </RenderElement>
+        </styled.div>
       </div>
     </div>
   )

@@ -1,4 +1,5 @@
 export * from './components/Editor'
+export { styled } from './components/Styled'
 export { RenderElement } from './components/RenderElement'
 
 export { Number as NumberInput } from './components/primitives'

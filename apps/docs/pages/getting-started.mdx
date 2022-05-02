@@ -24,12 +24,12 @@ yarn add @compai/css-gui
 
 ## Usage
 
-Import the `Editor` component and `RenderElement` to initialize controls
+Import the `Editor` and `styled` components to initialize controls
 and then render the element styles to your canvas.
 
 ```js
 import { useState } from 'react'
-import { Editor, RenderElement } from '@compai/css-gui'
+import { Editor, styled } from '@compai/css-gui'
 
 export const MyEditor = () => {
   const [styles, setStyles] = useState({})
@@ -37,9 +37,7 @@ export const MyEditor = () => {
   return (
     <>
       <Editor styles={styles} onChange={setStyles} />
-      <RenderElement tagName="p" styles={styles}>
-        Hello, world!
-      </RenderElement>
+      <styled.p styles={styles}>Hello, world!</styled.p>
     </>
   )
 }

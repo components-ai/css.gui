@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Link from 'next/link'
-import { Editor, Inputs, RenderElement, codegen } from '@compai/css-gui'
+import { Editor, Inputs, styled, codegen } from '@compai/css-gui'
 import { defaultTheme } from '../../data/default-theme'
 
 const initialStyles = {
@@ -53,7 +53,7 @@ export default function BorderImage() {
           </Editor>
         </div>
         <div sx={{ flexGrow: 1, pr: 4 }}>
-          <RenderElement tagName="p" styles={styles}>
+          <styled.p styles={styles}>
             “The parameters comprise sequences which are theoretically infinite
             but limits are, of course, set to them in practice. There is an
             upward limit to size and certainly a downward one... Within these
@@ -70,7 +70,7 @@ export default function BorderImage() {
               </Link>{' '}
               by Karl Gerstner
             </em>
-          </RenderElement>
+          </styled.p>
         </div>
       </div>
       <div className="full-bleed">

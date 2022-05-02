@@ -52,7 +52,7 @@ By default, CSS GUI will generate controls based on the style properties you pas
 
 ```js
 import { useState } from 'react'
-import { Editor, RenderElement } from '@compai/css-gui'
+import { Editor, styled } from '@compai/css-gui'
 
 export const MyEditor = () => {
   const [styles, setStyles] = useState({
@@ -64,9 +64,7 @@ export const MyEditor = () => {
   return (
     <>
       <Editor styles={styles} onChange={setStyles} />
-      <RenderElement tagName="p" styles={styles}>
-        Hello, world!
-      </RenderElement>
+      <styled.p styles={styles}>Hello, world!</styled.p>
     </>
   )
 }
@@ -77,7 +75,7 @@ pseudo-elements.
 
 ```js
 import { useState } from 'react'
-import { Editor, Inputs, RenderElement } from '@compai/css-gui'
+import { Editor, Inputs, styled } from '@compai/css-gui'
 
 export const MyEditor = () => {
   const [styles, setStyles] = useState({
@@ -98,9 +96,7 @@ export const MyEditor = () => {
           <Inputs.Color />
         </Fieldset>
       </Editor>
-      <RenderElement tagName="p" styles={styles}>
-        Hello, world!
-      </RenderElement>
+      <styled.p styles={styles}>Hello, world!</styled.p>
     </>
   )
 }
