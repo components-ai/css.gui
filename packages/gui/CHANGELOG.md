@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.22
+
+### Patch Changes
+
+- eeae533: Add importColors utility function
+
 ## 0.0.21
 
 ### Patch Changes
