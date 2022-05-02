@@ -116,7 +116,24 @@ export const properties: Record<string, PropertyData> = {
   },
   // TODO array of time values
   animationDelay: { type: 'time' },
+  animationDirection: {
+    type: 'keyword',
+    keywords: ['normal', 'reverse', 'alternate', 'alternate-reverse'],
+  },
   animationDuration: { type: 'time' },
+  animationFillMode: {
+    type: 'keyword',
+    keywords: ['none', 'forwards', 'backwards', 'both'],
+  },
+  animationIterationCount: {
+    type: 'number',
+    keywords: ['infinite'],
+    range: { number: [0, Infinity] },
+  },
+  animationPlayState: {
+    type: 'keyword',
+    keywords: ['running', 'paused'],
+  },
   // TODO this should be a combobox
   animationProperty: {
     type: 'keyword',
