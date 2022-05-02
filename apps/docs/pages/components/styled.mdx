@@ -1,0 +1,23 @@
+import { FirstParagraph } from '../../components/FirstParagraph'
+
+# Styled Elements
+
+<FirstParagraph>
+
+Render an HTML element with CSS GUI styles
+
+</FirstParagraph>
+
+The `styled` component contains a renderer for all HTML elements. So,
+if you have a styles object that's emitted from CSS GUI you can render
+it like so: `<styled.p styles={myStylesObject} />
+
+If you have some sort of style nesting via `Fieldset` it will also be
+automatically handled.
+
+```js
+<styled.div styles={styles}>
+  <h1>I'm a styled h1!</h1>
+  <p>I'm a styled p!</p>
+<styled.div>
+```

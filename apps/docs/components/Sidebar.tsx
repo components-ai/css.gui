@@ -24,6 +24,7 @@ export const Sidebar = () => {
       <NavSectionTitle>Components</NavSectionTitle>
       <NavItem href="/components/editor">Editor</NavItem>
       <NavItem href="/components/fieldset">Fieldset</NavItem>
+      <NavItem href="/components/styled">Styled Elements</NavItem>
       <NavSectionTitle>Inputs</NavSectionTitle>
       <NavItem href="/inputs/color">Color</NavItem>
       <NavItem href="/inputs/number">Number</NavItem>
