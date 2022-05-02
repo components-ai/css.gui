@@ -1,0 +1,84 @@
+import { SpaceExample } from '../../components/examples/Space'
+
+## Space
+
+Space refers to `margin` and `padding` controls. In order to keep things
+as simple as possible early on, we recommend that you use the longhand
+version.
+
+```js
+import { useState } from 'react'
+import { Editor, Inputs, styled, codegen } from '@compai/css-gui'
+
+export const SpaceExample = () => {
+  const [styles, setStyles] = useState({
+    marginTop: { value: 16, unit: 'px' },
+    marginRight: { value: 16, unit: 'px' },
+    marginLeft: { value: 16, unit: 'px' },
+    marginBottom: { value: 16, unit: 'px' },
+    paddingTop: { value: 16, unit: 'px' },
+    paddingRight: { value: 16, unit: 'px' },
+    paddingLeft: { value: 16, unit: 'px' },
+    paddingBottom: { value: 16, unit: 'px' },
+  })
+
+  return (
+    <div>
+      <Editor styles={styles} onChange={setStyles}>
+        <Inputs.MarginTop />
+        <Inputs.MarginRight />
+        <Inputs.MarginBottom />
+        <Inputs.MarginLeft />
+        <Inputs.PaddingTop />
+        <Inputs.PaddingRight />
+        <Inputs.PaddingBottom />
+        <Inputs.PaddingLeft />
+      </Editor>
+      <div sx={{ border: 'thin solid', borderColor: 'border', mt: [3, 4, 5] }}>
+        <styled.p styles={{ ...styles, border: 'thin solid' }}>
+          Fun with space!
+        </styled.p>
+      </div>
+      <pre>{codegen.css(styles)}</pre>
+      <hr />
+      <pre>{JSON.stringify(styles, null, 2)}</pre>
+    </div>
+  )
+}
+```
+
+<SpaceExample />
+
+## Padding/Margin Shorthand
+
+If desirable, you can also use the spacing shorthand to target all directions
+at once.
+
+```js
+import { useState } from 'react'
+import { Editor, Inputs, styled, codegen } from '@compai/css-gui'
+
+export const SpaceExample = () => {
+  const [styles, setStyles] = useState({
+    margin: { value: 16, unit: 'px' },
+    padding: { value: 16, unit: 'px' },
+  })
+
+  return (
+    <div>
+      <Editor styles={styles} onChange={setStyles}>
+        <Inputs.Margin />
+        <Inputs.Padding />
+      </Editor>
+      <div sx={{ border: 'thin solid', borderColor: 'border', mt: [3, 4, 5] }}>
+        <styled.p styles={{ ...styles, border: 'thin solid' }}>
+          Fun with space!
+        </styled.p>
+      </div>
+      <pre>{codegen.css(styles)}</pre>
+      <hr />
+      <pre>{JSON.stringify(styles, null, 2)}</pre>
+    </div>
+  )
+}
+```
