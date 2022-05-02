@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Link from 'next/link'
-import { Editor, Inputs, RenderElement, codegen } from '@compai/css-gui'
+import { Editor, Inputs, styled, codegen } from '@compai/css-gui'
 import { initialStyles } from '../../data/initial-styles'
 import { defaultTheme } from '../../data/default-theme'
 
@@ -47,7 +47,7 @@ export function Demo() {
           </Editor>
         </div>
         <div sx={{ flexGrow: 1 }}>
-          <RenderElement tagName="p" styles={styles}>
+          <styled.p styles={styles}>
             “The parameters comprise sequences which are theoretically infinite
             but limits are, of course, set to them in practice. There is an
             upward limit to size and certainly a downward one... Within these
@@ -64,7 +64,7 @@ export function Demo() {
               </Link>{' '}
               by Karl Gerstner
             </em>
-          </RenderElement>
+          </styled.p>
         </div>
       </div>
       <div className="full-bleed">

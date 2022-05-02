@@ -14,7 +14,7 @@ on its contents.
 
 ```js
 import { useState } from 'react'
-import { Editor, RenderElement } from '@compai/css-gui'
+import { Editor, styled } from '@compai/css-gui'
 
 export const MyEditor = () => {
   const [styles, setStyles] = useState({
@@ -26,9 +26,7 @@ export const MyEditor = () => {
   return (
     <>
       <Editor styles={styles} onChange={setStyles} />
-      <RenderElement tagName="p" styles={styles}>
-        Hello, world!
-      </RenderElement>
+      <styled.p styles={styles}>Hello, world!</styled.p>
     </>
   )
 }
@@ -42,7 +40,7 @@ used. You can compose inputs yourselves in this scenario:
 ```js
 import { useState } from 'react'
 import Link from 'next/link'
-import { Editor, Inputs, RenderElement, codegen } from '@compai/css-gui'
+import { Editor, Inputs, styled, codegen } from '@compai/css-gui'
 
 export function Demo() {
   const [styles, setStyles] = useState({})
@@ -67,7 +65,7 @@ export function Demo() {
           <Inputs.Height />
         </div>
       </Editor>
-      <RenderElement tagName="p" styles={styles}>
+      <styled.p styles={styles}>
         “The parameters comprise sequences which are theoretically infinite but
         limits are, of course, set to them in practice. There is an upward limit
         to size and certainly a downward one... Within these sequences there are
@@ -82,7 +80,7 @@ export function Demo() {
             Designing Programmes
           </a> by Karl Gerstner
         </em>
-      </RenderElement>
+      </styled.p>
       <pre>{codegen.css(styles)}</pre>
     </>
   )

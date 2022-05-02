@@ -1,4 +1,4 @@
-import { RenderElement, Editor } from '@compai/css-gui'
+import { Editor, styled } from '@compai/css-gui'
 import { useState } from 'react'
 
 const initialStyles = {
@@ -45,8 +45,7 @@ export default function Shadows() {
           justifyContent: 'center',
         }}
       >
-        <RenderElement
-          tagName="div"
+        <styled.div
           styles={{
             width: '12rem',
             height: '12rem',
@@ -57,7 +56,7 @@ export default function Shadows() {
           }}
         >
           Fun with shadows
-        </RenderElement>
+        </styled.div>
       </div>
     </div>
   )

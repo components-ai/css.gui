@@ -15,12 +15,11 @@ export const RenderElement = ({
 }: RenderElementProps) => {
   const Component = tagName
   const styleObject = toCSSObject(styles)
-  
-  
+
   return (
     // @ts-ignore
     <>
-      <FontTags fontFamily={styles.fontFamily}/>
+      <FontTags fontFamily={styles.fontFamily} />
       {/* @ts-ignore */}
       <Component {...props} sx={styleObject} />
     </>

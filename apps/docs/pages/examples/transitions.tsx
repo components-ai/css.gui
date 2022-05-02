@@ -1,4 +1,4 @@
-import { RenderElement, Editor } from '@compai/css-gui'
+import { Editor, styled } from '@compai/css-gui'
 import { useState } from 'react'
 
 const initialStyles = {
@@ -22,7 +22,7 @@ export default function Transitions() {
   return (
     <div>
       <Editor styles={styles} onChange={setStyles} />
-      <RenderElement tagName="div" styles={styles} />
+      <styled.div styles={styles} />
     </div>
   )
 }
