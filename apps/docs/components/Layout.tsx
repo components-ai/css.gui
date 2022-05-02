@@ -1,14 +1,12 @@
 import { HTMLAttributes, useId } from 'react'
 import Link from 'next/link'
 import { Logo } from '@compai/logo'
-import { SyntaxHighlighting } from './SyntaxHighlighting'
 
 interface Props extends HTMLAttributes<HTMLDivElement> {}
 export const Layout = (props: Props) => {
   const id = useId()
   return (
     <>
-      <SyntaxHighlighting />
       <header
         sx={{
           fontFamily: 'body',

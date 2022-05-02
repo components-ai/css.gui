@@ -5,6 +5,7 @@ import { Sidebar } from '../components/Sidebar'
 import { PageWrap } from '../components/PageWrap'
 import { Layout } from '../components/Layout'
 import { Head } from '../components/Head'
+import '../static/code-styles.css'
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
