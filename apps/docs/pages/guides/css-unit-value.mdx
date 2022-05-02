@@ -1,0 +1,113 @@
+# `CSSUnitValue`
+
+For `<length>`, `<percentage>`, and `<number>` grammars in CSS, we
+use the [`CSSUnitValue`](https://developer.mozilla.org/en-US/docs/Web/API/CSSUnitValue)
+to represent it.
+
+This means that the representation of something like `2em` or `16px` is
+"unpacked" into an object. This improves the internal APIs because they
+can readily swap and convert between units without having to make multiple
+parsing passes.
+
+We do augment the `CSSUnitValue` with an optional `themeId` (typically a UUID).
+This is for tracking aliases to theme values. Though we also store the referenced value
+inline for a fallback.
+
+```ts
+export type CSSUnitValue = {
+  value: number | string
+  unit: string
+  themeId?: string
+}
+```
+
+Here are some example representations:
+
+```js
+// 16px
+{
+  value: 16,
+  unit: 'px'
+}
+```
+
+```js
+// inherit
+{
+  value: 'inherit',
+  unit: 'keyword'
+}
+```
+
+And typing information:
+
+```ts
+export const enum FontRelativeLengthUnits {
+  Ch = 'ch',
+  Em = 'em',
+  Ex = 'ex',
+  Rem = 'rem',
+}
+export const enum ViewportPercentageLengthUnits {
+  Vh = 'vh',
+  Vw = 'vw',
+  VMin = 'vmin',
+  VMax = 'vmax',
+}
+export const enum AbsoluteLengthUnits {
+  Px = 'px',
+  Cm = 'cm',
+  Mm = 'mm',
+  In = 'in',
+  Pc = 'pc',
+  Pt = 'pt',
+}
+export const enum PercentageLengthUnits {
+  Pct = '%',
+}
+export const enum UnitlessUnits {
+  Number = 'number',
+}
+export const enum ThemeUnits {
+  Theme = 'theme',
+}
+export const enum KeywordUnits {
+  Keyword = 'keyword',
+}
+export type LengthPercentageUnit = LengthUnit | PercentageLengthUnits.Pct
+export const LENGTH_UNITS = [
+  'em',
+  'rem',
+  'px',
+  'ch',
+  'ex',
+  'cm',
+  'mm',
+  'in',
+  'pc',
+  'pt',
+  'vh',
+  'vw',
+  'vmin',
+  'vmax',
+] as const
+export type LengthUnit = typeof LENGTH_UNITS[number]
+export const NUMBER_PERCENTAGE_UNITS = ['number', '%'] as const
+export type NumberPercentageUnit = typeof NUMBER_PERCENTAGE_UNITS[number]
+export interface NumberPercentage {
+  value: number
+  unit: NumberPercentageUnit
+}
+export type CSSUnitValue = {
+  value: number | string
+  unit: string
+  themeId?: string
+}
+export type GenericLength = '0'
+export type Length = CSSUnitValue | GenericLength
+export type LengthPercentage = Length
+export type ResponsiveLength = Length[]
+export type CSSKeywordValue = {
+  value: string
+}
+```
