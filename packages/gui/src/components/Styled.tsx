@@ -6,7 +6,7 @@ type StyledProps = HTMLAttributes<HTMLBaseElement> & {
   styles: any
 }
 export const styled: Record<string, any> = {}
-Object.keys(elements).forEach((field: string) => {
+elements.forEach((field: string) => {
   styled[field] = ({ styles, ...props }: StyledProps) => (
     <RenderElement tagName={field} styles={styles} {...props} />
   )
