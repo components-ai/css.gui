@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.19
+
+### Patch Changes
+
+- 57fde2a: Create a styled component with tag name members for rendering the canvas/element
+
 ## 0.0.18
 
 ### Patch Changes
