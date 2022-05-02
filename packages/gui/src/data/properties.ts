@@ -884,14 +884,6 @@ export const properties: Record<string, PropertyData> = {
     type: 'length',
     percentage: true,
   },
-  marginX: {
-    type: 'length',
-    percentage: true,
-  },
-  marginY: {
-    type: 'length',
-    percentage: true,
-  },
   marginTop: {
     type: 'length',
     percentage: true,
@@ -1179,14 +1171,6 @@ export const properties: Record<string, PropertyData> = {
     keywords: ['auto', 'contain', 'none'],
   },
   padding: {
-    type: 'length',
-    percentage: true,
-  },
-  paddingX: {
-    type: 'length',
-    percentage: true,
-  },
-  paddingY: {
     type: 'length',
     percentage: true,
   },
