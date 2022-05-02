@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.20
+
+### Patch Changes
+
+- faa8f5d: Fix styled bug with undefined tag names
+
 ## 0.0.19
 
 ### Patch Changes
