@@ -29,6 +29,7 @@
     "@types/pascalcase": "^1.0.1",
     "@types/react": "18.0.5",
     "@types/react-dom": "^18.0.1",
+    "@types/uuid": "^8.3.4",
     "config": "*",
     "react": "18.0.0",
     "react-dom": "18.0.0",
