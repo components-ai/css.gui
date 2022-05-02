@@ -13,8 +13,8 @@ export const initialStyles: any = {
     unit: '%',
   },
   maxWidth: {
-    value: 'auto',
-    unit: 'keyword',
+    value: '42',
+    unit: 'em',
   },
-  fontFamily: 'ABeeZee',
+  fontFamily: 'Recursive',
 }

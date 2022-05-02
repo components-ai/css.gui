@@ -12,9 +12,8 @@ export const Layout = (props: Props) => {
           fontFamily: 'body',
           borderBottom: 'thin solid',
           borderColor: 'border',
-          px: [2, 3, 4],
-          py: 2,
-          fontSize: [2, 3],
+          px: [2, 3, 3],
+          py: 3,
           position: 'sticky',
           width: '100%',
           backgroundColor: 'background',
@@ -32,10 +31,10 @@ export const Layout = (props: Props) => {
               alignItems: 'center',
             }}
           >
-            <span sx={{ mr: 2 }}>
-              <Logo seed={id} />
+            <span sx={{ mr: 4 }}>
+              <Logo height={20} width={20} seed={id} />
             </span>
-            CSS GUI
+            <span>CSS GUI</span>
           </a>
         </Link>
       </header>
