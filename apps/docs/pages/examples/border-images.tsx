@@ -17,8 +17,8 @@ const initialStyles = {
     value: 128,
     unit: 'px',
   },
-  borderImageOffset: {
-    value: 64,
+  borderImageOutset: {
+    value: 0,
     unit: 'px',
   },
   borderRadius: {
@@ -56,6 +56,7 @@ export default function BorderImage() {
               <Inputs.BorderImageSource />
               <Inputs.BorderImageSlice />
               <Inputs.BorderImageWidth />
+              <Inputs.BorderImageOutset />
               <Inputs.BorderImageRepeat />
               <Inputs.BorderWidth />
               <Inputs.Padding />
@@ -90,6 +91,7 @@ export default function BorderImage() {
             borderTop: 'thin solid',
             borderColor: 'border',
             width: '100%',
+            fontSize: 3,
           }}
         >
           {codegen.css(styles)}
