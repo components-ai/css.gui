@@ -1500,7 +1500,7 @@ export const properties: Record<string, PropertyData> = {
       'square',
     ],
   },
-  strokeLinecap: {
+  strokeLinejoin: {
     type: 'keyword',
     keywords: [
       'arcs',
