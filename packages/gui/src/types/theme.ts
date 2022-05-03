@@ -20,8 +20,9 @@ export type Theme = {
 
 export type BorderRadius = {
   id: string
-  value: number
+  value: number | string
   unit: string
+  name?: string
 }
 
 export type BorderStyle = {
@@ -31,8 +32,9 @@ export type BorderStyle = {
 
 export type BorderWidth = {
   id: string
-  value: number
+  value: number | string
   unit: string
+  name?: string
 }
 
 export type BoxShadow = {
@@ -105,7 +107,7 @@ type FontWeight = {
 
 export type FontSize = {
   id: string
-  value: number
+  value: number | string
   unit: string
 }
 
@@ -118,21 +120,22 @@ export type Gradient = {
 export type LetterSpacing = {
   id: string
   value: number
-  name: string
+  name?: string
   unit: string
 }
 
 export type LineHeight = {
   id: string
-  value: number
+  value: number | string
   name?: string
   unit: string
 }
 
 export type Spacing = {
   id: string
-  value: number
+  value: number | string
   unit: string
+  name?: string
 }
 
 export type TextShadow = {
