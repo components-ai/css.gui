@@ -464,6 +464,11 @@ export const properties: Record<string, PropertyData> = {
     type: BoxShadowPicker,
     stringify: stringifyBoxShadow,
   },
+  boxSnap: {
+    type: 'keyword',
+    defaultValue: 'none',
+    keywords: ['none', 'block-start', 'block-end', 'center', 'baseline', 'last-baseline'],
+  },
   boxSizing: {
     type: 'keyword',
     keywords: ['border-box', 'content-box'],
@@ -530,9 +535,21 @@ export const properties: Record<string, PropertyData> = {
     type: 'keyword',
     keywords: ['none', 'left', 'right', 'both', 'inline-start', 'inline-end'],
   },
+  clipRule: { // SVG
+    type: 'keyword',
+    keywords: ['nonzero', 'evenodd'],
+  },
   color: {
     type: 'color',
     keywords: ['currentcolor', 'transparent'],
+  },
+  colorAdjust: {
+    type: 'keyword',
+    keywords: ['economy', 'exact'],
+  },
+  colorInterpolationFilters: {
+    type: 'keyword',
+    keywords: ['auto', 'sRGB', 'linearRGB'],
   },
   columnCount: {
     type: 'integer',
@@ -771,6 +788,22 @@ export const properties: Record<string, PropertyData> = {
     type: 'keyword',
     keywords: ['left', 'right', 'none', 'inline-start', 'inline-end'],
   },
+  floatDefer: {
+    type: 'number',
+    keywords: ['last', 'none'],
+    defaultValue: 'none',
+    range: { number: [0, Infinity] },
+  },
+  floatOffset: {
+    type: 'length',
+    percentage: true,
+    range: {
+      [AbsoluteLengthUnits.Px]: [0, 512],
+      [FontRelativeLengthUnits.Em]: [0, 16],
+      [FontRelativeLengthUnits.Rem]: [0, 16],
+      [PercentageLengthUnits.Pct]: [0.1, 200],
+    },
+  },
   floatReference: {
     type: 'keyword',
     keywords: ['inline', 'column', 'region', 'page'],
@@ -951,6 +984,15 @@ export const properties: Record<string, PropertyData> = {
   hyphens: {
     type: 'keyword',
     keywords: ['none', 'manual', 'auto'],
+  },
+  initialLetterAlign: {
+    type: 'keyword',
+    keywords: [
+      'auto',
+      'alphabetic',
+      'hanging',
+      'ideographic',
+    ],
   },
   imageRendering: {
     type: 'keyword',
