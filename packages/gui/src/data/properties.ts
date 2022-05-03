@@ -1049,6 +1049,23 @@ export const properties: Record<string, PropertyData> = {
     percentage: true,
     keywords: ['auto'],
   },
+  marqueeDirection: {
+    type: 'keyword',
+    keywords: ['forward', 'reverse'],
+  },
+  marqueeLoop: {
+    type: 'integer',
+    defaultValue: 1,
+    range: { number: [1, Infinity] },
+  },
+  marqueeStyle: {
+    type: 'keyword',
+    keywords: ['scroll', 'slide', 'alternate'],
+  },
+  marqueeSpeed: {
+    type: 'keyword',
+    keywords: ['slow', 'normal', 'fast'],
+  },
   maskBorderMode: {
     type: 'keyword',
     keywords: ['luminance', 'alpha'],
