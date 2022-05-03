@@ -1,5 +1,5 @@
 import { CSSFunctionURL } from '../../../types/css'
-import { GradientList } from '../Gradient/types'
+import { Gradient } from '../Gradient/types'
 
 // TODO: The background-image grammar and functionality is actually much
 // more complex, but for now we'll just roll with url() and gradients.
@@ -9,6 +9,6 @@ import { GradientList } from '../Gradient/types'
 export type ImageSourceType = 'url' | 'gradient'
 export type ImageSourceGradient = {
   type: 'gradient'
-  gradient: GradientList
+  gradient: Gradient
 }
 export type ImageSource = CSSFunctionURL | ImageSourceGradient

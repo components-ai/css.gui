@@ -116,7 +116,24 @@ export const properties: Record<string, PropertyData> = {
   },
   // TODO array of time values
   animationDelay: { type: 'time' },
+  animationDirection: {
+    type: 'keyword',
+    keywords: ['normal', 'reverse', 'alternate', 'alternate-reverse'],
+  },
   animationDuration: { type: 'time' },
+  animationFillMode: {
+    type: 'keyword',
+    keywords: ['none', 'forwards', 'backwards', 'both'],
+  },
+  animationIterationCount: {
+    type: 'number',
+    keywords: ['infinite'],
+    range: { number: [0, Infinity] },
+  },
+  animationPlayState: {
+    type: 'keyword',
+    keywords: ['running', 'paused'],
+  },
   // TODO this should be a combobox
   animationProperty: {
     type: 'keyword',
@@ -207,6 +224,7 @@ export const properties: Record<string, PropertyData> = {
     percentage: true,
     range: { number: [-1, 2000]}
   },
+  // TODO this actually can only accept *one* image value, not an array
   borderImageSource: {
     type: ImageSourcePicker,
     stringify: stringifyImageSource,
@@ -220,17 +238,20 @@ export const properties: Record<string, PropertyData> = {
     type: 'keyword',
     keywords: ['border-box', 'padding-box', 'content-box'],
   },
-  backgroundPositionY: {
-    // TOO: Add side relative values option and multiple values option
-    type: 'length',
-    percentage: true,
-    keywords: ['top', 'center', 'bottom'],
+  backgroundPosition: {
+    type: 'position',
   },
   backgroundPositionX: {
     // TODO: Add side relative values option and multiple values option
     type: 'length',
     percentage: true,
     keywords: ['top', 'left', 'center'],
+  },
+  backgroundPositionY: {
+    // TOO: Add side relative values option and multiple values option
+    type: 'length',
+    percentage: true,
+    keywords: ['top', 'center', 'bottom'],
   },
   borderRadius: {
     type: 'length',
@@ -986,6 +1007,7 @@ export const properties: Record<string, PropertyData> = {
       'view-box, fill-box, border-box',
     ],
   },
+  maskPosition: { type: 'position' },
   maskRepeat: {
     type: 'keyword',
     keywords: [
@@ -1069,9 +1091,16 @@ export const properties: Record<string, PropertyData> = {
       'luminosity',
     ],
   },
+  offsetAnchor: {
+    type: 'position',
+    keywords: ['auto'], // TODO the keyword isn't being populated currently
+  },
   objectFit: {
     type: 'keyword',
     keywords: ['contain', 'cover', 'fill', 'none', 'scale-down'],
+  },
+  objectPosition: {
+    type: 'position',
   },
   offsetDistance: {
     type: 'length',
