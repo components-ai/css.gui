@@ -9,10 +9,12 @@ export function PositionInput(props: EditorPropsWithLabel<Position>) {
       <Label>{props.label}</Label>
       <LengthInput
         {...getInputProps(props, 'x')}
+        percentage
         keywords={['left', 'center', 'right']}
       />
       <LengthInput
         {...getInputProps(props, 'y')}
+        percentage
         keywords={['top', 'center', 'bottom']}
       />
     </div>
