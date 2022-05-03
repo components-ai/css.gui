@@ -70,7 +70,6 @@ export const toGoogleVariableFontUrl = (variableFonts: any[]) => {
     }
   })
 
-  console.log(familyQueries, "????")
   const cssQueries = familyQueries.join('&')
   return `https://fonts.googleapis.com/css2?${cssQueries}`
 }
@@ -79,44 +78,46 @@ export const toGoogleVariableFontUrl = (variableFonts: any[]) => {
 export const getVariableFontFamilyHref = (
   fontFamily: string
 ) => {
-  
   const formattedName = fontFamily?.replace(/['"]+/g, '')
+  console.log(formattedName, "fmtName")
   // api call here
   const data: any = {
-    name: 'Recursive',
-    "slnt": {
-      "default": 0,
-      "min": -15,
-      "max": 0,
-      "step": 1
-    },
-    "wght": {
-      "default": 400,
-      "min": 300,
-      "max": 1000,
-      "step": 1
-    },
-    "CASL": {
-      "default": 0,
-      "min": 0,
-      "max": 1,
-      "step": 0.1
-    },
-    "CRSV": {
-      "default": 0.5,
-      "min": 0,
-      "max": 1,
-      "step": 0.1
-    },
-    "MONO": {
-      "default": 0,
-      "min": 0,
-      "max": 1,
-      "step": 0.01
+    Recursive: {
+      name: 'Recursive',
+      "slnt": {
+        "default": 0,
+        "min": -15,
+        "max": 0,
+        "step": 1
+      },
+      "wght": {
+        "default": 400,
+        "min": 300,
+        "max": 1000,
+        "step": 1
+      },
+      "CASL": {
+        "default": 0,
+        "min": 0,
+        "max": 1,
+        "step": 0.1
+      },
+      "CRSV": {
+        "default": 0.5,
+        "min": 0,
+        "max": 1,
+        "step": 0.1
+      },
+      "MONO": {
+        "default": 0,
+        "min": 0,
+        "max": 1,
+        "step": 0.01
+      }
     }
-  }
-
-  return toGoogleVariableFontUrl([data])
+  } 
+  const fontData = data[formattedName]
+  return fontData ? toGoogleVariableFontUrl([fontData]) : null
 }
 
 const getFontFamilyHref = async (font: string) => {
@@ -141,13 +142,13 @@ const getFontFamilyHref = async (font: string) => {
 
 const getVariableStyleSheet = (fontFamily: string, setVariableStyleSheet: Function) => {
   const sheet = getVariableFontFamilyHref(fontFamily)
-  if (sheet) setVariableStyleSheet(sheet)
+  setVariableStyleSheet(sheet)
 }
 const debouncedVariableStyleSheet = debounce(getVariableStyleSheet, 1000)
 
 const getStyleSheet = async (fontFamily: string, setStyleSheet: Function) => {
   const sheet = await getFontFamilyHref(fontFamily)
-  if (sheet) setStyleSheet(sheet)
+  setStyleSheet(sheet)
 }
 const debouncedGetStyleSheet = debounce(getStyleSheet, 1000)
 
