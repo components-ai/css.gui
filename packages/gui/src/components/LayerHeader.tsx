@@ -1,7 +1,7 @@
-import { ReactNode } from 'react'
+import { ComponentType, ReactNode } from 'react'
 
 interface Props {
-  preview: ReactNode
+  preview?: ComponentType<{ value: string }>
   text: string
 }
 
@@ -9,7 +9,7 @@ interface Props {
  * A header component for use with editors/layers that displays
  * a visual preview and text.
  */
-export default function LayerHeader({ preview, text }: Props) {
+export default function LayerHeader({ preview: Preview, text }: Props) {
   return (
     <div
       sx={{
@@ -20,19 +20,21 @@ export default function LayerHeader({ preview, text }: Props) {
         alignItems: 'center',
       }}
     >
-      <div
-        sx={{
-          width: '2rem',
-          height: '2rem',
-          border: '1px solid',
-          borderColor: 'border',
-          borderRadius: 8,
-          overflow: 'hidden',
-          mr: 2,
-        }}
-      >
-        {preview}
-      </div>
+      {Preview && (
+        <div
+          sx={{
+            width: '2rem',
+            height: '2rem',
+            border: '1px solid',
+            borderColor: 'border',
+            borderRadius: 8,
+            overflow: 'hidden',
+            mr: 2,
+          }}
+        >
+          <Preview value={text} />
+        </div>
+      )}
       <div
         sx={{
           position: 'relative',

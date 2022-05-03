@@ -1,6 +1,5 @@
 import { LengthInput } from '../LengthInput'
 import Layers, { LayerProps } from '../../Layers'
-import LayerHeader from '../../LayerHeader'
 
 import {
   Filter,
@@ -26,8 +25,9 @@ export default function FilterInput(props: EditorPropsWithLabel<Filter[]>) {
     <Layers<Filter>
       {...props}
       newItem={newItem}
-      header={Header}
+      stringify={stringifyFilter}
       content={FilterEditor}
+      thumbnail={Thumbnail}
     />
   )
 }
@@ -88,35 +88,28 @@ function FilterSwitch(props: LayerProps<Filter>) {
     }
   }
 }
-
-export function Header({ value }: { value: Filter | Filter[] }) {
-  const style = stringifyFilter(value)
+function Thumbnail({ value }: { value: string }) {
   return (
-    <LayerHeader
-      text={style}
-      preview={
-        <div
-          sx={{
-            width: '100%',
-            height: '100%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <div
-            sx={{
-              width: '1rem',
-              height: '1rem',
-              filter: style,
-              borderRadius: '9999px',
-              backgroundImage:
-                'conic-gradient(#f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00)',
-            }}
-          />
-        </div>
-      }
-    />
+    <div
+      sx={{
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <div
+        sx={{
+          width: '1rem',
+          height: '1rem',
+          filter: value,
+          borderRadius: '9999px',
+          backgroundImage:
+            'conic-gradient(#f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00)',
+        }}
+      />
+    </div>
   )
 }
 

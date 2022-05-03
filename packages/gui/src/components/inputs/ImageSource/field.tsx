@@ -1,5 +1,4 @@
 import Layers, { LayerProps } from '../../Layers'
-import LayerHeader from '../../LayerHeader'
 import { ImageSource, ImageSourceType } from './types'
 import { EditorPropsWithLabel, getInputProps } from '../../../lib/util'
 import { SelectInput } from '../SelectInput'
@@ -20,8 +19,9 @@ export default function ImageSourceInput(
     <Layers<ImageSource>
       {...props}
       newItem={newItem}
-      header={Header}
       content={ImageSourceEditor}
+      stringify={stringifyImageSource}
+      thumbnail={Thumbnail}
     />
   )
 }
@@ -61,33 +61,26 @@ export const ImageSourceEditor = (props: LayerProps<ImageSource>) => {
   )
 }
 
-export function Header({ value }: { value: ImageSource | ImageSource[] }) {
-  const style = stringifyImageSource(value)
+function Thumbnail({ value }: { value: string }) {
   return (
-    <LayerHeader
-      text={style}
-      preview={
-        <div
-          sx={{
-            width: '100%',
-            height: '100%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <div
-            sx={{
-              width: '1rem',
-              height: '1rem',
-              filter: style,
-              borderRadius: '9999px',
-              backgroundImage: style,
-            }}
-          />
-        </div>
-      }
-    />
+    <div
+      sx={{
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <div
+        sx={{
+          width: '1rem',
+          height: '1rem',
+          borderRadius: '9999px',
+          backgroundImage: value,
+        }}
+      />
+    </div>
   )
 }
 

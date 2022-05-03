@@ -1,6 +1,5 @@
 import { LengthInput } from '../LengthInput'
 import Layers, { LayerProps } from '../../Layers'
-import LayerHeader from '../../LayerHeader'
 
 import {
   Matrix,
@@ -35,8 +34,9 @@ export default function TransformInput(
     <Layers<Transform>
       {...props}
       newItem={newItem}
-      header={Header}
       content={TransformEditor}
+      stringify={stringifyTransform}
+      thumbnail={Thumbnail}
     />
   )
 }
@@ -246,32 +246,26 @@ function getInputProps<T extends object, K extends keyof T>(
   }
 }
 
-export function Header({ value }: { value: Transform | Transform[] }) {
-  const style = stringifyTransform(value)
+function Thumbnail({ value }: { value: string }) {
   return (
-    <LayerHeader
-      text={style}
-      preview={
-        <div
-          sx={{
-            width: '100%',
-            height: '100%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <div
-            sx={{
-              width: '1rem',
-              height: '1rem',
-              transform: style,
-              backgroundColor: '#f00',
-            }}
-          />
-        </div>
-      }
-    />
+    <div
+      sx={{
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <div
+        sx={{
+          width: '1rem',
+          height: '1rem',
+          transform: value,
+          backgroundColor: '#f00',
+        }}
+      />
+    </div>
   )
 }
 
