@@ -35,15 +35,15 @@ const getFontFamilyHref = async (font: string) => {
   try {
     const res = await fetch(`https://components.ai/api/v1/typefaces/${font}`)
     const rawFontData = await res.json()
-    
+
     const styles = Object.keys(rawFontData?.variants)
     const weights = Object.keys(rawFontData?.variants[styles[0]])
     const fontData: FontFamilyData = {
       name: rawFontData?.name,
       weights,
-      styles
+      styles,
     }
-    
+
     return toGoogleFontUrl([fontData])
   } catch (e) {
     console.log(`failed to fetch ${font} font`)
@@ -57,18 +57,16 @@ const getStyleSheet = async (fontFamily: string, setStyleSheet: Function) => {
 }
 const debouncedGetStyleSheet = debounce(getStyleSheet, 1000)
 
-export const FontTags = ({fontFamily}: any) => {
+export const FontTags = ({ fontFamily }: any) => {
   const [styleSheet, setStyleSheet] = React.useState<string | null>('')
-  
+
   React.useEffect(() => {
     debouncedGetStyleSheet(fontFamily, setStyleSheet)
   }, [fontFamily])
- 
-  return (
-    <>
-      {styleSheet ? (
-        <link rel="stylesheet" href={styleSheet} />
-      ) : null}
-    </>
-  )
+
+  if (!fontFamily) {
+    return null
+  }
+
+  return <>{styleSheet ? <link rel="stylesheet" href={styleSheet} /> : null}</>
 }
