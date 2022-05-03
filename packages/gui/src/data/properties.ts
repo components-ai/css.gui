@@ -224,6 +224,7 @@ export const properties: Record<string, PropertyData> = {
     percentage: true,
     range: positiveRanges(),
   },
+  // TODO this actually can only accept *one* image value, not an array
   borderImageSource: {
     type: ImageSourcePicker,
     stringify: stringifyImageSource,
