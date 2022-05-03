@@ -28,20 +28,19 @@ created by a user, you can transform that object into the _Theme Schema_.
 
 ```js
 import { useState } from 'react'
-import { Editor, styled, useTheme } from '@compai/css-gui'
+import { Editor, styled, importTheme } from '@compai/css-gui'
 
-const myTheme = {
+const theme = importTheme({
   colors: {
     gray: ['#111', '#888', '#ccc'],
     tomato: 'tomato',
   },
   space: [0, 2, 4, 8, 16, 32, 64, 128, 256],
   fontSizes: [12, 14, 16, 24, 32, 64, 128],
-}
+})
 
 const MyEditor = () => {
   const [styles, setStyles] = useState({})
-  const theme = useTheme(myTheme)
 
   return (
     <>
@@ -53,6 +52,18 @@ const MyEditor = () => {
   )
 }
 ```
+
+### Supported Theme Properties
+
+- Colors
+- Font Sizes
+- Line Heights
+- Space
+- Border Widths
+- Border Radii
+
+In the near future you can expect more theme property support
+and improved parsing.
 
 ## Theme Schema
 

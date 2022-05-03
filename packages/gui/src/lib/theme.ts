@@ -58,7 +58,7 @@ export const importRawLengths = (fontSizes: RawLength[]): FullLength[] => {
   })
 }
 
-export const importThemeFromSpec = (theme: any): Theme => {
+export const importTheme = (theme: any): Theme => {
   const colors = importColors(theme.colors)
   const fontSizes = importRawLengths(theme.fontSizes || [])
   const lineHeights = importRawLengths(theme.lineHeights || [])
