@@ -3,8 +3,8 @@ import { useState, ComponentType, useId } from 'react'
 import * as Accordion from '@radix-ui/react-accordion'
 import * as Collapsible from '@radix-ui/react-collapsible'
 import IconButton from './ui/IconButton'
-import { Label } from 'theme-ui'
 import { kebabCase } from 'lodash-es'
+import { Label } from './primitives'
 
 interface LayersProps<T> {
   label: string
@@ -20,8 +20,6 @@ interface LayersProps<T> {
    * The content to show when the layer is collapsed.
    */
   header: ComponentType<{ value: T[] }>
-  /** The label for the 'Add group' button */
-  addLabel?: string
   /** The values that should be populated when a new item is added. */
   newItem(): T
 }
@@ -40,7 +38,6 @@ export default function Layers<T>({
   onChange,
   header: Header,
   content: Content,
-  addLabel,
   newItem,
 }: LayersProps<T>) {
   const id = `${useId()}-${kebabCase(label)}`
@@ -205,7 +202,7 @@ export default function Layers<T>({
                 color: 'text',
               }}
             >
-              {addLabel}
+              + Add {label.toLowerCase()}
             </button>
           </div>
         </Collapsible.Content>

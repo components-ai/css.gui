@@ -9,22 +9,17 @@ import produce from 'immer'
 import { GradientField } from '../Gradient/field'
 
 const DEFAULT_IMAGE_URL = ''
-export default function ImageSourceContent({
-  label,
-  value,
-  onChange,
-}: EditorPropsWithLabel<ImageSource[]>) {
+export default function ImageSourceInput(
+  props: EditorPropsWithLabel<ImageSource[]>
+) {
   const newItem = () => {
     return getDefault('url')
   }
 
   return (
     <Layers<ImageSource>
-      label={label}
-      value={value}
-      onChange={onChange}
+      {...props}
       newItem={newItem}
-      addLabel={`+ Add ${label}`}
       header={Header}
       content={ImageSourceEditor}
     />
