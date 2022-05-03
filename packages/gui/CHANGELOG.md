@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.25
+
+### Patch Changes
+
+- e0eda11: Add smaller step for line height input
+
 ## 0.0.24
 
 ### Patch Changes
