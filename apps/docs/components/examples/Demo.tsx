@@ -40,11 +40,13 @@ export function Demo() {
               </div>
               <h3 sx={{ mt: 4, mb: 0 }}>Borders</h3>
               <Inputs.BorderRadius />
-              <Inputs.BorderImageSource />
-              <Inputs.BorderImageSlice />
               <Inputs.BorderWidth />
               <Inputs.BorderStyle />
               <Inputs.BorderColor />
+              <Inputs.BorderImageSource />
+              <Inputs.BorderImageSlice />
+              <Inputs.BorderImageRepeat />
+              <Inputs.BorderImageWidth />
 
               <h3 sx={{ mt: 4, mb: 0 }}>Spacing</h3>
               <Inputs.Margin />
