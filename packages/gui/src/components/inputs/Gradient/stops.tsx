@@ -7,7 +7,7 @@ import { ColorInput } from '../ColorInput'
 import { NumberInput } from '../NumberInput'
 import { getInputProps, randomInt } from '../../../lib/util'
 import { GradientStop as GradientStopValue } from './types'
-import { getDeclarationValue } from './stringify'
+import { stringifyGradient } from './stringify'
 
 interface StopsProps {
   value: GradientStopValue[]
@@ -200,7 +200,7 @@ function Track({ repeating, value }: TrackProps) {
           content: "''",
           position: 'absolute',
           inset: 0,
-          backgroundImage: getDeclarationValue({
+          backgroundImage: stringifyGradient({
             type: repeating ? 'repeating-linear' : 'linear',
             degrees: 90,
             stops: value,
