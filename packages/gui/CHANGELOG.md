@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.27
+
+### Patch Changes
+
+- 6756944: Don't embed font stylesheet when there's no font family passed in
+
 ## 0.0.26
 
 ### Patch Changes
