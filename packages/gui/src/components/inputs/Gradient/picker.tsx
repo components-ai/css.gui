@@ -1,4 +1,4 @@
-import { getDeclarationValue } from './stringify'
+import { stringifyGradient } from './stringify'
 import { GradientField } from './field'
 import Layers from '../../Layers'
 import LayerHeader from '../../LayerHeader'
@@ -50,7 +50,7 @@ export default function GradientPicker({
 }
 
 function Header({ value }: { value: Gradient }) {
-  const style = getDeclarationValue(value)
+  const style = stringifyGradient(value)
 
   return (
     <LayerHeader
