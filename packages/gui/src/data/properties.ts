@@ -26,6 +26,7 @@ import {
   textDecorationLines,
   textDecorationStyles,
 } from '../components/inputs/TextDecoration'
+import { UnitSteps } from '../lib'
 import ImageSourcePicker from '../components/inputs/ImageSource/field'
 import { stringifyImageSource } from '../components/inputs/ImageSource/stringify'
 import { allProperties } from './css-properties'
@@ -40,6 +41,7 @@ type PropertyData = {
   range?: UnitRanges
   defaultValue?: string | number
   stringify?: (value: any) => string
+  steps?: UnitSteps
   label?: string
 }
 
@@ -1020,6 +1022,7 @@ export const properties: Record<string, PropertyData> = {
     number: true,
     range: { number: [0, 2] },
     keywords: ['normal'],
+    steps: { number: 0.05 }
   },
   margin: {
     type: 'length',
