@@ -1474,9 +1474,23 @@ export const properties: Record<string, PropertyData> = {
     type: 'length',
     percentage: true,
   },
-  strokeOpacity: {
-    type: 'percentage',
-    defaultValue: 1,
+  strokeAlignment: {
+    type: 'keyword',
+    keywords: [
+      'center',
+      'inner',
+      'outer',
+    ],
+  },
+  strokeDashadjust: {
+    type: 'keyword',
+    keywords: [
+      'none',
+      'stretch',
+      'compress',
+      'dashed',
+      'gaps',
+    ],
   },
   strokeLinecap: {
     type: 'keyword',
@@ -1501,15 +1515,19 @@ export const properties: Record<string, PropertyData> = {
     defaultValue: 4,
     range: { number: [1, 256] }, // 256 seems reasonable but can adjust +/- if needed
   },
-  strokeDashadjust: {
-    type: 'keyword',
-    keywords: [
-      'none',
-      'stretch',
-      'compress',
-      'dashed',
-      'gaps',
-    ],
+  strokeOpacity: {
+    type: 'percentage',
+    defaultValue: 1,
+  },
+  strokeWidth: {
+    type: 'length',
+    percentage: true,
+    range: {
+      [AbsoluteLengthUnits.Px]: [0, 512],
+      [FontRelativeLengthUnits.Em]: [0, 16],
+      [FontRelativeLengthUnits.Rem]: [0, 16],
+      [PercentageLengthUnits.Pct]: [0.1, 400],
+    },
   },
   tabSize: {
     type: 'length',
