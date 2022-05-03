@@ -12,7 +12,6 @@ export function Demo() {
       <div
         className="full-bleed"
         sx={{
-          mt: 5,
           display: 'grid',
           gridTemplateColumns: '320px 1fr',
           borderTopWidth: 'thin',
@@ -22,14 +21,14 @@ export function Demo() {
       >
           <Editor styles={styles} onChange={setStyles} theme={defaultTheme}>
             <div sx={{ display: 'grid', gap: '.5rem', borderRightWidth: '1px', borderRightStyle: 'solid', borderColor: 'border', p: 4 }}>
-              <h3 sx={{ my: 0 }}>Typography</h3>
+              <h3 sx={{ fontSize: 2, my: 0 }}>Typography</h3>
               <Inputs.FontFamily />
               <Inputs.FontSize />
               <Inputs.LineHeight />
               <Inputs.TextAlign />
               <Inputs.FontStyle />
               <Inputs.FontStretch />
-              <h3 sx={{ mt: 4, mb: 0 }}>Colors</h3>
+              <h3 sx={{ fontSize: 2, mt: 4, mb: 0 }}>Colors</h3>
               <div sx={{ display: 'flex' }}>
                 <div sx={{ mr: 2 }}>
                   <Inputs.Color />
@@ -38,7 +37,7 @@ export function Demo() {
                   <Inputs.BackgroundColor />
                 </div>
               </div>
-              <h3 sx={{ mt: 4, mb: 0 }}>Borders</h3>
+              <h3 sx={{ fontSize: 2, mt: 4, mb: 0 }}>Borders</h3>
               <Inputs.BorderRadius />
               <Inputs.BorderWidth />
               <Inputs.BorderStyle />
@@ -49,10 +48,10 @@ export function Demo() {
               <Inputs.BorderImageRepeat />
               <Inputs.BorderImageWidth />
 
-              <h3 sx={{ mt: 4, mb: 0 }}>Spacing</h3>
+              <h3 sx={{ fontSize: 2, mt: 4, mb: 0 }}>Spacing</h3>
               <Inputs.Margin />
               <Inputs.Padding />
-              <h3 sx={{ mt: 4, mb: 0 }}>Size</h3>
+              <h3 sx={{ fontSize: 2, mt: 4, mb: 0 }}>Size</h3>
               <Inputs.Width />
               <Inputs.MinWidth />
               <Inputs.MaxWidth />
