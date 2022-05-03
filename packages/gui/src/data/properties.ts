@@ -994,6 +994,12 @@ export const properties: Record<string, PropertyData> = {
       'ideographic',
     ],
   },
+  initialLetterWrap: { 
+    type: 'length',
+    percentage: true,
+    keywords: ['none', 'first', 'all', 'grid'],
+    defaultValue: 'none',
+  },
   imageRendering: {
     type: 'keyword',
     keywords: ['auto', 'crisp-edges', 'pixelated'],
