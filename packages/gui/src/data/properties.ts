@@ -1022,7 +1022,7 @@ export const properties: Record<string, PropertyData> = {
     number: true,
     range: { number: [0, 2] },
     keywords: ['normal'],
-    steps: { number: 0.05 }
+    steps: { number: 0.05 },
   },
   margin: {
     type: 'length',
@@ -1476,39 +1476,15 @@ export const properties: Record<string, PropertyData> = {
   },
   strokeAlignment: {
     type: 'keyword',
-    keywords: [
-      'center',
-      'inner',
-      'outer',
-    ],
+    keywords: ['center', 'inner', 'outer'],
   },
   strokeDashadjust: {
     type: 'keyword',
-    keywords: [
-      'none',
-      'stretch',
-      'compress',
-      'dashed',
-      'gaps',
-    ],
-  },
-  strokeLinecap: {
-    type: 'keyword',
-    keywords: [
-      'butt',
-      'round',
-      'square',
-    ],
+    keywords: ['none', 'stretch', 'compress', 'dashed', 'gaps'],
   },
   strokeLinejoin: {
     type: 'keyword',
-    keywords: [
-      'arcs',
-      'bevel',
-      'miter',
-      'miter-clip',
-      'round',
-    ],
+    keywords: ['butt', 'round', 'square'],
   },
   strokeMiterlimit: {
     type: 'number',
