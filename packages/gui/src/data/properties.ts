@@ -91,6 +91,19 @@ export const properties: Record<string, PropertyData> = {
       'unsafe center',
     ],
   },
+  alignmentBaseline: {
+    type: 'keyword',
+    keywords: [
+      'baseline', 
+      'text-bottom',
+      'alphabetic',
+      'ideographic',
+      'middle',
+      'centeral',
+      'mathematical',
+      'text-top',
+    ],
+  },
   alignSelf: {
     type: 'keyword',
     keywords: [
