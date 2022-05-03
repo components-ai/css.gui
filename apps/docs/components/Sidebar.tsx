@@ -38,6 +38,7 @@ export const Sidebar = () => {
       <NavItem href="/examples/filters">Filters</NavItem>
       <NavItem href="/examples/transforms">Transforms</NavItem>
       <NavItem href="/examples/border-images">Border Images</NavItem>
+      <NavItem href="/examples/backgrounds">Backgrounds</NavItem>
       <NavItem href="/examples/space">Space</NavItem>
       <NavItem href="/examples/text-decoration">Text Decoration</NavItem>
       <NavSectionTitle>TODO</NavSectionTitle>
