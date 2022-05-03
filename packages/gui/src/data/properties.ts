@@ -1478,6 +1478,39 @@ export const properties: Record<string, PropertyData> = {
     type: 'percentage',
     defaultValue: 1,
   },
+  strokeLinecap: {
+    type: 'keyword',
+    keywords: [
+      'butt',
+      'round',
+      'square',
+    ],
+  },
+  strokeLinecap: {
+    type: 'keyword',
+    keywords: [
+      'arcs',
+      'bevel',
+      'miter',
+      'miter-clip',
+      'round',
+    ],
+  },
+  strokeMiterlimit: {
+    type: 'number',
+    defaultValue: 4,
+    range: { number: [1, 256] }, // 256 seems reasonable but can adjust +/- if needed
+  },
+  strokeDashadjust: {
+    type: 'keyword',
+    keywords: [
+      'none',
+      'stretch',
+      'compress',
+      'dashed',
+      'gaps',
+    ],
+  },
   tabSize: {
     type: 'length',
     number: true,
