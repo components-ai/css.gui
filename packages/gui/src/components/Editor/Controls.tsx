@@ -26,6 +26,7 @@ import { Label } from '../primitives'
 import { kebabCase } from 'lodash-es'
 import { useThemeProperty } from '../providers/ThemeContext'
 import { PositionInput } from '../inputs/PositionInput'
+import { X } from 'react-feather'
 
 type ControlProps = {
   field: KeyArg
@@ -49,16 +50,31 @@ const Control = ({ field }: ControlProps) => {
   const fullField = fieldset ? joinPath(fieldset.name, field) : field
 
   return (
-    <Component
-      label={sentenceCase(property)}
-      value={getField(fullField)}
-      onChange={(newValue: any) => {
-        setField(fullField, newValue)
-      }}
-      themeValues={themeValues}
-      {...properties[property]}
-      keywords={keywords}
-    />
+    <div sx={{ display: 'flex', width: '100%', alignItems: 'center' }}>
+      <Component
+        label={sentenceCase(property)}
+        value={getField(fullField)}
+        onChange={(newValue: any) => {
+          setField(fullField, newValue)
+        }}
+        themeValues={themeValues}
+        {...properties[property]}
+        keywords={keywords}
+      />
+      <X
+        size={10}
+        onClick={() => {
+          setField(fullField, null)
+        }}
+        sx={{
+          color: 'muted',
+          ml: 'auto',
+          ':hover': {
+            color: 'text',
+          },
+        }}
+      />
+    </div>
   )
 }
 
