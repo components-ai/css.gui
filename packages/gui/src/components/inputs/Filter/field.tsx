@@ -12,25 +12,20 @@ import {
 } from './types'
 import { stringifyFilter } from './stringify'
 import { EditorProps } from '../../../types/editor'
-import { getInputProps } from '../../../lib/util'
+import { EditorPropsWithLabel, getInputProps } from '../../../lib/util'
 import { SelectInput } from '../SelectInput'
 import { NumberPercentageInput } from '../NumberPercentageInput'
 import { AngleInput } from '../AngleInput'
 import { ColorInput } from '../ColorInput'
 
-export default function FilterContent({
-  value,
-  onChange,
-}: EditorProps<Filter[]>) {
+export default function FilterInput(props: EditorPropsWithLabel<Filter[]>) {
   const newItem = () => {
     return getDefault('blur')
   }
   return (
     <Layers<Filter>
-      value={value}
-      onChange={onChange}
+      {...props}
       newItem={newItem}
-      addLabel="+ Add filter"
       header={Header}
       content={FilterEditor}
     />

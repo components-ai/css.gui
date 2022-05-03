@@ -47,10 +47,6 @@ export const initialStyles: any = {
     value: 1,
     unit: 'number',
   },
-  borderWidth: {
-    value: 64,
-    unit: 'px',
-  },
   borderImageSource: [
     {
       type: 'url',

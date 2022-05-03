@@ -7,12 +7,11 @@ import { stringifyTextShadow } from './stringify'
 
 import LayerHeader from '../../LayerHeader'
 import Layers from '../../Layers'
-import { getInputProps } from '../../../lib/util'
+import { EditorPropsWithLabel, getInputProps } from '../../../lib/util'
 
-export default function TextShadowField({
-  value,
-  onChange,
-}: EditorProps<TextShadow[]>) {
+export default function TextShadowInput(
+  props: EditorPropsWithLabel<TextShadow[]>
+) {
   const newItem = () => {
     // generate a new text shadow with the units of the previous box shadow
     return {
@@ -25,10 +24,8 @@ export default function TextShadowField({
   }
   return (
     <Layers<TextShadow>
-      value={value}
-      onChange={onChange}
+      {...props}
       newItem={newItem}
-      addLabel="+ Add text shadow"
       header={Header}
       content={TextShadowEditor}
     />

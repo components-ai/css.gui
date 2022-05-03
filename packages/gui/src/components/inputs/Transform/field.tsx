@@ -25,19 +25,16 @@ import { Angle, Length } from '../../../types/css'
 import { NumberInput } from '../NumberInput'
 import { range } from 'lodash-es'
 
-export default function TransformContent({
-  value,
-  onChange,
-}: EditorProps<Transform[]>) {
+export default function TransformInput(
+  props: EditorPropsWithLabel<Transform[]>
+) {
   const newItem = () => {
     return getDefault('matrix')
   }
   return (
     <Layers<Transform>
-      value={value}
-      onChange={onChange}
+      {...props}
       newItem={newItem}
-      addLabel="+ Add filter"
       header={Header}
       content={TransformEditor}
     />

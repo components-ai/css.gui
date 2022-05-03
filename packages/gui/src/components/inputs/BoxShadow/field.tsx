@@ -7,12 +7,11 @@ import LayerHeader from '../../LayerHeader'
 import { BoxShadow } from './types'
 import { stringifyBoxShadow } from './stringify'
 import { EditorProps } from '../../../types/editor'
-import { getInputProps } from '../../../lib/util'
+import { EditorPropsWithLabel, getInputProps } from '../../../lib/util'
 
-export default function BoxShadowsField({
-  value,
-  onChange,
-}: EditorProps<BoxShadow[]>) {
+export default function BoxShadowInput(
+  props: EditorPropsWithLabel<BoxShadow[]>
+) {
   const newItem = () => {
     return {
       spread: { value: 0, unit: 'px' },
@@ -24,10 +23,8 @@ export default function BoxShadowsField({
   }
   return (
     <Layers<BoxShadow>
-      value={value}
-      onChange={onChange}
+      {...props}
       newItem={newItem}
-      addLabel="+ Add box shadow"
       header={Header}
       content={BoxShadowEditor}
     />
