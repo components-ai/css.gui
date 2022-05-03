@@ -26,9 +26,7 @@ export default function ColorPopover({
     <Popover.Root>
       <Popover.Trigger
         sx={{
-          display: 'flex',
-          gap: 2,
-          alignItems: 'center',
+          p: 0,
           color: 'text',
           backgroundColor: 'transparent',
           border: 'none',
