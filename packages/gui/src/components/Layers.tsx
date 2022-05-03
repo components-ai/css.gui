@@ -1,10 +1,11 @@
 import { Trash, ChevronUp, ChevronDown } from 'react-feather'
-import { useState, ComponentType, useId } from 'react'
+import { useState, ComponentType, useId, ReactNode } from 'react'
 import * as Accordion from '@radix-ui/react-accordion'
 import * as Collapsible from '@radix-ui/react-collapsible'
 import IconButton from './ui/IconButton'
 import { kebabCase } from 'lodash-es'
 import { Label } from './primitives'
+import LayerHeader from './LayerHeader'
 
 interface LayersProps<T> {
   label: string
@@ -15,13 +16,12 @@ interface LayersProps<T> {
    * (See `LayerProps` for what props this takes)
    */
   content: ComponentType<LayerProps<T>>
-
-  /**
-   * The content to show when the layer is collapsed.
-   */
-  header: ComponentType<{ value: T[] }>
   /** The values that should be populated when a new item is added. */
   newItem(): T
+  /** How to stringify the contents of the layer */
+  stringify(value: T[]): string
+  /** An optional thumbnail to display in the header */
+  thumbnail?: ComponentType<{ value: string }>
 }
 
 export interface LayerProps<T> {
@@ -36,9 +36,10 @@ export default function Layers<T>({
   label,
   value = [],
   onChange,
-  header: Header,
   content: Content,
+  stringify,
   newItem,
+  thumbnail,
 }: LayersProps<T>) {
   const id = `${useId()}-${kebabCase(label)}`
   const [expandedLayer, setExpandedLayer] = useState(-1)
@@ -58,9 +59,10 @@ export default function Layers<T>({
             background: 'none',
             color: 'text',
             border: 'none',
+            p: 0,
           }}
         >
-          <Header value={value} />
+          <LayerHeader preview={thumbnail} text={stringify(value)} />
         </Collapsible.Trigger>
         <Collapsible.Content
           sx={{
@@ -96,9 +98,13 @@ export default function Layers<T>({
                           borderBottom: '1px solid',
                           borderColor: 'border',
                           cursor: 'pointer',
+                          px: 2,
                         }}
                       >
-                        <Header value={[item]} />
+                        <LayerHeader
+                          preview={thumbnail}
+                          text={stringify([item])}
+                        />
                       </Accordion.Trigger>
                       <div
                         sx={{

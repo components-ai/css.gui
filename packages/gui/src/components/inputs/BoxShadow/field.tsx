@@ -2,11 +2,8 @@ import { ColorInput } from '../ColorInput'
 import { CheckboxInput } from '../CheckboxInput'
 import { LengthInput } from '../LengthInput'
 import Layers, { LayerProps } from '../../Layers'
-import LayerHeader from '../../LayerHeader'
-
 import { BoxShadow } from './types'
 import { stringifyBoxShadow } from './stringify'
-import { EditorProps } from '../../../types/editor'
 import { EditorPropsWithLabel, getInputProps } from '../../../lib/util'
 
 export default function BoxShadowInput(
@@ -25,8 +22,9 @@ export default function BoxShadowInput(
     <Layers<BoxShadow>
       {...props}
       newItem={newItem}
-      header={Header}
       content={BoxShadowEditor}
+      stringify={stringifyBoxShadow}
+      thumbnail={Thumbnail}
     />
   )
 }
@@ -48,24 +46,18 @@ export const BoxShadowEditor = (props: LayerProps<BoxShadow>) => {
   )
 }
 
-export function Header({ value }: { value: BoxShadow | BoxShadow[] }) {
-  const style = stringifyBoxShadow(value)
+function Thumbnail({ value }: { value: string }) {
   return (
-    <LayerHeader
-      text={style}
-      preview={
-        <div
-          sx={{
-            width: '100%',
-            height: '100%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <div sx={{ width: '1rem', height: '1rem', boxShadow: style }} />
-        </div>
-      }
-    />
+    <div
+      sx={{
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <div sx={{ width: '1rem', height: '1rem', boxShadow: value }} />
+    </div>
   )
 }
