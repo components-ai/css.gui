@@ -689,6 +689,20 @@ export const properties: Record<string, PropertyData> = {
       'block flow-root',
     ],
   },
+  dominantBaseline: { // SVG 
+    type: 'keyword',
+    keywords: [
+      'auto', 
+      'text-bottom',
+      'alphabetic',
+      'ideographic',
+      'middle',
+      'central',
+      'mathematical',
+      'hanging',
+      'text-top',
+    ],
+  },
   emptyCells: {
     type: 'keyword',
     keywords: ['show', 'hide'],
@@ -756,6 +770,10 @@ export const properties: Record<string, PropertyData> = {
   float: {
     type: 'keyword',
     keywords: ['left', 'right', 'none', 'inline-start', 'inline-end'],
+  },
+  floatReference: {
+    type: 'keyword',
+    keywords: ['inline', 'column', 'region', 'page'],
   },
   floodColor: {
     type: 'color',
@@ -1625,6 +1643,19 @@ export const properties: Record<string, PropertyData> = {
     type: 'length',
     percentage: true,
     keywords: ['auto', 'from-font'],
+  },
+  textDecorationSkip: {
+    type: 'keyword',
+    keywords: [
+      'none', 
+      'objects', 
+      'spaces',
+      'edges',
+      'box-decoration',
+      'objects spaces',
+      'leading-spaces trailing spaces',
+      'objects edges box-decoration',
+    ],
   },
   textDecorationSkipInk: {
     type: 'keyword',
