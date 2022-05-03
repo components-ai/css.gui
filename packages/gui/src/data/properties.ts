@@ -1053,6 +1053,10 @@ export const properties: Record<string, PropertyData> = {
     keywords: ['normal'],
     steps: { number: 0.05 },
   },
+  lineHeightStep: {
+    type: 'length',
+    percentage: true,
+  },
   margin: {
     type: 'length',
     percentage: true,
