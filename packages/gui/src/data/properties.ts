@@ -291,6 +291,10 @@ export const properties: Record<string, PropertyData> = {
     percentage: true,
     keywords: ['max-content', 'min-content', 'auto'],
   },
+  borderCollapse: {
+    type: 'keyword',
+    keywords: ['collapse', 'separate'],
+  },
   // TODO: 4-positional arguments separated by spaces
   borderImageOutset: {
     type: 'length',
