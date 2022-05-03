@@ -28,6 +28,7 @@ export function Demo() {
               <Inputs.FontSize />
               <Inputs.LineHeight />
               <Inputs.TextAlign />
+              <Inputs.FontStyle />
               <Inputs.FontStretch />
               <h3 sx={{ mt: 4, mb: 0 }}>Colors</h3>
               <div sx={{ display: 'flex' }}>
@@ -38,13 +39,22 @@ export function Demo() {
                   <Inputs.BackgroundColor />
                 </div>
               </div>
+              <h3 sx={{ mt: 4, mb: 0 }}>Borders</h3>
+              <Inputs.BorderRadius />
+              <Inputs.BorderImageSource />
+              <Inputs.BorderImageSlice />
+              <Inputs.BorderWidth />
+
               <h3 sx={{ mt: 4, mb: 0 }}>Spacing</h3>
               <Inputs.Margin />
               <Inputs.Padding />
               <h3 sx={{ mt: 4, mb: 0 }}>Size</h3>
               <Inputs.Width />
+              <Inputs.MinWidth />
               <Inputs.MaxWidth />
               <Inputs.Height />
+              <Inputs.MinHeight />
+              <Inputs.MaxHeight />
             </div>
           </Editor>
         </div>
