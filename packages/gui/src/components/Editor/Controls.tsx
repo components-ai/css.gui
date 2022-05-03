@@ -26,6 +26,7 @@ import { Label } from '../primitives'
 import { kebabCase } from 'lodash-es'
 import { useThemeProperty } from '../providers/ThemeContext'
 import { PositionInput } from '../inputs/PositionInput'
+import { TimeInput } from '../inputs/TimeInput'
 
 type ControlProps = {
   field: KeyArg
@@ -218,17 +219,6 @@ const ResponsiveLengthInput = ({
   )
 }
 
-const TimeInput = (props: EditorPropsWithLabel<CSSUnitValue>) => {
-  return (
-    <DimensionInput
-      units={TIME_UNITS}
-      steps={timeSteps}
-      conversions={timeConversions}
-      {...props}
-    />
-  )
-}
-
 const DEFAULT_KEYWORD = 'inherit'
 const KeywordInput = ({
   value,
@@ -244,16 +234,6 @@ const KeywordInput = ({
       options={keywords}
     />
   )
-}
-
-const timeConversions = {
-  ms: 1000,
-  s: 1,
-}
-
-const timeSteps = {
-  ms: 25,
-  s: 0.025,
 }
 
 const TextInput = ({

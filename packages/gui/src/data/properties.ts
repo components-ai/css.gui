@@ -32,6 +32,8 @@ import { stringifyImageSource } from '../components/inputs/ImageSource/stringify
 import { allProperties } from './css-properties'
 import { camelCase, uniqBy } from 'lodash-es'
 import { positiveRanges, UnitRanges } from './ranges'
+import TransitionInput from '../components/inputs/Transition/field'
+import { stringifyTransitionList } from '../components/inputs/Transition/stringify'
 
 type PropertyData = {
   type: string | ComponentType<any>
@@ -94,7 +96,7 @@ export const properties: Record<string, PropertyData> = {
   alignmentBaseline: {
     type: 'keyword',
     keywords: [
-      'baseline', 
+      'baseline',
       'text-bottom',
       'alphabetic',
       'ideographic',
@@ -1753,6 +1755,10 @@ export const properties: Record<string, PropertyData> = {
   transformStyle: {
     type: 'keyword',
     keywords: ['flat', 'preserve-3d'],
+  },
+  transition: {
+    type: TransitionInput,
+    stringify: stringifyTransitionList,
   },
   // TODO array of time values
   transitionDelay: { type: 'time' },
