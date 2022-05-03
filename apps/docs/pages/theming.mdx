@@ -1,0 +1,73 @@
+import { FirstParagraph } from '../components/FirstParagraph'
+
+# Theming
+
+<FirstParagraph>
+
+Use a theme to collapse the space for your controls.
+
+</FirstParagraph>
+
+When you pass in a theme to your editor, a theme unit will show up for any
+inputs that have a corresponding collection of theme values. Users still have
+the ability to "eject" from those theme values, but we constrain to them by
+default.
+
+CSS GUI supports two different theme formats:
+
+- [**System UI**](https://system-ui.com/theme): A theme specification used by
+  tools including Theme UI, Chakra UI, and Stitches.
+- [**Theme Schema**](/guides/theme-schema): A uuid-based theme shape used by
+  the [Components AI Theme Builder](https://components.ai/theme) which lets
+  use visually create a theme.
+
+## Using the System UI Theme Specification
+
+If you have a theme object that you're using in a containing app, or even one
+created by a user, you can transform that object into the _Theme Schema_.
+
+```js
+import { useState } from 'react'
+import { Editor, styled, importTheme } from '@compai/css-gui'
+
+const theme = importTheme({
+  colors: {
+    gray: ['#111', '#888', '#ccc'],
+    tomato: 'tomato',
+  },
+  space: [0, 2, 4, 8, 16, 32, 64, 128, 256],
+  fontSizes: [12, 14, 16, 24, 32, 64, 128],
+})
+
+const MyEditor = () => {
+  const [styles, setStyles] = useState({})
+
+  return (
+    <>
+      <Editor styles={styles} onChange={setStyles} theme={theme}>
+        <Inputs.Color />
+      </Editor>
+      <styled.p styles={styles}>Hello, world!</styled.p>
+    </>
+  )
+}
+```
+
+### Supported Theme Properties
+
+- Colors
+- Font Sizes
+- Line Heights
+- Space
+- Border Widths
+- Border Radii
+
+In the near future you can expect more theme property support
+and improved parsing.
+
+## Theme Schema
+
+If you already have a theme schema from the [Components AI Theme Builder](https://components.theme),
+you can export the _"JSON (Raw Schema)"_ format, then cut and paste it into your app.
+
+[**Read about the theme schema in detail &rarr;**](/guides/theme-schema)
