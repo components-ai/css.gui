@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.26
+
+### Patch Changes
+
+- 0f28790: Add missing "auto" keyword for margin
+
 ## 0.0.25
 
 ### Patch Changes
