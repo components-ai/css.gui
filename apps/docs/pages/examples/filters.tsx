@@ -12,7 +12,7 @@ export default function Filters() {
       <Editor styles={styles} onChange={setStyles} />
       <div
         sx={{
-          mt: 4,
+          mt: 5,
           display: 'flex',
           justifyContent: 'center',
         }}
