@@ -34,10 +34,11 @@ export default function TransformContent({
   }
   return (
     <Layers<Transform>
+      label="Transform"
       value={value}
       onChange={onChange}
       newItem={newItem}
-      addLabel="+ Add filter"
+      addLabel="+ Add transform"
       header={Header}
       content={TransformEditor}
     />

@@ -20,6 +20,7 @@ export default function ImageSourceContent({
 
   return (
     <Layers<ImageSource>
+      label={label}
       value={value}
       onChange={onChange}
       newItem={newItem}

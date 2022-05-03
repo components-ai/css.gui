@@ -24,6 +24,7 @@ export default function BoxShadowsField({
   }
   return (
     <Layers<BoxShadow>
+      label="Box shadow"
       value={value}
       onChange={onChange}
       newItem={newItem}

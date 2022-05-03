@@ -25,6 +25,7 @@ export default function TextShadowField({
   }
   return (
     <Layers<TextShadow>
+      label="Text shadow"
       value={value}
       onChange={onChange}
       newItem={newItem}
