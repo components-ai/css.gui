@@ -1,5 +1,12 @@
 # @compai/css-gui
 
+## 0.0.28
+
+### Patch Changes
+
+- 9af74d6: Add theme transformer
+- fffd5f1: Adds several stroke based properties for styling SVG elements
+
 ## 0.0.27
 
 ### Patch Changes
