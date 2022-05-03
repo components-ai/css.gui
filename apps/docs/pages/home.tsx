@@ -11,6 +11,13 @@ export default function Docs() {
           and end-user styling
         </p>
       </FirstParagraph>
+      <ul sx={{ listStyleType: 'none' }}>
+        <li>Controls for 692 CSS properties</li>
+        <li>+1000 Google Fonts</li>
+        <li>Responsive values</li>
+        <li>Theme aware controls</li>
+        <li>Scrubbable number inputs</li>
+      </ul>
       <Demo />
     </>
   )

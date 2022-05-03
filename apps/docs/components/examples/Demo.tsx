@@ -13,16 +13,15 @@ export function Demo() {
         className="full-bleed"
         sx={{
           mt: 5,
-          display: 'flex',
-          py: [2, 3, 4],
+          display: 'grid',
+          gridTemplateColumns: '320px 1fr',
           borderTopWidth: 'thin',
           borderTopStyle: 'solid',
           borderColor: 'border',
         }}
       >
-        <div sx={{ px: [2, 3, 4] }}>
           <Editor styles={styles} onChange={setStyles} theme={defaultTheme}>
-            <div sx={{ display: 'grid', gap: '.5rem', width: '240px' }}>
+            <div sx={{ display: 'grid', gap: '.5rem', borderRightWidth: '1px', borderRightStyle: 'solid', borderColor: 'border', p: 4 }}>
               <h3 sx={{ my: 0 }}>Typography</h3>
               <Inputs.FontFamily />
               <Inputs.FontSize />
@@ -44,6 +43,8 @@ export function Demo() {
               <Inputs.BorderImageSource />
               <Inputs.BorderImageSlice />
               <Inputs.BorderWidth />
+              <Inputs.BorderStyle />
+              <Inputs.BorderColor />
 
               <h3 sx={{ mt: 4, mb: 0 }}>Spacing</h3>
               <Inputs.Margin />
@@ -57,8 +58,7 @@ export function Demo() {
               <Inputs.MaxHeight />
             </div>
           </Editor>
-        </div>
-        <div sx={{ flexGrow: 1 }}>
+        <section>
           <styled.p styles={styles}>
             “The parameters comprise sequences which are theoretically infinite
             but limits are, of course, set to them in practice. There is an
@@ -77,15 +77,16 @@ export function Demo() {
               by Karl Gerstner
             </em>
           </styled.p>
-        </div>
+        </section>
       </div>
       <div className="full-bleed">
         <pre
           sx={{
-            p: [2, 3, 4],
+            p: [2, 3, 5],
             borderTop: 'thin solid',
             borderColor: 'border',
             width: '100%',
+            fontSize: 3,
           }}
         >
           {codegen.css(styles)}
