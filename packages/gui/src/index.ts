@@ -19,7 +19,7 @@ export { EditorProvider } from './components/providers/EditorContext'
 export { Layout } from './components/ui/Layout'
 
 export { theme } from './components/ui/theme'
-export { unsupportedProperties } from './data/properties'
+export { supportedProperties, unsupportedProperties } from './data/properties'
 export { allProperties } from './data/css-properties'
 
 export * from './lib'

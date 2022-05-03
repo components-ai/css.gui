@@ -1022,7 +1022,7 @@ export const properties: Record<string, PropertyData> = {
     number: true,
     range: { number: [0, 2] },
     keywords: ['normal'],
-    steps: { number: 0.05 }
+    steps: { number: 0.05 },
   },
   margin: {
     type: 'length',
@@ -1756,5 +1756,11 @@ export const properties: Record<string, PropertyData> = {
 export const unsupportedProperties = uniqBy(allProperties, 'property').filter(
   (property) => {
     return !properties[camelCase(property.property)]
+  }
+)
+
+export const supportedProperties = uniqBy(allProperties, 'property').filter(
+  (property) => {
+    return properties[camelCase(property.property)]
   }
 )
