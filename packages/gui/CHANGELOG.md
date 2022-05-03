@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.23
+
+### Patch Changes
+
+- d3fc370: Improve spec coverage and internal controls
+
 ## 0.0.22
 
 ### Patch Changes
