@@ -879,6 +879,7 @@ export const properties: Record<string, PropertyData> = {
     keywords: ['auto', 'loose', 'normal', 'strict', 'anywhere'],
   },
   listStyleImage: {
+    // TODO only accepts a single image
     type: ImageSourcePicker,
     stringify: stringifyImageSource,
     label: 'List Style Image',
