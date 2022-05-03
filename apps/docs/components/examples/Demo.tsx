@@ -45,6 +45,7 @@ export function Demo() {
               <Inputs.BorderColor />
               <Inputs.BorderImageSource />
               <Inputs.BorderImageSlice />
+              <Inputs.BorderImageOutset />
               <Inputs.BorderImageRepeat />
               <Inputs.BorderImageWidth />
 

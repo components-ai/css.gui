@@ -35,7 +35,7 @@ export const initialStyles: any = {
   },
   borderStyle: 'solid',
   borderWidth: {
-    value: 16,
+    value: 0,
     unit: 'px',
   },
   borderColor: 'transparent',
@@ -47,14 +47,18 @@ export const initialStyles: any = {
     value: 1,
     unit: 'number',
   },
+  borderImageWidth: {
+    value: 64,
+    unit: 'px',
+  },
   borderImageSource: [
     {
       type: 'url',
-      arguments: ['https://dc28c2r6oodom.cloudfront.net/p/h/042.jpg'],
+      arguments: ['https://source.unsplash.com/random'],
     },
   ],
   padding: {
-    value: '32',
+    value: '128',
     unit: 'px',
   },
 }

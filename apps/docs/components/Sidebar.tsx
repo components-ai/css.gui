@@ -20,7 +20,9 @@ export const Sidebar = () => {
       <NavSectionTitle>Overview</NavSectionTitle>
       <NavItem href="/introduction">Introduction</NavItem>
       <NavItem href="/getting-started">Getting Started</NavItem>
+      <NavSectionTitle>How To</NavSectionTitle>
       <NavItem href="/exports/css">Exporting CSS</NavItem>
+      <NavItem href="/imports/color">Importing Color Palettes</NavItem>
       <NavSectionTitle>Components</NavSectionTitle>
       <NavItem href="/components/editor">Editor</NavItem>
       <NavItem href="/components/fieldset">Fieldset</NavItem>
@@ -38,12 +40,16 @@ export const Sidebar = () => {
       <NavItem href="/examples/transforms">Transforms</NavItem>
       <NavItem href="/examples/border-images">Border Images</NavItem>
       <NavItem href="/examples/space">Space</NavItem>
+      <NavItem href="/examples/text-decoration">Text Decoration</NavItem>
+      <NavSectionTitle>TODO</NavSectionTitle>
+      <NavItem href="/unsupported">Unsupported Properties</NavItem>
+      <NavItem href="https://github.com/components-ai/css.gui/issues">Issues</NavItem>
+      <NavSectionTitle>Reference</NavSectionTitle>
+      <NavItem href="/colophon">Colophon</NavItem>
       <NavSectionTitle>Community</NavSectionTitle>
       <NavItem href="https://github.com/components-ai/css.gui">GitHub</NavItem>
       <NavItem href="https://twitter.com/components_ai">Twitter</NavItem>
       <NavItem href="https://discord.gg/PYF52BEEf3">Discord</NavItem>
-      <NavItem href="/unsupported">Unsupported Properties</NavItem>
-      <NavItem href="/colophon">Colophon</NavItem>
     </nav>
   )
 }

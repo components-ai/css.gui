@@ -4,40 +4,30 @@ import { Editor, Inputs, styled, codegen } from '@compai/css-gui'
 import { defaultTheme } from '../../data/default-theme'
 
 const initialStyles = {
-  padding: {
-    value: 64,
+  textDecorationColor: 'primary',
+  textDecorationThickness: {
+    value: 8,
     unit: 'px',
   },
-  borderStyle: 'solid',
-  borderWidth: {
-    value: 128,
-    unit: 'px',
+  textDecorationLine: 'underline',
+  textDecorationStyle: 'wavy',
+  // Font
+  fontSize: {
+    value: 3,
+    unit: 'rem',
   },
-  borderImageWidth: {
-    value: 128,
-    unit: 'px',
+  letterSpacing: {
+    value: 'initial',
+    unit: 'keyword',
   },
-  borderImageOutset: {
-    value: 0,
-    unit: 'px',
-  },
-  borderRadius: {
-    value: 0,
-    unit: 'px',
-  },
-  borderImageSlice: {
-    value: 1,
+  lineHeight: {
+    value: '1.5',
     unit: 'number',
   },
-  borderImageSource: [
-    {
-      type: 'url',
-      arguments: ['https://source.unsplash.com/random'],
-    },
-  ],
+  fontFamily: 'Space Mono',
 }
 
-export default function BorderImage() {
+export default function TextDecoration() {
   const [styles, setStyles] = useState<any>(initialStyles)
 
   return (
@@ -52,18 +42,24 @@ export default function BorderImage() {
       >
         <div sx={{ px: [2, 3, 4] }}>
           <Editor styles={styles} onChange={setStyles} theme={defaultTheme}>
-            <div sx={{ display: 'grid', gap: '.5rem', width: '240px' }}>
-              <Inputs.BorderImageSource />
-              <Inputs.BorderImageSlice />
-              <Inputs.BorderImageWidth />
-              <Inputs.BorderImageOutset />
-              <Inputs.BorderImageRepeat />
-              <Inputs.BorderWidth />
-              <Inputs.Padding />
-            </div>
+            <section sx={{ display: 'grid', gap: '.5rem', width: '240px' }}>
+              <h3 sx={{ my:0 }}>Text Decoration</h3>
+              <Inputs.TextDecorationColor />
+              <Inputs.TextDecorationLine />
+              <Inputs.TextDecorationThickness />
+              <Inputs.TextDecorationSkipInk />
+              <Inputs.TextDecorationStyle />
+            </section>
+            <section sx={{ display: 'grid', gap: '.5rem', width: '240px' }}>
+              <h3 sx={{ mt: 4, mb: 0 }}>Font</h3>
+              <Inputs.FontFamily />
+              <Inputs.FontSize />
+              <Inputs.LineHeight />
+              <Inputs.LetterSpacing />
+            </section>
           </Editor>
         </div>
-        <div sx={{ flexGrow: 1, pr: 4 }}>
+        <div sx={{ flexGrow: 1, padding: 5 }}>
           <styled.p styles={styles}>
             “The parameters comprise sequences which are theoretically infinite
             but limits are, of course, set to them in practice. There is an
