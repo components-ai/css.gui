@@ -1027,22 +1027,27 @@ export const properties: Record<string, PropertyData> = {
   margin: {
     type: 'length',
     percentage: true,
+    keywords: ['auto'],
   },
   marginTop: {
     type: 'length',
     percentage: true,
+    keywords: ['auto'],
   },
   marginLeft: {
     type: 'length',
     percentage: true,
+    keywords: ['auto'],
   },
   marginBottom: {
     type: 'length',
     percentage: true,
+    keywords: ['auto'],
   },
   marginRight: {
     type: 'length',
     percentage: true,
+    keywords: ['auto'],
   },
   maskBorderMode: {
     type: 'keyword',
