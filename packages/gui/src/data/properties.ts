@@ -1063,6 +1063,10 @@ export const properties: Record<string, PropertyData> = {
       'custom-counter-style',
     ],
   },
+  lineGrid: {
+    type: 'keyword',
+    keywords: ['match-parent', 'create'],
+  },
   lineHeight: {
     type: 'length',
     percentage: true,
@@ -1074,6 +1078,10 @@ export const properties: Record<string, PropertyData> = {
   lineHeightStep: {
     type: 'length',
     percentage: true,
+  },
+  lineSnap: {
+    type: 'keyword',
+    keywords: ['none', 'baseline', 'contain'],
   },
   margin: {
     type: 'length',
@@ -1238,6 +1246,11 @@ export const properties: Record<string, PropertyData> = {
     type: 'length',
     percentage: true,
     keywords: ['none', 'max-content', 'min-content'],
+  },
+  maxLines: {
+    type: 'number',
+    keywords: ['none'],
+    range: { number: [0, 9999] },
   },
   // TODO: add fit-content function
   maxWidth: {
@@ -1504,6 +1517,10 @@ export const properties: Record<string, PropertyData> = {
     type: 'keyword',
     keywords: ['start', 'center', 'space-between', 'space-around'],
   },
+  rubyMerge: {
+    type: 'keyword',
+    keywords: ['separate', 'merge', 'auto'],
+  },
   rubyPosition: {
     type: 'keyword',
     keywords: ['over', 'under', 'inter-character', 'alternate'],
@@ -1550,7 +1567,21 @@ export const properties: Record<string, PropertyData> = {
     type: 'keyword',
     keywords: ['none', 'stretch', 'compress', 'dashed', 'gaps'],
   },
+  strokeDashcorner: {
+    type: 'length',
+    percentage: true,
+    keywords: ['none'],
+  },
+  strokeDashOffset: {
+    type: 'number',
+    defaultValue: 0,
+    range: { number: [-9999, 9999] } // Todo add %
+  },
   strokeLinejoin: {
+    type: 'keyword',
+    keywords: ['miter', 'miter-clip', 'round', 'bevel', 'arcs'],
+  },
+  strokeLinecap: {
     type: 'keyword',
     keywords: ['butt', 'round', 'square'],
   },
@@ -1732,6 +1763,16 @@ export const properties: Record<string, PropertyData> = {
     type: TextShadowPicker,
     stringify: stringifyTextShadow,
   },
+  textSpaceCollapse: {
+    type: 'keyword',
+    keywords: [
+      'collapse',
+      'discard',
+      'preserve',
+      'preserve-breaks',
+      'preserve-spaces',
+    ],
+  },
   textTransform: {
     type: 'keyword',
     keywords: [
@@ -1746,6 +1787,16 @@ export const properties: Record<string, PropertyData> = {
   textUnderlinePosition: {
     type: 'keyword',
     keywords: ['auto', 'under', 'left', 'right', 'under left', 'right under'],
+  },
+  textWrap: {
+    type: 'keyword',
+    keywords: [
+      'wrap',
+      'nowrap',
+      'balance',
+      'stable',
+      'pretty',
+    ],
   },
   top: {
     type: 'length',
@@ -1867,6 +1918,48 @@ export const properties: Record<string, PropertyData> = {
   wordWrap: {
     type: 'keyword',
     keywords: ['normal', 'break-word', 'anywhere'],
+  },
+  wrapAfter: {
+    type: 'keyword',
+    keywords: [
+      'auto',
+      'avoid',
+      'avoid-line',
+      'aboid-flex',
+      'line',
+      'flex',
+    ],
+  },
+  wrapBefore: {
+    type: 'keyword',
+    keywords: [
+      'auto',
+      'avoid',
+      'avoid-line',
+      'aboid-flex',
+      'line',
+      'flex',
+    ],
+  },
+  wrapFlow: {
+    type: 'keyword',
+    keywords: [
+      'auto',
+      'both',
+      'start',
+      'end',
+      'minimum',
+      'maximum',
+      'clear',
+    ],
+  },
+  wrapInside: {
+    type: 'keyword',
+    keywords: ['auto', 'avoid'],
+  },
+  wrapThrough: {
+    type: 'keyword',
+    keywords: ['none', 'wrap'],
   },
   writingMode: {
     type: 'keyword',
