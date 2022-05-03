@@ -5,6 +5,10 @@ export const initialStyles: any = {
   textAlign: 'inherit',
   color: '#000',
   backgroundColor: '#fff',
+  margin: { 
+    value: 0,
+    unit: 'px'
+  },
   height: {
     value: 'auto',
     unit: 'keyword',
@@ -25,11 +29,16 @@ export const initialStyles: any = {
     value: '42',
     unit: 'em',
   },
+  maxWidth: {
+    value: '42',
+    unit: 'em',
+  },
   borderStyle: 'solid',
   borderWidth: {
     value: 16,
     unit: 'px',
   },
+  borderColor: 'transparent',
   borderRadius: {
     value: 0,
     unit: 'px',

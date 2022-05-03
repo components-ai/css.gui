@@ -201,7 +201,7 @@ export const properties: Record<string, PropertyData> = {
   },
   backgroundClip: {
     type: 'keyword',
-    keywords: ['border-box', 'padding-box', 'content-box', 'text'],
+    keywords: ['border-box', 'padding-box', 'content-box', 'text', 'content-box, border-box'],
   },
   backgroundImage: {
     type: ImageSourcePicker,
