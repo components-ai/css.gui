@@ -236,6 +236,7 @@ export const properties: Record<string, PropertyData> = {
     stringify: stringifyImageSource,
     label: 'Border Image',
   },
+  // TODO this can accept multiple values
   borderImageWidth: {
     type: 'length',
     keywords: ['thin', 'medium', 'thick'],
