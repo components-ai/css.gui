@@ -1,6 +1,7 @@
 import { HTMLAttributes, useId } from 'react'
 import Link from 'next/link'
 import { Logo } from '@compai/logo'
+import pkg from '../../../packages/gui/package.json'
 
 interface Props extends HTMLAttributes<HTMLDivElement> {}
 export const Layout = (props: Props) => {
@@ -34,7 +35,12 @@ export const Layout = (props: Props) => {
             <span sx={{ mr: 4 }}>
               <Logo height={20} width={20} seed={id} />
             </span>
-            <span>CSS GUI</span>
+            <span>
+              CSS GUI
+              <span sx={{ fontSize: 0, color: 'muted', ml: 1 }}>
+                v{pkg.version}
+              </span>
+            </span>
           </a>
         </Link>
       </header>
