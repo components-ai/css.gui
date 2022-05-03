@@ -1,11 +1,14 @@
-import { FirstParagraph } from '../components/FirstParagraph'
 import { Demo } from '../components/examples/Demo'
+import pkg from '../../../packages/gui/package.json'
 
 export default function Docs() {
   return (
     <>
       <header sx={{ pt: 5 }}>
-        <h1 sx={{ fontSize: '128px', my: 0, lineHeight: 1 }}>CSS GUI</h1>
+        <h1 sx={{ fontSize: '128px', my: 0, lineHeight: 1 }}>
+          CSS GUI
+          <span sx={{ fontSize: 1 }}>v{pkg.version}</span>
+        </h1>
         <h2 sx={{ my: 0 }}>
           A composable, extensible, and themeable CSS editor for creative coding
           and end-user styling.
