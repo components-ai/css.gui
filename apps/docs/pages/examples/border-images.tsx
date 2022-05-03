@@ -10,7 +10,7 @@ const initialStyles = {
   },
   borderStyle: 'solid',
   borderWidth: {
-    value: 16,
+    value: 128,
     unit: 'px',
   },
   borderRadius: {
@@ -24,7 +24,7 @@ const initialStyles = {
   borderImageSource: [
     {
       type: 'url',
-      arguments: ['https://dc28c2r6oodom.cloudfront.net/p/h/037.jpg'],
+      arguments: ['https://dc28c2r6oodom.cloudfront.net/p/h/001.jpg'],
     },
   ],
 }
