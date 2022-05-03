@@ -761,6 +761,10 @@ export const properties: Record<string, PropertyData> = {
     type: 'color',
     keywords: ['currentcolor', 'transparent'],
   },
+  floodOpacity: {
+    type: 'percentage',
+    defaultValue: 1,
+  },
   fontFamily: {
     type: FontFamily,
   },
