@@ -28,6 +28,7 @@ import {
 } from '../components/inputs/TextDecoration'
 import BackgroundImagePicker from '../components/inputs/BackgroundImage/picker'
 import { stringifyBackgroundImage } from '../components/inputs/BackgroundImage/stringify'
+import { UnitSteps } from '../lib'
 
 type PropertyData = {
   type: string | ComponentType<any>
@@ -37,6 +38,7 @@ type PropertyData = {
   range?: UnitRanges
   defaultValue?: string | number
   stringify?: (value: any) => string
+  steps?: UnitSteps
 }
 
 type UnitRanges = Record<string, [number, number]>
@@ -836,6 +838,7 @@ export const properties: Record<string, PropertyData> = {
     number: true,
     range: { number: [0, 2] },
     keywords: ['normal'],
+    steps: { number: 0.05 }
   },
   margin: {
     type: 'length',
