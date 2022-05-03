@@ -59,6 +59,7 @@ export default function Layers<T>({
             background: 'none',
             color: 'text',
             border: 'none',
+            p: 0,
           }}
         >
           <LayerHeader preview={thumbnail} text={stringify(value)} />
@@ -97,11 +98,12 @@ export default function Layers<T>({
                           borderBottom: '1px solid',
                           borderColor: 'border',
                           cursor: 'pointer',
+                          px: 2,
                         }}
                       >
                         <LayerHeader
                           preview={thumbnail}
-                          text={stringify(value)}
+                          text={stringify([item])}
                         />
                       </Accordion.Trigger>
                       <div

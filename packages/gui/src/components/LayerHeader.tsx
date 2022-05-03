@@ -13,7 +13,6 @@ export default function LayerHeader({ preview: Preview, text }: Props) {
   return (
     <div
       sx={{
-        mx: 2,
         height: '3rem',
         textAlign: 'start',
         display: 'flex',
