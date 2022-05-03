@@ -37,13 +37,16 @@ export const Sidebar = () => {
       <NavItem href="/examples/shadows">Shadows</NavItem>
       <NavItem href="/examples/filters">Filters</NavItem>
       <NavItem href="/examples/transforms">Transforms</NavItem>
+      <NavItem href="/examples/borders">Borders</NavItem>
       <NavItem href="/examples/border-images">Border Images</NavItem>
       <NavItem href="/examples/backgrounds">Backgrounds</NavItem>
       <NavItem href="/examples/space">Space</NavItem>
       <NavItem href="/examples/text-decoration">Text Decoration</NavItem>
       <NavSectionTitle>TODO</NavSectionTitle>
       <NavItem href="/unsupported">Unsupported Properties</NavItem>
-      <NavItem href="https://github.com/components-ai/css.gui/issues">Issues</NavItem>
+      <NavItem href="https://github.com/components-ai/css.gui/issues">
+        Issues
+      </NavItem>
       <NavSectionTitle>Reference</NavSectionTitle>
       <NavItem href="/colophon">Colophon</NavItem>
       <NavSectionTitle>Community</NavSectionTitle>
