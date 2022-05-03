@@ -214,33 +214,6 @@ export const properties: Record<string, PropertyData> = {
     stringify: stringifyImageSource,
     label: 'Background Image',
   },
-  // TODO: 4-positional arguments separated by spaces
-  borderImageOutset: {
-    type: 'length',
-    number: true,
-  },
-  // TODO: 2-positional arguments separated by spaces
-  borderImageRepeat: {
-    type: 'keyword',
-    keywords: ['stretch', 'repeat', 'round', 'space'],
-  },
-  borderImageSlice: {
-    type: 'length',
-    number: true,
-    percentage: true,
-    range: { number: [-1, 2000] },
-  },
-  // TODO this actually can only accept *one* image value, not an array
-  borderImageSource: {
-    type: ImageSourcePicker,
-    stringify: stringifyImageSource,
-    label: 'Border Image',
-  },
-  // TODO this can accept multiple values
-  borderImageWidth: {
-    type: 'length',
-    keywords: ['thin', 'medium', 'thick'],
-  },
   backgroundOrigin: {
     type: 'keyword',
     keywords: ['border-box', 'padding-box', 'content-box'],
@@ -302,6 +275,139 @@ export const properties: Record<string, PropertyData> = {
     type: 'length',
     percentage: true,
     keywords: ['max-content', 'min-content', 'auto'],
+  },
+  // TODO: 4-positional arguments separated by spaces
+  borderImageOutset: {
+    type: 'length',
+    number: true,
+  },
+  // TODO: 2-positional arguments separated by spaces
+  borderImageRepeat: {
+    type: 'keyword',
+    keywords: ['stretch', 'repeat', 'round', 'space'],
+  },
+  borderImageSlice: {
+    type: 'length',
+    number: true,
+    percentage: true,
+    range: { number: [-1, 2000] },
+  },
+  // TODO this actually can only accept *one* image value, not an array
+  borderImageSource: {
+    type: ImageSourcePicker,
+    stringify: stringifyImageSource,
+    label: 'Border Image',
+  },
+  // TODO this can accept multiple values
+  borderImageWidth: {
+    type: 'length',
+    keywords: ['thin', 'medium', 'thick'],
+  },
+  borderBottomColor: {
+    type: 'color',
+    keywords: ['currentcolor', 'transparent'],
+  },
+  // TODO this can accept two values
+  borderBottomLeftRadius: {
+    type: 'length',
+  },
+  borderBottomRightRadius: {
+    type: 'length',
+  },
+  borderBottomStyle: {
+    type: 'keyword',
+    keywords: [
+      'none',
+      'hidden',
+      'dotted',
+      'dashed',
+      'solid',
+      'double',
+      'groove',
+      'ridge',
+      'inset',
+      'outset',
+    ],
+  },
+  borderBottomWidth: {
+    type: 'length',
+    keywords: ['thin', 'medium', 'thick'],
+  },
+  borderLeftColor: {
+    type: 'color',
+    keywords: ['currentcolor', 'transparent'],
+  },
+  borderLeftStyle: {
+    type: 'keyword',
+    keywords: [
+      'none',
+      'hidden',
+      'dotted',
+      'dashed',
+      'solid',
+      'double',
+      'groove',
+      'ridge',
+      'inset',
+      'outset',
+    ],
+  },
+  borderLeftWidth: {
+    type: 'length',
+    keywords: ['thin', 'medium', 'thick'],
+  },
+  borderRightColor: {
+    type: 'color',
+    keywords: ['currentcolor', 'transparent'],
+  },
+  borderRightStyle: {
+    type: 'keyword',
+    keywords: [
+      'none',
+      'hidden',
+      'dotted',
+      'dashed',
+      'solid',
+      'double',
+      'groove',
+      'ridge',
+      'inset',
+      'outset',
+    ],
+  },
+  borderRightWidth: {
+    type: 'length',
+    keywords: ['thin', 'medium', 'thick'],
+  },
+  borderTopColor: {
+    type: 'color',
+    keywords: ['currentcolor', 'transparent'],
+  },
+  // TODO this can accept two values
+  borderTopLeftRadius: {
+    type: 'length',
+  },
+  borderTopRightRadius: {
+    type: 'length',
+  },
+  borderTopStyle: {
+    type: 'keyword',
+    keywords: [
+      'none',
+      'hidden',
+      'dotted',
+      'dashed',
+      'solid',
+      'double',
+      'groove',
+      'ridge',
+      'inset',
+      'outset',
+    ],
+  },
+  borderTopWidth: {
+    type: 'length',
+    keywords: ['thin', 'medium', 'thick'],
   },
   borderColor: {
     type: 'color',
