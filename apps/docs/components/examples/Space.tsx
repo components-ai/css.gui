@@ -15,13 +15,15 @@ export const SpaceExample = () => {
 
   return (
     <div>
-      {/** @ts-ignore */}
-      <div sx={{ 
+      <div
+        sx={{
           ':first-child > div': {
-            display: 'grid', 
+            display: 'grid',
             gap: '.5rem',
-          } 
-        }}>
+          },
+        }}
+      >
+        {/** @ts-ignore */}
         <Editor styles={styles} onChange={setStyles} />
       </div>
       <div sx={{ border: 'thin solid', borderColor: 'border', mt: [3, 4, 5] }}>

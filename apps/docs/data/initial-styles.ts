@@ -5,9 +5,9 @@ export const initialStyles: any = {
   textAlign: 'inherit',
   color: '#000',
   backgroundColor: '#fff',
-  margin: { 
+  margin: {
     value: 0,
-    unit: 'px'
+    unit: 'px',
   },
   height: {
     value: 'auto',
@@ -24,10 +24,6 @@ export const initialStyles: any = {
   width: {
     value: '100',
     unit: '%',
-  },
-  maxWidth: {
-    value: '42',
-    unit: 'em',
   },
   maxWidth: {
     value: '42',

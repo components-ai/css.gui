@@ -42,21 +42,23 @@ export default function TextDecoration() {
       >
         <div sx={{ px: [2, 3, 4] }}>
           <Editor styles={styles} onChange={setStyles} theme={defaultTheme}>
-            <section sx={{ display: 'grid', gap: '.5rem', width: '240px' }}>
-              <h3 sx={{ my:0 }}>Text Decoration</h3>
-              <Inputs.TextDecorationColor />
-              <Inputs.TextDecorationLine />
-              <Inputs.TextDecorationThickness />
-              <Inputs.TextDecorationSkipInk />
-              <Inputs.TextDecorationStyle />
-            </section>
-            <section sx={{ display: 'grid', gap: '.5rem', width: '240px' }}>
-              <h3 sx={{ mt: 4, mb: 0 }}>Font</h3>
-              <Inputs.FontFamily />
-              <Inputs.FontSize />
-              <Inputs.LineHeight />
-              <Inputs.LetterSpacing />
-            </section>
+            <>
+              <section sx={{ display: 'grid', gap: '.5rem', width: '240px' }}>
+                <h3 sx={{ my: 0 }}>Text Decoration</h3>
+                <Inputs.TextDecorationColor />
+                <Inputs.TextDecorationLine />
+                <Inputs.TextDecorationThickness />
+                <Inputs.TextDecorationSkipInk />
+                <Inputs.TextDecorationStyle />
+              </section>
+              <section sx={{ display: 'grid', gap: '.5rem', width: '240px' }}>
+                <h3 sx={{ mt: 4, mb: 0 }}>Font</h3>
+                <Inputs.FontFamily />
+                <Inputs.FontSize />
+                <Inputs.LineHeight />
+                <Inputs.LetterSpacing />
+              </section>
+            </>
           </Editor>
         </div>
         <div sx={{ flexGrow: 1, padding: 5 }}>
