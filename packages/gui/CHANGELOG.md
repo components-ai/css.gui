@@ -1,5 +1,12 @@
 # @compai/css-gui
 
+## 0.0.29
+
+### Patch Changes
+
+- 26f5b7f: Adds marquee property support
+- 72158f3: Change alignment of color picker label
+
 ## 0.0.28
 
 ### Patch Changes
