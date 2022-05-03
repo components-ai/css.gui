@@ -12,7 +12,7 @@ const ANALYTICS_WRITE_KEY =
     ? 'l2esDJDa92SQGAtVN9yZY5ByGKYbXhf5'
     : 'RMUHme5teZLiDPnqWE6z27snMAHmpFei'
 
-export default class extends Document {
+export default class CustomDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
     const initialProps = await Document.getInitialProps(ctx)
     return { ...initialProps }
