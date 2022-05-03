@@ -107,3 +107,9 @@ export type CSSFunctionURL = {
 }
 
 export type Styles = CSS.PropertiesFallback
+
+// TODO support [keyword value] values
+export interface Position {
+  x: Length
+  y: Length
+}

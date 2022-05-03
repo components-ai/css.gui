@@ -237,17 +237,20 @@ export const properties: Record<string, PropertyData> = {
     type: 'keyword',
     keywords: ['border-box', 'padding-box', 'content-box'],
   },
-  backgroundPositionY: {
-    // TOO: Add side relative values option and multiple values option
-    type: 'length',
-    percentage: true,
-    keywords: ['top', 'center', 'bottom'],
+  backgroundPosition: {
+    type: 'position',
   },
   backgroundPositionX: {
     // TODO: Add side relative values option and multiple values option
     type: 'length',
     percentage: true,
     keywords: ['top', 'left', 'center'],
+  },
+  backgroundPositionY: {
+    // TOO: Add side relative values option and multiple values option
+    type: 'length',
+    percentage: true,
+    keywords: ['top', 'center', 'bottom'],
   },
   borderRadius: {
     type: 'length',
@@ -1003,6 +1006,7 @@ export const properties: Record<string, PropertyData> = {
       'view-box, fill-box, border-box',
     ],
   },
+  maskPosition: { type: 'position' },
   maskRepeat: {
     type: 'keyword',
     keywords: [
@@ -1086,9 +1090,16 @@ export const properties: Record<string, PropertyData> = {
       'luminosity',
     ],
   },
+  offsetAnchor: {
+    type: 'position',
+    keywords: ['auto'], // TODO the keyword isn't being populated currently
+  },
   objectFit: {
     type: 'keyword',
     keywords: ['contain', 'cover', 'fill', 'none', 'scale-down'],
+  },
+  objectPosition: {
+    type: 'position',
   },
   offsetDistance: {
     type: 'length',

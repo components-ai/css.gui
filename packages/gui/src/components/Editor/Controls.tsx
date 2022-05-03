@@ -25,6 +25,7 @@ import { GLOBAL_KEYWORDS } from '../../data/global-keywords'
 import { Label } from '../primitives'
 import { kebabCase } from 'lodash-es'
 import { useThemeProperty } from '../providers/ThemeContext'
+import { PositionInput } from '../inputs/PositionInput'
 
 type ControlProps = {
   field: KeyArg
@@ -135,6 +136,8 @@ function getPrimitiveInput(type: string) {
       return TimeInput
     case 'color':
       return ColorInput
+    case 'position':
+      return PositionInput
     default:
       return TextInput
   }
