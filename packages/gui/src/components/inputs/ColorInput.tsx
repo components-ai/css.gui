@@ -19,7 +19,7 @@ export function ColorInput({
   const id = useId()
   const fullId = `${id}-${label}`
   return (
-    <div sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+    <div>
       <Label htmlFor={fullId}>{label}</Label>
       <ColorPopover
         id={fullId}
