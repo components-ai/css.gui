@@ -38,99 +38,6 @@ interface Props extends EditorProps<TempFontFamilyType> {
   defaultValue?: TempFontFamilyType
 }
 
-const getVariableFontData = (name: string): VariableFont => {
-  const mockData: {[k: string]: VariableFont} = {
-    "Inconsolata": {
-      name: 'Inconsolata',
-      "wdth": {
-        "default": 100,
-        "min": 50,
-        "max": 200,
-        "step": 0.1
-      },
-      "wght": {
-        "default": 400,
-        "min": 200,
-        "max": 900,
-        "step": 1
-      }
-    },
-    "Inter": {
-      name: 'Inter',
-      "slnt": {
-        "default": 0,
-        "min": -10,
-        "max": 0,
-        "step": 1
-      },
-      "wght": {
-        "default": 400,
-        "min": 100,
-        "max": 900,
-        "step": 1
-      }
-    },
-    "Literata": {
-      name: 'Literata',
-      "ital": {
-        "default": 0,
-        "min": 0,
-        "max": 1,
-        "step": 1
-      },
-      "wght": {
-        "default": 400,
-        "min": 200,
-        "max": 900,
-        "step": 1
-      },
-      "opsz": {
-        "default": 14,
-        "min": 7,
-        "max": 72,
-        "step": 0.1
-      }
-    },
-    "Recursive": {
-      name: 'Recursive',
-      "slnt": {
-        "default": 0,
-        "min": -15,
-        "max": 0,
-        "step": 1
-      },
-      "wght": {
-        "default": 400,
-        "min": 300,
-        "max": 1000,
-        "step": 1
-      },
-      "CASL": {
-        "default": 0,
-        "min": 0,
-        "max": 1,
-        "step": 0.1
-      },
-      "CRSV": {
-        "default": 0.5,
-        "min": 0,
-        "max": 1,
-        "step": 0.1
-      },
-      "MONO": {
-        "default": 0,
-        "min": 0,
-        "max": 1,
-        "step": 0.01
-      }
-    },
-  }
-
-  return mockData[name]
-}
-
-const debouncedVariableFontData = debounce(getVariableFontData, 1000)
-
 export function FontFamilyInput({
   label,
   value,
@@ -142,13 +49,17 @@ export function FontFamilyInput({
   const [allOptions, setAllOptions] = React.useState<Font[]>([])
   const [inputItems, setInputItems] = React.useState<string[]>([])
   const [variableFont, setVariableFont] = React.useState<VariableFont | undefined>()
+  const [variableFontsData, setVariableFontsData] = React.useState<any>({})
 
   const inputRef = React.useRef(null)
 
   React.useEffect(() => {
     const getFontData = async () => {
-      const options = await getAllOptions()
-      setAllOptions(options)
+      const fontData = await getFontsData()
+
+      setAllOptions(fontData?.fontOptions)
+      setVariableFontsData(fontData?.variableFontsData)
+
       handleFilterItems(value?.fontfamily)
       handleFontChange(value?.fontFamily || '')
     }
@@ -199,12 +110,12 @@ export function FontFamilyInput({
   }
 
   const handleFontChange = (name: string) => {
-    const variableFontData = getVariableFontData(name)
+    const fontData = variableFontsData[name] ?? {}
     onChange({ 
       ...(name === variableFont?.name ? value : {}), 
       fontFamily: name
     })
-    setVariableFont(variableFontData)
+    setVariableFont(fontData)
   }
   
   const parseFontStyleValue = (fontStyle: string) => {
@@ -487,10 +398,15 @@ const CustomAxis = ({
   )
 }
 
-const getAllOptions = async (): Promise<Font[]> => {
-  const opts: Font[] = []
+type APIFontData = {
+  fontOptions: Font[]
+  variableFontsData: any
+}
+const getFontsData = async (): Promise<APIFontData> => {
+  const fontOptions: Font[] = []
   const rawGoogData = await fetch('https://components.ai/api/v1/typefaces/list')
   const rawSystemData = await fetch('https://components.ai/api/v1/typefaces/system')
+  const variableFontsData = await fetch('https://components.ai/api/v1/typefaces/variable')
 
   const systemFonts = (await rawSystemData.json()) as any
   systemFonts.forEach(({ name, type }: any) => {
@@ -499,7 +415,7 @@ const getAllOptions = async (): Promise<Font[]> => {
       type === FontCategory.Serif ||
       type === FontCategory.Mono
     ) {
-      opts.push({
+      fontOptions.push({
         name,
         category: type,
       })
@@ -514,9 +430,12 @@ const getAllOptions = async (): Promise<Font[]> => {
       category === FontCategory.Serif ||
       category === FontCategory.Mono
     ) {
-      opts.push({ name: name, category })
+      fontOptions.push({ name, category })
     }
   })
-
-  return opts
+  
+  return {
+    fontOptions,
+    variableFontsData: (await variableFontsData.json())
+  }
 }
