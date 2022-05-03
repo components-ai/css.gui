@@ -1544,6 +1544,18 @@ export const properties: Record<string, PropertyData> = {
       'match-parent',
     ],
   },
+  textAlignAll: {
+    type: 'keyword',
+    keywords: [
+      'start',
+      'end',
+      'left',
+      'right',
+      'center',
+      'justify',
+      'match-parent',
+    ],
+  },
   textAlignLast: {
     type: 'keyword',
     keywords: [
