@@ -32,7 +32,7 @@ const initialStyles = {
   borderImageSource: [
     {
       type: 'url',
-      arguments: ['https://dc28c2r6oodom.cloudfront.net/p/h/001.jpg'],
+      arguments: ['https://source.unsplash.com/random'],
     },
   ],
 }

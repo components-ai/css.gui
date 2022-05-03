@@ -54,7 +54,7 @@ export const initialStyles: any = {
   borderImageSource: [
     {
       type: 'url',
-      arguments: ['https://dc28c2r6oodom.cloudfront.net/p/h/042.jpg'],
+      arguments: ['https://source.unsplash.com/random'],
     },
   ],
   padding: {
