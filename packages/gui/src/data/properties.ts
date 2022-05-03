@@ -757,6 +757,10 @@ export const properties: Record<string, PropertyData> = {
     type: 'keyword',
     keywords: ['left', 'right', 'none', 'inline-start', 'inline-end'],
   },
+  floodColor: {
+    type: 'color',
+    keywords: ['currentcolor', 'transparent'],
+  },
   fontFamily: {
     type: FontFamily,
   },
@@ -1004,6 +1008,10 @@ export const properties: Record<string, PropertyData> = {
     type: 'length',
     percentage: true,
     keywords: ['normal'],
+  },
+  lightingColor: {
+    type: 'color',
+    keywords: ['currentcolor', 'transparent'],
   },
   lineBreak: {
     type: 'keyword',
