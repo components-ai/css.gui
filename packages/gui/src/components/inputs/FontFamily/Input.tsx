@@ -7,13 +7,11 @@ import { useCombobox } from 'downshift'
 import { NumberInput } from '../NumberInput'
 
 type Font = {
-  fontName: string,
+  name: string,
   category: FontCategory
 }
 
-type VariableFont = {
-  [k: string]: VariableAttribute | string
-}
+type VariableFont = Record<string, VariableAttribute | string>
 
 type VariableAttribute = {
   min: number
@@ -40,10 +38,10 @@ interface Props extends EditorProps<TempFontFamilyType> {
   defaultValue?: TempFontFamilyType
 }
 
-const getVariableFontData = (fontName: string): VariableFont => {
+const getVariableFontData = (name: string): VariableFont => {
   const mockData: {[k: string]: VariableFont} = {
     "Inconsolata": {
-      fontName: 'Inconsolata',
+      name: 'Inconsolata',
       "wdth": {
         "default": 100,
         "min": 50,
@@ -58,7 +56,7 @@ const getVariableFontData = (fontName: string): VariableFont => {
       }
     },
     "Inter": {
-      fontName: 'Inter',
+      name: 'Inter',
       "slnt": {
         "default": 0,
         "min": -10,
@@ -73,6 +71,7 @@ const getVariableFontData = (fontName: string): VariableFont => {
       }
     },
     "Literata": {
+      name: 'Literata',
       "ital": {
         "default": 0,
         "min": 0,
@@ -93,7 +92,7 @@ const getVariableFontData = (fontName: string): VariableFont => {
       }
     },
     "Recursive": {
-      fontName: 'Recursive',
+      name: 'Recursive',
       "slnt": {
         "default": 0,
         "min": -15,
@@ -127,7 +126,7 @@ const getVariableFontData = (fontName: string): VariableFont => {
     },
   }
 
-  return mockData[fontName]
+  return mockData[name]
 }
 
 const debouncedVariableFontData = debounce(getVariableFontData, 1000)
@@ -145,12 +144,13 @@ export function FontFamilyInput({
   const [variableFont, setVariableFont] = React.useState<VariableFont | undefined>()
 
   const inputRef = React.useRef(null)
+
   React.useEffect(() => {
     const getFontData = async () => {
       const options = await getAllOptions()
       setAllOptions(options)
       handleFilterItems(value?.fontfamily)
-      // handleVariableFonts(value?.fontfamily)
+      handleFontChange(value?.fontFamily || '')
     }
 
     getFontData()
@@ -179,14 +179,13 @@ export function FontFamilyInput({
       handleFilterItems(inputValue!)
     },
     onSelectedItemChange: ({ selectedItem }) => {
-      onChange({ ...value, fontFamily: selectedItem ?? ''})
-      handleVariableFonts(selectedItem ?? '')
+      handleFontChange(selectedItem ?? '')
     },
   })
 
   const handleFilterItems = (inputValue: string) => {
     const filteredOptions = allOptions.filter((item) => {
-      if (item.fontName.toLowerCase().startsWith(inputValue?.toLowerCase() || '')) {
+      if (item.name.toLowerCase().startsWith(inputValue?.toLowerCase() || '')) {
         return (
           (includeSans && item.category === FontCategory.Sans) ||
           (includeSerif && item.category === FontCategory.Serif) ||
@@ -195,16 +194,17 @@ export function FontFamilyInput({
       }
     })
 
-    const items = filteredOptions.map((opt) => opt.fontName).sort()
+    const items = filteredOptions.map((opt) => opt.name).sort()
     setInputItems(items)
   }
 
-  // const handleVariableFonts = async (fontName: string) => {
-    const handleVariableFonts = (fontName: string) => {
-    // const fontData = debouncedVariableFontData(fontName)
-    const fontData = getVariableFontData(fontName)
-    
-    setVariableFont(fontData)
+  const handleFontChange = (name: string) => {
+    const variableFontData = getVariableFontData(name)
+    onChange({ 
+      ...(name === variableFont?.name ? value : {}), 
+      fontFamily: name
+    })
+    setVariableFont(variableFontData)
   }
   
   const parseFontStyleValue = (fontStyle: string) => {
@@ -249,8 +249,7 @@ export function FontFamilyInput({
           ref: inputRef,
           onChange: (e: any) => {
             const name = e.target.value
-            onChange({ ...value, fontFamily: name})
-            handleVariableFonts(name)
+            handleFontChange(name)
           },
         })}
         onFocus={() => {
@@ -378,9 +377,7 @@ export function FontFamilyInput({
                 key={`${item}${index}`}
                 {...getItemProps({ item, index })}
                 onClick={() => {
-                  const name = inputItems[highlightedIndex]
-                  onChange({ ...value, fontFamily: name })
-                  handleVariableFonts(name)
+                  handleFontChange(inputItems[highlightedIndex])
                   toggleMenu()
                 }}
               >
@@ -391,7 +388,7 @@ export function FontFamilyInput({
         </ul>
       </div>
       {variableFont && Object.entries(variableFont).map(([k, v]) => {
-        if (['fontName', 'ital'].includes(k)) return null
+        if (['name', 'ital'].includes(k)) return null
         if (typeof(v) === 'string') return null
 
         if (k === 'slnt') {
@@ -503,7 +500,7 @@ const getAllOptions = async (): Promise<Font[]> => {
       type === FontCategory.Mono
     ) {
       opts.push({
-        fontName: name,
+        name,
         category: type,
       })
     }
@@ -517,7 +514,7 @@ const getAllOptions = async (): Promise<Font[]> => {
       category === FontCategory.Serif ||
       category === FontCategory.Mono
     ) {
-      opts.push({ fontName: name, category })
+      opts.push({ name: name, category })
     }
   })
 

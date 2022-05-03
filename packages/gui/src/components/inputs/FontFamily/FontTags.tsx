@@ -38,8 +38,8 @@ export const toGoogleVariableFontUrl = (variableFonts: any[]) => {
   let familyQueries: any[] = []
 
   variableFonts.forEach((vFont) => {
-    let prependQuery = `family=${plusify(vFont.fontName)}:`
-    delete vFont['fontName']
+    let prependQuery = `family=${plusify(vFont.name)}:`
+    delete vFont['name']
     
     let orderedKeys = [
       ...Object.keys(vFont)
@@ -83,7 +83,7 @@ export const getVariableFontFamilyHref = (
   const formattedName = fontFamily?.replace(/['"]+/g, '')
   // api call here
   const data: any = {
-    fontName: 'Recursive',
+    name: 'Recursive',
     "slnt": {
       "default": 0,
       "min": -15,
