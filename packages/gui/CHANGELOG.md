@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.24
+
+### Patch Changes
+
+- cf6302f: Add directional borders
+
 ## 0.0.23
 
 ### Patch Changes
