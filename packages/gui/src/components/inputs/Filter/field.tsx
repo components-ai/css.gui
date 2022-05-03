@@ -27,6 +27,7 @@ export default function FilterContent({
   }
   return (
     <Layers<Filter>
+      label="Filter"
       value={value}
       onChange={onChange}
       newItem={newItem}

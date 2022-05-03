@@ -1,14 +1,14 @@
 import { ComponentType } from 'react'
-import BoxShadowPicker from '../components/inputs/BoxShadow/picker'
+import BoxShadowPicker from '../components/inputs/BoxShadow/field'
 import { stringifyBoxShadow } from '../components/inputs/BoxShadow/stringify'
 import EasingFunctionPicker from '../components/inputs/EasingFunction/picker'
 import { stringifyEasingFunction } from '../components/inputs/EasingFunction/stringify'
-import FilterPicker from '../components/inputs/Filter/picker'
+import FilterPicker from '../components/inputs/Filter/field'
 import { stringifyFilter } from '../components/inputs/Filter/stringify'
-import TextShadowPicker from '../components/inputs/TextShadow/picker'
+import TextShadowPicker from '../components/inputs/TextShadow/field'
 import { FontFamily } from '../components/inputs/FontFamily'
 import { stringifyTextShadow } from '../components/inputs/TextShadow/stringify'
-import TransformPicker from '../components/inputs/Transform/picker'
+import TransformPicker from '../components/inputs/Transform/field'
 import { stringifyTransform } from '../components/inputs/Transform/stringify'
 import {
   AbsoluteLengthUnits,
@@ -26,7 +26,7 @@ import {
   textDecorationLines,
   textDecorationStyles,
 } from '../components/inputs/TextDecoration'
-import ImageSourcePicker from '../components/inputs/ImageSource/picker'
+import ImageSourcePicker from '../components/inputs/ImageSource/field'
 import { stringifyImageSource } from '../components/inputs/ImageSource/stringify'
 import { allProperties } from './css-properties'
 import { camelCase, uniqBy } from 'lodash-es'
@@ -201,7 +201,13 @@ export const properties: Record<string, PropertyData> = {
   },
   backgroundClip: {
     type: 'keyword',
-    keywords: ['border-box', 'padding-box', 'content-box', 'text', 'content-box, border-box'],
+    keywords: [
+      'border-box',
+      'padding-box',
+      'content-box',
+      'text',
+      'content-box, border-box',
+    ],
   },
   backgroundImage: {
     type: ImageSourcePicker,
@@ -222,7 +228,7 @@ export const properties: Record<string, PropertyData> = {
     type: 'length',
     number: true,
     percentage: true,
-    range: { number: [-1, 2000]}
+    range: { number: [-1, 2000] },
   },
   // TODO this actually can only accept *one* image value, not an array
   borderImageSource: {
