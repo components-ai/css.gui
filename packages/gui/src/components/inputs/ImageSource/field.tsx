@@ -1,21 +1,19 @@
 import Layers, { LayerProps } from '../../Layers'
 import LayerHeader from '../../LayerHeader'
 import { ImageSource, ImageSourceType } from './types'
-import { EditorProps } from '../../../types/editor'
-import { getInputProps } from '../../../lib/util'
+import { EditorPropsWithLabel, getInputProps } from '../../../lib/util'
 import { SelectInput } from '../SelectInput'
 import { stringifyImageSource } from './stringify'
 import { URLInput } from '../../primitives/URLInput'
 import produce from 'immer'
-import GradientPicker from '../Gradient/picker'
-import { GradientList } from '../Gradient/types'
+import { GradientField } from '../Gradient/field'
 
 const DEFAULT_IMAGE_URL = ''
 export default function ImageSourceContent({
   label,
   value,
   onChange,
-}: EditorProps<ImageSource[]>) {
+}: EditorPropsWithLabel<ImageSource[]>) {
   const newItem = () => {
     return getDefault('url')
   }
@@ -53,9 +51,9 @@ export const ImageSourceEditor = (props: LayerProps<ImageSource>) => {
           }}
         />
       ) : (
-        <GradientPicker
+        <GradientField
           value={props.value.gradient}
-          onChange={(newGradient: GradientList) => {
+          onChange={(newGradient) => {
             const newValue = produce(props.value, (draft: any) => {
               draft.gradient = newGradient
             })
@@ -112,7 +110,7 @@ function convertBackgroundImageValue(
 function getDefault(type: ImageSourceType): ImageSource {
   switch (type) {
     case 'gradient':
-      return { type, gradient: [] }
+      return { type, gradient: { type: 'linear', degrees: 0, stops: [] } }
     case 'url':
     default:
       return { type: 'url', arguments: [DEFAULT_IMAGE_URL] }

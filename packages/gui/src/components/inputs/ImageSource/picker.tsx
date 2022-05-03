@@ -1,11 +1,11 @@
 import * as Collapsible from '@radix-ui/react-collapsible'
 import { ImageSource } from './types'
-import { EditorProps } from '../../../types/editor'
 import ImageSourceContent, { Header } from './field'
 import { Label } from '../../primitives'
 import { useId } from 'react'
+import { EditorPropsWithLabel } from '../../../lib/util'
 
-type Props = EditorProps<ImageSource[]>
+type Props = EditorPropsWithLabel<ImageSource[]>
 export default function FilterPicker({
   value,
   onChange,
