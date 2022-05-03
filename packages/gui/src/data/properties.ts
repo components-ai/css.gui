@@ -222,7 +222,7 @@ export const properties: Record<string, PropertyData> = {
     type: 'length',
     number: true,
     percentage: true,
-    range: positiveRanges(),
+    range: { number: [-1, 2000]}
   },
   // TODO this actually can only accept *one* image value, not an array
   borderImageSource: {
