@@ -1,14 +1,14 @@
 import { useState } from 'react'
-import { FontFamilyInput, RenderElement } from '@compai/css-gui'
+import { FontFamilyInput, styled } from '@compai/css-gui'
 
 export const FontFamilyExample = () => {
   const [fontFamily, setFontFamily] = useState('Abel')
 
   return (
     <>
-      <RenderElement tagName='p' styles={{ fontFamily, fontSize: '24px' }}>
+      <styled.p styles={{ fontFamily, fontSize: '24px' }}>
         Fun with fonts!
-      </RenderElement>
+      </styled.p>
       <FontFamilyInput value={fontFamily} onChange={setFontFamily} />
     </>
   )

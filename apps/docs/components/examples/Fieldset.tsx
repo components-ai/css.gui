@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import {
   Editor,
-  RenderElement,
+  styled,
   Fieldset as FieldsetInput,
   Inputs,
   toCSSObject,
@@ -35,9 +35,9 @@ export const Fieldset = () => {
           </FieldsetInput>
         </>
       </Editor>
-      <RenderElement tagName="p" styles={styles}>
+      <styled.p styles={styles}>
         Hello, <b>world!</b>
-      </RenderElement>
+      </styled.p>
       <pre>{JSON.stringify(toCSSObject(styles), null, 2)}</pre>
     </>
   )

@@ -5,18 +5,19 @@
 CSS GUI is a visual toolkit for editing element styles on the web.
 It's theme-aware, performant, and can be composed into any React app.
 
-[See the docs &rarr;](https://components.ai/open-source/css-gui)
+[**Read the documentation &rarr;**](https://components.ai/open-source/css-gui)
 
-## ⚠️ CSS GUI is currently under active development
+## ⚠️ Under active development
 
 This project is a work in (rapid) progress.
 
 Over the next few weeks the API will be stabilizing as more functionality is added.
-CSS GUI only supports a portion of the CSS spec currently, but the intention is to
-support it all in the future.
+CSS GUI only [supports a portion](https://components.ai/open-source/css-gui/unsupported)
+of the CSS spec currently, but the intention is to support it all in the future.
 
-We welcome any and all contributions. We'd love it if you try to experiment with
-CSS GUI. Please feel free to report bugs or open up feature requests.
+[We welcome any and all contributions](https://github.com/components-ai/css.gui/blob/main/.github/contributing.md).
+We'd love it if you try to experiment with CSS GUI. Please feel free to report bugs
+or make feature requests.
 
 ## Why?
 
@@ -42,16 +43,16 @@ stacks and grammars (think gradients, background-image, box shadow, etc.).
 ## Installation
 
 ```sh
-npm install --save css-gui
+npm install --save @compai/css-gui
 ```
 
 ## Usage
 
-By default, CSS GUI will provide controls based on the style properties you pass.
+By default, CSS GUI will generate controls based on the style properties you pass.
 
 ```js
 import { useState } from 'react'
-import { Editor, RenderElement } from '@compai/css-gui'
+import { Editor, styled } from '@compai/css-gui'
 
 export const MyEditor = () => {
   const [styles, setStyles] = useState({
@@ -63,9 +64,7 @@ export const MyEditor = () => {
   return (
     <>
       <Editor styles={styles} onChange={setStyles} />
-      <RenderElement tagName="p" styles={styles}>
-        Hello, world!
-      </RenderElement>
+      <styled.p styles={styles}>Hello, world!</styled.p>
     </>
   )
 }
@@ -76,7 +75,7 @@ pseudo-elements.
 
 ```js
 import { useState } from 'react'
-import { Editor, Inputs, RenderElement } from '@compai/css-gui'
+import { Editor, Inputs, styled } from '@compai/css-gui'
 
 export const MyEditor = () => {
   const [styles, setStyles] = useState({
@@ -91,61 +90,35 @@ export const MyEditor = () => {
         <Inputs.FontSize />
         <Inputs.LineHeight />
         <Inputs.Color />
-        <PseudoFieldset name="first-letter">
+        <Fieldset type="pseudo-element" name="first-letter">
           <Inputs.FontSize />
           <Inputs.FontWeight />
           <Inputs.Color />
-        </PseudoFieldset>
+        </Fieldset>
       </Editor>
-      <RenderElement tagName="p" styles={styles}>
-        Hello, world!
-      </RenderElement>
+      <styled.p styles={styles}>Hello, world!</styled.p>
     </>
   )
 }
 ```
 
-[Read the full getting started guide &rarr;](https://components.ai/open-source/css-gui/getting-started)
+[**Read the full getting started guide &rarr;**](https://components.ai/open-source/css-gui/getting-started)
 
 ## Development
 
-### Installation
+CSS GUI is a TypeScript-based monorepo that contains the main `@compai/css-gui` package, a docs site,
+and its supporting packages.
 
-```sh
-git clone https://github.com/components-ai/css.gui
-cd css-gui
-yarn
-```
-
-### Running the development server
-
-```sh
-yarn dev
-```
-
-### Running the tests
-
-```sh
-yarn test
-```
-
-### Reinstalling dependencies and clearing caches
-
-On rare ocassions, especially when changing configurations, you might
-need to clear the cache and reinstall the dependencies:
-
-```sh
-yarn nuke
-```
+[**See the contributing guide &rarr;**](https://github.com/components-ai/css.gui/blob/main/.github/contributing.md)
 
 ## Resources
 
-- [MDN data](https://github.com/mdn/data/blob/main/css/properties.json)
-- [csstype](https://github.com/frenic/csstype)
+- [**MDN data**](https://github.com/mdn/data/blob/main/css/properties.json): Provides amazing documentation of the CSS spec which we use to drive the development of our parametric controls
+- [**csstype**](https://github.com/frenic/csstype): Types for CSS properties and their values based on MDN data
 
 ## Inspiration
 
-- [**dat.gui**](https://github.com/dataarts/dat.gui) well known, especially in the generative design/three space
-- [**leva**](https://github.com/pmndrs/leva) a React-based [pmndrs](https://pmnd.rs/) project that builds the entire control set from hooks
-- [**Blender**](https://blender.org) - Shader and Geometry nodes allow for rapid exploration withiin the available rendering space
-- [**MDN Docs**](https://developer.mozilla.org/en-US/) have long been an amazing introduction to how various CSS property values will affect the appearance of a DOM element.
+- [**dat.gui**](https://github.com/dataarts/dat.gui): well known, especially in the generative design/three space
+- [**leva**](https://github.com/pmndrs/leva): a React-based [pmndrs](https://pmnd.rs/) project that builds the entire control set from hooks
+- [**Blender**](https://blender.org): Shader and Geometry nodes allow for rapid exploration withiin the available rendering space
+- [**MDN Docs**](https://developer.mozilla.org/en-US/): have long been an amazing introduction to how various CSS property values will affect the appearance of a DOM element.

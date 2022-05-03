@@ -2,17 +2,13 @@ import { ColorInput } from '../ColorInput'
 import { CheckboxInput } from '../CheckboxInput'
 import { LengthInput } from '../LengthInput'
 import Layers, { LayerProps } from '../../Layers'
-import LayerHeader from '../../LayerHeader'
-
 import { BoxShadow } from './types'
 import { stringifyBoxShadow } from './stringify'
-import { EditorProps } from '../../../types/editor'
-import { getInputProps } from '../../../lib/util'
+import { EditorPropsWithLabel, getInputProps } from '../../../lib/util'
 
-export default function BoxShadowsField({
-  value,
-  onChange,
-}: EditorProps<BoxShadow[]>) {
+export default function BoxShadowInput(
+  props: EditorPropsWithLabel<BoxShadow[]>
+) {
   const newItem = () => {
     return {
       spread: { value: 0, unit: 'px' },
@@ -24,12 +20,11 @@ export default function BoxShadowsField({
   }
   return (
     <Layers<BoxShadow>
-      value={value}
-      onChange={onChange}
+      {...props}
       newItem={newItem}
-      addLabel="+ Add box shadow"
-      header={Header}
       content={BoxShadowEditor}
+      stringify={stringifyBoxShadow}
+      thumbnail={Thumbnail}
     />
   )
 }
@@ -51,24 +46,18 @@ export const BoxShadowEditor = (props: LayerProps<BoxShadow>) => {
   )
 }
 
-export function Header({ value }: { value: BoxShadow | BoxShadow[] }) {
-  const style = stringifyBoxShadow(value)
+function Thumbnail({ value }: { value: string }) {
   return (
-    <LayerHeader
-      text={style}
-      preview={
-        <div
-          sx={{
-            width: '100%',
-            height: '100%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <div sx={{ width: '1rem', height: '1rem', boxShadow: style }} />
-        </div>
-      }
-    />
+    <div
+      sx={{
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <div sx={{ width: '1rem', height: '1rem', boxShadow: value }} />
+    </div>
   )
 }

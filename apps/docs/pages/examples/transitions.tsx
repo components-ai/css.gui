@@ -1,9 +1,7 @@
-import { RenderElement, Editor } from '@compai/css-gui'
+import { Editor, styled } from '@compai/css-gui'
 import { useState } from 'react'
 
 const initialStyles = {
-  transitionDuration: { value: 250, unit: 'ms' },
-  transitionDelay: { value: 0, unit: 'ms' },
   transitionTimingFunction: {
     type: 'cubic-bezier',
     p1: 0,
@@ -11,9 +9,12 @@ const initialStyles = {
     p3: 1,
     p4: 1,
   },
-  transitionProperty: 'height',
+  transitionDuration: { value: 250, unit: 'ms' },
+  transitionDelay: { value: 0, unit: 'ms' },
+  transitionProperty: 'all',
   width: { value: 200, unit: 'px' },
   height: { value: 200, unit: 'px' },
+  borderRadius: { value: 0, unit: 'px' },
   backgroundColor: '#f00',
 }
 
@@ -21,8 +22,12 @@ export default function Transitions() {
   const [styles, setStyles] = useState<any>(initialStyles)
   return (
     <div>
-      <Editor styles={styles} onChange={setStyles} />
-      <RenderElement tagName="div" styles={styles} />
+      <div sx={{ ':first-child > div' : { display: 'grid', gap: '.5em' }}}>
+        <Editor styles={styles} onChange={setStyles} />
+      </div>
+      <section sx={{ mt: 5 }}>
+        <styled.div styles={styles} />
+      </section>
     </div>
   )
 }

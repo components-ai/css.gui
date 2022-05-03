@@ -7,7 +7,7 @@ import { FontFamilyExample } from '../../components/examples/FontFamily'
 
 This input supports a growing set of typefaces, which currently includes all
 [Google Fonts](https://fonts.google.com) and system fonts. Style sheets links are
-generated automatically with `RenderElement`.
+generated automatically with `styled`.
 
 ### Example
 
@@ -17,16 +17,14 @@ generated automatically with `RenderElement`.
 
 ```js
 import { useState } from 'react'
-import { FontFamilyInput, RenderElement } from '@compai/css-gui'
+import { FontFamilyInput, styled } from '@compai/css-gui'
 
 const MyEditor = () => {
   const [fontFamily, setFontFamily] = useState('Abel')
 
   return (
     <>
-      <RenderElement tagName="p" styles={{ fontFamily }}>
-        Fun with fonts!
-      </RenderElement>
+      <styled.p styles={{ fontFamily }}>Fun with fonts!</styled.p>
       <FontFamilyInput value={fontFamily} onChange={setFontFamily} />
     </>
   )

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Link from 'next/link'
-import { Editor, Inputs, RenderElement, codegen } from '@compai/css-gui'
+import { Editor, Inputs, styled, codegen } from '@compai/css-gui'
 import { initialStyles } from '../../data/initial-styles'
 import { defaultTheme } from '../../data/default-theme'
 
@@ -12,25 +12,23 @@ export function Demo() {
       <div
         className="full-bleed"
         sx={{
-          mt: 5,
-          display: 'flex',
-          py: [2, 3, 4],
+          display: 'grid',
+          gridTemplateColumns: '320px 1fr',
           borderTopWidth: 'thin',
           borderTopStyle: 'solid',
           borderColor: 'border',
         }}
       >
-        <div sx={{ px: [2, 3, 4] }}>
           <Editor styles={styles} onChange={setStyles} theme={defaultTheme}>
-            <div sx={{ display: 'grid', gap: '.5rem', width: '240px' }}>
-              <h3 sx={{ my: 0 }}>Typography</h3>
+            <div sx={{ display: 'grid', gap: '.5rem', borderRightWidth: '1px', borderRightStyle: 'solid', borderColor: 'border', p: 4 }}>
+              <h3 sx={{ fontSize: 2, my: 0 }}>Typography</h3>
+              <Inputs.FontFamily />
               <Inputs.FontSize />
               <Inputs.LineHeight />
               <Inputs.TextAlign />
+              <Inputs.FontStyle />
               <Inputs.FontStretch />
-              <Inputs.Margin />
-              <Inputs.FontFamily />
-              <h3 sx={{ mt: 4, mb: 0 }}>Colors</h3>
+              <h3 sx={{ fontSize: 2, mt: 4, mb: 0 }}>Colors</h3>
               <div sx={{ display: 'flex' }}>
                 <div sx={{ mr: 2 }}>
                   <Inputs.Color />
@@ -39,15 +37,31 @@ export function Demo() {
                   <Inputs.BackgroundColor />
                 </div>
               </div>
-              <h3 sx={{ mt: 4, mb: 0 }}>Size</h3>
+              <h3 sx={{ fontSize: 2, mt: 4, mb: 0 }}>Borders</h3>
+              <Inputs.BorderRadius />
+              <Inputs.BorderWidth />
+              <Inputs.BorderStyle />
+              <Inputs.BorderColor />
+              <Inputs.BorderImageSource />
+              <Inputs.BorderImageSlice />
+              <Inputs.BorderImageOutset />
+              <Inputs.BorderImageRepeat />
+              <Inputs.BorderImageWidth />
+
+              <h3 sx={{ fontSize: 2, mt: 4, mb: 0 }}>Spacing</h3>
+              <Inputs.Margin />
+              <Inputs.Padding />
+              <h3 sx={{ fontSize: 2, mt: 4, mb: 0 }}>Size</h3>
               <Inputs.Width />
+              <Inputs.MinWidth />
               <Inputs.MaxWidth />
               <Inputs.Height />
+              <Inputs.MinHeight />
+              <Inputs.MaxHeight />
             </div>
           </Editor>
-        </div>
-        <div sx={{ flexGrow: 1 }}>
-          <RenderElement tagName="p" styles={styles}>
+        <section>
+          <styled.p styles={styles}>
             “The parameters comprise sequences which are theoretically infinite
             but limits are, of course, set to them in practice. There is an
             upward limit to size and certainly a downward one... Within these
@@ -64,16 +78,17 @@ export function Demo() {
               </Link>{' '}
               by Karl Gerstner
             </em>
-          </RenderElement>
-        </div>
+          </styled.p>
+        </section>
       </div>
       <div className="full-bleed">
         <pre
           sx={{
-            p: [2, 3, 4],
+            p: [2, 3, 5],
             borderTop: 'thin solid',
             borderColor: 'border',
             width: '100%',
+            fontSize: 3,
           }}
         >
           {codegen.css(styles)}
