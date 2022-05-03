@@ -13,6 +13,14 @@ const initialStyles = {
     value: 128,
     unit: 'px',
   },
+  borderImageWidth: {
+    value: 128,
+    unit: 'px',
+  },
+  borderImageOffset: {
+    value: 64,
+    unit: 'px',
+  },
   borderRadius: {
     value: 0,
     unit: 'px',
@@ -47,6 +55,8 @@ export default function BorderImage() {
             <div sx={{ display: 'grid', gap: '.5rem', width: '240px' }}>
               <Inputs.BorderImageSource />
               <Inputs.BorderImageSlice />
+              <Inputs.BorderImageWidth />
+              <Inputs.BorderImageRepeat />
               <Inputs.BorderWidth />
               <Inputs.Padding />
             </div>
