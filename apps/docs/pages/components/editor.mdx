@@ -86,3 +86,21 @@ export function Demo() {
   )
 }
 ```
+
+### Customizing Inputs
+
+When using the composition-based approach, you can customize the `label`, `steps`, `range`.
+
+```js
+<Inputs.FontSize
+  label="Size"
+  steps={{
+    px: 1,
+    em: 0.2,
+  }}
+  range={{
+    px: [1, 256],
+    em: [0.1, 16],
+  }}
+/>
+```
