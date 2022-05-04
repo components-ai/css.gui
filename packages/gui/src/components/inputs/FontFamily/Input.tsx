@@ -10,22 +10,18 @@ type Font = {
   name: string,
   category: FontCategory
 }
-
 type VariableFont = Record<string, VariableAttribute | string>
-
 type VariableAttribute = {
   min: number
   max: number
   default: number
   step: number
 }
-
 const enum FontCategory {
   Sans = 'sans-serif',
   Mono = 'monospace',
   Serif = 'serif',
 }
-
 const nameMap: any = {
   opsz: 'Optical Size',
   CASL: 'Casual',
@@ -43,7 +39,6 @@ export function FontFamilyInput({
   value,
   onChange,
 }: Props) {  
-  console.log(value, "vvvvv")
   const id = React.useId()
   const fullId = `${id}-${property || 'fontfamily'}`
 
@@ -57,12 +52,13 @@ export function FontFamilyInput({
   React.useEffect(() => {
     const getFontData = async () => {
       const fontData = await getFontsData()
+      const fontFamily = value?.fontFamily || ''
 
       setAllOptions(fontData?.fontOptions)
       setVariableFontsData(fontData?.variableFontsData)
+      setVariableFont(fontData.variableFontsData[fontFamily])
 
-      handleFilterItems(value?.fontfamily)
-      handleFontChange(value?.fontFamily || '')
+      handleFilterItems(fontFamily)
     }
 
     getFontData()
@@ -111,6 +107,7 @@ export function FontFamilyInput({
   }
 
   const handleFontChange = (name: string) => {
+    console.log(variableFontsData, "tihonn")
     const fontData = variableFontsData[name] ?? {}
     onChange({ 
       ...(name === variableFont?.name ? value : {}), 
@@ -254,7 +251,7 @@ export function FontFamilyInput({
                   alignItems: 'center',
                 }}
                 onClick={() => {
-                  onChange({ ...value, fontFamily: '' })
+                  handleFontChange('')
                   // @ts-ignore
                   inputRef.current.focus()
                   if (!isOpen) {

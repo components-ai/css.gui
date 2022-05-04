@@ -16,5 +16,5 @@ export const initialStyles: any = {
     value: 'auto',
     unit: 'keyword',
   },
-  fontFamily: 'Archivo',
+  fontFamily: 'Recursive',
 }
