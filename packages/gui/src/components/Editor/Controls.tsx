@@ -30,7 +30,13 @@ type ControlProps = {
   field: KeyArg
 }
 const Control = ({ field }: ControlProps) => {
-  const { getField, getFields, setField, setFields, removeField } = useEditor()
+  const {
+    getField,
+    getFields,
+    setField,
+    setFields,
+    removeField
+  } = useEditor()
   const fieldset = useFieldset()
   const property = field.toString()
   const Component: ComponentType<any> = getInputComponent(property)
@@ -39,9 +45,7 @@ const Control = ({ field }: ControlProps) => {
     ...(properties[property].keywords ?? []),
     ...GLOBAL_KEYWORDS,
   ]
-  const sideEffects = [
-    ...(properties[property].sideEffects ?? [])
-  ]
+  const sideEffects = properties[property].sideEffects ?? []
 
   if (!Component) {
     console.error(`Unknown field: ${field}, ignoring`)
