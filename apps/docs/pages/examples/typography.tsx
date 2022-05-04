@@ -43,21 +43,22 @@ export default function Typography() {
           <Editor styles={styles} onChange={setStyles} theme={defaultTheme}>
             <>
               <section sx={{ display: 'grid', gap: '.5rem', width: '240px' }}>
-                <h3 sx={{ mt: 4, mb: 0 }}>Font</h3>
+                <h3 sx={{ mt: 4, mb: 0 }}>Typography</h3>
                 <Inputs.FontFamily />
               </section>
-              <section sx={{ display: 'grid', gap: '.5rem', width: '240px' }}>
-                <h3 sx={{ mt: 4, mb: 0 }}>Typography</h3>
+              <section sx={{ mt: 4, display: 'grid', gap: '.5rem', width: '240px' }}>
                 <Inputs.FontSize />
                 <Inputs.LineHeight />
                 <Inputs.LetterSpacing />
+                <Inputs.TextTransform />
               </section>
-              <section sx={{ display: 'grid', gap: '.5rem', width: '240px' }}>
+              <section sx={{ mt: 4, display: 'grid', gap: '.5rem', width: '240px' }}>
                 <h3 sx={{ my: 0 }}>Text Decoration</h3>
                 <Inputs.TextDecorationColor />
                 <Inputs.TextDecorationLine />
                 <Inputs.TextDecorationThickness />
                 <Inputs.TextDecorationSkipInk />
+                <Inputs.TextDecorationSkip />
                 <Inputs.TextDecorationStyle />
               </section>
             </>
