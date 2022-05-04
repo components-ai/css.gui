@@ -33,6 +33,7 @@ export const Sidebar = () => {
       <NavItem href="/inputs/responsive">Responsive</NavItem>
       <NavItem href="/inputs/font-family">Font Family</NavItem>
       <NavSectionTitle>Examples</NavSectionTitle>
+      <NavItem href="/examples/typography">Typography</NavItem>
       <NavItem href="/examples/transitions">Transitions</NavItem>
       <NavItem href="/examples/animations">Animations</NavItem>
       <NavItem href="/examples/shadows">Shadows</NavItem>
