@@ -5397,6 +5397,7 @@ const invalidModules = [
   'CSS Speech Module',
   'CSS Rhythmic Sizing',
   'CSS Generated Content for Paged Media Module',
+  'SVG Markers',
 ]
 export const allProperties = uniqBy(everySinglePropertyEver, 'property').filter(
   (prop) => {
