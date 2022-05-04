@@ -56,7 +56,7 @@ export default function TextDecoration() {
       >
         <div sx={{ px: [2, 3, 4] }}>
           <Editor styles={styles} onChange={setStyles} theme={defaultTheme}>
-            <section sx={{ display: 'grid', gap: '.5rem', width: '240px' }}>
+            <section sx={{ display: 'grid', gap: '.5rem', width: '320px' }}>
               <h3 sx={{ mt: 4, mb: 0 }}>Backgrounds</h3>
               <Inputs.Background />
               <Inputs.BackgroundBlendMode />

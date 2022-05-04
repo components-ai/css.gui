@@ -28,7 +28,7 @@ export default function ImageSourceInput(
 
 export const ImageSourceEditor = (props: LayerProps<ImageSource>) => {
   return (
-    <div sx={{ px: 3, pb: 3, pt: 2 }}>
+    <div>
       <SelectInput
         {...getInputProps(props, 'type')}
         options={['url', 'gradient']}

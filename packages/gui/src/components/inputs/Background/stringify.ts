@@ -1,4 +1,8 @@
-import { stringifyPosition, stringifyValues } from '../../../lib/stringify'
+import {
+  stringifyPosition,
+  stringifyUnit,
+  stringifyValues,
+} from '../../../lib/stringify'
 import { stringifyImageSource } from '../ImageSource/stringify'
 import { Background, BgSize, RepeatStyle } from './types'
 
@@ -7,9 +11,7 @@ export function stringifyBackgroundList(backgrounds: Background[]) {
 }
 
 export function stringifyBackground(background: Background) {
-  console.log(background)
   const { attachment, clip, image, origin, position, repeat, size } = background
-  console.log(image)
   return stringifyValues([
     stringifyImageSource(image),
     stringifyPosition(position),
@@ -22,7 +24,7 @@ export function stringifyBackground(background: Background) {
 }
 
 function stringifySize(size: BgSize) {
-  return `${size.x} ${size.y}`
+  return `${stringifyUnit(size.x)} ${stringifyUnit(size.y)}`
 }
 
 function stringifyRepeatStyle(repeat: RepeatStyle) {

@@ -35,7 +35,10 @@ import { positiveRanges, UnitRanges } from './ranges'
 import TransitionInput from '../components/inputs/Transition/field'
 import { stringifyTransitionList } from '../components/inputs/Transition/stringify'
 import BackgroundInput from '../components/inputs/Background/field'
-import { stringifyBackground } from '../components/inputs/Background/stringify'
+import {
+  stringifyBackground,
+  stringifyBackgroundList,
+} from '../components/inputs/Background/stringify'
 
 type PropertyData = {
   type: string | ComponentType<any>
@@ -189,7 +192,7 @@ export const properties: Record<string, PropertyData> = {
   },
   background: {
     type: BackgroundInput,
-    stringify: stringifyBackground,
+    stringify: stringifyBackgroundList,
   },
   backgroundAttachment: {
     type: 'keyword',

@@ -62,7 +62,7 @@ export default function BackgroundInput(
 
 export const BackgroundLayer = (props: EditorProps<Background>) => {
   return (
-    <div sx={{ margin: 3 }}>
+    <div sx={{ m: 3, display: 'flex', flexDirection: 'column', gap: 3 }}>
       <ImageSourceEditor {...getInputProps(props, 'image')} />
       <PositionInput {...getInputProps(props, 'position')} />
       <SizeInput {...getInputProps(props, 'size')} />
@@ -84,8 +84,12 @@ function SizeInput(props: EditorPropsWithLabel<BgSize>) {
   return (
     <div>
       <Label>Size</Label>
-      <LengthInput percentage {...getInputProps(props, 'x')} />
-      <LengthInput percentage {...getInputProps(props, 'y')} />
+      <div
+        sx={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 2 }}
+      >
+        <LengthInput percentage {...getInputProps(props, 'x')} />
+        <LengthInput percentage {...getInputProps(props, 'y')} />
+      </div>
     </div>
   )
 }
@@ -94,8 +98,12 @@ function RepeatStyleInput(props: EditorPropsWithLabel<RepeatStyle>) {
   return (
     <div>
       <Label>Repeat</Label>
-      <SelectInput {...getInputProps(props, 'x')} options={repeatKeywords} />
-      <SelectInput {...getInputProps(props, 'y')} options={repeatKeywords} />
+      <div
+        sx={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 2 }}
+      >
+        <SelectInput {...getInputProps(props, 'x')} options={repeatKeywords} />
+        <SelectInput {...getInputProps(props, 'y')} options={repeatKeywords} />
+      </div>
     </div>
   )
 }
@@ -109,9 +117,8 @@ function Thumbnail({ value }: { value: string }) {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        background: value,
       }}
-    >
-      <div sx={{ background: value }}></div>
-    </div>
+    ></div>
   )
 }

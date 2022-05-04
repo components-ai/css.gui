@@ -1,4 +1,4 @@
-import { Color, LengthPercentage, Position } from '../../../types/css'
+import { LengthPercentage, Position } from '../../../types/css'
 import { ImageSource } from '../ImageSource/types'
 
 export interface Background {
