@@ -22,7 +22,7 @@ import { useThemeProperty } from '../providers/ThemeContext'
 import { PositionInput } from '../inputs/PositionInput'
 import { TimeInput } from '../inputs/TimeInput'
 
-type ControlProps = {
+interface ControlProps {
   field: KeyArg
 }
 const Control = ({ field }: ControlProps) => {
@@ -41,7 +41,7 @@ const Control = ({ field }: ControlProps) => {
     ...(properties[property].keywords ?? []),
     ...GLOBAL_KEYWORDS,
   ]
-  const sideEffects = properties[property].sideEffects ?? []
+  const dependantProperties = properties[property].dependantProperties ?? []
 
   if (!Component) {
     console.error(`Unknown field: ${field}, ignoring`)
@@ -49,30 +49,56 @@ const Control = ({ field }: ControlProps) => {
   }
 
   const fullField = fieldset ? joinPath(fieldset.name, field) : field
+  const componentProps = {
+    label: sentenceCase(property),
+    themeValues: themeValues,
+    keywords,
+    ...properties[property]
+  }
+
+  if (dependantProperties.length) {
+    return <ComponentWithPropertyGroup 
+      dependantProperties={dependantProperties}
+      property={property}
+      {...componentProps}
+    />
+  }
 
   return (
     <Component
-      label={sentenceCase(property)}
-      value={sideEffects.length 
-        ? getFields([...sideEffects, property]) 
-        : getField(fullField)
-      }
+      value={getField(fullField)}
       onChange={(newValue: any) => {
-        if (sideEffects.length) {
-          // unset any properties that no longer exist
-          sideEffects.forEach((sf) => {
-            if (!Object.keys(newValue).includes(sf)) {
-              removeField(sf)
-            }
-          })
-          setFields(newValue)
-        } else {
-          setField(fullField, newValue)
-        }
+        setField(fullField, newValue)
       }}
-      themeValues={themeValues}
-      {...properties[property]}
-      keywords={keywords}
+      {...componentProps}
+    />
+  )
+}
+
+interface ComponentGroupProps {
+  dependantProperties: string[],
+  property: string
+}
+const ComponentWithPropertyGroup = ({ dependantProperties, property, ...props }: ComponentGroupProps) => {
+  const Component: ComponentType<any> = getInputComponent(property)
+  const {
+    getFields,
+    setFields,
+    removeField
+  } = useEditor()
+
+  return (
+    <Component
+      value={getFields([...dependantProperties, property])}
+      onChange={(newValue: any) => {
+        dependantProperties.forEach((dp) => {
+          if (!Object.keys(newValue).includes(dp)) {
+            removeField(dp)
+          }
+        })
+        setFields(newValue)
+      }}
+      {...props}
     />
   )
 }
