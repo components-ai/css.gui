@@ -1,7 +1,7 @@
 import { EditorProps } from '../types/editor'
 import { isPseudoClass, isPseudoElement } from './pseudos'
 import { isElement } from './elements'
-import { camelCase, lowerCase, startCase, upperFirst } from 'lodash-es'
+import { lowerCase, startCase, upperFirst } from 'lodash-es'
 
 export type EditorPropsWithLabel<T> = EditorProps<T> & { label: string }
 /**
@@ -96,13 +96,13 @@ export const toGoogleFontUrl = (families: FontFamilyData[]) => {
  */
 export const toGoogleVariableFontUrl = (variableFonts: any[]) => {
   if (!variableFonts?.length) return null
-  
+
   let familyQueries: any[] = []
 
   variableFonts.forEach((vFont) => {
     let prependQuery = `family=${plusify(vFont.name)}:`
     delete vFont['name']
-    
+
     let orderedKeys = [
       ...Object.keys(vFont)
         .filter((k) => k === k.toLowerCase())
@@ -111,9 +111,9 @@ export const toGoogleVariableFontUrl = (variableFonts: any[]) => {
         .filter((k) => k === k.toUpperCase())
         .sort(),
     ]
-    
+
     const queryParams = orderedKeys.join(',')
-    
+
     const queryRange = orderedKeys
       .map((key) => {
         if (key === 'ital') return null
@@ -137,5 +137,5 @@ export const toGoogleVariableFontUrl = (variableFonts: any[]) => {
 }
 
 export function pascalCase(str: string) {
-  return startCase(camelCase(str))
+  return startCase(str).replace(/\s/g, '')
 }
