@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.32
+
+### Patch Changes
+
+- e4a26b7: Replace pascalcase dep with lodash-based function
+
 ## 0.0.31
 
 ### Patch Changes

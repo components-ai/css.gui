@@ -1,6 +1,6 @@
 {
   "name": "@compai/css-gui",
-  "version": "0.0.31",
+  "version": "0.0.32",
   "type": "module",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -26,7 +26,6 @@
   },
   "devDependencies": {
     "@types/lodash-es": "^4.17.6",
-    "@types/pascalcase": "^1.0.1",
     "@types/react": "18.0.5",
     "@types/react-dom": "^18.0.1",
     "@types/uuid": "^8.3.4",
@@ -53,7 +52,6 @@
     "get-contrast": "^3.0.0",
     "immer": "^9.0.12",
     "lodash-es": "^4.17.21",
-    "pascalcase": "^2.0.0",
     "react-feather": "^2.0.9",
     "react-use-gesture": "^9.1.3",
     "theme-ui": "^0.14.5",
