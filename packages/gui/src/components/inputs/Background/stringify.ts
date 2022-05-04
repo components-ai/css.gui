@@ -7,7 +7,9 @@ export function stringifyBackgroundList(backgrounds: Background[]) {
 }
 
 export function stringifyBackground(background: Background) {
+  console.log(background)
   const { attachment, clip, image, origin, position, repeat, size } = background
+  console.log(image)
   return stringifyValues([
     stringifyImageSource(image),
     stringifyPosition(position),

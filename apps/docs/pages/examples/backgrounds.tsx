@@ -30,6 +30,9 @@ const initialStyles = {
       },
       repeat: { x: 'no-repeat', y: 'no-repeat' },
       size: { x: { value: 100, unit: '%' }, y: { value: 100, unit: '%' } },
+      attachment: 'fixed',
+      origin: 'border-box',
+      clip: 'border-box',
     },
   ],
   padding: {
