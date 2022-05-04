@@ -5399,11 +5399,12 @@ const invalidModules = [
   'CSS Generated Content for Paged Media Module',
   'SVG Markers',
 ]
+
 export const allProperties = uniqBy(everySinglePropertyEver, 'property').filter(
   (prop) => {
-    if (invalidModules.includes(prop.title)) {
-      return false
-    }
+    // if (invalidModules.includes(prop.title)) {
+    //   return false
+    // }
     return true
   }
 )
