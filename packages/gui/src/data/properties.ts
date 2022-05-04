@@ -39,6 +39,8 @@ import {
   stringifyBackground,
   stringifyBackgroundList,
 } from '../components/inputs/Background/stringify'
+import MaskInput from '../components/inputs/Mask/field'
+import { stringifyMaskList } from '../components/inputs/Mask/stringify'
 
 type PropertyData = {
   type: string | ComponentType<any>
@@ -1187,6 +1189,10 @@ export const properties: Record<string, PropertyData> = {
   marqueeSpeed: {
     type: 'keyword',
     keywords: ['slow', 'normal', 'fast'],
+  },
+  mask: {
+    type: MaskInput,
+    stringify: stringifyMaskList,
   },
   maskBorderMode: {
     type: 'keyword',

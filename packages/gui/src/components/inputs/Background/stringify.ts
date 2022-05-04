@@ -23,10 +23,10 @@ export function stringifyBackground(background: Background) {
   ])
 }
 
-function stringifySize(size: BgSize) {
+export function stringifySize(size: BgSize) {
   return `${stringifyUnit(size.x)} ${stringifyUnit(size.y)}`
 }
 
-function stringifyRepeatStyle(repeat: RepeatStyle) {
+export function stringifyRepeatStyle(repeat: RepeatStyle) {
   return `${repeat.x} ${repeat.y}`
 }

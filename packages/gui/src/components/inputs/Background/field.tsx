@@ -36,8 +36,8 @@ export default function BackgroundInput(
       },
       origin: 'border-box',
       position: {
-        x: 'center',
-        y: 'center',
+        x: { value: 0, unit: 'px' },
+        y: { value: 0, unit: 'px' },
       },
       repeat: {
         x: 'no-repeat',
@@ -80,7 +80,7 @@ export const BackgroundLayer = (props: EditorProps<Background>) => {
   )
 }
 
-function SizeInput(props: EditorPropsWithLabel<BgSize>) {
+export function SizeInput(props: EditorPropsWithLabel<BgSize>) {
   return (
     <div>
       <Label>Size</Label>
@@ -94,7 +94,7 @@ function SizeInput(props: EditorPropsWithLabel<BgSize>) {
   )
 }
 
-function RepeatStyleInput(props: EditorPropsWithLabel<RepeatStyle>) {
+export function RepeatStyleInput(props: EditorPropsWithLabel<RepeatStyle>) {
   return (
     <div>
       <Label>Repeat</Label>

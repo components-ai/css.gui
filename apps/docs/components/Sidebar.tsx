@@ -40,6 +40,7 @@ export const Sidebar = () => {
       <NavItem href="/examples/borders">Borders</NavItem>
       <NavItem href="/examples/border-images">Border Images</NavItem>
       <NavItem href="/examples/backgrounds">Backgrounds</NavItem>
+      <NavItem href="/examples/masks">Masks</NavItem>
       <NavItem href="/examples/space">Space</NavItem>
       <NavItem href="/examples/text-decoration">Text Decoration</NavItem>
       <NavSectionTitle>TODO</NavSectionTitle>
