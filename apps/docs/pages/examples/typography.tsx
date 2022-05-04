@@ -51,6 +51,35 @@ export default function Typography() {
                 <Inputs.LineHeight />
                 <Inputs.LetterSpacing />
                 <Inputs.TextTransform />
+                <Inputs.FontStretch />
+                <Inputs.FontStyle />
+                <Inputs.FontSynthesis />
+                <Inputs.FontVariantCaps />
+                <Inputs.FontVariantEastAsian />
+                <Inputs.FontVariantLigatures />
+                <Inputs.FontVariantNumeric />
+                <Inputs.FontVariantPosition />
+                <Inputs.VerticalAlign />
+                <Inputs.WhiteSpace />
+                <Inputs.TextAlign />
+                <Inputs.TextIndent />
+                <Inputs.TextOrientation />
+                <Inputs.TextOverflow />
+                <Inputs.TextAlignAll />
+                <Inputs.TextAlignLast />
+                <Inputs.TextEmphasisColor />
+                <Inputs.TextEmphasisPosition />
+                <Inputs.TextEmphasisStyle />
+                <Inputs.TextRendering />
+                <Inputs.TextShadow />
+                <Inputs.TextUnderlinePosition />
+                <Inputs.TextWrap />
+                <Inputs.Widows />
+                <Inputs.WordSpacing />
+                <Inputs.WordWrap />
+                <Inputs.Width />
+                <Inputs.MaxWidth />
+                <Inputs.MinWidth />
               </section>
               <section sx={{ mt: 4, display: 'grid', gap: '.5rem', width: '240px' }}>
                 <h3 sx={{ my: 0 }}>Text Decoration</h3>
@@ -78,7 +107,7 @@ export default function Typography() {
                 href="https://www.lars-mueller-publishers.com/designing-programmes-0"
                 passHref={true}
               >
-                <a style={{ color: styles.color }}>Designing Programmes</a>
+                <a style={{ color: 'inherit' }}>Designing Programmes</a>
               </Link>{' '}
               by Karl Gerstner
             </em>
