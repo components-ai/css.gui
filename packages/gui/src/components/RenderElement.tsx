@@ -14,26 +14,15 @@ export const RenderElement = ({
   ...props
 }: RenderElementProps) => {
   const Component = tagName
-  //Temp
-  const { fontFamily } = styles
   const styleObject = toCSSObject(styles)
   
-  
-  // TODO: change all this back
   return (
     // @ts-ignore
     <>
       {/* @ts-ignore */}
-      <FontTags fontFamily={fontFamily.fontFamily}/>
+      <FontTags fontFamily={styles.fontFamily}/>
       {/* @ts-ignore */}
-      <Component {...props} sx={{ 
-        ...styleObject,
-        // @ts-ignore
-        ...fontFamily,
-        // fontFamily: styles.fontFamily.fontFamily,
-        // @ts-ignore
-        fontVariationSettings: styles.fontFamily?.fontVariationSettings
-      }} />
+      <Component {...props} sx={styleObject} />
     </>
   )
 }

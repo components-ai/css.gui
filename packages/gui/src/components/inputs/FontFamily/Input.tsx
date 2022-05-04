@@ -43,6 +43,7 @@ export function FontFamilyInput({
   value,
   onChange,
 }: Props) {  
+  console.log(value, "vvvvv")
   const id = React.useId()
   const fullId = `${id}-${property || 'fontfamily'}`
 

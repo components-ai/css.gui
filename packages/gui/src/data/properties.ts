@@ -37,6 +37,7 @@ type PropertyData = {
   range?: UnitRanges
   defaultValue?: string | number
   stringify?: (value: any) => string
+  sideEffects?: string[]
 }
 
 type UnitRanges = Record<string, [number, number]>
@@ -558,6 +559,7 @@ export const properties: Record<string, PropertyData> = {
   },
   fontFamily: {
     type: FontFamily,
+    sideEffects: ['fontStyle', 'fontStretch', 'fontWeight', 'fontVariationSettings']
   },
   fontKerning: {
     type: 'keyword',

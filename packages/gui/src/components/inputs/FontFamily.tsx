@@ -1,8 +1,8 @@
 import { EditorProps } from '../../types/editor'
-import { FontFamilyType } from '../../types/css'
+import { FontFamilyType, TempFontFamilyType } from '../../types/css'
 import { FontFamilyInput } from './FontFamily/Input'
 
-export const FontFamily = ({value, onChange}: EditorProps<FontFamilyType>) => {
+export const FontFamily = ({value, onChange}: EditorProps<TempFontFamilyType>) => {
   return (
     // @ts-ignore
     <FontFamilyInput

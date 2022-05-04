@@ -30,7 +30,7 @@ type ControlProps = {
   field: KeyArg
 }
 const Control = ({ field }: ControlProps) => {
-  const { getField, setField } = useEditor()
+  const { getField, getFields, setField, setFields, removeField } = useEditor()
   const fieldset = useFieldset()
   const property = field.toString()
   const Component: ComponentType<any> = getInputComponent(property)
@@ -38,6 +38,9 @@ const Control = ({ field }: ControlProps) => {
   const keywords = [
     ...(properties[property].keywords ?? []),
     ...GLOBAL_KEYWORDS,
+  ]
+  const sideEffects = [
+    ...(properties[property].sideEffects ?? [])
   ]
 
   if (!Component) {
@@ -50,9 +53,23 @@ const Control = ({ field }: ControlProps) => {
   return (
     <Component
       label={sentenceCase(property)}
-      value={getField(fullField)}
+      value={sideEffects.length 
+        ? getFields([...sideEffects, property]) 
+        : getField(fullField)
+      }
       onChange={(newValue: any) => {
-        setField(fullField, newValue)
+        if (sideEffects.length) {
+          // unset any properties that no longer exist
+          sideEffects.forEach((sf) => {
+            if (!Object.keys(newValue).includes(sf)) {
+              removeField(sf)
+            }
+          })
+          setFields(newValue)
+        }
+        sideEffects.length
+          ? setFields(newValue)
+          : setField(fullField, newValue)
       }}
       themeValues={themeValues}
       {...properties[property]}

@@ -24,6 +24,19 @@ export function useEditor() {
     return field ? (get(value, field) as T) : value
   }
 
+  function getFields<T = any>(fields: KeyArg[] | undefined) {
+    // console.log(value, "firstv ")
+    const fieldsValue = fields?.reduce((acc: any, curr: KeyArg) => {
+      const fieldValue = (get(value, curr) as T)
+      return fieldValue ? {
+        ...acc,
+        [`${curr}`]: fieldValue
+      } : acc
+    }, {})
+
+    return fieldsValue ?? value
+  }
+
   function setField<T>(field: KeyArg, recipe: Recipe<T>) {
     editComponentData((draft) => {
       applyRecipe(draft.value, field, recipe)
@@ -47,6 +60,7 @@ export function useEditor() {
   return {
     ...context,
     getField,
+    getFields,
     setField,
     setFields,
     onChange,
