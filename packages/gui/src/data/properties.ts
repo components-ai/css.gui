@@ -587,10 +587,13 @@ export const properties: Record<string, PropertyData> = {
   columnGap: {
     type: 'length',
     percentage: true,
+    defaultValue: 0,
     range: {
       [AbsoluteLengthUnits.Px]: [0, 128],
       [FontRelativeLengthUnits.Em]: [0, 8],
       [FontRelativeLengthUnits.Rem]: [0, 8],
+      [FontRelativeLengthUnits.Vh]: [0, 100],
+      [FontRelativeLengthUnits.Vw]: [0, 100],
       [PercentageLengthUnits.Pct]: [0.1, 100],
     },
     keywords: ['normal'],
@@ -1586,6 +1589,14 @@ export const properties: Record<string, PropertyData> = {
   rowGap: {
     type: 'length',
     percentage: true,
+    range: {
+      [AbsoluteLengthUnits.Px]: [0, 128],
+      [FontRelativeLengthUnits.Em]: [0, 8],
+      [FontRelativeLengthUnits.Rem]: [0, 8],
+      [FontRelativeLengthUnits.Vh]: [0, 100],
+      [FontRelativeLengthUnits.Vw]: [0, 100],
+      [PercentageLengthUnits.Pct]: [0.1, 100],
+    },
   },
   rubyAlign: {
     type: 'keyword',
