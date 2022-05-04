@@ -1,5 +1,17 @@
 # @compai/css-gui
 
+## 0.0.31
+
+### Patch Changes
+
+- 9d9c6c6: Allow for control props to be passed to the input
+
+## 0.0.30
+
+### Patch Changes
+
+- 0a08008: Add new properties including some stacked shorthands
+
 ## 0.0.29
 
 ### Patch Changes
