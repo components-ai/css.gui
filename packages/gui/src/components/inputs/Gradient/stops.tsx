@@ -5,9 +5,9 @@ import { Minus, Plus } from 'react-feather'
 import { randomColor } from '../../../lib/color'
 import { ColorInput } from '../ColorInput'
 import { NumberInput } from '../NumberInput'
-import { getInputProps } from '../../../lib/util'
+import { getInputProps, randomInt } from '../../../lib/util'
 import { GradientStop as GradientStopValue } from './types'
-import { getDeclarationValue } from './stringify'
+import { stringifyGradient } from './stringify'
 
 interface StopsProps {
   value: GradientStopValue[]
@@ -73,7 +73,7 @@ export default function GradientStopsField({
             ...value,
             {
               color: randomColor(),
-              hinting: 69,
+              hinting: randomInt(0, 100),
             },
           ])
         }}
@@ -200,7 +200,7 @@ function Track({ repeating, value }: TrackProps) {
           content: "''",
           position: 'absolute',
           inset: 0,
-          backgroundImage: getDeclarationValue({
+          backgroundImage: stringifyGradient({
             type: repeating ? 'repeating-linear' : 'linear',
             degrees: 90,
             stops: value,

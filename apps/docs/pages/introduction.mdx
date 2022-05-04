@@ -7,16 +7,14 @@ import { FirstParagraph } from '../components/FirstParagraph'
   themeability and extensibility in mind.
 </FirstParagraph>
 
-With CSS GUI you can quickly get up and running with parametric controls for styling.
-You can use this to improve your creative coding workflow or build user interfaces
-where users get to control how their content looks.
+With CSS GUI you can quickly get up and running with parametric controls for styling any set of DOM elements. You can use this to improve your creative coding workflow or build custom design tools for stakeholders to interact with or interfaces where users can control how their content looks.
 
-At its essence, CSS GUI exposes an `Editor` and a `RenderElement` component to display
+At its essence, CSS GUI exposes an `Editor` and a `styled` component to display
 your controls and canvas, respectively.
 
 ```js
 import { useState } from 'react'
-import { Editor, RenderElement } from '@compai/css-gui'
+import { Editor, styled } from '@compai/css-gui'
 
 export const MyEditor = () => {
   const [styles, setStyles] = useState({})
@@ -24,9 +22,7 @@ export const MyEditor = () => {
   return (
     <>
       <Editor styles={styles} onChange={setStyles} />
-      <RenderElement tagName="p" styles={styles}>
-        Hello, world!
-      </RenderElement>
+      <styled.p styles={styles}>Hello, world!</styled.p>
     </>
   )
 }
@@ -36,9 +32,12 @@ export const MyEditor = () => {
 
 ## Theme units
 
-Define a theme and use that to collapse the space for the controls.
-Controls still allow you to put in any custom value, but will default
-to the values in your theme for rapid designing and consistency.
+Many CSS properties accept a wide range of values. Designers and developers
+often develop scales for properties to help ensure that designs are visually harmonious, 
+while also speeding up development by limiting the paradox of choice. 
+Define a theme and use that to collapse n-dimensional space for what your custom component can output.
+Controls still allow you to eject from constraints and enter any custom value, but will default
+to the values in your theme for rapid design exploration within a visual brand.
 
 ## Media query support
 
@@ -46,8 +45,9 @@ Change your designs across viewports with CSS controls that understand
 media queries. CSS GUI controls let you seamlessly switch back and forth
 between all viewports and responsive values.
 
-You can also customize your breakpoints in your theme. Whether it's only two
-breakpoints or eight, you decide.
+You can customize your breakpoints in your theme. Whether it's two
+breakpoints or eight, responsive controls will expose the option to target each breakpoint automatically
+as an array of values.
 
 ## Pseudo-classes and pseudo-elements
 

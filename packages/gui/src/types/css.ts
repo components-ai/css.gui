@@ -45,11 +45,30 @@ export const enum KeywordUnits {
 // Only use a subset for now to keep things simpler
 export type LengthPercentageUnit = LengthUnit | PercentageLengthUnits.Pct
 
-export const LENGTH_UNITS = ['em', 'rem', 'px'] as const
+export const LENGTH_UNITS = [
+  'em',
+  'rem',
+  'px',
+  'ch',
+  'ex',
+  'cm',
+  'mm',
+  'in',
+  'pc',
+  'pt',
+  'vh',
+  'vw',
+  'vmin',
+  'vmax',
+] as const
 export type LengthUnit = typeof LENGTH_UNITS[number]
 
 export const TIME_UNITS = ['ms', 's'] as const
 export type TimeUnit = typeof TIME_UNITS[number]
+export interface Time {
+  value: number
+  unit: TimeUnit
+}
 
 export const ANGLE_UNITS = ['deg', 'turn', 'rad', 'grad'] as const
 export type AngleUnit = typeof ANGLE_UNITS[number]
@@ -92,3 +111,9 @@ export type CSSFunctionURL = {
 }
 
 export type Styles = CSS.PropertiesFallback
+
+// TODO support [keyword value] values
+export interface Position {
+  x: Length
+  y: Length
+}

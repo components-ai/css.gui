@@ -43,10 +43,7 @@ export const getRepeatingRadialGradient = (gradient: RadialGradient) => {
   } at ${getLocation(gradient)}, ${getStops(gradient, '%')})`
 }
 
-export function getDeclarationValue(gradient: Gradient | Gradient[]): string {
-  if (Array.isArray(gradient)) {
-    return gradient.filter(Boolean).map(getDeclarationValue).join(', ')
-  }
+export function stringifyGradient(gradient: Gradient): string {
   if (gradient.type === 'linear') {
     return getLinearGradient(gradient)
   }
@@ -68,9 +65,9 @@ export function getDeclarationValue(gradient: Gradient | Gradient[]): string {
   throw new Error('Unknown gradient type')
 }
 
-export const stringifyGradient = (gradient: GradientList): string => {
-  return squeeze(getDeclarationValue(gradient))
-}
+// export const stringifyGradient = (gradient: GradientList): string => {
+//   return squeeze(getDeclarationValue(gradient))
+// }
 
 const getStops = (gradient: Gradient, unit: string) => {
   return sortBy(gradient?.stops, (stop) => stop.hinting)

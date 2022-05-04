@@ -1,0 +1,11 @@
+# Theme Schema
+
+The _"Theme Schema"_ is a more robust and granular version of a standard
+[System UI Theme](https://system-ui.com/theme).
+
+This is by design, because CSS GUI needs to be able to refer to theme values
+via their UUID to properly handle aliasing. Additionally, length units are
+automatically unpacked into [`CSSUnitValue`s](/guides/css-unit-value) so
+that there isn't a need to make multiple parsing passes.
+
+[**See the Theme Schema type definitions &rarr;**](https://github.com/components-ai/css.gui/blob/main/packages/gui/src/types/theme.ts)

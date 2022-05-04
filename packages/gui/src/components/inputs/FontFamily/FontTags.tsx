@@ -2,7 +2,6 @@ import * as React from 'react'
 import { debounce } from 'lodash-es'
 import { toGoogleFontUrl, toGoogleVariableFontUrl } from '../../../lib/util'
 
-
 export const getVariableFontFamilyHref = async (
   fontFamily: string
 ) => {
@@ -25,15 +24,15 @@ const getFontFamilyHref = async (font: string) => {
   try {
     const res = await fetch(`https://components.ai/api/v1/typefaces/${font}`)
     const rawFontData = await res.json()
-    
+
     const styles = Object.keys(rawFontData?.variants)
     const weights = Object.keys(rawFontData?.variants[styles[0]])
     const fontData = {
       name: rawFontData?.name,
       weights,
-      styles
+      styles,
     }
-    
+
     return toGoogleFontUrl([fontData])
   } catch (e) {
     console.log(`failed to fetch ${font} font`)
@@ -62,7 +61,13 @@ export const FontTags = ({ fontFamily }: any) => {
     debouncedGetStyleSheet(fontFamily, setStyleSheet)
   }, [fontFamily])
  
-  return (
-    <link rel="stylesheet" href={variableStyleSheet || styleSheet || ''} />
-  )
+  if (!fontFamily) {
+    return null
+  }
+
+  return <>{styleSheet || variableStyleSheet 
+    ? <link rel="stylesheet" href={variableStyleSheet || styleSheet || ''} />
+    : null
+  }</>
+
 }

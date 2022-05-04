@@ -1,4 +1,4 @@
-import { RenderElement, Editor } from '@compai/css-gui'
+import { Editor, styled } from '@compai/css-gui'
 import { useState } from 'react'
 
 const initialStyles = {
@@ -12,22 +12,23 @@ export default function Filters() {
       <Editor styles={styles} onChange={setStyles} />
       <div
         sx={{
-          m: 4,
+          mt: 5,
           display: 'flex',
           justifyContent: 'center',
         }}
       >
-        <RenderElement
-          tagName="div"
+        <styled.div
           styles={{
-            width: '24rem',
-            height: '24rem',
+            width: '100%',
+            aspectRatio: '4 / 3',
             backgroundImage: [
               {
                 type: 'url',
                 arguments: ['https://source.unsplash.com/random'],
               },
             ],
+            backgroundSize: 'cover',
+            backgroundPosition: 'center center',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -37,7 +38,7 @@ export default function Filters() {
           }}
         >
           Fun with filters
-        </RenderElement>
+        </styled.div>
       </div>
     </div>
   )

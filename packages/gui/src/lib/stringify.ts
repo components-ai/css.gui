@@ -1,5 +1,5 @@
 import { isElement, isNil } from 'lodash-es'
-import { Color, Length } from '../types/css'
+import { Color, Length, Position } from '../types/css'
 import { addPseudoSyntax } from './pseudos'
 
 export function stringifySelector(selector: string): string {
@@ -24,6 +24,11 @@ export function stringifyUnit(value: Length) {
     value.unit === 'keyword'
   ) {
     return value.value
+  }
+
+  if (value.unit === 'string') {
+    // TODO handle string escapes
+    return `'${value.value}'`
   }
 
   if (value.unit === 'number') {
@@ -54,6 +59,10 @@ export function stringifyValues(
     .filter((x) => !isNil(x))
     .map(stringifyPrimitive)
     .join(separator)}`
+}
+
+export function stringifyPosition(position: Position) {
+  return `${stringifyUnit(position.x)} ${stringifyUnit(position.y)}`
 }
 
 export function stringifyPrimitive(value: Primitive) {

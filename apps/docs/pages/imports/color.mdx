@@ -1,0 +1,62 @@
+import { ColorImportExample } from '../../components/examples/ColorImport'
+
+# Importing Color Palettes
+
+If you have a [System UI](https://system-ui.com/theme) compatible color palette, you can
+use `importColors` to transform it to the theme used internally.
+
+In the future, this will likely happen automatically, but for now it needs to be explicitly
+called.
+
+```js
+import { useState } from 'react'
+import { Editor, importColors } from '@compai/css-gui'
+
+// https://components.ai/theme/asa9lvO69pQGyRn8ZAXL?tab=export
+const themeColors = {
+  gray: [
+    '#000000',
+    '#1c1c1c',
+    '#303030',
+    '#474747',
+    '#5d5d5d',
+    '#757575',
+    '#8c8c8c',
+    '#a3a3a3',
+    '#bababa',
+    '#d1d1d1',
+    '#e8e8e8',
+    '#ffffff',
+  ],
+  'blue-gray': [
+    '#0e0e11',
+    '#21222a',
+    '#343544',
+    '#484a5e',
+    '#5c5f78',
+    '#717490',
+    '#8789a6',
+    '#9c9eba',
+    '#b1b3cb',
+    '#c6c8db',
+    '#dcdce9',
+    '#f1f1f6',
+  ],
+}
+
+export const MyEditor = () => {
+  const [styles, setStyles] = useState({ color: 'tomato' })
+  const colors = importColors(themeColors)
+
+  return (
+    <>
+      <Editor styles={styles} onChange={setStyles} theme={{ colors }} />
+      <p style={{ color: styles.color }}>Hello, world!</p>
+    </>
+  )
+}
+```
+
+## Interactive Example
+
+<ColorImportExample />

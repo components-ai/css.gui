@@ -1,5 +1,131 @@
 # @compai/css-gui
 
+## 0.0.29
+
+### Patch Changes
+
+- 26f5b7f: Adds marquee property support
+- 72158f3: Change alignment of color picker label
+
+## 0.0.28
+
+### Patch Changes
+
+- 9af74d6: Add theme transformer
+- fffd5f1: Adds several stroke based properties for styling SVG elements
+
+## 0.0.27
+
+### Patch Changes
+
+- 6756944: Don't embed font stylesheet when there's no font family passed in
+
+## 0.0.26
+
+### Patch Changes
+
+- 0f28790: Add missing "auto" keyword for margin
+
+## 0.0.25
+
+### Patch Changes
+
+- e0eda11: Add smaller step for line height input
+
+## 0.0.24
+
+### Patch Changes
+
+- cf6302f: Add directional borders
+
+## 0.0.23
+
+### Patch Changes
+
+- d3fc370: Improve spec coverage and internal controls
+
+## 0.0.22
+
+### Patch Changes
+
+- eeae533: Add importColors utility function
+
+## 0.0.21
+
+### Patch Changes
+
+- 0f46b0c: Remove x/y shorthands for spacing
+
+## 0.0.20
+
+### Patch Changes
+
+- faa8f5d: Fix styled bug with undefined tag names
+
+## 0.0.19
+
+### Patch Changes
+
+- 57fde2a: Create a styled component with tag name members for rendering the canvas/element
+
+## 0.0.18
+
+### Patch Changes
+
+- 761ced3: Bump theme-ui from 0.14.2 to 0.14.5
+
+## 0.0.17
+
+### Patch Changes
+
+- a2071e7: Add license
+
+## 0.0.16
+
+### Patch Changes
+
+- c30697b: Add homepage to pkg
+
+## 0.0.15
+
+### Patch Changes
+
+- 80b0250: Add stroke-opacity
+
+## 0.0.14
+
+### Patch Changes
+
+- a00f204: Add word-wrap even though its an overflow-wrap alias
+
+## 0.0.13
+
+### Patch Changes
+
+- 9a6b880: Add all properties export
+- 2396616: Add opacity input
+- d251f4b: Add all keyword input
+
+## 0.0.12
+
+### Patch Changes
+
+- 32d67fb: Add all units to length input, begin incorporating new ranges
+
+## 0.0.11
+
+### Patch Changes
+
+- 92b1177: Add border radius input
+- 8820f98: Add border image input
+
+## 0.0.10
+
+### Patch Changes
+
+- e5e27f5: Add react as dev dep
+- 0119a1a: Add full property list with unsupported properties export
+
 ## 0.0.9
 
 ### Patch Changes

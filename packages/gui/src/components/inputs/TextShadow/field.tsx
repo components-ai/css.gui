@@ -5,14 +5,12 @@ import { TextShadow } from './types'
 
 import { stringifyTextShadow } from './stringify'
 
-import LayerHeader from '../../LayerHeader'
 import Layers from '../../Layers'
-import { getInputProps } from '../../../lib/util'
+import { EditorPropsWithLabel, getInputProps } from '../../../lib/util'
 
-export default function TextShadowField({
-  value,
-  onChange,
-}: EditorProps<TextShadow[]>) {
+export default function TextShadowInput(
+  props: EditorPropsWithLabel<TextShadow[]>
+) {
   const newItem = () => {
     // generate a new text shadow with the units of the previous box shadow
     return {
@@ -25,12 +23,11 @@ export default function TextShadowField({
   }
   return (
     <Layers<TextShadow>
-      value={value}
-      onChange={onChange}
+      {...props}
       newItem={newItem}
-      addLabel="+ Add text shadow"
-      header={Header}
       content={TextShadowEditor}
+      stringify={stringifyTextShadow}
+      thumbnail={Thumbnail}
     />
   )
 }
@@ -46,24 +43,18 @@ export const TextShadowEditor = (props: EditorProps<TextShadow>) => {
   )
 }
 
-export function Header({ value }: { value: TextShadow | TextShadow[] }) {
-  const style = stringifyTextShadow(value)
+function Thumbnail({ value }: { value: string }) {
   return (
-    <LayerHeader
-      text={style}
-      preview={
-        <div
-          sx={{
-            width: '100%',
-            height: '100%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <div sx={{ textShadow: style, fontWeight: 'bold' }}>Aa</div>
-        </div>
-      }
-    />
+    <div
+      sx={{
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <div sx={{ textShadow: value, fontWeight: 'bold' }}>Aa</div>
+    </div>
   )
 }

@@ -34,7 +34,7 @@
     "@changesets/cli": "^2.22.0",
     "@manypkg/cli": "^0.19.1",
     "prettier": "^2.6.2",
-    "tsup": "^5.12.5",
-    "turbo": "^1.2.4"
+    "tsup": "^5.12.6",
+    "turbo": "^1.2.6"
   }
 }

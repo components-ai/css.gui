@@ -16,7 +16,7 @@ all pseudo-elements and pseudo-selectors so you can also target
 
 ```js
 import { useState } from 'react'
-import { Editor, RenderElement, Fieldset, Inputs } from '@compai/css-gui'
+import { Editor, Fieldset, Inputs, styled } from '@compai/css-gui'
 
 const MyEditor = () => {
   const [styles, setStyles] = useState({})
@@ -34,9 +34,7 @@ const MyEditor = () => {
           </Fieldset>
         </>
       </Editor>
-      <RenderElement tagName="p" styles={styles}>
-        Hello, world!
-      </RenderElement>
+      <styled.p styles={styles}>Hello, world!</styled.p>
     </>
   )
 }
