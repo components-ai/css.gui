@@ -2,14 +2,14 @@ import { useState } from 'react'
 import { FontFamilyInput, styled } from '@compai/css-gui'
 
 export const FontFamilyExample = () => {
-  const [fontFamily, setFontFamily] = useState('Abel')
+  const [styles, setStyles] = useState({ fontFamily: 'Abel'})
 
   return (
     <>
-      <styled.p styles={{ fontFamily, fontSize: '24px' }}>
+      <styled.p styles={{ fontFamily: styles, fontSize: '24px' }}>
         Fun with fonts!
       </styled.p>
-      <FontFamilyInput value={fontFamily} onChange={setFontFamily} />
+      <FontFamilyInput value={styles} onChange={setStyles} />
     </>
   )
 }
