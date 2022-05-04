@@ -31,8 +31,13 @@ and then render the element styles to your canvas.
 import { useState } from 'react'
 import { Editor, styled } from '@compai/css-gui'
 
-export const MyEditor = () => {
-  const [styles, setStyles] = useState({})
+export default function MyEditor() {
+  const [styles, setStyles] = useState({
+    fontSize: {
+      value: 16,
+      unit: 'px',
+    },
+  })
 
   return (
     <>
