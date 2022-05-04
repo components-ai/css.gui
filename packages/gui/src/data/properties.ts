@@ -34,6 +34,8 @@ import { camelCase, uniqBy } from 'lodash-es'
 import { positiveRanges, UnitRanges } from './ranges'
 import TransitionInput from '../components/inputs/Transition/field'
 import { stringifyTransitionList } from '../components/inputs/Transition/stringify'
+import BackgroundInput from '../components/inputs/Background/field'
+import { stringifyBackground } from '../components/inputs/Background/stringify'
 
 type PropertyData = {
   type: string | ComponentType<any>
@@ -184,6 +186,10 @@ export const properties: Record<string, PropertyData> = {
   backfaceVisibility: {
     type: 'keyword',
     keywords: ['visible', 'hidden'],
+  },
+  background: {
+    type: BackgroundInput,
+    stringify: stringifyBackground,
   },
   backgroundAttachment: {
     type: 'keyword',
@@ -469,7 +475,14 @@ export const properties: Record<string, PropertyData> = {
   boxSnap: {
     type: 'keyword',
     defaultValue: 'none',
-    keywords: ['none', 'block-start', 'block-end', 'center', 'baseline', 'last-baseline'],
+    keywords: [
+      'none',
+      'block-start',
+      'block-end',
+      'center',
+      'baseline',
+      'last-baseline',
+    ],
   },
   boxSizing: {
     type: 'keyword',
@@ -537,7 +550,8 @@ export const properties: Record<string, PropertyData> = {
     type: 'keyword',
     keywords: ['none', 'left', 'right', 'both', 'inline-start', 'inline-end'],
   },
-  clipRule: { // SVG
+  clipRule: {
+    // SVG
     type: 'keyword',
     keywords: ['nonzero', 'evenodd'],
   },
@@ -708,10 +722,11 @@ export const properties: Record<string, PropertyData> = {
       'block flow-root',
     ],
   },
-  dominantBaseline: { // SVG 
+  dominantBaseline: {
+    // SVG
     type: 'keyword',
     keywords: [
-      'auto', 
+      'auto',
       'text-bottom',
       'alphabetic',
       'ideographic',
@@ -989,14 +1004,9 @@ export const properties: Record<string, PropertyData> = {
   },
   initialLetterAlign: {
     type: 'keyword',
-    keywords: [
-      'auto',
-      'alphabetic',
-      'hanging',
-      'ideographic',
-    ],
+    keywords: ['auto', 'alphabetic', 'hanging', 'ideographic'],
   },
-  initialLetterWrap: { 
+  initialLetterWrap: {
     type: 'length',
     percentage: true,
     keywords: ['none', 'first', 'all', 'grid'],
@@ -1625,7 +1635,7 @@ export const properties: Record<string, PropertyData> = {
   strokeDashOffset: {
     type: 'number',
     defaultValue: 0,
-    range: { number: [-9999, 9999] } // Todo add %
+    range: { number: [-9999, 9999] }, // Todo add %
   },
   strokeLinejoin: {
     type: 'keyword',
@@ -1728,8 +1738,8 @@ export const properties: Record<string, PropertyData> = {
   textDecorationSkip: {
     type: 'keyword',
     keywords: [
-      'none', 
-      'objects', 
+      'none',
+      'objects',
       'spaces',
       'edges',
       'box-decoration',
@@ -1840,13 +1850,7 @@ export const properties: Record<string, PropertyData> = {
   },
   textWrap: {
     type: 'keyword',
-    keywords: [
-      'wrap',
-      'nowrap',
-      'balance',
-      'stable',
-      'pretty',
-    ],
+    keywords: ['wrap', 'nowrap', 'balance', 'stable', 'pretty'],
   },
   top: {
     type: 'length',
@@ -1975,37 +1979,15 @@ export const properties: Record<string, PropertyData> = {
   },
   wrapAfter: {
     type: 'keyword',
-    keywords: [
-      'auto',
-      'avoid',
-      'avoid-line',
-      'aboid-flex',
-      'line',
-      'flex',
-    ],
+    keywords: ['auto', 'avoid', 'avoid-line', 'aboid-flex', 'line', 'flex'],
   },
   wrapBefore: {
     type: 'keyword',
-    keywords: [
-      'auto',
-      'avoid',
-      'avoid-line',
-      'aboid-flex',
-      'line',
-      'flex',
-    ],
+    keywords: ['auto', 'avoid', 'avoid-line', 'aboid-flex', 'line', 'flex'],
   },
   wrapFlow: {
     type: 'keyword',
-    keywords: [
-      'auto',
-      'both',
-      'start',
-      'end',
-      'minimum',
-      'maximum',
-      'clear',
-    ],
+    keywords: ['auto', 'both', 'start', 'end', 'minimum', 'maximum', 'clear'],
   },
   wrapInside: {
     type: 'keyword',
