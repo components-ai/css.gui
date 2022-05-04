@@ -24,6 +24,14 @@ const initialStyles = {
   },
   textDecorationLine: 'underline',
   textDecorationStyle: 'wavy',
+  width: {
+    value: 100,
+    unit: '%'
+  },
+  maxWidth: {
+    value: 42,
+    unit: 'em'
+  }
 }
 
 export default function Typography() {
