@@ -4,6 +4,8 @@ import { Editor, Inputs, styled, codegen } from '@compai/css-gui'
 import { defaultTheme } from '../../data/default-theme'
 
 const initialStyles = {
+  color: 'text',
+  backgroundColor: 'background',
   fontFamily: 'Recursive',
   fontSize: {
     value: 3,
@@ -43,15 +45,17 @@ export default function Typography() {
         className="full-bleed"
         sx={{
           display: 'flex',
-          py: [2, 3, 4],
-          borderTopWidth: 'thin',
         }}
       >
         <div sx={{ px: [2, 3, 4] }}>
           <Editor styles={styles} onChange={setStyles} theme={defaultTheme}>
             <>
               <section sx={{ display: 'grid', gap: '.5rem', width: '240px' }}>
-                <h3 sx={{ mt: 4, mb: 0 }}>Typography</h3>
+                <div sx={{display: 'flex', gap: '2rem'}}>
+                  <Inputs.Color />
+                  <Inputs.BackgroundColor />
+                </div>
+                <h3 sx={{ mt: 3, mb: 0 }}>Typography</h3>
                 <Inputs.FontFamily />
               </section>
               <section sx={{ mt: 4, display: 'grid', gap: '.5rem', width: '240px' }}>
