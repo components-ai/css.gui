@@ -41,6 +41,8 @@ import {
 } from '../components/inputs/Background/stringify'
 import MaskInput from '../components/inputs/Mask/field'
 import { stringifyMaskList } from '../components/inputs/Mask/stringify'
+import AnimationInput from '../components/inputs/Animation/field'
+import { stringifyAnimationList } from '../components/inputs/Animation/stringify'
 
 type PropertyData = {
   type: string | ComponentType<any>
@@ -138,6 +140,7 @@ export const properties: Record<string, PropertyData> = {
     type: 'keyword',
     keywords: [],
   },
+  animation: { type: AnimationInput, stringify: stringifyAnimationList },
   // TODO array of time values
   animationDelay: { type: 'time' },
   animationDirection: {
