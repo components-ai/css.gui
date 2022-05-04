@@ -66,10 +66,9 @@ const Control = ({ field }: ControlProps) => {
             }
           })
           setFields(newValue)
+        } else {
+          setField(fullField, newValue)
         }
-        sideEffects.length
-          ? setFields(newValue)
-          : setField(fullField, newValue)
       }}
       themeValues={themeValues}
       {...properties[property]}

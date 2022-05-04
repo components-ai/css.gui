@@ -25,7 +25,6 @@ export function useEditor() {
   }
 
   function getFields<T = any>(fields: KeyArg[] | undefined) {
-    // console.log(value, "firstv ")
     const fieldsValue = fields?.reduce((acc: any, curr: KeyArg) => {
       const fieldValue = (get(value, curr) as T)
       return fieldValue ? {
