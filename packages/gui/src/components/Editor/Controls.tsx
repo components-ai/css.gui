@@ -21,11 +21,13 @@ import { kebabCase } from 'lodash-es'
 import { useThemeProperty } from '../providers/ThemeContext'
 import { PositionInput } from '../inputs/PositionInput'
 import { TimeInput } from '../inputs/TimeInput'
+import { UnitSteps } from '../../lib'
+import { UnitRanges } from '../../data/ranges'
 
-type ControlProps = {
+type ControlProps = InputProps & {
   field: KeyArg
 }
-const Control = ({ field }: ControlProps) => {
+const Control = ({ field, ...props }: ControlProps) => {
   const { getField, setField } = useEditor()
   const fieldset = useFieldset()
   const property = field.toString()
@@ -53,13 +55,21 @@ const Control = ({ field }: ControlProps) => {
       themeValues={themeValues}
       {...properties[property]}
       keywords={keywords}
+      {...props}
     />
   )
 }
 
+type InputProps = {
+  label?: string
+  steps?: UnitSteps
+  range?: UnitRanges
+}
 export const Inputs: Record<string, any> = {}
 Object.keys(properties).forEach((field: string) => {
-  Inputs[pascal(field)] = () => <Control field={field} />
+  Inputs[pascal(field)] = (props: InputProps) => (
+    <Control {...props} field={field} />
+  )
 })
 
 type ControlsProps = {
