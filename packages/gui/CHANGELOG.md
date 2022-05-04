@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.30
+
+### Patch Changes
+
+- 0a08008: Add new properties including some stacked shorthands
+
 ## 0.0.29
 
 ### Patch Changes
