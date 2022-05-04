@@ -1,5 +1,7 @@
+import { uniqBy } from 'lodash-es'
+
 // From: https://gist.github.com/davidhund/3bd6757d6a36a283b0a2933666bd1976
-export const allProperties = [
+export const everySinglePropertyEver = [
   {
     property: '--*',
     url: 'http://dev.w3.org/csswg/css-variables/#propdef-',
@@ -5389,3 +5391,18 @@ export const allProperties = [
     title: 'CSS Positioned Layout Module Level 3',
   },
 ]
+
+// Modules that are still in early drafts or otherwise not supported at all
+const invalidModules = [
+  'CSS Speech Module',
+  'CSS Rhythmic Sizing',
+  'CSS Generated Content for Paged Media Module',
+]
+export const allProperties = uniqBy(everySinglePropertyEver, 'property').filter(
+  (prop) => {
+    if (invalidModules.includes(prop.title)) {
+      return false
+    }
+    return true
+  }
+)
