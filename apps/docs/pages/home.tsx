@@ -36,9 +36,9 @@ export default function Docs() {
           gridTemplateColumns: '1fr 1fr 1fr',
         }}
       >
-        <li>692 properties</li>
+        <li>245 properties</li>
         <li>+1000 Google Fonts</li>
-        <li>Variable fonts</li>
+        <li>Full variable fonts support</li>
         <li>Responsive value arrays</li>
         <li>Theme aware inputs</li>
         <li>Scrubbable number inputs</li>
