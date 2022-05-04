@@ -6,7 +6,7 @@ export const FontFamilyExample = () => {
 
   return (
     <>
-      <styled.p styles={{ fontFamily: styles, fontSize: '24px' }}>
+      <styled.p styles={styles}>
         Fun with fonts!
       </styled.p>
       <FontFamilyInput value={styles} onChange={setStyles} />
