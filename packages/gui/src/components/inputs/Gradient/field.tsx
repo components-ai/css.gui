@@ -23,7 +23,7 @@ type GradientFieldProps = {
 }
 export const GradientField = (props: GradientFieldProps) => {
   return (
-    <div sx={{ px: 3, pb: 2 }}>
+    <div>
       <div sx={{ py: 1, display: 'flex', alignItems: 'center' }}>
         <SelectInput
           {...getInputProps(props, 'type')}

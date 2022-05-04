@@ -1,13 +1,7 @@
 import produce from 'immer'
 import { ComponentType, ReactChild, useId } from 'react'
 import pascal from 'pascalcase'
-import {
-  CSSUnitValue,
-  Length,
-  ResponsiveLength,
-  Styles,
-  TIME_UNITS,
-} from '../../types/css'
+import { CSSUnitValue, Length, ResponsiveLength, Styles } from '../../types/css'
 import { Theme } from '../../types/theme'
 import { EditorProvider, useEditor } from '../providers/EditorContext'
 import { EditorData, KeyArg, Recipe } from '../providers/types'
@@ -26,6 +20,7 @@ import { Label } from '../primitives'
 import { kebabCase } from 'lodash-es'
 import { useThemeProperty } from '../providers/ThemeContext'
 import { PositionInput } from '../inputs/PositionInput'
+import { TimeInput } from '../inputs/TimeInput'
 import { UnitSteps } from '../../lib'
 import { UnitRanges } from '../../data/ranges'
 
@@ -228,17 +223,6 @@ const ResponsiveLengthInput = ({
   )
 }
 
-const TimeInput = (props: EditorPropsWithLabel<CSSUnitValue>) => {
-  return (
-    <DimensionInput
-      units={TIME_UNITS}
-      steps={timeSteps}
-      conversions={timeConversions}
-      {...props}
-    />
-  )
-}
-
 const DEFAULT_KEYWORD = 'inherit'
 const KeywordInput = ({
   value,
@@ -254,16 +238,6 @@ const KeywordInput = ({
       options={keywords}
     />
   )
-}
-
-const timeConversions = {
-  ms: 1000,
-  s: 1,
-}
-
-const timeSteps = {
-  ms: 25,
-  s: 0.025,
 }
 
 const TextInput = ({

@@ -65,6 +65,10 @@ export type LengthUnit = typeof LENGTH_UNITS[number]
 
 export const TIME_UNITS = ['ms', 's'] as const
 export type TimeUnit = typeof TIME_UNITS[number]
+export interface Time {
+  value: number
+  unit: TimeUnit
+}
 
 export const ANGLE_UNITS = ['deg', 'turn', 'rad', 'grad'] as const
 export type AngleUnit = typeof ANGLE_UNITS[number]

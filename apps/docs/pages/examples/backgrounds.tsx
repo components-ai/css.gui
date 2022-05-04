@@ -18,18 +18,27 @@ const initialStyles = {
     unit: 'number',
   },
   fontFamily: 'Space Mono',
-  backgroundImage: [
+  background: [
     {
-      type: 'url',
-      arguments: [ 'https://source.unsplash.com/random'], 
-    }
-   ],
-  backgroundImageRepeat: 'no-repeat',
-  backgroundSize: 'cover',
+      image: {
+        type: 'url',
+        arguments: ['https://source.unsplash.com/random'],
+      },
+      position: {
+        x: { value: 'center', type: 'keyword' },
+        y: { value: 'center', type: 'keyword' },
+      },
+      repeat: { x: 'no-repeat', y: 'no-repeat' },
+      size: { x: { value: 100, unit: '%' }, y: { value: 100, unit: '%' } },
+      attachment: 'fixed',
+      origin: 'border-box',
+      clip: 'border-box',
+    },
+  ],
   padding: {
     value: 128,
     unit: 'px',
-  }
+  },
 }
 
 export default function TextDecoration() {
@@ -47,18 +56,10 @@ export default function TextDecoration() {
       >
         <div sx={{ px: [2, 3, 4] }}>
           <Editor styles={styles} onChange={setStyles} theme={defaultTheme}>
-            <section sx={{ display: 'grid', gap: '.5rem', width: '240px' }}>
+            <section sx={{ display: 'grid', gap: '.5rem', width: '320px' }}>
               <h3 sx={{ mt: 4, mb: 0 }}>Backgrounds</h3>
-              <Inputs.BackgroundColor />
-              <Inputs.BackgroundImage />
-              <Inputs.BackgroundRepeat />
-              <Inputs.BackgroundSize />
+              <Inputs.Background />
               <Inputs.BackgroundBlendMode />
-              <Inputs.BackgroundAttachment />
-              <Inputs.BackfaceVisibility />
-              <Inputs.BackgroundClip />
-              <Inputs.BackgroundPositionX />
-              <Inputs.BackgroundPositionY />
               <h3 sx={{ mt: 4, mb: 0 }}>Typography</h3>
               <Inputs.FontFamily />
               <Inputs.FontSize />

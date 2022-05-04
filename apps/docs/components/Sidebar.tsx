@@ -34,12 +34,14 @@ export const Sidebar = () => {
       <NavItem href="/inputs/font-family">Font Family</NavItem>
       <NavSectionTitle>Examples</NavSectionTitle>
       <NavItem href="/examples/transitions">Transitions</NavItem>
+      <NavItem href="/examples/animations">Animations</NavItem>
       <NavItem href="/examples/shadows">Shadows</NavItem>
       <NavItem href="/examples/filters">Filters</NavItem>
       <NavItem href="/examples/transforms">Transforms</NavItem>
       <NavItem href="/examples/borders">Borders</NavItem>
       <NavItem href="/examples/border-images">Border Images</NavItem>
       <NavItem href="/examples/backgrounds">Backgrounds</NavItem>
+      <NavItem href="/examples/masks">Masks</NavItem>
       <NavItem href="/examples/space">Space</NavItem>
       <NavItem href="/examples/text-decoration">Text Decoration</NavItem>
       <NavSectionTitle>TODO</NavSectionTitle>
