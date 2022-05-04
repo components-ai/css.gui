@@ -52,6 +52,7 @@ type PropertyData = {
   range?: UnitRanges
   defaultValue?: string | number
   stringify?: (value: any) => string
+  dependantProperties?: string[]
   steps?: UnitSteps
   label?: string
 }
@@ -843,6 +844,7 @@ export const properties: Record<string, PropertyData> = {
   },
   fontFamily: {
     type: FontFamily,
+    dependantProperties: ['fontStyle', 'fontStretch', 'fontWeight', 'fontVariationSettings']
   },
   fontKerning: {
     type: 'keyword',

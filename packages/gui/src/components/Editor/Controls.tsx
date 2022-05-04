@@ -24,7 +24,7 @@ import { UnitSteps } from '../../lib'
 import { pascalCase } from '../../lib/util'
 import { UnitRanges } from '../../data/ranges'
 
-type ControlProps = InputProps & {
+interface ControlProps extends InputProps {
   field: KeyArg
 }
 const Control = ({ field, ...props }: ControlProps) => {
@@ -37,6 +37,7 @@ const Control = ({ field, ...props }: ControlProps) => {
     ...(properties[property].keywords ?? []),
     ...GLOBAL_KEYWORDS,
   ]
+  const dependantProperties = properties[property].dependantProperties ?? []
 
   if (!Component) {
     console.error(`Unknown field: ${field}, ignoring`)
@@ -44,17 +45,56 @@ const Control = ({ field, ...props }: ControlProps) => {
   }
 
   const fullField = fieldset ? joinPath(fieldset.name, field) : field
+  const componentProps = {
+    label: sentenceCase(property),
+    themeValues: themeValues,
+    keywords,
+    ...properties[property],
+    ...props
+  }
+
+  if (dependantProperties.length) {
+    return <ComponentWithPropertyGroup 
+      dependantProperties={dependantProperties}
+      property={property}
+      {...componentProps}
+    />
+  }
 
   return (
     <Component
-      label={sentenceCase(property)}
       value={getField(fullField)}
       onChange={(newValue: any) => {
         setField(fullField, newValue)
       }}
-      themeValues={themeValues}
-      {...properties[property]}
-      keywords={keywords}
+      {...componentProps}
+    />
+  )
+}
+
+interface ComponentGroupProps {
+  dependantProperties: string[],
+  property: string
+}
+const ComponentWithPropertyGroup = ({ dependantProperties, property, ...props }: ComponentGroupProps) => {
+  const Component: ComponentType<any> = getInputComponent(property)
+  const {
+    getFields,
+    setFields,
+    removeField
+  } = useEditor()
+
+  return (
+    <Component
+      value={getFields([...dependantProperties, property])}
+      onChange={(newValue: any) => {
+        dependantProperties.forEach((dp) => {
+          if (!Object.keys(newValue).includes(dp)) {
+            removeField(dp)
+          }
+        })
+        setFields(newValue)
+      }}
       {...props}
     />
   )

@@ -1,34 +1,23 @@
 import * as React from 'react'
 import { debounce } from 'lodash-es'
-import { plusify } from '../../../lib/util'
+import { toGoogleFontUrl, toGoogleVariableFontUrl } from '../../../lib/util'
 
-type FontFamilyData = {
-  name: string
-  weights: (string | number)[]
-  styles: string[]
-}
+export const getVariableFontFamilyHref = async (
+  fontFamily: string
+) => {
+  const formattedName = fontFamily?.replace(/['"]+/g, '')
+  try {
+    const res = await fetch(`https://components.ai/api/v1/typefaces/variable?name=${formattedName}`)
+    const varFontData = await res.json()
+    const fullData = {
+      name: fontFamily,
+      ...(varFontData ?? {})
+    }
 
-const toGoogleFontUrl = (families: FontFamilyData[]) => {
-  if (!families?.length) return null
-
-  let familiesFmt: any[] = []
-
-  families.forEach((family) => {
-    let name = plusify(family.name)
-    family.weights.forEach((weight) => {
-      family.styles.forEach((style) => {
-        let query = `family=${name}:`
-        let italics = ''
-
-        if (style === 'italic') italics = 'ital,'
-        familiesFmt.push(
-          `${query}${italics}wght@${italics ? '1,' : ''}${weight}`
-        )
-      })
-    })
-  })
-
-  return `https://fonts.googleapis.com/css2?${familiesFmt.join('&')}`
+    return toGoogleVariableFontUrl([fullData])
+  } catch {
+    return null
+  }
 }
 
 const getFontFamilyHref = async (font: string) => {
@@ -38,7 +27,7 @@ const getFontFamilyHref = async (font: string) => {
 
     const styles = Object.keys(rawFontData?.variants)
     const weights = Object.keys(rawFontData?.variants[styles[0]])
-    const fontData: FontFamilyData = {
+    const fontData = {
       name: rawFontData?.name,
       weights,
       styles,
@@ -51,22 +40,34 @@ const getFontFamilyHref = async (font: string) => {
   }
 }
 
+const getVariableStyleSheet = async (fontFamily: string, setVariableStyleSheet: Function) => {
+  const sheet = await getVariableFontFamilyHref(fontFamily)  
+  setVariableStyleSheet(sheet)
+}
+const debouncedVariableStyleSheet = debounce(getVariableStyleSheet, 1000)
+
 const getStyleSheet = async (fontFamily: string, setStyleSheet: Function) => {
   const sheet = await getFontFamilyHref(fontFamily)
-  if (sheet) setStyleSheet(sheet)
+  setStyleSheet(sheet)
 }
 const debouncedGetStyleSheet = debounce(getStyleSheet, 1000)
 
 export const FontTags = ({ fontFamily }: any) => {
   const [styleSheet, setStyleSheet] = React.useState<string | null>('')
-
+  const [variableStyleSheet, setVariableStyleSheet] = React.useState<string | null>('')
+  
   React.useEffect(() => {
+    debouncedVariableStyleSheet(fontFamily, setVariableStyleSheet)
     debouncedGetStyleSheet(fontFamily, setStyleSheet)
   }, [fontFamily])
-
+ 
   if (!fontFamily) {
     return null
   }
 
-  return <>{styleSheet ? <link rel="stylesheet" href={styleSheet} /> : null}</>
+  return <>{styleSheet || variableStyleSheet 
+    ? <link rel="stylesheet" href={variableStyleSheet || styleSheet || ''} />
+    : null
+  }</>
+
 }
