@@ -1,13 +1,7 @@
 import produce from 'immer'
 import { ComponentType, ReactChild, useId } from 'react'
 import pascal from 'pascalcase'
-import {
-  CSSUnitValue,
-  Length,
-  ResponsiveLength,
-  Styles,
-  TIME_UNITS,
-} from '../../types/css'
+import { CSSUnitValue, Length, ResponsiveLength, Styles } from '../../types/css'
 import { Theme } from '../../types/theme'
 import { EditorProvider, useEditor } from '../providers/EditorContext'
 import { EditorData, KeyArg, Recipe } from '../providers/types'
