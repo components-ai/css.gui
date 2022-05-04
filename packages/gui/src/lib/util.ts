@@ -1,7 +1,7 @@
 import { EditorProps } from '../types/editor'
 import { isPseudoClass, isPseudoElement } from './pseudos'
 import { isElement } from './elements'
-import { lowerCase, upperFirst } from 'lodash-es'
+import { camelCase, lowerCase, startCase, upperFirst } from 'lodash-es'
 
 export type EditorPropsWithLabel<T> = EditorProps<T> & { label: string }
 /**
@@ -57,4 +57,8 @@ export function squeeze(s: string) {
 
 export function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1) + min)
+}
+
+export function pascalCase(str: string) {
+  return startCase(camelCase(str))
 }

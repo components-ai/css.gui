@@ -1,6 +1,5 @@
 import produce from 'immer'
 import { ComponentType, ReactChild, useId } from 'react'
-import pascal from 'pascalcase'
 import { CSSUnitValue, Length, ResponsiveLength, Styles } from '../../types/css'
 import { Theme } from '../../types/theme'
 import { EditorProvider, useEditor } from '../providers/EditorContext'
@@ -22,6 +21,7 @@ import { useThemeProperty } from '../providers/ThemeContext'
 import { PositionInput } from '../inputs/PositionInput'
 import { TimeInput } from '../inputs/TimeInput'
 import { UnitSteps } from '../../lib'
+import { pascalCase } from '../../lib/util'
 import { UnitRanges } from '../../data/ranges'
 
 type ControlProps = InputProps & {
@@ -67,7 +67,7 @@ type InputProps = {
 }
 export const Inputs: Record<string, any> = {}
 Object.keys(properties).forEach((field: string) => {
-  Inputs[pascal(field)] = (props: InputProps) => (
+  Inputs[pascalCase(field)] = (props: InputProps) => (
     <Control {...props} field={field} />
   )
 })
