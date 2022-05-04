@@ -1,6 +1,6 @@
 import * as React from 'react'
-import { debounce, property } from 'lodash-es'
-import { FontFamilyType, TempFontFamilyType } from '../../../types/css'
+import { property } from 'lodash-es'
+import { FontFamilyType } from '../../../types/css'
 import { EditorProps } from '../../../types/editor'
 import { Label } from '../../primitives'
 import { useCombobox } from 'downshift'
@@ -33,9 +33,9 @@ const nameMap: any = {
   MONO: 'Monospace'
 }
 
-interface Props extends EditorProps<TempFontFamilyType> {
+interface Props extends EditorProps<FontFamilyType> {
   label: string,
-  defaultValue?: TempFontFamilyType
+  defaultValue?: FontFamilyType
 }
 
 export function FontFamilyInput({
@@ -73,7 +73,7 @@ export function FontFamilyInput({
   const [includeMono, setIncMono] = React.useState<boolean>(true)
 
   React.useEffect(() => {
-    handleFilterItems(value?.fontFamily)
+    handleFilterItems(value.fontFamily)
   }, [includeMono, includeSans, includeSerif])
 
   const {
@@ -159,10 +159,7 @@ export function FontFamilyInput({
         value={value}
         {...getInputProps({ 
           ref: inputRef,
-          onChange: (e: any) => {
-            const name = e.target.value
-            handleFontChange(name)
-          },
+          onChange: (e: any) => handleFontChange(e.target.value),
         })}
         onFocus={() => {
           if (!isOpen) {
