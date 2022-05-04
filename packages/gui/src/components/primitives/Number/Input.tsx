@@ -22,19 +22,19 @@ export const DraggableInput = ({
   const initialValue = React.useRef<number>(value)
 
   const bind = useDrag(
-    ({ dragging, first, tap, movement: [dx] }) => {
+    ({ dragging, first, last, tap, movement: [dx] }) => {
       setDragging(dragging)
       const parsedValue = typeof value === 'string' ? parseFloat(value) : value
 
-      if (tap) return
+      if (tap || last) return
       if (first) {
         initialValue.current = parsedValue
       }
 
       const deltaValue = dx * step
       let newValue = roundToStep(initialValue.current + deltaValue, step)
-      if (min || min === 0) newValue = Math.max(newValue, min)
-      if (max) newValue = Math.min(newValue, max)
+      if (dragging && (min || min === 0)) newValue = Math.max(newValue, min)
+      if (dragging && max) newValue = Math.min(newValue, max)
 
       onUpdate(newValue)
     },
@@ -47,8 +47,8 @@ export const DraggableInput = ({
       value={value}
       onChange={({ currentTarget: { value: inputValue } }) => {
         let newValue = parseFloat(inputValue)
-        if (min || min === 0) newValue = Math.max(newValue, min)
-        if (max) newValue = Math.min(newValue, max)
+        if (dragging && (min || min === 0)) newValue = Math.max(newValue, min)
+        if (dragging && max) newValue = Math.min(newValue, max)
 
         onUpdate(newValue)
       }}
