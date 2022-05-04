@@ -1,5 +1,12 @@
 # @compai/css-gui
 
+## 0.0.33
+
+### Patch Changes
+
+- c90b015: Implement variable fonts
+- 81cfd40: Fix pascal case bug
+
 ## 0.0.32
 
 ### Patch Changes
