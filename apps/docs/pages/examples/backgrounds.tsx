@@ -25,8 +25,8 @@ const initialStyles = {
         arguments: ['https://source.unsplash.com/random'],
       },
       position: {
-        x: { value: 'center', type: 'keyword' },
-        y: { value: 'center', type: 'keyword' },
+        x: { value: 'center', unit: 'keyword' },
+        y: { value: 'center', unit: 'keyword' },
       },
       repeat: { x: 'no-repeat', y: 'no-repeat' },
       size: { x: { value: 100, unit: '%' }, y: { value: 100, unit: '%' } },
