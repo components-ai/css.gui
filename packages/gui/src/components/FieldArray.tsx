@@ -4,6 +4,7 @@ import * as Collapsible from '@radix-ui/react-collapsible'
 import IconButton from './ui/IconButton'
 import { kebabCase } from 'lodash-es'
 import { Label } from './primitives'
+import { ExpandMarker } from './ui/ExpandMarker'
 
 interface FieldArrayProps<T> {
   label: string
@@ -38,7 +39,7 @@ export default function FieldArray<T>({
   stringify,
 }: FieldArrayProps<T>) {
   const id = `${useId()}-${kebabCase(label)}`
-  const [expandedLayer, setExpandedLayer] = useState(-1)
+  const [open, setOpen] = useState(true)
 
   const handleReorder = (i1: number, i2: number) => {
     onChange(flip(value, i1, i2))
@@ -46,7 +47,7 @@ export default function FieldArray<T>({
 
   return (
     <div>
-      <Collapsible.Root id={id} defaultOpen>
+      <Collapsible.Root id={id} open={open} onOpenChange={setOpen}>
         <div
           sx={{
             display: 'grid',
@@ -57,6 +58,8 @@ export default function FieldArray<T>({
           <Label htmlFor={id}>{label}</Label>
           <Collapsible.Trigger
             sx={{
+              display: 'flex',
+              alignItems: 'center',
               textAlign: 'left',
               cursor: 'pointer',
               width: '100%',
@@ -66,6 +69,7 @@ export default function FieldArray<T>({
               p: 0,
             }}
           >
+            <ExpandMarker open={open} />
             {stringify(value)}
           </Collapsible.Trigger>
         </div>
@@ -104,13 +108,6 @@ export default function FieldArray<T>({
                       title="Delete"
                       onClick={() => {
                         onChange(remove(value, i))
-                        // If the deleted value was expanded, close it
-                        if (i === expandedLayer) {
-                          setExpandedLayer(-1)
-                        } else if (i < expandedLayer) {
-                          // If the deleted value was at a lower index, adjust expanded value accordingly
-                          setExpandedLayer((v) => v - 1)
-                        }
                       }}
                     >
                       <Trash size={16} />
@@ -129,11 +126,6 @@ export default function FieldArray<T>({
                         onClick={() => {
                           if (i > 0) {
                             handleReorder(i, i - 1)
-                            if (i === expandedLayer) {
-                              setExpandedLayer(i - 1)
-                            } else if (i - 1 === expandedLayer) {
-                              setExpandedLayer(i)
-                            }
                           }
                         }}
                       >
@@ -144,11 +136,6 @@ export default function FieldArray<T>({
                         onClick={() => {
                           if (i < value.length - 1) {
                             handleReorder(i, i + 1)
-                          }
-                          if (i === expandedLayer) {
-                            setExpandedLayer(i + 1)
-                          } else if (i + 1 === expandedLayer) {
-                            setExpandedLayer(i)
                           }
                         }}
                       >
