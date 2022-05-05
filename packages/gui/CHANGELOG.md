@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.36
+
+### Patch Changes
+
+- 1095de4: Fix some React warnings for id mismatches and missing keys
+
 ## 0.0.35
 
 ### Patch Changes
