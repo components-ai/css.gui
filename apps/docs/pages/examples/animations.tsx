@@ -1,6 +1,7 @@
 import { Editor, Inputs, toCSSObject } from '@compai/css-gui'
 import Head from 'next/head'
 import { useState } from 'react'
+import { Container } from '../../components/Container'
 
 const initialStyles = {
   animation: [
@@ -26,11 +27,12 @@ const initialStyles = {
 export default function AnimationExample() {
   const [styles, setStyles] = useState<any>(initialStyles)
   return (
-    <div>
+    <div sx={{pt: 5}}>
+      <Container>
       <h1>Animations</h1>
       <p>
         Try out any of the animations from{' '}
-        <a href="https://animate.style/">animate.css</a>!
+        <a sx={{color: 'currentColor'}}href="https://animate.style/">animate.css</a>!
       </p>
       <Head>
         <link
@@ -53,6 +55,7 @@ export default function AnimationExample() {
           Animate!
         </div>
       </div>
+      </Container>
     </div>
   )
 }

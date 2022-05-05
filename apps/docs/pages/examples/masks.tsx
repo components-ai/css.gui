@@ -1,6 +1,7 @@
 import { codegen, Editor, Inputs, styled, toCSSObject } from '@compai/css-gui'
 import { useState } from 'react'
 import { defaultTheme } from '../../data/default-theme'
+import { Container } from '../../components/Container'
 
 const initialStyles = {
   mask: [
@@ -33,11 +34,15 @@ const initialStyles = {
 export default function MaskExample() {
   const [styles, setStyles] = useState<any>(initialStyles)
   return (
-    <div sx={{ display: 'grid', gridTemplateColumns: '18rem 1fr' }}>
+    <div sx={{ pt: 5 }}>
+    <Container>
+      <div sx={{ mb: 5 }}>
+        <img src="https://source.unsplash.com/random" sx={toCSSObject(styles)} />
+      </div>
       <Editor styles={styles} onChange={setStyles} theme={defaultTheme}>
         <Inputs.Mask />
       </Editor>
-      <img src="https://source.unsplash.com/random" sx={toCSSObject(styles)} />
+      </Container>
     </div>
   )
 }

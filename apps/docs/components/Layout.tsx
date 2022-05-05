@@ -61,7 +61,7 @@ export const Layout = (props: Props) => {
         sx={{
           fontFamily: 'body',
           display: 'flex',
-          flexDirection: ['column', 'row'],
+          flexDirection: ['column-reverse', 'initial'],
         }}
         {...props}
       />

@@ -1,5 +1,6 @@
 import { Editor, styled } from '@compai/css-gui'
 import { useState } from 'react'
+import { Container } from '../../components/Container'
 
 const initialStyles = {
   boxShadow: [
@@ -37,26 +38,30 @@ export default function Shadows() {
   const [styles, setStyles] = useState<any>(initialStyles)
   return (
     <div>
-      <Editor styles={styles} onChange={setStyles} />
       <div
         sx={{
-          m: 4,
+          my: 5,
           display: 'flex',
           justifyContent: 'center',
         }}
       >
         <styled.div
           styles={{
-            width: '12rem',
-            height: '12rem',
+            width: '32rem',
+            height: '20rem',
+            maxWidth: '100%',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
+            fontSize: '64px',
             ...styles,
           }}
         >
           Fun with shadows
         </styled.div>
+      </div>
+      <div sx={{ display: 'flex', justifyContent: 'center',}}>
+        <Editor styles={styles} onChange={setStyles} />
       </div>
     </div>
   )
