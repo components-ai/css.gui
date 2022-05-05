@@ -754,6 +754,10 @@ export const properties: Record<string, PropertyData> = {
     type: 'keyword',
     keywords: ['show', 'hide'],
   },
+  fill: {
+    type: 'color',
+    keywords: ['none', 'context-fill', 'context-stroke'],
+  },
   filter: {
     type: FilterPicker,
     stringify: stringifyFilter,
@@ -1649,6 +1653,11 @@ export const properties: Record<string, PropertyData> = {
   shapeMargin: {
     type: 'length',
     percentage: true,
+  },
+  stroke: {
+    // TODO URL <color> values
+    type: 'color',
+    keywords: ['none', 'context-fill', 'context-stroke'],
   },
   strokeAlignment: {
     type: 'keyword',
