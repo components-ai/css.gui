@@ -44,6 +44,10 @@ import MaskInput from '../components/inputs/Mask/field'
 import { stringifyMaskList } from '../components/inputs/Mask/stringify'
 import AnimationInput from '../components/inputs/Animation/field'
 import { stringifyAnimationList } from '../components/inputs/Animation/stringify'
+import {
+  stringifyStrokeDasharray,
+  StrokeDasharrayInput,
+} from '../components/inputs/StrokeDasharray'
 
 type PropertyData = {
   type: string | ComponentType<any>
@@ -1662,6 +1666,10 @@ export const properties: Record<string, PropertyData> = {
   strokeAlignment: {
     type: 'keyword',
     keywords: ['center', 'inner', 'outer'],
+  },
+  strokeDasharray: {
+    type: StrokeDasharrayInput,
+    stringify: stringifyStrokeDasharray,
   },
   strokeDashadjust: {
     type: 'keyword',
