@@ -19,47 +19,56 @@ export function Demo() {
           borderColor: 'border',
         }}
       >
-          <Editor styles={styles} onChange={setStyles} theme={defaultTheme}>
-            <div sx={{ display: 'grid', gap: '.5rem', borderRightWidth: '1px', borderRightStyle: 'solid', borderColor: 'border', p: 4 }}>
-              <h3 sx={{ fontSize: 2, my: 0 }}>Typography</h3>
-              <Inputs.FontFamily />
-              <Inputs.FontSize />
-              <Inputs.LineHeight />
-              <Inputs.TextAlign />
-              <Inputs.FontStyle />
-              <Inputs.FontStretch />
-              <h3 sx={{ fontSize: 2, mt: 4, mb: 0 }}>Colors</h3>
-              <div sx={{ display: 'flex' }}>
-                <div sx={{ mr: 2 }}>
-                  <Inputs.Color />
-                </div>
-                <div>
-                  <Inputs.BackgroundColor />
-                </div>
+        <Editor styles={styles} onChange={setStyles} theme={defaultTheme}>
+          <div
+            sx={{
+              display: 'grid',
+              gap: '.5rem',
+              borderRightWidth: '1px',
+              borderRightStyle: 'solid',
+              borderColor: 'border',
+              p: 4,
+            }}
+          >
+            <h3 sx={{ fontSize: 2, my: 0 }}>Typography</h3>
+            <Inputs.FontFamily />
+            <Inputs.FontSize />
+            <Inputs.LineHeight />
+            <Inputs.TextAlign />
+            <Inputs.FontStyle />
+            <Inputs.FontStretch />
+            <h3 sx={{ fontSize: 2, mt: 4, mb: 0 }}>Colors</h3>
+            <div sx={{ display: 'flex' }}>
+              <div sx={{ mr: 2 }}>
+                <Inputs.Color />
               </div>
-              <h3 sx={{ fontSize: 2, mt: 4, mb: 0 }}>Borders</h3>
-              <Inputs.BorderRadius />
-              <Inputs.BorderWidth />
-              <Inputs.BorderStyle />
-              <Inputs.BorderColor />
-              <Inputs.BorderImageSource />
-              <Inputs.BorderImageSlice />
-              <Inputs.BorderImageOutset />
-              <Inputs.BorderImageRepeat />
-              <Inputs.BorderImageWidth />
-
-              <h3 sx={{ fontSize: 2, mt: 4, mb: 0 }}>Spacing</h3>
-              <Inputs.Margin />
-              <Inputs.Padding />
-              <h3 sx={{ fontSize: 2, mt: 4, mb: 0 }}>Size</h3>
-              <Inputs.Width />
-              <Inputs.MinWidth />
-              <Inputs.MaxWidth />
-              <Inputs.Height />
-              <Inputs.MinHeight />
-              <Inputs.MaxHeight />
+              <div>
+                <Inputs.BackgroundColor />
+              </div>
             </div>
-          </Editor>
+            <h3 sx={{ fontSize: 2, mt: 4, mb: 0 }}>Borders</h3>
+            <Inputs.BorderRadius />
+            <Inputs.BorderWidth />
+            <Inputs.BorderStyle />
+            <Inputs.BorderColor />
+            <Inputs.BorderImageSource />
+            <Inputs.BorderImageSlice />
+            <Inputs.BorderImageOutset />
+            <Inputs.BorderImageRepeat />
+            <Inputs.BorderImageWidth />
+
+            <h3 sx={{ fontSize: 2, mt: 4, mb: 0 }}>Spacing</h3>
+            <Inputs.Margin />
+            <Inputs.Padding />
+            <h3 sx={{ fontSize: 2, mt: 4, mb: 0 }}>Size</h3>
+            <Inputs.Width />
+            <Inputs.MinWidth />
+            <Inputs.MaxWidth />
+            <Inputs.Height />
+            <Inputs.MinHeight />
+            <Inputs.MaxHeight />
+          </div>
+        </Editor>
         <section>
           <styled.p styles={styles}>
             “The parameters comprise sequences which are theoretically infinite
