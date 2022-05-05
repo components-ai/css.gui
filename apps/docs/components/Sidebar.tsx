@@ -42,7 +42,6 @@ export const Sidebar = () => {
       <NavItem href="/examples/backgrounds">Backgrounds</NavItem>
       <NavItem href="/examples/space">Space</NavItem>
       <NavItem href="/examples/text-decoration">Text Decoration</NavItem>
-      <NavItem href="/examples/grid-layout">Grid Layout</NavItem>
       <NavSectionTitle>TODO</NavSectionTitle>
       <NavItem href="/unsupported">Unsupported Properties</NavItem>
       <NavItem href="https://github.com/components-ai/css.gui/issues">
