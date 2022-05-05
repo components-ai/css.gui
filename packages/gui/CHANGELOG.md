@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.34
+
+### Patch Changes
+
+- 3346d9d: Add more inputs, improve existing
+
 ## 0.0.33
 
 ### Patch Changes
