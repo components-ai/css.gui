@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.38
+
+### Patch Changes
+
+- e5956c3: Add support for roboto flex, fix width handling for variable fonts
+
 ## 0.0.37
 
 ### Patch Changes
