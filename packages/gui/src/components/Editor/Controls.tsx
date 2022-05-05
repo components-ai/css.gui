@@ -23,6 +23,7 @@ import { TimeInput } from '../inputs/TimeInput'
 import { UnitSteps } from '../../lib'
 import { pascalCase } from '../../lib/util'
 import { UnitRanges } from '../../data/ranges'
+import { StringInput } from '../inputs/StringInput'
 
 interface ControlProps extends InputProps {
   field: KeyArg
@@ -50,15 +51,17 @@ const Control = ({ field, ...props }: ControlProps) => {
     themeValues: themeValues,
     keywords,
     ...properties[property],
-    ...props
+    ...props,
   }
 
   if (dependantProperties.length) {
-    return <ComponentWithPropertyGroup 
-      dependantProperties={dependantProperties}
-      property={property}
-      {...componentProps}
-    />
+    return (
+      <ComponentWithPropertyGroup
+        dependantProperties={dependantProperties}
+        property={property}
+        {...componentProps}
+      />
+    )
   }
 
   return (
@@ -73,16 +76,16 @@ const Control = ({ field, ...props }: ControlProps) => {
 }
 
 interface ComponentGroupProps {
-  dependantProperties: string[],
+  dependantProperties: string[]
   property: string
 }
-const ComponentWithPropertyGroup = ({ dependantProperties, property, ...props }: ComponentGroupProps) => {
+const ComponentWithPropertyGroup = ({
+  dependantProperties,
+  property,
+  ...props
+}: ComponentGroupProps) => {
   const Component: ComponentType<any> = getInputComponent(property)
-  const {
-    getFields,
-    setFields,
-    removeField
-  } = useEditor()
+  const { getFields, setFields, removeField } = useEditor()
 
   return (
     <Component
@@ -179,6 +182,8 @@ function getPrimitiveInput(type: string) {
       return ResponsiveLengthInput
     case 'time':
       return TimeInput
+    case 'string':
+      return StringInput
     case 'color':
       return ColorInput
     case 'position':

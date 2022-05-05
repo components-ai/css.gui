@@ -1006,10 +1006,10 @@ export const properties: Record<string, PropertyData> = {
       '700',
       '800',
       '900',
-      'normal', 
-      'bold', 
-      'lighter', 
-      'bolder', 
+      'normal',
+      'bold',
+      'lighter',
+      'bolder',
     ],
   },
   forceColorAdjust: {
@@ -1841,8 +1841,7 @@ export const properties: Record<string, PropertyData> = {
     ],
   },
   textEmphasisStyle: {
-    // TODO: Add string input option
-    type: 'keyword',
+    type: 'string',
     keywords: [
       'filled',
       'open',
