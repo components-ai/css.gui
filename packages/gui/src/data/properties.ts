@@ -13,6 +13,7 @@ import { stringifyTransform } from '../components/inputs/Transform/stringify'
 import {
   AbsoluteLengthUnits,
   FontRelativeLengthUnits,
+  ViewportPercentageLengthUnits,
   PercentageLengthUnits,
 } from '../types/css'
 import { ANIMATABLE_PROPERTIES } from './animatable'
