@@ -26,11 +26,8 @@ const nameMap: any = {
   opsz: 'Optical Size',
   CASL: 'Casual',
   CRSV: 'Cursive',
-<<<<<<< HEAD
-  MONO: 'Mono'
-=======
-  MONO: 'Monospace',
->>>>>>> main
+  MONO: 'Mono',
+  slnt: 'Slant',
 }
 
 interface Props extends EditorProps<FontFamilyType> {
@@ -117,14 +114,6 @@ export function FontFamilyInput({ label, value, onChange }: Props) {
     })
     setVariableFont(fontData)
   }
-<<<<<<< HEAD
-=======
-
-  const parseFontStyleValue = (fontStyle: string) => {
-    const parsedNumericVal = fontStyle?.match(/-?\d+/g)?.join('')
-    return parsedNumericVal ? parsedNumericVal : fontStyle
-  }
->>>>>>> main
 
   const handleCustomAxesChange = (axisKey: string, newValue: any) => {
     const axisDict: Record<string, any> = {}
@@ -298,30 +287,6 @@ export function FontFamilyInput({ label, value, onChange }: Props) {
         Object.entries(variableFont).map(([k, v]) => {
           if (['name', 'ital'].includes(k)) return null
           if (typeof v === 'string') return null
-
-          if (k === 'slnt') {
-            return (
-              <NumberInput
-                key={k}
-                value={
-                  +parseFontStyleValue(
-                    value.fontStyle ?? `oblique ${v.default} oblique`
-                  )
-                }
-                onChange={(v: number) => {
-                  onChange({
-                    ...value,
-                    fontStyle: `oblique ${v}deg`,
-                  })
-                }}
-                min={v.max}
-                max={-v.min}
-                step={v.step}
-                label="Slant"
-                sx={{ width: '100%' }}
-              />
-            )
-          }
 
           if (k === 'wdth') {
             return (
