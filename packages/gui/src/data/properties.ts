@@ -856,12 +856,7 @@ export const properties: Record<string, PropertyData> = {
   },
   fontFamily: {
     type: FontFamily,
-    dependantProperties: [
-      'fontStyle',
-      'fontStretch',
-      'fontWeight',
-      'fontVariationSettings',
-    ],
+    dependantProperties: ['fontStyle', 'fontWeight', 'fontVariationSettings'],
   },
   fontKerning: {
     type: 'keyword',

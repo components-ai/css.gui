@@ -1,9 +1,9 @@
 import * as React from 'react'
-import { kebabCase, property } from 'lodash-es'
+import { kebabCase } from 'lodash-es'
+import { useCombobox } from 'downshift'
 import { FontFamilyType } from '../../../types/css'
 import { EditorProps } from '../../../types/editor'
 import { Label } from '../../primitives'
-import { useCombobox } from 'downshift'
 import { NumberInput } from '../NumberInput'
 
 type Font = {
@@ -318,12 +318,12 @@ export function FontFamilyInput({ label, value, onChange }: Props) {
 
           if (k === 'wdth') {
             return (
-              <NumberInput
+              <CustomAxis
                 key={k}
-                value={value.fontStretch ?? v.default}
-                onChange={(newVal: number) =>
-                  onChange({ ...value, fontStretch: newVal })
-                }
+                axisKey={k}
+                defaultValue={v.default}
+                value={value.fontVariationSettings ?? `'${k}' ${v.default};`}
+                onChange={(e: any) => handleCustomAxesChange(k, e)}
                 min={v.min}
                 max={v.max}
                 step={v.step}
