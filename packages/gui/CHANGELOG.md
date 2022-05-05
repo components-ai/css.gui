@@ -1,5 +1,12 @@
 # @compai/css-gui
 
+## 0.0.37
+
+### Patch Changes
+
+- d687d8f: Fixes negative values and variable font slant property
+- bae0824: Fixes slant property and negative numbers on draggable inputs
+
 ## 0.0.36
 
 ### Patch Changes

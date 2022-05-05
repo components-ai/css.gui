@@ -23,22 +23,32 @@ export default function UnsupportedProperties() {
           properties that haven&apos;t been implemented yet.
         </p>
       </FirstParagraph>
-
-      <label htmlFor="progress" sx={{ fontWeight: 500 }}>
-        So far, we&apos;ve implemented {implementedPropertiesCount} out of{' '}
-        {allPropertiesCount} properties ({percentageComplete}%).
-        <br />
+      <label htmlFor="progress" sx={{
+        fontSize: 3,
+      }}>
+        <span>So far, we&apos;ve implemented <b>{implementedPropertiesCount} out of{' '}
+        {allPropertiesCount}</b> properties ({percentageComplete}%).</span>
         <progress
           id="progress"
           max="100"
           value={percentageComplete}
-          sx={{ width: '100%' }}
+          sx={{ 
+            mt: 2,
+            width: '100%', 
+            WebKitAppearance: 'none',
+            appearance: 'none',
+            height: '48px',
+          }}
         >
           {percentageComplete}%
         </progress>
       </label>
-      <h2>The following properties are on our TODO list</h2>
-      <ul>
+      <div sx={{ display: 'flex', justifyContent: 'space-between'}}>
+        <span>0</span>
+        <span>427</span>
+      </div>
+      <h2 sx={{ mt: 5 }}>The following properties are on our TODO list</h2>
+      <ul sx={{ pl: 3 }}>
         {unsupportedProperties.map(({ property, url }) => {
           return (
             <li>
