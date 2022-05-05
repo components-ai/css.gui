@@ -857,7 +857,6 @@ export const properties: Record<string, PropertyData> = {
   fontFamily: {
     type: FontFamily,
     dependantProperties: [
-      'fontStyle',
       'fontStretch',
       'fontWeight',
       'fontVariationSettings',

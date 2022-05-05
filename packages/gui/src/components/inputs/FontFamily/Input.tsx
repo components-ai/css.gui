@@ -26,7 +26,8 @@ const nameMap: any = {
   opsz: 'Optical Size',
   CASL: 'Casual',
   CRSV: 'Cursive',
-  MONO: 'Monospace',
+  MONO: 'Mono',
+  slnt: 'Slant',
 }
 
 interface Props extends EditorProps<FontFamilyType> {
@@ -112,11 +113,6 @@ export function FontFamilyInput({ label, value, onChange }: Props) {
       fontFamily: name,
     })
     setVariableFont(fontData)
-  }
-
-  const parseFontStyleValue = (fontStyle: string) => {
-    const parsedNumericVal = fontStyle?.match(/-?\d+/g)?.join('')
-    return parsedNumericVal ? parsedNumericVal : fontStyle
   }
 
   const handleCustomAxesChange = (axisKey: string, newValue: any) => {
@@ -292,38 +288,12 @@ export function FontFamilyInput({ label, value, onChange }: Props) {
           if (['name', 'ital'].includes(k)) return null
           if (typeof v === 'string') return null
 
-          if (k === 'slnt') {
-            return (
-              <NumberInput
-                key={k}
-                value={
-                  +parseFontStyleValue(
-                    value.fontStyle ?? `oblique ${v.default} oblique`
-                  )
-                }
-                onChange={(v: number) => {
-                  onChange({
-                    ...value,
-                    fontStyle: `oblique ${v}deg`,
-                  })
-                }}
-                min={v.max}
-                max={-v.min}
-                step={v.step}
-                label="Slant"
-                sx={{ width: '100%' }}
-              />
-            )
-          }
-
           if (k === 'wdth') {
             return (
               <NumberInput
                 key={k}
                 value={value.fontStretch ?? v.default}
-                onChange={(newVal: number) =>
-                  onChange({ ...value, fontStretch: newVal })
-                }
+                onChange={(newVal: number) => onChange({ ...value, fontStretch: newVal })}
                 min={v.min}
                 max={v.max}
                 step={v.step}
@@ -381,7 +351,7 @@ const CustomAxis = ({
     if (splitAxis?.length > 0) {
       for (const ax of splitAxis) {
         if (ax.startsWith(`'${axisKey}'`)) {
-          return Number(ax.match(/[\d.]+/))
+          return Number(ax.match(/-?[\d.]+/))
         }
       }
     }
