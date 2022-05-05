@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { property } from 'lodash-es'
+import { kebabCase, property } from 'lodash-es'
 import { FontFamilyType } from '../../../types/css'
 import { EditorProps } from '../../../types/editor'
 import { Label } from '../../primitives'
@@ -36,7 +36,7 @@ interface Props extends EditorProps<FontFamilyType> {
 
 export function FontFamilyInput({ label, value, onChange }: Props) {
   const id = React.useId()
-  const fullId = `${id}-${property || 'fontfamily'}`
+  const fullId = `${id}-${label ? kebabCase(label) : 'font-family'}`
 
   const [allOptions, setAllOptions] = React.useState<Font[]>([])
   const [inputItems, setInputItems] = React.useState<string[]>([])
@@ -79,6 +79,7 @@ export function FontFamilyInput({ label, value, onChange }: Props) {
     highlightedIndex,
     getItemProps,
   } = useCombobox({
+    id: fullId,
     items: inputItems,
     selectedItem: value.fontFamily,
     onInputValueChange: ({ inputValue }) => {
@@ -137,7 +138,7 @@ export function FontFamilyInput({ label, value, onChange }: Props) {
   }
 
   return (
-    <div {...getComboboxProps()} id={fullId}>
+    <div {...getComboboxProps()}>
       {label && (
         <Label htmlFor={id} sx={{ display: 'block' }}>
           {label}
@@ -294,6 +295,7 @@ export function FontFamilyInput({ label, value, onChange }: Props) {
           if (k === 'slnt') {
             return (
               <NumberInput
+                key={k}
                 value={
                   +parseFontStyleValue(
                     value.fontStyle ?? `oblique ${v.default} oblique`
@@ -317,6 +319,7 @@ export function FontFamilyInput({ label, value, onChange }: Props) {
           if (k === 'wdth') {
             return (
               <NumberInput
+                key={k}
                 value={value.fontStretch ?? v.default}
                 onChange={(newVal: number) =>
                   onChange({ ...value, fontStretch: newVal })
@@ -333,6 +336,7 @@ export function FontFamilyInput({ label, value, onChange }: Props) {
           if (k === 'wght') {
             return (
               <NumberInput
+                key={k}
                 value={value.fontWeight ?? v.default}
                 onChange={(newVal: number) =>
                   onChange({ ...value, fontWeight: newVal })
@@ -348,6 +352,7 @@ export function FontFamilyInput({ label, value, onChange }: Props) {
 
           return (
             <CustomAxis
+              key={k}
               value={value.fontVariationSettings ?? `'${k}' ${v.default};`}
               onChange={(e: any) => handleCustomAxesChange(k, e)}
               axisKey={k}
