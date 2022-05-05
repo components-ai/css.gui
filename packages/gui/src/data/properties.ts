@@ -1675,6 +1675,7 @@ export const properties: Record<string, PropertyData> = {
   strokeDashoffset: {
     type: 'number',
     percentage: true,
+    number: true, // for SVG, raw numbers are counted as pixels
     defaultValue: 0,
     range: { number: [-9999, 9999] }, // Todo add %
   },
