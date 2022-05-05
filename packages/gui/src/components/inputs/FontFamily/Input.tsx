@@ -26,7 +26,7 @@ const nameMap: any = {
   opsz: 'Optical Size',
   CASL: 'Casual',
   CRSV: 'Cursive',
-  MONO: 'Monospace'
+  MONO: 'Mono'
 }
 
 interface Props extends EditorProps<FontFamilyType> {
@@ -107,18 +107,12 @@ export function FontFamilyInput({
   }
 
   const handleFontChange = (name: string) => {
-    console.log(variableFontsData, "tihonn")
     const fontData = variableFontsData[name] ?? {}
     onChange({ 
       ...(name === variableFont?.name ? value : {}), 
       fontFamily: name
     })
     setVariableFont(fontData)
-  }
-  
-  const parseFontStyleValue = (fontStyle: string) => {
-    const parsedNumericVal = fontStyle?.match(/-?\d+/g)?.join('')
-    return parsedNumericVal ? parsedNumericVal : fontStyle
   }
 
   const handleCustomAxesChange = (axisKey: string, newValue: any) => {
@@ -297,27 +291,6 @@ export function FontFamilyInput({
         if (['name', 'ital'].includes(k)) return null
         if (typeof(v) === 'string') return null
 
-        if (k === 'slnt') {
-          return (
-            <NumberInput
-              value={+parseFontStyleValue(
-                value.fontStyle ?? `oblique ${v.default} oblique`
-              )}
-              onChange={(v: number) => {  
-                onChange({
-                  ...value,
-                  fontStyle: `oblique ${v}deg`
-                })
-              }}
-              min={v.max}
-              max={-v.min}
-              step={v.step}
-              label='Slant'
-              sx={{ width: '100%' }}
-            />
-          )
-        }
-
         if (k === 'wdth') {
           return (
             <NumberInput
@@ -376,7 +349,7 @@ const CustomAxis = ({
     if (splitAxis?.length > 0) {
       for (const ax of splitAxis) {
         if (ax.startsWith(`'${axisKey}'`)) {
-          return Number(ax.match(/[\d.]+/))
+          return Number(ax.match(/-?[\d.]+/))
         }
       }
     }
