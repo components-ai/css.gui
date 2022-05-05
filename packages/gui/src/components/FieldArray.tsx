@@ -46,46 +46,58 @@ export default function FieldArray<T>({
 
   return (
     <div>
-      <Label htmlFor={id}>{label}</Label>
       <Collapsible.Root id={id} defaultOpen>
-        <Collapsible.Trigger
+        <div
           sx={{
-            cursor: 'pointer',
-            width: '100%',
-            background: 'none',
-            color: 'text',
-            border: 'none',
-            p: 0,
+            display: 'grid',
+            gridTemplateColumns: 'max-content 1fr',
+            gap: 2,
           }}
         >
-          {stringify(value)}
-        </Collapsible.Trigger>
+          <Label htmlFor={id}>{label}</Label>
+          <Collapsible.Trigger
+            sx={{
+              textAlign: 'left',
+              cursor: 'pointer',
+              width: '100%',
+              background: 'none',
+              color: 'text',
+              border: 'none',
+              p: 0,
+            }}
+          >
+            {stringify(value)}
+          </Collapsible.Trigger>
+        </div>
         <Collapsible.Content
           sx={{
             my: 2,
             maxWidth: '32rem',
           }}
         >
-          <div
-            sx={{
-              border: '1px solid',
-              borderColor: 'border',
-              borderRadius: 8,
-            }}
-          >
+          <div>
             {value.map((item, i) => {
               return (
-                <div>
+                <div
+                  sx={{
+                    display: 'grid',
+                    gridTemplateColumns: '1fr max-content',
+                    gap: 1,
+                  }}
+                >
+                  <Content
+                    value={item}
+                    onChange={(newValue) => {
+                      onChange(replace(value, i, newValue))
+                    }}
+                    label={'' + i}
+                  />
                   <div
                     sx={{
-                      position: 'absolute',
-                      top: 0,
-                      right: 0,
                       height: '100%',
                       display: 'flex',
                       alignItems: 'center',
                       gap: 1,
-                      mr: 2,
                     }}
                   >
                     <IconButton
@@ -144,13 +156,6 @@ export default function FieldArray<T>({
                       </IconButton>
                     </div>
                   </div>
-                  <Content
-                    value={item}
-                    onChange={(newValue) => {
-                      onChange(replace(value, i, newValue))
-                    }}
-                    label={'' + i}
-                  />
                 </div>
               )
             })}
