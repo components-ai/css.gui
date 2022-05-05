@@ -37,7 +37,9 @@ export function StringInput({
             onChange={(e) => onChange({ ...value, value: e.target.value })}
           >
             {keywords.map((kw) => (
-              <option value={kw}>{kw}</option>
+              <option key={kw} value={kw}>
+                {kw}
+              </option>
             ))}
           </select>
         )}

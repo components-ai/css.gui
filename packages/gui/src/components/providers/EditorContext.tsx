@@ -93,7 +93,6 @@ export function EditorProvider<V>({
     hideResponsiveControls: hideResponsiveControls ?? false,
   }
 
-  console.log(hideResponsiveControls, { editorConfig })
   return (
     <ThemeProvider theme={theme}>
       <ThemeUIProvider theme={uiTheme}>
