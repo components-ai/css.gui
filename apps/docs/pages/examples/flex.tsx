@@ -43,14 +43,18 @@ export default function TextDecoration() {
               <section sx={{ display: 'grid', gap: '.5rem', width: '240px' }}>
                 <h3 sx={{ my: 0 }}>Flex</h3>
                 <Inputs.Display />
-                <Inputs.FlexWrap />
+                <Inputs.ColumnGap />
+                <Inputs.RowGap />
                 <Inputs.AlignItems />
                 <Inputs.AlignSelf />
                 <Inputs.AlignContent />
                 <Inputs.JustifyContent />
+                <Inputs.FlexBasis />
                 <Inputs.FlexDirection />
-                <Inputs.ColumnGap />
-                <Inputs.RowGap />
+                <Inputs.FlexFlow />
+                <Inputs.FlexGrow />
+                <Inputs.FlexShrink />
+                <Inputs.FlexWrap />
               </section>
               <section sx={{ mt: 5, display: 'flex', gap: '2rem' }}>
                 <Inputs.Color />
