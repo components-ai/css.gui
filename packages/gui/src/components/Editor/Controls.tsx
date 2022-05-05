@@ -120,12 +120,14 @@ type ControlsProps = {
   theme?: Theme
   onChange: (newStyles: any) => void
   children?: ReactChild
+  hideResponsiveControls?: boolean
 }
 export const Editor = ({
   theme,
   styles,
   onChange,
   children,
+  hideResponsiveControls,
 }: ControlsProps) => {
   const properties = Object.keys(styles)
 
@@ -154,7 +156,12 @@ export const Editor = ({
   )
 
   return (
-    <EditorProvider theme={theme} value={styles} onChange={handleStylesChange}>
+    <EditorProvider
+      theme={theme}
+      value={styles}
+      onChange={handleStylesChange}
+      hideResponsiveControls={hideResponsiveControls}
+    >
       {controls}
     </EditorProvider>
   )

@@ -5,6 +5,7 @@ import { Breakpoint } from '../../types/theme'
 import { DimensionInputProps } from '../inputs/Dimension/Input'
 import { useTheme } from '../providers/ThemeContext'
 import { Label } from '../primitives'
+import { useEditorConfig } from '../providers/EditorConfigContext'
 
 const DEFAULT_BREAKPOINT_COUNT = 3
 // TODO: Base this on the type of property
@@ -58,7 +59,7 @@ export const ResponsiveInput = ({
   const editors = isResponsiveControls ? (
     Array(breakpointCount)
       .fill(null)
-      .map((breakpoint: Breakpoint, i: number) => {
+      .map((_breakpoint: Breakpoint, i: number) => {
         return (
           <div key={breakpoints?.[i].id ?? i} sx={{ pb: 1 }}>
             <Component
@@ -94,30 +95,53 @@ export const ResponsiveInput = ({
           }}
         >
           <span>{label}</span>
-          {isResponsiveControls ? (
-            <button
-              title="Remove responsive controls"
-              sx={{ all: 'unset', color: 'muted' }}
-              onClick={handleSwitchFromResponsive}
-            >
-              <X size={14} sx={{ position: 'relative', top: '1px' }} />
-            </button>
-          ) : (
-            <button
-              title="Switch to responsive controls"
-              sx={{ all: 'unset', color: 'muted' }}
-              onClick={handleSwitchToResponsive}
-            >
-              <Smartphone
-                size={8}
-                sx={{ position: 'relative', right: '-1px', top: '-1px' }}
-              />
-              <Monitor size={13} />
-            </button>
-          )}
+          <ResponsiveToggle
+            isResponsive={isResponsiveControls}
+            onSwitchFromResponsive={handleSwitchFromResponsive}
+            onSwitchToResponsive={handleSwitchToResponsive}
+          />
         </div>
       </Label>
       {editors}
     </div>
+  )
+}
+
+type ResponsiveToggleProps = {
+  isResponsive: boolean
+  onSwitchFromResponsive: () => void
+  onSwitchToResponsive: () => void
+}
+const ResponsiveToggle = ({
+  isResponsive,
+  onSwitchFromResponsive,
+  onSwitchToResponsive,
+}: ResponsiveToggleProps) => {
+  const { hideResponsiveControls } = useEditorConfig()
+
+  if (hideResponsiveControls) {
+    return null
+  }
+
+  return isResponsive ? (
+    <button
+      title="Remove responsive controls"
+      sx={{ all: 'unset', color: 'muted' }}
+      onClick={onSwitchFromResponsive}
+    >
+      <X size={14} sx={{ position: 'relative', top: '1px' }} />
+    </button>
+  ) : (
+    <button
+      title="Switch to responsive controls"
+      sx={{ all: 'unset', color: 'muted' }}
+      onClick={onSwitchToResponsive}
+    >
+      <Smartphone
+        size={8}
+        sx={{ position: 'relative', right: '-1px', top: '-1px' }}
+      />
+      <Monitor size={13} />
+    </button>
   )
 }
