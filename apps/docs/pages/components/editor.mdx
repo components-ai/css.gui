@@ -1,4 +1,7 @@
 import { FirstParagraph } from '../../components/FirstParagraph'
+import { Container } from '../../components/Container'
+
+<Container>
 
 # Editor
 
@@ -104,3 +107,37 @@ When using the composition-based approach, you can customize the `label`, `steps
   }}
 />
 ```
+
+### Hiding Responsive Controls
+
+In some situations you may not want responsive controls, if that's the
+case you can pass `hideResponsiveControls={true}` to the `Editor`
+component.
+
+If a value comes in as a `ResponsiveLength` which is an array of values
+the responsive input will still be shown. But the toggle to switch between
+a standard `Length` and a `ResponsiveLength` won't be exposed.
+
+```js
+import { useState } from 'react'
+import { Editor, Inputs, styled } from '@compai/css-gui'
+
+export function Demo() {
+  const [styles, setStyles] = useState({})
+
+  return (
+    <>
+      <Editor
+        styles={styles}
+        onChange={setStyles}
+        hideResponsiveControls={true}
+      >
+        <Inputs.FontSize />
+      </Editor>
+      <styled.p styles={styles}>Hello, world!</styled.p>
+    </>
+  )
+}
+```
+
+</Container>

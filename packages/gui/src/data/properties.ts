@@ -13,6 +13,7 @@ import { stringifyTransform } from '../components/inputs/Transform/stringify'
 import {
   AbsoluteLengthUnits,
   FontRelativeLengthUnits,
+  ViewportPercentageLengthUnits,
   PercentageLengthUnits,
 } from '../types/css'
 import { ANIMATABLE_PROPERTIES } from './animatable'
@@ -43,6 +44,10 @@ import MaskInput from '../components/inputs/Mask/field'
 import { stringifyMaskList } from '../components/inputs/Mask/stringify'
 import AnimationInput from '../components/inputs/Animation/field'
 import { stringifyAnimationList } from '../components/inputs/Animation/stringify'
+import {
+  stringifyStrokeDasharray,
+  StrokeDasharrayInput,
+} from '../components/inputs/StrokeDasharray'
 
 type PropertyData = {
   type: string | ComponentType<any>
@@ -52,6 +57,7 @@ type PropertyData = {
   range?: UnitRanges
   defaultValue?: string | number
   stringify?: (value: any) => string
+  dependantProperties?: string[]
   steps?: UnitSteps
   label?: string
 }
@@ -586,10 +592,13 @@ export const properties: Record<string, PropertyData> = {
   columnGap: {
     type: 'length',
     percentage: true,
+    defaultValue: 0,
     range: {
       [AbsoluteLengthUnits.Px]: [0, 128],
       [FontRelativeLengthUnits.Em]: [0, 8],
       [FontRelativeLengthUnits.Rem]: [0, 8],
+      [ViewportPercentageLengthUnits.Vh]: [0, 100],
+      [ViewportPercentageLengthUnits.Vw]: [0, 100],
       [PercentageLengthUnits.Pct]: [0.1, 100],
     },
     keywords: ['normal'],
@@ -749,6 +758,10 @@ export const properties: Record<string, PropertyData> = {
     type: 'keyword',
     keywords: ['show', 'hide'],
   },
+  fill: {
+    type: 'color',
+    keywords: ['none', 'context-fill', 'context-stroke'],
+  },
   filter: {
     type: FilterPicker,
     stringify: stringifyFilter,
@@ -843,6 +856,11 @@ export const properties: Record<string, PropertyData> = {
   },
   fontFamily: {
     type: FontFamily,
+    dependantProperties: [
+      'fontStretch',
+      'fontWeight',
+      'fontVariationSettings',
+    ],
   },
   fontKerning: {
     type: 'keyword',
@@ -974,6 +992,24 @@ export const properties: Record<string, PropertyData> = {
   fontVariantPosition: {
     type: 'keyword',
     keywords: ['normal', 'sub', 'super'],
+  },
+  fontWeight: {
+    type: 'keyword',
+    keywords: [
+      '100',
+      '200',
+      '300',
+      '400',
+      '500',
+      '600',
+      '700',
+      '800',
+      '900',
+      'normal',
+      'bold',
+      'lighter',
+      'bolder',
+    ],
   },
   forceColorAdjust: {
     type: 'keyword',
@@ -1584,6 +1620,14 @@ export const properties: Record<string, PropertyData> = {
   rowGap: {
     type: 'length',
     percentage: true,
+    range: {
+      [AbsoluteLengthUnits.Px]: [0, 128],
+      [FontRelativeLengthUnits.Em]: [0, 8],
+      [FontRelativeLengthUnits.Rem]: [0, 8],
+      [ViewportPercentageLengthUnits.Vh]: [0, 100],
+      [ViewportPercentageLengthUnits.Vw]: [0, 100],
+      [PercentageLengthUnits.Pct]: [0.1, 100],
+    },
   },
   rubyAlign: {
     type: 'keyword',
@@ -1631,9 +1675,18 @@ export const properties: Record<string, PropertyData> = {
     type: 'length',
     percentage: true,
   },
+  stroke: {
+    // TODO URL <color> values
+    type: 'color',
+    keywords: ['none', 'context-fill', 'context-stroke'],
+  },
   strokeAlignment: {
     type: 'keyword',
     keywords: ['center', 'inner', 'outer'],
+  },
+  strokeDasharray: {
+    type: StrokeDasharrayInput,
+    stringify: stringifyStrokeDasharray,
   },
   strokeDashadjust: {
     type: 'keyword',
@@ -1644,8 +1697,10 @@ export const properties: Record<string, PropertyData> = {
     percentage: true,
     keywords: ['none'],
   },
-  strokeDashOffset: {
+  strokeDashoffset: {
     type: 'number',
+    percentage: true,
+    number: true, // for SVG, raw numbers are counted as pixels
     defaultValue: 0,
     range: { number: [-9999, 9999] }, // Todo add %
   },
@@ -1785,8 +1840,7 @@ export const properties: Record<string, PropertyData> = {
     ],
   },
   textEmphasisStyle: {
-    // TODO: Add string input option
-    type: 'keyword',
+    type: 'string',
     keywords: [
       'filled',
       'open',

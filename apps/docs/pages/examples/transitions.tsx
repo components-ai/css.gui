@@ -1,5 +1,6 @@
 import { Editor, styled } from '@compai/css-gui'
 import { useState } from 'react'
+import { Container } from '../../components/Container'
 
 const initialStyles = {
   transition: [
@@ -28,22 +29,24 @@ const initialStyles = {
       delay: { value: 0, unit: 'ms' },
     },
   ],
-  width: { value: 200, unit: 'px' },
-  height: { value: 200, unit: 'px' },
+  width: { value: 100, unit: '%' },
+  height: { value: 240, unit: 'px' },
   borderRadius: { value: 0, unit: 'px' },
-  backgroundColor: '#f00',
+  backgroundColor: 'primary',
 }
 
 export default function Transitions() {
   const [styles, setStyles] = useState<any>(initialStyles)
   return (
+    <div sx={{display: 'flex', justifyContent: 'center'}}>
     <div>
-      <div sx={{ ':first-child > div': { display: 'grid', gap: '.5em' } }}>
-        <Editor styles={styles} onChange={setStyles} />
-      </div>
-      <section sx={{ mt: 5 }}>
+      <section sx={{ my: 5 }}>
         <styled.div styles={styles} />
       </section>
+        <div sx={{ '& > div': { display: 'grid', gap: '1em' } }}>
+          <Editor styles={styles} onChange={setStyles} />
+        </div>
+      </div>
     </div>
   )
 }

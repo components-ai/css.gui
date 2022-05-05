@@ -20,8 +20,24 @@ export const Layout = (props: Props) => {
           backgroundColor: 'background',
           zIndex: 999,
           top: 0,
+          display: 'flex',
+          alignItems: 'center',
         }}
       >
+          <a
+            href='https://components.ai'
+            title='Components AI - Home'
+            sx={{
+              color: 'text',
+              textDecoration: 'none',
+              display: 'flex',
+              alignItems: 'center',
+            }}
+          >
+            <span sx={{ mr: 4 }}>
+              <Logo height={20} width={20} seed={id} />
+            </span>
+        </a>
         <Link href="/home" passHref={true}>
           <a
             sx={{
@@ -32,9 +48,6 @@ export const Layout = (props: Props) => {
               alignItems: 'center',
             }}
           >
-            <span sx={{ mr: 4 }}>
-              <Logo height={20} width={20} seed={id} />
-            </span>
             <span>
               CSS GUI
               <span sx={{ fontSize: 0, color: 'muted', ml: 1 }}>
@@ -48,7 +61,7 @@ export const Layout = (props: Props) => {
         sx={{
           fontFamily: 'body',
           display: 'flex',
-          flexDirection: ['column', 'row'],
+          flexDirection: ['column-reverse', 'initial'],
         }}
         {...props}
       />

@@ -1,10 +1,7 @@
-import {
-  stringifyPosition,
-  stringifyUnit,
-  stringifyValues,
-} from '../../../lib/stringify'
+import { stringifyPosition, stringifyValues } from '../../../lib/stringify'
+import { stringifyBgSize } from '../BgSizeInput'
 import { stringifyImageSource } from '../ImageSource/stringify'
-import { Background, BgSize, RepeatStyle } from './types'
+import { Background, RepeatStyle } from './types'
 
 export function stringifyBackgroundList(backgrounds: Background[]) {
   return backgrounds.map(stringifyBackground).join(', ')
@@ -15,16 +12,12 @@ export function stringifyBackground(background: Background) {
   return stringifyValues([
     stringifyImageSource(image),
     stringifyPosition(position),
-    `/ ${stringifySize(size)}`,
+    `/ ${stringifyBgSize(size)}`,
     stringifyRepeatStyle(repeat),
     attachment,
     origin,
     clip,
   ])
-}
-
-export function stringifySize(size: BgSize) {
-  return `${stringifyUnit(size.x)} ${stringifyUnit(size.y)}`
 }
 
 export function stringifyRepeatStyle(repeat: RepeatStyle) {

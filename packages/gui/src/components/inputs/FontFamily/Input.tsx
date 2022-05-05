@@ -1,44 +1,63 @@
 import * as React from 'react'
-import { property } from 'lodash-es'
+import { kebabCase, property } from 'lodash-es'
 import { FontFamilyType } from '../../../types/css'
 import { EditorProps } from '../../../types/editor'
 import { Label } from '../../primitives'
 import { useCombobox } from 'downshift'
+import { NumberInput } from '../NumberInput'
 
 type Font = {
-  fontName: string,
+  name: string
   category: FontCategory
 }
-
+type VariableFont = Record<string, VariableAttribute | string>
+type VariableAttribute = {
+  min: number
+  max: number
+  default: number
+  step: number
+}
 const enum FontCategory {
   Sans = 'sans-serif',
   Mono = 'monospace',
   Serif = 'serif',
 }
+const nameMap: any = {
+  opsz: 'Optical Size',
+  CASL: 'Casual',
+  CRSV: 'Cursive',
+  MONO: 'Mono',
+  slnt: 'Slant',
+}
 
 interface Props extends EditorProps<FontFamilyType> {
-  label: string,
+  label: string
   defaultValue?: FontFamilyType
 }
 
-
-export function FontFamilyInput({
-  label,
-  value,
-  onChange,
-}: Props) {  
+export function FontFamilyInput({ label, value, onChange }: Props) {
   const id = React.useId()
-  const fullId = `${id}-${property || 'fontfamily'}`
+  const fullId = `${id}-${label ? kebabCase(label) : 'font-family'}`
 
   const [allOptions, setAllOptions] = React.useState<Font[]>([])
   const [inputItems, setInputItems] = React.useState<string[]>([])
+  const [variableFont, setVariableFont] = React.useState<
+    VariableFont | undefined
+  >()
+  const [variableFontsData, setVariableFontsData] = React.useState<any>({})
 
   const inputRef = React.useRef(null)
+
   React.useEffect(() => {
     const getFontData = async () => {
-      const options = await getAllOptions()
-      setAllOptions(options)
-      handleFilterItems(value)
+      const fontData = await getFontsData()
+      const fontFamily = value?.fontFamily || ''
+
+      setAllOptions(fontData?.fontOptions)
+      setVariableFontsData(fontData?.variableFontsData)
+      setVariableFont(fontData.variableFontsData[fontFamily])
+
+      handleFilterItems(fontFamily)
     }
 
     getFontData()
@@ -47,8 +66,9 @@ export function FontFamilyInput({
   const [includeSans, setIncSans] = React.useState<boolean>(true)
   const [includeSerif, setIncSerif] = React.useState<boolean>(true)
   const [includeMono, setIncMono] = React.useState<boolean>(true)
+
   React.useEffect(() => {
-    handleFilterItems(value)
+    handleFilterItems(value.fontFamily)
   }, [includeMono, includeSans, includeSerif])
 
   const {
@@ -60,19 +80,20 @@ export function FontFamilyInput({
     highlightedIndex,
     getItemProps,
   } = useCombobox({
+    id: fullId,
     items: inputItems,
-    selectedItem: value,
+    selectedItem: value.fontFamily,
     onInputValueChange: ({ inputValue }) => {
       handleFilterItems(inputValue!)
     },
     onSelectedItemChange: ({ selectedItem }) => {
-      onChange(selectedItem ?? '')
+      handleFontChange(selectedItem ?? '')
     },
   })
 
   const handleFilterItems = (inputValue: string) => {
     const filteredOptions = allOptions.filter((item) => {
-      if (item.fontName.toLowerCase().startsWith(inputValue?.toLowerCase() || '')) {
+      if (item.name.toLowerCase().startsWith(inputValue?.toLowerCase() || '')) {
         return (
           (includeSans && item.category === FontCategory.Sans) ||
           (includeSerif && item.category === FontCategory.Serif) ||
@@ -81,25 +102,50 @@ export function FontFamilyInput({
       }
     })
 
-    const items = filteredOptions.map((opt) => opt.fontName).sort()
+    const items = filteredOptions.map((opt) => opt.name).sort()
     setInputItems(items)
   }
+
+  const handleFontChange = (name: string) => {
+    const fontData = variableFontsData[name] ?? {}
+    onChange({
+      ...(name === variableFont?.name ? value : {}),
+      fontFamily: name,
+    })
+    setVariableFont(fontData)
+  }
+
+  const handleCustomAxesChange = (axisKey: string, newValue: any) => {
+    const axisDict: Record<string, any> = {}
+    value.fontVariationSettings?.split(',').forEach((axis: string) => {
+      const axisSplit = axis.split(' ')
+      const k = axisSplit[0]
+      const v = axisSplit[1]
+      axisDict[k] = v
+    })
+
+    axisDict[`'${axisKey}'`] = newValue
+
+    const fontVariationSettings = Object.entries(axisDict)
+      .map(([k, v]) => `${k} ${v}`)
+      .join(',')
+
+    onChange({ ...value, fontVariationSettings })
+  }
+
   return (
-    <div 
-      {...getComboboxProps()}
-      id={fullId}
-    >
+    <div {...getComboboxProps()}>
       {label && (
         <Label htmlFor={id} sx={{ display: 'block' }}>
           {label}
         </Label>
       )}
       <input
-        type='text'
+        type="text"
         value={value}
-        {...getInputProps({ 
+        {...getInputProps({
           ref: inputRef,
-          onChange: (e: any) => onChange(e.target.value),
+          onChange: (e: any) => handleFontChange(e.target.value),
         })}
         onFocus={() => {
           if (!isOpen) {
@@ -194,7 +240,7 @@ export function FontFamilyInput({
                   alignItems: 'center',
                 }}
                 onClick={() => {
-                  onChange('')
+                  handleFontChange('')
                   // @ts-ignore
                   inputRef.current.focus()
                   if (!isOpen) {
@@ -202,48 +248,139 @@ export function FontFamilyInput({
                   }
                 }}
               >
-                <span sx={{ mr: 2 }}>Clear</span>  
+                <span sx={{ mr: 2 }}>Clear</span>
               </button>
             </div>
           )}
-          {isOpen && inputItems.map((item, index) => {
-            return (
-              <li
-                sx={{
-                  margin: 0,
-                  pl: 3,
-                  py: 1,
-                  backgroundColor:
-                    highlightedIndex === index
-                      ? 'backgroundOffset'
-                      : 'inherit',
-                  ':last-of-type': {
-                    borderBottomRightRadius: 7,
-                    overflow: 'hidden',
-                    pb: 1,
-                  },
-                }}
-                key={`${item}${index}`}
-                {...getItemProps({ item, index })}
-                onClick={() => {
-                  onChange(inputItems[highlightedIndex])
-                  toggleMenu()
-                }}
-              >
-                {item}
-              </li>
-            )
-          })}
+          {isOpen &&
+            inputItems.map((item, index) => {
+              return (
+                <li
+                  sx={{
+                    margin: 0,
+                    pl: 3,
+                    py: 1,
+                    backgroundColor:
+                      highlightedIndex === index
+                        ? 'backgroundOffset'
+                        : 'inherit',
+                    ':last-of-type': {
+                      borderBottomRightRadius: 7,
+                      overflow: 'hidden',
+                      pb: 1,
+                    },
+                  }}
+                  key={`${item}${index}`}
+                  {...getItemProps({ item, index })}
+                  onClick={() => {
+                    handleFontChange(inputItems[highlightedIndex])
+                    toggleMenu()
+                  }}
+                >
+                  {item}
+                </li>
+              )
+            })}
         </ul>
       </div>
+      {variableFont &&
+        Object.entries(variableFont).map(([k, v]) => {
+          if (['name', 'ital'].includes(k)) return null
+          if (typeof v === 'string') return null
+
+          if (k === 'wdth') {
+            return (
+              <NumberInput
+                key={k}
+                value={value.fontStretch ?? v.default}
+                onChange={(newVal: number) => onChange({ ...value, fontStretch: newVal })}
+                min={v.min}
+                max={v.max}
+                step={v.step}
+                label="Width"
+                sx={{ width: '100%' }}
+              />
+            )
+          }
+
+          if (k === 'wght') {
+            return (
+              <NumberInput
+                key={k}
+                value={value.fontWeight ?? v.default}
+                onChange={(newVal: number) =>
+                  onChange({ ...value, fontWeight: newVal })
+                }
+                min={v.min}
+                max={v.max}
+                step={v.step}
+                label="Font Weight"
+                sx={{ width: '100%' }}
+              />
+            )
+          }
+
+          return (
+            <CustomAxis
+              key={k}
+              value={value.fontVariationSettings ?? `'${k}' ${v.default};`}
+              onChange={(e: any) => handleCustomAxesChange(k, e)}
+              axisKey={k}
+              min={v.min}
+              max={v.max}
+              step={v.step}
+              label={nameMap[k] ?? k}
+              sx={{ width: '100%' }}
+            />
+          )
+        })}
     </div>
   )
 }
 
-const getAllOptions = async (): Promise<Font[]> => {
-  const opts: Font[] = []
+const CustomAxis = ({
+  defaultValue,
+  axisKey,
+  value,
+  onChange,
+  ...props
+}: any) => {
+  const parseCustomAxisValue = () => {
+    const splitAxis = value?.split(',')
+
+    if (splitAxis?.length > 0) {
+      for (const ax of splitAxis) {
+        if (ax.startsWith(`'${axisKey}'`)) {
+          return Number(ax.match(/-?[\d.]+/))
+        }
+      }
+    }
+
+    return defaultValue
+  }
+
+  return (
+    <NumberInput
+      {...props}
+      value={parseCustomAxisValue()}
+      onChange={onChange}
+    />
+  )
+}
+
+type APIFontData = {
+  fontOptions: Font[]
+  variableFontsData: any
+}
+const getFontsData = async (): Promise<APIFontData> => {
+  const fontOptions: Font[] = []
   const rawGoogData = await fetch('https://components.ai/api/v1/typefaces/list')
-  const rawSystemData = await fetch('https://components.ai/api/v1/typefaces/system')
+  const rawSystemData = await fetch(
+    'https://components.ai/api/v1/typefaces/system'
+  )
+  const variableFontsData = await fetch(
+    'https://components.ai/api/v1/typefaces/variable'
+  )
 
   const systemFonts = (await rawSystemData.json()) as any
   systemFonts.forEach(({ name, type }: any) => {
@@ -252,8 +389,8 @@ const getAllOptions = async (): Promise<Font[]> => {
       type === FontCategory.Serif ||
       type === FontCategory.Mono
     ) {
-      opts.push({
-        fontName: name,
+      fontOptions.push({
+        name,
         category: type,
       })
     }
@@ -267,9 +404,12 @@ const getAllOptions = async (): Promise<Font[]> => {
       category === FontCategory.Serif ||
       category === FontCategory.Mono
     ) {
-      opts.push({ fontName: name, category })
+      fontOptions.push({ name, category })
     }
   })
 
-  return opts
+  return {
+    fontOptions,
+    variableFontsData: await variableFontsData.json(),
+  }
 }

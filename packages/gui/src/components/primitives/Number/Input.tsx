@@ -34,7 +34,7 @@ export const DraggableInput = ({
       const deltaValue = dx * step
       let newValue = roundToStep(initialValue.current + deltaValue, step)
       if (dragging && (min || min === 0)) newValue = Math.max(newValue, min)
-      if (dragging && max) newValue = Math.min(newValue, max)
+      if (dragging && (max || max === 0)) newValue = Math.min(newValue, max)
 
       onUpdate(newValue)
     },
@@ -45,10 +45,10 @@ export const DraggableInput = ({
     <input
       type="number"
       value={value}
-      onChange={({ currentTarget: { value: inputValue } }) => {
+      onChange={({ target: { value: inputValue }}: any) => {
         let newValue = parseFloat(inputValue)
         if (dragging && (min || min === 0)) newValue = Math.max(newValue, min)
-        if (dragging && max) newValue = Math.min(newValue, max)
+        if (dragging && (max || max === 0)) newValue = Math.min(newValue, max)
 
         onUpdate(newValue)
       }}
@@ -71,14 +71,12 @@ export const NumberInput = ({
   max,
 }: NumberInputProps): any => {
   return (
-    <>
-      <DraggableInput
-        value={value}
-        step={step}
-        min={min}
-        max={max}
-        onUpdate={onChange}
-      />
-    </>
+    <DraggableInput
+      value={value}
+      step={step}
+      min={min}
+      max={max}
+      onUpdate={onChange}
+    />
   )
 }

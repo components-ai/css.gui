@@ -4,6 +4,7 @@ import { createContext, ReactChild, useContext } from 'react'
 import { KeyArg, Recipe, EditorData } from './types'
 import { applyRecipe } from './util'
 import { ThemeProvider } from './ThemeContext'
+import { EditorConfigProvider, EditorConfig } from './EditorConfigContext'
 import { theme as uiTheme } from '../ui/theme'
 import { Theme } from '../../types/theme'
 
@@ -22,6 +23,20 @@ export function useEditor() {
 
   function getField<T = any>(field: KeyArg | undefined) {
     return field ? (get(value, field) as T) : value
+  }
+
+  function getFields<T = any>(fields: KeyArg[] | undefined) {
+    const fieldsValue = fields?.reduce((acc: any, curr: KeyArg) => {
+      const fieldValue = get(value, curr) as T
+      return fieldValue
+        ? {
+            ...acc,
+            [`${curr}`]: fieldValue,
+          }
+        : acc
+    }, {})
+
+    return fieldsValue ?? value
   }
 
   function setField<T>(field: KeyArg, recipe: Recipe<T>) {
@@ -47,6 +62,7 @@ export function useEditor() {
   return {
     ...context,
     getField,
+    getFields,
     setField,
     setFields,
     onChange,
@@ -67,14 +83,24 @@ const EditorContext = createContext<EditorContextProviderValue<any>>({
 export function EditorProvider<V>({
   children,
   theme,
+  hideResponsiveControls,
   ...values
-}: EditorContextProviderValue<V> & { children: ReactChild }) {
+}: EditorContextProviderValue<V> & {
+  hideResponsiveControls?: boolean
+  children: ReactChild
+}) {
+  const editorConfig: EditorConfig = {
+    hideResponsiveControls: hideResponsiveControls ?? false,
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <ThemeUIProvider theme={uiTheme}>
-        <EditorContext.Provider value={values}>
-          {children}
-        </EditorContext.Provider>
+        <EditorConfigProvider config={editorConfig}>
+          <EditorContext.Provider value={values}>
+            {children}
+          </EditorContext.Provider>
+        </EditorConfigProvider>
       </ThemeUIProvider>
     </ThemeProvider>
   )

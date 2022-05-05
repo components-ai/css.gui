@@ -1,4 +1,5 @@
 import { LengthPercentage, Position } from '../../../types/css'
+import { BgSize } from '../BgSizeInput'
 import { ImageSource } from '../ImageSource/types'
 
 export interface Background {
@@ -11,12 +12,6 @@ export interface Background {
   position: Position
   repeat: RepeatStyle
   size: BgSize
-}
-
-// TODO cover | contain keywords
-export interface BgSize {
-  x: LengthPercentage
-  y: LengthPercentage
 }
 
 export const boxKeywords = ['border-box', 'padding-box', 'content-box'] as const

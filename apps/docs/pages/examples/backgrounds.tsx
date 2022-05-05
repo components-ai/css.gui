@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { Editor, Inputs, styled, codegen } from '@compai/css-gui'
 import { defaultTheme } from '../../data/default-theme'
+import { Container } from '../../components/Container'
 
 const initialStyles = {
   // Font
@@ -25,11 +26,15 @@ const initialStyles = {
         arguments: ['https://source.unsplash.com/random'],
       },
       position: {
-        x: { value: 'center', type: 'keyword' },
-        y: { value: 'center', type: 'keyword' },
+        x: { value: 'center', unit: 'keyword' },
+        y: { value: 'center', unit: 'keyword' },
       },
       repeat: { x: 'no-repeat', y: 'no-repeat' },
-      size: { x: { value: 100, unit: '%' }, y: { value: 100, unit: '%' } },
+      size: {
+        type: 'dimensions',
+        x: { value: 100, unit: '%' },
+        y: { value: 100, unit: '%' },
+      },
       attachment: 'fixed',
       origin: 'border-box',
       clip: 'border-box',

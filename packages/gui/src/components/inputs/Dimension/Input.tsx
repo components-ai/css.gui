@@ -71,7 +71,7 @@ export const DimensionInput = ({
   ])
 
   return (
-    <div>
+    <div sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
       {label && (
         <Label htmlFor={id} sx={{ display: 'block' }}>
           {label}

@@ -1,4 +1,8 @@
 import { FirstParagraph } from '../components/FirstParagraph'
+import { Container } from '../components/Container'
+
+
+<Container>
 
 # Getting Started
 
@@ -7,6 +11,9 @@ import { FirstParagraph } from '../components/FirstParagraph'
 Get going with CSS GUI in a few steps.
 
 </FirstParagraph>
+
+<iframe width="100%" style={{ marginBottom: '2rem', aspectRatio: '16 / 9'}} src="https://www.youtube.com/embed/b6J2TGyDYc0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 
 ## Installation
 
@@ -31,8 +38,13 @@ and then render the element styles to your canvas.
 import { useState } from 'react'
 import { Editor, styled } from '@compai/css-gui'
 
-export const MyEditor = () => {
-  const [styles, setStyles] = useState({})
+export default function MyEditor() {
+  const [styles, setStyles] = useState({
+    fontSize: {
+      value: 16,
+      unit: 'px',
+    },
+  })
 
   return (
     <>
@@ -42,3 +54,5 @@ export const MyEditor = () => {
   )
 }
 ```
+
+</Container>

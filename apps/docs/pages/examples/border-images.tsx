@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { Editor, Inputs, styled, codegen } from '@compai/css-gui'
 import { defaultTheme } from '../../data/default-theme'
+import { Container } from '../../components/Container'
 
 const initialStyles = {
   padding: {

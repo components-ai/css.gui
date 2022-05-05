@@ -1,5 +1,30 @@
 # @compai/css-gui
 
+## 0.0.36
+
+### Patch Changes
+
+- 1095de4: Fix some React warnings for id mismatches and missing keys
+
+## 0.0.35
+
+### Patch Changes
+
+- dc1dac4: Allow responsive controls to be hidden
+
+## 0.0.34
+
+### Patch Changes
+
+- 3346d9d: Add more inputs, improve existing
+
+## 0.0.33
+
+### Patch Changes
+
+- c90b015: Implement variable fonts
+- 81cfd40: Fix pascal case bug
+
 ## 0.0.32
 
 ### Patch Changes

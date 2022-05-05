@@ -3,9 +3,9 @@ import pkg from '../../../packages/gui/package.json'
 
 export default function Docs() {
   return (
-    <>
-      <header sx={{ pt: 5 }}>
-        <h1 sx={{ fontSize: '128px', my: 0, lineHeight: 1 }}>
+    <div>
+      <header sx={{ pt: [5,6,7], mx: 'auto', maxWidth: '1024px', px: 4 }}>
+        <h1 sx={{ fontSize: [6,8,'128px'], my: 0, lineHeight: 1 }}>
           CSS GUI
           <span sx={{ fontSize: 1 }}>v{pkg.version}</span>
         </h1>
@@ -25,7 +25,6 @@ export default function Docs() {
         >
           npm install --save @compai/css-gui
         </code>
-      </header>
       <h4 sx={{ mt: 5 }}>Features</h4>
       <ul
         sx={{
@@ -34,25 +33,28 @@ export default function Docs() {
           display: 'grid',
           gap: '2rem',
           gridTemplateColumns: '1fr 1fr 1fr',
+          ml: 0, 
+          pl: 0,
         }}
       >
-        <li>692 properties</li>
+        <li>245 properties</li>
         <li>+1000 Google Fonts</li>
-        <li>Variable fonts</li>
+        <li>Full variable fonts support</li>
         <li>Responsive value arrays</li>
         <li>Theme aware inputs</li>
         <li>Scrubbable number inputs</li>
         <li>Supports all CSS units</li>
         <li>Advanced layer based gradient editor</li>
-        <li>Target pseudo-elements and pseudo-classes</li>
         <li>Nested elements</li>
         <li>Cubic bezier curve editor for animations</li>
         <li>Completely open source</li>
+        <li>Target pseudo-elements and pseudo-classes</li>
       </ul>
+      </header>
       <section className="full-bleed">
         <h2 sx={{ textAlign: 'center' }}>Demo</h2>
         <Demo />
       </section>
-    </>
+    </div>
   )
 }

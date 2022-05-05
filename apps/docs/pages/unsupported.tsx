@@ -1,4 +1,8 @@
 import { allProperties, unsupportedProperties } from '@compai/css-gui'
+import { FirstParagraph } from '../components/FirstParagraph'
+import { Container } from '../components/Container'
+
+
 
 export default function UnsupportedProperties() {
   const allPropertiesCount = allProperties.length
@@ -10,12 +14,16 @@ export default function UnsupportedProperties() {
   )
 
   return (
-    <div>
+<Container>
+    <div sx={{ pt: [5,6] }}>
       <h1>Unsupported properties</h1>
-      <p>
-        CSS GUI is a work in progress, below is an up to date listing of
-        properties that haven&apos;t been implemented yet.
-      </p>
+      <FirstParagraph>
+        <p>
+          CSS GUI is a work in progress, below is an up to date listing of
+          properties that haven&apos;t been implemented yet.
+        </p>
+      </FirstParagraph>
+
       <label htmlFor="progress" sx={{ fontWeight: 500 }}>
         So far, we&apos;ve implemented {implementedPropertiesCount} out of{' '}
         {allPropertiesCount} properties ({percentageComplete}%).
@@ -49,5 +57,6 @@ export default function UnsupportedProperties() {
         })}
       </ul>
     </div>
+</Container>
   )
 }

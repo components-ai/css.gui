@@ -1,13 +1,21 @@
 import { FirstParagraph } from '../../components/FirstParagraph'
 import { FontFamilyExample } from '../../components/examples/FontFamily'
+import { Container } from '../../components/Container'
+
+<Container>
 
 # Font Family
 
-<FirstParagraph>A dynamically loaded font family input</FirstParagraph>
+<FirstParagraph>
 
-This input supports a growing set of typefaces, which currently includes all
-[Google Fonts](https://fonts.google.com) and system fonts. Style sheets links are
-generated automatically with `styled`.
+A dynamically loaded font family input
+
+</FirstParagraph>
+
+The Font Family control supports a growing set of typefaces, including the entire
+[Google Fonts](https://fonts.google.com) library as well as a catalog of system fonts.
+Style sheet links are
+generated automatically with `styled`. Variable fonts are fully supported. Select any variable font to expose the axis' for that font.
 
 ### Example
 
@@ -20,13 +28,15 @@ import { useState } from 'react'
 import { FontFamilyInput, styled } from '@compai/css-gui'
 
 const MyEditor = () => {
-  const [fontFamily, setFontFamily] = useState('Abel')
+  const [styles, setStyles] = useState({ fontFamily: 'Abel' })
 
   return (
     <>
-      <styled.p styles={{ fontFamily }}>Fun with fonts!</styled.p>
-      <FontFamilyInput value={fontFamily} onChange={setFontFamily} />
+      <styled.p styles={styles}>Fun with fonts!</styled.p>
+      <FontFamilyInput value={styles} onChange={setStyles} />
     </>
   )
 }
 ```
+
+</Container>

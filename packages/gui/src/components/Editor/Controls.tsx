@@ -23,8 +23,9 @@ import { TimeInput } from '../inputs/TimeInput'
 import { UnitSteps } from '../../lib'
 import { pascalCase } from '../../lib/util'
 import { UnitRanges } from '../../data/ranges'
+import { StringInput } from '../inputs/StringInput'
 
-type ControlProps = InputProps & {
+interface ControlProps extends InputProps {
   field: KeyArg
 }
 const Control = ({ field, ...props }: ControlProps) => {
@@ -37,6 +38,7 @@ const Control = ({ field, ...props }: ControlProps) => {
     ...(properties[property].keywords ?? []),
     ...GLOBAL_KEYWORDS,
   ]
+  const dependantProperties = properties[property].dependantProperties ?? []
 
   if (!Component) {
     console.error(`Unknown field: ${field}, ignoring`)
@@ -44,17 +46,58 @@ const Control = ({ field, ...props }: ControlProps) => {
   }
 
   const fullField = fieldset ? joinPath(fieldset.name, field) : field
+  const componentProps = {
+    label: sentenceCase(property),
+    themeValues: themeValues,
+    keywords,
+    ...properties[property],
+    ...props,
+  }
+
+  if (dependantProperties.length) {
+    return (
+      <ComponentWithPropertyGroup
+        dependantProperties={dependantProperties}
+        property={property}
+        {...componentProps}
+      />
+    )
+  }
 
   return (
     <Component
-      label={sentenceCase(property)}
       value={getField(fullField)}
       onChange={(newValue: any) => {
         setField(fullField, newValue)
       }}
-      themeValues={themeValues}
-      {...properties[property]}
-      keywords={keywords}
+      {...componentProps}
+    />
+  )
+}
+
+interface ComponentGroupProps {
+  dependantProperties: string[]
+  property: string
+}
+const ComponentWithPropertyGroup = ({
+  dependantProperties,
+  property,
+  ...props
+}: ComponentGroupProps) => {
+  const Component: ComponentType<any> = getInputComponent(property)
+  const { getFields, setFields, removeField } = useEditor()
+
+  return (
+    <Component
+      value={getFields([...dependantProperties, property])}
+      onChange={(newValue: any) => {
+        dependantProperties.forEach((dp) => {
+          if (!Object.keys(newValue).includes(dp)) {
+            removeField(dp)
+          }
+        })
+        setFields(newValue)
+      }}
       {...props}
     />
   )
@@ -77,12 +120,14 @@ type ControlsProps = {
   theme?: Theme
   onChange: (newStyles: any) => void
   children?: ReactChild
+  hideResponsiveControls?: boolean
 }
 export const Editor = ({
   theme,
   styles,
   onChange,
   children,
+  hideResponsiveControls,
 }: ControlsProps) => {
   const properties = Object.keys(styles)
 
@@ -111,7 +156,12 @@ export const Editor = ({
   )
 
   return (
-    <EditorProvider theme={theme} value={styles} onChange={handleStylesChange}>
+    <EditorProvider
+      theme={theme}
+      value={styles}
+      onChange={handleStylesChange}
+      hideResponsiveControls={hideResponsiveControls}
+    >
       {controls}
     </EditorProvider>
   )
@@ -139,6 +189,8 @@ function getPrimitiveInput(type: string) {
       return ResponsiveLengthInput
     case 'time':
       return TimeInput
+    case 'string':
+      return StringInput
     case 'color':
       return ColorInput
     case 'position':

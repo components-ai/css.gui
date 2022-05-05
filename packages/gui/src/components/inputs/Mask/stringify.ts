@@ -1,5 +1,6 @@
 import { stringifyPosition, stringifyValues } from '../../../lib/stringify'
-import { stringifyRepeatStyle, stringifySize } from '../Background/stringify'
+import { stringifyRepeatStyle } from '../Background/stringify'
+import { stringifyBgSize } from '../BgSizeInput'
 import { stringifyImageSource } from '../ImageSource/stringify'
 import { Mask } from './types'
 
@@ -12,7 +13,7 @@ function stringifyMask(mask: Mask) {
   return stringifyValues([
     stringifyImageSource(image),
     stringifyPosition(position),
-    `/ ${stringifySize(size)}`,
+    `/ ${stringifyBgSize(size)}`,
     stringifyRepeatStyle(repeat),
     origin,
     clip,

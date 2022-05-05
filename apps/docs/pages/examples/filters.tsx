@@ -1,5 +1,6 @@
 import { Editor, styled } from '@compai/css-gui'
 import { useState } from 'react'
+import { Container } from '../../components/Container'
 
 const initialStyles = {
   filter: [{ type: 'sepia', amount: { value: 50, unit: '%' } }],
@@ -8,7 +9,8 @@ const initialStyles = {
 export default function Filters() {
   const [styles, setStyles] = useState<any>(initialStyles)
   return (
-    <div>
+    <div sx={{ pt: 5 }}>
+    <Container>
       <Editor styles={styles} onChange={setStyles} />
       <div
         sx={{
@@ -40,6 +42,7 @@ export default function Filters() {
           Fun with filters
         </styled.div>
       </div>
+      </Container>
     </div>
   )
 }

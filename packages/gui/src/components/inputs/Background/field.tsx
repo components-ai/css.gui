@@ -1,9 +1,7 @@
-import { LengthInput } from '../LengthInput'
 import { EditorProps } from '../../../types/editor'
 import {
   attachmentKeywords,
   Background,
-  BgSize,
   boxKeywords,
   repeatKeywords,
   RepeatStyle,
@@ -17,6 +15,7 @@ import { ImageSourceEditor } from '../ImageSource/field'
 import { PositionInput } from '../PositionInput'
 import { Label } from '../../primitives'
 import { SelectInput } from '../SelectInput'
+import { BgSizeInput } from '../BgSizeInput'
 
 export default function BackgroundInput(
   props: EditorPropsWithLabel<Background[]>
@@ -65,7 +64,7 @@ export const BackgroundLayer = (props: EditorProps<Background>) => {
     <div sx={{ m: 3, display: 'flex', flexDirection: 'column', gap: 3 }}>
       <ImageSourceEditor {...getInputProps(props, 'image')} />
       <PositionInput {...getInputProps(props, 'position')} />
-      <SizeInput {...getInputProps(props, 'size')} />
+      <BgSizeInput {...getInputProps(props, 'size')} />
       <RepeatStyleInput {...getInputProps(props, 'repeat')} />
       <SelectInput
         {...getInputProps(props, 'attachment')}
@@ -76,20 +75,6 @@ export const BackgroundLayer = (props: EditorProps<Background>) => {
         {...getInputProps(props, 'clip')}
         options={[...boxKeywords, 'text']}
       />
-    </div>
-  )
-}
-
-export function SizeInput(props: EditorPropsWithLabel<BgSize>) {
-  return (
-    <div>
-      <Label>Size</Label>
-      <div
-        sx={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 2 }}
-      >
-        <LengthInput percentage {...getInputProps(props, 'x')} />
-        <LengthInput percentage {...getInputProps(props, 'y')} />
-      </div>
     </div>
   )
 }

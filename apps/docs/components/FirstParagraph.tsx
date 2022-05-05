@@ -8,7 +8,8 @@ export const FirstParagraph = (props: FirstParagraphProps) => {
         p: {
           fontSize: [2, 3, 3],
           color: 'muted',
-          lineHeight: 1.4,
+          lineHeight: 1.5,
+          maxWidth: '42em',
         },
       }}
       {...props}
