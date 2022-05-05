@@ -7,7 +7,7 @@ import { useCombobox } from 'downshift'
 import { NumberInput } from '../NumberInput'
 
 type Font = {
-  name: string,
+  name: string
   category: FontCategory
 }
 type VariableFont = Record<string, VariableAttribute | string>
@@ -26,25 +26,23 @@ const nameMap: any = {
   opsz: 'Optical Size',
   CASL: 'Casual',
   CRSV: 'Cursive',
-  MONO: 'Monospace'
+  MONO: 'Monospace',
 }
 
 interface Props extends EditorProps<FontFamilyType> {
-  label: string,
+  label: string
   defaultValue?: FontFamilyType
 }
 
-export function FontFamilyInput({
-  label,
-  value,
-  onChange,
-}: Props) {  
+export function FontFamilyInput({ label, value, onChange }: Props) {
   const id = React.useId()
   const fullId = `${id}-${property || 'fontfamily'}`
 
   const [allOptions, setAllOptions] = React.useState<Font[]>([])
   const [inputItems, setInputItems] = React.useState<string[]>([])
-  const [variableFont, setVariableFont] = React.useState<VariableFont | undefined>()
+  const [variableFont, setVariableFont] = React.useState<
+    VariableFont | undefined
+  >()
   const [variableFontsData, setVariableFontsData] = React.useState<any>({})
 
   const inputRef = React.useRef(null)
@@ -107,30 +105,27 @@ export function FontFamilyInput({
   }
 
   const handleFontChange = (name: string) => {
-    console.log(variableFontsData, "tihonn")
     const fontData = variableFontsData[name] ?? {}
-    onChange({ 
-      ...(name === variableFont?.name ? value : {}), 
-      fontFamily: name
+    onChange({
+      ...(name === variableFont?.name ? value : {}),
+      fontFamily: name,
     })
     setVariableFont(fontData)
   }
-  
+
   const parseFontStyleValue = (fontStyle: string) => {
     const parsedNumericVal = fontStyle?.match(/-?\d+/g)?.join('')
     return parsedNumericVal ? parsedNumericVal : fontStyle
   }
 
   const handleCustomAxesChange = (axisKey: string, newValue: any) => {
-    
     const axisDict: Record<string, any> = {}
-    value.fontVariationSettings?.split(',')
-      .forEach((axis: string) => {
-        const axisSplit = axis.split(' ')
-        const k = axisSplit[0]
-        const v = axisSplit[1]
-        axisDict[k] = v
-      })
+    value.fontVariationSettings?.split(',').forEach((axis: string) => {
+      const axisSplit = axis.split(' ')
+      const k = axisSplit[0]
+      const v = axisSplit[1]
+      axisDict[k] = v
+    })
 
     axisDict[`'${axisKey}'`] = newValue
 
@@ -142,19 +137,16 @@ export function FontFamilyInput({
   }
 
   return (
-    <div 
-      {...getComboboxProps()}
-      id={fullId}
-    >
+    <div {...getComboboxProps()} id={fullId}>
       {label && (
         <Label htmlFor={id} sx={{ display: 'block' }}>
           {label}
         </Label>
       )}
       <input
-        type='text'
+        type="text"
         value={value}
-        {...getInputProps({ 
+        {...getInputProps({
           ref: inputRef,
           onChange: (e: any) => handleFontChange(e.target.value),
         })}
@@ -259,106 +251,114 @@ export function FontFamilyInput({
                   }
                 }}
               >
-                <span sx={{ mr: 2 }}>Clear</span>  
+                <span sx={{ mr: 2 }}>Clear</span>
               </button>
             </div>
           )}
-          {isOpen && inputItems.map((item, index) => {
-            return (
-              <li
-                sx={{
-                  margin: 0,
-                  pl: 3,
-                  py: 1,
-                  backgroundColor:
-                    highlightedIndex === index
-                      ? 'backgroundOffset'
-                      : 'inherit',
-                  ':last-of-type': {
-                    borderBottomRightRadius: 7,
-                    overflow: 'hidden',
-                    pb: 1,
-                  },
-                }}
-                key={`${item}${index}`}
-                {...getItemProps({ item, index })}
-                onClick={() => {
-                  handleFontChange(inputItems[highlightedIndex])
-                  toggleMenu()
-                }}
-              >
-                {item}
-              </li>
-            )
-          })}
+          {isOpen &&
+            inputItems.map((item, index) => {
+              return (
+                <li
+                  sx={{
+                    margin: 0,
+                    pl: 3,
+                    py: 1,
+                    backgroundColor:
+                      highlightedIndex === index
+                        ? 'backgroundOffset'
+                        : 'inherit',
+                    ':last-of-type': {
+                      borderBottomRightRadius: 7,
+                      overflow: 'hidden',
+                      pb: 1,
+                    },
+                  }}
+                  key={`${item}${index}`}
+                  {...getItemProps({ item, index })}
+                  onClick={() => {
+                    handleFontChange(inputItems[highlightedIndex])
+                    toggleMenu()
+                  }}
+                >
+                  {item}
+                </li>
+              )
+            })}
         </ul>
       </div>
-      {variableFont && Object.entries(variableFont).map(([k, v]) => {
-        if (['name', 'ital'].includes(k)) return null
-        if (typeof(v) === 'string') return null
+      {variableFont &&
+        Object.entries(variableFont).map(([k, v]) => {
+          if (['name', 'ital'].includes(k)) return null
+          if (typeof v === 'string') return null
 
-        if (k === 'slnt') {
-          return (
-            <NumberInput
-              value={+parseFontStyleValue(
-                value.fontStyle ?? `oblique ${v.default} oblique`
-              )}
-              onChange={(v: number) => {  
-                onChange({
-                  ...value,
-                  fontStyle: `oblique ${v}deg`
-                })
-              }}
-              min={v.max}
-              max={-v.min}
-              step={v.step}
-              label='Slant'
-              sx={{ width: '100%' }}
-            />
-          )
-        }
+          if (k === 'slnt') {
+            return (
+              <NumberInput
+                value={
+                  +parseFontStyleValue(
+                    value.fontStyle ?? `oblique ${v.default} oblique`
+                  )
+                }
+                onChange={(v: number) => {
+                  onChange({
+                    ...value,
+                    fontStyle: `oblique ${v}deg`,
+                  })
+                }}
+                min={v.max}
+                max={-v.min}
+                step={v.step}
+                label="Slant"
+                sx={{ width: '100%' }}
+              />
+            )
+          }
 
-        if (k === 'wdth') {
+          if (k === 'wdth') {
+            return (
+              <NumberInput
+                value={value.fontStretch ?? v.default}
+                onChange={(newVal: number) =>
+                  onChange({ ...value, fontStretch: newVal })
+                }
+                min={v.min}
+                max={v.max}
+                step={v.step}
+                label="Width"
+                sx={{ width: '100%' }}
+              />
+            )
+          }
+
+          if (k === 'wght') {
+            return (
+              <NumberInput
+                value={value.fontWeight ?? v.default}
+                onChange={(newVal: number) =>
+                  onChange({ ...value, fontWeight: newVal })
+                }
+                min={v.min}
+                max={v.max}
+                step={v.step}
+                label="Font Weight"
+                sx={{ width: '100%' }}
+              />
+            )
+          }
+
           return (
-            <NumberInput
-              value={value.fontStretch ?? v.default} 
-              onChange={(newVal: number) => onChange({ ...value, fontStretch: newVal })}
+            <CustomAxis
+              value={value.fontVariationSettings ?? `'${k}' ${v.default};`}
+              onChange={(e: any) => handleCustomAxesChange(k, e)}
+              axisKey={k}
               min={v.min}
               max={v.max}
               step={v.step}
-              label='Width'
+              label={nameMap[k] ?? k}
               sx={{ width: '100%' }}
             />
           )
-        }
-
-        if (k === 'wght') {
-          return (
-            <NumberInput
-              value={value.fontWeight ?? v.default} 
-              onChange={(newVal: number) => onChange({ ...value, fontWeight: newVal })}
-              min={v.min}
-              max={v.max}
-              step={v.step}
-              label='Font Weight'
-              sx={{ width: '100%' }}
-            />
-          )
-        }
-
-        return (
-          <CustomAxis
-            value={value.fontVariationSettings ?? `'${k}' ${v.default};`} 
-            onChange={(e: any) => handleCustomAxesChange(k, e)}
-            axisKey={k}
-            min={v.min}
-            max={v.max}
-            step={v.step}
-            label={nameMap[k] ?? k}
-            sx={{ width: '100%' }}
-          />
-        )
-      })}
+        })}
     </div>
   )
 }
@@ -400,8 +400,12 @@ type APIFontData = {
 const getFontsData = async (): Promise<APIFontData> => {
   const fontOptions: Font[] = []
   const rawGoogData = await fetch('https://components.ai/api/v1/typefaces/list')
-  const rawSystemData = await fetch('https://components.ai/api/v1/typefaces/system')
-  const variableFontsData = await fetch('https://components.ai/api/v1/typefaces/variable')
+  const rawSystemData = await fetch(
+    'https://components.ai/api/v1/typefaces/system'
+  )
+  const variableFontsData = await fetch(
+    'https://components.ai/api/v1/typefaces/variable'
+  )
 
   const systemFonts = (await rawSystemData.json()) as any
   systemFonts.forEach(({ name, type }: any) => {
@@ -428,9 +432,9 @@ const getFontsData = async (): Promise<APIFontData> => {
       fontOptions.push({ name, category })
     }
   })
-  
+
   return {
     fontOptions,
-    variableFontsData: (await variableFontsData.json())
+    variableFontsData: await variableFontsData.json(),
   }
 }

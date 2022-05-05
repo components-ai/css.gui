@@ -10,7 +10,17 @@ interface Props extends EditorPropsWithLabel<StringValue> {
   keywords?: string[]
 }
 
-export function StringInput({ label, value, onChange, keywords = [] }: Props) {
+const DEFAULT_STRING_VALUE: StringValue = {
+  value: 'inherit',
+  unit: 'keyword',
+}
+
+export function StringInput({
+  label,
+  value = DEFAULT_STRING_VALUE,
+  onChange,
+  keywords = [],
+}: Props) {
   return (
     <div>
       <Label>{label}</Label>
