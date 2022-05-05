@@ -117,7 +117,7 @@ export function FontFamilyInput({
   }
   
   const parseFontStyleValue = (fontStyle: string) => {
-    const parsedNumericVal = fontStyle?.match(/\d/g)?.join('')
+    const parsedNumericVal = fontStyle?.match(/-?\d+/g)?.join('')
     return parsedNumericVal ? parsedNumericVal : fontStyle
   }
 
@@ -303,7 +303,7 @@ export function FontFamilyInput({
               value={+parseFontStyleValue(
                 value.fontStyle ?? `oblique ${v.default} oblique`
               )}
-              onChange={(v: number) => {                
+              onChange={(v: number) => {  
                 onChange({
                   ...value,
                   fontStyle: `oblique ${v}deg`
