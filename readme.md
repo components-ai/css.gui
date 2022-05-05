@@ -5,7 +5,9 @@
 CSS GUI is a visual toolkit for editing element styles on the web.
 It's theme-aware, performant, and can be composed into any React app.
 
-[**Read the documentation &rarr;**](https://components.ai/open-source/css-gui)
+- [**Read the documentation &rarr;**](https://components.ai/open-source/css-gui)
+- [**Play with a demo on CodeSandbox &rarr;**](https://codesandbox.io/s/cssgui-example-w1c9h5)
+- [**Watch an introduction on YouTube &rarr;**](https://www.youtube.com/watch?v=b6J2TGyDYc0)
 
 ## ⚠️ Under active development
 
