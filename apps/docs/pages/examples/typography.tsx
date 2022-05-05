@@ -70,6 +70,7 @@ export default function Typography() {
         </div>
       </div>
           <Editor styles={styles} onChange={setStyles} theme={defaultTheme}>
+          <>
             <h3 sx={{ mt: 3, mb: 4, px: 4  }}>Typography</h3>
             <div sx={{px: 4, pb: 5, display: 'grid' , gridTemplateColumns: '1fr 1fr 1fr 1fr', alignItems: 'start', gap: '2rem', justifyContent: 'space-evenly'}}>
               <section sx={{ display: 'grid', gap: '1rem', }}>
@@ -126,6 +127,7 @@ export default function Typography() {
                 <Inputs.MinWidth />
               </section>
             </div>
+            </>
           </Editor>
       <div className="full-bleed">
         <pre
