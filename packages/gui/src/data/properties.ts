@@ -848,7 +848,12 @@ export const properties: Record<string, PropertyData> = {
   },
   fontFamily: {
     type: FontFamily,
-    dependantProperties: ['fontStyle', 'fontStretch', 'fontWeight', 'fontVariationSettings']
+    dependantProperties: [
+      'fontStyle',
+      'fontStretch',
+      'fontWeight',
+      'fontVariationSettings',
+    ],
   },
   fontKerning: {
     type: 'keyword',
@@ -1658,8 +1663,9 @@ export const properties: Record<string, PropertyData> = {
     percentage: true,
     keywords: ['none'],
   },
-  strokeDashOffset: {
+  strokeDashoffset: {
     type: 'number',
+    percentage: true,
     defaultValue: 0,
     range: { number: [-9999, 9999] }, // Todo add %
   },
