@@ -29,7 +29,11 @@ const initialStyles = {
         y: { value: 'center', unit: 'keyword' },
       },
       repeat: { x: 'no-repeat', y: 'no-repeat' },
-      size: { x: { value: 100, unit: '%' }, y: { value: 100, unit: '%' } },
+      size: {
+        type: 'dimensions',
+        x: { value: 100, unit: '%' },
+        y: { value: 100, unit: '%' },
+      },
       attachment: 'fixed',
       origin: 'border-box',
       clip: 'border-box',

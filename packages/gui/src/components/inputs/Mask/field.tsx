@@ -13,7 +13,8 @@ import {
   compositingOperators,
   maskingModes,
 } from './types'
-import { RepeatStyleInput, SizeInput } from '../Background/field'
+import { RepeatStyleInput } from '../Background/field'
+import { BgSizeInput } from '../BgSizeInput'
 
 export default function MaskInput(props: EditorPropsWithLabel<Mask[]>) {
   const newItem = () => {
@@ -61,7 +62,7 @@ export const MaskLayer = (props: EditorProps<Mask>) => {
     <div sx={{ m: 3, display: 'flex', flexDirection: 'column', gap: 3 }}>
       <ImageSourceEditor {...getInputProps(props, 'image')} />
       <PositionInput {...getInputProps(props, 'position')} />
-      <SizeInput {...getInputProps(props, 'size')} />
+      <BgSizeInput {...getInputProps(props, 'size')} />
       <RepeatStyleInput {...getInputProps(props, 'repeat')} />
       <SelectInput
         {...getInputProps(props, 'origin')}

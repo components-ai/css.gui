@@ -1,5 +1,6 @@
 import { Position } from '../../../types/css'
-import { BgSize, boxKeywords, RepeatStyle } from '../Background/types'
+import { boxKeywords, RepeatStyle } from '../Background/types'
+import { BgSize } from '../BgSizeInput'
 import { ImageSource } from '../ImageSource/types'
 
 export interface Mask {

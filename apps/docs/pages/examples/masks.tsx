@@ -20,6 +20,7 @@ const initialStyles = {
         y: 'no-repeat',
       },
       size: {
+        type: 'dimensions',
         x: { value: 100, unit: '%' },
         y: { value: 100, unit: '%' },
       },
