@@ -2,6 +2,7 @@ import { EditorPropsWithLabel, getInputProps } from '../../../lib/util'
 import { EditorProps } from '../../../types/editor'
 import Layers from '../../Layers'
 import { LengthInput } from '../LengthInput'
+import { SelectInput } from '../SelectInput'
 import { stringifyTrackSizeList } from './stringify'
 import { FitContent, MinMax, TrackBreadth, TrackSize } from './types'
 
@@ -25,6 +26,18 @@ export default function TrackSizeListInput(
 }
 
 function TrackSizeInput(props: EditorProps<TrackSize>) {
+  return (
+    <div>
+      <SelectInput
+        {...getInputProps(props, 'type')}
+        options={['breadth', 'minmax', 'fit-content']}
+      />
+      <TrackSizeSwitch {...props} />
+    </div>
+  )
+}
+
+function TrackSizeSwitch(props: EditorProps<TrackSize>) {
   switch (props.value.type) {
     case 'breadth': {
       const _props = props as EditorProps<TrackBreadth>
