@@ -1061,6 +1061,10 @@ export const properties: Record<string, PropertyData> = {
     keywords: ['max-content', 'min-content', 'auto'],
     defaultValue: 'auto',
   },
+  hyphenateCharacter: {
+    type: 'string',
+    keywords: ['auto'],
+  },
   hyphens: {
     type: 'keyword',
     keywords: ['none', 'manual', 'auto'],
