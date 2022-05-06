@@ -3,7 +3,10 @@ import { EditorProps } from '../../../types/editor'
 import Layers from '../../Layers'
 import { NumberInput } from '../NumberInput'
 import { SelectInput } from '../SelectInput'
-import TrackSizeListInput, { TrackSizeSwitch } from '../TrackSize/field'
+import TrackSizeListInput, {
+  getDefaultTrackSizeValue,
+  TrackSizeSwitch,
+} from '../TrackSize/field'
 import { TrackSize } from '../TrackSize/types'
 import { stringifyGridTrackList } from './stringify'
 import { GridTrack, TrackRepeat } from './types'
@@ -33,6 +36,7 @@ function GridTrackInput(props: EditorProps<GridTrack>) {
       <SelectInput
         {...getInputProps(props, 'type')}
         options={['breadth', 'minmax', 'fit-content', 'repeat']}
+        onChange={(type) => props.onChange(getDefaultGridTrackValue(type))}
       />
       <GridTrackSwitch {...props} />
     </div>
@@ -59,4 +63,18 @@ function TrackRepeatInput(props: EditorProps<TrackRepeat>) {
       <TrackSizeListInput {...getInputProps(props, 'trackList')} />
     </div>
   )
+}
+
+function getDefaultGridTrackValue(type: GridTrack['type']): GridTrack {
+  switch (type) {
+    case 'repeat': {
+      return {
+        type,
+        count: 1,
+        trackList: [{ type: 'breadth', value: { value: 1, unit: 'fr' } }],
+      }
+    }
+    default:
+      return getDefaultTrackSizeValue(type)
+  }
 }

@@ -31,6 +31,7 @@ function TrackSizeInput(props: EditorProps<TrackSize>) {
       <SelectInput
         {...getInputProps(props, 'type')}
         options={['breadth', 'minmax', 'fit-content']}
+        onChange={(type) => props.onChange(getDefaultTrackSizeValue(type))}
       />
       <TrackSizeSwitch {...props} />
     </div>
@@ -76,3 +77,21 @@ export function TrackSizeSwitch(props: EditorProps<TrackSize>) {
 }
 
 const trackKeywords = ['min-content', 'max-content', 'auto']
+
+export function getDefaultTrackSizeValue(type: TrackSize['type']): TrackSize {
+  switch (type) {
+    case 'breadth':
+      return { type, value: { value: 1, unit: 'fr' } }
+    case 'minmax':
+      return {
+        type,
+        min: { value: 20, unit: 'px' },
+        max: { value: 1, unit: 'fr' },
+      }
+    case 'fit-content':
+      return {
+        type,
+        value: { value: 100, unit: '%' },
+      }
+  }
+}
