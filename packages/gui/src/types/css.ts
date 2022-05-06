@@ -62,6 +62,11 @@ export const LENGTH_UNITS = [
   'vmax',
 ] as const
 export type LengthUnit = typeof LENGTH_UNITS[number]
+export type MultidimensionalLengthType = 'multidimensionalLength'
+export type MultidimensionalLengthUnit = {
+  type: MultidimensionalLengthType
+  values: CSSUnitValue[]
+}
 
 export const TIME_UNITS = ['ms', 's'] as const
 export type TimeUnit = typeof TIME_UNITS[number]

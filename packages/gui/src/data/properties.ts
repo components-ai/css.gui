@@ -88,6 +88,7 @@ type PropertyData = {
   steps?: UnitSteps
   label?: string
   responsive?: boolean
+  dimensions?: number
 }
 
 export const properties: Record<string, PropertyData> = {
@@ -380,12 +381,13 @@ export const properties: Record<string, PropertyData> = {
     type: 'color',
     keywords: ['currentcolor', 'transparent'],
   },
-  // TODO this can accept two values
   borderBottomLeftRadius: {
-    type: 'length',
+    type: 'multiLength',
+    dimensions: 2,
   },
   borderBottomRightRadius: {
-    type: 'length',
+    type: 'multiLength',
+    dimensions: 2,
   },
   borderBottomStyle: {
     type: 'keyword',
@@ -480,12 +482,13 @@ export const properties: Record<string, PropertyData> = {
     type: 'color',
     keywords: ['currentcolor', 'transparent'],
   },
-  // TODO this can accept two values
   borderTopLeftRadius: {
-    type: 'length',
+    type: 'multiLength',
+    dimensions: 2,
   },
   borderTopRightRadius: {
-    type: 'length',
+    type: 'multiLength',
+    dimensions: 2,
   },
   borderTopStyle: {
     type: 'keyword',

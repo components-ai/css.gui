@@ -34,6 +34,7 @@ import { UnitRanges } from '../../data/ranges'
 import { StringInput } from '../inputs/StringInput'
 import { DEFAULT_LENGTH } from '../../lib/constants'
 import { getDefaultValue } from '../../lib/defaults'
+import { MultidimensionInput } from '../inputs/Multidimension'
 
 interface ControlProps extends InputProps {
   field: KeyArg
@@ -198,6 +199,8 @@ function getPrimitiveInput(type: string) {
       return PercentageInput
     case 'length':
       return ResponsiveLengthInput
+    case 'multiLength':
+      return MultidimensionLengthInput
     case 'time':
       return TimeInput
     case 'string':
@@ -282,6 +285,27 @@ const ResponsiveLengthInput = ({
       defaultValue={DEFAULT_LENGTH}
       onChange={onChange}
       Component={LengthInput}
+      componentProps={{
+        ...props,
+        keyword: true,
+      }}
+    />
+  )
+}
+
+const MultidimensionLengthInput = ({
+  value,
+  onChange,
+  label,
+  ...props
+}: EditorPropsWithLabel<Length | ResponsiveLength> & { property: string }) => {
+  return (
+    <ResponsiveInput
+      label={label}
+      value={value}
+      defaultValue={DEFAULT_LENGTH}
+      onChange={onChange}
+      Component={MultidimensionInput}
       componentProps={{
         ...props,
         keyword: true,
