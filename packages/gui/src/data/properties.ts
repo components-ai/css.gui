@@ -55,6 +55,11 @@ import {
   stringifyGridTrack,
   stringifyGridTrackList,
 } from '../components/inputs/GridTrack/stringify'
+import { BgSizeInput, stringifyBgSize } from '../components/inputs/BgSizeInput'
+import {
+  stringifyTransformOrigin,
+  TransformOriginInput,
+} from '../components/inputs/TransformOrigin'
 
 type PropertyData = {
   type: string | ComponentType<any>
@@ -1061,9 +1066,18 @@ export const properties: Record<string, PropertyData> = {
     keywords: ['max-content', 'min-content', 'auto'],
     defaultValue: 'auto',
   },
+  hyphenateCharacter: {
+    type: 'string',
+    keywords: ['auto'],
+  },
   hyphens: {
     type: 'keyword',
     keywords: ['none', 'manual', 'auto'],
+  },
+  imageOrientation: {
+    // NOTE: there is an <angle> version that is deprecated in favor of rotate()
+    type: 'keyword',
+    keywords: ['none', 'from-image'],
   },
   initialLetterAlign: {
     type: 'keyword',
@@ -1261,6 +1275,10 @@ export const properties: Record<string, PropertyData> = {
     stringify: stringifyImageSource,
     label: 'Mask Border Source',
   },
+  maskBorderSize: {
+    type: BgSizeInput,
+    stringify: stringifyBgSize,
+  },
   maskBorderWidth: {
     // TODO: add multiple sides (top, bottom, left, right)
     type: 'length',
@@ -1353,6 +1371,10 @@ export const properties: Record<string, PropertyData> = {
       'round space',
       'no-repeat round',
     ],
+  },
+  maskSize: {
+    type: BgSizeInput,
+    stringify: stringifyBgSize,
   },
   maskType: {
     type: 'keyword',
@@ -1974,6 +1996,10 @@ export const properties: Record<string, PropertyData> = {
       'stroke-box',
       'view-box',
     ],
+  },
+  transformOrigin: {
+    type: TransformOriginInput,
+    stringify: stringifyTransformOrigin,
   },
   transformStyle: {
     type: 'keyword',
