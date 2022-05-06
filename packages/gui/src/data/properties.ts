@@ -50,6 +50,11 @@ import {
 } from '../components/inputs/StrokeDasharray'
 import TrackSizeListInput from '../components/inputs/TrackSize/field'
 import { stringifyTrackSizeList } from '../components/inputs/TrackSize/stringify'
+import GridTrackListInput from '../components/inputs/GridTrack/field'
+import {
+  stringifyGridTrack,
+  stringifyGridTrackList,
+} from '../components/inputs/GridTrack/stringify'
 
 type PropertyData = {
   type: string | ComponentType<any>
@@ -1024,6 +1029,14 @@ export const properties: Record<string, PropertyData> = {
   gridAutoRows: {
     type: TrackSizeListInput,
     stringify: stringifyTrackSizeList,
+  },
+  gridTemplateColumns: {
+    type: GridTrackListInput,
+    stringify: stringifyGridTrackList,
+  },
+  gridTemplateRows: {
+    type: GridTrackListInput,
+    stringify: stringifyGridTrackList,
   },
   hangingPunctuation: {
     type: 'keyword',

@@ -37,7 +37,7 @@ function TrackSizeInput(props: EditorProps<TrackSize>) {
   )
 }
 
-function TrackSizeSwitch(props: EditorProps<TrackSize>) {
+export function TrackSizeSwitch(props: EditorProps<TrackSize>) {
   switch (props.value.type) {
     case 'breadth': {
       const _props = props as EditorProps<TrackBreadth>
