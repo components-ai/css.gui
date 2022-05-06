@@ -56,6 +56,10 @@ import {
   stringifyGridTrackList,
 } from '../components/inputs/GridTrack/stringify'
 import { BgSizeInput, stringifyBgSize } from '../components/inputs/BgSizeInput'
+import {
+  stringifyTransformOrigin,
+  TransformOriginInput,
+} from '../components/inputs/TransformOrigin'
 
 type PropertyData = {
   type: string | ComponentType<any>
@@ -1992,6 +1996,10 @@ export const properties: Record<string, PropertyData> = {
       'stroke-box',
       'view-box',
     ],
+  },
+  transformOrigin: {
+    type: TransformOriginInput,
+    stringify: stringifyTransformOrigin,
   },
   transformStyle: {
     type: 'keyword',
