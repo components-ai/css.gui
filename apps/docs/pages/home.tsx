@@ -9,10 +9,20 @@ export default function Docs() {
           CSS GUI
           <span sx={{ fontSize: 1 }}>v{pkg.version}</span>
         </h1>
-        <h2 sx={{ my: 0 }}>
-          A composable, extensible, and themeable CSS editor for creative coding
-          and end-user styling.
+        <h2 sx={{ fontWeight: 500, my: 0 }}>
+          A composable, extensible, and themeable controls for visually editing CSS.
         </h2>
+      <p sx={{
+        mt: 4,
+        fontSize: '2rem',
+        fontWeight: 400,
+        mb: 0,
+        }}>
+         Everyone should be able to explore the creative potential of CSS.
+         This project is a growing set of parametric controls for rapidly editing CSS properties. 
+         Designed for composability, mix and match any combination of properties
+         to create custom components and tap into the vast and beautiful world of CSS. 
+      </p>
         <h4 sx={{ mt: 5 }}>Install</h4>
         <code
           sx={{
@@ -25,7 +35,7 @@ export default function Docs() {
         >
           npm install --save @compai/css-gui
         </code>
-      <h4 sx={{ mt: 5 }}>Features</h4>
+      <h4 sx={{ fontSize: 3, mt: 4 }}>Features</h4>
       <ul
         sx={{
           listStyleType: 'none',
@@ -37,7 +47,7 @@ export default function Docs() {
           pl: 0,
         }}
       >
-        <li>245 properties</li>
+        <li>Controls for 258 CSS properties</li>
         <li>+1000 Google Fonts</li>
         <li>Full variable fonts support</li>
         <li>Responsive value arrays</li>
@@ -46,9 +56,9 @@ export default function Docs() {
         <li>Supports all CSS units</li>
         <li>Advanced layer based gradient editor</li>
         <li>Nested elements</li>
-        <li>Cubic bezier curve editor for animations</li>
+        <li>Cubic bezier editor for custom easings</li>
+        <li>Style pseudo-elements and pseudo-classes</li>
         <li>Completely open source</li>
-        <li>Target pseudo-elements and pseudo-classes</li>
       </ul>
       </header>
       <section className="full-bleed">
