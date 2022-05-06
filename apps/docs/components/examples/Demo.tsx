@@ -6,11 +6,11 @@ import { defaultTheme } from '../../data/default-theme'
 
 export function Demo() {
   const [styles, setStyles] = useState<any>(initialStyles)
+  const [fontFamily, setFontFamily] = useState<any>(initialStyles)
 
   return (
     <>
       <div
-        className="full-bleed"
         sx={{
           display: 'grid',
           gridTemplateColumns: '320px 1fr',

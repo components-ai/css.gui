@@ -4,10 +4,9 @@ import { FontFamilyInput, styled } from '@compai/css-gui'
 export const FontFamilyExample = () => {
   const [styles, setStyles] = useState({ 
     fontFamily: 'Recursive', 
-    fontWeight: 800,
     fontSize: {
-      value: 6,
-      unit: 'rem'
+      value: 96,
+      unit: 'px'
     },
     marginTop: {
       value: 0,

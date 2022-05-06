@@ -1,4 +1,7 @@
 import { Demo } from '../components/examples/Demo'
+import { FontFamilyPreview } from '../components/examples/FontFamilyPreview'
+import { FontSizePreview } from '../components/examples/FontSizePreview'
+import { ColorPreview } from '../components/examples/ColorPreview'
 import pkg from '../../../packages/gui/package.json'
 
 export default function Docs() {
@@ -61,9 +64,13 @@ export default function Docs() {
         <li>Completely open source</li>
       </ul>
       </header>
-      <section className="full-bleed">
+      <section sx={{ pb: 6 }}>
         <h2 sx={{ textAlign: 'center' }}>Demo</h2>
-        <Demo />
+        <div sx={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(24rem, 1fr))', gap: '4rem', px: [4,5,5], maxWidth: '114em', mx: 'auto', }}>
+          <ColorPreview />
+          <FontSizePreview />
+          <FontFamilyPreview />
+        </div>
       </section>
     </div>
   )
