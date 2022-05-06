@@ -1069,6 +1069,11 @@ export const properties: Record<string, PropertyData> = {
     type: 'keyword',
     keywords: ['none', 'manual', 'auto'],
   },
+  imageOrientation: {
+    // NOTE: there is an <angle> version that is deprecated in favor of rotate()
+    type: 'keyword',
+    keywords: ['none', 'from-image'],
+  },
   initialLetterAlign: {
     type: 'keyword',
     keywords: ['auto', 'alphabetic', 'hanging', 'ideographic'],
