@@ -16,6 +16,7 @@ export const Head = ({
     <title>{title}</title>
     <meta name="title" content={title} key="title" />
     <meta name="description" content={description} key="description" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <meta property="og:type" content="website" />
     <meta property="og:url" content={url} key="og-url" />
