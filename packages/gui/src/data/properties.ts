@@ -55,6 +55,7 @@ import {
   stringifyGridTrack,
   stringifyGridTrackList,
 } from '../components/inputs/GridTrack/stringify'
+import { BgSizeInput, stringifyBgSize } from '../components/inputs/BgSizeInput'
 
 type PropertyData = {
   type: string | ComponentType<any>
@@ -1269,6 +1270,10 @@ export const properties: Record<string, PropertyData> = {
     type: ImageSourcePicker,
     stringify: stringifyImageSource,
     label: 'Mask Border Source',
+  },
+  maskBorderSize: {
+    type: BgSizeInput,
+    stringify: stringifyBgSize,
   },
   maskBorderWidth: {
     // TODO: add multiple sides (top, bottom, left, right)
