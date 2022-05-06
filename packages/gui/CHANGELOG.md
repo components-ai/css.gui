@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.40
+
+### Patch Changes
+
+- 9e63ccc: Add more transform controls, implement first pass of grid
+
 ## 0.0.39
 
 ### Patch Changes
