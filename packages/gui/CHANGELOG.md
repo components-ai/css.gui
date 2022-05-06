@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.39
+
+### Patch Changes
+
+- 6faafcc: Allow user to type values out of bounds of limit range
+
 ## 0.0.38
 
 ### Patch Changes
