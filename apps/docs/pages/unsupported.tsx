@@ -57,8 +57,10 @@ export default function UnsupportedProperties() {
           <span>0</span>
           <span>427</span>
         </div>
-        <h2 sx={{ mt: 5 }}>The following properties are on our TODO list</h2>
-        <ul sx={{ pl: 3 }}>
+        <h2 sx={{ mt: 5, mb: 4 }}>
+          The following properties are on our TODO list
+        </h2>
+        <ul sx={{ pl: 3, columnCount: 3 }}>
           {unsupportedProperties.map(({ property, url }) => {
             const hasMDN = hasMDNDocs(property)
             const color = hasMDN ? 'text' : 'muted'
