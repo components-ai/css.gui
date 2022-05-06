@@ -1676,6 +1676,10 @@ export const properties: Record<string, PropertyData> = {
     type: 'keyword',
     keywords: ['auto', 'thin', 'none'],
   },
+  scrollSnapStop: {
+    type: 'keyword',
+    keywords: ['normal', 'always'],
+  },
   scrollSnapType: {
     type: 'keyword',
     keywords: [

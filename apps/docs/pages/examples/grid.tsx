@@ -22,7 +22,7 @@ export default function GridExample() {
   const [styles, setStyles] = useState<any>(initialStyles)
 
   return (
-    <div>
+    <div sx={{ p: 2, display: 'grid', gridTemplateColumns: 'max-content 1fr' }}>
       <Editor styles={styles} onChange={setStyles}>
         <>
           <Inputs.GridTemplateColumns />
@@ -30,7 +30,7 @@ export default function GridExample() {
         </>
       </Editor>
       <div sx={{ display: 'grid', ...toCSSObject(styles) }}>
-        {[...Array(20)].map((n, i) => {
+        {[...Array(100)].map((n, i) => {
           return (
             <div sx={{ border: '1px solid', borderColor: 'text' }}>{i}</div>
           )
