@@ -1,4 +1,3 @@
-import { Demo } from '../components/examples/Demo'
 import { FontFamilyPreview } from '../components/examples/FontFamilyPreview'
 import { FontSizePreview } from '../components/examples/FontSizePreview'
 import { ColorPreview } from '../components/examples/ColorPreview'

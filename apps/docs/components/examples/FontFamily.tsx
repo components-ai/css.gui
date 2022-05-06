@@ -10,11 +10,11 @@ export const FontFamilyExample = () => {
     },
     marginTop: {
       value: 0,
-      unit: 'rem'
+      unit: 'rem',
     },
     marginBottom: {
       value: 0,
-      unit: 'rem'
+      unit: 'rem',
     },
     whiteSpace: 'nowrap',
   })
@@ -22,8 +22,11 @@ export const FontFamilyExample = () => {
   return (
     <>
       <styled.p styles={styles}>Fun with fonts!</styled.p>
-      <div sx={{ '& > div' : { display: 'grid', gap: '1rem' }}}>
-        <FontFamilyInput value={styles} onChange={setStyles} />
+      <div sx={{ '& > div': { display: 'grid', gap: '1rem' } }}>
+        <FontFamilyInput
+          value={styles}
+          onChange={(newStyles) => setStyles({ ...styles, ...newStyles })}
+        />
       </div>
     </>
   )
