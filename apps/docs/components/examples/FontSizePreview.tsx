@@ -19,10 +19,9 @@ export function FontSizePreview() {
         overflow: 'hidden',
         }}>
         <section sx={{
-          color: 'text',
           fontWeight: 900,
-          bg: 'primary',
           height: '300px',
+          borderBottom: '1px solid',
           maxWidth: '100%',
           display: 'flex',
           alignItems: 'center',
@@ -33,7 +32,7 @@ export function FontSizePreview() {
           mb: 3,
           }}>
           <styled.p styles={styles} style={{ margin: 0, lineHeight: 1 }}>
-            Aa
+            <span sx={{color: "text"}}>Aa</span>
           </styled.p>
         </section>
         <Editor styles={styles} onChange={setStyles} theme={defaultTheme}>

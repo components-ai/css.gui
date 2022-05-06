@@ -66,12 +66,12 @@ export default function Docs() {
       <section sx={{ pb: 6 }}>
         <header sx={{ mb: 5 }}>
           <h2 sx={{ textAlign: 'center' }}>Demo</h2>
-          <p sx={{ fontSize: 3, textAlign: 'center', }}>Previews of some individual properties</p>
+          <p sx={{ fontSize: 3, textAlign: 'center', }}>Previews of CSS controls</p>
         </header>
         <div sx={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(24rem, 1fr))', gap: '4rem', px: [4,5,5], maxWidth: '114em', mx: 'auto', }}>
-          <ColorPreview />
           <FontSizePreview />
           <FontFamilyPreview />
+          <ColorPreview />
         </div>
       </section>
     </div>

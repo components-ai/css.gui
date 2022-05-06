@@ -11,39 +11,13 @@ export function FontFamilyPreview() {
     <>
       <article sx={{ 
         display: 'flex',
-        flexDirection: 'column',
+        flexDirection: 'column-reverse',
         color: 'muted',
         width: '100%', 
         boxShadow: 'inset 0 0 0px 1px currentColor', 
         borderRadius: '6px',
         overflow: 'hidden',
         }}>
-        <section sx={{
-            fontWeight: '900',
-            fontSize: '192px',
-            height: '300px',
-            color: 'text',
-          }}>
-          <styled.p styles={styles} style={{ margin: 0, lineHeight: 1, height: '100%', 
-          width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', }}>
-            Aa
-          </styled.p>
-        </section>
-        <Editor styles={styles} onChange={setStyles} theme={defaultTheme}>
-          <div
-            sx={{
-              color: 'text',
-              px: 5, pt: 4,
-              width: '100%',
-              '& > div': { 
-                display: 'grid',
-                gap: '.5rem',
-              },
-            }}
-          >
-            <Inputs.FontFamily />
-          </div>
-        </Editor>
       <div sx={{ 
         mt: 'auto', 
         px: 5,
@@ -61,6 +35,32 @@ export function FontFamilyPreview() {
           {codegen.css(styles)}
         </pre>
       </div>
+        <Editor styles={styles} onChange={setStyles} theme={defaultTheme}>
+          <div
+            sx={{
+              color: 'text',
+              px: 5, pt: 4,
+              width: '100%',
+              '& > div': { 
+                display: 'grid',
+                gap: '.5rem',
+              },
+            }}
+          >
+            <Inputs.FontFamily />
+          </div>
+        </Editor>
+        <section sx={{
+            fontWeight: '900',
+            fontSize: '192px',
+            height: '300px',
+            borderBottom: '1px solid',
+          }}>
+          <styled.p styles={styles} style={{ margin: 0, lineHeight: 1, height: '100%', 
+          width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', }}>
+            <span sx={{color:'text',}}>Aa</span>
+          </styled.p>
+        </section>
       </article>
     </>
   )
