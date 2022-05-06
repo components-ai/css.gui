@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.42
+
+### Patch Changes
+
+- e898aff: Add ranges for border width
+
 ## 0.0.41
 
 ### Patch Changes
