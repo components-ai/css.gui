@@ -48,6 +48,8 @@ import {
   stringifyStrokeDasharray,
   StrokeDasharrayInput,
 } from '../components/inputs/StrokeDasharray'
+import TrackSizeListInput from '../components/inputs/TrackSize/field'
+import { stringifyTrackSizeList } from '../components/inputs/TrackSize/stringify'
 
 type PropertyData = {
   type: string | ComponentType<any>
@@ -1011,9 +1013,17 @@ export const properties: Record<string, PropertyData> = {
     type: 'keyword',
     keywords: ['auto', 'none'],
   },
+  gridAutoColumns: {
+    type: TrackSizeListInput,
+    stringify: stringifyTrackSizeList,
+  },
   gridAutoFlow: {
     type: 'keyword',
     keywords: ['row', 'column', 'dense', 'row dense', 'column dense'],
+  },
+  gridAutoRows: {
+    type: TrackSizeListInput,
+    stringify: stringifyTrackSizeList,
   },
   hangingPunctuation: {
     type: 'keyword',

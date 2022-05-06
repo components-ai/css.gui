@@ -16,6 +16,7 @@ interface LengthInputProps {
   keywords?: string[]
   number?: boolean
   percentage?: boolean
+  flex?: boolean
   themeValues?: (CSSUnitValue & { id: string })[]
 }
 
@@ -23,6 +24,7 @@ export function LengthInput({
   property,
   number,
   percentage,
+  flex,
   value: providedValue,
   ...props
 }: LengthInputProps) {
@@ -30,6 +32,7 @@ export function LengthInput({
     number && UnitlessUnits.Number,
     ...LENGTH_UNITS,
     percentage && PercentageLengthUnits.Pct,
+    flex && 'fr', // TODO flex should be non-negative
   ])
   const value =
     providedValue === '0' ? { value: 0, unit: 'number' } : providedValue
@@ -57,4 +60,5 @@ const lengthSteps = {
   em: 0.125,
   rem: 0.125,
   '%': 0.1,
+  fr: 0.1,
 }
