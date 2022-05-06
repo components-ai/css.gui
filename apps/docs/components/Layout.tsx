@@ -13,7 +13,7 @@ export const Layout = (props: Props) => {
           fontFamily: 'body',
           borderBottom: 'thin solid',
           borderColor: 'border',
-          px: [2, 3, 3],
+          px: 3,
           py: 3,
           position: 'sticky',
           width: '100%',
@@ -32,9 +32,10 @@ export const Layout = (props: Props) => {
               textDecoration: 'none',
               display: 'flex',
               alignItems: 'center',
+              mr: 2,
             }}
           >
-            <span sx={{ mr: 4 }}>
+            <span>
               <Logo height={20} width={20} seed={id} />
             </span>
         </a>
