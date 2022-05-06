@@ -325,7 +325,8 @@ export function FontFamilyInput({ label, value, onChange }: Props) {
           return (
             <CustomAxis
               key={k}
-              value={value.fontVariationSettings ?? `'${k}' ${v.default};`}
+              defaultValue={v.default}
+              value={value.fontVariationSettings}
               onChange={(e: any) => handleCustomAxesChange(k, e)}
               axisKey={k}
               min={v.min}
@@ -347,7 +348,7 @@ const CustomAxis = ({
   onChange,
   ...props
 }: any) => {
-  const parseCustomAxisValue = () => {
+  const parseCustomAxisValue = (): number => {
     const splitAxis = value?.split(',')
 
     if (splitAxis?.length > 0) {
@@ -361,13 +362,9 @@ const CustomAxis = ({
     return defaultValue
   }
 
-  return (
-    <NumberInput
-      {...props}
-      value={parseCustomAxisValue()}
-      onChange={onChange}
-    />
-  )
+  const parsedValue = parseCustomAxisValue()
+
+  return <NumberInput {...props} value={parsedValue} onChange={onChange} />
 }
 
 type APIFontData = {
