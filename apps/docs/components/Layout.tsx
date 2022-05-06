@@ -32,7 +32,7 @@ export const Layout = (props: Props) => {
               textDecoration: 'none',
               display: 'flex',
               alignItems: 'center',
-              mr: 2,
+              mr: 3,
             }}
           >
             <span>
