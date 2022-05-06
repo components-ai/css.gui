@@ -1368,6 +1368,10 @@ export const properties: Record<string, PropertyData> = {
       'no-repeat round',
     ],
   },
+  maskSize: {
+    type: BgSizeInput,
+    stringify: stringifyBgSize,
+  },
   maskType: {
     type: 'keyword',
     keywords: ['luminance', 'alpha'],
