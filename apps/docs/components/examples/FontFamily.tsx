@@ -2,20 +2,20 @@ import { useState } from 'react'
 import { FontFamilyInput, styled } from '@compai/css-gui'
 
 export const FontFamilyExample = () => {
-  const [styles, setStyles] = useState({ 
-    fontFamily: 'Recursive', 
+  const [styles, setStyles] = useState({
+    fontFamily: 'Recursive',
     fontWeight: 800,
     fontSize: {
       value: 6,
-      unit: 'rem'
+      unit: 'rem',
     },
     marginTop: {
       value: 0,
-      unit: 'rem'
+      unit: 'rem',
     },
     marginBottom: {
       value: 0,
-      unit: 'rem'
+      unit: 'rem',
     },
     whiteSpace: 'nowrap',
   })
@@ -23,8 +23,11 @@ export const FontFamilyExample = () => {
   return (
     <>
       <styled.p styles={styles}>Fun with fonts!</styled.p>
-      <div sx={{ '& > div' : { display: 'grid', gap: '1rem' }}}>
-        <FontFamilyInput value={styles} onChange={setStyles} />
+      <div sx={{ '& > div': { display: 'grid', gap: '1rem' } }}>
+        <FontFamilyInput
+          value={styles}
+          onChange={(newStyles) => setStyles({ ...styles, ...newStyles })}
+        />
       </div>
     </>
   )
