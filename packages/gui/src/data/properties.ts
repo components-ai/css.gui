@@ -385,6 +385,14 @@ export const properties: Record<string, PropertyData> = {
   borderBottomWidth: {
     type: 'length',
     keywords: ['thin', 'medium', 'thick'],
+    range: {
+      [AbsoluteLengthUnits.Px]: [0, 512],
+      [FontRelativeLengthUnits.Em]: [0, 16],
+      [FontRelativeLengthUnits.Rem]: [0, 16],
+      [ViewportPercentageLengthUnits.Vh]: [0, 100],
+      [ViewportPercentageLengthUnits.Vw]: [0, 100],
+      [PercentageLengthUnits.Pct]: [0.1, 100],
+    },
   },
   borderLeftColor: {
     type: 'color',
@@ -408,6 +416,14 @@ export const properties: Record<string, PropertyData> = {
   borderLeftWidth: {
     type: 'length',
     keywords: ['thin', 'medium', 'thick'],
+    range: {
+      [AbsoluteLengthUnits.Px]: [0, 512],
+      [FontRelativeLengthUnits.Em]: [0, 16],
+      [FontRelativeLengthUnits.Rem]: [0, 16],
+      [ViewportPercentageLengthUnits.Vh]: [0, 100],
+      [ViewportPercentageLengthUnits.Vw]: [0, 100],
+      [PercentageLengthUnits.Pct]: [0.1, 100],
+    },
   },
   borderRightColor: {
     type: 'color',
@@ -431,6 +447,14 @@ export const properties: Record<string, PropertyData> = {
   borderRightWidth: {
     type: 'length',
     keywords: ['thin', 'medium', 'thick'],
+    range: {
+      [AbsoluteLengthUnits.Px]: [0, 512],
+      [FontRelativeLengthUnits.Em]: [0, 16],
+      [FontRelativeLengthUnits.Rem]: [0, 16],
+      [ViewportPercentageLengthUnits.Vh]: [0, 100],
+      [ViewportPercentageLengthUnits.Vw]: [0, 100],
+      [PercentageLengthUnits.Pct]: [0.1, 100],
+    },
   },
   borderTopColor: {
     type: 'color',
@@ -461,6 +485,14 @@ export const properties: Record<string, PropertyData> = {
   borderTopWidth: {
     type: 'length',
     keywords: ['thin', 'medium', 'thick'],
+    range: {
+      [AbsoluteLengthUnits.Px]: [0, 512],
+      [FontRelativeLengthUnits.Em]: [0, 16],
+      [FontRelativeLengthUnits.Rem]: [0, 16],
+      [ViewportPercentageLengthUnits.Vh]: [0, 100],
+      [ViewportPercentageLengthUnits.Vw]: [0, 100],
+      [PercentageLengthUnits.Pct]: [0.1, 100],
+    },
   },
   borderColor: {
     type: 'color',
@@ -484,6 +516,14 @@ export const properties: Record<string, PropertyData> = {
   borderWidth: {
     type: 'length',
     keywords: ['thin', 'medium', 'thick'],
+    range: {
+      [AbsoluteLengthUnits.Px]: [0, 512],
+      [FontRelativeLengthUnits.Em]: [0, 16],
+      [FontRelativeLengthUnits.Rem]: [0, 16],
+      [ViewportPercentageLengthUnits.Vh]: [0, 100],
+      [ViewportPercentageLengthUnits.Vw]: [0, 100],
+      [PercentageLengthUnits.Pct]: [0.1, 100],
+    },
   },
   bottom: {
     type: 'length',
