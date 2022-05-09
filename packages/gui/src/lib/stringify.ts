@@ -52,12 +52,12 @@ export function stringifyFunction(
 }
 
 export function stringifyValues(
-  properties: Primitive[],
+  properties: (Primitive | null)[],
   separator: string = ' '
 ) {
   return `${properties
     .filter((x) => !isNil(x))
-    .map(stringifyPrimitive)
+    .map(stringifyPrimitive as any)
     .join(separator)}`
 }
 

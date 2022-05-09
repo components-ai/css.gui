@@ -60,6 +60,7 @@ import {
   stringifyTransformOrigin,
   TransformOriginInput,
 } from '../components/inputs/TransformOrigin'
+import { GridLineInput, stringifyGridLine } from '../components/inputs/GridLine'
 
 type PropertyData = {
   type: string | ComponentType<any>
@@ -1074,6 +1075,22 @@ export const properties: Record<string, PropertyData> = {
   gridAutoRows: {
     type: TrackSizeListInput,
     stringify: stringifyTrackSizeList,
+  },
+  gridColumnStart: {
+    type: GridLineInput,
+    stringify: stringifyGridLine,
+  },
+  gridColumnEnd: {
+    type: GridLineInput,
+    stringify: stringifyGridLine,
+  },
+  gridRowStart: {
+    type: GridLineInput,
+    stringify: stringifyGridLine,
+  },
+  gridRowEnd: {
+    type: GridLineInput,
+    stringify: stringifyGridLine,
   },
   gridTemplateColumns: {
     type: GridTrackListInput,
