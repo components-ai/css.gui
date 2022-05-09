@@ -61,6 +61,10 @@ import {
   TransformOriginInput,
 } from '../components/inputs/TransformOrigin'
 import { GridLineInput, stringifyGridLine } from '../components/inputs/GridLine'
+import {
+  ScrollSnapAlignInput,
+  stringifyScrollSnapAlign,
+} from '../components/inputs/ScrollSnapAlign'
 
 type PropertyData = {
   type: string | ComponentType<any>
@@ -1810,6 +1814,10 @@ export const properties: Record<string, PropertyData> = {
     type: 'length',
     percentage: true,
     keywords: ['auto'],
+  },
+  scrollSnapAlign: {
+    type: ScrollSnapAlignInput,
+    stringify: stringifyScrollSnapAlign,
   },
   scrollSnapStop: {
     type: 'keyword',
