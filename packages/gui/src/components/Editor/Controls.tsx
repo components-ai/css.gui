@@ -24,6 +24,7 @@ import { UnitSteps } from '../../lib'
 import { pascalCase } from '../../lib/util'
 import { UnitRanges } from '../../data/ranges'
 import { StringInput } from '../inputs/StringInput'
+import { ResponsiveInputValueType } from '../Responsive/Input'
 
 interface ControlProps extends InputProps {
   field: KeyArg
@@ -200,7 +201,10 @@ function getPrimitiveInput(type: string) {
   }
 }
 
-type EditorPropsWithLabel<T> = EditorProps<T> & { label: string }
+type EditorPropsWithLabel<T> = EditorProps<T> & {
+  label: string
+  responsive: boolean
+}
 const NumberInput = ({
   value,
   onChange,
@@ -281,7 +285,21 @@ const KeywordInput = ({
   onChange,
   label,
   keywords,
+  responsive,
 }: EditorPropsWithLabel<string> & { keywords: string[] }) => {
+  if (responsive) {
+    return (
+      <ResponsiveInput
+        label={label}
+        value={value || DEFAULT_KEYWORD}
+        onChange={(newValue: any) => onChange(newValue)}
+        Component={SelectInput}
+        componentProps={{
+          options: keywords,
+        }}
+      />
+    )
+  }
   return (
     <SelectInput
       label={label}

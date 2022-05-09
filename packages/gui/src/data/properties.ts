@@ -72,6 +72,7 @@ type PropertyData = {
   dependantProperties?: string[]
   steps?: UnitSteps
   label?: string
+  responsive?: boolean
 }
 
 export const properties: Record<string, PropertyData> = {
@@ -1827,6 +1828,7 @@ export const properties: Record<string, PropertyData> = {
   },
   textAlign: {
     type: 'keyword',
+    responsive: true,
     keywords: [
       'start',
       'end',
