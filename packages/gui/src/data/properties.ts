@@ -1755,6 +1755,62 @@ export const properties: Record<string, PropertyData> = {
     type: 'keyword',
     keywords: ['auto', 'thin', 'none'],
   },
+  // TODO positional syntax
+  scrollPadding: {
+    type: 'length',
+    percentage: true,
+    keywords: ['auto'],
+  },
+  scrollPaddingBlock: {
+    type: 'length',
+    percentage: true,
+    keywords: ['auto'],
+  },
+  scrollPaddingBlockEnd: {
+    type: 'length',
+    percentage: true,
+    keywords: ['auto'],
+  },
+  scrollPaddingBlockStart: {
+    type: 'length',
+    percentage: true,
+    keywords: ['auto'],
+  },
+  scrollPaddingBottom: {
+    type: 'length',
+    percentage: true,
+    keywords: ['auto'],
+  },
+  scrollPaddingInline: {
+    type: 'length',
+    percentage: true,
+    keywords: ['auto'],
+  },
+  scrollPaddingInlineEnd: {
+    type: 'length',
+    percentage: true,
+    keywords: ['auto'],
+  },
+  scrollPaddingInlineStart: {
+    type: 'length',
+    percentage: true,
+    keywords: ['auto'],
+  },
+  scrollPaddingLeft: {
+    type: 'length',
+    percentage: true,
+    keywords: ['auto'],
+  },
+  scrollPaddingRight: {
+    type: 'length',
+    percentage: true,
+    keywords: ['auto'],
+  },
+  scrollPaddingTop: {
+    type: 'length',
+    percentage: true,
+    keywords: ['auto'],
+  },
   scrollSnapStop: {
     type: 'keyword',
     keywords: ['normal', 'always'],
