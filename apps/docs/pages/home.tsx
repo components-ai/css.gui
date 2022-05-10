@@ -8,6 +8,7 @@ import { BackgroundPreview } from '../components/examples/BackgroundPreview'
 import { BorderRadiusPreview } from '../components/examples/BorderRadiusPreview'
 import { TextAlignPreview } from '../components/examples/TextAlignPreview'
 import { FilterPreview } from '../components/examples/FilterPreview'
+import { CursorPreview } from '../components/examples/CursorPreview'
 import pkg from '../../../packages/gui/package.json'
 
 export default function Docs() {
@@ -86,6 +87,7 @@ export default function Docs() {
           <WidthPreview />
           <HeightPreview />
           <FilterPreview />
+          <CursorPreview />
         </div>
       </section>
     </div>
