@@ -10,28 +10,24 @@ const DEFAULT_BREAKPOINT_COUNT = 3
 // TODO: Base this on the type of property
 const DEFAULT_LENGTH: Length = { value: 0, unit: AbsoluteLengthUnits.Px }
 
-export type ResponsiveInputValueType =
-  | Length
-  | ResponsiveLength
-  | string
-  | string[]
-type ResponsiveInputProps = {
-  value?: ResponsiveInputValueType
-  onChange: (newValue: ResponsiveInputValueType) => void
+export type Responsive<T> = T | T[]
+type ResponsiveInputProps<T> = {
+  value?: Responsive<T>
+  onChange: (newValue: Responsive<T>) => void
   label: string
   property?: string
   // TODO: Type this component
   Component: React.ComponentType<any>
   componentProps?: any
 }
-export const ResponsiveInput = ({
+export function ResponsiveInput<T>({
   value,
   onChange,
   label,
   Component,
   componentProps = {},
   property,
-}: ResponsiveInputProps) => {
+}: ResponsiveInputProps<T>) {
   const { breakpoints } = useTheme()
   const breakpointCount = breakpoints?.length || DEFAULT_BREAKPOINT_COUNT
 
