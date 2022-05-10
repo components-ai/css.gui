@@ -5,6 +5,7 @@ import { WidthPreview } from '../components/examples/WidthPreview'
 import { HeightPreview } from '../components/examples/HeightPreview'
 import { BackgroundImagePreview } from '../components/examples/BackgroundImagePreview'
 import { BackgroundPreview } from '../components/examples/BackgroundPreview'
+import { BackgroundBlendModePreview } from '../components/examples/BackgroundBlendModePreview'
 import { BorderRadiusPreview } from '../components/examples/BorderRadiusPreview'
 import { TextAlignPreview } from '../components/examples/TextAlignPreview'
 import { FilterPreview } from '../components/examples/FilterPreview'
@@ -83,6 +84,7 @@ export default function Docs() {
           <ColorPreview />
           <BackgroundImagePreview />
           <BackgroundPreview />
+          <BackgroundBlendModePreview />
           <BorderRadiusPreview />
           <WidthPreview />
           <HeightPreview />

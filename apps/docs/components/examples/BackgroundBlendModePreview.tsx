@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { Editor, Inputs, styled, codegen } from '@compai/css-gui'
-import { initialStyles } from '../../data/initial-styles-filter-preview'
+import { initialStyles } from '../../data/initial-styles-background-blend-mode-preview'
 import { defaultTheme } from '../../data/default-theme'
 
-export function FilterPreview() {
+export function BackgroundBlendModePreview() {
   const [styles, setStyles] = useState<any>(initialStyles)
 
   return (
@@ -31,8 +31,15 @@ export function FilterPreview() {
           overflow: 'hidden',
           mb: 3,
           }}>
-          <styled.div styles={styles}>
-            <img src='https://source.unsplash.com/random' sx={{display: 'block', width: '100%', }}/>
+          <styled.div styles={styles} style={{ 
+            backgroundColor: '#6465ff',
+            backgroundImage: 'url(https://source.unsplash.com/random)',
+            backgroundSize: 'cover',
+            height: '100%',
+            width: '100%',
+          }}>
+
+
           </styled.div>
         </section>
         <Editor styles={styles} onChange={setStyles} theme={defaultTheme}>
@@ -48,7 +55,7 @@ export function FilterPreview() {
               },
             }}
           >
-            <Inputs.Filter />
+            <Inputs.BackgroundBlendMode />
           </div>
         </Editor>
       <div sx={{
