@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.43
+
+### Patch Changes
+
+- 79021f9: Add support for more layout controls
+
 ## 0.0.42
 
 ### Patch Changes
