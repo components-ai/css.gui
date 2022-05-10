@@ -1,6 +1,13 @@
 import { FontFamilyPreview } from '../components/examples/FontFamilyPreview'
 import { FontSizePreview } from '../components/examples/FontSizePreview'
 import { ColorPreview } from '../components/examples/ColorPreview'
+import { WidthPreview } from '../components/examples/WidthPreview'
+import { HeightPreview } from '../components/examples/HeightPreview'
+import { BackgroundImagePreview } from '../components/examples/BackgroundImagePreview'
+import { BackgroundPreview } from '../components/examples/BackgroundPreview'
+import { BorderRadiusPreview } from '../components/examples/BorderRadiusPreview'
+import { TextAlignPreview } from '../components/examples/TextAlignPreview'
+import { FilterPreview } from '../components/examples/FilterPreview'
 import pkg from '../../../packages/gui/package.json'
 
 export default function Docs() {
@@ -71,7 +78,14 @@ export default function Docs() {
         <div sx={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(24rem, 1fr))', gap: '4rem', px: [4,5,5], maxWidth: '114em', mx: 'auto', }}>
           <FontSizePreview />
           <FontFamilyPreview />
+          <TextAlignPreview />
           <ColorPreview />
+          <BackgroundImagePreview />
+          <BackgroundPreview />
+          <BorderRadiusPreview />
+          <WidthPreview />
+          <HeightPreview />
+          <FilterPreview />
         </div>
       </section>
     </div>
