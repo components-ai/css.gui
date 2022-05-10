@@ -1643,8 +1643,7 @@ export const properties: Record<string, PropertyData> = {
     keywords: ['none'],
   },
   perspectiveOrigin: {
-    type: PerspectiveOriginInput,
-    stringify: stringifyPerspectiveOrigin,
+    type: 'position',
   },
   placeItems: {
     type: 'keyword',
