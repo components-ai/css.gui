@@ -24,7 +24,7 @@ export default function Docs() {
         </h2>
       <p sx={{
         mt: 4,
-        fontSize: '2rem',
+        fontSize: ['18px', '1.5rem', '2rem'],
         fontWeight: 400,
         mb: 0,
         }}>
