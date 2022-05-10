@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.44
+
+### Patch Changes
+
+- ba1079a: Updates font-size, width, and height with new ranges
+
 ## 0.0.43
 
 ### Patch Changes
