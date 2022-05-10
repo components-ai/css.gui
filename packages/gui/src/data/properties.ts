@@ -18,10 +18,6 @@ import {
 } from '../types/css'
 import { ANIMATABLE_PROPERTIES } from './animatable'
 import {
-  PerspectiveOriginInput,
-  stringifyPerspectiveOrigin,
-} from '../components/inputs/PerspectiveOrigin'
-import {
   stringifyTextDecoration,
   TextDecorationInput,
   textDecorationLines,
@@ -65,6 +61,10 @@ import {
   ScrollSnapAlignInput,
   stringifyScrollSnapAlign,
 } from '../components/inputs/ScrollSnapAlign'
+import {
+  BorderSpacingInput,
+  stringifyBorderSpacing,
+} from '../components/inputs/BorderSpacing'
 
 type PropertyData = {
   type: string | ComponentType<any>
@@ -502,6 +502,10 @@ export const properties: Record<string, PropertyData> = {
   borderColor: {
     type: 'color',
     keywords: ['currentcolor', 'transparent'],
+  },
+  borderSpacing: {
+    type: BorderSpacingInput,
+    stringify: stringifyBorderSpacing,
   },
   borderStyle: {
     type: 'keyword',
