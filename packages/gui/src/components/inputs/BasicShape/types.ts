@@ -1,6 +1,7 @@
 import { Length, LengthPercentage, Position } from '../../../types/css'
 
 export type BasicShape = Inset | Circle | Ellipse | Polygon | Path
+export type BasicShapeType = BasicShape['type']
 
 export interface Inset {
   type: 'inset'
@@ -38,4 +39,4 @@ export interface Path {
 }
 
 type FillRule = 'nonzero' | 'evenodd'
-export type Point = [x: LengthPercentage, y: LengthPercentage]
+export type Point = { x: LengthPercentage; y: LengthPercentage }

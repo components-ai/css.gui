@@ -37,6 +37,7 @@ export const Sidebar = () => {
       <NavItem href="/examples/backgrounds">Backgrounds</NavItem>
       <NavItem href="/examples/border-images">Border Images</NavItem>
       <NavItem href="/examples/borders">Borders</NavItem>
+      <NavItem href="/examples/clip-path">Clip Path</NavItem>
       <NavItem href="/examples/filters">Filters</NavItem>
       <NavItem href="/examples/flex">Flex</NavItem>
       <NavItem href="/examples/grid">Grid</NavItem>

@@ -47,10 +47,7 @@ import {
 import TrackSizeListInput from '../components/inputs/TrackSize/field'
 import { stringifyTrackSizeList } from '../components/inputs/TrackSize/stringify'
 import GridTrackListInput from '../components/inputs/GridTrack/field'
-import {
-  stringifyGridTrack,
-  stringifyGridTrackList,
-} from '../components/inputs/GridTrack/stringify'
+import { stringifyGridTrackList } from '../components/inputs/GridTrack/stringify'
 import { BgSizeInput, stringifyBgSize } from '../components/inputs/BgSizeInput'
 import {
   stringifyTransformOrigin,
@@ -65,6 +62,7 @@ import {
   BorderSpacingInput,
   stringifyBorderSpacing,
 } from '../components/inputs/BorderSpacing'
+import { ClipPathInput, stringifyClipPath } from '../components/inputs/ClipPath'
 
 type PropertyData = {
   type: string | ComponentType<any>
@@ -624,6 +622,10 @@ export const properties: Record<string, PropertyData> = {
   clear: {
     type: 'keyword',
     keywords: ['none', 'left', 'right', 'both', 'inline-start', 'inline-end'],
+  },
+  clipPath: {
+    type: ClipPathInput,
+    stringify: stringifyClipPath,
   },
   clipRule: {
     // SVG

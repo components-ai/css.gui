@@ -1,5 +1,4 @@
 import { EditorPropsWithLabel, getInputProps } from '../../../lib/util'
-import { Length } from '../../../types/css'
 import { EditorProps } from '../../../types/editor'
 import FieldArray from '../../FieldArray'
 import { Label } from '../../primitives'
@@ -9,6 +8,7 @@ import { SelectInput } from '../SelectInput'
 import { stringifyBasicShape } from './stringify'
 import {
   BasicShape,
+  BasicShapeType,
   Circle,
   Ellipse,
   Inset,
@@ -24,6 +24,7 @@ export function BasicShapeInput(props: EditorPropsWithLabel<BasicShape>) {
       <SelectInput
         {...getInputProps(props, 'type')}
         options={['inset', 'circle', 'ellipse', 'polygon', 'path']}
+        onChange={(type) => props.onChange(getDefaultValue(type))}
       />
       <BasicShapeSwitch {...props} />
     </div>
@@ -36,11 +37,11 @@ function BasicShapeSwitch(props: EditorProps<BasicShape>) {
       const _props = props as EditorProps<Inset>
       return (
         <div>
-          <LengthInput {...getInputProps(_props, 'top')} />
-          <LengthInput {...getInputProps(_props, 'right')} />
-          <LengthInput {...getInputProps(_props, 'bottom')} />
-          <LengthInput {...getInputProps(_props, 'left')} />
-          <LengthInput {...getInputProps(_props, 'borderRadius')} />
+          <LengthInput percentage {...getInputProps(_props, 'top')} />
+          <LengthInput percentage {...getInputProps(_props, 'right')} />
+          <LengthInput percentage {...getInputProps(_props, 'bottom')} />
+          <LengthInput percentage {...getInputProps(_props, 'left')} />
+          <LengthInput percentage {...getInputProps(_props, 'borderRadius')} />
         </div>
       )
     }
@@ -49,6 +50,7 @@ function BasicShapeSwitch(props: EditorProps<BasicShape>) {
       return (
         <div>
           <LengthInput
+            percentage
             {...getInputProps(_props, 'radius')}
             keywords={['closest-side', 'farthest-side']}
           />
@@ -61,10 +63,12 @@ function BasicShapeSwitch(props: EditorProps<BasicShape>) {
       return (
         <div>
           <LengthInput
+            percentage
             {...getInputProps(_props, 'rx')}
             keywords={['closest-side', 'farthest-side']}
           />
           <LengthInput
+            percentage
             {...getInputProps(_props, 'ry')}
             keywords={['closest-side', 'farthest-side']}
           />
@@ -85,12 +89,10 @@ function BasicShapeSwitch(props: EditorProps<BasicShape>) {
             {...getInputProps(_props, 'points')}
             stringify={stringifyBasicShape as any}
             content={PointInput}
-            newItem={() =>
-              [
-                { value: 0, unit: 'px' },
-                { value: 0, unit: 'px' },
-              ] as [Length, Length]
-            }
+            newItem={() => ({
+              x: { value: 0, unit: 'px' },
+              y: { value: 0, unit: 'px' },
+            })}
           />
         </div>
       )
@@ -122,8 +124,75 @@ function BasicShapeSwitch(props: EditorProps<BasicShape>) {
 function PointInput(props: EditorPropsWithLabel<Point>) {
   return (
     <div sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
-      <LengthInput percentage {...getInputProps(props, 0)} label="x" />
-      <LengthInput percentage {...getInputProps(props, 1)} label="y" />
+      <LengthInput percentage {...getInputProps(props, 'x')} />
+      <LengthInput percentage {...getInputProps(props, 'y')} />
     </div>
   )
+}
+
+function getDefaultValue(type: BasicShapeType): BasicShape {
+  switch (type) {
+    case 'inset': {
+      return {
+        type,
+        top: { value: 0, unit: 'px' },
+        right: { value: 0, unit: 'px' },
+        bottom: { value: 0, unit: 'px' },
+        left: { value: 0, unit: 'px' },
+        borderRadius: { value: 0, unit: 'px' },
+      }
+    }
+    case 'circle': {
+      return {
+        type,
+        radius: { value: 'closest-side', unit: 'keyword' },
+        position: {
+          x: { value: 'center', unit: 'keyword' },
+          y: { value: 'center', unit: 'keyword' },
+        },
+      }
+    }
+    case 'ellipse': {
+      return {
+        type,
+        rx: { value: 'closest-side', unit: 'keyword' },
+        ry: { value: 'closest-side', unit: 'keyword' },
+        position: {
+          x: { value: 'center', unit: 'keyword' },
+          y: { value: 'center', unit: 'keyword' },
+        },
+      }
+    }
+    case 'polygon': {
+      return {
+        type,
+        fillRule: 'nonzero',
+        points: [
+          {
+            x: { value: 0, unit: '%' },
+            y: { value: 0, unit: '%' },
+          },
+          {
+            x: { value: 100, unit: '%' },
+            y: { value: 0, unit: '%' },
+          },
+          {
+            x: { value: 100, unit: '%' },
+            y: { value: 100, unit: '%' },
+          },
+          {
+            x: { value: 0, unit: '%' },
+            y: { value: 100, unit: '%' },
+          },
+        ],
+      }
+    }
+    case 'path': {
+      return {
+        type,
+        fillRule: 'nonzero',
+        path: '',
+      }
+    }
+  }
 }

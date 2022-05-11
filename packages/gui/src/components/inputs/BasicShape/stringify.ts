@@ -34,9 +34,12 @@ export function stringifyBasicShape(value: BasicShape) {
     }
     case 'polygon': {
       const { fillRule, points } = value
+      console.log(points)
       return stringifyFunction(type, [
         fillRule,
-        ...points.map(([x, y]) => `${stringifyUnit(x)} ${stringifyUnit(y)}`),
+        points
+          .map(({ x, y }) => `${stringifyUnit(x)} ${stringifyUnit(y)}`)
+          .join(', '),
       ])
     }
     case 'path': {
