@@ -64,6 +64,7 @@ import {
   ShapeOutsideInput,
   stringifyShapeOutside,
 } from '../components/inputs/ShapeOutside'
+import { NumberPercentageInput } from '../components/inputs/NumberPercentageInput'
 
 type PropertyData = {
   type: string | ComponentType<any>
@@ -1856,6 +1857,9 @@ export const properties: Record<string, PropertyData> = {
       'y proximity',
       'both mandatory',
     ],
+  },
+  shapeImageThreshold: {
+    type: NumberPercentageInput,
   },
   shapeMargin: {
     type: 'length',

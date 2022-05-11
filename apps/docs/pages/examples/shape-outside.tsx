@@ -14,6 +14,11 @@ const initialStyles = {
     },
     box: 'margin-box',
   },
+  shapeMargin: { value: 0, unit: 'px' },
+  shapeImageThreshold: {
+    value: 0,
+    unit: '%',
+  },
   width: { value: 200, unit: 'px' },
   height: { value: 200, unit: 'px' },
   float: 'left',
