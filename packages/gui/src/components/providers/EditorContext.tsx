@@ -2,7 +2,7 @@ import { ThemeProvider as ThemeUIProvider } from 'theme-ui'
 import { get, unset } from 'lodash-es'
 import { createContext, ReactChild, useContext } from 'react'
 import { KeyArg, Recipe, EditorData } from './types'
-import { applyRecipe } from './util'
+import { applyRecipe, remove as removeT } from './util'
 import { ThemeProvider } from './ThemeContext'
 import { EditorConfigProvider, EditorConfig } from './EditorConfigContext'
 import { theme as uiTheme } from '../ui/theme'
@@ -59,6 +59,11 @@ export function useEditor() {
     })
   }
 
+  const removeFields = (fields: KeyArg[]) => {
+    editComponentData((draft) => {
+      fields.forEach((field) => unset(draft.value, field))
+    })
+  }
   return {
     ...context,
     getField,
@@ -67,6 +72,7 @@ export function useEditor() {
     setFields,
     onChange,
     removeField,
+    removeFields
   }
 }
 

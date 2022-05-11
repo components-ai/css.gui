@@ -14,6 +14,7 @@ export const RenderElement = ({
   ...props
 }: RenderElementProps) => {
   const Component = tagName
+  // console.log(styles, "styles")
   const styleObject = toCSSObject(styles)
 
   return (

@@ -1,4 +1,4 @@
-import produce from 'immer'
+import produce, { current } from 'immer'
 import { ComponentType, ReactChild, useId } from 'react'
 import { CSSUnitValue, Length, ResponsiveLength, Styles } from '../../types/css'
 import { Theme } from '../../types/theme'
@@ -85,18 +85,28 @@ const ComponentWithPropertyGroup = ({
   ...props
 }: ComponentGroupProps) => {
   const Component: ComponentType<any> = getInputComponent(property)
-  const { getFields, setFields, removeField } = useEditor()
+  const { getFields, setFields, removeFields } = useEditor()
 
   return (
     <Component
       value={getFields([...dependantProperties, property])}
       onChange={(newValue: any) => {
+
+        let toDelete: KeyArg[] = []
         dependantProperties.forEach((dp) => {
+          // const removeKeys = Object.keys(newValue).map(())
           if (!Object.keys(newValue).includes(dp)) {
-            removeField(dp)
+            toDelete.push(dp)
+            // console.log(dp, 'dp')
+            // removeField(dp)
+            // const out = getField(dp)
+            // console.log(out, "out")
           }
         })
+        removeFields(toDelete)
         setFields(newValue)
+        // removeField('fontVariationSettings')
+        
       }}
       {...props}
     />
@@ -137,11 +147,13 @@ export const Editor = ({
         value: draft,
       }
 
+      console.log(current(draft), "vd")
       // @ts-ignore
       recipe(valueData)
       draft = valueData as any
     })
 
+    console.log(newData, "new dataaa")
     onChange(newData)
   }
 
