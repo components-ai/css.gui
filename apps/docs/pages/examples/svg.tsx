@@ -45,25 +45,32 @@ export default function SvgExample() {
   const [styles, setStyles] = useState<any>(initialStyles)
 
   return (
-    <div sx={{
-      pt: 5,
-      display: 'flex',
-      justifyContent: 'center',
-      }}>
+    <div
+      sx={{
+        pt: 5,
+        display: 'flex',
+        justifyContent: 'center',
+      }}
+    >
       <div>
         <svg width="400" height="400">
           <circle sx={{ ...toCSSObject(styles) }} cx={200} cy={200} r={150} />
         </svg>
-        <section sx={{ '& > div': {
-          display: 'grid', gap: '1em',
-          }}}>
-        <Editor
-          styles={styles}
-          onChange={setStyles}
-          theme={defaultTheme}
-        ></Editor>
+        <section
+          sx={{
+            '& > div': {
+              display: 'grid',
+              gap: '1em',
+            },
+          }}
+        >
+          <Editor
+            styles={styles}
+            onChange={setStyles}
+            theme={defaultTheme}
+          ></Editor>
         </section>
-        </div>
+      </div>
     </div>
   )
 }

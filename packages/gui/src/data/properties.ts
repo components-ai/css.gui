@@ -65,6 +65,11 @@ import {
   stringifyShapeOutside,
 } from '../components/inputs/ShapeOutside'
 import { NumberPercentageInput } from '../components/inputs/NumberPercentageInput'
+import {
+  OffsetPathInput,
+  stringifyOffsetPath,
+} from '../components/inputs/OffsetPath'
+import { AngleInput } from '../components/inputs/AngleInput'
 
 type PropertyData = {
   type: string | ComponentType<any>
@@ -1536,16 +1541,23 @@ export const properties: Record<string, PropertyData> = {
     type: 'position',
     keywords: ['auto'], // TODO the keyword isn't being populated currently
   },
+  offsetDistance: {
+    type: 'length',
+    percentage: true,
+  },
+  offsetPath: {
+    type: OffsetPathInput,
+    stringify: stringifyOffsetPath,
+  },
+  offsetRotate: {
+    type: AngleInput,
+  },
   objectFit: {
     type: 'keyword',
     keywords: ['contain', 'cover', 'fill', 'none', 'scale-down'],
   },
   objectPosition: {
     type: 'position',
-  },
-  offsetDistance: {
-    type: 'length',
-    percentage: true,
   },
   opacity: {
     type: 'percentage',

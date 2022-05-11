@@ -42,6 +42,7 @@ export const Sidebar = () => {
       <NavItem href="/examples/flex">Flex</NavItem>
       <NavItem href="/examples/grid">Grid</NavItem>
       <NavItem href="/examples/masks">Masks</NavItem>
+      <NavItem href="/examples/offset">Offset</NavItem>
       <NavItem href="/examples/shadows">Shadows</NavItem>
       <NavItem href="/examples/space">Space</NavItem>
       <NavItem href="/examples/text-decoration">Text Decoration</NavItem>
