@@ -4,12 +4,8 @@ import { useState } from 'react'
 const initialStyles = {
   offsetPath: {
     shape: {
-      type: 'circle',
-      radius: { value: 'closest-side', unit: 'keyword' },
-      position: {
-        x: { value: 'center', unit: 'keyword' },
-        y: { value: 'center', unit: 'keyword' },
-      },
+      type: 'path',
+      path: 'M 10 80 C 40 10, 65 10, 95 80 S 150 150, 180 80',
     },
     box: 'margin-box',
   },
@@ -25,7 +21,18 @@ export default function OffsetExample() {
   return (
     <div sx={{ display: 'grid', gridTemplateColumns: '18rem 1fr' }}>
       <Editor styles={styles} onChange={setStyles} />
-      <div sx={{ ...toCSSObject(styles) }}>🚗</div>
+      <div>
+        <div
+          sx={{
+            width: '20px',
+            height: '20px',
+            fontSize: '2rem',
+            ...toCSSObject(styles),
+          }}
+        >
+          🚗
+        </div>
+      </div>
     </div>
   )
 }

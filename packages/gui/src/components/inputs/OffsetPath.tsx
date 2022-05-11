@@ -27,5 +27,5 @@ export function OffsetPathInput(props: EditorPropsWithLabel<OffsetPath>) {
 }
 
 export function stringifyOffsetPath(value: OffsetPath) {
-  return stringifyValues([stringifyBasicShape(value.shape), value.box])
+  return stringifyValues([stringifyBasicShape(value.shape)])
 }
