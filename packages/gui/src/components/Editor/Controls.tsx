@@ -24,7 +24,7 @@ import { UnitSteps } from '../../lib'
 import { pascalCase } from '../../lib/util'
 import { UnitRanges } from '../../data/ranges'
 import { StringInput } from '../inputs/StringInput'
-import { ResponsiveInputValueType } from '../Responsive/Input'
+import { DEFAULT_LENGTH } from '../../lib/constants'
 
 interface ControlProps extends InputProps {
   field: KeyArg
@@ -269,6 +269,7 @@ const ResponsiveLengthInput = ({
     <ResponsiveInput
       label={label}
       value={value}
+      defaultValue={DEFAULT_LENGTH}
       onChange={onChange}
       Component={LengthInput}
       componentProps={{
@@ -291,8 +292,9 @@ const KeywordInput = ({
     return (
       <ResponsiveInput
         label={label}
-        value={value || DEFAULT_KEYWORD}
+        value={value}
         onChange={(newValue: any) => onChange(newValue)}
+        defaultValue={DEFAULT_KEYWORD}
         Component={SelectInput}
         componentProps={{
           options: keywords,
@@ -300,6 +302,7 @@ const KeywordInput = ({
       />
     )
   }
+
   return (
     <SelectInput
       label={label}

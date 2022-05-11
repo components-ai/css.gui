@@ -1,18 +1,16 @@
 import * as React from 'react'
 import { Monitor, Smartphone, X } from 'react-feather'
-import { AbsoluteLengthUnits, Length, ResponsiveLength } from '../../types/css'
 import { Breakpoint } from '../../types/theme'
 import { useTheme } from '../providers/ThemeContext'
 import { Label } from '../primitives'
 import { useEditorConfig } from '../providers/EditorConfigContext'
 
 const DEFAULT_BREAKPOINT_COUNT = 3
-// TODO: Base this on the type of property
-const DEFAULT_LENGTH: Length = { value: 0, unit: AbsoluteLengthUnits.Px }
 
 export type Responsive<T> = T | T[]
 type ResponsiveInputProps<T> = {
   value?: Responsive<T>
+  defaultValue: Responsive<T>
   onChange: (newValue: Responsive<T>) => void
   label: string
   property?: string
@@ -27,18 +25,19 @@ export function ResponsiveInput<T>({
   Component,
   componentProps = {},
   property,
+  defaultValue,
 }: ResponsiveInputProps<T>) {
   const { breakpoints } = useTheme()
   const breakpointCount = breakpoints?.length || DEFAULT_BREAKPOINT_COUNT
 
   const handleResponsiveChange =
-    (breakpointIndex: number) => (newItemValue: Length) => {
+    (breakpointIndex: number) => (newItemValue: Responsive<T>) => {
       const newValue: any[] = Array.isArray(value) ? [...value] : []
       newValue[breakpointIndex] = newItemValue
       onChange(newValue)
     }
 
-  const handleChange = (newItemValue: Length) => {
+  const handleChange = (newItemValue: Responsive<T>) => {
     onChange(newItemValue)
   }
 
@@ -48,10 +47,10 @@ export function ResponsiveInput<T>({
   }
 
   const handleSwitchFromResponsive = () => {
-    const newValue: ResponsiveInputValueType | undefined = Array.isArray(value)
+    const newValue: Responsive<T> | undefined = Array.isArray(value)
       ? value[0]
       : value
-    onChange(newValue ?? DEFAULT_LENGTH)
+    onChange(newValue ?? defaultValue)
   }
 
   const isResponsiveControls = Array.isArray(value)

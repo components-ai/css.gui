@@ -18,6 +18,7 @@ export const ResponsiveExample = () => {
           label="Font size"
           value={value}
           onChange={setValue}
+          defaultValue={{ value: 16, unit: 'px' }}
           Component={LengthInput}
         />
       </div>
