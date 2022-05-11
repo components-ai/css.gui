@@ -51,7 +51,6 @@ export function FontFamilyPreview() {
           </div>
         </Editor>
         <section sx={{
-            fontWeight: '900',
             fontSize: '192px',
             height: '300px',
             borderBottom: '1px solid',

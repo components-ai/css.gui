@@ -13,7 +13,7 @@ export interface EditorContextValue<V> extends EditorData<V> {
   setValue(value: Recipe<V>): void
   getField<T = any>(key: KeyArg): T
   setField<T>(key: KeyArg, value: Recipe<T>): void
-  setFields<T>(fields: Record<string, Recipe<T>>): void
+  setFields<T>(fields: Record<string, Recipe<T>>, removeFields?: KeyArg[]): void
   removeField(key: KeyArg): void
 }
 
@@ -44,8 +44,14 @@ export function useEditor() {
       applyRecipe(draft.value, field, recipe)
     })
   }
-  function setFields<T>(fields: Record<string, Recipe<T>>) {
+
+  function setFields<T>(fields: Record<string, Recipe<T>>, removeFields?: KeyArg[]) {
     editComponentData((draft) => {
+      if (removeFields) {
+        removeFields.forEach((field) => {
+          unset(draft.value, field)
+        })
+      }
       Object.entries(fields).map(([key, recipe]: any) => {
         applyRecipe(draft.value, key, recipe)
       })
