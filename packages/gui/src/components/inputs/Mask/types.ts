@@ -1,5 +1,5 @@
-import { Position } from '../../../types/css'
-import { boxKeywords, RepeatStyle } from '../Background/types'
+import { GeometryBox, Position } from '../../../types/css'
+import { RepeatStyle } from '../Background/types'
 import { BgSize } from '../BgSizeInput'
 import { ImageSource } from '../ImageSource/types'
 
@@ -24,12 +24,3 @@ export const compositingOperators = [
   'exclude',
 ] as const
 type CompositeOperator = typeof compositingOperators[number]
-
-export const geometryBoxKeywords = [
-  ...boxKeywords,
-  'margin-box',
-  'fill-box',
-  'stroke-box',
-  'view-box',
-] as const
-type GeometryBox = typeof geometryBoxKeywords[number]

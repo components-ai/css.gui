@@ -8,7 +8,7 @@ export type ColorObject = {
 }
 
 export type Color = string
-export type FontFamilyType = { [k: string]: any}
+export type FontFamilyType = { [k: string]: any }
 
 export const enum FontRelativeLengthUnits {
   Ch = 'ch',
@@ -117,3 +117,17 @@ export interface Position {
   x: Length
   y: Length
 }
+
+export const BOX_KEYWORDS = ['box', 'padding-box', 'content-box'] as const
+export type Box = typeof BOX_KEYWORDS[number]
+
+export const SHAPE_BOX_KEYWORDS = [...BOX_KEYWORDS, 'margin-box'] as const
+export type ShapeBox = typeof SHAPE_BOX_KEYWORDS[number]
+
+export const GEOMETRY_BOX_KEYWORDS = [
+  ...SHAPE_BOX_KEYWORDS,
+  'fill-box',
+  'stroke-box',
+  'view-box',
+] as const
+export type GeometryBox = typeof GEOMETRY_BOX_KEYWORDS[number]

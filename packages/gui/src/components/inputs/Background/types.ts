@@ -1,4 +1,4 @@
-import { LengthPercentage, Position } from '../../../types/css'
+import { Box, Position } from '../../../types/css'
 import { BgSize } from '../BgSizeInput'
 import { ImageSource } from '../ImageSource/types'
 
@@ -13,9 +13,6 @@ export interface Background {
   repeat: RepeatStyle
   size: BgSize
 }
-
-export const boxKeywords = ['border-box', 'padding-box', 'content-box'] as const
-type Box = typeof boxKeywords[number]
 
 export interface RepeatStyle {
   x: Repeat

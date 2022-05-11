@@ -32,10 +32,7 @@ import { positiveRanges, UnitRanges } from './ranges'
 import TransitionInput from '../components/inputs/Transition/field'
 import { stringifyTransitionList } from '../components/inputs/Transition/stringify'
 import BackgroundInput from '../components/inputs/Background/field'
-import {
-  stringifyBackground,
-  stringifyBackgroundList,
-} from '../components/inputs/Background/stringify'
+import { stringifyBackgroundList } from '../components/inputs/Background/stringify'
 import MaskInput from '../components/inputs/Mask/field'
 import { stringifyMaskList } from '../components/inputs/Mask/stringify'
 import AnimationInput from '../components/inputs/Animation/field'

@@ -2,7 +2,6 @@ import { EditorProps } from '../../../types/editor'
 import {
   attachmentKeywords,
   Background,
-  boxKeywords,
   repeatKeywords,
   RepeatStyle,
 } from './types'
@@ -16,6 +15,7 @@ import { PositionInput } from '../PositionInput'
 import { Label } from '../../primitives'
 import { SelectInput } from '../SelectInput'
 import { BgSizeInput } from '../BgSizeInput'
+import { BOX_KEYWORDS } from '../../../types/css'
 
 export default function BackgroundInput(
   props: EditorPropsWithLabel<Background[]>
@@ -70,10 +70,10 @@ export const BackgroundLayer = (props: EditorProps<Background>) => {
         {...getInputProps(props, 'attachment')}
         options={attachmentKeywords}
       />
-      <SelectInput {...getInputProps(props, 'origin')} options={boxKeywords} />
+      <SelectInput {...getInputProps(props, 'origin')} options={BOX_KEYWORDS} />
       <SelectInput
         {...getInputProps(props, 'clip')}
-        options={[...boxKeywords, 'text']}
+        options={[...BOX_KEYWORDS, 'text']}
       />
     </div>
   )

@@ -7,14 +7,10 @@ import { EditorPropsWithLabel, getInputProps } from '../../../lib/util'
 import { ImageSourceEditor } from '../ImageSource/field'
 import { PositionInput } from '../PositionInput'
 import { SelectInput } from '../SelectInput'
-import {
-  geometryBoxKeywords,
-  Mask,
-  compositingOperators,
-  maskingModes,
-} from './types'
+import { Mask, compositingOperators, maskingModes } from './types'
 import { RepeatStyleInput } from '../Background/field'
 import { BgSizeInput } from '../BgSizeInput'
+import { GEOMETRY_BOX_KEYWORDS } from '../../../types/css'
 
 export default function MaskInput(props: EditorPropsWithLabel<Mask[]>) {
   const newItem = () => {
@@ -66,11 +62,11 @@ export const MaskLayer = (props: EditorProps<Mask>) => {
       <RepeatStyleInput {...getInputProps(props, 'repeat')} />
       <SelectInput
         {...getInputProps(props, 'origin')}
-        options={geometryBoxKeywords}
+        options={GEOMETRY_BOX_KEYWORDS}
       />
       <SelectInput
         {...getInputProps(props, 'clip')}
-        options={[...geometryBoxKeywords, 'no-clip']}
+        options={[...GEOMETRY_BOX_KEYWORDS, 'no-clip']}
       />
       <SelectInput
         {...getInputProps(props, 'composite')}

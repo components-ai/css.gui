@@ -1,6 +1,7 @@
 import { Label } from 'theme-ui'
 import { stringifyValues } from '../../lib/stringify'
 import { EditorPropsWithLabel, getInputProps } from '../../lib/util'
+import { GeometryBox, GEOMETRY_BOX_KEYWORDS } from '../../types/css'
 import { BasicShapeInput } from './BasicShape/input'
 import { stringifyBasicShape } from './BasicShape/stringify'
 import { BasicShape } from './BasicShape/types'
@@ -19,7 +20,7 @@ export function ClipPathInput(props: EditorPropsWithLabel<ClipPath>) {
       <BasicShapeInput {...getInputProps(props, 'shape')} />
       <SelectInput
         {...getInputProps(props, 'box')}
-        options={geometryBoxKeywords}
+        options={GEOMETRY_BOX_KEYWORDS}
       />
     </div>
   )
@@ -28,15 +29,3 @@ export function ClipPathInput(props: EditorPropsWithLabel<ClipPath>) {
 export function stringifyClipPath(value: ClipPath) {
   return stringifyValues([stringifyBasicShape(value.shape), value.box])
 }
-
-// TODO I think these are generic types?
-const geometryBoxKeywords = [
-  'margin-box',
-  'border-box',
-  'padding-box',
-  'conent-box',
-  'fill-box',
-  'stroke-box',
-  'view-box',
-] as const
-type GeometryBox = typeof geometryBoxKeywords[number]
