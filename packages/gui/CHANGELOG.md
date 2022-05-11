@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.45
+
+### Patch Changes
+
+- 8728b6a: Add responsive handling for keyword controls
+
 ## 0.0.44
 
 ### Patch Changes
