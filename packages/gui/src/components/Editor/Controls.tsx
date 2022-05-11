@@ -85,19 +85,12 @@ const ComponentWithPropertyGroup = ({
   ...props
 }: ComponentGroupProps) => {
   const Component: ComponentType<any> = getInputComponent(property)
-  const { getFields, setFields, removeField } = useEditor()
+  const { getFields, setFields } = useEditor()
 
   return (
     <Component
       value={getFields([...dependantProperties, property])}
-      onChange={(newValue: any) => {
-        dependantProperties.forEach((dp) => {
-          if (!Object.keys(newValue).includes(dp)) {
-            removeField(dp)
-          }
-        })
-        setFields(newValue)
-      }}
+      onChange={(newValue: any) => setFields(newValue, dependantProperties)}
       {...props}
     />
   )
