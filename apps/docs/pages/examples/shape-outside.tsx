@@ -34,6 +34,7 @@ export default function ShapeOutsideExample() {
         <div
           sx={{
             ...toCSSObject(styles),
+            ...getDerivedStyles(styles.shapeOutside),
           }}
         ></div>
         {text}
@@ -43,3 +44,15 @@ export default function ShapeOutsideExample() {
 }
 
 const text = supportedProperties.map((prop) => prop.property).join(' ')
+
+function getDerivedStyles(shapeOutside: any) {
+  if (shapeOutside.type === 'image') {
+    return toCSSObject({
+      backgroundImage: shapeOutside.image,
+    })
+  }
+  return toCSSObject({
+    backgroundColor: 'tomato',
+    clipPath: shapeOutside,
+  })
+}
