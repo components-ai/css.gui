@@ -1,3 +1,5 @@
+import { AbsoluteLengthUnits, Length } from '../types/css'
+
 export const THEME_ALIASES: Record<string, string> = {
   bg: 'backgroundColor',
   m: 'margin',
@@ -162,3 +164,5 @@ export const THEME_SCALES: Record<string, string> = {
   fill: 'colors',
   stroke: 'colors',
 }
+
+export const DEFAULT_LENGTH: Length = { value: 0, unit: AbsoluteLengthUnits.Px }

@@ -2,7 +2,6 @@ import { FirstParagraph } from '../../components/FirstParagraph'
 import { ResponsiveExample } from '../../components/examples/Responsive'
 import { Container } from '../../components/Container'
 
-
 <Container>
 
 # Responsive Input
@@ -30,17 +29,19 @@ import {
   ResponsiveInput,
 } from '@compai/css-gui'
 
+const DEFAULT_VALUE = {
+  value: 16,
+  unit: 'px',
+}
 export const ResponsiveExample = () => {
-  const [value, setValue] = useState<Length | ResponsiveLength>({
-    value: 16,
-    unit: 'px',
-  })
+  const [value, setValue] = useState<Length | ResponsiveLength>(DEFAULT_VALUE)
 
   return (
     <>
       <ResponsiveInput
         label="Font size"
         value={value}
+        defaultValue={DEFAULT_VALUE}
         onChange={setValue}
         Component={LengthInput}
       />
