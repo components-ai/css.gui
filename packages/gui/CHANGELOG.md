@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.47
+
+### Patch Changes
+
+- 65d2397: Fixes variable font properties persisting across font changes"
+
 ## 0.0.46
 
 ### Patch Changes
