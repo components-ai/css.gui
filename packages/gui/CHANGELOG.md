@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.46
+
+### Patch Changes
+
+- 482dae0: Ensure global keywords are selectable
+
 ## 0.0.45
 
 ### Patch Changes
