@@ -50,9 +50,9 @@ const Control = ({ field, ...props }: ControlProps) => {
   const componentProps = {
     label: sentenceCase(property),
     themeValues: themeValues,
-    keywords,
     ...properties[property],
     ...props,
+    keywords,
   }
 
   if (dependantProperties.length) {
