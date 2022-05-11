@@ -60,6 +60,10 @@ import {
   stringifyBorderSpacing,
 } from '../components/inputs/BorderSpacing'
 import { ClipPathInput, stringifyClipPath } from '../components/inputs/ClipPath'
+import {
+  ShapeOutsideInput,
+  stringifyShapeOutside,
+} from '../components/inputs/ShapeOutside'
 
 type PropertyData = {
   type: string | ComponentType<any>
@@ -1857,6 +1861,10 @@ export const properties: Record<string, PropertyData> = {
     type: 'length',
     percentage: true,
   },
+  shapeOutside: {
+    type: ShapeOutsideInput,
+    stringify: stringifyShapeOutside,
+  },
   stroke: {
     // TODO URL <color> values
     type: 'color',
@@ -2268,6 +2276,12 @@ export const properties: Record<string, PropertyData> = {
     keywords: ['auto'],
   },
 }
+
+export const supportedProperties = uniqBy(allProperties, 'property').filter(
+  (property) => {
+    return properties[camelCase(property.property)]
+  }
+)
 
 export const unsupportedProperties = uniqBy(allProperties, 'property').filter(
   (property) => {

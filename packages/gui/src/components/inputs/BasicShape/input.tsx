@@ -24,7 +24,7 @@ export function BasicShapeInput(props: EditorPropsWithLabel<BasicShape>) {
       <SelectInput
         {...getInputProps(props, 'type')}
         options={['inset', 'circle', 'ellipse', 'polygon', 'path']}
-        onChange={(type) => props.onChange(getDefaultValue(type))}
+        onChange={(type) => props.onChange(getDefaultBasicShape(type))}
       />
       <BasicShapeSwitch {...props} />
     </div>
@@ -130,7 +130,7 @@ function PointInput(props: EditorPropsWithLabel<Point>) {
   )
 }
 
-function getDefaultValue(type: BasicShapeType): BasicShape {
+export function getDefaultBasicShape(type: BasicShapeType): BasicShape {
   switch (type) {
     case 'inset': {
       return {
