@@ -1,5 +1,6 @@
 export const pseudoElements = [
   'after',
+  'backdrop',
   'before',
   'cue',
   'cue-region',
