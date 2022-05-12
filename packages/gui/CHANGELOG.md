@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.49
+
+### Patch Changes
+
+- 74e5c1b: Don't fetch font family from API if it doesn't exist
+
 ## 0.0.48
 
 ### Patch Changes
