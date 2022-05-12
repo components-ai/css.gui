@@ -19,7 +19,7 @@ export const RenderElement = ({
   return (
     // @ts-ignore
     <>
-      <FontTags fontFamily={styles.fontFamily} />
+      {styles.fontFamily ? <FontTags fontFamily={styles.fontFamily} /> : null}
       {/* @ts-ignore */}
       <Component {...props} sx={styleObject} />
     </>
