@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.48
+
+### Patch Changes
+
+- 461ea3c: Add backdrop pseudo element
+
 ## 0.0.47
 
 ### Patch Changes
