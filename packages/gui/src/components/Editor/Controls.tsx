@@ -8,7 +8,13 @@ import {
   useEffect,
   useId,
 } from 'react'
-import { CSSUnitValue, Length, ResponsiveLength, Styles } from '../../types/css'
+import {
+  CSSUnitValue,
+  Length,
+  MultidimensionalLength,
+  ResponsiveLength,
+  Styles,
+} from '../../types/css'
 import { Theme } from '../../types/theme'
 import { EditorProvider, useEditor } from '../providers/EditorContext'
 import { EditorData, KeyArg, Recipe } from '../providers/types'
@@ -35,6 +41,7 @@ import { StringInput } from '../inputs/StringInput'
 import { DEFAULT_LENGTH } from '../../lib/constants'
 import { getDefaultValue } from '../../lib/defaults'
 import { MultidimensionInput } from '../inputs/Multidimension'
+import { Responsive } from '../Responsive/Input'
 
 interface ControlProps extends InputProps {
   field: KeyArg
@@ -298,12 +305,14 @@ const MultidimensionLengthInput = ({
   onChange,
   label,
   ...props
-}: EditorPropsWithLabel<Length | ResponsiveLength> & { property: string }) => {
+}: EditorPropsWithLabel<Responsive<CSSUnitValue | MultidimensionalLength>> & {
+  property: string
+}) => {
   return (
     <ResponsiveInput
       label={label}
       value={value}
-      defaultValue={DEFAULT_LENGTH}
+      defaultValue={DEFAULT_LENGTH as CSSUnitValue}
       onChange={onChange}
       Component={MultidimensionInput}
       componentProps={{

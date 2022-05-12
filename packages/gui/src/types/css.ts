@@ -67,6 +67,7 @@ export type MultidimensionalLengthUnit = {
   type: MultidimensionalLengthType
   values: CSSUnitValue[]
 }
+export type ResponsiveMultidimensionalLengthUnit = MultidimensionalLengthUnit[]
 
 export const TIME_UNITS = ['ms', 's'] as const
 export type TimeUnit = typeof TIME_UNITS[number]

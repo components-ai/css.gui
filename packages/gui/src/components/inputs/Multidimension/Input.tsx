@@ -1,13 +1,15 @@
 import * as React from 'react'
-import { CSSUnitValue, MultidimensionalLengthUnit } from '../../../types/css'
-import { Label } from '../../primitives'
+import {
+  CSSUnitValue,
+  Length,
+  MultidimensionalLengthUnit,
+} from '../../../types/css'
 import { reducer } from './reducer'
 import { State } from './types'
 import { EditorProps } from '../../../types/editor'
 import { UnitConversions } from '../../../lib/convert'
-import { kebabCase } from 'lodash-es'
 import { DimensionInput } from '../Dimension'
-import { Maximize, Minimize } from 'react-feather'
+import { DEFAULT_LENGTH } from '../../../lib/constants'
 
 // Mapping of units to [min, max] tuple
 type UnitRanges = Record<string, [min: number, max: number]>
@@ -15,13 +17,8 @@ type UnitRanges = Record<string, [min: number, max: number]>
 type UnitSteps = Record<string, number>
 
 export interface MultidimensionInputProps
-  extends EditorProps<MultidimensionalLengthUnit | CSSUnitValue> {
+  extends EditorProps<MultidimensionalLengthUnit | Length> {
   label?: string
-  range?: UnitRanges
-  steps?: UnitSteps
-  units?: readonly string[]
-  keywords?: string[]
-  conversions?: UnitConversions
   dimensions: number
 }
 export const MultidimensionInput = ({
@@ -31,9 +28,8 @@ export const MultidimensionInput = ({
   label,
   ...props
 }: MultidimensionInputProps) => {
-  const id = `${React.useId()}-${kebabCase(label)}`
   const [state, dispatch] = React.useReducer(reducer, {
-    value,
+    value: value ?? DEFAULT_LENGTH,
     dimensions,
     isMultidimensional: Array.isArray(
       (value as MultidimensionalLengthUnit)?.values
@@ -44,27 +40,22 @@ export const MultidimensionInput = ({
     onChange(state.value)
   }, [state])
 
-  const handleChange = (value: CSSUnitValue) => {
+  const handleChange = (value: Length) => {
     dispatch({
       type: 'CHANGED_VALUE',
       value,
     })
   }
 
-  const handleDimensionChange =
-    (dimension: number) => (value: CSSUnitValue) => {
-      dispatch({
-        type: 'CHANGED_VALUE',
-        dimension,
-        value,
-      })
-    }
-
-  const handleToggle = () => {
+  const handleDimensionChange = (dimension: number) => (value: Length) => {
     dispatch({
-      type: 'TOGGLE_MULTIDIMENSIONAL',
+      type: 'CHANGED_VALUE',
+      dimension,
+      value,
     })
   }
+
+  console.log(JSON.stringify({ ...props, ...state }, null, 2))
 
   return (
     <div>
@@ -100,49 +91,25 @@ export const MultidimensionInput = ({
               }
             )}
           </div>
-          <Toggle
-            isMultidimensional={state.isMultidimensional}
-            onToggle={handleToggle}
-          />
         </div>
       ) : (
-        <div
-          sx={{
-            display: 'flex',
-            width: '100%',
-            alignItems: 'center',
-          }}
-        >
+        <>
           <DimensionInput
-            value={state.value as CSSUnitValue}
+            label=""
+            value={(state.value || DEFAULT_LENGTH) as CSSUnitValue}
             onChange={handleChange}
             {...props}
           />
-          <Toggle
-            isMultidimensional={state.isMultidimensional}
-            onToggle={handleToggle}
-          />
-        </div>
+          <div sx={{ pt: 1 }}>
+            <DimensionInput
+              label=""
+              value={DEFAULT_LENGTH as CSSUnitValue}
+              onChange={handleDimensionChange(1)}
+              {...props}
+            />
+          </div>
+        </>
       )}
     </div>
-  )
-}
-
-type ToggleProps = {
-  isMultidimensional: boolean
-  onToggle: () => void
-}
-const Toggle = ({ isMultidimensional, onToggle }: ToggleProps) => {
-  return (
-    <button
-      onClick={onToggle}
-      sx={{
-        all: 'unset',
-        ml: 1,
-        color: 'muted',
-      }}
-    >
-      {isMultidimensional ? <Maximize size={14} /> : <Minimize size={14} />}
-    </button>
   )
 }
