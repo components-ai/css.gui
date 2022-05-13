@@ -35,6 +35,7 @@ export const enum PercentageLengthUnits {
 }
 export const enum UnitlessUnits {
   Number = 'number',
+  Calc = 'calc',
 }
 export const enum ThemeUnits {
   Theme = 'theme',

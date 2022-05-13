@@ -2,9 +2,7 @@ import * as React from 'react'
 import {
   AbsoluteLengthUnits,
   CSSUnitValue,
-  GenericLength,
   KeywordUnits,
-  Length,
   ThemeUnits,
 } from '../../../types/css'
 import { Label, Number, UnitSelect, ValueSelect } from '../../primitives'
@@ -115,7 +113,7 @@ export const DimensionInput = ({
             values={themeValues ?? []}
           />
         ) : state.unit === 'calc' ? (
-          <CalcInput 
+          <CalcInput
             units={allUnits}
             onChange={onChange}
             value={value}
