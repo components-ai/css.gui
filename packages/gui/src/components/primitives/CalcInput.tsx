@@ -6,6 +6,7 @@ import { AbsoluteLengthUnits, CSSUnitValue, Length } from '../../types/css'
 import { EditorProps } from '../../types/editor'
 import { SelectInput } from '../inputs/SelectInput'
 import { Number } from '../primitives'
+import { theme } from '../ui/theme'
 import { Label } from './Label'
 import { UnitSelect } from './UnitSelect'
 import { ValueSelect } from './ValueSelect'
@@ -16,6 +17,7 @@ interface CalcInputProps extends EditorProps<CSSUnitValue> {
   steps?: UnitSteps
   units: readonly string[]
   conversions?: UnitConversions
+  themeValues?: (CSSUnitValue & { id: string })[]
 }
 
 type CalcFunction = {
@@ -36,8 +38,9 @@ export const CalcInput = ({
   value,
   label,
   range,
-  conversions,
   steps,
+  conversions,
+  themeValues,
 }: CalcInputProps) => { 
   const [calcOperation, setCalcOperation] = useState<CalcFunction>({
     operand: '+',
@@ -64,6 +67,7 @@ export const CalcInput = ({
         steps={steps}
         range={range}
         conversions={conversions}
+        themeValues={themeValues}
       />
       <SelectInput
         options={['+', '-', '/', '*']}
@@ -89,6 +93,7 @@ export const CalcInput = ({
         steps={steps}
         range={range}
         conversions={conversions}
+        themeValues={themeValues}
       />
     </div>
   )
@@ -101,6 +106,7 @@ interface NumberUnitInput {
   steps?: UnitSteps
   range?: UnitRanges
   conversions?: UnitConversions
+  themeValues?: (CSSUnitValue & { id: string })[]
 }
 
 const NumberUnitInput = ({
@@ -109,32 +115,52 @@ const NumberUnitInput = ({
   units,
   steps,
   range,
-  conversions
+  conversions,
+  themeValues,
 }: NumberUnitInput) => {
   return (
     <div sx={{ display: 'flex', flexDirection: 'row' }}>
-      <Number
-        // id={id}
-        // key={key}
-        step={steps?.[value.unit]}
-        min={range?.[value.unit]?.[0]}
-        max={range?.[value.unit]?.[1]}
-        value={value.value}
-        onChange={(newValue: number) => 
-          onChange({ ...value, value: newValue })}
-      />
+      {value.unit === 'theme' ? (
+        <ValueSelect
+          onChange={(e: any) => {
+            const themeValue = themeValues?.find(
+              (p) => p.id === e.target.value
+            )
+            const newValue = themeValue && stringifyUnit(themeValue)
+            onChange({ ...value, value: newValue ?? `16px` })
+          }}
+          values={themeValues ?? []}
+        />
+      ) : (
+        <Number
+          // id={id}
+          // key={key}
+          step={steps?.[value.unit]}
+          min={range?.[value.unit]?.[0]}
+          max={range?.[value.unit]?.[1]}
+          value={value.value}
+          onChange={(newValue: number) => 
+            onChange({ ...value, value: newValue })}
+        />
+      )}
       {/* calc shouldnt be an option here */}
       <UnitSelect 
         units={units}
         value={value.unit}
         onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
           const newUnit = e.target.value
-          const newValue = convertUnits(
+          const convertedValue = convertUnits(
             newUnit,
             value,
             conversions,
             steps
           )
+          // Stringify full theme values so calc works correctly
+          const newValue = newUnit === 'theme' && themeValues
+            ? stringifyUnit(themeValues?.[0])
+            : convertedValue
+
+          //@ts-ignore
           onChange({ value: newValue, unit: newUnit })
         }}
       />

@@ -123,6 +123,7 @@ export const DimensionInput = ({
             steps={steps}
             range={range}
             conversions={conversions}
+            themeValues={themeValues}
           />
         ) : (
           <Number
