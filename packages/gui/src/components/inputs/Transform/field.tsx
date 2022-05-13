@@ -43,7 +43,7 @@ export default function TransformInput(
 
 export const TransformEditor = (props: LayerProps<Transform>) => {
   return (
-    <div>
+    <div sx={{ p: 3 }}>
       <SelectInput
         {...getInputProps(props, 'type')}
         options={filterTypes}
