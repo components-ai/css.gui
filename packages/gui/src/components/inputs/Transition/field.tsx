@@ -1,11 +1,12 @@
 import Layers, { LayerProps } from '../../Layers'
 import { Transition } from './types'
 import { stringifyTransitionList } from './stringify'
-import { EditorPropsWithLabel, getInputProps } from '../../../lib/util'
+import { getInputProps } from '../../../lib/util'
 import { SelectInput } from '../SelectInput'
 import { ANIMATABLE_PROPERTIES } from '../../../data/animatable'
 import { TimeInput } from '../TimeInput'
 import { EasingFunctionEditor } from '../EasingFunction'
+import { EditorPropsWithLabel } from '../../../types/editor'
 
 export default function TransitionInput(
   props: EditorPropsWithLabel<Transition[]>

@@ -4,7 +4,8 @@ import { LengthInput } from '../LengthInput'
 import Layers, { LayerProps } from '../../Layers'
 import { BoxShadow } from './types'
 import { stringifyBoxShadow } from './stringify'
-import { EditorPropsWithLabel, getInputProps } from '../../../lib/util'
+import { getInputProps } from '../../../lib/util'
+import { EditorPropsWithLabel } from '../../../types/editor'
 
 export default function BoxShadowInput(
   props: EditorPropsWithLabel<BoxShadow[]>

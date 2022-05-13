@@ -1,12 +1,12 @@
 import { ColorInput } from '../ColorInput'
 import { LengthInput } from '../LengthInput'
-import { EditorProps } from '../../../types/editor'
+import { EditorProps, EditorPropsWithLabel } from '../../../types/editor'
 import { TextShadow } from './types'
 
 import { stringifyTextShadow } from './stringify'
 
 import Layers from '../../Layers'
-import { EditorPropsWithLabel, getInputProps } from '../../../lib/util'
+import { getInputProps } from '../../../lib/util'
 
 export default function TextShadowInput(
   props: EditorPropsWithLabel<TextShadow[]>

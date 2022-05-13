@@ -1,9 +1,8 @@
-import { EditorProps } from '../types/editor'
 import { isPseudoClass, isPseudoElement } from './pseudos'
 import { isElement } from './elements'
 import { lowerCase, startCase, upperFirst } from 'lodash-es'
+import { EditorProps, EditorPropsWithLabel } from '../types/editor'
 
-export type EditorPropsWithLabel<T> = EditorProps<T> & { label: string }
 /**
  * Populate props to be used for an input control for a subproperty of a value.
  *

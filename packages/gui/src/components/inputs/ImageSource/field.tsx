@@ -1,11 +1,12 @@
 import Layers, { LayerProps } from '../../Layers'
 import { ImageSource, ImageSourceType } from './types'
-import { EditorPropsWithLabel, getInputProps } from '../../../lib/util'
+import { getInputProps } from '../../../lib/util'
 import { SelectInput } from '../SelectInput'
 import { stringifyImageSource } from './stringify'
 import { URLInput } from '../../primitives/URLInput'
 import produce from 'immer'
 import { GradientField } from '../Gradient/field'
+import { EditorPropsWithLabel } from '../../../types/editor'
 
 const DEFAULT_IMAGE_URL = ''
 export default function ImageSourceInput(

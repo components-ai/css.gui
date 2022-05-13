@@ -1,5 +1,5 @@
-import { EditorPropsWithLabel, getInputProps } from '../../../lib/util'
-import { EditorProps } from '../../../types/editor'
+import { getInputProps } from '../../../lib/util'
+import { EditorProps, EditorPropsWithLabel } from '../../../types/editor'
 import Layers from '../../Layers'
 import { LengthInput } from '../LengthInput'
 import { SelectInput } from '../SelectInput'
