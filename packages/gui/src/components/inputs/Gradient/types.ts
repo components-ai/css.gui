@@ -1,32 +1,30 @@
+import { Angle, Color, Position } from '../../../types/css'
+
 interface BaseGradient {
   type: string
   stops: GradientStop[]
 }
 
 export interface GradientStop {
-  color: string
-  hinting: number
+  color: Color
+  hinting: number // TODO units
 }
 
 export interface LinearGradient extends BaseGradient {
   type: 'linear' | 'repeating-linear'
-  degrees: number
+  degrees: Angle
 }
 
 export interface RadialGradient extends BaseGradient {
   type: 'radial' | 'repeating-radial'
-  locationX: number
-  locationY: number
+  position: Position
   shape: 'circle' | 'ellipse'
 }
 
 export interface ConicGradient extends BaseGradient {
   type: 'conic' | 'repeating-conic'
-  locationX: number
-  locationY: number
-  degrees: number
+  position: Position
+  degrees: Angle
 }
 
 export type Gradient = LinearGradient | RadialGradient | ConicGradient
-
-export type GradientList = Gradient[]

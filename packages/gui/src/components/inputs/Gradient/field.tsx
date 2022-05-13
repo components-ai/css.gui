@@ -1,6 +1,5 @@
 import { SelectInput } from '../SelectInput'
 import { getInputProps } from '../../../lib/util'
-import { NumberInput } from '../NumberInput'
 import GradientStopsField from './stops'
 import {
   ConicGradient,
@@ -8,6 +7,8 @@ import {
   LinearGradient,
   RadialGradient,
 } from './types'
+import { PositionInput } from '../PositionInput'
+import { AngleInput } from '../AngleInput'
 
 const gradientTypeOptions = [
   'linear',
@@ -28,6 +29,13 @@ export const GradientField = (props: GradientFieldProps) => {
         <SelectInput
           {...getInputProps(props, 'type')}
           options={gradientTypeOptions}
+          onChange={(type) => {
+            props.onChange({
+              ...getDefaultGradient(type),
+              // keep the stops of the current gradient when overriding
+              stops: props.value.stops,
+            })
+          }}
         />
       </div>
       <GradientEditor {...props} />
@@ -65,22 +73,7 @@ export const RadialGradientEditor = (props: RadialGradientEditorProps) => {
   return (
     <div>
       <div sx={{ display: 'flex' }}>
-        <div sx={{ width: '50%', pr: 1 }}>
-          <NumberInput
-            {...getInputProps(props, 'locationX')}
-            label="X"
-            min={-200}
-            max={200}
-          />
-        </div>
-        <div sx={{ width: '50%', pl: 1 }}>
-          <NumberInput
-            {...getInputProps(props, 'locationY')}
-            label="Y"
-            min={-200}
-            max={200}
-          />
-        </div>
+        <PositionInput {...getInputProps(props, 'position')} />
       </div>
       <div sx={{ display: 'flex' }}>
         <SelectInput
@@ -100,24 +93,9 @@ export const ConicGradientEditor = (props: ConicGradientEditorProps) => {
   return (
     <div>
       <div sx={{ display: 'flex' }}>
-        <div sx={{ width: '50%', pr: 1 }}>
-          <NumberInput
-            {...getInputProps(props, 'locationX')}
-            label="X"
-            min={-200}
-            max={200}
-          />
-        </div>
-        <div sx={{ width: '50%', pl: 1 }}>
-          <NumberInput
-            {...getInputProps(props, 'locationY')}
-            label="Y"
-            min={-200}
-            max={200}
-          />
-        </div>
+        <PositionInput {...getInputProps(props, 'position')} />
       </div>
-      <NumberInput {...getInputProps(props, 'degrees')} min={0} max={360} />
+      <AngleInput {...getInputProps(props, 'degrees')} />
     </div>
   )
 }
@@ -127,5 +105,39 @@ type LinearGradientEditorProps = {
   onChange: (newValue: LinearGradient) => void
 }
 export const LinearGradientEditor = (props: LinearGradientEditorProps) => {
-  return <NumberInput {...getInputProps(props, 'degrees')} min={0} max={360} />
+  return <AngleInput {...getInputProps(props, 'degrees')} />
+}
+
+function getDefaultGradient(type: Gradient['type']): Gradient {
+  switch (type) {
+    case 'linear':
+    case 'repeating-linear':
+      return {
+        type,
+        degrees: { value: 0, unit: 'deg' },
+        stops: [],
+      }
+    case 'radial':
+    case 'repeating-radial':
+      return {
+        type,
+        shape: 'circle',
+        position: {
+          x: { value: 'center', unit: 'keyword' },
+          y: { value: 'center', unit: 'keyword' },
+        },
+        stops: [],
+      }
+    case 'conic':
+    case 'repeating-conic':
+      return {
+        type,
+        degrees: { value: 0, unit: 'deg' },
+        position: {
+          x: { value: 'center', unit: 'keyword' },
+          y: { value: 'center', unit: 'keyword' },
+        },
+        stops: [],
+      }
+  }
 }
