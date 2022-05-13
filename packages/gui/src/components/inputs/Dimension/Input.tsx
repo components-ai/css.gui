@@ -4,13 +4,14 @@ import {
   CSSUnitValue,
   KeywordUnits,
   ThemeUnits,
+  UnitlessUnits,
 } from '../../../types/css'
 import { Label, Number, UnitSelect, ValueSelect } from '../../primitives'
 import { reducer } from './reducer'
 import { State } from './types'
 import { EditorProps } from '../../../types/editor'
 import { UnitConversions } from '../../../lib/convert'
-import { compact, kebabCase, property } from 'lodash-es'
+import { compact, kebabCase } from 'lodash-es'
 import { CalcInput } from '../../primitives/CalcInput'
 
 // Mapping of units to [min, max] tuple
@@ -69,7 +70,7 @@ export const DimensionInput = ({
     themeValues.length > 0 && 'theme',
     ...units,
     keywords.length > 0 && 'keyword',
-    'calc', // TODO, put this in the appropriate place
+    UnitlessUnits.Calc,
   ])
 
   return (
