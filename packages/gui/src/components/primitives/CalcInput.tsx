@@ -1,7 +1,7 @@
-import { ComponentType, useState } from 'react'
+import { ComponentType, useEffect, useState } from 'react'
 import { UnitRanges } from '../../data/ranges'
 import { convertUnits, UnitConversions, UnitSteps } from '../../lib'
-import { stringifyUnit } from '../../lib/stringify'
+import { stringifyUnit, stringifyValues } from '../../lib/stringify'
 import { AbsoluteLengthUnits, CSSUnitValue, Length } from '../../types/css'
 import { EditorProps } from '../../types/editor'
 import { SelectInput } from '../inputs/SelectInput'
@@ -45,11 +45,15 @@ export const CalcInput = ({
   const [calcOperation, setCalcOperation] = useState<CalcFunction>({
     operand: '+',
     valueX: value,
-    valueY: { value: 1, unit: AbsoluteLengthUnits.Px }
+    valueY: { value: 0, unit: AbsoluteLengthUnits.Px }
   })
+
+  useEffect(() => {
+    onChange({ value: stringifyCalcValue(calcOperation), unit: 'calc' })
+  }, [])
+
   const handleCalcChange = (newCalcValue: CalcFunction) => {
     setCalcOperation(newCalcValue)
-
     const stringified = stringifyCalcValue(newCalcValue)
     onChange({ value: stringified, unit: 'calc' })
   }
