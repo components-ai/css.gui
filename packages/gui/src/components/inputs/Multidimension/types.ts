@@ -10,7 +10,7 @@ export type State = {
 export type Action =
   | {
       type: 'CHANGED_VALUE'
-      dimension?: number
+      dimension: number
       value: Length
     }
   | {

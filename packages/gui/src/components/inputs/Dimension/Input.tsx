@@ -64,8 +64,6 @@ export const DimensionInput = ({
     }
   }, [state])
 
-  console.log(JSON.stringify({ keywords, units }))
-
   const allUnits = compact([
     themeValues.length > 0 && 'theme',
     ...units,

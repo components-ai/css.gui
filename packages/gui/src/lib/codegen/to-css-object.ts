@@ -1,4 +1,9 @@
-import { Styles, Length, CSSUnitValue } from '../../types/css'
+import {
+  Styles,
+  Length,
+  CSSUnitValue,
+  MultidimensionalLengthUnit,
+} from '../../types/css'
 import { stringifySelector, stringifyUnit } from '../stringify'
 import { has } from 'lodash-es'
 import { isNestedSelector } from '../util'
@@ -19,6 +24,9 @@ export const stringifyProperty = (
     )
   }
 
+  if (isMultidimensionalLength(value)) {
+    return stringifyUnit(value)
+  }
   if (!isCSSUnitValue(value)) {
     return String(value) ?? null
   }
@@ -53,4 +61,14 @@ function isCSSUnitValue(value: unknown): value is CSSUnitValue {
   }
 
   return true
+}
+
+function isMultidimensionalLength(
+  value: unknown
+): value is MultidimensionalLengthUnit {
+  if (typeof value !== 'object') {
+    return false
+  }
+
+  return (value as MultidimensionalLengthUnit).type === 'multidimensionalLength'
 }
