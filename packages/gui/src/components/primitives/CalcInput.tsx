@@ -69,17 +69,14 @@ export const CalcInput = ({
         options={['+', '-', '/', '*']}
         label=''
         onChange={(newValue: string) => {
-          switch (newValue) {
-            case '/':
-            case '*':
-              handleCalcChange({ 
-                ...calcOperation,
-                operand: newValue,
-                valueY: { ...calcOperation.valueY, unit: 'number' }
-              })
-              break
-            default:
-              handleCalcChange({ ...calcOperation, operand: newValue })
+          if (newValue === '/' || newValue === '*') {
+            handleCalcChange({ 
+              ...calcOperation,
+              operand: newValue,
+              valueY: { ...calcOperation.valueY, unit: 'number' }
+            })
+          } else {
+            handleCalcChange({ ...calcOperation, operand: newValue })
           }
         }}
         value={calcOperation.operand}
