@@ -1,3 +1,4 @@
+import { uniq } from 'lodash-es'
 import { ComponentType, useEffect, useState } from 'react'
 import { UnitRanges } from '../../data/ranges'
 import { convertUnits, UnitConversions, UnitSteps } from '../../lib'
@@ -47,6 +48,7 @@ export const CalcInput = ({
     valueX: value,
     valueY: { value: 0, unit: AbsoluteLengthUnits.Px }
   })
+  const allUnits = uniq([...units, 'number'])
 
   useEffect(() => {
     onChange({ value: stringifyCalcValue(calcOperation), unit: 'calc' })
@@ -67,7 +69,7 @@ export const CalcInput = ({
         value={calcOperation.valueX}
         onChange={(newValue: CSSUnitValue) => 
           handleCalcChange({ ...calcOperation, valueX: newValue})}
-        units={[...units, 'number']} // create a set to make uniq options
+        units={allUnits}
         steps={steps}
         range={range}
         conversions={conversions}
@@ -77,15 +79,27 @@ export const CalcInput = ({
         options={['+', '-', '/', '*']}
         label=''
         onChange={(newValue: string) => {
+          const y = calcOperation.valueY
+
           if (newValue === '/' || newValue === '*') {
             handleCalcChange({ 
               ...calcOperation,
               operand: newValue,
-              valueY: { ...calcOperation.valueY, unit: 'number' }
+              valueY: { ...y, unit: 'number' }
             })
-          } else {
-            handleCalcChange({ ...calcOperation, operand: newValue })
+            return
+          } 
+          
+          if ((newValue === '+' || newValue === '-') && y.unit === 'number') {
+            handleCalcChange({
+              ...calcOperation,
+              operand: newValue,
+              valueY: { ...y, unit: 'px' }
+            })
+            return
           }
+          
+          handleCalcChange({ ...calcOperation, operand: newValue })
         }}
         value={calcOperation.operand}
       />
@@ -93,7 +107,7 @@ export const CalcInput = ({
         value={calcOperation.valueY}
         onChange={(newValue: CSSUnitValue) => 
           handleCalcChange({ ...calcOperation, valueY: newValue})}
-        units={[...units, 'number']}
+        units={allUnits}
         steps={steps}
         range={range}
         conversions={conversions}
