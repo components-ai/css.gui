@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.50
+
+### Patch Changes
+
+- 4bd301d: Miscellaneous input improvements
+
 ## 0.0.49
 
 ### Patch Changes
