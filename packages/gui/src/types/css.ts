@@ -43,6 +43,12 @@ export const enum ThemeUnits {
 export const enum KeywordUnits {
   Keyword = 'keyword',
 }
+export const enum CalcOperand {
+  Mult = '*',
+  Plus = '+',
+  Sub = '_',
+  Div = '/'
+}
 // Only use a subset for now to keep things simpler
 export type LengthPercentageUnit = LengthUnit | PercentageLengthUnits.Pct
 
@@ -85,6 +91,15 @@ export interface NumberPercentage {
   unit: NumberPercentageUnit
 }
 
+export type CSSFunctionCalc = {
+  type: string
+  arguments: CalcFunction
+}
+export type CalcFunction = {
+  valueX: CSSUnitValue
+  valueY: CSSUnitValue
+  operand: CalcOperand
+}
 export type CSSUnitValue = {
   value: number | string
   unit: string

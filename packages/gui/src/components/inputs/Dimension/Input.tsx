@@ -1,6 +1,7 @@
 import * as React from 'react'
 import {
   AbsoluteLengthUnits,
+  CSSFunctionCalc,
   CSSUnitValue,
   KeywordUnits,
   ThemeUnits,
@@ -19,7 +20,7 @@ type UnitRanges = Record<string, [min: number, max: number]>
 // Mapping of units to steps
 type UnitSteps = Record<string, number>
 
-export interface DimensionInputProps extends EditorProps<CSSUnitValue> {
+export interface DimensionInputProps extends EditorProps<CSSUnitValue | CSSFunctionCalc> {
   label?: string
   range?: UnitRanges
   steps?: UnitSteps
@@ -113,10 +114,11 @@ export const DimensionInput = ({
             }}
             values={themeValues ?? []}
           />
-        ) : state.unit === 'calc' ? (
+        ) : (value as CSSFunctionCalc).type === 'calc' ? (
           <CalcInput
             units={allUnits}
             onChange={onChange}
+            //@ts-ignore
             value={value}
             label={label}
             steps={steps}
