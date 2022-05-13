@@ -1,17 +1,21 @@
 import { ComponentType, useState } from 'react'
+import { UnitRanges } from '../../data/ranges'
+import { convertUnits, UnitConversions, UnitSteps } from '../../lib'
 import { stringifyUnit } from '../../lib/stringify'
 import { AbsoluteLengthUnits, CSSUnitValue, Length } from '../../types/css'
+import { EditorProps } from '../../types/editor'
 import { SelectInput } from '../inputs/SelectInput'
 import { Number } from '../primitives'
 import { Label } from './Label'
 import { UnitSelect } from './UnitSelect'
 import { ValueSelect } from './ValueSelect'
 
-interface CalcInputProps {
+interface CalcInputProps extends EditorProps<CSSUnitValue> {
+  label?: string
+  range?: UnitRanges
+  steps?: UnitSteps
   units: readonly string[]
-  onChange: (newValue: CSSUnitValue) => void // type this correctly with generics
-  value: CSSUnitValue
-  label: string | undefined
+  conversions?: UnitConversions
 }
 
 type CalcFunction = {
@@ -31,7 +35,9 @@ export const CalcInput = ({
   onChange,
   value,
   label,
-  ...props
+  range,
+  conversions,
+  steps,
 }: CalcInputProps) => { 
   const [calcOperation, setCalcOperation] = useState<CalcFunction>({
     operand: '+',
@@ -50,13 +56,14 @@ export const CalcInput = ({
       <Label>
         {`${label || 'value'}: ${stringifyCalcValue(calcOperation)}`}
       </Label>
-      <ValueInput
-        
+      <NumberUnitInput
         value={calcOperation.valueX}
         onChange={(newValue: CSSUnitValue) => 
           handleCalcChange({ ...calcOperation, valueX: newValue})}
-        units={[...units, 'number']}
-        {...props}
+        units={[...units, 'number']} // create a set to make uniq options
+        steps={steps}
+        range={range}
+        conversions={conversions}
       />
       <SelectInput
         options={['+', '-', '/', '*']}
@@ -77,32 +84,61 @@ export const CalcInput = ({
         }}
         value={calcOperation.operand}
       />
-      <ValueInput
+      <NumberUnitInput
         value={calcOperation.valueY}
         onChange={(newValue: CSSUnitValue) => 
           handleCalcChange({ ...calcOperation, valueY: newValue})}
         units={[...units, 'number']}
+        steps={steps}
+        range={range}
+        conversions={conversions}
       />
     </div>
   )
 }
 
-const ValueInput = ({ value, onChange, units, ...props }: any) => {
+interface NumberUnitInput {
+  value: CSSUnitValue
+  onChange: (newValue: CSSUnitValue) => void
+  units: readonly string[]
+  steps?: UnitSteps
+  range?: UnitRanges
+  conversions?: UnitConversions
+}
+
+const NumberUnitInput = ({
+  value,
+  onChange,
+  units,
+  steps,
+  range,
+  conversions
+}: NumberUnitInput) => {
   return (
     <div sx={{ display: 'flex', flexDirection: 'row' }}>
       <Number
+        // id={id}
+        // key={key}
+        step={steps?.[value.unit]}
+        min={range?.[value.unit]?.[0]}
+        max={range?.[value.unit]?.[1]}
         value={value.value}
-        {...props}
         onChange={(newValue: number) => 
           onChange({ ...value, value: newValue })}
       />
+      {/* calc shouldnt be an option here */}
       <UnitSelect 
         units={units}
         value={value.unit}
         onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-          // why does number return a object ?
-          const out = typeof(e) === 'object' ? e.target.value : e
-          onChange({ ...value, unit: out})
+          const newUnit = e.target.value
+          const newValue = convertUnits(
+            newUnit,
+            value,
+            conversions,
+            steps
+          )
+          onChange({ value: newValue, unit: newUnit })
         }}
       />
     </div>

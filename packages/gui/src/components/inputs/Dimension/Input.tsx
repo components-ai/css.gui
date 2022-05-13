@@ -120,9 +120,9 @@ export const DimensionInput = ({
             onChange={onChange}
             value={value}
             label={label}
-            step={steps?.[state.unit]}
-            min={range?.[state.unit]?.[0]}
-            max={range?.[state.unit]?.[1]}
+            steps={steps}
+            range={range}
+            conversions={conversions}
           />
         ) : (
           <Number
