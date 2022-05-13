@@ -1,11 +1,12 @@
-import { Length, MultidimensionalLengthUnit } from '../../../types/css'
+import { isMultidimensionalLength } from '../../../lib/util'
+import { Length, MultidimensionalLength } from '../../../types/css'
 
 export const convertToMultidimensional = (
-  value: Length | MultidimensionalLengthUnit,
+  value: Length | MultidimensionalLength,
   dimensions: number = 2
-): MultidimensionalLengthUnit => {
-  if ((value as MultidimensionalLengthUnit).type === 'multidimensionalLength') {
-    return value as MultidimensionalLengthUnit
+): MultidimensionalLength => {
+  if (isMultidimensionalLength(value)) {
+    return value as MultidimensionalLength
   }
 
   const values = Array(dimensions).fill(value)
