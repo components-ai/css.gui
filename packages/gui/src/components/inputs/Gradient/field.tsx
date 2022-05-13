@@ -1,6 +1,5 @@
 import { SelectInput } from '../SelectInput'
 import { getInputProps } from '../../../lib/util'
-import { NumberInput } from '../NumberInput'
 import GradientStopsField from './stops'
 import {
   ConicGradient,
@@ -8,6 +7,9 @@ import {
   LinearGradient,
   RadialGradient,
 } from './types'
+import { PositionInput } from '../PositionInput'
+import { AngleInput } from '../AngleInput'
+import { EditorProps } from '../../../types/editor'
 
 const gradientTypeOptions = [
   'linear',
@@ -28,6 +30,13 @@ export const GradientField = (props: GradientFieldProps) => {
         <SelectInput
           {...getInputProps(props, 'type')}
           options={gradientTypeOptions}
+          onChange={(type) => {
+            props.onChange({
+              ...getDefaultGradient(type),
+              // keep the stops of the current gradient when overriding
+              stops: props.value.stops,
+            })
+          }}
         />
       </div>
       <GradientEditor {...props} />
@@ -57,30 +66,29 @@ export const GradientEditor = ({ value, ...props }: GradientFieldProps) => {
   }
 }
 
-type RadialGradientEditorProps = {
-  value: RadialGradient
-  onChange: (newValue: RadialGradient) => void
+export const LinearGradientEditor = (props: EditorProps<LinearGradient>) => {
+  return (
+    <AngleInput
+      {...getInputProps(props, 'angle')}
+      keywords={[
+        'to top',
+        'to right',
+        'to bottom',
+        'to left',
+        'to top left',
+        'to top right',
+        'to bottom right',
+        'to bottom left',
+      ]}
+    />
+  )
 }
-export const RadialGradientEditor = (props: RadialGradientEditorProps) => {
+
+export const RadialGradientEditor = (props: EditorProps<RadialGradient>) => {
   return (
     <div>
       <div sx={{ display: 'flex' }}>
-        <div sx={{ width: '50%', pr: 1 }}>
-          <NumberInput
-            {...getInputProps(props, 'locationX')}
-            label="X"
-            min={-200}
-            max={200}
-          />
-        </div>
-        <div sx={{ width: '50%', pl: 1 }}>
-          <NumberInput
-            {...getInputProps(props, 'locationY')}
-            label="Y"
-            min={-200}
-            max={200}
-          />
-        </div>
+        <PositionInput {...getInputProps(props, 'position')} />
       </div>
       <div sx={{ display: 'flex' }}>
         <SelectInput
@@ -92,40 +100,47 @@ export const RadialGradientEditor = (props: RadialGradientEditorProps) => {
   )
 }
 
-type ConicGradientEditorProps = {
-  value: ConicGradient
-  onChange: (newValue: ConicGradient) => void
-}
-export const ConicGradientEditor = (props: ConicGradientEditorProps) => {
+export const ConicGradientEditor = (props: EditorProps<ConicGradient>) => {
   return (
     <div>
       <div sx={{ display: 'flex' }}>
-        <div sx={{ width: '50%', pr: 1 }}>
-          <NumberInput
-            {...getInputProps(props, 'locationX')}
-            label="X"
-            min={-200}
-            max={200}
-          />
-        </div>
-        <div sx={{ width: '50%', pl: 1 }}>
-          <NumberInput
-            {...getInputProps(props, 'locationY')}
-            label="Y"
-            min={-200}
-            max={200}
-          />
-        </div>
+        <PositionInput {...getInputProps(props, 'position')} />
       </div>
-      <NumberInput {...getInputProps(props, 'degrees')} min={0} max={360} />
+      <AngleInput {...getInputProps(props, 'angle')} />
     </div>
   )
 }
 
-type LinearGradientEditorProps = {
-  value: LinearGradient
-  onChange: (newValue: LinearGradient) => void
-}
-export const LinearGradientEditor = (props: LinearGradientEditorProps) => {
-  return <NumberInput {...getInputProps(props, 'degrees')} min={0} max={360} />
+function getDefaultGradient(type: Gradient['type']): Gradient {
+  switch (type) {
+    case 'linear':
+    case 'repeating-linear':
+      return {
+        type,
+        angle: { value: 0, unit: 'deg' },
+        stops: [],
+      }
+    case 'radial':
+    case 'repeating-radial':
+      return {
+        type,
+        shape: 'circle',
+        position: {
+          x: { value: 'center', unit: 'keyword' },
+          y: { value: 'center', unit: 'keyword' },
+        },
+        stops: [],
+      }
+    case 'conic':
+    case 'repeating-conic':
+      return {
+        type,
+        angle: { value: 0, unit: 'deg' },
+        position: {
+          x: { value: 'center', unit: 'keyword' },
+          y: { value: 'center', unit: 'keyword' },
+        },
+        stops: [],
+      }
+  }
 }

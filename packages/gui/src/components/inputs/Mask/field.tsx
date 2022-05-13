@@ -21,7 +21,7 @@ export default function MaskInput(props: EditorPropsWithLabel<Mask[]>) {
         type: 'gradient',
         gradient: {
           type: 'linear',
-          degrees: 0,
+          angle: { value: 0, unit: 'deg' },
           stops: [],
         },
       },

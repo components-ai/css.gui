@@ -9,13 +9,25 @@ It's theme-aware, performant, and can be composed into any React app.
 - [**Play with a demo on CodeSandbox &rarr;**](https://codesandbox.io/s/cssgui-example-w1c9h5)
 - [**Watch an introduction on YouTube &rarr;**](https://www.youtube.com/watch?v=b6J2TGyDYc0)
 
+## Features
+
+- Controls for 280 CSS properties
+- Theme aware so you can quickly select from your brand
+- Responsive value arrays
+- Support for all CSS units 
+- Variable font support
+- +1000 Google fonts
+- Support for styling any element, pseudo-element or pseudo-class
+- Scrubbable number inputs
+- Smart default ranges
+
 ## ⚠️ Under active development
 
 This project is a work in (rapid) progress.
 
 Over the next few weeks the API will be stabilizing as more functionality is added.
 CSS GUI only [supports a portion](https://components.ai/open-source/css-gui/unsupported)
-of the CSS spec currently, but the intention is to support it all in the future.
+of the CSS spec currently, but the intention is to support it all.
 
 [We welcome any and all contributions](https://github.com/components-ai/css.gui/blob/main/.github/contributing.md).
 We'd love it if you try to experiment with CSS GUI. Please feel free to report bugs

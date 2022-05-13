@@ -202,7 +202,7 @@ function Track({ repeating, value }: TrackProps) {
           inset: 0,
           backgroundImage: stringifyGradient({
             type: repeating ? 'repeating-linear' : 'linear',
-            degrees: 90,
+            angle: { value: 90, unit: 'deg' },
             stops: value,
           }),
         },

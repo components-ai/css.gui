@@ -34,7 +34,7 @@ export default function FilterInput(props: EditorPropsWithLabel<Filter[]>) {
 
 export const FilterEditor = (props: LayerProps<Filter>) => {
   return (
-    <div>
+    <div sx={{ m: 3 }}>
       <SelectInput
         {...getInputProps(props, 'type')}
         options={filterTypes}

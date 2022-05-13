@@ -99,7 +99,14 @@ function convertBackgroundImageValue(
 function getDefault(type: ImageSourceType): ImageSource {
   switch (type) {
     case 'gradient':
-      return { type, gradient: { type: 'linear', degrees: 0, stops: [] } }
+      return {
+        type,
+        gradient: {
+          type: 'linear',
+          angle: { value: 0, unit: 'deg' },
+          stops: [],
+        },
+      }
     case 'url':
     default:
       return { type: 'url', arguments: [DEFAULT_IMAGE_URL] }
