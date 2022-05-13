@@ -79,7 +79,7 @@ function getDefaultValue(type: 'image' | 'shape'): ShapeOutside {
           type: 'gradient',
           gradient: {
             type: 'linear',
-            degrees: 0,
+            degrees: { value: 0, unit: 'deg' },
             stops: [
               { hinting: 0, color: 'black' },
               { hinting: 100, color: 'transparent' },
