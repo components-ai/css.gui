@@ -11,7 +11,7 @@ export function stringifyGradient(gradient: Gradient): string {
     case 'linear':
     case 'repeating-linear': {
       return stringifyFunction(gradient.type + '-gradient', [
-        gradient.degrees,
+        gradient.angle,
         stringifyStops(gradient, '%'),
       ])
     }
@@ -28,7 +28,7 @@ export function stringifyGradient(gradient: Gradient): string {
     case 'repeating-conic': {
       console.log(gradient.position, stringifyPosition(gradient.position))
       return stringifyFunction(gradient.type + '-gradient', [
-        `from ${stringifyUnit(gradient.degrees)} at ${stringifyPosition(
+        `from ${stringifyUnit(gradient.angle)} at ${stringifyPosition(
           gradient.position
         )}`,
         stringifyStops(gradient, '%'),

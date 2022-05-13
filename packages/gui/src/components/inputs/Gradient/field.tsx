@@ -69,7 +69,7 @@ export const GradientEditor = ({ value, ...props }: GradientFieldProps) => {
 export const LinearGradientEditor = (props: EditorProps<LinearGradient>) => {
   return (
     <AngleInput
-      {...getInputProps(props, 'degrees')}
+      {...getInputProps(props, 'angle')}
       keywords={[
         'to top',
         'to right',
@@ -106,7 +106,7 @@ export const ConicGradientEditor = (props: EditorProps<ConicGradient>) => {
       <div sx={{ display: 'flex' }}>
         <PositionInput {...getInputProps(props, 'position')} />
       </div>
-      <AngleInput {...getInputProps(props, 'degrees')} />
+      <AngleInput {...getInputProps(props, 'angle')} />
     </div>
   )
 }
@@ -117,7 +117,7 @@ function getDefaultGradient(type: Gradient['type']): Gradient {
     case 'repeating-linear':
       return {
         type,
-        degrees: { value: 0, unit: 'deg' },
+        angle: { value: 0, unit: 'deg' },
         stops: [],
       }
     case 'radial':
@@ -135,7 +135,7 @@ function getDefaultGradient(type: Gradient['type']): Gradient {
     case 'repeating-conic':
       return {
         type,
-        degrees: { value: 0, unit: 'deg' },
+        angle: { value: 0, unit: 'deg' },
         position: {
           x: { value: 'center', unit: 'keyword' },
           y: { value: 'center', unit: 'keyword' },

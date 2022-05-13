@@ -12,7 +12,7 @@ export interface GradientStop {
 
 export interface LinearGradient extends BaseGradient {
   type: 'linear' | 'repeating-linear'
-  degrees: Angle
+  angle: Angle
 }
 
 export interface RadialGradient extends BaseGradient {
@@ -24,7 +24,7 @@ export interface RadialGradient extends BaseGradient {
 export interface ConicGradient extends BaseGradient {
   type: 'conic' | 'repeating-conic'
   position: Position
-  degrees: Angle
+  angle: Angle
 }
 
 export type Gradient = LinearGradient | RadialGradient | ConicGradient

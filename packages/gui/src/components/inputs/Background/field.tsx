@@ -29,7 +29,7 @@ export default function BackgroundInput(
         type: 'gradient',
         gradient: {
           type: 'linear',
-          degrees: { value: 0, unit: 'deg' },
+          angle: { value: 0, unit: 'deg' },
           stops: [],
         },
       },
