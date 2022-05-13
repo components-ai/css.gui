@@ -3,7 +3,7 @@ import { NumberInputProps } from './types'
 import { useDrag } from 'react-use-gesture'
 import { roundToStep } from '../../../lib/math'
 
-type DraggableLabelProps = {
+interface DraggableLabelProps {
   step: number
   onUpdate: (newValue: any) => void
   value: number

@@ -2,7 +2,9 @@ import * as React from 'react'
 import {
   AbsoluteLengthUnits,
   CSSUnitValue,
+  GenericLength,
   KeywordUnits,
+  Length,
   ThemeUnits,
 } from '../../../types/css'
 import { Label, Number, UnitSelect, ValueSelect } from '../../primitives'
@@ -10,7 +12,8 @@ import { reducer } from './reducer'
 import { State } from './types'
 import { EditorProps } from '../../../types/editor'
 import { UnitConversions } from '../../../lib/convert'
-import { compact, kebabCase } from 'lodash-es'
+import { compact, kebabCase, property } from 'lodash-es'
+import { CalcInput } from '../../primitives/CalcInput'
 
 // Mapping of units to [min, max] tuple
 type UnitRanges = Record<string, [min: number, max: number]>
@@ -68,6 +71,7 @@ export const DimensionInput = ({
     themeValues.length > 0 && 'theme',
     ...units,
     keywords.length > 0 && 'keyword',
+    'calc', // TODO, put this in the appropriate place
   ])
 
   return (
@@ -109,6 +113,16 @@ export const DimensionInput = ({
               })
             }}
             values={themeValues ?? []}
+          />
+        ) : state.unit === 'calc' ? (
+          <CalcInput 
+            units={allUnits}
+            onChange={onChange}
+            value={value}
+            label={label}
+            step={steps?.[state.unit]}
+            min={range?.[state.unit]?.[0]}
+            max={range?.[state.unit]?.[1]}
           />
         ) : (
           <Number

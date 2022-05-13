@@ -18,11 +18,7 @@ export function stringifyUnit(value: Length) {
     return null
   }
 
-  if (
-    value.unit === 'theme' ||
-    value.unit === 'raw' ||
-    value.unit === 'keyword'
-  ) {
+  if (['theme', 'raw', 'keyword', 'calc'].includes(value.unit)) {
     return value.value
   }
 
