@@ -60,8 +60,7 @@ export function BgSizeInput(props: EditorPropsWithLabel<BgSize>) {
         <div
           sx={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(2, 1fr)',
-            gap: 2,
+            gap: 1,
           }}
         >
           <LengthInput percentage {...getInputProps(props, 'x' as any)} />

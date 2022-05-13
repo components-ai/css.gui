@@ -16,7 +16,7 @@ export function ScrollSnapAlignInput(props: EditorProps<ScrollSnapAlign>) {
   return (
     <div>
       <Label>{props.label}</Label>
-      <div sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2 }}>
+      <div sx={{ display: 'grid', gap: 1 }}>
         <SelectInput {...getInputProps(props, 'x')} options={snapPositions} />
         <SelectInput {...getInputProps(props, 'y')} options={snapPositions} />
       </div>

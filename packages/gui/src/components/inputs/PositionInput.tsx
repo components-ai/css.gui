@@ -7,9 +7,7 @@ export function PositionInput(props: EditorPropsWithLabel<Position>) {
   return (
     <div>
       <Label>{props.label}</Label>
-      <div
-        sx={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 2 }}
-      >
+      <div sx={{ display: 'grid', gap: 1 }}>
         <LengthInput
           {...getInputProps(props, 'x')}
           percentage
