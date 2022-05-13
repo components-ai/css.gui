@@ -1,4 +1,4 @@
-import { ANGLE_UNITS, CSSUnitValue } from '../../types/css'
+import { Angle, ANGLE_UNITS } from '../../types/css'
 import { DimensionInput } from './Dimension'
 import { EditorProps } from '../../types/editor'
 
@@ -7,12 +7,14 @@ export function AngleInput({
   value,
   onChange,
   label,
-}: EditorProps<CSSUnitValue> & { label: string }) {
+  keywords = [],
+}: EditorProps<Angle> & { label: string; keywords?: string[] }) {
   return (
     <DimensionInput
       value={value}
       onChange={onChange}
       label={label}
+      keywords={keywords}
       units={ANGLE_UNITS}
       steps={angleSteps}
       conversions={angleConversions}

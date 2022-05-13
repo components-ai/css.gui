@@ -9,6 +9,7 @@ import {
 } from './types'
 import { PositionInput } from '../PositionInput'
 import { AngleInput } from '../AngleInput'
+import { EditorProps } from '../../../types/editor'
 
 const gradientTypeOptions = [
   'linear',
@@ -65,11 +66,25 @@ export const GradientEditor = ({ value, ...props }: GradientFieldProps) => {
   }
 }
 
-type RadialGradientEditorProps = {
-  value: RadialGradient
-  onChange: (newValue: RadialGradient) => void
+export const LinearGradientEditor = (props: EditorProps<LinearGradient>) => {
+  return (
+    <AngleInput
+      {...getInputProps(props, 'degrees')}
+      keywords={[
+        'to top',
+        'to right',
+        'to bottom',
+        'to left',
+        'to top left',
+        'to top right',
+        'to bottom right',
+        'to bottom left',
+      ]}
+    />
+  )
 }
-export const RadialGradientEditor = (props: RadialGradientEditorProps) => {
+
+export const RadialGradientEditor = (props: EditorProps<RadialGradient>) => {
   return (
     <div>
       <div sx={{ display: 'flex' }}>
@@ -85,11 +100,7 @@ export const RadialGradientEditor = (props: RadialGradientEditorProps) => {
   )
 }
 
-type ConicGradientEditorProps = {
-  value: ConicGradient
-  onChange: (newValue: ConicGradient) => void
-}
-export const ConicGradientEditor = (props: ConicGradientEditorProps) => {
+export const ConicGradientEditor = (props: EditorProps<ConicGradient>) => {
   return (
     <div>
       <div sx={{ display: 'flex' }}>
@@ -98,14 +109,6 @@ export const ConicGradientEditor = (props: ConicGradientEditorProps) => {
       <AngleInput {...getInputProps(props, 'degrees')} />
     </div>
   )
-}
-
-type LinearGradientEditorProps = {
-  value: LinearGradient
-  onChange: (newValue: LinearGradient) => void
-}
-export const LinearGradientEditor = (props: LinearGradientEditorProps) => {
-  return <AngleInput {...getInputProps(props, 'degrees')} />
 }
 
 function getDefaultGradient(type: Gradient['type']): Gradient {
