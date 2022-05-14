@@ -42,7 +42,7 @@ export const DimensionInput = ({
   const id = `${React.useId()}-${kebabCase(label)}`
   const [state, dispatch] = React.useReducer(reducer, {
     value: value?.value || 0,
-    unit: value?.unit || AbsoluteLengthUnits.Px,
+    unit: value?.unit || units[0] || AbsoluteLengthUnits.Px,
     themeId: value?.themeId,
     key: 0,
   } as State)
