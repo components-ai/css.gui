@@ -5,6 +5,7 @@ import {
   Fragment,
   isValidElement,
   ReactNode,
+  useEffect,
   useId,
 } from 'react'
 import { CSSUnitValue, Length, ResponsiveLength, Styles } from '../../types/css'
@@ -146,6 +147,14 @@ export const Editor = ({
 
     onChange(newData)
   }
+
+  useEffect(() => {
+    if (children) {
+      const defaultStyles = getDefaultsFromChildren(children)
+      // TODO this should be a deep merge when we support defaults for nested
+      handleStylesChange({ ...defaultStyles, ...styles } as any)
+    }
+  }, [children])
 
   const controls = children ? (
     children
