@@ -32,6 +32,7 @@ import { pascalCase } from '../../lib/util'
 import { UnitRanges } from '../../data/ranges'
 import { StringInput } from '../inputs/StringInput'
 import { DEFAULT_LENGTH } from '../../lib/constants'
+import { getDefaultValue } from '../../lib/defaults'
 
 interface ControlProps extends InputProps {
   field: KeyArg
