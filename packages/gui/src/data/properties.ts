@@ -70,9 +70,10 @@ import {
   stringifyOffsetPath,
 } from '../components/inputs/OffsetPath'
 import { AngleInput } from '../components/inputs/AngleInput'
+import { EditorPropsWithLabel } from '../types/editor'
 
 type PropertyData = {
-  type: string | ComponentType<any>
+  type: string | ComponentType<EditorPropsWithLabel<any>>
   percentage?: boolean
   number?: boolean
   keywords?: readonly string[]
