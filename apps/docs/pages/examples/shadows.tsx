@@ -53,7 +53,7 @@ export default function Shadows() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            fontSize: '64px',
+            fontSize: '128px',
             ...styles,
           }}
         >
