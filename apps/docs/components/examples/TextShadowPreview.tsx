@@ -49,6 +49,7 @@ export function TextShadowPreview() {
           >
             <Inputs.TextShadow />
             <Fieldset type='pseudo-class' name='hover'>
+              <h4 sx={{ mb: 0 }}>Hover :hover</h4>
               <Inputs.TextShadow />
             </Fieldset>
           </div>

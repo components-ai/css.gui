@@ -50,6 +50,7 @@ export function BoxShadowPreview() {
           >
             <Inputs.BoxShadow />
             <Fieldset type='pseudo-class' name='hover'>
+              <h4 sx={{ mb: 0 }}>Hover :hover</h4>
               <Inputs.BoxShadow />
             </Fieldset>
           </div>
