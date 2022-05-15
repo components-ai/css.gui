@@ -1,4 +1,5 @@
 import { CSSUnitValue, Time } from '../../../types/css'
+import { keywordValues } from '../EasingFunction/keywords'
 import { EasingFunction } from '../EasingFunction/types'
 
 export interface Animation {
@@ -30,3 +31,14 @@ export type AnimationFillMode = typeof animationFillModes[number]
 
 export const animationPlayStates = ['running', 'paused'] as const
 export type AnimationPlayState = typeof animationPlayStates[number]
+
+export const DEFAULT_ANIMATION: Animation = {
+  delay: { value: 0, unit: 's' },
+  duration: { value: 0, unit: 's' },
+  direction: 'normal',
+  fillMode: 'none',
+  iterationCount: { value: 1, unit: 'number' },
+  name: 'none',
+  playState: 'running',
+  timingFunction: keywordValues.ease,
+}

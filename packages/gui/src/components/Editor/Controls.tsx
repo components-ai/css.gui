@@ -1,5 +1,13 @@
 import produce from 'immer'
-import { ComponentType, ReactChild, useId } from 'react'
+import {
+  Children,
+  ComponentType,
+  Fragment,
+  isValidElement,
+  ReactNode,
+  useEffect,
+  useId,
+} from 'react'
 import { CSSUnitValue, Length, ResponsiveLength, Styles } from '../../types/css'
 import { Theme } from '../../types/theme'
 import { EditorProvider, useEditor } from '../providers/EditorContext'
@@ -16,7 +24,7 @@ import { DimensionInput } from '../inputs/Dimension'
 import { SelectInput } from '../inputs/SelectInput'
 import { GLOBAL_KEYWORDS } from '../../data/global-keywords'
 import { Label } from '../primitives'
-import { kebabCase } from 'lodash-es'
+import { camelCase, kebabCase } from 'lodash-es'
 import { useThemeProperty } from '../providers/ThemeContext'
 import { PositionInput } from '../inputs/PositionInput'
 import { TimeInput } from '../inputs/TimeInput'
@@ -25,6 +33,7 @@ import { pascalCase } from '../../lib/util'
 import { UnitRanges } from '../../data/ranges'
 import { StringInput } from '../inputs/StringInput'
 import { DEFAULT_LENGTH } from '../../lib/constants'
+import { getDefaultValue } from '../../lib/defaults'
 
 interface ControlProps extends InputProps {
   field: KeyArg
@@ -104,16 +113,16 @@ type InputProps = {
 }
 export const Inputs: Record<string, any> = {}
 Object.keys(properties).forEach((field: string) => {
-  Inputs[pascalCase(field)] = (props: InputProps) => (
-    <Control {...props} field={field} />
-  )
+  const Component = (props: InputProps) => <Control {...props} field={field} />
+  Component.displayName = pascalCase(field)
+  Inputs[pascalCase(field)] = Component
 })
 
 type ControlsProps = {
   styles: Styles
   theme?: Theme
   onChange: (newStyles: any) => void
-  children?: ReactChild
+  children?: ReactNode
   hideResponsiveControls?: boolean
 }
 export const Editor = ({
@@ -138,6 +147,14 @@ export const Editor = ({
 
     onChange(newData)
   }
+
+  useEffect(() => {
+    if (children) {
+      const defaultStyles = getDefaultsFromChildren(children)
+      // TODO this should be a deep merge when we support defaults for nested
+      onChange({ ...defaultStyles, ...styles })
+    }
+  }, [])
 
   const controls = children ? (
     children
@@ -322,4 +339,44 @@ const TextInput = ({
       />
     </div>
   )
+}
+
+/**
+ * Extract the defaults from the editor's children
+ */
+function getDefaultsFromChildren(children: ReactNode): Record<string, any> {
+  // Based on: https://github.com/remix-run/react-router/blob/main/packages/react-router/lib/components.tsx#L270
+  let defaults: Record<string, any> = {}
+  Children.forEach(children, (element) => {
+    if (!isValidElement(element)) {
+      return
+    }
+    if (element.type === Fragment) {
+      defaults = {
+        ...defaults,
+        ...getDefaultsFromChildren(element.props.children),
+      }
+    }
+    // TODO defaults on nested fields
+    if (
+      typeof element.type === 'function' &&
+      (element.type as any).displayName
+    ) {
+      // console.log('ran into a field')
+      const property = camelCase((element.type as any).displayName)
+      defaults = {
+        ...defaults,
+        [property]: getDefaultValue(property),
+      }
+    }
+    if (element.props.children) {
+      // console.log('ran into element with children')
+      // console.log(element.props.children)
+      defaults = {
+        ...defaults,
+        ...getDefaultsFromChildren(element.props.children),
+      }
+    }
+  })
+  return defaults
 }

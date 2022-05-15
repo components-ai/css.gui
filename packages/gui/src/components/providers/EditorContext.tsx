@@ -1,6 +1,6 @@
 import { ThemeProvider as ThemeUIProvider } from 'theme-ui'
 import { get, unset } from 'lodash-es'
-import { createContext, ReactChild, useContext } from 'react'
+import { createContext, ReactChild, ReactNode, useContext } from 'react'
 import { KeyArg, Recipe, EditorData } from './types'
 import { applyRecipe } from './util'
 import { ThemeProvider } from './ThemeContext'
@@ -45,7 +45,10 @@ export function useEditor() {
     })
   }
 
-  function setFields<T>(fields: Record<string, Recipe<T>>, removeFields?: KeyArg[]) {
+  function setFields<T>(
+    fields: Record<string, Recipe<T>>,
+    removeFields?: KeyArg[]
+  ) {
     editComponentData((draft) => {
       if (removeFields) {
         removeFields.forEach((field) => {
@@ -93,7 +96,7 @@ export function EditorProvider<V>({
   ...values
 }: EditorContextProviderValue<V> & {
   hideResponsiveControls?: boolean
-  children: ReactChild
+  children: ReactNode
 }) {
   const editorConfig: EditorConfig = {
     hideResponsiveControls: hideResponsiveControls ?? false,

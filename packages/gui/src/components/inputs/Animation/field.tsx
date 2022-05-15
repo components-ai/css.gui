@@ -6,13 +6,14 @@ import {
   animationPlayStates,
 } from './types'
 import { stringifyAnimationList } from './stringify'
-import { EditorPropsWithLabel, getInputProps } from '../../../lib/util'
+import { getInputProps } from '../../../lib/util'
 import { SelectInput } from '../SelectInput'
 import { TimeInput } from '../TimeInput'
 import { EasingFunctionEditor } from '../EasingFunction'
 import { DimensionInput } from '../Dimension'
 import { Label } from '../../primitives'
 import { useId } from 'react'
+import { EditorPropsWithLabel } from '../../../types/editor'
 
 export default function AnimationInput(
   props: EditorPropsWithLabel<Animation[]>

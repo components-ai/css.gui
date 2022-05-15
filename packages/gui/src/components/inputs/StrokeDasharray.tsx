@@ -1,7 +1,6 @@
 import { stringifyValues } from '../../lib/stringify'
-import { EditorPropsWithLabel } from '../../lib/util'
 import { Length } from '../../types/css'
-import { EditorProps } from '../../types/editor'
+import { EditorPropsWithLabel } from '../../types/editor'
 import FieldArray from '../FieldArray'
 import { LengthInput } from './LengthInput'
 
