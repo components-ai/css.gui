@@ -152,7 +152,7 @@ export const Editor = ({
     if (children) {
       const defaultStyles = getDefaultsFromChildren(children)
       // TODO this should be a deep merge when we support defaults for nested
-      handleStylesChange({ ...defaultStyles, ...styles } as any)
+      onChange({ ...defaultStyles, ...styles })
     }
   }, [children])
 
