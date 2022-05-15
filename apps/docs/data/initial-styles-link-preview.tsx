@@ -33,7 +33,6 @@ export const initialStyles: any = {
   },
   borderColor: 'transparent',
   boxSizing: 'border-box',
-  overflow: 'hidden',
 //  borderRadius: {
 //    value: 9999,
 //    unit: 'px',
