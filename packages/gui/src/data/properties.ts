@@ -2106,7 +2106,7 @@ export const properties: Record<string, PropertyData> = {
   textShadow: {
     type: TextShadowPicker,
     stringify: stringifyTextShadow,
-    defaultValue: DEFAULT_TEXT_SHADOW,
+    defaultValue: [DEFAULT_TEXT_SHADOW],
   },
   textSpaceCollapse: {
     type: 'keyword',
