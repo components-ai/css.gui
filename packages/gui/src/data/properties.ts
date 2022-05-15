@@ -71,6 +71,7 @@ import {
 } from '../components/inputs/OffsetPath'
 import { AngleInput } from '../components/inputs/AngleInput'
 import { EditorPropsWithLabel } from '../types/editor'
+import { DEFAULT_ANIMATION } from '../components/inputs/Animation/types'
 
 type PropertyData = {
   type: string | ComponentType<EditorPropsWithLabel<any>>
@@ -78,7 +79,7 @@ type PropertyData = {
   number?: boolean
   keywords?: readonly string[]
   range?: UnitRanges
-  defaultValue?: string | number
+  defaultValue?: any
   stringify?: (value: any) => string
   dependantProperties?: string[]
   steps?: UnitSteps
@@ -170,7 +171,11 @@ export const properties: Record<string, PropertyData> = {
     type: 'keyword',
     keywords: [],
   },
-  animation: { type: AnimationInput, stringify: stringifyAnimationList },
+  animation: {
+    type: AnimationInput,
+    stringify: stringifyAnimationList,
+    defaultValue: [DEFAULT_ANIMATION],
+  },
   // TODO array of time values
   animationDelay: { type: 'time' },
   animationDirection: {
