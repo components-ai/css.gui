@@ -1,7 +1,8 @@
-import { EditorPropsWithLabel, getInputProps } from '../../lib/util'
+import { getInputProps } from '../../lib/util'
 import { Label, Number } from '../primitives'
 import * as Toggle from '@radix-ui/react-toggle'
 import { stringifyValues } from '../../lib/stringify'
+import { EditorPropsWithLabel } from '../../types/editor'
 
 interface GridLine {
   span?: boolean
