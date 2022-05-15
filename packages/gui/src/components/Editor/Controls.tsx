@@ -24,7 +24,7 @@ import { DimensionInput } from '../inputs/Dimension'
 import { SelectInput } from '../inputs/SelectInput'
 import { GLOBAL_KEYWORDS } from '../../data/global-keywords'
 import { Label } from '../primitives'
-import { kebabCase } from 'lodash-es'
+import { camelCase, kebabCase } from 'lodash-es'
 import { useThemeProperty } from '../providers/ThemeContext'
 import { PositionInput } from '../inputs/PositionInput'
 import { TimeInput } from '../inputs/TimeInput'
@@ -114,7 +114,7 @@ type InputProps = {
 export const Inputs: Record<string, any> = {}
 Object.keys(properties).forEach((field: string) => {
   const Component = (props: InputProps) => <Control {...props} field={field} />
-  Component.displayName = field
+  Component.displayName = pascalCase(field)
   Inputs[pascalCase(field)] = Component
 })
 
@@ -154,7 +154,7 @@ export const Editor = ({
       // TODO this should be a deep merge when we support defaults for nested
       onChange({ ...defaultStyles, ...styles })
     }
-  }, [children])
+  }, [])
 
   const controls = children ? (
     children
@@ -357,18 +357,21 @@ function getDefaultsFromChildren(children: ReactNode): Record<string, any> {
         ...getDefaultsFromChildren(element.props.children),
       }
     }
-    // console.log(element.props)
     // TODO defaults on nested fields
-    if ((element as any).displayName) {
-      console.log('ran into a field')
+    if (
+      typeof element.type === 'function' &&
+      (element.type as any).displayName
+    ) {
+      // console.log('ran into a field')
+      const property = camelCase((element.type as any).displayName)
       defaults = {
         ...defaults,
-        [element.props.field]: getDefaultValue(element.props.field),
+        [property]: getDefaultValue(property),
       }
     }
     if (element.props.children) {
-      console.log('ran into element with children')
-      console.log(element.props.children)
+      // console.log('ran into element with children')
+      // console.log(element.props.children)
       defaults = {
         ...defaults,
         ...getDefaultsFromChildren(element.props.children),

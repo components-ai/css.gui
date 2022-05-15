@@ -1,7 +1,5 @@
 import { useState } from 'react'
-import Link from 'next/link'
 import { Editor, Inputs, styled, codegen } from '@compai/css-gui'
-import { initialStyles } from '../../data/initial-styles-text-align-preview'
 import { defaultTheme } from '../../data/default-theme'
 
 export function TextAlignPreview() {

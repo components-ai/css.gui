@@ -8,7 +8,7 @@ export function getDefaultValue(property: string) {
   }
   switch (propertyDefinition.type) {
     case 'keyword':
-      return { value: propertyDefinition.keywords![0], type: 'keyword' }
+      return { value: propertyDefinition.keywords![0], unit: 'keyword' }
     case 'number':
     case 'integer':
       return { value: 0, unit: 'number' }
