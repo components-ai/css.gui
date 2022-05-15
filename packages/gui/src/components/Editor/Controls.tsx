@@ -113,9 +113,9 @@ type InputProps = {
 }
 export const Inputs: Record<string, any> = {}
 Object.keys(properties).forEach((field: string) => {
-  Inputs[pascalCase(field)] = (props: InputProps) => (
-    <Control {...props} field={field} />
-  )
+  const Component = (props: InputProps) => <Control {...props} field={field} />
+  Component.displayName = field
+  Inputs[pascalCase(field)] = Component
 })
 
 type ControlsProps = {
@@ -357,14 +357,18 @@ function getDefaultsFromChildren(children: ReactNode): Record<string, any> {
         ...getDefaultsFromChildren(element.props.children),
       }
     }
+    // console.log(element.props)
     // TODO defaults on nested fields
-    if (element.props.field) {
+    if ((element as any).displayName) {
+      console.log('ran into a field')
       defaults = {
         ...defaults,
         [element.props.field]: getDefaultValue(element.props.field),
       }
     }
     if (element.props.children) {
+      console.log('ran into element with children')
+      console.log(element.props.children)
       defaults = {
         ...defaults,
         ...getDefaultsFromChildren(element.props.children),
