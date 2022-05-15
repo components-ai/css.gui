@@ -73,6 +73,8 @@ import { AngleInput } from '../components/inputs/AngleInput'
 import { EditorPropsWithLabel } from '../types/editor'
 import { DEFAULT_ANIMATION } from '../components/inputs/Animation/types'
 import { DEFAULT_TRANSITION } from '../components/inputs/Transition/types'
+import { DEFAULT_BOX_SHADOW } from '../components/inputs/BoxShadow/types'
+import { DEFAULT_TEXT_SHADOW } from '../components/inputs/TextShadow/types'
 
 type PropertyData = {
   type: string | ComponentType<EditorPropsWithLabel<any>>
@@ -559,6 +561,7 @@ export const properties: Record<string, PropertyData> = {
   boxShadow: {
     type: BoxShadowPicker,
     stringify: stringifyBoxShadow,
+    defaultValue: [DEFAULT_BOX_SHADOW],
   },
   boxSnap: {
     type: 'keyword',
@@ -2103,6 +2106,7 @@ export const properties: Record<string, PropertyData> = {
   textShadow: {
     type: TextShadowPicker,
     stringify: stringifyTextShadow,
+    defaultValue: DEFAULT_TEXT_SHADOW,
   },
   textSpaceCollapse: {
     type: 'keyword',
@@ -2178,7 +2182,7 @@ export const properties: Record<string, PropertyData> = {
   transition: {
     type: TransitionInput,
     stringify: stringifyTransitionList,
-    defaultValue: [DEFAULT_TRANSITION]
+    defaultValue: [DEFAULT_TRANSITION],
   },
   // TODO array of time values
   transitionDelay: { type: 'time' },
