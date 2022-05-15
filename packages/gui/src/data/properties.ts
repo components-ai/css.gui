@@ -72,6 +72,7 @@ import {
 import { AngleInput } from '../components/inputs/AngleInput'
 import { EditorPropsWithLabel } from '../types/editor'
 import { DEFAULT_ANIMATION } from '../components/inputs/Animation/types'
+import { DEFAULT_TRANSITION } from '../components/inputs/Transition/types'
 
 type PropertyData = {
   type: string | ComponentType<EditorPropsWithLabel<any>>
@@ -2177,6 +2178,7 @@ export const properties: Record<string, PropertyData> = {
   transition: {
     type: TransitionInput,
     stringify: stringifyTransitionList,
+    defaultValue: [DEFAULT_TRANSITION]
   },
   // TODO array of time values
   transitionDelay: { type: 'time' },
