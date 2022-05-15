@@ -1,5 +1,12 @@
 import produce from 'immer'
-import { ComponentType, ReactNode, useId } from 'react'
+import {
+  Children,
+  ComponentType,
+  Fragment,
+  isValidElement,
+  ReactNode,
+  useId,
+} from 'react'
 import { CSSUnitValue, Length, ResponsiveLength, Styles } from '../../types/css'
 import { Theme } from '../../types/theme'
 import { EditorProvider, useEditor } from '../providers/EditorContext'
@@ -324,4 +331,35 @@ const TextInput = ({
   )
 }
 
-function getDefaultsFromChildren() {}
+/**
+ * Extract the defaults from the editor's children
+ */
+function getDefaultsFromChildren(children: ReactNode): Record<string, any> {
+  // Based on: https://github.com/remix-run/react-router/blob/main/packages/react-router/lib/components.tsx#L270
+  let defaults: Record<string, any> = {}
+  Children.forEach(children, (element) => {
+    if (!isValidElement(element)) {
+      return
+    }
+    if (element.type === Fragment) {
+      defaults = {
+        ...defaults,
+        ...getDefaultsFromChildren(element.props.children),
+      }
+    }
+    // TODO defaults on nested fields
+    if (element.props.field) {
+      defaults = {
+        ...defaults,
+        [element.props.field]: getDefaultValue(element.props.field),
+      }
+    }
+    if (element.props.children) {
+      defaults = {
+        ...defaults,
+        ...getDefaultsFromChildren(element.props.children),
+      }
+    }
+  })
+  return defaults
+}
