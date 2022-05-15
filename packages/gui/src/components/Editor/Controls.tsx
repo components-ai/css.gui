@@ -1,5 +1,5 @@
 import produce from 'immer'
-import { ComponentType, ReactChild, useId } from 'react'
+import { ComponentType, ReactNode, useId } from 'react'
 import { CSSUnitValue, Length, ResponsiveLength, Styles } from '../../types/css'
 import { Theme } from '../../types/theme'
 import { EditorProvider, useEditor } from '../providers/EditorContext'
@@ -113,7 +113,7 @@ type ControlsProps = {
   styles: Styles
   theme?: Theme
   onChange: (newStyles: any) => void
-  children?: ReactChild
+  children?: ReactNode
   hideResponsiveControls?: boolean
 }
 export const Editor = ({
@@ -323,3 +323,5 @@ const TextInput = ({
     </div>
   )
 }
+
+function getDefaultsFromChildren() {}
