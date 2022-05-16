@@ -31,7 +31,7 @@ export function AppearancePreview() {
           position: 'relative',
           overflow: 'hidden',
           py: 4,
-          px: 4,
+          px: 3,
           mb: 2,
         }}>
           <label>
@@ -72,7 +72,7 @@ export function AppearancePreview() {
         <Editor styles={styles} onChange={setStyles} theme={defaultTheme}>
           <div
             sx={{
-              px: 5,
+              px: 3,
               pt: 3,
               width: '100%',
               color: 'text',
@@ -87,7 +87,7 @@ export function AppearancePreview() {
         </Editor>
       <div sx={{
         mt: 'auto',
-        px: 5,
+        px: 3,
         pb: 4,
         maxWidth: '100%',
         overflow: 'auto',
@@ -96,7 +96,7 @@ export function AppearancePreview() {
         <pre
           sx={{
             width: '100%',
-            fontSize: 2,
+            fontSize: 0,
           }}
         >
           {codegen.css(styles)}

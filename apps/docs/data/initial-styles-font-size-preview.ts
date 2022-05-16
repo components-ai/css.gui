@@ -1,6 +1,6 @@
 export const initialStyles: any = {
   fontSize: {
-    value: 192,
+    value: 64,
     unit: 'px',
   }
 

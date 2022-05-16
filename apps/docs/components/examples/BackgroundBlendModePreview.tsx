@@ -12,17 +12,18 @@ export function BackgroundBlendModePreview() {
       <article 
       id='background-blend-mode'
       sx={{ 
-        display: 'flex',
-        flexDirection: 'column',
         color: 'muted',
         width: '100%', 
         boxShadow: 'inset 0 0 0px 1px currentColor', 
         borderRadius: '6px',
         overflow: 'hidden',
         }}>
+        <code sx={{ color: 'text', px: 3, py: 2, width: '100%', display: 'block', borderBottom: '1px solid', borderBottomColor: 'muted', }}>
+          &lt;Inputs.BackgroundBlendMode /&gt;
+        </code>
         <section sx={{
           fontWeight: 900,
-          height: '300px',
+          height: '192px',
           borderBottom: '1px solid',
           maxWidth: '100%',
           display: 'flex',
@@ -47,8 +48,8 @@ export function BackgroundBlendModePreview() {
         <Editor styles={styles} onChange={setStyles} theme={defaultTheme}>
           <div
             sx={{
-              px: 5,
-              pt: 3,
+              px: 3,
+              pt: 0,
               width: '100%',
               color: 'text',
               '& > div': { 
@@ -71,7 +72,7 @@ export function BackgroundBlendModePreview() {
         <pre
           sx={{
             width: '100%',
-            fontSize: 2,
+            fontSize: 0,
           }}
         >
           {codegen.css(styles)}

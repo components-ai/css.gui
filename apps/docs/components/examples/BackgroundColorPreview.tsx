@@ -1,16 +1,15 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { Editor, Inputs, styled, codegen } from '@compai/css-gui'
-import { initialStyles } from '../../data/initial-styles-border-radius-preview'
+import { initialStyles } from '../../data/initial-styles-background-color-preview'
 import { defaultTheme } from '../../data/default-theme'
 
-export function BorderRadiusPreview() {
+export function BackgroundColorPreview() {
   const [styles, setStyles] = useState<any>(initialStyles)
 
   return (
     <>
-      <article 
-      id='border-radius'
+      <article id='color'
       sx={{ 
         display: 'flex',
         flexDirection: 'column',
@@ -18,37 +17,31 @@ export function BorderRadiusPreview() {
         width: '100%', 
         boxShadow: 'inset 0 0 0px 1px currentColor', 
         borderRadius: '6px',
+        overflow: 'hidden',
         }}>
         <code sx={{ color: 'text', px: 3, py: 2, width: '100%', display: 'block', borderBottom: '1px solid', borderBottomColor: 'muted', }}>
-          &lt;Inputs.BorderRadius /&gt;
+          &lt;Inputs.BackgroundColor /&gt;
         </code>
         <section sx={{
+          color: 'text',
           fontWeight: 900,
           height: '192px',
-          borderBottom: '1px solid',
           maxWidth: '100%',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          mb: 3,
-
+          position: 'relative',
+          textAlign: 'center',
+          overflow: 'hidden',
           }}>
-          <styled.div
-          styles={styles} 
-          style={{ 
-            margin: 0, 
-            lineHeight: 1, 
-            height: '128px', 
-            width: '128px', 
-            backgroundColor: '#6465ff' 
-          }} />
-
+          <styled.p styles={styles} style={{ margin: 0, lineHeight: 1, height: '100%', width: '100%', }}>
+          </styled.p>
         </section>
         <Editor styles={styles} onChange={setStyles} theme={defaultTheme}>
           <div
             sx={{
               px: 3,
-              pt: 0,
+              pt: 3,
               width: '100%',
               color: 'text',
               '& > div': { 
@@ -57,12 +50,11 @@ export function BorderRadiusPreview() {
               },
             }}
           >
-            <Inputs.BorderRadius />
+            <Inputs.BackgroundColor />
           </div>
         </Editor>
       <div sx={{
-        mt: 'auto',
-        px: 5,
+        px: 3,
         pb: 4,
         maxWidth: '100%',
         overflow: 'auto',
