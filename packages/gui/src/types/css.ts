@@ -105,6 +105,7 @@ export type CSSUnitValue = {
   unit: string
   themeId?: string
 }
+export type Dimension = Length | CSSFunctionCalc
 export type GenericLength = '0'
 export type Length = CSSUnitValue | GenericLength
 // This isn't differentiated type-wise but it's good to keep track of
