@@ -1,4 +1,4 @@
-import { CSSUnitValue, Length } from '../types/css'
+import { CSSUnitValue, Length, UnitlessUnits } from '../types/css'
 import { roundToStep } from './math'
 
 /**
@@ -25,8 +25,7 @@ export const convertUnits = (
   }
 
   // If the new unit has a value but the old one doesn't, return the new one
-  // if (conversions[newUnit] && value.unit !== 'calc') {
-  if (conversions[newUnit]) {
+  if (conversions[newUnit] && value.unit !== UnitlessUnits.Calc) {
     return conversions[newUnit]
   }
 
