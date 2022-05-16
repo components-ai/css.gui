@@ -3,6 +3,7 @@ import { FontSizePreview } from '../../components/examples/FontSizePreview'
 import { FontStylePreview } from '../../components/examples/FontStylePreview'
 import { LetterSpacingPreview } from '../../components/examples/LetterSpacingPreview'
 import { TextTransformPreview } from '../../components/examples/TextTransformPreview'
+import { AccentColorPreview } from '../../components/examples/AccentColorPreview'
 import { ColorPreview } from '../../components/examples/ColorPreview'
 import { ColorsPreview } from '../../components/examples/ColorsPreview'
 import { ColorPairPreview } from '../../components/examples/ColorPairPreview'
@@ -40,6 +41,7 @@ export default function Docs() {
           <FontStylePreview />
           <FontWeightPreview />
           <LetterSpacingPreview />
+          <AccentColorPreview />
           <ColorPreview />
           <BackgroundImagePreview />
           <BackgroundPreview />
