@@ -1,8 +1,9 @@
 import { Number } from '.'
+import { CSSUnitValue } from '../../types/css'
 
 interface ThemeValueProps {
   onChange: (e: number) => void
-  themeValues: any[]
+  themeValues: (CSSUnitValue & { id: string })[]
   value: number
 }
 
