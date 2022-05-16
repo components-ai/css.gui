@@ -5,6 +5,7 @@ import {
   CSSFunctionCalc,
   CSSUnitValue,
   KeywordUnits,
+  Length,
   ThemeUnits,
   UnitlessUnits,
 } from '../../../types/css'
@@ -21,7 +22,7 @@ type UnitRanges = Record<string, [min: number, max: number]>
 // Mapping of units to steps
 type UnitSteps = Record<string, number>
 
-export interface DimensionInputProps extends EditorProps<CSSUnitValue | CSSFunctionCalc> {
+export interface DimensionInputProps extends EditorProps<Length | CSSFunctionCalc> {
   label?: string
   range?: UnitRanges
   steps?: UnitSteps
