@@ -1,4 +1,4 @@
-import { EditorPropsWithLabel } from '../../lib/util'
+import { EditorPropsWithLabel } from '../../types/editor'
 import { Label } from '../primitives'
 
 interface StringValue {

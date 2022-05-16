@@ -10,8 +10,8 @@ import {
   AmountFilter,
 } from './types'
 import { stringifyFilter } from './stringify'
-import { EditorProps } from '../../../types/editor'
-import { EditorPropsWithLabel, getInputProps } from '../../../lib/util'
+import { EditorProps, EditorPropsWithLabel } from '../../../types/editor'
+import { getInputProps } from '../../../lib/util'
 import { SelectInput } from '../SelectInput'
 import { NumberPercentageInput } from '../NumberPercentageInput'
 import { AngleInput } from '../AngleInput'

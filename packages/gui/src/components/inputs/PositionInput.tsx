@@ -1,5 +1,6 @@
-import { EditorPropsWithLabel, getInputProps } from '../../lib/util'
+import { getInputProps } from '../../lib/util'
 import { Position } from '../../types/css'
+import { EditorPropsWithLabel } from '../../types/editor'
 import { Label } from '../primitives'
 import { LengthInput } from './LengthInput'
 

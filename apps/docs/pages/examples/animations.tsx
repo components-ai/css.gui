@@ -27,34 +27,37 @@ const initialStyles = {
 export default function AnimationExample() {
   const [styles, setStyles] = useState<any>(initialStyles)
   return (
-    <div sx={{pt: 5}}>
+    <div sx={{ pt: 5 }}>
       <Container>
-      <h1>Animations</h1>
-      <p>
-        Try out any of the animations from{' '}
-        <a sx={{color: 'currentColor'}}href="https://animate.style/">animate.css</a>!
-      </p>
-      <Head>
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-        />
-      </Head>
-      <div sx={{ display: 'grid', gridTemplateColumns: '16rem 1fr' }}>
-        <Editor styles={styles} onChange={setStyles}>
-          <Inputs.Animation />
-        </Editor>
-        <div
-          sx={{
-            width: '16rem',
-            height: '16rem',
-            backgroundColor: '#128',
-            ...toCSSObject(styles),
-          }}
-        >
-          Animate!
+        <h1>Animations</h1>
+        <p>
+          Try out any of the animations from{' '}
+          <a sx={{ color: 'currentColor' }} href="https://animate.style/">
+            animate.css
+          </a>
+          !
+        </p>
+        <Head>
+          <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+          />
+        </Head>
+        <div sx={{ display: 'grid', gridTemplateColumns: '16rem 1fr' }}>
+          <Editor styles={styles} onChange={setStyles}>
+            <Inputs.Animation />
+          </Editor>
+          <div
+            sx={{
+              width: '16rem',
+              height: '16rem',
+              backgroundColor: '#128',
+              ...toCSSObject(styles),
+            }}
+          >
+            Animate!
+          </div>
         </div>
-      </div>
       </Container>
     </div>
   )

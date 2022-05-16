@@ -1,5 +1,5 @@
-import { EditorPropsWithLabel } from '../../lib/util'
 import { Time, TIME_UNITS } from '../../types/css'
+import { EditorPropsWithLabel } from '../../types/editor'
 import { DimensionInput } from './Dimension'
 
 export const TimeInput = (props: EditorPropsWithLabel<Time>) => {

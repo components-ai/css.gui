@@ -12,11 +12,8 @@ import {
   TransformType,
   Translate,
 } from './types'
-import { EditorProps } from '../../../types/editor'
-import {
-  EditorPropsWithLabel,
-  getInputProps as _getInputProps,
-} from '../../../lib/util'
+import { EditorProps, EditorPropsWithLabel } from '../../../types/editor'
+import { getInputProps as _getInputProps } from '../../../lib/util'
 import { SelectInput } from '../SelectInput'
 import { AngleInput } from '../AngleInput'
 import { stringifyTransform } from './stringify'

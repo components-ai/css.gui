@@ -1,4 +1,4 @@
-import { EditorProps } from '../../../types/editor'
+import { EditorProps, EditorPropsWithLabel } from '../../../types/editor'
 import {
   attachmentKeywords,
   Background,
@@ -9,7 +9,7 @@ import {
 import { stringifyBackgroundList } from './stringify'
 
 import Layers from '../../Layers'
-import { EditorPropsWithLabel, getInputProps } from '../../../lib/util'
+import { getInputProps } from '../../../lib/util'
 import { ImageSourceEditor } from '../ImageSource/field'
 import { PositionInput } from '../PositionInput'
 import { Label } from '../../primitives'

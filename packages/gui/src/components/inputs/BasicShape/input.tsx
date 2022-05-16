@@ -1,5 +1,5 @@
-import { EditorPropsWithLabel, getInputProps } from '../../../lib/util'
-import { EditorProps } from '../../../types/editor'
+import { getInputProps } from '../../../lib/util'
+import { EditorProps, EditorPropsWithLabel } from '../../../types/editor'
 import FieldArray from '../../FieldArray'
 import { Label } from '../../primitives'
 import { LengthInput } from '../LengthInput'

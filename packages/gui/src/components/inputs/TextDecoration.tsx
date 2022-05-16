@@ -1,6 +1,7 @@
 import { stringifyValues } from '../../lib/stringify'
-import { EditorPropsWithLabel, getInputProps } from '../../lib/util'
+import { getInputProps } from '../../lib/util'
 import { Color, Length } from '../../types/css'
+import { EditorPropsWithLabel } from '../../types/editor'
 import { Label } from '../primitives'
 import { ColorInput } from './ColorInput'
 import { LengthInput } from './LengthInput'

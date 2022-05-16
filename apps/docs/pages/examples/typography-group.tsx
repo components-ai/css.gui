@@ -2,7 +2,7 @@ import { TypographyGroupExample } from '../../components/examples/TypographyGrou
 
 export default function TypographyGroup() {
   return (
-    <div className="full-bleed">
+    <div>
       <TypographyGroupExample />
     </div>
   )

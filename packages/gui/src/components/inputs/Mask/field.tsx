@@ -1,9 +1,9 @@
-import { EditorProps } from '../../../types/editor'
+import { EditorProps, EditorPropsWithLabel } from '../../../types/editor'
 
 import { stringifyMaskList } from './stringify'
 
 import Layers from '../../Layers'
-import { EditorPropsWithLabel, getInputProps } from '../../../lib/util'
+import { getInputProps } from '../../../lib/util'
 import { ImageSourceEditor } from '../ImageSource/field'
 import { PositionInput } from '../PositionInput'
 import { SelectInput } from '../SelectInput'

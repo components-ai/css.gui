@@ -1,3 +1,3 @@
 export const initialStyles: any = {
-  textAlign: 'start'
+  textTransform: 'uppercase'
 }

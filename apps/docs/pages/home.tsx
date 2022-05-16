@@ -1,15 +1,21 @@
+import Link from 'next/link'
 import { FontFamilyPreview } from '../components/examples/FontFamilyPreview'
 import { FontSizePreview } from '../components/examples/FontSizePreview'
 import { ColorPreview } from '../components/examples/ColorPreview'
+import { ColorsPreview } from '../components/examples/ColorsPreview'
+import { ColorPairPreview } from '../components/examples/ColorPairPreview'
 import { WidthPreview } from '../components/examples/WidthPreview'
 import { HeightPreview } from '../components/examples/HeightPreview'
 import { BackgroundImagePreview } from '../components/examples/BackgroundImagePreview'
 import { BackgroundPreview } from '../components/examples/BackgroundPreview'
 import { BackgroundBlendModePreview } from '../components/examples/BackgroundBlendModePreview'
 import { BorderRadiusPreview } from '../components/examples/BorderRadiusPreview'
+import { BoxShadowPreview } from '../components/examples/BoxShadowPreview'
+import { TextShadowPreview } from '../components/examples/TextShadowPreview'
 import { TextAlignPreview } from '../components/examples/TextAlignPreview'
 import { FilterPreview } from '../components/examples/FilterPreview'
 import { CursorPreview } from '../components/examples/CursorPreview'
+import { LinkPreview } from '../components/examples/LinkPreview'
 import pkg from '../../../packages/gui/package.json'
 
 export default function Docs() {
@@ -86,12 +92,51 @@ export default function Docs() {
           <BackgroundPreview />
           <BackgroundBlendModePreview />
           <BorderRadiusPreview />
-          <WidthPreview />
-          <HeightPreview />
           <FilterPreview />
-          <CursorPreview />
+        <Link href="/properties" passHref={true}>
+          <a
+            sx={{
+              fontWeight: 500,
+              color: 'white',
+              textDecoration: 'none',
+              display: 'flex',
+              alignItems: 'center',
+              gridColumn: 'span 3',
+              textAlign: 'center',
+              mx: 'auto',
+              py: 3,
+              px: 4,
+              bg: '#675bff',
+              borderRadius: '6px',
+              transition: 'background-color .2s ease-in-out',
+              ':hover': {
+                bg: '#3e38b0'
+              }
+            }}
+          >
+            <span>
+              View more properties
+            </span>
+          </a>
+        </Link>
         </div>
       </section>
+      <section sx={{ display: 'none', pb: 6, px: [4,5,5]  }}>
+        <header sx={{ mb: 5 }}>
+          <h2 sx={{ textAlign: 'center' }}>Composable</h2>
+          <p sx={{ fontSize: 3, textAlign: 'center', }}>
+            Mix and match controls to create your own custom component design interfaces. 
+          </p>
+        </header>
+        <div sx={{
+          display: 'flex',
+          gap: '8em',
+          }}>
+          <ColorPairPreview />
+          <ColorsPreview />
+        </div>
+          <LinkPreview />
+        </section>
     </div>
   )
 }
