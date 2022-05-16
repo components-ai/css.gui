@@ -9,7 +9,7 @@ import {
   ThemeUnits,
   UnitlessUnits,
 } from '../../../types/css'
-import { Label, Number, UnitSelect, ValueSelect } from '../../primitives'
+import { Label, Number, ThemeValue, UnitSelect, ValueSelect } from '../../primitives'
 import { reducer } from './reducer'
 import { State } from './types'
 import { EditorProps } from '../../../types/editor'
@@ -104,19 +104,18 @@ export const DimensionInput = ({
             }}
           />
         ) : state.themeId ? (
-          <ValueSelect
-            onChange={(e: any) => {
-              const themeValue = themeValues?.find(
-                (p) => p.id === e.target.value
-              )
+          <ThemeValue
+            value={themeValues.findIndex((tv) => tv.id === state.themeId) + 1}
+            onChange={(newValue: number) => {
+              const themeValue = themeValues[newValue - 1]
               dispatch({
                 type: 'CHANGED_INPUT_TO_THEME_VALUE',
                 value: themeValue?.value ?? 0,
                 unit: (themeValue?.unit as any) ?? 'px',
-                themeId: e.target.value,
+                themeId: themeValue.id
               })
             }}
-            values={themeValues ?? []}
+            themeValues={themeValues}
           />
         ) : state.unit === UnitlessUnits.Calc ? (
           <CalcInput
