@@ -1,6 +1,7 @@
 import { isElement, isNil } from 'lodash-es'
-import { Color, Length, Position } from '../types/css'
+import { Color, Length, MultidimensionalLength, Position } from '../types/css'
 import { addPseudoSyntax } from './pseudos'
+import { isMultidimensionalLength } from './util'
 
 export function stringifySelector(selector: string): string {
   if (isElement(selector)) {
@@ -10,7 +11,17 @@ export function stringifySelector(selector: string): string {
   return addPseudoSyntax(selector)
 }
 
-export function stringifyUnit(value: Length) {
+export function stringifyUnit(
+  providedValue: Length | MultidimensionalLength
+): string | number | null {
+  if (isMultidimensionalLength(providedValue)) {
+    return (providedValue as MultidimensionalLength).values
+      .map(stringifyUnit)
+      .join(' ')
+  }
+
+  const value = providedValue as Length
+
   if (value === '0') {
     return value
   }
@@ -75,4 +86,4 @@ export function stringifyPrimitive(value: Primitive) {
   return stringifyUnit(value)
 }
 
-type Primitive = Length | number | Color
+type Primitive = Length | number | Color | MultidimensionalLength

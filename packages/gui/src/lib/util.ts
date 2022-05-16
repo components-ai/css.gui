@@ -2,6 +2,7 @@ import { isPseudoClass, isPseudoElement } from './pseudos'
 import { isElement } from './elements'
 import { lowerCase, startCase, upperFirst } from 'lodash-es'
 import { EditorProps, EditorPropsWithLabel } from '../types/editor'
+import { MultidimensionalLength } from '../types/css'
 
 /**
  * Populate props to be used for an input control for a subproperty of a value.
@@ -137,4 +138,14 @@ export const toGoogleVariableFontUrl = (variableFonts: any[]) => {
 
 export function pascalCase(str: string) {
   return startCase(str).replace(/\s/g, '')
+}
+
+export function isMultidimensionalLength(
+  value: unknown
+): value is MultidimensionalLength {
+  if (typeof value !== 'object') {
+    return false
+  }
+
+  return (value as MultidimensionalLength).type === 'multidimensionalLength'
 }

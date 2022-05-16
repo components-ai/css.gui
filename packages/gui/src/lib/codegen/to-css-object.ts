@@ -1,7 +1,7 @@
 import { Styles, Length, CSSUnitValue } from '../../types/css'
 import { stringifySelector, stringifyUnit } from '../stringify'
 import { has } from 'lodash-es'
-import { isNestedSelector } from '../util'
+import { isMultidimensionalLength, isNestedSelector } from '../util'
 import { properties } from '../../data/properties'
 
 export const stringifyProperty = (
@@ -19,6 +19,9 @@ export const stringifyProperty = (
     )
   }
 
+  if (isMultidimensionalLength(value)) {
+    return stringifyUnit(value)
+  }
   if (!isCSSUnitValue(value)) {
     return String(value) ?? null
   }
