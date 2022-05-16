@@ -1,5 +1,12 @@
 # @compai/css-gui
 
+## 0.0.51
+
+### Patch Changes
+
+- 1abc092: Select theme values with a slider
+- a97f111: Add multidimensional length to border radii
+
 ## 0.0.50
 
 ### Patch Changes
