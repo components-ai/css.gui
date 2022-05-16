@@ -9,7 +9,9 @@ export function BoxShadowPreview() {
 
   return (
     <>
-      <article sx={{ 
+      <article 
+      id='box-shadow'
+      sx={{ 
         display: 'flex',
         flexDirection: 'column-reverse',
         color: 'muted',

@@ -9,14 +9,16 @@ export function TextShadowPreview() {
 
   return (
     <>
-      <article sx={{ 
-        display: 'flex',
-        flexDirection: 'column-reverse',
-        color: 'muted',
-        width: '100%', 
-        boxShadow: 'inset 0 0 0px 1px currentColor', 
-        borderRadius: '6px',
-        overflow: 'hidden',
+      <article 
+        id='text-shadow'
+        sx={{ 
+          display: 'flex',
+          flexDirection: 'column-reverse',
+          color: 'muted',
+          width: '100%', 
+          boxShadow: 'inset 0 0 0px 1px currentColor', 
+          borderRadius: '6px',
+          overflow: 'hidden',
         }}>
       <div sx={{ 
         mt: 'auto', 

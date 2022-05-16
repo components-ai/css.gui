@@ -9,7 +9,9 @@ export function LinkPreview() {
 
   return (
     <>
-      <article sx={{ 
+      <article 
+      id='link'
+      sx={{ 
         display: 'flex',
         flexDirection: 'column',
         width: '100%', 

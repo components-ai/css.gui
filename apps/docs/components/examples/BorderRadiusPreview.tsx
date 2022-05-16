@@ -9,7 +9,9 @@ export function BorderRadiusPreview() {
 
   return (
     <>
-      <article sx={{ 
+      <article 
+      id='border-radius'
+      sx={{ 
         display: 'flex',
         flexDirection: 'column',
         color: 'muted',

@@ -10,7 +10,9 @@ export function LineHeightPreview() {
 
   return (
     <>
-      <article sx={{ 
+      <article 
+      id='line-height'
+      sx={{ 
         display: 'flex',
         flexDirection: 'column',
         color: 'muted',

@@ -9,7 +9,9 @@ export function CursorPreview() {
 
   return (
     <>
-      <article sx={{ 
+      <article 
+      id='cursor'
+      sx={{ 
         display: 'flex',
         flexDirection: 'column',
         color: 'muted',

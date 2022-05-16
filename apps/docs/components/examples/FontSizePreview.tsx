@@ -9,7 +9,9 @@ export function FontSizePreview() {
 
   return (
     <>
-      <article sx={{ 
+      <article 
+      id='font-size'
+      sx={{ 
         display: 'flex',
         flexDirection: 'column',
         color: 'muted',

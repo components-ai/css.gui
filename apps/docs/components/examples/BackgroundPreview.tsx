@@ -9,7 +9,9 @@ export function BackgroundPreview() {
 
   return (
     <>
-      <article sx={{ 
+      <article 
+      id='background'
+      sx={{ 
         display: 'flex',
         flexDirection: 'column',
         color: 'muted',

@@ -9,7 +9,9 @@ export function LetterSpacingPreview() {
 
   return (
     <>
-      <article sx={{ 
+      <article 
+      id='letter-spacing'
+      sx={{ 
         display: 'flex',
         flexDirection: 'column-reverse',
         color: 'muted',

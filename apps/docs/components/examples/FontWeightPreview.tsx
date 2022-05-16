@@ -9,7 +9,9 @@ export function FontWeightPreview() {
 
   return (
     <>
-      <article sx={{ 
+      <article 
+      id='font-weight'
+      sx={{ 
         display: 'flex',
         flexDirection: 'column-reverse',
         color: 'muted',

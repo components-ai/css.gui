@@ -9,7 +9,8 @@ export function ColorsPreview() {
 
   return (
     <>
-      <article sx={{ 
+      <article id='colors'
+      sx={{ 
         display: 'flex',
         flexDirection: 'column',
         color: 'muted',

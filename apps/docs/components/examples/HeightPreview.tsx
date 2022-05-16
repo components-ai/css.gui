@@ -9,7 +9,9 @@ export function HeightPreview() {
 
   return (
     <>
-      <article sx={{ 
+      <article 
+      id='height'
+      sx={{ 
         display: 'flex',
         flexDirection: 'column',
         color: 'muted',

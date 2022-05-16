@@ -9,7 +9,9 @@ export function WidthPreview() {
 
   return (
     <>
-      <article sx={{ 
+      <article 
+      id='width'
+      sx={{ 
         display: 'flex',
         flexDirection: 'column',
         color: 'muted',

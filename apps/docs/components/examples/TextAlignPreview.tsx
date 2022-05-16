@@ -8,6 +8,7 @@ export function TextAlignPreview() {
   return (
     <>
       <article
+        id='text-align'
         sx={{
           display: 'flex',
           flexDirection: 'column',

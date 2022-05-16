@@ -9,7 +9,9 @@ export function FilterPreview() {
 
   return (
     <>
-      <article sx={{ 
+      <article 
+      id='filter-blur'
+      sx={{ 
         display: 'flex',
         flexDirection: 'column',
         color: 'muted',

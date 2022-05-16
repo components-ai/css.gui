@@ -9,7 +9,9 @@ export function AccentColorPreview() {
 
   return (
     <>
-      <article sx={{ 
+      <article 
+      id='accent-color'
+      sx={{ 
         display: 'flex',
         flexDirection: 'column',
         color: 'muted',

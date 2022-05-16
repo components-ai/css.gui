@@ -9,7 +9,9 @@ export function TextTransformPreview() {
 
   return (
     <>
-      <article sx={{ 
+      <article 
+      id='text-transform'
+      sx={{ 
         display: 'flex',
         flexDirection: 'column-reverse',
         color: 'muted',

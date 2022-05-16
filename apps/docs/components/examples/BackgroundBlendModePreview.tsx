@@ -9,7 +9,9 @@ export function BackgroundBlendModePreview() {
 
   return (
     <>
-      <article sx={{ 
+      <article 
+      id='background-blend-mode'
+      sx={{ 
         display: 'flex',
         flexDirection: 'column',
         color: 'muted',

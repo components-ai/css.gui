@@ -9,7 +9,9 @@ export function FontStylePreview() {
 
   return (
     <>
-      <article sx={{ 
+      <article 
+      id='font-style'
+      sx={{ 
         display: 'flex',
         flexDirection: 'column',
         color: 'muted',

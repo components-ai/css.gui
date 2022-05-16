@@ -9,7 +9,7 @@ export function ColorPairPreview() {
 
   return (
     <>
-      <article sx={{ 
+      <article id='color-pair' sx={{ 
         display: 'flex',
         flexDirection: 'column',
         color: 'muted',
