@@ -34,7 +34,6 @@ export function stringifyBasicShape(value: BasicShape) {
     }
     case 'polygon': {
       const { fillRule, points } = value
-      console.log(points)
       return stringifyFunction(type, [
         fillRule,
         points

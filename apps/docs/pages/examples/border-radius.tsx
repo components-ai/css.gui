@@ -9,9 +9,14 @@ const initialStyles = {
     value: 64,
     unit: 'px',
   },
+  borderStyle: 'solid',
+  borderWidth: {
+    value: 16,
+    unit: 'px',
+  },
 }
 
-export default function BorderImage() {
+export default function BorderRadius() {
   const [styles, setStyles] = useState<any>(initialStyles)
 
   return (
@@ -27,33 +32,11 @@ export default function BorderImage() {
         <div sx={{ px: [2, 3, 4] }}>
           <Editor styles={styles} onChange={setStyles} theme={defaultTheme}>
             <div sx={{ display: 'grid', gap: '.5rem', width: '240px' }}>
-              <>
-                <h3>Color</h3>
-                <Inputs.BorderLeftColor />
-                <Inputs.BorderRightColor />
-                <Inputs.BorderTopColor />
-                <Inputs.BorderBottomColor />
-                <h3>Style</h3>
-                <Inputs.BorderLeftStyle />
-                <Inputs.BorderRightStyle />
-                <Inputs.BorderTopStyle />
-                <Inputs.BorderBottomStyle />
-                <h3>Width</h3>
-                <Inputs.BorderLeftWidth />
-                <Inputs.BorderRightWidth />
-                <Inputs.BorderTopWidth />
-                <Inputs.BorderBottomWidth />
-              </>
               <h3>Radius</h3>
               <Inputs.BorderTopLeftRadius />
               <Inputs.BorderTopRightRadius />
               <Inputs.BorderBottomLeftRadius />
               <Inputs.BorderBottomRightRadius />
-              <>
-                <h3>Spacing</h3>
-                <Inputs.Padding />
-                <Inputs.Margin />
-              </>
             </div>
           </Editor>
         </div>
