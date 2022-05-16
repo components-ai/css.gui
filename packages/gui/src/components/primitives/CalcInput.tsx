@@ -2,7 +2,7 @@ import { kebabCase, uniq } from 'lodash-es'
 import { useId } from 'react'
 import { UnitRanges } from '../../data/ranges'
 import { convertUnits, UnitConversions, UnitSteps } from '../../lib'
-import { stringifyUnit, } from '../../lib/stringify'
+import { stringifyCalcFunction, stringifyUnit, } from '../../lib/stringify'
 import { AbsoluteLengthUnits, CalcOperand, CSSFunctionCalc, CSSUnitValue, ThemeUnits, UnitlessUnits } from '../../types/css'
 import { EditorProps } from '../../types/editor'
 import { SelectInput } from '../inputs/SelectInput'
@@ -35,7 +35,7 @@ export const CalcInput = ({
   return (
     <div sx={{ width: '100%' }}>
       <Label sx={{ display: 'block' }}>
-        {/* {`${label || 'value'}: ${stringifyCalcValue(calcOperation)}`} */}
+        {`${label || 'value'}: ${stringifyCalcFunction(value)}`}
       </Label>
       <NumberUnitInput
         value={value.arguments.valueX}
@@ -67,7 +67,7 @@ export const CalcInput = ({
           const y = value.arguments.valueY
 
           if (newValue === CalcOperand.Div || newValue === CalcOperand.Mult) {
-            onChange({ 
+            return onChange({ 
               ...value,
               arguments: {
                 ...value.arguments,
@@ -75,14 +75,13 @@ export const CalcInput = ({
                 valueY: { ...value.arguments.valueY, unit: UnitlessUnits.Number }
               }
             })
-            return
           } 
           
           if (
             y.unit === UnitlessUnits.Number &&
             (newValue === CalcOperand.Plus || newValue === CalcOperand.Sub)
           ) {
-            onChange({
+            return onChange({
               ...value,
               arguments: {
                 ...value.arguments,
@@ -90,7 +89,6 @@ export const CalcInput = ({
                 valueY: { value: 16, unit: AbsoluteLengthUnits.Px }
               }
             })
-            return
           }
           
           onChange({ 

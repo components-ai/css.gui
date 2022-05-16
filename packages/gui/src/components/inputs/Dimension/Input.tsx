@@ -117,7 +117,7 @@ export const DimensionInput = ({
             }}
             values={themeValues ?? []}
           />
-        ) : state.unit === 'calc' ? (
+        ) : state.unit === UnitlessUnits.Calc ? (
           <CalcInput
             units={allUnits}
             onChange={onChange}
@@ -168,7 +168,7 @@ export const DimensionInput = ({
                 type: 'calc'
               })
             }
-            if (state.unit === UnitlessUnits.Calc && newUnit !== 'calc') {
+            if (state.unit === UnitlessUnits.Calc && newUnit !== UnitlessUnits.Calc) {
               const unitValue = (value as CSSFunctionCalc).arguments.valueX.value
               
               onChange({ value: unitValue, unit: newUnit})

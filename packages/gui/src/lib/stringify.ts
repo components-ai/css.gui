@@ -10,7 +10,7 @@ export function stringifySelector(selector: string): string {
   return addPseudoSyntax(selector)
 }
 
-export const stringifyCalcValue = ({ arguments: args }: CSSFunctionCalc) => {
+export const stringifyCalcFunction = ({ arguments: args }: CSSFunctionCalc) => {
   const x = stringifyUnit(args.valueX)
   const y = stringifyUnit(args.valueY)
   return `calc(${x} ${args.operand} ${y})`
