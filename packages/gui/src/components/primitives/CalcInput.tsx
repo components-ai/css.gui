@@ -1,5 +1,5 @@
 import { kebabCase, uniq } from 'lodash-es'
-import { useEffect, useState, useId } from 'react'
+import { useId } from 'react'
 import { UnitRanges } from '../../data/ranges'
 import { convertUnits, UnitConversions, UnitSteps } from '../../lib'
 import { stringifyUnit, } from '../../lib/stringify'
@@ -20,12 +20,6 @@ interface CalcInputProps extends EditorProps<CSSFunctionCalc> {
   themeValues?: (CSSUnitValue & { id: string })[]
 }
 
-type CalcFunction = {
-  operand: string
-  valueX: CSSUnitValue
-  valueY: CSSUnitValue
-}
-
 export const CalcInput = ({
   units,
   onChange,
@@ -35,18 +29,8 @@ export const CalcInput = ({
   steps,
   conversions,
   themeValues,
-}: CalcInputProps) => { 
-  const [functionCalc, setFunctionCalc] = useState<CSSFunctionCalc>(value)
+}: CalcInputProps) => {   
   const allUnits = uniq([...units, UnitlessUnits.Number])
-
-  // useEffect(() => {
-  //   onChange({ type: 'calc',  })
-  // }, [])
-
-  const handleCalcChange = (newFunctionCalc: CSSFunctionCalc) => {
-    setFunctionCalc(functionCalc)
-    onChange(newFunctionCalc)
-  }
 
   return (
     <div sx={{ width: '100%' }}>
@@ -54,12 +38,12 @@ export const CalcInput = ({
         {/* {`${label || 'value'}: ${stringifyCalcValue(calcOperation)}`} */}
       </Label>
       <NumberUnitInput
-        value={functionCalc.arguments.valueX}
+        value={value.arguments.valueX}
         onChange={(newValue: CSSUnitValue) => {
-          handleCalcChange({
-            ...functionCalc, 
+          onChange({
+            ...value, 
             arguments: {
-              ...functionCalc.arguments,
+              ...value.arguments,
               valueX: newValue
             }
           })
@@ -72,32 +56,36 @@ export const CalcInput = ({
       />
       <SelectInput
         options={[
-          CalcOperand.Div,
           CalcOperand.Plus,
+          CalcOperand.Sub,
+          CalcOperand.Div,
           CalcOperand.Mult,
-          CalcOperand.Sub
+          
         ]}
         label=''
         onChange={(newValue: CalcOperand) => {
-          const y = functionCalc.arguments.valueY
+          const y = value.arguments.valueY
 
-          if (newValue === '/' || newValue === '*') {
-            handleCalcChange({ 
-              ...functionCalc,
+          if (newValue === CalcOperand.Div || newValue === CalcOperand.Mult) {
+            onChange({ 
+              ...value,
               arguments: {
-                ...functionCalc.arguments,
+                ...value.arguments,
                 operand: newValue,
-                valueY: { ...functionCalc.arguments.valueY, unit: UnitlessUnits.Number }
+                valueY: { ...value.arguments.valueY, unit: UnitlessUnits.Number }
               }
             })
             return
           } 
           
-          if ((newValue === CalcOperand.Plus || newValue === CalcOperand.Sub) && y.unit === UnitlessUnits.Number) {
-            handleCalcChange({
-              ...functionCalc,
+          if (
+            y.unit === UnitlessUnits.Number &&
+            (newValue === CalcOperand.Plus || newValue === CalcOperand.Sub)
+          ) {
+            onChange({
+              ...value,
               arguments: {
-                ...functionCalc.arguments,
+                ...value.arguments,
                 operand: newValue,
                 valueY: { value: 16, unit: AbsoluteLengthUnits.Px }
               }
@@ -105,23 +93,23 @@ export const CalcInput = ({
             return
           }
           
-          handleCalcChange({ 
-            ...functionCalc,
+          onChange({ 
+            ...value,
             arguments: {
-              ...functionCalc.arguments,
+              ...value.arguments,
               operand: newValue,
             }
           })
         }}
-        value={functionCalc.arguments.operand}
+        value={value.arguments.operand}
       />
       <NumberUnitInput
-        value={functionCalc.arguments.valueY}
+        value={value.arguments.valueY}
         onChange={(newValue: CSSUnitValue) => {
-          handleCalcChange({
-            ...functionCalc, 
+          onChange({
+            ...value, 
             arguments: {
-              ...functionCalc.arguments,
+              ...value.arguments,
               valueY: newValue
             }
           })
@@ -193,7 +181,6 @@ const NumberUnitInput = ({
             conversions,
             steps
           )
-          // Stringify full theme values so calc works correctly
           const newValue = newUnit === ThemeUnits.Theme && themeValues
             ? stringifyUnit(themeValues?.[0])
             : convertedValue
@@ -204,10 +191,4 @@ const NumberUnitInput = ({
       />
     </div>
   )
-}
-
-const stringifyCalcValue = ({ operand, valueX, valueY }: CalcFunction) => {
-  const x = stringifyUnit(valueX)
-  const y = stringifyUnit(valueY)
-  return `calc(${x} ${operand} ${y})`
 }

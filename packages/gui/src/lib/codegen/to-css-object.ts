@@ -1,5 +1,5 @@
-import { Styles, Length, CSSUnitValue } from '../../types/css'
-import { stringifySelector, stringifyUnit } from '../stringify'
+import { Styles, Length, CSSUnitValue, CSSFunctionCalc } from '../../types/css'
+import { stringifySelector, stringifyUnit, stringifyCalcValue } from '../stringify'
 import { has } from 'lodash-es'
 import { isNestedSelector } from '../util'
 import { properties } from '../../data/properties'
@@ -17,6 +17,11 @@ export const stringifyProperty = (
     return value.map((v: Length | string | null) =>
       stringifyProperty(property, v)
     )
+  }
+
+  if ((value as CSSFunctionCalc).type === 'calc') {
+    // @ts-ignore
+    return stringifyCalcValue(value)
   }
 
   if (!isCSSUnitValue(value)) {

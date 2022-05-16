@@ -1,5 +1,5 @@
 import { isElement, isNil } from 'lodash-es'
-import { Color, Length, Position } from '../types/css'
+import { Color, CSSFunctionCalc, Length, Position } from '../types/css'
 import { addPseudoSyntax } from './pseudos'
 
 export function stringifySelector(selector: string): string {
@@ -8,6 +8,12 @@ export function stringifySelector(selector: string): string {
   }
 
   return addPseudoSyntax(selector)
+}
+
+export const stringifyCalcValue = ({ arguments: args }: CSSFunctionCalc) => {
+  const x = stringifyUnit(args.valueX)
+  const y = stringifyUnit(args.valueY)
+  return `calc(${x} ${args.operand} ${y})`
 }
 
 export function stringifyUnit(value: Length) {

@@ -25,6 +25,7 @@ export const convertUnits = (
   }
 
   // If the new unit has a value but the old one doesn't, return the new one
+  // if (conversions[newUnit] && value.unit !== 'calc') {
   if (conversions[newUnit]) {
     return conversions[newUnit]
   }

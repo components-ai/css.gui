@@ -46,7 +46,7 @@ export const enum KeywordUnits {
 export const enum CalcOperand {
   Mult = '*',
   Plus = '+',
-  Sub = '_',
+  Sub = '-',
   Div = '/'
 }
 // Only use a subset for now to keep things simpler
@@ -92,7 +92,7 @@ export interface NumberPercentage {
 }
 
 export type CSSFunctionCalc = {
-  type: string
+  type: 'calc'
   arguments: CalcFunction
 }
 export type CalcFunction = {
