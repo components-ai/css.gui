@@ -94,7 +94,7 @@ type PropertyData = {
 export const properties: Record<string, PropertyData> = {
   accentColor: {
     type: 'color',
-    defaultValue: 'auto',
+    defaultValue: 'tomato',
     keywords: ['auto', 'currentcolor', 'transparent'],
   },
   alignContent: {
@@ -141,7 +141,7 @@ export const properties: Record<string, PropertyData> = {
     ],
     defaultValue: 'center',
   },
-  alignmentBaseline: {
+  alignmentBaseline: { // Can be used with tspan tref altGlyph and textPath SVG elements
     type: 'keyword',
     keywords: [
       'baseline',
@@ -188,13 +188,25 @@ export const properties: Record<string, PropertyData> = {
     defaultValue: [DEFAULT_ANIMATION],
   },
   // TODO array of time values
-  animationDelay: { type: 'time' },
+  animationDelay: { 
+    type: 'time',
+    defaultValue: {
+      value: 0,
+      unit: 'ms'
+    }
+  },
   animationDirection: {
     type: 'keyword',
     keywords: ['normal', 'reverse', 'alternate', 'alternate-reverse'],
     defaultValue: 'normal',
   },
-  animationDuration: { type: 'time' },
+  animationDuration: { 
+    type: 'time',
+    defaultValue: {
+      value: 500,
+      unit: 'ms',
+    }
+  },
   animationFillMode: {
     type: 'keyword',
     keywords: ['none', 'forwards', 'backwards', 'both'],
@@ -204,10 +216,12 @@ export const properties: Record<string, PropertyData> = {
     type: 'number',
     keywords: ['infinite'],
     range: { number: [0, Infinity] },
+    defaultValue: 'infinite',
   },
   animationPlayState: {
     type: 'keyword',
     keywords: ['running', 'paused'],
+    defaultValue: 'running',
   },
   // TODO this should be a combobox
   animationProperty: {
@@ -245,6 +259,7 @@ export const properties: Record<string, PropertyData> = {
     keywords: ['visible', 'hidden'],
     defaultValue: 'hidden',
   },
+  // TODO: Add defaultValue
   background: {
     type: BackgroundInput,
     stringify: stringifyBackgroundList,
@@ -279,7 +294,7 @@ export const properties: Record<string, PropertyData> = {
   },
   backgroundColor: {
     type: 'color',
-    defaultValue: '#fff',
+    defaultValue: 'tomato',
     keywords: ['currentcolor', 'transparent'],
   },
   backgroundClip: {
@@ -293,6 +308,7 @@ export const properties: Record<string, PropertyData> = {
     ],
     defaultValue: 'border-box',
   },
+  // TODO: Add defaultValue
   backgroundImage: {
     type: ImageSourcePicker,
     stringify: stringifyImageSource,
@@ -301,6 +317,7 @@ export const properties: Record<string, PropertyData> = {
   backgroundOrigin: {
     type: 'keyword',
     keywords: ['border-box', 'padding-box', 'content-box'],
+    defaultValue: 'border-box',
   },
   backgroundPosition: {
     type: 'position',
@@ -310,12 +327,14 @@ export const properties: Record<string, PropertyData> = {
     type: 'length',
     percentage: true,
     keywords: ['top', 'left', 'center'],
+    defaultValue: 'center',
   },
   backgroundPositionY: {
     // TOO: Add side relative values option and multiple values option
     type: 'length',
     percentage: true,
     keywords: ['top', 'center', 'bottom'],
+    defaultValue: 'center',
   },
   borderRadius: {
     type: 'length',
@@ -326,6 +345,10 @@ export const properties: Record<string, PropertyData> = {
       [FontRelativeLengthUnits.Em]: [0, 64],
       [FontRelativeLengthUnits.Rem]: [0, 64],
     },
+    defaultValue: {
+      value: 6,
+      unit: 'px',
+    }
   },
   backgroundRepeat: {
     type: 'keyword',
@@ -341,6 +364,7 @@ export const properties: Record<string, PropertyData> = {
       'round space',
       'no-repeat round',
     ],
+    defaultValue: 'no-repeat',
   },
   backgroundSize: {
     // TODO: Add two value syntax
@@ -353,27 +377,36 @@ export const properties: Record<string, PropertyData> = {
       [FontRelativeLengthUnits.Rem]: [0, 8],
       [PercentageLengthUnits.Pct]: [0.1, 100],
     },
+    defaultValue: 'cover',
   },
   blockSize: {
     // TODO: Add fit-content function
     type: 'length',
     percentage: true,
     keywords: ['max-content', 'min-content', 'auto'],
+    defaultValue: 'auto',
   },
   borderCollapse: {
     type: 'keyword',
     keywords: ['collapse', 'separate'],
+    defaultValue: 'collapse',
   },
   // TODO: 4-positional arguments separated by spaces
   borderImageOutset: {
     type: 'length',
     number: true,
+    defaultValue: {
+      value:  4,
+      unit: 'px',
+    }
   },
   // TODO: 2-positional arguments separated by spaces
   borderImageRepeat: {
     type: 'keyword',
     keywords: ['stretch', 'repeat', 'round', 'space'],
+    defaultValue: 'stretch',
   },
+  // TODO: Add defaultValue
   borderImageSlice: {
     type: 'length',
     number: true,
@@ -381,6 +414,7 @@ export const properties: Record<string, PropertyData> = {
     range: { number: [-1, 2000] },
   },
   // TODO this actually can only accept *one* image value, not an array
+  // TODO: Add defaultValue
   borderImageSource: {
     type: ImageSourcePicker,
     stringify: stringifyImageSource,
@@ -390,10 +424,15 @@ export const properties: Record<string, PropertyData> = {
   borderImageWidth: {
     type: 'length',
     keywords: ['thin', 'medium', 'thick'],
+    defaultValue: {
+      value: 4,
+      unit: 'px',
+    }
   },
   borderBottomColor: {
     type: 'color',
     keywords: ['currentcolor', 'transparent'],
+    defaultValue: '#6465ff',
   },
   borderBottomLeftRadius: {
     type: 'multiLength',
@@ -417,6 +456,7 @@ export const properties: Record<string, PropertyData> = {
       'inset',
       'outset',
     ],
+    defaultValue: 'solid',
   },
   borderBottomWidth: {
     type: 'length',
@@ -429,10 +469,15 @@ export const properties: Record<string, PropertyData> = {
       [ViewportPercentageLengthUnits.Vw]: [0, 100],
       [PercentageLengthUnits.Pct]: [0.1, 100],
     },
+    defaultValue: {
+      value: 2,
+      unit: 'px',
+    }
   },
   borderLeftColor: {
     type: 'color',
     keywords: ['currentcolor', 'transparent'],
+    defaultValue: '#6465ff',
   },
   borderLeftStyle: {
     type: 'keyword',
@@ -448,6 +493,7 @@ export const properties: Record<string, PropertyData> = {
       'inset',
       'outset',
     ],
+    defaultValue: 'solid',
   },
   borderLeftWidth: {
     type: 'length',
@@ -464,6 +510,7 @@ export const properties: Record<string, PropertyData> = {
   borderRightColor: {
     type: 'color',
     keywords: ['currentcolor', 'transparent'],
+    defaultValue: '#6465ff',
   },
   borderRightStyle: {
     type: 'keyword',
@@ -479,6 +526,7 @@ export const properties: Record<string, PropertyData> = {
       'inset',
       'outset',
     ],
+    defaultValue: 'solid',
   },
   borderRightWidth: {
     type: 'length',
@@ -495,6 +543,7 @@ export const properties: Record<string, PropertyData> = {
   borderTopColor: {
     type: 'color',
     keywords: ['currentcolor', 'transparent'],
+    defaultValue: '#6465ff',
   },
   borderTopLeftRadius: {
     type: 'multiLength',
@@ -518,6 +567,7 @@ export const properties: Record<string, PropertyData> = {
       'inset',
       'outset',
     ],
+    defaultValue: 'solid',
   },
   borderTopWidth: {
     type: 'length',
@@ -553,6 +603,7 @@ export const properties: Record<string, PropertyData> = {
       'inset',
       'outset',
     ],
+    defaultValue: 'solid',
   },
   borderWidth: {
     type: 'length',
