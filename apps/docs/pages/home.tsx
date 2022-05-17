@@ -65,7 +65,7 @@ export default function Docs() {
           pl: 0,
         }}
       >
-        <li>Controls for 258 CSS properties</li>
+        <li>Controls for 280 CSS properties</li>
         <li>+1000 Google Fonts</li>
         <li>Full variable fonts support</li>
         <li>Responsive value arrays</li>
