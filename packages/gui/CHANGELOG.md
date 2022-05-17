@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.52
+
+### Patch Changes
+
+- aa6dc32: Fix multidimensional init
+
 ## 0.0.51
 
 ### Patch Changes
