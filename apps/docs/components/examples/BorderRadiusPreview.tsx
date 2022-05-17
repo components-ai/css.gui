@@ -9,30 +9,34 @@ export function BorderRadiusPreview() {
 
   return (
     <>
-      <article 
-      id='border-radius'
-      sx={{ 
-        display: 'flex',
-        flexDirection: 'column',
-        color: 'muted',
-        width: '100%', 
-        boxShadow: 'inset 0 0 0px 1px currentColor', 
-        borderRadius: '6px',
-        }}>
-        <code sx={{ color: 'text', px: 3, py: 2, width: '100%', display: 'block', borderBottom: '1px solid', borderBottomColor: 'muted', }}>
-          &lt;Inputs.BorderRadius /&gt;
-        </code>
-        <section sx={{
-          fontWeight: 900,
-          height: '192px',
-          borderBottom: '1px solid',
-          maxWidth: '100%',
+      <article
+        id="border-radius"
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          color: 'muted',
+          width: '100%',
+          boxShadow: 'inset 0 0 0px 1px currentColor',
+          borderRadius: '6px',
         }}
       >
+        <code
+          sx={{
+            color: 'text',
+            px: 3,
+            py: 2,
+            width: '100%',
+            display: 'block',
+            borderBottom: '1px solid',
+            borderBottomColor: 'muted',
+          }}
+        >
+          &lt;Inputs.BorderRadius /&gt;
+        </code>
         <section
           sx={{
             fontWeight: 900,
-            height: '300px',
+            height: '192px',
             borderBottom: '1px solid',
             maxWidth: '100%',
             display: 'flex',
@@ -68,23 +72,19 @@ export function BorderRadiusPreview() {
             <Inputs.BorderRadius />
           </div>
         </Editor>
-      <div sx={{
-        px: 3,
-        pb: 3,
-        maxWidth: '100%',
-        overflow: 'auto',
-        color: 'text',
-        }}>
-        <pre
+        <div
           sx={{
-            width: '100%',
-            fontSize: 0,
+            px: 3,
+            pb: 3,
+            maxWidth: '100%',
+            overflow: 'auto',
+            color: 'text',
           }}
         >
           <pre
             sx={{
               width: '100%',
-              fontSize: 2,
+              fontSize: 0,
             }}
           >
             {codegen.css(styles)}
