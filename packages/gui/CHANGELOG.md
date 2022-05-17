@@ -1,5 +1,12 @@
 # @compai/css-gui
 
+## 0.0.53
+
+### Patch Changes
+
+- 5a59618: Add display fonts
+- 9ec945d: Adds calc operations
+
 ## 0.0.52
 
 ### Patch Changes
