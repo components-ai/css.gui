@@ -22,6 +22,7 @@ const enum FontCategory {
   Mono = 'monospace',
   Serif = 'serif',
   Display = 'display',
+  Handwriting = 'handwriting',
 }
 const nameMap: any = {
   opsz: 'Optical Size',
@@ -68,10 +69,17 @@ export function FontFamilyInput({ label, value, onChange }: Props) {
   const [includeSerif, setIncSerif] = React.useState<boolean>(true)
   const [includeMono, setIncMono] = React.useState<boolean>(true)
   const [includeDisplay, setIncDisplay] = React.useState<boolean>(true)
+  const [includeHandwriting, setIncHandwriting] = React.useState<boolean>(true)
 
   React.useEffect(() => {
     handleFilterItems(value.fontFamily)
-  }, [includeMono, includeSans, includeSerif, includeDisplay])
+  }, [
+    includeMono,
+    includeSans,
+    includeSerif,
+    includeDisplay,
+    includeHandwriting,
+  ])
 
   const {
     isOpen,
@@ -100,7 +108,8 @@ export function FontFamilyInput({ label, value, onChange }: Props) {
           (includeSans && item.category === FontCategory.Sans) ||
           (includeSerif && item.category === FontCategory.Serif) ||
           (includeMono && item.category === FontCategory.Mono) ||
-          (includeDisplay && item.category === FontCategory.Display)
+          (includeDisplay && item.category === FontCategory.Display) ||
+          (includeHandwriting && item.category === FontCategory.Handwriting)
         )
       }
     })
@@ -197,7 +206,9 @@ export function FontFamilyInput({ label, value, onChange }: Props) {
           }}
         >
           {isOpen && inputItems.length > 0 && (
-            <div sx={{ display: 'flex' }}>
+            <div
+              sx={{ display: 'flex', maxWidth: '100%', overflowX: 'scroll' }}
+            >
               <FontFamilyToggle
                 label="Sans"
                 checked={includeSans}
@@ -208,17 +219,20 @@ export function FontFamilyInput({ label, value, onChange }: Props) {
                 checked={includeSerif}
                 onToggle={() => setIncSerif(!includeSerif)}
               />
-
               <FontFamilyToggle
-                label="Monospace"
+                label="Mono"
                 checked={includeMono}
                 onToggle={() => setIncMono(!includeMono)}
               />
-
               <FontFamilyToggle
                 label="Display"
                 checked={includeDisplay}
                 onToggle={() => setIncDisplay(!includeDisplay)}
+              />
+              <FontFamilyToggle
+                label="Handwriting"
+                checked={includeHandwriting}
+                onToggle={() => setIncHandwriting(!includeHandwriting)}
               />
             </div>
           )}
@@ -431,7 +445,8 @@ const getFontsData = async (): Promise<APIFontData> => {
       category === FontCategory.Sans ||
       category === FontCategory.Serif ||
       category === FontCategory.Mono ||
-      category === FontCategory.Display
+      category === FontCategory.Display ||
+      category === FontCategory.Handwriting
     ) {
       fontOptions.push({ name, category })
     }
