@@ -11,7 +11,7 @@ export interface Transition {
 
 export const DEFAULT_TRANSITION: Transition = {
   delay: { value: 0, unit: 's' },
-  duration: { value: 0, unit: 's' },
+  duration: { value: 250, unit: 'ms' },
   property: 'all',
   timingFunction: keywordValues.ease,
 }

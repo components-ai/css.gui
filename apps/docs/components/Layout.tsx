@@ -57,37 +57,41 @@ export const Layout = (props: Props) => {
             </span>
           </a>
         </Link>
+        <Link href="/properties" passHref={true} title='Visual demos of CSS properties'>
+          <a
+            sx={{
+              ml: 'auto',
+              fontWeight: 500,
+              color: 'text',
+              textDecoration: 'none',
+              display: 'flex',
+              alignItems: 'center',
+              fontSize: [0,1,2],
+              px: 3,
+            }}
+          >
+          Properties
+          </a>
+        </Link>
         <a sx={{
-          ml: 'auto',
           textDecoration: 'none',
           color: 'currentColor',
           fontWeight: 600,
           transition: 'color .2s ease-in-out',
           px: 3,
+          fontSize: [0,1,1],
           ':hover': {
             color: 'primary'
           }
           }}href='https://github.com/components-ai/css.gui'>
           GitHub 
         </a>
-        <a sx={{
-          textDecoration: 'none',
-          color: 'currentColor',
-          fontWeight: 600,
-          transition: 'color .2s ease-in-out',
-          pl: 3,
-          ':hover': {
-            color: 'primary'
-          }
-          }}href='https://www.npmjs.com/package/@compai/css-gui'>
-          NPM
-        </a>
       </header>
       <div
         sx={{
           fontFamily: 'body',
-          display: 'flex',
-          flexDirection: ['column-reverse', 'initial'],
+          display: 'grid',
+          gridTemplateColumns: ['1fr', '256px auto', '256px auto'],
         }}
         {...props}
       />

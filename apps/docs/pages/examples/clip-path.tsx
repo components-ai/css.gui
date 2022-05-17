@@ -19,7 +19,7 @@ export default function ClipPathExample() {
   const [styles, setStyles] = useState<any>(initialStyles)
 
   return (
-    <div sx={{ display: 'grid', gridTemplateColumns: '18rem 1fr' }}>
+    <div sx={{ display: 'grid', gridTemplateColumns: '18rem 1fr', gap: '2em', p: [ 4,5,5 ], }}>
       <Editor styles={styles} onChange={setStyles} />
       <div>
         <div

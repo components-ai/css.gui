@@ -45,21 +45,21 @@ export default function GridExample() {
   return (
     <div
       sx={{
-        p: 2,
+        p: [4,5,5],
         display: 'grid',
         gridTemplateColumns: 'minmax(18rem, max-content) 1fr',
         gap: 3,
       }}
     >
       <section>
-        <h2>Container</h2>
+        <h4>Container</h4>
         <Editor styles={containerStyles} onChange={setContainerStyles}>
           <>
             <Inputs.GridTemplateColumns />
             <Inputs.GridTemplateRows />
           </>
         </Editor>
-        <h2>Child</h2>
+        <h4>Child</h4>
         <Editor styles={childStyles} onChange={setChildStyles}>
           <>
             <Inputs.GridColumnStart />
@@ -72,7 +72,7 @@ export default function GridExample() {
       <div sx={{ display: 'grid', ...toCSSObject(containerStyles) }}>
         {[...Array(100)].map((n, i) => {
           return (
-            <div sx={{ border: '1px solid', borderColor: 'text' }}>{i}</div>
+            <div sx={{ border: '1px solid', borderColor: 'text', py: 3, pl: 3 }}>{i}</div>
           )
         })}
         <div
@@ -80,7 +80,7 @@ export default function GridExample() {
             display: 'flex',
             alignItems: 'center',
             placeContent: 'center',
-            backgroundColor: 'tomato',
+            backgroundColor: '#6365ff',
             ...toCSSObject(childStyles),
           }}
         >

@@ -1,3 +1,4 @@
+import { GitHub, Twitter } from 'react-feather'
 import { NavItem, NavSectionTitle } from './Nav'
 
 export const Sidebar = () => {
@@ -5,16 +6,16 @@ export const Sidebar = () => {
     <nav
       sx={{
         minHeight: '100vh',
-        width: ['100%', 256],
-        minWidth: ['100%', 256],
-        borderRight: 'thin solid',
-        borderColor: 'border',
+        height: '100%',
+        borderRightWidth: '1px',
+        borderRightStyle: 'solid',
+        borderRightColor: 'border',
         py: [2, 3],
-        position: ['relative', 'sticky'],
         overflowY: 'auto',
         top: 0,
         left: 0,
         bottom: 0,
+        order: [2,1,1],
       }}
     >
       <NavSectionTitle>Overview</NavSectionTitle>
@@ -62,8 +63,14 @@ export const Sidebar = () => {
       <NavSectionTitle>Reference</NavSectionTitle>
       <NavItem href="/colophon">Colophon</NavItem>
       <NavSectionTitle>Community</NavSectionTitle>
-      <NavItem href="https://github.com/components-ai/css.gui">GitHub</NavItem>
-      <NavItem href="https://twitter.com/components_ai">Twitter</NavItem>
+      <NavItem href="https://github.com/components-ai/css.gui">
+        <GitHub size={16} fill='currentColor' /> 
+        <span>GitHub</span>
+      </NavItem>
+      <NavItem href="https://twitter.com/components_ai">
+        <Twitter size={16} fill='currentColor' /> 
+        <span>Twitter</span>
+      </NavItem>
       <NavItem href="https://discord.gg/PYF52BEEf3">Discord</NavItem>
     </nav>
   )

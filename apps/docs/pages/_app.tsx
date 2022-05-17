@@ -16,13 +16,13 @@ Router.events.on('routeChangeComplete', (url) => {
 const App = ({ Component, pageProps }: AppProps) => {
   return (
     <ThemeProvider theme={theme}>
-      <Layout>
         <Head />
-        <Sidebar />
-        <PageWrap>
-          <Component {...pageProps} />
-        </PageWrap>
-      </Layout>
+        <Layout>
+          <Sidebar />
+          <PageWrap>
+            <Component {...pageProps} />
+          </PageWrap>
+        </Layout>
     </ThemeProvider>
   )
 }

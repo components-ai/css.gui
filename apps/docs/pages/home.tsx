@@ -21,8 +21,8 @@ import pkg from '../../../packages/gui/package.json'
 export default function Docs() {
   return (
     <div>
-      <header sx={{ pt: [5,6,7], mx: 'auto', maxWidth: '1024px', px: 4 }}>
-        <h1 sx={{ fontSize: [6,8,'128px'], my: 0, lineHeight: 1 }}>
+      <header sx={{ pt: [5,6,7], display: 'block', px: 5,  }}>
+        <h1 sx={{ fontSize: [4,6,8], my: 0, lineHeight: 1, maxWidth: '100%', overflow: 'hidden', }}>
           CSS GUI
           <span sx={{ fontSize: 1 }}>v{pkg.version}</span>
         </h1>
@@ -34,6 +34,7 @@ export default function Docs() {
         fontSize: ['18px', '1.5rem', '2rem'],
         fontWeight: 400,
         mb: 0,
+        maxWidth: '40em',
         }}>
          Everyone should be able to explore the creative potential of CSS.
          This project is a growing set of parametric controls for rapidly editing CSS properties. 
@@ -59,7 +60,7 @@ export default function Docs() {
           mb: 7,
           display: 'grid',
           gap: '2rem',
-          gridTemplateColumns: '1fr 1fr 1fr',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(16rem, 1fr))', 
           ml: 0, 
           pl: 0,
         }}
@@ -83,7 +84,7 @@ export default function Docs() {
           <h2 sx={{ textAlign: 'center' }}>Demo</h2>
           <p sx={{ fontSize: 3, textAlign: 'center', }}>Previews of CSS controls</p>
         </header>
-        <div sx={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(24rem, 1fr))', gap: '4rem', px: [4,5,5], maxWidth: '114em', mx: 'auto', }}>
+        <div sx={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(16rem, 1fr))', gap: '2rem', px: [4,5,5], }}>
           <FontSizePreview />
           <FontFamilyPreview />
           <TextAlignPreview />
@@ -93,7 +94,9 @@ export default function Docs() {
           <BackgroundBlendModePreview />
           <BorderRadiusPreview />
           <FilterPreview />
-        <Link href="/properties" passHref={true}>
+        
+        </div>
+<Link href="/properties" passHref={true}>
           <a
             sx={{
               fontWeight: 500,
@@ -101,14 +104,17 @@ export default function Docs() {
               textDecoration: 'none',
               display: 'flex',
               alignItems: 'center',
+              justifyContent: 'center',
               gridColumn: 'span 3',
-              textAlign: 'center',
+              mt: 5,
               mx: 'auto',
               py: 3,
               px: 4,
               bg: '#675bff',
               borderRadius: '6px',
               transition: 'background-color .2s ease-in-out',
+              maxWidth: '16em',
+              textAlign: 'center',
               ':hover': {
                 bg: '#3e38b0'
               }
@@ -119,7 +125,6 @@ export default function Docs() {
             </span>
           </a>
         </Link>
-        </div>
       </section>
       <section sx={{ display: 'none', pb: 6, px: [4,5,5]  }}>
         <header sx={{ mb: 5 }}>

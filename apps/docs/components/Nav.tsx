@@ -16,7 +16,9 @@ export const NavItem = ({
         sx={{
           fontSize: 2,
           textDecoration: 'none',
-          display: 'block',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '.5rem',
           width: '100%',
           color: isActive ? 'background' : 'muted',
           backgroundColor: isActive ? 'primary' : 'background',

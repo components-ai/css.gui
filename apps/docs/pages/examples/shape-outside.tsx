@@ -28,9 +28,8 @@ export default function ShapeOutsideExample() {
   const [styles, setStyles] = useState<any>(initialStyles)
 
   return (
-    <div sx={{ display: 'grid', gridTemplateColumns: '18rem 1fr' }}>
-      <Editor styles={styles} onChange={setStyles} />
-      <div sx={{ textAlign: 'justify' }}>
+    <div>
+      <div sx={{ p: [ 3,4,5 ] }}>
         <div
           sx={{
             ...toCSSObject(styles),
@@ -39,6 +38,11 @@ export default function ShapeOutsideExample() {
         ></div>
         {text}
       </div>
+      <div sx={{ 
+        px: [ 3,4,5 ], 
+      }}>
+       <Editor styles={styles} onChange={setStyles} />
+     </div>
     </div>
   )
 }
@@ -52,7 +56,7 @@ function getDerivedStyles(shapeOutside: any) {
     })
   }
   return toCSSObject({
-    backgroundColor: 'tomato',
+    backgroundColor: '#6465ff',
     clipPath: shapeOutside,
   })
 }

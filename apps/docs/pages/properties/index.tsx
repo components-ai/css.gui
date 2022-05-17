@@ -37,7 +37,7 @@ export default function Docs() {
   return (
     <div>
       <header sx={{ pt: [5,6,7], mx: 'auto', maxWidth: '1024px', px: 4, textAlign: 'center' }}>
-        <h1 sx={{ fontSize: [6,8,'128px'], my: 0, lineHeight: 1.25 }}>
+        <h1 sx={{ fontSize: [4,6,7], my: 0, lineHeight: 1.25 }}>
           Properties
         </h1>
         <h2 sx={{ fontWeight: 500, my: 0 }}>
