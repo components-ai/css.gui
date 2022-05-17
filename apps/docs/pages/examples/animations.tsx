@@ -6,15 +6,15 @@ import { Container } from '../../components/Container'
 const initialStyles = {
   animation: [
     {
-      name: 'zoomIn',
+      name: 'backOutRight',
       timingFunction: {
         type: 'cubic-bezier',
-        p1: 0,
+        p1: 0.42,
         p2: 0,
-        p3: 1,
+        p3: .58,
         p4: 1,
       },
-      duration: { value: 250, unit: 'ms' },
+      duration: { value: 2000, unit: 'ms' },
       delay: { value: 0, unit: 'ms' },
       iterationCount: { value: 'infinite', type: 'keyword' },
       fillMode: 'none',
@@ -29,27 +29,21 @@ export default function AnimationExample() {
   return (
     <div sx={{ pt: 5 }}>
       <Container>
-        <h1>Animations</h1>
-        <p>
-          Try out any of the animations from{' '}
-          <a sx={{ color: 'currentColor' }} href="https://animate.style/">
-            animate.css
-          </a>
-          !
-        </p>
         <Head>
           <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
           />
         </Head>
-        <div sx={{ display: 'grid', gridTemplateColumns: '16rem 1fr' }}>
-          <Editor styles={styles} onChange={setStyles}>
-            <Inputs.Animation />
-          </Editor>
+        <div>
           <div
             sx={{
-              width: '16rem',
+              mb: 4, 
+              width: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '24px',
               height: '16rem',
               backgroundColor: '#128',
               ...toCSSObject(styles),
@@ -57,6 +51,16 @@ export default function AnimationExample() {
           >
             Animate!
           </div>
+          <p sx={{ fontSize: '24px' }}>
+            Try out any of the animations from{' '}
+            <a sx={{ color: 'currentColor' }} href="https://animate.style/">
+              animate.css
+            </a>
+            !
+          </p>
+          <Editor styles={styles} onChange={setStyles}>
+            <Inputs.Animation />
+          </Editor>
         </div>
       </Container>
     </div>
