@@ -1527,6 +1527,7 @@ export const properties: Record<string, PropertyData> = {
       'padding-box, content-box',
       'view-box, fill-box, border-box',
     ],
+    defaultValue: 'border-box', 
   },
   maskPosition: { type: 'position' },
   maskRepeat: {
@@ -1543,6 +1544,7 @@ export const properties: Record<string, PropertyData> = {
       'round space',
       'no-repeat round',
     ],
+    defaultValue: 'no-repeat',
   },
   maskSize: {
     type: BgSizeInput,
@@ -1551,6 +1553,7 @@ export const properties: Record<string, PropertyData> = {
   maskType: {
     type: 'keyword',
     keywords: ['luminance', 'alpha'],
+    defaultValue: 'alpha',
   },
   // TODO: add fit-content function
   maxBlockSize: {
@@ -1562,6 +1565,10 @@ export const properties: Record<string, PropertyData> = {
     type: 'length',
     percentage: true,
     keywords: ['none', 'max-content', 'min-content', 'auto'],
+    defaultValue: {
+      value: 100,
+      unit: '%',
+    }
   },
   maxInlineSize: {
     type: 'length',
@@ -1578,27 +1585,44 @@ export const properties: Record<string, PropertyData> = {
     type: 'length',
     percentage: true,
     keywords: ['none', 'max-content', 'min-content', 'auto'],
+    defaultValue: {
+      value: 100,
+      unit: '%',
+    }
   },
   minHeight: {
     type: 'length',
     percentage: true,
     keywords: ['max-content', 'min-content', 'auto'],
+    defaultValue: {
+      value: 48,
+      unit: 'px',
+    }
   },
   minBlockSize: {
     type: 'length',
     percentage: true,
     keywords: ['max-content', 'min-content'],
+    defaultValue: {
+      value: 0,
+      unit: 'px',
+    }
   },
   minInlineSize: {
     type: 'length',
     percentage: true,
     keywords: ['max-content', 'min-content'],
+    defaultValue: {
+      value: 0,
+      unit: 'px',
+    }
   },
   // TODO: add fit-content function
   minWidth: {
     type: 'length',
     percentage: true,
     keywords: ['max-content', 'min-content', 'auto'],
+    defaultValue: 'auto',
   },
   mixBlendMode: {
     type: 'keyword',
@@ -1620,14 +1644,20 @@ export const properties: Record<string, PropertyData> = {
       'color',
       'luminosity',
     ],
+    defaultValue: 'overlay',
   },
   offsetAnchor: {
     type: 'position',
     keywords: ['auto'], // TODO the keyword isn't being populated currently
+    defaultValue: 'auto',
   },
   offsetDistance: {
     type: 'length',
     percentage: true,
+    defaultValue: {
+      value: 0,
+      unit: 'px',
+    }
   },
   offsetPath: {
     type: OffsetPathInput,
@@ -1639,16 +1669,20 @@ export const properties: Record<string, PropertyData> = {
   objectFit: {
     type: 'keyword',
     keywords: ['contain', 'cover', 'fill', 'none', 'scale-down'],
+    defaultValue: 'cover',
   },
   objectPosition: {
     type: 'position',
   },
   opacity: {
     type: 'percentage',
-    defaultValue: 1,
     range: {
       [PercentageLengthUnits.Pct]: [0, 100],
     },
+    defaultValue: {
+      value: 100,
+      unit: '%',
+    }
   },
   order: {
     type: 'integer',
@@ -1656,16 +1690,21 @@ export const properties: Record<string, PropertyData> = {
   },
   orphans: {
     type: 'integer',
-    defaultValue: 2,
     range: { number: [1, 10] },
+    defaultValue: 2,
   },
   outlineColor: {
     type: 'color',
     keywords: ['invert'],
+    defaultValue: '#6465ff',
   },
   outlineOffset: {
     type: 'length',
     percentage: true,
+    defaultValue: {
+      value: 4,
+      unit: 'px',
+    }
   },
   outlineStyle: {
     type: 'keyword',
@@ -1680,23 +1719,31 @@ export const properties: Record<string, PropertyData> = {
       'inset',
       'outset',
     ],
+    defaultValue: 'solid',
   },
   outlineWidth: {
     type: 'length',
     percentage: true,
     keywords: ['thin', 'medium', 'thick'],
+    defaultValue:{
+      value: 2,
+      unit: 'px',
+    }
   },
   overflow: {
     type: 'keyword',
     keywords: ['visible', 'hidden', 'clip', 'scroll', 'auto', 'hidden visible'],
+    defaultValue: 'visible',
   },
   overflowAnchor: {
     type: 'keyword',
     keywords: ['auto', 'none'],
+    defaultValue: 'auto',
   },
   overflowBlock: {
     type: 'keyword',
     keywords: ['visible', 'hidden', 'scroll', 'auto'],
+    defaultValue: 'auto',
   },
   overflowClipMargin: {
     // TODO: Add ranges
@@ -1706,63 +1753,94 @@ export const properties: Record<string, PropertyData> = {
   overflowInline: {
     type: 'keyword',
     keywords: ['visible', 'hidden', 'scroll', 'auto'],
+    defaultValue: 'auto',
   },
   overflowWrap: {
     type: 'keyword',
     keywords: ['normal', 'break-word', 'anywhere'],
+    defaultValue: 'normal',
   },
   overflowX: {
     type: 'keyword',
     keywords: ['visible', 'hidden', 'clip', 'scroll', 'auto'],
+    defaultValue: 'auto',
   },
   overflowY: {
     type: 'keyword',
     keywords: ['visible', 'hidden', 'clip', 'scroll', 'auto'],
+    defaultValue: 'auto',
   },
   overscrollBehavior: {
     type: 'keyword',
     keywords: ['auto', 'contain', 'none', 'auto contain'],
+    defaultValue: 'auto',
   },
   overscrollBehaviorBlock: {
     type: 'keyword',
     keywords: ['auto', 'contain', 'none'],
+    defaultValue: 'auto',
   },
   overscrollBehaviorInline: {
     type: 'keyword',
     keywords: ['auto', 'contain', 'none'],
+    defaultValue: 'auto',
   },
   overscrollBehaviorX: {
     type: 'keyword',
     keywords: ['auto', 'contain', 'none'],
+    defaultValue: 'auto',
   },
   overscrollBehaviorY: {
     type: 'keyword',
     keywords: ['auto', 'contain', 'none'],
+    defaultValue: 'auto',
   },
   padding: {
     type: 'length',
     percentage: true,
+    defaultValue: {
+      value: 0,
+      unit: 'px',
+    }
   },
   paddingTop: {
     type: 'length',
     percentage: true,
+    defaultValue: {
+      value: 0,
+      unit: 'px',
+    }
   },
   paddingLeft: {
     type: 'length',
     percentage: true,
+    defaultValue: {
+      value: 0,
+      unit: 'px',
+    }
   },
   paddingBottom: {
     type: 'length',
     percentage: true,
+    defaultValue: {
+      value: 0,
+      unit: 'px',
+    }
   },
   paddingRight: {
     type: 'length',
     percentage: true,
+    defaultValue: {
+      value: 0,
+      unit: 'px',
+    }
   },
+  // TODO: Add defaultValue
   perspective: {
     type: 'length',
     keywords: ['none'],
   },
+  // TODO: Add defaultValue
   perspectiveOrigin: {
     type: 'position',
   },
@@ -1785,6 +1863,7 @@ export const properties: Record<string, PropertyData> = {
       'last baseline normal',
       'stretch legacy',
     ],
+    defaultValue: 'center',
   },
   placeSelf: {
     type: 'keyword',
@@ -1805,6 +1884,7 @@ export const properties: Record<string, PropertyData> = {
       'last baseline normal',
       'stretch auto',
     ],
+    defaultValue: 'auto center',
   },
   pointerEvents: {
     type: 'keyword',
@@ -1821,23 +1901,31 @@ export const properties: Record<string, PropertyData> = {
       'stroke',
       'all',
     ],
+    defaultValue: 'auto',
   },
   position: {
     type: 'keyword',
     keywords: ['static', 'relative', 'asbolsute', 'fixed', 'sticky'],
+    defaultValue: 'static',
   },
   printColorAdjust: {
     type: 'keyword',
     keywords: ['economy', 'exact'],
+    defaultValue: 'exact',
   },
   resize: {
     type: 'keyword',
     keywords: ['none', 'both', 'horizontal', 'vertical', 'block', 'inline'],
+    defaultValue: 'none',
   },
   right: {
     type: 'length',
     percentage: true,
     keywords: ['auto'],
+    defaultValue: {
+      value: 0,
+      unit: 'px',
+    }
   },
   rowGap: {
     type: 'length',
@@ -1850,91 +1938,114 @@ export const properties: Record<string, PropertyData> = {
       [ViewportPercentageLengthUnits.Vw]: [0, 100],
       [PercentageLengthUnits.Pct]: [0.1, 100],
     },
+    defaultValue: {
+      value: 2,
+      unit: 'em',
+    }
   },
   rubyAlign: {
     type: 'keyword',
     keywords: ['start', 'center', 'space-between', 'space-around'],
+    defaultValue: 'start',
   },
   rubyMerge: {
     type: 'keyword',
     keywords: ['separate', 'merge', 'auto'],
+    defaultValue: 'auto',
   },
   rubyPosition: {
     type: 'keyword',
     keywords: ['over', 'under', 'inter-character', 'alternate'],
+    defaultValue: 'alternate',
   },
   scrollBehavior: {
     type: 'keyword',
     keywords: ['auto', 'smooth'],
+    defaultValue: 'auto',
   },
   scrollbarColor: {
     type: 'color',
     keywords: ['auto', 'currentcolor', 'transparent'],
+    defaultValue: '#ff33cc',
   },
   scrollbarGutter: {
     type: 'keyword',
     keywords: ['auto', 'stable', 'stable both-edges'],
+    defaultValue: 'auto',
   },
   scrollbarWidth: {
     type: 'keyword',
     keywords: ['auto', 'thin', 'none'],
+    defaultValue: 'auto',
   },
   // TODO positional syntax
   scrollPadding: {
     type: 'length',
     percentage: true,
     keywords: ['auto'],
+    defaultValue: 'auto',
   },
   scrollPaddingBlock: {
     type: 'length',
     percentage: true,
     keywords: ['auto'],
+    defaultValue: 'auto',
   },
   scrollPaddingBlockEnd: {
     type: 'length',
     percentage: true,
     keywords: ['auto'],
+    defaultValue: 'auto',
   },
   scrollPaddingBlockStart: {
     type: 'length',
     percentage: true,
     keywords: ['auto'],
+    defaultValue: 'auto',
   },
   scrollPaddingBottom: {
     type: 'length',
     percentage: true,
     keywords: ['auto'],
+    defaultValue: 'auto',
   },
   scrollPaddingInline: {
     type: 'length',
     percentage: true,
     keywords: ['auto'],
+    defaultValue: 'auto',
   },
   scrollPaddingInlineEnd: {
     type: 'length',
     percentage: true,
     keywords: ['auto'],
+    defaultValue: 'auto',
   },
   scrollPaddingInlineStart: {
     type: 'length',
     percentage: true,
     keywords: ['auto'],
+    defaultValue: 'auto',
   },
   scrollPaddingLeft: {
     type: 'length',
     percentage: true,
     keywords: ['auto'],
+    defaultValue: 'auto',
   },
   scrollPaddingRight: {
     type: 'length',
     percentage: true,
     keywords: ['auto'],
+    defaultValue: 'auto',
   },
   scrollPaddingTop: {
     type: 'length',
     percentage: true,
     keywords: ['auto'],
+    defaultValue: 'auto',
   },
+  // TODO: Add defaultValue
   scrollSnapAlign: {
     type: ScrollSnapAlignInput,
     stringify: stringifyScrollSnapAlign,
@@ -1942,6 +2053,7 @@ export const properties: Record<string, PropertyData> = {
   scrollSnapStop: {
     type: 'keyword',
     keywords: ['normal', 'always'],
+    defaultValue: 'normal',
   },
   scrollSnapType: {
     type: 'keyword',
@@ -1956,14 +2068,21 @@ export const properties: Record<string, PropertyData> = {
       'y proximity',
       'both mandatory',
     ],
+    defaultValue: 'none',
   },
+  // TODO: Add defaultValue
   shapeImageThreshold: {
     type: NumberPercentageInput,
   },
   shapeMargin: {
     type: 'length',
     percentage: true,
+    defaultValue: {
+      value: 0,
+      unit: 'px',
+    }
   },
+  // TODO: Add defaultValue
   shapeOutside: {
     type: ShapeOutsideInput,
     stringify: stringifyShapeOutside,
@@ -1972,11 +2091,14 @@ export const properties: Record<string, PropertyData> = {
     // TODO URL <color> values
     type: 'color',
     keywords: ['none', 'context-fill', 'context-stroke'],
+    defaultValue: '#6465ff',
   },
   strokeAlignment: {
     type: 'keyword',
     keywords: ['center', 'inner', 'outer'],
+    defaultValue: 'center',
   },
+  // TODO: Add defaultValue
   strokeDasharray: {
     type: StrokeDasharrayInput,
     stringify: stringifyStrokeDasharray,
@@ -1984,26 +2106,30 @@ export const properties: Record<string, PropertyData> = {
   strokeDashadjust: {
     type: 'keyword',
     keywords: ['none', 'stretch', 'compress', 'dashed', 'gaps'],
+    defaultValue: 'none',
   },
   strokeDashcorner: {
     type: 'length',
     percentage: true,
     keywords: ['none'],
+    defaultValue: 'none',
   },
   strokeDashoffset: {
     type: 'number',
     percentage: true,
     number: true, // for SVG, raw numbers are counted as pixels
-    defaultValue: 0,
     range: { number: [-9999, 9999] }, // Todo add %
+    defaultValue: 0,
   },
   strokeLinejoin: {
     type: 'keyword',
     keywords: ['miter', 'miter-clip', 'round', 'bevel', 'arcs'],
+    defaultValue: 'miter',
   },
   strokeLinecap: {
     type: 'keyword',
     keywords: ['butt', 'round', 'square'],
+    defaultValue: 'round',
   },
   strokeMiterlimit: {
     type: 'number',
@@ -2023,7 +2149,12 @@ export const properties: Record<string, PropertyData> = {
       [FontRelativeLengthUnits.Rem]: [0, 16],
       [PercentageLengthUnits.Pct]: [0.1, 400],
     },
+    defaultValue: {
+      value: 4,
+      unit: 'px',
+    }
   },
+  // TODO: Add defaultValue
   tabSize: {
     type: 'length',
     number: true,
@@ -2032,6 +2163,7 @@ export const properties: Record<string, PropertyData> = {
     // TODO: Only have control appear when display: table
     type: 'keyword',
     keywords: ['auto', 'fixed'],
+    defaultValue: 'auto',
   },
   textAlign: {
     type: 'keyword',
@@ -2046,6 +2178,7 @@ export const properties: Record<string, PropertyData> = {
       'justify-all',
       'match-parent',
     ],
+    defaultValue: 'start',
   },
   textAlignAll: {
     type: 'keyword',
@@ -2058,6 +2191,7 @@ export const properties: Record<string, PropertyData> = {
       'justify',
       'match-parent',
     ],
+    defaultValue: 'start',
   },
   textAlignLast: {
     type: 'keyword',
@@ -2072,12 +2206,15 @@ export const properties: Record<string, PropertyData> = {
       'justify-all',
       'match-parent',
     ],
+    defaultValue: 'start',
   },
   textCombineUpright: {
     // note: there is a special `digits <number>` syntax that is only supported by Internet Explorer??
     type: 'keyword',
     keywords: ['none', 'all'],
+    defaultValue: 'none',
   },
+  // TODO: Add defaultValue
   textDecoration: {
     type: TextDecorationInput,
     stringify: stringifyTextDecoration,
@@ -2085,16 +2222,22 @@ export const properties: Record<string, PropertyData> = {
   textDecorationColor: {
     type: 'color',
     keywords: ['currentcolor', 'transparent'],
+    defaultValue: '#6465ff',
   },
   textDecorationLine: {
     type: 'keyword',
     keywords: textDecorationLines,
+    defaultValue: 'underline',
   },
   textDecorationThickness: {
     //TODO: Add value ranges
     type: 'length',
     percentage: true,
     keywords: ['auto', 'from-font'],
+    defaultValue: {
+      value: 4,
+      unit: 'px',
+    }
   },
   textDecorationSkip: {
     type: 'keyword',
@@ -2108,18 +2251,22 @@ export const properties: Record<string, PropertyData> = {
       'leading-spaces trailing spaces',
       'objects edges box-decoration',
     ],
+    defaultValue: 'none',
   },
   textDecorationSkipInk: {
     type: 'keyword',
     keywords: ['none', 'auto', 'all'],
+    defaultValue: 'auto',
   },
   textDecorationStyle: {
     type: 'keyword',
     keywords: textDecorationStyles,
+    defaultValue: 'solid',
   },
   textEmphasisColor: {
     type: 'color',
     keywords: ['currentcolor', 'transparent'],
+    defaultValue: '#6465ff',
   },
   textEmphasisPosition: {
     type: 'keyword',
@@ -2132,6 +2279,7 @@ export const properties: Record<string, PropertyData> = {
       'right under',
       'left under',
     ],
+    defaultValue: 'over right',
   },
   textEmphasisStyle: {
     type: 'string',
@@ -2145,14 +2293,20 @@ export const properties: Record<string, PropertyData> = {
       'filled sesame',
       'open sesame',
     ],
+    defaultValue: 'none',
   },
   textIndent: {
     type: 'length',
     percentage: true,
+    defaultValue: {
+      value: 1,
+      unit: 'em',
+    }
   },
   textJustify: {
     type: 'keyword',
     keywords: ['none', 'auto', 'inter-word', 'inter-character', 'distribute'],
+    defaultValue: 'auto',
   },
   textOrientation: {
     type: 'keyword',
@@ -2163,12 +2317,14 @@ export const properties: Record<string, PropertyData> = {
       'sideways',
       'use-glyph-orientation',
     ],
+    defaultValue: 'mixed',
   },
   textOverflow: {
     // TODO firefox supports two-value syntax and there are more experimental values
     // but these are supported by all browsers
     type: 'keyword',
     keywords: ['clip', 'ellipsis'],
+    defaultValue: 'clip',
   },
   textRendering: {
     type: 'keyword',
@@ -2178,6 +2334,7 @@ export const properties: Record<string, PropertyData> = {
       'optimzeLegibility',
       'geometricPrecision',
     ],
+    defaultValue: 'optimizeLegibility', 
   },
   textShadow: {
     type: TextShadowPicker,
@@ -2193,6 +2350,7 @@ export const properties: Record<string, PropertyData> = {
       'preserve-breaks',
       'preserve-spaces',
     ],
+    defaultValue: 'collapse',
   },
   textTransform: {
     type: 'keyword',
@@ -2204,19 +2362,26 @@ export const properties: Record<string, PropertyData> = {
       'full-width',
       'full-size-kana',
     ],
+    defaultValue: 'none',
   },
   textUnderlinePosition: {
     type: 'keyword',
     keywords: ['auto', 'under', 'left', 'right', 'under left', 'right under'],
+    defaultValue: 'under',
   },
   textWrap: {
     type: 'keyword',
     keywords: ['wrap', 'nowrap', 'balance', 'stable', 'pretty'],
+    defaultValue: 'wrap',
   },
   top: {
     type: 'length',
     percentage: true,
     keywords: ['auto'],
+    defaultValue: {
+      value: 0,
+      unit: 'px',
+    }
   },
   touchAction: {
     type: 'keyword',
@@ -2232,6 +2397,7 @@ export const properties: Record<string, PropertyData> = {
       'pinch-zoom',
       'manipulation',
     ],
+    defaultValue: 'auto',
   },
   transform: {
     type: TransformPicker,
@@ -2246,6 +2412,7 @@ export const properties: Record<string, PropertyData> = {
       'stroke-box',
       'view-box',
     ],
+    defaultValue: 'view-box',
   },
   transformOrigin: {
     type: TransformOriginInput,
@@ -2279,10 +2446,12 @@ export const properties: Record<string, PropertyData> = {
       'isolate-override',
       'plaintext',
     ],
+    defaultValue: 'normal',
   },
   userSelect: {
     type: 'keyword',
     keywords: ['none', 'auto', 'text', 'contain', 'all'],
+    defaultValue: 'auto',
   },
   verticalAlign: {
     type: 'length',
@@ -2303,10 +2472,12 @@ export const properties: Record<string, PropertyData> = {
       'top',
       'bottom',
     ],
+    defaultValue: 'baseline',
   },
   visibility: {
     type: 'keyword',
     keywords: ['visible', 'hidden', 'collapse'],
+    defaultValue: 'visible',
   },
   whiteSpace: {
     type: 'keyword',
@@ -2318,17 +2489,17 @@ export const properties: Record<string, PropertyData> = {
       'pre-line',
       'break-spaces',
     ],
+    defaultValue: 'normal',
   },
   widows: {
     type: 'integer',
-    defaultValue: 2,
     range: { number: [1, Infinity] },
+    defaultValue: 2,
   },
   width: {
     type: 'length',
     percentage: true,
     keywords: ['max-content', 'min-content', 'auto'],
-    defaultValue: { value: 100, unit: '%' },
     range: {
       [AbsoluteLengthUnits.Px]: [0, 3840],
       [FontRelativeLengthUnits.Em]: [0, 16],
@@ -2339,6 +2510,7 @@ export const properties: Record<string, PropertyData> = {
       [ViewportPercentageLengthUnits.VMin]: [0, 100],
       [ViewportPercentageLengthUnits.VMax]: [0, 100],
     },
+    defaultValue: { value: 100, unit: '%' },
   },
   wordBreak: {
     type: 'keyword',
@@ -2349,30 +2521,37 @@ export const properties: Record<string, PropertyData> = {
     type: 'length',
     percentage: true,
     keywords: ['normal'],
+    defaultValue: 'normal',
   },
   wordWrap: {
     type: 'keyword',
     keywords: ['normal', 'break-word', 'anywhere'],
+    defaultValue: 'normal',
   },
   wrapAfter: {
     type: 'keyword',
     keywords: ['auto', 'avoid', 'avoid-line', 'aboid-flex', 'line', 'flex'],
+    defaultValue: 'auto',
   },
   wrapBefore: {
     type: 'keyword',
     keywords: ['auto', 'avoid', 'avoid-line', 'aboid-flex', 'line', 'flex'],
+    defaultValue: 'auto',
   },
   wrapFlow: {
     type: 'keyword',
     keywords: ['auto', 'both', 'start', 'end', 'minimum', 'maximum', 'clear'],
+    defaultValue: 'auto',
   },
   wrapInside: {
     type: 'keyword',
     keywords: ['auto', 'avoid'],
+    defaultValue: 'auto',
   },
   wrapThrough: {
     type: 'keyword',
     keywords: ['none', 'wrap'],
+    defaultValue: 'none',
   },
   writingMode: {
     type: 'keyword',
