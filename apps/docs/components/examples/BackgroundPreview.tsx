@@ -53,7 +53,7 @@ export function BackgroundPreview() {
         </Editor>
       <div sx={{
         mt: 'auto',
-        px: 4,
+        px: 3,
         pb: 4,
         maxWidth: '100%',
         overflow: 'auto',

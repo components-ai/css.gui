@@ -62,8 +62,7 @@ export function BackgroundBlendModePreview() {
           </div>
         </Editor>
       <div sx={{
-        mt: 'auto',
-        px: 5,
+        px: 3,
         pb: 4,
         maxWidth: '100%',
         overflow: 'auto',

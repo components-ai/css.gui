@@ -47,7 +47,7 @@ export function CursorPreview() {
         <Editor styles={styles} onChange={setStyles} theme={defaultTheme}>
           <div
             sx={{
-              px: 5,
+              px: 3,
               pt: 3,
               width: '100%',
               color: 'text',
@@ -62,7 +62,7 @@ export function CursorPreview() {
         </Editor>
       <div sx={{
         mt: 'auto',
-        px: 5,
+        px: 3,
         pb: 4,
         maxWidth: '100%',
         overflow: 'auto',

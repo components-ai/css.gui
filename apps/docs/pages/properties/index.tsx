@@ -4,17 +4,21 @@ import { FontSizePreview } from '../../components/examples/FontSizePreview'
 import { FontStylePreview } from '../../components/examples/FontStylePreview'
 import { LetterSpacingPreview } from '../../components/examples/LetterSpacingPreview'
 import { TextTransformPreview } from '../../components/examples/TextTransformPreview'
+import { TextIndentPreview } from '../../components/examples/TextIndentPreview'
 import { AccentColorPreview } from '../../components/examples/AccentColorPreview'
 import { ColorPreview } from '../../components/examples/ColorPreview'
 import { BackgroundColorPreview } from '../../components/examples/BackgroundColorPreview'
+import { BorderColorPreview } from '../../components/examples/BorderColorPreview'
 import { ColorsPreview } from '../../components/examples/ColorsPreview'
 import { ColorPairPreview } from '../../components/examples/ColorPairPreview'
+import { TextDecorationColorPreview } from '../../components/examples/TextDecorationColorPreview'
 import { WidthPreview } from '../../components/examples/WidthPreview'
 import { HeightPreview } from '../../components/examples/HeightPreview'
 import { BackgroundImagePreview } from '../../components/examples/BackgroundImagePreview'
 import { BackgroundPreview } from '../../components/examples/BackgroundPreview'
 import { BackgroundBlendModePreview } from '../../components/examples/BackgroundBlendModePreview'
 import { BorderRadiusPreview } from '../../components/examples/BorderRadiusPreview'
+import { BorderTopLeftRadiusPreview } from '../../components/examples/BorderTopLeftRadiusPreview'
 import { BoxShadowPreview } from '../../components/examples/BoxShadowPreview'
 import { TextShadowPreview } from '../../components/examples/TextShadowPreview'
 import { TextAlignPreview } from '../../components/examples/TextAlignPreview'
@@ -39,7 +43,6 @@ export default function Docs() {
       </header>
       <section sx={{ mt: 6, pb: 6 }}>
         <div sx={{ px: [4,5,5], maxWidth: '114em', mx: 'auto', }}>
-          <h4>Typography</h4>
           <section sx={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(16rem, 1fr))', gap: '2rem', }}>
             <FontSizePreview />
             <FontFamilyPreview />
@@ -48,15 +51,12 @@ export default function Docs() {
             <TextAlignPreview />
             <TextTransformPreview />
             <LetterSpacingPreview />
-          </section>
-          <h4>Color</h4>
-          <section sx={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(16rem, 1fr))', gap: '2rem', }}>
-            <AccentColorPreview />
+            <TextIndentPreview />
             <ColorPreview />
             <BackgroundColorPreview />
-          </section>
-          <h4>Borders and Backgrounds</h4>
-          <section sx={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(16rem, 1fr))', gap: '2rem', }}>
+            <BorderColorPreview />
+            <TextDecorationColorPreview />
+            <AccentColorPreview />
             <BackgroundImagePreview />
             <BackgroundPreview />
             <BackgroundBlendModePreview />
@@ -64,15 +64,9 @@ export default function Docs() {
             <BoxShadowPreview />
             <TextShadowPreview />
             <FilterPreview />
-          </section>
-          <h4>Layout, Size, & Structure</h4>
-          <section sx={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(16rem, 1fr))', gap: '2rem', }}>
             <WidthPreview />
             <HeightPreview />
-          </section>
-          <h4>Additional properties</h4>
-          <section sx={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(16rem, 1fr))', gap: '2rem', }}>
-          <CursorPreview />
+            <CursorPreview />
           </section>
         </div>
       </section>
