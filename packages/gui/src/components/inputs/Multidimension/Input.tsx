@@ -10,6 +10,7 @@ import { EditorProps } from '../../../types/editor'
 import { DEFAULT_LENGTH } from '../../../lib/constants'
 import { LengthInput } from '../LengthInput'
 import { isMultidimensionalLength } from '../../../lib/util'
+import { convertToMultidimensional } from './util'
 
 // Mapping of units to [min, max] tuple
 type UnitRanges = Record<string, [min: number, max: number]>
@@ -29,7 +30,7 @@ export const MultidimensionInput = ({
   ...props
 }: MultidimensionInputProps) => {
   const [state, dispatch] = React.useReducer(reducer, {
-    value: value ?? DEFAULT_LENGTH,
+    value: convertToMultidimensional(value ?? DEFAULT_LENGTH),
     dimensions,
     isMultidimensional: isMultidimensionalLength(value),
     key: 0,
@@ -51,14 +52,14 @@ export const MultidimensionInput = ({
       <>
         <LengthInput
           label=""
-          value={(state.value || DEFAULT_LENGTH) as CSSUnitValue}
+          value={(state.value as MultidimensionalLength).values[0]}
           onChange={handleDimensionChange(0)}
           {...props}
         />
         <div sx={{ pt: 1 }}>
           <LengthInput
             label=""
-            value={DEFAULT_LENGTH as CSSUnitValue}
+            value={(state.value as MultidimensionalLength).values[1]}
             onChange={handleDimensionChange(1)}
             {...props}
           />
