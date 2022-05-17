@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.54
+
+### Patch Changes
+
+- 59fee5a: Add more responsive coverage
+
 ## 0.0.53
 
 ### Patch Changes
