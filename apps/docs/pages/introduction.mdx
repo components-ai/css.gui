@@ -1,7 +1,6 @@
 import { FirstParagraph } from '../components/FirstParagraph'
 import { Container } from '../components/Container'
 
-
 <Container>
 
 # Introduction
@@ -21,7 +20,10 @@ import { useState } from 'react'
 import { Editor, styled } from '@compai/css-gui'
 
 export const MyEditor = () => {
-  const [styles, setStyles] = useState({})
+  const [styles, setStyles] = useState({
+    fontFamily: 'Recursive',
+    fontSize: { value: 16, unit: 'px' },
+  })
 
   return (
     <>
@@ -37,8 +39,8 @@ export const MyEditor = () => {
 ## Theme units
 
 Many CSS properties accept a wide range of values. Designers and developers
-often develop scales for properties to help ensure that designs are visually harmonious, 
-while also speeding up development by limiting the paradox of choice. 
+often develop scales for properties to help ensure that designs are visually harmonious,
+while also speeding up development by limiting the paradox of choice.
 Define a theme and use that to collapse n-dimensional space for what your custom component can output.
 Controls still allow you to eject from constraints and enter any custom value, but will default
 to the values in your theme for rapid design exploration within a visual brand.
