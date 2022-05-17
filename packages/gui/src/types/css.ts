@@ -46,20 +46,20 @@ export const enum KeywordUnits {
 export type LengthPercentageUnit = LengthUnit | PercentageLengthUnits.Pct
 
 export const LENGTH_UNITS = [
-  'em',
-  'rem',
   'px',
+  'rem',
+  'em',
   'ch',
   'ex',
+  'vh',
+  'vw',
+  'vmin',
+  'vmax',
   'cm',
   'mm',
   'in',
   'pc',
   'pt',
-  'vh',
-  'vw',
-  'vmin',
-  'vmax',
 ] as const
 export type LengthUnit = typeof LENGTH_UNITS[number]
 export type MultidimensionalLengthType = 'multidimensionalLength'
