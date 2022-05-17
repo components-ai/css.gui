@@ -2,6 +2,7 @@ import * as React from 'react'
 import { elements } from '../../data/elements'
 import { pseudoClasses } from '../../data/pseudo-classes'
 import { pseudoElements } from '../../data/pseudo-elements'
+import { addPseudoSyntax } from '../../lib/pseudos'
 
 type PseudoElementTypes = typeof pseudoElements[number]
 type PseudoClassTypes = typeof pseudoClasses[number]
@@ -26,6 +27,7 @@ export const Fieldset = ({ type, name, children }: FieldsetProps) => {
   const fullName = outerNames.length
     ? [...outerNames, name]
     : (name as FieldsetNames)
+    console.log(fullName, "fullName")
   return (
     // @ts-ignore
     <FieldsetContext.Provider value={{ type, name: fullName }}>

@@ -15,6 +15,6 @@ export const addPseudoSyntax = (str: string): string => {
   } else if (isPseudoElement(str)) {
     return '::' + str
   }
-
+  // console.log(str, 'returning')
   return str
 }
