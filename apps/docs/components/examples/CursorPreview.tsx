@@ -20,6 +20,9 @@ export function CursorPreview() {
         borderRadius: '6px',
         overflow: 'hidden',
         }}>
+        <code sx={{ color: 'text', px: 3, py: 2, width: '100%', display: 'block', borderBottom: '1px solid', borderBottomColor: 'muted', }}>
+          &lt;Inputs.Cursor /&gt;
+        </code>
         <section sx={{
           fontWeight: 900,
           height: '192px',
@@ -31,7 +34,6 @@ export function CursorPreview() {
           position: 'relative',
           textAlign: 'center',
           overflow: 'hidden',
-          mb: 3,
           }}>
           <styled.div styles={styles} style={{ 
             height: '100%', 
@@ -51,7 +53,7 @@ export function CursorPreview() {
               pt: 3,
               width: '100%',
               color: 'text',
-              '& > div': { 
+              '& > div > span': { 
                 display: 'grid',
                 gap: '.5rem',
               },
