@@ -1,6 +1,8 @@
 import { compact } from 'lodash-es'
 import {
+  CSSFunctionCalc,
   CSSUnitValue,
+  Dimension,
   Length,
   LENGTH_UNITS,
   PercentageLengthUnits,
@@ -9,7 +11,7 @@ import {
 import { DimensionInput } from './Dimension'
 
 interface LengthInputProps {
-  value: Length
+  value: Dimension
   onChange: (value: Length) => void
   label: string
   property?: string

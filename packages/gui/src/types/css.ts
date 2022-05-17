@@ -35,12 +35,19 @@ export const enum PercentageLengthUnits {
 }
 export const enum UnitlessUnits {
   Number = 'number',
+  Calc = 'calc',
 }
 export const enum ThemeUnits {
   Theme = 'theme',
 }
 export const enum KeywordUnits {
   Keyword = 'keyword',
+}
+export const enum CalcOperand {
+  Mult = '*',
+  Plus = '+',
+  Sub = '-',
+  Div = '/'
 }
 // Only use a subset for now to keep things simpler
 export type LengthPercentageUnit = LengthUnit | PercentageLengthUnits.Pct
@@ -90,11 +97,21 @@ export interface NumberPercentage {
   unit: NumberPercentageUnit
 }
 
+export type CSSFunctionCalc = {
+  type: 'calc'
+  arguments: CalcFunction
+}
+export type CalcFunction = {
+  valueX: CSSUnitValue
+  valueY: CSSUnitValue
+  operand: CalcOperand
+}
 export type CSSUnitValue = {
   value: number | string
   unit: string
   themeId?: string
 }
+export type Dimension = Length | CSSFunctionCalc
 export type GenericLength = '0'
 export type Length = CSSUnitValue | GenericLength
 // This isn't differentiated type-wise but it's good to keep track of
