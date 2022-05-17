@@ -1,4 +1,4 @@
-import { Type }  from 'react-feather'
+import { Type } from 'react-feather'
 import { FontFamilyPreview } from '../../components/examples/FontFamilyPreview'
 import { FontSizePreview } from '../../components/examples/FontSizePreview'
 import { FontStylePreview } from '../../components/examples/FontStylePreview'
@@ -28,25 +28,38 @@ import { TextAlignPreview } from '../../components/examples/TextAlignPreview'
 import { FontWeightPreview } from '../../components/examples/FontWeightPreview'
 import { FilterPreview } from '../../components/examples/FilterPreview'
 import { CursorPreview } from '../../components/examples/CursorPreview'
-import { TransitionPreview } from '../../components/examples/TransitionPreview'
 import pkg from '../../../../packages/gui/package.json'
 
-// display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(24rem, 1fr))', gap: '4rem', 
+// display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(24rem, 1fr))', gap: '4rem',
 
 export default function Docs() {
   return (
     <div>
-      <header sx={{ pt: [5,6,7], mx: 'auto', maxWidth: '1024px', px: 4, textAlign: 'center' }}>
-        <h1 sx={{ fontSize: [6,8,'128px'], my: 0, lineHeight: 1.25 }}>
+      <header
+        sx={{
+          pt: [5, 6, 7],
+          mx: 'auto',
+          maxWidth: '1024px',
+          px: 4,
+          textAlign: 'center',
+        }}
+      >
+        <h1 sx={{ fontSize: [6, 8, '128px'], my: 0, lineHeight: 1.25 }}>
           Properties
         </h1>
         <h2 sx={{ fontWeight: 500, my: 0 }}>
-          Preview available controls from the library 
+          Preview available controls from the library
         </h2>
       </header>
       <section sx={{ mt: 6, pb: 6 }}>
-        <div sx={{ px: [4,5,5], maxWidth: '114em', mx: 'auto', }}>
-          <section sx={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(16rem, 1fr))', gap: '2rem', }}>
+        <div sx={{ px: [4, 5, 5], maxWidth: '114em', mx: 'auto' }}>
+          <section
+            sx={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(16rem, 1fr))',
+              gap: '2rem',
+            }}
+          >
             <FontSizePreview />
             <FontFamilyPreview />
             <FontStylePreview />
