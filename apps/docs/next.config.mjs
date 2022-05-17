@@ -1,12 +1,16 @@
-const withMDX = require('@next/mdx')({
+import nextMDX from '@next/mdx'
+import remarkGFM from 'remark-gfm'
+import remarkPrism from 'remark-prism'
+
+const withMDX = nextMDX({
   extension: /\.mdx?$/,
   options: {
     providerImportSource: '@mdx-js/react',
-    remarkPlugins: [require('remark-prism')],
+    remarkPlugins: [remarkGFM, remarkPrism],
   },
 })
 
-module.exports = withMDX({
+export default withMDX({
   reactStrictMode: true,
   basePath: '/open-source/css-gui',
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],

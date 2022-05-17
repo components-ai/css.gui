@@ -1,5 +1,11 @@
 import { isElement, isNil } from 'lodash-es'
-import { Color, Length, MultidimensionalLength, Position } from '../types/css'
+import {
+  Color,
+  Length,
+  MultidimensionalLength,
+  Position,
+  CSSFunctionCalc
+} from '../types/css'
 import { addPseudoSyntax } from './pseudos'
 import { isMultidimensionalLength } from './util'
 
@@ -9,6 +15,12 @@ export function stringifySelector(selector: string): string {
   }
 
   return addPseudoSyntax(selector)
+}
+
+export const stringifyCalcFunction = ({ arguments: args }: CSSFunctionCalc) => {
+  const x = stringifyUnit(args.valueX)
+  const y = stringifyUnit(args.valueY)
+  return `calc(${x} ${args.operand} ${y})`
 }
 
 export function stringifyUnit(
@@ -29,11 +41,7 @@ export function stringifyUnit(
     return null
   }
 
-  if (
-    value.unit === 'theme' ||
-    value.unit === 'raw' ||
-    value.unit === 'keyword'
-  ) {
+  if (['theme', 'raw', 'keyword', 'calc'].includes(value.unit)) {
     return value.value
   }
 

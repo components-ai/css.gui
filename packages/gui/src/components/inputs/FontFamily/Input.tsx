@@ -21,6 +21,8 @@ const enum FontCategory {
   Sans = 'sans-serif',
   Mono = 'monospace',
   Serif = 'serif',
+  Display = 'display',
+  Handwriting = 'handwriting',
 }
 const nameMap: any = {
   opsz: 'Optical Size',
@@ -66,10 +68,18 @@ export function FontFamilyInput({ label, value, onChange }: Props) {
   const [includeSans, setIncSans] = React.useState<boolean>(true)
   const [includeSerif, setIncSerif] = React.useState<boolean>(true)
   const [includeMono, setIncMono] = React.useState<boolean>(true)
+  const [includeDisplay, setIncDisplay] = React.useState<boolean>(true)
+  const [includeHandwriting, setIncHandwriting] = React.useState<boolean>(true)
 
   React.useEffect(() => {
     handleFilterItems(value.fontFamily)
-  }, [includeMono, includeSans, includeSerif])
+  }, [
+    includeMono,
+    includeSans,
+    includeSerif,
+    includeDisplay,
+    includeHandwriting,
+  ])
 
   const {
     isOpen,
@@ -97,7 +107,9 @@ export function FontFamilyInput({ label, value, onChange }: Props) {
         return (
           (includeSans && item.category === FontCategory.Sans) ||
           (includeSerif && item.category === FontCategory.Serif) ||
-          (includeMono && item.category === FontCategory.Mono)
+          (includeMono && item.category === FontCategory.Mono) ||
+          (includeDisplay && item.category === FontCategory.Display) ||
+          (includeHandwriting && item.category === FontCategory.Handwriting)
         )
       }
     })
@@ -194,31 +206,34 @@ export function FontFamilyInput({ label, value, onChange }: Props) {
           }}
         >
           {isOpen && inputItems.length > 0 && (
-            <div>
-              <label sx={{ whiteSpace: 'nowrap', pr: 2 }}>
-                <input
-                  type="checkbox"
-                  checked={includeSans}
-                  onChange={() => setIncSans(!includeSans)}
-                />
-                <span sx={{ fontWeight: 400, pl: 0 }}>Sans</span>
-              </label>
-              <label sx={{ whiteSpace: 'nowrap', pr: 2 }}>
-                <input
-                  type="checkbox"
-                  checked={includeSerif}
-                  onChange={() => setIncSerif(!includeSerif)}
-                />
-                <span sx={{ fontWeight: 400, pl: 0 }}>Serif</span>
-              </label>
-              <label sx={{ whiteSpace: 'nowrap', pr: 2 }}>
-                <input
-                  type="checkbox"
-                  checked={includeMono}
-                  onChange={() => setIncMono(!includeMono)}
-                />
-                <span sx={{ fontWeight: 400, pl: 0 }}>Monospace</span>
-              </label>
+            <div
+              sx={{ display: 'flex', maxWidth: '100%', overflowX: 'scroll' }}
+            >
+              <FontFamilyToggle
+                label="Sans"
+                checked={includeSans}
+                onToggle={() => setIncSans(!includeSans)}
+              />
+              <FontFamilyToggle
+                label="Serif"
+                checked={includeSerif}
+                onToggle={() => setIncSerif(!includeSerif)}
+              />
+              <FontFamilyToggle
+                label="Mono"
+                checked={includeMono}
+                onToggle={() => setIncMono(!includeMono)}
+              />
+              <FontFamilyToggle
+                label="Display"
+                checked={includeDisplay}
+                onToggle={() => setIncDisplay(!includeDisplay)}
+              />
+              <FontFamilyToggle
+                label="Handwriting"
+                checked={includeHandwriting}
+                onToggle={() => setIncHandwriting(!includeHandwriting)}
+              />
             </div>
           )}
           {isOpen && inputItems.length === 0 && (
@@ -341,6 +356,31 @@ export function FontFamilyInput({ label, value, onChange }: Props) {
   )
 }
 
+type FontFamilyToggleProps = {
+  checked: boolean
+  onToggle: () => void
+  label: string
+}
+const FontFamilyToggle = ({
+  checked,
+  onToggle,
+  label,
+}: FontFamilyToggleProps) => {
+  return (
+    <label
+      sx={{
+        whiteSpace: 'nowrap',
+        pr: 2,
+        display: 'flex',
+        alignItems: 'center',
+      }}
+    >
+      <input type="checkbox" checked={checked} onChange={onToggle} />
+      <span sx={{ fontWeight: 400, pl: 0 }}>{label}</span>
+    </label>
+  )
+}
+
 const CustomAxis = ({
   defaultValue,
   axisKey,
@@ -371,14 +411,17 @@ type APIFontData = {
   fontOptions: Font[]
   variableFontsData: any
 }
+const TYPEFACE_API_BASE_URL = 'https://components.ai/api'
 const getFontsData = async (): Promise<APIFontData> => {
   const fontOptions: Font[] = []
-  const rawGoogData = await fetch('https://components.ai/api/v1/typefaces/list')
+  const rawGoogData = await fetch(
+    `${TYPEFACE_API_BASE_URL}/v1/typefaces/list?v1=a`
+  )
   const rawSystemData = await fetch(
-    'https://components.ai/api/v1/typefaces/system'
+    `${TYPEFACE_API_BASE_URL}/v1/typefaces/system`
   )
   const variableFontsData = await fetch(
-    'https://components.ai/api/v1/typefaces/variable'
+    `${TYPEFACE_API_BASE_URL}/v1/typefaces/variable`
   )
 
   const systemFonts = (await rawSystemData.json()) as any
@@ -401,7 +444,9 @@ const getFontsData = async (): Promise<APIFontData> => {
     if (
       category === FontCategory.Sans ||
       category === FontCategory.Serif ||
-      category === FontCategory.Mono
+      category === FontCategory.Mono ||
+      category === FontCategory.Display ||
+      category === FontCategory.Handwriting
     ) {
       fontOptions.push({ name, category })
     }
