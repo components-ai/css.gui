@@ -9,7 +9,13 @@ import {
   ThemeUnits,
   UnitlessUnits,
 } from '../../../types/css'
-import { Label, Number, ThemeValue, UnitSelect, ValueSelect } from '../../primitives'
+import {
+  Label,
+  Number,
+  ThemeValue,
+  UnitSelect,
+  ValueSelect,
+} from '../../primitives'
 import { reducer } from './reducer'
 import { State } from './types'
 import { EditorProps } from '../../../types/editor'
@@ -52,13 +58,13 @@ export const DimensionInput = ({
     key: 0,
   } as State)
   React.useEffect(() => {
-    if ((value as CSSFunctionCalc).type === 'calc') return
-    const unitValue = value as CSSUnitValue 
+    if ((value as CSSFunctionCalc)?.type === 'calc') return
+    const unitValue = value as CSSUnitValue
     if (
       // Only want to call on change when the value differs
-      (state.value !== unitValue?.value ||
+      state.value !== unitValue?.value ||
       state.unit !== unitValue?.unit ||
-      state.themeId !== unitValue?.themeId)
+      state.themeId !== unitValue?.themeId
     ) {
       const newValue: CSSUnitValue = {
         value: state.value,
@@ -112,7 +118,7 @@ export const DimensionInput = ({
                 type: 'CHANGED_INPUT_TO_THEME_VALUE',
                 value: themeValue?.value ?? 0,
                 unit: (themeValue?.unit as any) ?? 'px',
-                themeId: themeValue.id
+                themeId: themeValue.id,
               })
             }}
             themeValues={themeValues}
@@ -163,18 +169,22 @@ export const DimensionInput = ({
                 arguments: {
                   valueX: value as CSSUnitValue,
                   valueY: { value: 1, unit: 'px' },
-                  operand: CalcOperand.Plus
+                  operand: CalcOperand.Plus,
                 },
-                type: 'calc'
+                type: 'calc',
               })
             }
-            if (state.unit === UnitlessUnits.Calc && newUnit !== UnitlessUnits.Calc) {
-              const unitValue = (value as CSSFunctionCalc).arguments.valueX.value
-              
-              onChange({ value: unitValue, unit: newUnit})
+            if (
+              state.unit === UnitlessUnits.Calc &&
+              newUnit !== UnitlessUnits.Calc
+            ) {
+              const unitValue = (value as CSSFunctionCalc).arguments.valueX
+                .value
+
+              onChange({ value: unitValue, unit: newUnit })
               dispatch({
                 value: unitValue,
-                type: 'CHANGED_INPUT_VALUE'
+                type: 'CHANGED_INPUT_VALUE',
               })
             }
 

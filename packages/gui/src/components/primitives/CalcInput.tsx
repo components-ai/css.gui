@@ -2,12 +2,18 @@ import { kebabCase, uniq } from 'lodash-es'
 import { useId } from 'react'
 import { UnitRanges } from '../../data/ranges'
 import { convertUnits, UnitConversions, UnitSteps } from '../../lib'
-import { stringifyCalcFunction, stringifyUnit, } from '../../lib/stringify'
-import { AbsoluteLengthUnits, CalcOperand, CSSFunctionCalc, CSSUnitValue, ThemeUnits, UnitlessUnits } from '../../types/css'
+import { stringifyUnit } from '../../lib/stringify'
+import {
+  AbsoluteLengthUnits,
+  CalcOperand,
+  CSSFunctionCalc,
+  CSSUnitValue,
+  ThemeUnits,
+  UnitlessUnits,
+} from '../../types/css'
 import { EditorProps } from '../../types/editor'
 import { SelectInput } from '../inputs/SelectInput'
 import { Number } from '../primitives'
-import { Label } from './Label'
 import { UnitSelect } from './UnitSelect'
 import { ValueSelect } from './ValueSelect'
 
@@ -24,28 +30,24 @@ export const CalcInput = ({
   units,
   onChange,
   value,
-  label,
   range,
   steps,
   conversions,
   themeValues,
-}: CalcInputProps) => {   
+}: CalcInputProps) => {
   const allUnits = uniq([...units, UnitlessUnits.Number])
 
   return (
     <div sx={{ width: '100%' }}>
-      <Label sx={{ display: 'block' }}>
-        {`${label || 'value'}: ${stringifyCalcFunction(value)}`}
-      </Label>
       <NumberUnitInput
         value={value.arguments.valueX}
         onChange={(newValue: CSSUnitValue) => {
           onChange({
-            ...value, 
+            ...value,
             arguments: {
               ...value.arguments,
-              valueX: newValue
-            }
+              valueX: newValue,
+            },
           })
         }}
         units={allUnits}
@@ -60,23 +62,25 @@ export const CalcInput = ({
           CalcOperand.Sub,
           CalcOperand.Div,
           CalcOperand.Mult,
-          
         ]}
-        label=''
+        label=""
         onChange={(newValue: CalcOperand) => {
           const y = value.arguments.valueY
 
           if (newValue === CalcOperand.Div || newValue === CalcOperand.Mult) {
-            return onChange({ 
+            return onChange({
               ...value,
               arguments: {
                 ...value.arguments,
                 operand: newValue,
-                valueY: { ...value.arguments.valueY, unit: UnitlessUnits.Number }
-              }
+                valueY: {
+                  ...value.arguments.valueY,
+                  unit: UnitlessUnits.Number,
+                },
+              },
             })
-          } 
-          
+          }
+
           if (
             y.unit === UnitlessUnits.Number &&
             (newValue === CalcOperand.Plus || newValue === CalcOperand.Sub)
@@ -86,17 +90,17 @@ export const CalcInput = ({
               arguments: {
                 ...value.arguments,
                 operand: newValue,
-                valueY: { value: 16, unit: AbsoluteLengthUnits.Px }
-              }
+                valueY: { value: 16, unit: AbsoluteLengthUnits.Px },
+              },
             })
           }
-          
-          onChange({ 
+
+          onChange({
             ...value,
             arguments: {
               ...value.arguments,
               operand: newValue,
-            }
+            },
           })
         }}
         value={value.arguments.operand}
@@ -105,11 +109,11 @@ export const CalcInput = ({
         value={value.arguments.valueY}
         onChange={(newValue: CSSUnitValue) => {
           onChange({
-            ...value, 
+            ...value,
             arguments: {
               ...value.arguments,
-              valueY: newValue
-            }
+              valueY: newValue,
+            },
           })
         }}
         units={allUnits}
@@ -122,7 +126,7 @@ export const CalcInput = ({
   )
 }
 
-interface NumberUnitInput extends EditorProps<CSSUnitValue>{
+interface NumberUnitInput extends EditorProps<CSSUnitValue> {
   units: readonly string[]
   steps?: UnitSteps
   range?: UnitRanges
@@ -138,19 +142,17 @@ const NumberUnitInput = ({
   range,
   conversions,
   themeValues,
-  label
+  label,
 }: NumberUnitInput) => {
   const id = `${useId()}-${kebabCase(label)}`
-  const validUnits = units.filter(u => u !== UnitlessUnits.Calc)
+  const validUnits = units.filter((u) => u !== UnitlessUnits.Calc)
 
   return (
     <div sx={{ display: 'flex', flexDirection: 'row', my: 1 }}>
       {value.unit === ThemeUnits.Theme ? (
         <ValueSelect
           onChange={(e: any) => {
-            const themeValue = themeValues?.find(
-              (p) => p.id === e.target.value
-            )
+            const themeValue = themeValues?.find((p) => p.id === e.target.value)
             const newValue = themeValue && stringifyUnit(themeValue)
             onChange({ ...value, value: newValue ?? `16px` })
           }}
@@ -163,11 +165,12 @@ const NumberUnitInput = ({
           min={range?.[value.unit]?.[0]}
           max={range?.[value.unit]?.[1]}
           value={value.value}
-          onChange={(newValue: number) => 
-            onChange({ ...value, value: newValue })}
+          onChange={(newValue: number) =>
+            onChange({ ...value, value: newValue })
+          }
         />
       )}
-      <UnitSelect 
+      <UnitSelect
         sx={{ ml: 1 }}
         units={validUnits}
         value={value.unit}
@@ -179,9 +182,10 @@ const NumberUnitInput = ({
             conversions,
             steps
           )
-          const newValue = newUnit === ThemeUnits.Theme && themeValues
-            ? stringifyUnit(themeValues?.[0])
-            : convertedValue
+          const newValue =
+            newUnit === ThemeUnits.Theme && themeValues
+              ? stringifyUnit(themeValues?.[0])
+              : convertedValue
 
           //@ts-ignore
           onChange({ value: newValue, unit: newUnit })
