@@ -9,6 +9,30 @@ const initialStyles = {
     value: 64,
     unit: 'px',
   },
+  borderLeftColor: '#6465ff',
+  borderLeftStyle: 'double',
+  borderLeftWidth: {
+    value: 16,
+    unit: 'px',
+  },
+  borderRightColor: '#6465ff',
+  borderRightStyle: 'groove',
+  borderRightWidth: {
+    value: 16,
+    unit: 'px',
+  },
+  borderTopColor: '#6465ff',
+  borderTopStyle: 'dotted',
+  borderTopWidth: {
+    value: 16,
+    unit: 'px',
+  },
+  borderBottomColor: '#6465ff',
+  borderBottomStyle: 'dashed',
+  borderBottomWidth: {
+    value: 16,
+    unit: 'px',
+  },
 }
 
 export default function BorderImage() {
@@ -19,45 +43,12 @@ export default function BorderImage() {
       <div
         className="full-bleed"
         sx={{
-          display: 'flex',
           py: [2, 3, 4],
+          px: 5,
           borderTopWidth: 'thin',
         }}
       >
-        <div sx={{ px: [2, 3, 4] }}>
-          <Editor styles={styles} onChange={setStyles} theme={defaultTheme}>
-            <div sx={{ display: 'grid', gap: '.5rem', width: '240px' }}>
-              <>
-                <h3>Color</h3>
-                <Inputs.BorderLeftColor />
-                <Inputs.BorderRightColor />
-                <Inputs.BorderTopColor />
-                <Inputs.BorderBottomColor />
-                <h3>Style</h3>
-                <Inputs.BorderLeftStyle />
-                <Inputs.BorderRightStyle />
-                <Inputs.BorderTopStyle />
-                <Inputs.BorderBottomStyle />
-                <h3>Width</h3>
-                <Inputs.BorderLeftWidth />
-                <Inputs.BorderRightWidth />
-                <Inputs.BorderTopWidth />
-                <Inputs.BorderBottomWidth />
-              </>
-              <h3>Radius</h3>
-              <Inputs.BorderTopLeftRadius />
-              <Inputs.BorderTopRightRadius />
-              <Inputs.BorderBottomLeftRadius />
-              <Inputs.BorderBottomRightRadius />
-              <>
-                <h3>Spacing</h3>
-                <Inputs.Padding />
-                <Inputs.Margin />
-              </>
-            </div>
-          </Editor>
-        </div>
-        <div sx={{ flexGrow: 1, pr: 4 }}>
+        <div sx={{ flexGrow: 1, fontSize: [4,5,5], my: 4 }}>
           <styled.p styles={styles}>
             “The parameters comprise sequences which are theoretically infinite
             but limits are, of course, set to them in practice. There is an
@@ -71,14 +62,45 @@ export default function BorderImage() {
                 href="https://www.lars-mueller-publishers.com/designing-programmes-0"
                 passHref={true}
               >
-                <a style={{ color: styles.color }}>Designing Programmes</a>
+                <a style={{ color: 'inherit' }}>Designing Programmes</a>
               </Link>{' '}
               by Karl Gerstner
             </em>
           </styled.p>
         </div>
+          <Editor styles={styles} onChange={setStyles} theme={defaultTheme}>
+            <div>
+                <h4>Borders</h4>
+                <article sx={{ display: 'grid', gap: '1rem', gridTemplateColumns: '1.25fr 2fr 2fr', maxWidth: '32rem', width: '100%', }}>
+                  <Inputs.BorderLeftColor />
+                  <Inputs.BorderLeftStyle />
+                  <Inputs.BorderLeftWidth />
+                  <Inputs.BorderRightColor />
+                  <Inputs.BorderRightStyle />
+                  <Inputs.BorderRightWidth />
+                  <Inputs.BorderTopColor />
+                  <Inputs.BorderTopStyle />
+                  <Inputs.BorderTopWidth />
+                  <Inputs.BorderBottomColor />
+                  <Inputs.BorderBottomStyle />
+                  <Inputs.BorderBottomWidth />
+                </article>
+                <article sx={{ maxWidth: '32rem', width: '100%', }}>
+                <h4>Radius</h4>
+                <Inputs.BorderTopLeftRadius />
+                <Inputs.BorderTopRightRadius />
+                <Inputs.BorderBottomLeftRadius />
+                <Inputs.BorderBottomRightRadius />
+                </article>
+                <article sx={{ maxWidth: '32rem', width: '100%', }}>
+                <h4>Spacing</h4>
+                <Inputs.Padding />
+                <Inputs.Margin />
+                </article>
+            </div>
+          </Editor>
       </div>
-      <div className="full-bleed">
+      <div>
         <pre
           sx={{
             p: [2, 3, 4],
