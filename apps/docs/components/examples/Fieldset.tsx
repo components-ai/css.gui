@@ -8,13 +8,13 @@ import {
 } from '@compai/css-gui'
 
 export const Fieldset = () => {
-  const [styles, setStyles] = useState<any>({ 
+  const [styles, setStyles] = useState<any>({
     '::first-letter': {
-      fontSize: { unit: 'px', value: 32 }
-    }, 
+      fontSize: { unit: 'px', value: 32 },
+    },
     fontSize: { unit: 'px', value: 16 },
   })
-  
+
   return (
     <>
       <Editor styles={styles} onChange={setStyles}>

@@ -64,9 +64,10 @@ const Control = ({ field, ...props }: ControlProps) => {
     return null
   }
 
-  const fieldsetName = fieldset && getField(fieldset.name)
-    ? fieldset.name
-    : addPseudoSyntax(fieldset?.name as string)
+  const fieldsetName =
+    fieldset && getField(fieldset.name)
+      ? fieldset.name
+      : addPseudoSyntax(fieldset?.name as string)
 
   const fullField = fieldsetName ? joinPath(fieldsetName, field) : field
   const componentProps = {
@@ -145,7 +146,7 @@ export const Editor = ({
   children,
   hideResponsiveControls,
 }: ControlsProps) => {
-  const properties = uniq(Object.keys(styles).map(p => p.replace(/^:+/, '')))
+  const properties = uniq(Object.keys(styles).map((p) => p.replace(/^:+/, '')))
 
   const handleStylesChange = (recipe: Recipe<EditorData<any>>) => {
     const newData = produce(styles, (draft: any) => {
