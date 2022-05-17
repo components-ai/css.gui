@@ -158,7 +158,6 @@ export const Editor = ({
       draft = valueData as any
     })
 
-    console.log(newData, "newData")
     onChange(newData)
   }
 
@@ -402,15 +401,12 @@ function getDefaultsFromChildren(children: ReactNode): Record<string, any> {
       (element.type as any).displayName
     ) {
       const property = camelCase((element.type as any).displayName)
-      // console.log(property, 'ran into a field')
       defaults = {
         ...defaults,
         [property]: getDefaultValue(property),
       }
     }
     if (element.props.children) {
-      // console.log('ran into element with children')
-      // console.log(element.props.children)
       defaults = {
         ...defaults,
         ...getDefaultsFromChildren(element.props.children),

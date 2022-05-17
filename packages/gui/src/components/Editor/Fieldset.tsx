@@ -27,7 +27,6 @@ export const Fieldset = ({ type, name, children }: FieldsetProps) => {
   const fullName = outerNames.length
     ? [...outerNames, name]
     : (name as FieldsetNames)
-    console.log(fullName, "fullName")
   return (
     // @ts-ignore
     <FieldsetContext.Provider value={{ type, name: fullName }}>
