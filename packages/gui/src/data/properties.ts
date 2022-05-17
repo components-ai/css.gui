@@ -99,6 +99,7 @@ export const properties: Record<string, PropertyData> = {
   },
   alignContent: {
     type: 'keyword',
+    responsive: true,
     keywords: [
       'center',
       'start',
@@ -120,6 +121,7 @@ export const properties: Record<string, PropertyData> = {
   },
   alignItems: {
     type: 'keyword',
+    responsive: true,
     keywords: [
       'center',
       'start',
@@ -155,6 +157,7 @@ export const properties: Record<string, PropertyData> = {
   },
   alignSelf: {
     type: 'keyword',
+    responsive: true,
     keywords: [
       'auto',
       'center',
@@ -288,7 +291,7 @@ export const properties: Record<string, PropertyData> = {
       'text',
       'content-box, border-box',
     ],
-    defaultValue: 'border-box' 
+    defaultValue: 'border-box',
   },
   backgroundImage: {
     type: ImageSourcePicker,
@@ -811,6 +814,7 @@ export const properties: Record<string, PropertyData> = {
   },
   display: {
     type: 'keyword',
+    responsive: true,
     keywords: [
       'block',
       'inline',
@@ -881,10 +885,12 @@ export const properties: Record<string, PropertyData> = {
   },
   flexDirection: {
     type: 'keyword',
+    responsive: true,
     keywords: ['row', 'row-reverse', 'column', 'column-reverse'],
   },
   flexFlow: {
     type: 'keyword',
+    responsive: true,
     keywords: [
       'row',
       'row-reverse',
@@ -915,6 +921,7 @@ export const properties: Record<string, PropertyData> = {
   },
   flexWrap: {
     type: 'keyword',
+    responsive: true,
     keywords: ['nowrap', 'wrap', 'wrap-reverse'],
   },
   float: {
@@ -1212,6 +1219,7 @@ export const properties: Record<string, PropertyData> = {
   },
   justifyContent: {
     type: 'keyword',
+    responsive: true,
     keywords: [
       'start',
       'center',
@@ -2269,7 +2277,7 @@ export const properties: Record<string, PropertyData> = {
     type: 'length',
     percentage: true,
     keywords: ['max-content', 'min-content', 'auto'],
-    defaultValue: { value: 100, unit: '%'},
+    defaultValue: { value: 100, unit: '%' },
     range: {
       [AbsoluteLengthUnits.Px]: [0, 3840],
       [FontRelativeLengthUnits.Em]: [0, 16],
@@ -2325,7 +2333,6 @@ export const properties: Record<string, PropertyData> = {
     keywords: ['auto'],
     defaultValue: 'auto',
   },
-
 }
 
 export const supportedProperties = uniqBy(allProperties, 'property').filter(
