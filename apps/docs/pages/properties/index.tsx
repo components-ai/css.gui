@@ -12,6 +12,9 @@ import { BorderColorPreview } from '../../components/examples/BorderColorPreview
 import { ColorsPreview } from '../../components/examples/ColorsPreview'
 import { ColorPairPreview } from '../../components/examples/ColorPairPreview'
 import { TextDecorationColorPreview } from '../../components/examples/TextDecorationColorPreview'
+import { TextDecorationLinePreview } from '../../components/examples/TextDecorationLinePreview'
+import { TextDecorationStylePreview } from '../../components/examples/TextDecorationStylePreview'
+import { TextDecorationThicknessPreview } from '../../components/examples/TextDecorationThicknessPreview'
 import { WidthPreview } from '../../components/examples/WidthPreview'
 import { HeightPreview } from '../../components/examples/HeightPreview'
 import { BackgroundImagePreview } from '../../components/examples/BackgroundImagePreview'
@@ -56,6 +59,9 @@ export default function Docs() {
             <BackgroundColorPreview />
             <BorderColorPreview />
             <TextDecorationColorPreview />
+            <TextDecorationLinePreview />
+            <TextDecorationStylePreview />
+            <TextDecorationThicknessPreview />
             <AccentColorPreview />
             <BackgroundImagePreview />
             <BackgroundPreview />

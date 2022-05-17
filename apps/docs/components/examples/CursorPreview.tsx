@@ -22,7 +22,7 @@ export function CursorPreview() {
         }}>
         <section sx={{
           fontWeight: 900,
-          height: '300px',
+          height: '192px',
           borderBottom: '1px solid',
           maxWidth: '100%',
           display: 'flex',

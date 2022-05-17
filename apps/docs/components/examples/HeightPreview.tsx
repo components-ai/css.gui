@@ -50,9 +50,8 @@ export function HeightPreview() {
           </div>
         </Editor>
       <div sx={{
-        mt: 'auto',
         px: 3,
-        pb: 4,
+        pb: 3,
         maxWidth: '100%',
         overflow: 'auto',
             color: 'text',
