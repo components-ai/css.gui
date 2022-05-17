@@ -1587,6 +1587,9 @@ export const properties: Record<string, PropertyData> = {
   opacity: {
     type: 'percentage',
     defaultValue: 1,
+    range: {
+      [PercentageLengthUnits.Pct]: [0, 100],
+    },
   },
   order: {
     type: 'integer',

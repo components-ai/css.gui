@@ -19,6 +19,7 @@ import { TextDecorationStylePreview } from '../../components/examples/TextDecora
 import { TextDecorationThicknessPreview } from '../../components/examples/TextDecorationThicknessPreview'
 import { WidthPreview } from '../../components/examples/WidthPreview'
 import { HeightPreview } from '../../components/examples/HeightPreview'
+import { OpacityPreview } from '../../components/examples/OpacityPreview'
 import { BackgroundImagePreview } from '../../components/examples/BackgroundImagePreview'
 import { BackgroundPreview } from '../../components/examples/BackgroundPreview'
 import { BackgroundBlendModePreview } from '../../components/examples/BackgroundBlendModePreview'
@@ -83,6 +84,7 @@ export default function Docs() {
             <BackgroundImagePreview />
             <BackgroundPreview />
             <BackgroundBlendModePreview />
+            <OpacityPreview />
             <BoxShadowPreview />
             <TextShadowPreview />
             <WidthPreview />
