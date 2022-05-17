@@ -1,16 +1,16 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { Editor, Inputs, styled, codegen } from '@compai/css-gui'
-import { initialStyles } from '../../data/initial-styles-opacity-preview'
+import { initialStyles } from '../../data/initial-styles-mix-blend-mode-preview'
 import { defaultTheme } from '../../data/default-theme'
 
-export function OpacityPreview() {
+export function MixBlendModePreview() {
   const [styles, setStyles] = useState<any>(initialStyles)
 
   return (
     <>
       <article 
-      id='opacity'
+      id='mix-blend-mode'
       sx={{ 
         color: 'muted',
         width: '100%', 
@@ -19,7 +19,7 @@ export function OpacityPreview() {
         overflow: 'hidden',
         }}>
         <code sx={{ color: 'text', px: 3, py: 2, width: '100%', display: 'block', borderBottom: '1px solid', borderBottomColor: 'muted', }}>
-          &lt;Inputs.Opacity /&gt;
+          &lt;Inputs.MixBlendMode /&gt;
         </code>
         <section sx={{
           fontWeight: 900,
@@ -34,16 +34,25 @@ export function OpacityPreview() {
           overflow: 'hidden',
           mb: 3,
           }}>
-          <styled.div styles={styles} style={{ 
+          <div sx={{
             backgroundColor: '#6465ff',
             backgroundImage: 'url(https://source.unsplash.com/random)',
             backgroundSize: 'cover',
             height: '100%',
             width: '100%',
           }}>
-
+          <styled.div styles={styles} style={{ 
+            height: '100%',
+            width: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '64px',
+          }}>
+            Blend
 
           </styled.div>
+          </div>
         </section>
         <Editor styles={styles} onChange={setStyles} theme={defaultTheme}>
           <div
@@ -58,7 +67,7 @@ export function OpacityPreview() {
               },
             }}
           >
-            <Inputs.Opacity />
+            <Inputs.MixBlendMode />
           </div>
         </Editor>
       <div sx={{

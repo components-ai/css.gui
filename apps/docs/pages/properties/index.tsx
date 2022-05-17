@@ -22,6 +22,7 @@ import { HeightPreview } from '../../components/examples/HeightPreview'
 import { OpacityPreview } from '../../components/examples/OpacityPreview'
 import { BackgroundImagePreview } from '../../components/examples/BackgroundImagePreview'
 import { BackgroundPreview } from '../../components/examples/BackgroundPreview'
+import { MixBlendModePreview } from '../../components/examples/MixBlendModePreview'
 import { BackgroundBlendModePreview } from '../../components/examples/BackgroundBlendModePreview'
 import { BorderRadiusPreview } from '../../components/examples/BorderRadiusPreview'
 import { BorderTopLeftRadiusPreview } from '../../components/examples/BorderTopLeftRadiusPreview'
@@ -84,6 +85,7 @@ export default function Docs() {
             <BackgroundImagePreview />
             <BackgroundPreview />
             <BackgroundBlendModePreview />
+            <MixBlendModePreview />
             <OpacityPreview />
             <BoxShadowPreview />
             <TextShadowPreview />
