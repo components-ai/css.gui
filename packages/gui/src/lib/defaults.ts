@@ -21,7 +21,7 @@ export function getDefaultValue(property: string) {
     case 'string':
       return { value: '', unit: 'string' }
     case 'color':
-      return 'transparent'
+      return 'inherit'
     case 'position':
       return {
         x: { value: 0, unit: '%' },

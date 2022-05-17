@@ -39,7 +39,7 @@ export const toCSSObject = (styles: Styles): any => {
   // @ts-ignore
   return Object.entries(styles).reduce((acc: Styles, curr: StyleEntry) => {
     const [property, value] = curr
-    if (isNestedSelector(property)) {
+    if (isNestedSelector(property.replace(/^:+/, ''))) {
       return {
         ...acc,
         [stringifySelector(property)]: toCSSObject(value as Styles),

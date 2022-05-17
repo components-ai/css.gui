@@ -30,7 +30,7 @@ import { DimensionInput } from '../inputs/Dimension'
 import { SelectInput } from '../inputs/SelectInput'
 import { GLOBAL_KEYWORDS } from '../../data/global-keywords'
 import { Label } from '../primitives'
-import { camelCase, kebabCase } from 'lodash-es'
+import { camelCase, kebabCase, uniq } from 'lodash-es'
 import { useThemeProperty } from '../providers/ThemeContext'
 import { PositionInput } from '../inputs/PositionInput'
 import { TimeInput } from '../inputs/TimeInput'
@@ -42,6 +42,7 @@ import { DEFAULT_LENGTH } from '../../lib/constants'
 import { getDefaultValue } from '../../lib/defaults'
 import { MultidimensionInput } from '../inputs/Multidimension'
 import { Responsive } from '../Responsive/Input'
+import { addPseudoSyntax } from '../../lib/pseudos'
 
 interface ControlProps extends InputProps {
   field: KeyArg
@@ -63,7 +64,12 @@ const Control = ({ field, ...props }: ControlProps) => {
     return null
   }
 
-  const fullField = fieldset ? joinPath(fieldset.name, field) : field
+  const fieldsetName =
+    fieldset && getField(fieldset.name)
+      ? fieldset.name
+      : addPseudoSyntax(fieldset?.name as string)
+
+  const fullField = fieldsetName ? joinPath(fieldsetName, field) : field
   const componentProps = {
     label: sentenceCase(property),
     themeValues: themeValues,
@@ -140,7 +146,7 @@ export const Editor = ({
   children,
   hideResponsiveControls,
 }: ControlsProps) => {
-  const properties = Object.keys(styles)
+  const properties = uniq(Object.keys(styles).map((p) => p.replace(/^:+/, '')))
 
   const handleStylesChange = (recipe: Recipe<EditorData<any>>) => {
     const newData = produce(styles, (draft: any) => {
@@ -395,7 +401,6 @@ function getDefaultsFromChildren(children: ReactNode): Record<string, any> {
       typeof element.type === 'function' &&
       (element.type as any).displayName
     ) {
-      // console.log('ran into a field')
       const property = camelCase((element.type as any).displayName)
       defaults = {
         ...defaults,
@@ -403,8 +408,6 @@ function getDefaultsFromChildren(children: ReactNode): Record<string, any> {
       }
     }
     if (element.props.children) {
-      // console.log('ran into element with children')
-      // console.log(element.props.children)
       defaults = {
         ...defaults,
         ...getDefaultsFromChildren(element.props.children),
