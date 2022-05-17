@@ -9,7 +9,9 @@ export function FontSizePreview() {
 
   return (
     <>
-      <article sx={{ 
+      <article 
+      id='font-size'
+      sx={{ 
         display: 'flex',
         flexDirection: 'column',
         color: 'muted',
@@ -18,10 +20,13 @@ export function FontSizePreview() {
         borderRadius: '6px',
         overflow: 'hidden',
         }}>
+        <code sx={{ color: 'text', px: 3, py: 2, width: '100%', display: 'block', borderBottom: '1px solid', borderBottomColor: 'muted', }}>
+          &lt;Input.FontSize /&gt;
+        </code>
         <section sx={{
           fontWeight: 900,
-          height: '300px',
           borderBottom: '1px solid',
+          height: '192px',
           maxWidth: '100%',
           display: 'flex',
           alignItems: 'center',
@@ -35,11 +40,11 @@ export function FontSizePreview() {
             <span sx={{color: "text"}}>Aa</span>
           </styled.p>
         </section>
+        <section>
         <Editor styles={styles} onChange={setStyles} theme={defaultTheme}>
           <div
             sx={{
-              px: 5,
-              pt: 3,
+              px: 3,
               width: '100%',
               color: 'text',
               '& > div': { 
@@ -52,9 +57,7 @@ export function FontSizePreview() {
           </div>
         </Editor>
       <div sx={{
-        mt: 'auto',
-        px: 5,
-        pb: 4,
+        px: 3,
         maxWidth: '100%',
         overflow: 'auto',
             color: 'text',
@@ -62,12 +65,13 @@ export function FontSizePreview() {
         <pre
           sx={{
             width: '100%',
-            fontSize: 2,
+            fontSize: 0,
           }}
         >
           {codegen.css(styles)}
         </pre>
       </div>
+      </section>
       </article>
     </>
   )

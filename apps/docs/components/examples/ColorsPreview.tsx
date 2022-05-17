@@ -9,7 +9,8 @@ export function ColorsPreview() {
 
   return (
     <>
-      <article sx={{ 
+      <article id='colors'
+      sx={{ 
         display: 'flex',
         flexDirection: 'column',
         color: 'muted',
@@ -97,7 +98,7 @@ export function ColorsPreview() {
         <pre
           sx={{
             width: '100%',
-            fontSize: 2,
+            fontSize: 0,
           }}
         >
           {codegen.css(styles)}

@@ -8,6 +8,7 @@ export function TextAlignPreview() {
   return (
     <>
       <article
+        id='text-align'
         sx={{
           display: 'flex',
           flexDirection: 'column',
@@ -18,11 +19,15 @@ export function TextAlignPreview() {
           overflow: 'hidden',
         }}
       >
+        <code sx={{ color: 'text', px: 3, py: 2, width: '100%', borderBottom: '1px solid', borderBottomColor: 'muted', }}>
+          &lt;Input.TextAlign /&gt;
+        </code>
         <section
           sx={{
             fontWeight: 900,
-            height: '300px',
+            height: '192px',
             borderBottom: '1px solid',
+            borderBottomColor: 'muted',
             maxWidth: '100%',
             display: 'flex',
             alignItems: 'center',
@@ -39,7 +44,7 @@ export function TextAlignPreview() {
             style={{
               margin: 0,
               lineHeight: '1.5',
-              fontSize: '18px',
+              fontSize: '16px',
               fontWeight: 400,
               paddingLeft: '32px',
               paddingRight: '32px',
@@ -47,17 +52,13 @@ export function TextAlignPreview() {
             }}
           >
             The parameters comprise sequences which are theoretically infinite
-            but limits are, of course, set to them in practice. There is an
-            upward limit to size and certainly a downward one... Within these
-            sequences there are reasonable bounds; extremes set by technical and
-            functional experience.
+            but limits are, of course, set to them in practice. 
           </styled.p>
         </section>
         <Editor styles={styles} onChange={setStyles} theme={defaultTheme}>
           <div
             sx={{
-              px: 5,
-              pt: 3,
+              px: 3,
               width: '100%',
               color: 'text',
               '& [role="label"]': {
@@ -71,9 +72,9 @@ export function TextAlignPreview() {
         </Editor>
         <div
           sx={{
-            mt: 'auto',
-            px: 5,
-            pb: 4,
+            mt: 0,
+            px: 3,
+            pb: 3,
             maxWidth: '100%',
             overflow: 'auto',
             color: 'text',
@@ -82,7 +83,7 @@ export function TextAlignPreview() {
           <pre
             sx={{
               width: '100%',
-              fontSize: 2,
+              fontSize: 0,
             }}
           >
             {codegen.css(styles)}

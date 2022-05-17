@@ -9,37 +9,35 @@ export function LetterSpacingPreview() {
 
   return (
     <>
-      <article sx={{ 
-        display: 'flex',
-        flexDirection: 'column-reverse',
+      <article 
+      id='letter-spacing'
+      sx={{ 
         color: 'muted',
         width: '100%', 
         boxShadow: 'inset 0 0 0px 1px currentColor', 
         borderRadius: '6px',
         overflow: 'hidden',
         }}>
-      <div sx={{ 
-        mt: 'auto', 
-        px: 5,
-        pb: 4,
-        maxWidth: '100%',
-        color: 'text',
-        overflow: 'auto',
-        }}>
-        <pre
-          sx={{
-            width: '100%',
-            fontSize: 2,
-          }}
-        >
-          {codegen.css(styles)}
-        </pre>
-      </div>
+      
+        <code sx={{ color: 'text', px: 3, py: 2, width: '100%', display: 'block', borderBottom: '1px solid', borderBottomColor: 'muted', }}>
+          &lt;Input.LetterSpacing /&gt;
+        </code>
+        <section sx={{
+            fontSize: '16px',
+            height: '192px',
+            px: 4,
+            borderBottom: '1px solid',
+          }}>
+          <styled.p styles={styles} style={{ margin: 0, lineHeight: '1.5', height: '100%', 
+          width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', }}>
+            <span sx={{color:'text',}}>Anyone who would letter-space lower case would steal sheep.</span>
+          </styled.p>
+        </section>
         <Editor styles={styles} onChange={setStyles} theme={defaultTheme}>
           <div
             sx={{
               color: 'text',
-              px: 5, pt: 4,
+              px: 3, pt: 3,
               width: '100%',
               '& > div': { 
                 display: 'grid',
@@ -50,17 +48,22 @@ export function LetterSpacingPreview() {
             <Inputs.LetterSpacing />
           </div>
         </Editor>
-        <section sx={{
-            fontSize: '32px',
-            height: '300px',
-            px: 5,
-            borderBottom: '1px solid',
-          }}>
-          <styled.p styles={styles} style={{ margin: 0, lineHeight: '1.5', height: '100%', 
-          width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', }}>
-            <span sx={{color:'text',}}>Anyone who would letter-space lower case would steal sheep.</span>
-          </styled.p>
-        </section>
+<div sx={{ 
+        px: 3,
+        pb: 3,
+        maxWidth: '100%',
+        color: 'text',
+        overflow: 'auto',
+        }}>
+        <pre
+          sx={{
+            width: '100%',
+            fontSize: 0,
+          }}
+        >
+          {codegen.css(styles)}
+        </pre>
+      </div>
       </article>
     </>
   )

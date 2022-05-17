@@ -1,3 +1,3 @@
 export const initialStyles: any = {
-  fontWeight: '900'
+  fontWeight: '100'
 }

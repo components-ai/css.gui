@@ -9,7 +9,9 @@ export function HeightPreview() {
 
   return (
     <>
-      <article sx={{ 
+      <article 
+      id='height'
+      sx={{ 
         display: 'flex',
         flexDirection: 'column',
         color: 'muted',
@@ -19,7 +21,7 @@ export function HeightPreview() {
         }}>
         <section sx={{
           fontWeight: 900,
-          height: '300px',
+          height: '192px',
           borderBottom: '1px solid',
           maxWidth: '100%',
           display: 'flex',
@@ -35,8 +37,7 @@ export function HeightPreview() {
         <Editor styles={styles} onChange={setStyles} theme={defaultTheme}>
           <div
             sx={{
-              px: 5,
-              pt: 3,
+              px: 3,
               width: '100%',
               color: 'text',
               '& > div': { 
@@ -49,9 +50,8 @@ export function HeightPreview() {
           </div>
         </Editor>
       <div sx={{
-        mt: 'auto',
-        px: 5,
-        pb: 4,
+        px: 3,
+        pb: 3,
         maxWidth: '100%',
         overflow: 'auto',
             color: 'text',
@@ -59,7 +59,7 @@ export function HeightPreview() {
         <pre
           sx={{
             width: '100%',
-            fontSize: 2,
+            fontSize: 0,
           }}
         >
           {codegen.css(styles)}

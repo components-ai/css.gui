@@ -4,12 +4,13 @@ import { Editor, Inputs, styled, codegen } from '@compai/css-gui'
 import { initialStyles } from '../../data/initial-styles-background-blend-mode-preview'
 import { defaultTheme } from '../../data/default-theme'
 
-export function BackgroundBlendModePreview() {
+export function BackgroundImageBlendModePreview() {
   const [styles, setStyles] = useState<any>(initialStyles)
 
   return (
     <>
-      <article sx={{ 
+      <article 
+     id='background-image-blend-mode' sx={{ 
         display: 'flex',
         flexDirection: 'column',
         color: 'muted',
@@ -69,7 +70,7 @@ export function BackgroundBlendModePreview() {
         <pre
           sx={{
             width: '100%',
-            fontSize: 2,
+            fontSize: 0,
           }}
         >
           {codegen.css(styles)}

@@ -116,6 +116,7 @@ export const properties: Record<string, PropertyData> = {
       'safe center',
       'unsafe center',
     ],
+    defaultValue: 'center',
   },
   alignItems: {
     type: 'keyword',
@@ -136,6 +137,7 @@ export const properties: Record<string, PropertyData> = {
       'safe center',
       'unsafe center',
     ],
+    defaultValue: 'center',
   },
   alignmentBaseline: {
     type: 'keyword',
@@ -145,10 +147,11 @@ export const properties: Record<string, PropertyData> = {
       'alphabetic',
       'ideographic',
       'middle',
-      'centeral',
+      'central',
       'mathematical',
       'text-top',
     ],
+    defaultValue: 'auto',
   },
   alignSelf: {
     type: 'keyword',
@@ -170,6 +173,7 @@ export const properties: Record<string, PropertyData> = {
       'safe center',
       'unsafe center',
     ],
+    defaultValue: 'auto',
   },
   all: {
     type: 'keyword',
@@ -185,11 +189,13 @@ export const properties: Record<string, PropertyData> = {
   animationDirection: {
     type: 'keyword',
     keywords: ['normal', 'reverse', 'alternate', 'alternate-reverse'],
+    defaultValue: 'normal',
   },
   animationDuration: { type: 'time' },
   animationFillMode: {
     type: 'keyword',
     keywords: ['none', 'forwards', 'backwards', 'both'],
+    defaultValue: 'forwards',
   },
   animationIterationCount: {
     type: 'number',
@@ -229,10 +235,12 @@ export const properties: Record<string, PropertyData> = {
       'meter',
       'progress-bar',
     ],
+    defaultValue: 'none',
   },
   backfaceVisibility: {
     type: 'keyword',
     keywords: ['visible', 'hidden'],
+    defaultValue: 'hidden',
   },
   background: {
     type: BackgroundInput,
@@ -241,6 +249,7 @@ export const properties: Record<string, PropertyData> = {
   backgroundAttachment: {
     type: 'keyword',
     keywords: ['scroll', 'fixed', 'local', 'local, scroll', 'scroll, local'],
+    defaultValue: 'scroll',
   },
   backgroundBlendMode: {
     // TODO multiple properties
@@ -263,6 +272,7 @@ export const properties: Record<string, PropertyData> = {
       'color',
       'luminosity',
     ],
+    defaultValue: 'overlay',
   },
   backgroundColor: {
     type: 'color',
@@ -278,6 +288,7 @@ export const properties: Record<string, PropertyData> = {
       'text',
       'content-box, border-box',
     ],
+    defaultValue: 'border-box' 
   },
   backgroundImage: {
     type: ImageSourcePicker,
@@ -2255,7 +2266,7 @@ export const properties: Record<string, PropertyData> = {
     type: 'length',
     percentage: true,
     keywords: ['max-content', 'min-content', 'auto'],
-    defaultValue: '100%',
+    defaultValue: { value: 100, unit: '%'},
     range: {
       [AbsoluteLengthUnits.Px]: [0, 3840],
       [FontRelativeLengthUnits.Em]: [0, 16],
@@ -2270,6 +2281,7 @@ export const properties: Record<string, PropertyData> = {
   wordBreak: {
     type: 'keyword',
     keywords: ['normal', 'break-all', 'keep-all', 'break-word'],
+    defaultValue: 'normal',
   },
   wordSpacing: {
     type: 'length',
@@ -2303,11 +2315,14 @@ export const properties: Record<string, PropertyData> = {
   writingMode: {
     type: 'keyword',
     keywords: ['horizontal-tb', 'vertical-rl', 'vertical-lr'],
+    defaultValue: 'horizontal-tb',
   },
   zIndex: {
     type: 'integer',
     keywords: ['auto'],
+    defaultValue: 'auto',
   },
+
 }
 
 export const supportedProperties = uniqBy(allProperties, 'property').filter(

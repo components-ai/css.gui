@@ -1,16 +1,15 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { Editor, Inputs, styled, codegen } from '@compai/css-gui'
-import { initialStyles } from '../../data/initial-styles-background-image-preview'
+import { initialStyles } from '../../data/initial-styles-text-decoration-thickness-preview'
 import { defaultTheme } from '../../data/default-theme'
 
-export function BackgroundImagePreview() {
+export function TextDecorationThicknessPreview() {
   const [styles, setStyles] = useState<any>(initialStyles)
 
   return (
     <>
-      <article 
-      id='background-image'
+      <article id='color'
       sx={{ 
         color: 'muted',
         width: '100%', 
@@ -18,26 +17,38 @@ export function BackgroundImagePreview() {
         borderRadius: '6px',
         overflow: 'hidden',
         }}>
-        <code sx={{ color: 'text', px: 3, py: 2, width: '100%', display: 'block', borderBottom: '1px solid', borderBottomColor: 'muted', }}>
-          &lt;Inputs.Background /&gt;
+        <code sx={{ color: 'text', px: 3, py: 2, width: '100%', display: 'block', borderBottom: '1px solid', borderBottomColor: 'muted', whiteSpace: 'nowrap', }}>
+          &lt;Inputs.TextDecorationThickness /&gt;
         </code>
         <section sx={{
+          color: 'text',
           fontWeight: 900,
           height: '192px',
-          borderBottom: '1px solid',
           maxWidth: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
           position: 'relative',
           textAlign: 'center',
           overflow: 'hidden',
-          mb: 3,
+          borderbottom: '1px solid',
+          borderBottomColor: 'muted',
           }}>
-          <styled.div styles={styles} style={{ margin: 0, height: '100%', width: '100%', backgroundSize: 'cover', backgroundPosition: 'center center', backgroundColor: 'salmon', backgroundRepeat: 'no-repeat' }}>
-          </styled.div>
+          <styled.p styles={styles} style={{ margin: 0, lineHeight: 1, fontSize: '4rem', 
+          textDecorationStyle: 'wavy', 
+          textDecorationLine: 'underline overline', 
+          textDecorationColor: '#6465ff', 
+          }}>
+            Aa
+          </styled.p>
         </section>
         <Editor styles={styles} onChange={setStyles} theme={defaultTheme}>
           <div
             sx={{
+              borderTop: '1px solid',
+              borderTopColor: 'muted',
               px: 3,
+              pt: 3,
               width: '100%',
               color: 'text',
               '& > div': { 
@@ -46,12 +57,13 @@ export function BackgroundImagePreview() {
               },
             }}
           >
-            <Inputs.BackgroundImage />
+            <Inputs.TextDecorationThickness />
           </div>
         </Editor>
       <div sx={{
+        mt: 'auto',
         px: 3,
-        pb: 3,
+        pb: 4,
         maxWidth: '100%',
         overflow: 'auto',
             color: 'text',

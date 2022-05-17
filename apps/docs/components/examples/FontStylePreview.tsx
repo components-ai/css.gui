@@ -9,18 +9,21 @@ export function FontStylePreview() {
 
   return (
     <>
-      <article sx={{ 
-        display: 'flex',
-        flexDirection: 'column',
+      <article 
+      id='font-style'
+      sx={{ 
         color: 'muted',
         width: '100%', 
         boxShadow: 'inset 0 0 0px 1px currentColor', 
         borderRadius: '6px',
         overflow: 'hidden',
         }}>
+        <code sx={{ color: 'text', px: 3, py: 2, width: '100%', display: 'block', borderBottom: '1px solid', borderBottomColor: 'muted', }}>
+          &lt;Input.FontStyle /&gt;
+        </code>
         <section sx={{
           fontWeight: 900,
-          height: '300px',
+          height: '192px',
           borderBottom: '1px solid',
           maxWidth: '100%',
           display: 'flex',
@@ -32,17 +35,16 @@ export function FontStylePreview() {
           mb: 3,
           }}>
           <styled.p styles={styles} style={{ margin: 0, lineHeight: 1 }}>
-            <span sx={{color: "text", fontSize: '12rem'}}>Aa</span>
+            <span sx={{color: "text", fontSize: '4rem'}}>Aa</span>
           </styled.p>
         </section>
         <Editor styles={styles} onChange={setStyles} theme={defaultTheme}>
           <div
             sx={{
-              px: 5,
-              pt: 3,
+              px: 3,
               width: '100%',
               color: 'text',
-              '& > div': { 
+              '& > div > span': { 
                 display: 'grid',
                 gap: '.5rem',
               },
@@ -52,9 +54,8 @@ export function FontStylePreview() {
           </div>
         </Editor>
       <div sx={{
-        mt: 'auto',
-        px: 5,
-        pb: 4,
+        px: 3,
+        pb: 3,
         maxWidth: '100%',
         overflow: 'auto',
             color: 'text',
@@ -62,7 +63,7 @@ export function FontStylePreview() {
         <pre
           sx={{
             width: '100%',
-            fontSize: 2,
+            fontSize: 0,
           }}
         >
           {codegen.css(styles)}

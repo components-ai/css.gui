@@ -1,16 +1,16 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { Editor, Inputs, styled, codegen } from '@compai/css-gui'
-import { initialStyles } from '../../data/initial-styles-background-image-preview'
+import { initialStyles } from '../../data/initial-styles-text-indent-preview'
 import { defaultTheme } from '../../data/default-theme'
 
-export function BackgroundImagePreview() {
+export function TextIndentPreview() {
   const [styles, setStyles] = useState<any>(initialStyles)
 
   return (
     <>
       <article 
-      id='background-image'
+      id='letter-spacing'
       sx={{ 
         color: 'muted',
         width: '100%', 
@@ -18,43 +18,49 @@ export function BackgroundImagePreview() {
         borderRadius: '6px',
         overflow: 'hidden',
         }}>
+      
         <code sx={{ color: 'text', px: 3, py: 2, width: '100%', display: 'block', borderBottom: '1px solid', borderBottomColor: 'muted', }}>
-          &lt;Inputs.Background /&gt;
+          &lt;Input.TextIndent /&gt;
         </code>
         <section sx={{
-          fontWeight: 900,
-          height: '192px',
-          borderBottom: '1px solid',
-          maxWidth: '100%',
-          position: 'relative',
-          textAlign: 'center',
-          overflow: 'hidden',
-          mb: 3,
+            fontSize: '10px',
+            height: '192px',
+            px: 4,
+            py: 3,
+            borderBottom: '1px solid',
           }}>
-          <styled.div styles={styles} style={{ margin: 0, height: '100%', width: '100%', backgroundSize: 'cover', backgroundPosition: 'center center', backgroundColor: 'salmon', backgroundRepeat: 'no-repeat' }}>
-          </styled.div>
+          <styled.p styles={styles} style={{ margin: 0, lineHeight: '1.5',}}>
+            <span sx={{color:'text',}}>
+              A common stylistic choice for books and printed material. Indenting
+              the first line of paragraphs is often used both digitally and in
+              print when there is no vertical spacing between paragraphs. 
+            </span>
+          </styled.p>
+          <styled.p styles={styles} style={{ margin: 0, lineHeight: '1.5' }}>
+            <span sx={{color:'text',}}>Indent text forwards or backwards with positive and negative values. Paragraphs that are flush often have indented text.</span>
+          </styled.p>
         </section>
         <Editor styles={styles} onChange={setStyles} theme={defaultTheme}>
           <div
             sx={{
-              px: 3,
-              width: '100%',
               color: 'text',
+              px: 3, pt: 3,
+              width: '100%',
               '& > div': { 
                 display: 'grid',
                 gap: '.5rem',
               },
             }}
           >
-            <Inputs.BackgroundImage />
+            <Inputs.TextIndent />
           </div>
         </Editor>
-      <div sx={{
+<div sx={{ 
         px: 3,
         pb: 3,
         maxWidth: '100%',
+        color: 'text',
         overflow: 'auto',
-            color: 'text',
         }}>
         <pre
           sx={{

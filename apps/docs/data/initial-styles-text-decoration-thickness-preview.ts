@@ -1,7 +1,6 @@
 export const initialStyles: any = {
-  fontSize: {
-    value: 64,
+  textDecorationThickness: {
+    value: 8,
     unit: 'px',
   }
-
 }

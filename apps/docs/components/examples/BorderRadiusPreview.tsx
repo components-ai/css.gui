@@ -9,14 +9,24 @@ export function BorderRadiusPreview() {
 
   return (
     <>
-      <article
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          color: 'muted',
-          width: '100%',
-          boxShadow: 'inset 0 0 0px 1px currentColor',
-          borderRadius: '6px',
+      <article 
+      id='border-radius'
+      sx={{ 
+        display: 'flex',
+        flexDirection: 'column',
+        color: 'muted',
+        width: '100%', 
+        boxShadow: 'inset 0 0 0px 1px currentColor', 
+        borderRadius: '6px',
+        }}>
+        <code sx={{ color: 'text', px: 3, py: 2, width: '100%', display: 'block', borderBottom: '1px solid', borderBottomColor: 'muted', }}>
+          &lt;Inputs.BorderRadius /&gt;
+        </code>
+        <section sx={{
+          fontWeight: 900,
+          height: '192px',
+          borderBottom: '1px solid',
+          maxWidth: '100%',
         }}
       >
         <section
@@ -45,8 +55,8 @@ export function BorderRadiusPreview() {
         <Editor styles={styles} onChange={setStyles} theme={defaultTheme}>
           <div
             sx={{
-              px: 5,
-              pt: 3,
+              px: 3,
+              pt: 0,
               width: '100%',
               color: 'text',
               '& > div': {
@@ -58,14 +68,17 @@ export function BorderRadiusPreview() {
             <Inputs.BorderRadius />
           </div>
         </Editor>
-        <div
+      <div sx={{
+        px: 3,
+        pb: 3,
+        maxWidth: '100%',
+        overflow: 'auto',
+        color: 'text',
+        }}>
+        <pre
           sx={{
-            mt: 'auto',
-            px: 5,
-            pb: 4,
-            maxWidth: '100%',
-            overflow: 'auto',
-            color: 'text',
+            width: '100%',
+            fontSize: 0,
           }}
         >
           <pre

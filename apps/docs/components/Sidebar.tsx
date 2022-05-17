@@ -22,6 +22,8 @@ export const Sidebar = () => {
       <NavItem href="/getting-started">Getting Started</NavItem>
       <NavItem href="/exports/css">Exporting CSS</NavItem>
       <NavItem href="/imports/color">Importing Color Palettes</NavItem>
+      <NavSectionTitle>Properties</NavSectionTitle>
+      <NavItem href="/properties/">Demo</NavItem>
       <NavSectionTitle>Components</NavSectionTitle>
       <NavItem href="/components/editor">Editor</NavItem>
       <NavItem href="/components/fieldset">Fieldset</NavItem>

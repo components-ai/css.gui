@@ -9,7 +9,9 @@ export function CursorPreview() {
 
   return (
     <>
-      <article sx={{ 
+      <article 
+      id='cursor'
+      sx={{ 
         display: 'flex',
         flexDirection: 'column',
         color: 'muted',
@@ -20,7 +22,7 @@ export function CursorPreview() {
         }}>
         <section sx={{
           fontWeight: 900,
-          height: '300px',
+          height: '192px',
           borderBottom: '1px solid',
           maxWidth: '100%',
           display: 'flex',
@@ -45,7 +47,7 @@ export function CursorPreview() {
         <Editor styles={styles} onChange={setStyles} theme={defaultTheme}>
           <div
             sx={{
-              px: 5,
+              px: 3,
               pt: 3,
               width: '100%',
               color: 'text',
@@ -60,7 +62,7 @@ export function CursorPreview() {
         </Editor>
       <div sx={{
         mt: 'auto',
-        px: 5,
+        px: 3,
         pb: 4,
         maxWidth: '100%',
         overflow: 'auto',
@@ -69,7 +71,7 @@ export function CursorPreview() {
         <pre
           sx={{
             width: '100%',
-            fontSize: 2,
+            fontSize: 0,
           }}
         >
           {codegen.css(styles)}

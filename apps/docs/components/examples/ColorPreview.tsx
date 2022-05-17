@@ -9,19 +9,21 @@ export function ColorPreview() {
 
   return (
     <>
-      <article sx={{ 
-        display: 'flex',
-        flexDirection: 'column',
+      <article id='color'
+      sx={{ 
         color: 'muted',
         width: '100%', 
         boxShadow: 'inset 0 0 0px 1px currentColor', 
         borderRadius: '6px',
         overflow: 'hidden',
         }}>
+        <code sx={{ color: 'text', px: 3, py: 2, width: '100%', display: 'block', borderBottom: '1px solid', borderBottomColor: 'muted', }}>
+          &lt;Inputs.Color /&gt;
+        </code>
         <section sx={{
           color: 'text',
           fontWeight: 900,
-          height: '300px',
+          height: '192px',
           maxWidth: '100%',
           display: 'flex',
           alignItems: 'center',
@@ -29,15 +31,19 @@ export function ColorPreview() {
           position: 'relative',
           textAlign: 'center',
           overflow: 'hidden',
-          mb: 3,
+          borderbottom: '1px solid',
+          borderBottomColor: 'muted',
           }}>
-          <styled.p styles={styles} style={{ margin: 0, lineHeight: 1, height: '100%', width: '100%', }}>
+          <styled.p styles={styles} style={{ margin: 0, lineHeight: 1, fontSize: '4rem', }}>
+            Aa
           </styled.p>
         </section>
         <Editor styles={styles} onChange={setStyles} theme={defaultTheme}>
           <div
             sx={{
-              px: 5,
+              borderTop: '1px solid',
+              borderTopColor: 'muted',
+              px: 3,
               pt: 3,
               width: '100%',
               color: 'text',
@@ -47,12 +53,12 @@ export function ColorPreview() {
               },
             }}
           >
-            <Inputs.BackgroundColor />
+            <Inputs.Color />
           </div>
         </Editor>
       <div sx={{
         mt: 'auto',
-        px: 5,
+        px: 3,
         pb: 4,
         maxWidth: '100%',
         overflow: 'auto',
@@ -61,7 +67,7 @@ export function ColorPreview() {
         <pre
           sx={{
             width: '100%',
-            fontSize: 2,
+            fontSize: 0,
           }}
         >
           {codegen.css(styles)}

@@ -10,7 +10,9 @@ export function LineHeightPreview() {
 
   return (
     <>
-      <article sx={{ 
+      <article 
+      id='line-height'
+      sx={{ 
         display: 'flex',
         flexDirection: 'column',
         color: 'muted',
@@ -62,7 +64,7 @@ export function LineHeightPreview() {
         <pre
           sx={{
             width: '100%',
-            fontSize: 2,
+            fontSize: 0,
           }}
         >
           {codegen.css(styles)}

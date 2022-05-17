@@ -9,9 +9,9 @@ export function BoxShadowPreview() {
 
   return (
     <>
-      <article sx={{ 
-        display: 'flex',
-        flexDirection: 'column-reverse',
+      <article 
+      id='box-shadow'
+      sx={{ 
         color: 'muted',
         width: '100%', 
         boxShadow: 'inset 0 0 0px 1px currentColor', 
@@ -19,49 +19,16 @@ export function BoxShadowPreview() {
         overflow: 'hidden',
         cursor: 'pointer',
         }}>
-      <div sx={{ 
-        mt: 'auto', 
-        px: 5,
-        pb: 4,
-        maxWidth: '100%',
-        color: 'text',
-        overflow: 'auto',
-        }}>
-        <pre
-          sx={{
-            width: '100%',
-            fontSize: 2,
-          }}
-        >
-          {codegen.css(styles)}
-        </pre>
-      </div>
-        <Editor styles={styles} onChange={setStyles} theme={defaultTheme}>
-          <div
-            sx={{
-              color: 'text',
-              px: 5, pt: 4,
-              width: '100%',
-              '& > div': { 
-                display: 'grid',
-                gap: '.5rem',
-              },
-            }}
-          >
-            <Inputs.BoxShadow />
-            <Fieldset type='pseudo-class' name='hover'>
-              <h4 sx={{ mb: 0 }}>Hover :hover</h4>
-              <Inputs.BoxShadow />
-            </Fieldset>
-          </div>
-        </Editor>
-        <section sx={{
+        <code sx={{ color: 'text', px: 3, py: 2, width: '100%', display: 'block', borderBottom: '1px solid', borderBottomColor: 'muted', }}>
+          &lt;Inputs.BoxShadow /&gt;
+        </code>
+      <section sx={{
             fontSize: '48px',
             lineHeight: '1.5',
             fontWeight: 700,
-            height: '300px',
+            height: '192px',
             borderBottom: '1px solid',
-            px: 5,
+            px: 4,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -85,6 +52,42 @@ export function BoxShadowPreview() {
               }}>
           </styled.a>
         </section>
+        <Editor styles={styles} onChange={setStyles} theme={defaultTheme}>
+          <div
+            sx={{
+              color: 'text',
+              px: 3, pt: 3, 
+              width: '100%',
+              '& > div': { 
+                display: 'grid',
+                gap: '.5rem',
+              },
+            }}
+          >
+            <Inputs.BoxShadow />
+            <Fieldset type='pseudo-class' name='hover'>
+              <h4 sx={{ mb: 0, fontSize: 0, }}>Hover :hover</h4>
+              <Inputs.BoxShadow />
+            </Fieldset>
+          </div>
+        </Editor>
+        
+<div sx={{ 
+        px: 3,
+        pb: 4,
+        maxWidth: '100%',
+        color: 'text',
+        overflow: 'auto',
+        }}>
+        <pre
+          sx={{
+            width: '100%',
+            fontSize: 0,
+          }}
+        >
+          {codegen.css(styles)}
+        </pre>
+      </div>
       </article>
     </>
   )

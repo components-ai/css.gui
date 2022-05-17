@@ -9,7 +9,7 @@ export function ColorPairPreview() {
 
   return (
     <>
-      <article sx={{ 
+      <article id='color-pair' sx={{ 
         display: 'flex',
         flexDirection: 'column',
         color: 'muted',
@@ -73,7 +73,7 @@ export function ColorPairPreview() {
         <pre
           sx={{
             width: '100%',
-            fontSize: 2,
+            fontSize: 0,
           }}
         >
           {codegen.css(styles)}
