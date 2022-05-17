@@ -47,7 +47,14 @@ export default function UnsupportedProperties() {
               width: '100%',
               WebKitAppearance: 'none',
               appearance: 'none',
+              border: 0,
               height: '48px',
+              '&::-webkit-progress-value': {
+                background: '#6465ff',
+              },
+              '&::-moz-progress-bar': {
+                background: '#6465ff',
+              }
             }}
           >
             {percentageComplete}%
