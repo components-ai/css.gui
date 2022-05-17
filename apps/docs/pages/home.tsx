@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { Codesandbox } from 'react-feather'
 import { FontFamilyPreview } from '../components/examples/FontFamilyPreview'
 import { FontSizePreview } from '../components/examples/FontSizePreview'
 import { ColorPreview } from '../components/examples/ColorPreview'
@@ -53,7 +54,31 @@ export default function Docs() {
         >
           npm install --save @compai/css-gui
         </code>
-      <h4 sx={{ fontSize: 3, mt: 4 }}>Features</h4>
+        <h4>Demo</h4>
+        <a href='https://codesandbox.io/s/cssgui-example-w1c9h5'
+        sx={{
+          color: 'text',
+          textDecoration: 'none',
+          display: 'inline-flex', 
+          alignItems: 'center',
+          gap: '1em',
+          bg: 'backgroundOffset',
+          py: 3,
+          pl: 3, 
+          pr: 4,
+          fontSize: 1,
+          borderRadius: '6px',
+          transition: 'background-color .2s ease-in-out',
+          ':hover': {
+            bg: '#6465ff',
+            color: '#ffffff',
+          }
+        }}
+        >
+          <Codesandbox /> 
+          <span>Codesandbox</span>
+        </a>
+      <h4 sx={{ fontSize: 3, mt: 5 }}>Features</h4>
       <ul
         sx={{
           listStyleType: 'none',

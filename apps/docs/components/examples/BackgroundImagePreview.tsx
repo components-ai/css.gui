@@ -19,7 +19,7 @@ export function BackgroundImagePreview() {
         overflow: 'hidden',
         }}>
         <code sx={{ color: 'text', px: 3, py: 2, width: '100%', display: 'block', borderBottom: '1px solid', borderBottomColor: 'muted', }}>
-          &lt;Inputs.Background /&gt;
+          &lt;Inputs.BackgroundImage /&gt;
         </code>
         <section sx={{
           fontWeight: 900,
