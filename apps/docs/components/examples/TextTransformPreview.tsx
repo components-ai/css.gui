@@ -19,7 +19,7 @@ export function TextTransformPreview() {
         overflow: 'hidden',
         }}>
         <code sx={{ color: 'text', px: 3, py: 2, width: '100%', display: 'block', borderBottom: '1px solid', borderBottomColor: 'muted', }}>
-          &lt;Input.TextTransform /&gt;
+          &lt;Inputs.TextTransform /&gt;
         </code>
       <section sx={{
             fontSize: '24px',

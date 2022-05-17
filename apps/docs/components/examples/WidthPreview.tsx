@@ -19,6 +19,9 @@ export function WidthPreview() {
         boxShadow: 'inset 0 0 0px 1px currentColor', 
         borderRadius: '6px',
         }}>
+        <code sx={{ color: 'text', px: 3, py: 2, width: '100%', display: 'block', borderBottom: '1px solid', borderBottomColor: 'muted', }}>
+          &lt;Inputs.Width /&gt;
+        </code>
         <section sx={{
           fontWeight: 900,
           height: '192px',

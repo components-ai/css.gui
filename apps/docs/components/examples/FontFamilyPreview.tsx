@@ -21,7 +21,7 @@ export function FontFamilyPreview() {
         overflow: 'hidden',
         }}>
         <code sx={{ display: 'block', my: 0, color: 'text', px: 3, py: 2, width: '100%', borderBottom: '1px solid', borderBottomColor: 'muted', }}>
-          &lt;Input.FontFamily /&gt;
+          &lt;Inputs.FontFamily /&gt;
         </code>
         <section sx={{
             fontSize: '64px',

@@ -20,7 +20,7 @@ export function TextIndentPreview() {
         }}>
       
         <code sx={{ color: 'text', px: 3, py: 2, width: '100%', display: 'block', borderBottom: '1px solid', borderBottomColor: 'muted', }}>
-          &lt;Input.TextIndent /&gt;
+          &lt;Inputs.TextIndent /&gt;
         </code>
         <section sx={{
             fontSize: '10px',

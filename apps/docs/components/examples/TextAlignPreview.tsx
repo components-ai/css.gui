@@ -20,7 +20,7 @@ export function TextAlignPreview() {
         }}
       >
         <code sx={{ color: 'text', px: 3, py: 2, width: '100%', borderBottom: '1px solid', borderBottomColor: 'muted', }}>
-          &lt;Input.TextAlign /&gt;
+          &lt;Inputs.TextAlign /&gt;
         </code>
         <section
           sx={{

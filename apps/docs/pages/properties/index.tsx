@@ -28,7 +28,7 @@ import { TextAlignPreview } from '../../components/examples/TextAlignPreview'
 import { FontWeightPreview } from '../../components/examples/FontWeightPreview'
 import { FilterPreview } from '../../components/examples/FilterPreview'
 import { CursorPreview } from '../../components/examples/CursorPreview'
-import { LinkPreview } from '../../components/examples/LinkPreview'
+import { TransitionPreview } from '../../components/examples/TransitionPreview'
 import pkg from '../../../../packages/gui/package.json'
 
 // display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(24rem, 1fr))', gap: '4rem', 
