@@ -57,7 +57,7 @@ export const Layout = (props: Props) => {
             </span>
           </a>
         </Link>
-        <Link href="/properties" passHref={true} title='Visual demos of CSS properties'>
+        <Link href="/properties" passHref={true}>
           <a
             sx={{
               ml: 'auto',
