@@ -1,5 +1,12 @@
 # @compai/css-gui
 
+## 0.0.55
+
+### Patch Changes
+
+- 7b9efa3: allows optional pseudo syntax for initial styles. Change default color to inherit
+- 3c287db: Add handwriting category of fonts
+
 ## 0.0.54
 
 ### Patch Changes
