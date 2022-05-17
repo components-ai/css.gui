@@ -10,7 +10,7 @@ export function BackgroundImageBlendModePreview() {
   return (
     <>
       <article 
-     id='background-image-blend-mode' sx={{ 
+     id='background-image-color-blend-mode' sx={{ 
         display: 'flex',
         flexDirection: 'column',
         color: 'muted',

@@ -10,7 +10,7 @@ export function BorderTopLeftRadiusPreview() {
   return (
     <>
       <article 
-      id='border-radius'
+      id='border-top-left-radius'
       sx={{ 
         display: 'flex',
         flexDirection: 'column',

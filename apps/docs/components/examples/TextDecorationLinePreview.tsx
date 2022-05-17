@@ -9,7 +9,7 @@ export function TextDecorationLinePreview() {
 
   return (
     <>
-      <article id='color'
+      <article id='text-decoration-line'
       sx={{ 
         color: 'muted',
         width: '100%', 

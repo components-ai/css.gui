@@ -9,7 +9,7 @@ export function BorderWidthPreview() {
 
   return (
     <>
-      <article id='color'
+      <article id='border-width'
       sx={{ 
         color: 'muted',
         width: '100%', 

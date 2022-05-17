@@ -9,7 +9,7 @@ export function TextDecorationStylePreview() {
 
   return (
     <>
-      <article id='color'
+      <article id='text-decoration-style'
       sx={{ 
         color: 'muted',
         width: '100%', 

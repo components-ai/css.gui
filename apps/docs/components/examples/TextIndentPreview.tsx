@@ -10,7 +10,7 @@ export function TextIndentPreview() {
   return (
     <>
       <article 
-      id='letter-spacing'
+      id='text-indent'
       sx={{ 
         color: 'muted',
         width: '100%', 

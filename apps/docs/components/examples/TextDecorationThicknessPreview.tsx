@@ -9,7 +9,7 @@ export function TextDecorationThicknessPreview() {
 
   return (
     <>
-      <article id='color'
+      <article id='text-decoration-thickness'
       sx={{ 
         color: 'muted',
         width: '100%', 

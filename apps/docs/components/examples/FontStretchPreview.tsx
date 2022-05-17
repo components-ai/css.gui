@@ -10,7 +10,7 @@ export function FontStretchPreview() {
   return (
     <>
       <article 
-      id='letter-spacing'
+      id='font-stretch'
       sx={{ 
         color: 'muted',
         width: '100%', 
