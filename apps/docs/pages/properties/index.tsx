@@ -9,6 +9,8 @@ import { AccentColorPreview } from '../../components/examples/AccentColorPreview
 import { ColorPreview } from '../../components/examples/ColorPreview'
 import { BackgroundColorPreview } from '../../components/examples/BackgroundColorPreview'
 import { BorderColorPreview } from '../../components/examples/BorderColorPreview'
+import { BorderWidthPreview } from '../../components/examples/BorderWidthPreview'
+import { BorderStylePreview } from '../../components/examples/BorderStylePreview'
 import { ColorsPreview } from '../../components/examples/ColorsPreview'
 import { ColorPairPreview } from '../../components/examples/ColorPairPreview'
 import { TextDecorationColorPreview } from '../../components/examples/TextDecorationColorPreview'
@@ -74,6 +76,8 @@ export default function Docs() {
             <TextDecorationStylePreview />
             <TextDecorationThicknessPreview />
             <AccentColorPreview />
+            <BorderWidthPreview />
+            <BorderStylePreview />
             <BorderRadiusPreview />
             <FilterPreview />
             <BackgroundImagePreview />
