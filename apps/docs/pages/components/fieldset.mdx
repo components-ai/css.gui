@@ -23,7 +23,12 @@ import { useState } from 'react'
 import { Editor, Fieldset, Inputs, styled } from '@compai/css-gui'
 
 const MyEditor = () => {
-  const [styles, setStyles] = useState({})
+  const [styles, setStyles] = useState({ 
+    '::first-letter': {
+      fontSize: { unit: 'px', value: 32 }
+    }, 
+    fontSize: { unit: 'px', value: 16 },
+  }))
 
   return (
     <>
