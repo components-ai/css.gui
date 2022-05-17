@@ -240,7 +240,7 @@ export const properties: Record<string, PropertyData> = {
   backfaceVisibility: {
     type: 'keyword',
     keywords: ['visible', 'hidden'],
-    defaultvalue: 'hidden',
+    defaultValue: 'hidden',
   },
   background: {
     type: BackgroundInput,
@@ -2315,7 +2315,7 @@ export const properties: Record<string, PropertyData> = {
   writingMode: {
     type: 'keyword',
     keywords: ['horizontal-tb', 'vertical-rl', 'vertical-lr'],
-    defaultvalue: 'horizontal-tb',
+    defaultValue: 'horizontal-tb',
   },
   zIndex: {
     type: 'integer',
