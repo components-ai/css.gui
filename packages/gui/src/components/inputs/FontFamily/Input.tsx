@@ -154,8 +154,7 @@ export function FontFamilyInput({ label, value, onChange }: Props) {
       )}
       <input
         type="text"
-        // weird that this even works ..
-        value={value}
+        value={value.fontFamily}
         {...getInputProps({
           ref: inputRef,
           onChange: (e: any) => handleFontChange(e.target.value),

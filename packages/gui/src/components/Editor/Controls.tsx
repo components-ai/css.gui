@@ -52,7 +52,6 @@ const Control = ({ field, ...props }: ControlProps) => {
   const { getField, setField } = useEditor()
   const fieldset = useFieldset()
   const property = field.toString()
-  console.log(property, "properties")
   const Component: ComponentType<any> | null = getInputComponent(property)
   const themeValues = useThemeProperty(property)
   const keywords = [
@@ -117,7 +116,7 @@ const ComponentWithPropertyGroup = ({
     console.error(`Unknown field: ${property}, ignoring`)
     return null
   }
-  
+
   return (
     <Component
       value={getFields([...dependantProperties, property])}
