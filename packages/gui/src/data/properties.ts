@@ -646,6 +646,7 @@ export const properties: Record<string, PropertyData> = {
   boxSizing: {
     type: 'keyword',
     keywords: ['border-box', 'content-box'],
+    defaultValue: 'border-box',
   },
   breakAfter: {
     type: 'keyword',
@@ -702,12 +703,13 @@ export const properties: Record<string, PropertyData> = {
   },
   caretColor: {
     type: 'color',
-    defaultValue: 'auto',
+    defaultValue: '#6465ff',
     keywords: ['currentcolor', 'transparent'],
   },
   clear: {
     type: 'keyword',
     keywords: ['none', 'left', 'right', 'both', 'inline-start', 'inline-end'],
+    defaultValue: 'both',
   },
   clipPath: {
     type: ClipPathInput,
@@ -721,14 +723,17 @@ export const properties: Record<string, PropertyData> = {
   color: {
     type: 'color',
     keywords: ['currentcolor', 'transparent'],
+    defaultValue: '#6465ff',
   },
   colorAdjust: {
     type: 'keyword',
     keywords: ['economy', 'exact'],
+    defaultValue: 'exact',
   },
   colorInterpolationFilters: {
     type: 'keyword',
     keywords: ['auto', 'sRGB', 'linearRGB'],
+    defaultValue: 'auto',
   },
   columnCount: {
     type: 'integer',
@@ -816,6 +821,7 @@ export const properties: Record<string, PropertyData> = {
   contentVisibility: {
     type: 'keyword',
     keywords: ['visible', 'hidden', 'auto'],
+    defaultValue: 'visible',
   },
   // TODO: Add url() for images to cursor
   cursor: {
@@ -858,10 +864,12 @@ export const properties: Record<string, PropertyData> = {
       'zoom-in',
       'zoom-out',
     ],
+    defaultValue: 'pointer',
   },
   direction: {
     type: 'keyword',
     keywords: ['ltr', 'rtl'],
+    defaultValue: 'ltr',
   },
   display: {
     type: 'keyword',
@@ -888,6 +896,7 @@ export const properties: Record<string, PropertyData> = {
       'inline grid',
       'block flow-root',
     ],
+    defaultValue: 'block',
   },
   dominantBaseline: {
     // SVG
@@ -933,11 +942,13 @@ export const properties: Record<string, PropertyData> = {
       'fit-content',
       'content',
     ],
+    defaultValue: 'auto'
   },
   flexDirection: {
     type: 'keyword',
     responsive: true,
     keywords: ['row', 'row-reverse', 'column', 'column-reverse'],
+    defaultValue: 'row'
   },
   flexFlow: {
     type: 'keyword',
@@ -959,25 +970,28 @@ export const properties: Record<string, PropertyData> = {
       'row-reverse wrap',
       'column-reverse wrap',
     ],
+    defaultValue: 'row wrap'
   },
   flexGrow: {
     type: 'number',
-    defaultValue: 0,
     range: { number: [0, Infinity] },
+    defaultValue: 0,
   },
   flexShrink: {
     type: 'number',
-    defaultValue: 1,
     range: { number: [0, Infinity] },
+    defaultValue: 1,
   },
   flexWrap: {
     type: 'keyword',
     responsive: true,
     keywords: ['nowrap', 'wrap', 'wrap-reverse'],
+    defaultValue: 'wrap',
   },
   float: {
     type: 'keyword',
     keywords: ['left', 'right', 'none', 'inline-start', 'inline-end'],
+    defaultValue: 'none',
   },
   floatDefer: {
     type: 'number',
@@ -994,6 +1008,10 @@ export const properties: Record<string, PropertyData> = {
       [FontRelativeLengthUnits.Rem]: [0, 16],
       [PercentageLengthUnits.Pct]: [0.1, 200],
     },
+    defaultValue: {
+      value: 0,
+      unit: 'px',
+    }
   },
   floatReference: {
     type: 'keyword',
@@ -1002,22 +1020,29 @@ export const properties: Record<string, PropertyData> = {
   floodColor: {
     type: 'color',
     keywords: ['currentcolor', 'transparent'],
+    defaultValue: '#6465ff',
   },
   floodOpacity: {
     type: 'percentage',
-    defaultValue: 1,
+    defaultValue: {
+      value: 100,
+      unit: '%'
+    },
   },
   fontFamily: {
     type: FontFamily,
     dependantProperties: ['fontStyle', 'fontWeight', 'fontVariationSettings'],
+    defaultValue: 'Inter',
   },
   fontKerning: {
     type: 'keyword',
     keywords: ['auto', 'normal', 'none'],
+    defaultValue: 'auto',
   },
   fontOpticalSizing: {
     type: 'keyword',
     keywords: ['auto', 'none'],
+    defaultValue: 'auto',
   },
   fontSize: {
     type: 'length',
@@ -1044,6 +1069,10 @@ export const properties: Record<string, PropertyData> = {
       'smaller',
       'larger',
     ],
+    defaultValue: {
+      value: 24,
+      unit: 'px',
+    }
   },
   fontStretch: {
     type: 'percentage',
@@ -1059,6 +1088,7 @@ export const properties: Record<string, PropertyData> = {
       'ultra-expanded',
     ],
     range: { [PercentageLengthUnits.Pct]: [50, 200] },
+    defaultValue: 'ultra-condensed', 
   },
   fontStyle: {
     type: 'keyword',
@@ -1163,6 +1193,7 @@ export const properties: Record<string, PropertyData> = {
       'lighter',
       'bolder',
     ],
+    defaultValue: '400',
   },
   forceColorAdjust: {
     type: 'keyword',
@@ -1220,12 +1251,12 @@ export const properties: Record<string, PropertyData> = {
       'first force-end last',
       'first allow-end last',
     ],
+    defaultValue: 'none',
   },
   height: {
     type: 'length',
     percentage: true,
     keywords: ['max-content', 'min-content', 'auto'],
-    defaultValue: 'auto',
     range: {
       [AbsoluteLengthUnits.Px]: [0, 2160],
       [FontRelativeLengthUnits.Em]: [0, 16],
@@ -1236,6 +1267,7 @@ export const properties: Record<string, PropertyData> = {
       [ViewportPercentageLengthUnits.VMin]: [0, 100],
       [ViewportPercentageLengthUnits.VMax]: [0, 100],
     },
+    defaultValue: 'auto',
   },
   hyphenateCharacter: {
     type: 'string',
@@ -1244,15 +1276,18 @@ export const properties: Record<string, PropertyData> = {
   hyphens: {
     type: 'keyword',
     keywords: ['none', 'manual', 'auto'],
+    defaultValue: 'auto',
   },
   imageOrientation: {
     // NOTE: there is an <angle> version that is deprecated in favor of rotate()
     type: 'keyword',
     keywords: ['none', 'from-image'],
+    defaultValue: 'from-image',
   },
   initialLetterAlign: {
     type: 'keyword',
     keywords: ['auto', 'alphabetic', 'hanging', 'ideographic'],
+    defaultValue: 'auto',
   },
   initialLetterWrap: {
     type: 'length',
@@ -1263,6 +1298,7 @@ export const properties: Record<string, PropertyData> = {
   imageRendering: {
     type: 'keyword',
     keywords: ['auto', 'crisp-edges', 'pixelated'],
+    defaultValue: 'auto',
   },
   isolation: {
     type: 'keyword',
@@ -1287,6 +1323,7 @@ export const properties: Record<string, PropertyData> = {
       'safe center',
       'unsafe center',
     ],
+    defaultValue: 'center',
   },
   justifyItems: {
     type: 'keyword',
@@ -1308,6 +1345,7 @@ export const properties: Record<string, PropertyData> = {
       'safe center',
       'unsafe center',
     ],
+    defaultValue: 'center',
   },
   justifySelf: {
     type: 'keyword',
@@ -1329,16 +1367,22 @@ export const properties: Record<string, PropertyData> = {
       'safe center',
       'unsafe center',
     ],
+    defaultValue: 'center',
   },
   left: {
     type: 'length',
     percentage: true,
     keywords: ['auto'],
+    defaultValue: {
+      value: 0,
+      unit: 'px',
+    }
   },
   letterSpacing: {
     type: 'length',
     percentage: true,
     keywords: ['normal'],
+    defaultValue: 'normal',
   },
   lightingColor: {
     type: 'color',
@@ -1347,6 +1391,7 @@ export const properties: Record<string, PropertyData> = {
   lineBreak: {
     type: 'keyword',
     keywords: ['auto', 'loose', 'normal', 'strict', 'anywhere'],
+    defaultValue: 'auto',
   },
   listStyleImage: {
     // TODO only accepts a single image
@@ -1357,6 +1402,7 @@ export const properties: Record<string, PropertyData> = {
   listStylePosition: {
     type: 'keyword',
     keywords: ['inside', 'outside'],
+    defaultValue: 'outside',
   },
   listStyleType: {
     type: 'keyword',
@@ -1371,6 +1417,7 @@ export const properties: Record<string, PropertyData> = {
       'kannada',
       'custom-counter-style',
     ],
+    defaultValue: 'disc',
   },
   lineGrid: {
     type: 'keyword',
@@ -1383,6 +1430,10 @@ export const properties: Record<string, PropertyData> = {
     range: { number: [0, 2] },
     keywords: ['normal'],
     steps: { number: 0.05 },
+    defaultValue: {
+      value: 1.5,
+      unit: 'number',
+    }
   },
   lineHeightStep: {
     type: 'length',
@@ -1391,48 +1442,72 @@ export const properties: Record<string, PropertyData> = {
   lineSnap: {
     type: 'keyword',
     keywords: ['none', 'baseline', 'contain'],
+    defaultValue: 'none',
   },
   margin: {
     type: 'length',
     percentage: true,
     keywords: ['auto'],
+    defaultValue: {
+      value: 0,
+      unit: 'px',
+    }
   },
   marginTop: {
     type: 'length',
     percentage: true,
     keywords: ['auto'],
+    defaultValue: {
+      value: 0,
+      unit: 'px',
+    }
   },
   marginLeft: {
     type: 'length',
     percentage: true,
     keywords: ['auto'],
+    defaultValue: {
+      value: 0,
+      unit: 'px',
+    }
   },
   marginBottom: {
     type: 'length',
     percentage: true,
     keywords: ['auto'],
+    defaultValue: {
+      value: 0,
+      unit: 'px',
+    }
   },
   marginRight: {
     type: 'length',
     percentage: true,
     keywords: ['auto'],
+    defaultValue: {
+      value: 0,
+      unit: 'px',
+    }
   },
   marqueeDirection: {
     type: 'keyword',
     keywords: ['forward', 'reverse'],
+    defaultValue: 'forward',
   },
   marqueeLoop: {
     type: 'integer',
-    defaultValue: 1,
     range: { number: [1, Infinity] },
+    defaultValue: 'infinite',
   },
   marqueeStyle: {
     type: 'keyword',
     keywords: ['scroll', 'slide', 'alternate'],
+    defaultvalue: 'scroll',
   },
   marqueeSpeed: {
     type: 'keyword',
     keywords: ['slow', 'normal', 'fast'],
+    defaultvalue: 'slow',
   },
   mask: {
     type: MaskInput,
@@ -1441,6 +1516,7 @@ export const properties: Record<string, PropertyData> = {
   maskBorderMode: {
     type: 'keyword',
     keywords: ['luminance', 'alpha'],
+    defaultValue: 'luminance',
   },
   maskBorderSource: {
     type: ImageSourcePicker,
@@ -1457,6 +1533,10 @@ export const properties: Record<string, PropertyData> = {
     percentage: true,
     number: true,
     keywords: ['auto'],
+    defaultValue: {
+      value: 8,
+      unit: 'px',
+    }
   },
   maskBorderRepeat: {
     type: 'keyword',
@@ -1478,6 +1558,7 @@ export const properties: Record<string, PropertyData> = {
       'space round',
       'space repeat',
     ],
+    defaultValue: 'stretch',
   },
   maskClip: {
     type: 'keyword',
@@ -1491,11 +1572,13 @@ export const properties: Record<string, PropertyData> = {
       'view-box',
       'no-clip',
     ],
+    defaultValue: 'border-box',
   },
   maskComposite: {
     // TODO should be an array of values
     type: 'keyword',
     keywords: ['add', 'subtract', 'intersect', 'exclude'],
+    defaultValue: 'add',
   },
   maskImage: {
     type: ImageSourcePicker,
@@ -1513,6 +1596,7 @@ export const properties: Record<string, PropertyData> = {
       'alpha, match-source, luminance',
       'match-source, luminance',
     ],
+    defaultValue: 'luminance',
   },
   maskOrigin: {
     type: 'keyword',
