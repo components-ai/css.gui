@@ -74,6 +74,7 @@ export default function SimpleButton() {
             <div sx={{ display: 'flex', gap: '2em', mb: 3}}>
               <Inputs.Color />
               <Inputs.BackgroundColor />
+              <Inputs.OutlineColor />
             </div>
           </Fieldset>
           <Fieldset type='pseudo-class' name='focus'>
@@ -94,6 +95,7 @@ export default function SimpleButton() {
             <div sx={{ display: 'flex', gap: '2em', mb: 3}}>
               <Inputs.Color />
               <Inputs.BackgroundColor />
+              <Inputs.OutlineColor />
             </div>
           </Fieldset>
         </Editor>
