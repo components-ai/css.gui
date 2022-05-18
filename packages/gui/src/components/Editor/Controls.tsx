@@ -43,6 +43,7 @@ import { getDefaultValue } from '../../lib/defaults'
 import { MultidimensionInput } from '../inputs/Multidimension'
 import { Responsive } from '../Responsive/Input'
 import { addPseudoSyntax } from '../../lib/pseudos'
+import { AddPropertyControl } from '../AddProperty'
 
 interface ControlProps extends InputProps {
   field: KeyArg
@@ -51,7 +52,8 @@ const Control = ({ field, ...props }: ControlProps) => {
   const { getField, setField } = useEditor()
   const fieldset = useFieldset()
   const property = field.toString()
-  const Component: ComponentType<any> = getInputComponent(property)
+  console.log(property, "properties")
+  const Component: ComponentType<any> | null = getInputComponent(property)
   const themeValues = useThemeProperty(property)
   const keywords = [
     ...(properties[property].keywords ?? []),
@@ -108,9 +110,14 @@ const ComponentWithPropertyGroup = ({
   property,
   ...props
 }: ComponentGroupProps) => {
-  const Component: ComponentType<any> = getInputComponent(property)
+  const Component: ComponentType<any> | null = getInputComponent(property)
   const { getFields, setFields } = useEditor()
 
+  if (!Component) {
+    console.error(`Unknown field: ${property}, ignoring`)
+    return null
+  }
+  
   return (
     <Component
       value={getFields([...dependantProperties, property])}
@@ -132,12 +139,13 @@ Object.keys(properties).forEach((field: string) => {
   Inputs[pascalCase(field)] = Component
 })
 
-type ControlsProps = {
+interface ControlsProps {
   styles: Styles
   theme?: Theme
   onChange: (newStyles: any) => void
   children?: ReactNode
   hideResponsiveControls?: boolean
+  showAddProperties?: boolean
 }
 export const Editor = ({
   theme,
@@ -145,6 +153,7 @@ export const Editor = ({
   onChange,
   children,
   hideResponsiveControls,
+  showAddProperties,
 }: ControlsProps) => {
   const properties = uniq(Object.keys(styles).map((p) => p.replace(/^:+/, '')))
 
@@ -177,6 +186,7 @@ export const Editor = ({
       {properties.map((property) => {
         return <Control key={property} field={property} />
       })}
+      {showAddProperties && <AddPropertyControl styles={styles} />}
     </>
   )
 
@@ -222,6 +232,8 @@ function getPrimitiveInput(type: string) {
       return ColorInput
     case 'position':
       return PositionInput
+    case 'none':
+      return null
     default:
       return TextInput
   }

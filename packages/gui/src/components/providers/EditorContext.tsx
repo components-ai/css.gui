@@ -93,13 +93,16 @@ export function EditorProvider<V>({
   children,
   theme,
   hideResponsiveControls,
+  showAddProperties,
   ...values
 }: EditorContextProviderValue<V> & {
   hideResponsiveControls?: boolean
+  showAddProperties?: boolean
   children: ReactNode
 }) {
   const editorConfig: EditorConfig = {
     hideResponsiveControls: hideResponsiveControls ?? false,
+    showAddProperties: showAddProperties ?? false
   }
 
   return (

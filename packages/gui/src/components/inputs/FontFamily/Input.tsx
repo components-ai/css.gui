@@ -154,6 +154,7 @@ export function FontFamilyInput({ label, value, onChange }: Props) {
       )}
       <input
         type="text"
+        // weird that this even works ..
         value={value}
         {...getInputProps({
           ref: inputRef,
