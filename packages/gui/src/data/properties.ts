@@ -1502,12 +1502,12 @@ export const properties: Record<string, PropertyData> = {
   marqueeStyle: {
     type: 'keyword',
     keywords: ['scroll', 'slide', 'alternate'],
-    defaultvalue: 'scroll',
+    defaultValue: 'scroll',
   },
   marqueeSpeed: {
     type: 'keyword',
     keywords: ['slow', 'normal', 'fast'],
-    defaultvalue: 'slow',
+    defaultValue: 'slow',
   },
   mask: {
     type: MaskInput,
