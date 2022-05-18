@@ -81,12 +81,14 @@ export function useEditor() {
 
 interface EditorContextProviderValue<V> extends EditorData<V> {
   onChange(recipe: Recipe<EditorData<V>>): void
+  onRemove?(): void
   theme?: Theme
 }
 
 const EditorContext = createContext<EditorContextProviderValue<any>>({
   value: {},
   onChange: () => {},
+  onRemove: () => {},
 })
 
 export function EditorProvider<V>({

@@ -30,7 +30,7 @@ import { DimensionInput } from '../inputs/Dimension'
 import { SelectInput } from '../inputs/SelectInput'
 import { GLOBAL_KEYWORDS } from '../../data/global-keywords'
 import { Label } from '../primitives'
-import { camelCase, kebabCase, uniq } from 'lodash-es'
+import { camelCase, kebabCase, property, uniq } from 'lodash-es'
 import { useThemeProperty } from '../providers/ThemeContext'
 import { PositionInput } from '../inputs/PositionInput'
 import { TimeInput } from '../inputs/TimeInput'
@@ -49,7 +49,7 @@ interface ControlProps extends InputProps {
   field: KeyArg
 }
 const Control = ({ field, ...props }: ControlProps) => {
-  const { getField, setField } = useEditor()
+  const { getField, setField, removeField } = useEditor()
   const fieldset = useFieldset()
   const property = field.toString()
   const Component: ComponentType<any> | null = getInputComponent(property)
@@ -84,6 +84,7 @@ const Control = ({ field, ...props }: ControlProps) => {
       <ComponentWithPropertyGroup
         dependantProperties={dependantProperties}
         property={property}
+        fullField={fullField}
         {...componentProps}
       />
     )
@@ -95,6 +96,8 @@ const Control = ({ field, ...props }: ControlProps) => {
       onChange={(newValue: any) => {
         setField(fullField, newValue)
       }}
+      onRemove={() => removeField(fullField)}
+      property={property}
       {...componentProps}
     />
   )
@@ -102,15 +105,17 @@ const Control = ({ field, ...props }: ControlProps) => {
 
 interface ComponentGroupProps {
   dependantProperties: string[]
-  property: string
+  property: string,
+  fullField: KeyArg,
 }
 const ComponentWithPropertyGroup = ({
   dependantProperties,
   property,
+  fullField,
   ...props
 }: ComponentGroupProps) => {
   const Component: ComponentType<any> | null = getInputComponent(property)
-  const { getFields, setFields } = useEditor()
+  const { getFields, setFields, removeField } = useEditor()
 
   if (!Component) {
     console.error(`Unknown field: ${property}, ignoring`)
@@ -121,6 +126,7 @@ const ComponentWithPropertyGroup = ({
     <Component
       value={getFields([...dependantProperties, property])}
       onChange={(newValue: any) => setFields(newValue, dependantProperties)}
+      onRemove={() => removeField(fullField)} //
       {...props}
     />
   )
@@ -210,6 +216,7 @@ function getInputComponent(property: string) {
 }
 
 function getPrimitiveInput(type: string) {
+  console.log(type, "type")
   switch (type) {
     case 'keyword':
       return KeywordInput
@@ -300,6 +307,7 @@ const ResponsiveLengthInput = ({
   value,
   onChange,
   label,
+  property,
   ...props
 }: EditorPropsWithLabel<Length | ResponsiveLength> & { property: string }) => {
   return (
@@ -309,6 +317,7 @@ const ResponsiveLengthInput = ({
       defaultValue={DEFAULT_LENGTH}
       onChange={onChange}
       Component={LengthInput}
+      property={property}
       componentProps={{
         ...props,
         keyword: true,

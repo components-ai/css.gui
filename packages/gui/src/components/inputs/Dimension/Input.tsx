@@ -22,6 +22,8 @@ import { EditorProps } from '../../../types/editor'
 import { UnitConversions } from '../../../lib/convert'
 import { compact, kebabCase } from 'lodash-es'
 import { CalcInput } from '../../primitives/CalcInput'
+import { X } from 'react-feather'
+import { useEditor } from '../../providers/EditorContext'
 
 // Mapping of units to [min, max] tuple
 type UnitRanges = Record<string, [min: number, max: number]>
@@ -38,10 +40,12 @@ export interface DimensionInputProps extends EditorProps<Dimension> {
   /** The available theme values for the property. If provided, 'theme' will be appended as a unit */
   themeValues?: (CSSUnitValue & { id: string })[]
   conversions?: UnitConversions
+  property?: string
 }
 export const DimensionInput = ({
   value,
   onChange,
+  onRemove,
   label,
   range,
   units = [],
@@ -49,8 +53,10 @@ export const DimensionInput = ({
   themeValues = [],
   steps,
   conversions = {},
+  property,
 }: DimensionInputProps) => {
   const id = `${React.useId()}-${kebabCase(label)}`
+  const { removeField } = useEditor()
   const [state, dispatch] = React.useReducer(reducer, {
     value: (value as CSSUnitValue)?.value || 0,
     unit: (value as CSSUnitValue)?.unit || units[0] || AbsoluteLengthUnits.Px,
@@ -208,6 +214,22 @@ export const DimensionInput = ({
           sx={{ marginLeft: 1, minHeight: '1.6em', width: 72 }}
         />
       </div>
+      {onRemove && (
+        <DeletePropButton onRemove={onRemove}/>
+      )}
     </div>
+  )
+}
+
+interface DeleteProps {
+  onRemove(): void
+}
+export const DeletePropButton = ({ onRemove }: DeleteProps) => {
+  return (
+    <button onClick={() => {
+      if (onRemove) onRemove()
+    }}>
+      <X size={14}/>
+    </button>
   )
 }

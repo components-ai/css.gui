@@ -44,6 +44,7 @@ export function LengthInput({
       units={units}
       conversions={lengthConversions}
       steps={lengthSteps}
+      property={property}
       {...props}
     />
   )
