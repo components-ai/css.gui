@@ -2,11 +2,11 @@ import { useState } from 'react'
 import { FontFamilyInput, styled } from '@compai/css-gui'
 
 export const FontFamilyExample = () => {
-  const [styles, setStyles] = useState({ 
-    fontFamily: 'Recursive', 
+  const [styles, setStyles] = useState({
+    fontFamily: 'Recursive',
     fontSize: {
       value: 96,
-      unit: 'px'
+      unit: 'px',
     },
     marginTop: {
       value: 0,

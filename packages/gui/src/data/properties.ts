@@ -1096,7 +1096,7 @@ export const properties: Record<string, PropertyData> = {
     keywords: ['normal', 'sub', 'super'],
   },
   fontVariationSettings: {
-    type: 'none'
+    type: 'none',
   },
   fontWeight: {
     type: 'keyword',

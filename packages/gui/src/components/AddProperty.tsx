@@ -1,10 +1,10 @@
-import { useCombobox } from "downshift"
-import { useEffect, useId, useRef, useState } from "react"
-import { properties as propertyList } from "../data/properties"
-import { getDefaultValue } from "../lib/defaults"
-import { Styles } from "../types/css"
-import { Label } from "./primitives"
-import { useEditor } from "./providers/EditorContext"
+import { useCombobox } from 'downshift'
+import { useEffect, useId, useRef, useState } from 'react'
+import { properties as propertyList } from '../data/properties'
+import { getDefaultValue } from '../lib/defaults'
+import { Styles } from '../types/css'
+import { Label } from './primitives'
+import { useEditor } from './providers/EditorContext'
 
 interface Props {
   styles: Styles
@@ -15,9 +15,11 @@ export const AddPropertyControl = ({ styles }: Props) => {
   const inputRef = useRef(null)
 
   // @ts-ignore
-  const allProperties: string[] = Object.entries(propertyList).map(([name, data]) => {
+  const allProperties: string[] = Object.entries(propertyList)
+    .map(([name, data]) => {
       return data.type !== 'none' ? name : null
-    }).filter(Boolean)
+    })
+    .filter(Boolean)
 
   const [inputItems, setInputItems] = useState<string[]>([])
   const [filterValue, setFilterValue] = useState<string>('')
@@ -25,7 +27,7 @@ export const AddPropertyControl = ({ styles }: Props) => {
   useEffect(() => {
     handleFilterItems(filterValue)
   }, [])
-  
+
   const {
     isOpen,
     toggleMenu,
@@ -48,11 +50,13 @@ export const AddPropertyControl = ({ styles }: Props) => {
 
   const handleFilterItems = (input: string) => {
     const styleItems = Object.keys(styles)
-    const filteredItems = allProperties.filter((item) => {
-      if (item.toLowerCase().startsWith(input.toLowerCase() || '')) {
-        return !styleItems.includes(item)
-      }
-    }).sort()
+    const filteredItems = allProperties
+      .filter((item) => {
+        if (item.toLowerCase().startsWith(input.toLowerCase() || '')) {
+          return !styleItems.includes(item)
+        }
+      })
+      .sort()
     setInputItems(filteredItems)
   }
 
@@ -62,7 +66,7 @@ export const AddPropertyControl = ({ styles }: Props) => {
   }
 
   return (
-    <div {...getComboboxProps()} >
+    <div {...getComboboxProps()}>
       <Label htmlFor={id} sx={{ display: 'block' }}>
         Add Property
       </Label>
@@ -71,7 +75,7 @@ export const AddPropertyControl = ({ styles }: Props) => {
         value={filterValue}
         {...getInputProps({
           ref: inputRef,
-          onChange: (e: any) => setFilterValue(e.target.value)
+          onChange: (e: any) => setFilterValue(e.target.value),
         })}
         onFocus={() => {
           if (!isOpen) {

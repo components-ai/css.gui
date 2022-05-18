@@ -102,7 +102,7 @@ export function EditorProvider<V>({
 }) {
   const editorConfig: EditorConfig = {
     hideResponsiveControls: hideResponsiveControls ?? false,
-    showAddProperties: showAddProperties ?? false
+    showAddProperties: showAddProperties ?? false,
   }
 
   return (
