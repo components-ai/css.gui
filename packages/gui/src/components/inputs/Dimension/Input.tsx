@@ -23,7 +23,6 @@ import { UnitConversions } from '../../../lib/convert'
 import { compact, kebabCase } from 'lodash-es'
 import { CalcInput } from '../../primitives/CalcInput'
 import { X } from 'react-feather'
-import { useEditor } from '../../providers/EditorContext'
 
 // Mapping of units to [min, max] tuple
 type UnitRanges = Record<string, [min: number, max: number]>
@@ -56,7 +55,7 @@ export const DimensionInput = ({
   property,
 }: DimensionInputProps) => {
   const id = `${React.useId()}-${kebabCase(label)}`
-  const { removeField } = useEditor()
+  
   const [state, dispatch] = React.useReducer(reducer, {
     value: (value as CSSUnitValue)?.value || 0,
     unit: (value as CSSUnitValue)?.unit || units[0] || AbsoluteLengthUnits.Px,

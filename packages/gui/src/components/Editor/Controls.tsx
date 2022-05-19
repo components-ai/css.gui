@@ -30,7 +30,7 @@ import { DimensionInput } from '../inputs/Dimension'
 import { SelectInput } from '../inputs/SelectInput'
 import { GLOBAL_KEYWORDS } from '../../data/global-keywords'
 import { Label } from '../primitives'
-import { camelCase, kebabCase, property, uniq } from 'lodash-es'
+import { camelCase, kebabCase, uniq } from 'lodash-es'
 import { useThemeProperty } from '../providers/ThemeContext'
 import { PositionInput } from '../inputs/PositionInput'
 import { TimeInput } from '../inputs/TimeInput'
@@ -44,6 +44,7 @@ import { MultidimensionInput } from '../inputs/Multidimension'
 import { Responsive } from '../Responsive/Input'
 import { addPseudoSyntax } from '../../lib/pseudos'
 import { AddPropertyControl } from '../AddProperty'
+import { DeletePropButton } from '../inputs/Dimension/Input'
 
 interface ControlProps extends InputProps {
   field: KeyArg
@@ -252,6 +253,7 @@ type EditorPropsWithLabel<T> = EditorProps<T> & {
 const NumberInput = ({
   value,
   onChange,
+  onRemove,
   label,
   ...props
 }: EditorPropsWithLabel<CSSUnitValue>) => {
@@ -260,6 +262,7 @@ const NumberInput = ({
       value={value}
       label={label}
       onChange={onChange}
+      onRemove={onRemove}
       units={['number']}
       steps={{ number: 0.1 }}
       {...props}
@@ -270,6 +273,7 @@ const NumberInput = ({
 const IntegerInput = ({
   value,
   onChange,
+  onRemove,
   label,
   ...props
 }: EditorPropsWithLabel<CSSUnitValue>) => {
@@ -278,6 +282,7 @@ const IntegerInput = ({
       value={value}
       label={label}
       onChange={onChange}
+      onRemove={onRemove}
       units={['number']}
       steps={{ number: 1 }}
       {...props}
@@ -288,6 +293,7 @@ const IntegerInput = ({
 const PercentageInput = ({
   value,
   onChange,
+  onRemove,
   label,
   ...props
 }: EditorPropsWithLabel<CSSUnitValue>) => {
@@ -296,6 +302,7 @@ const PercentageInput = ({
       value={value}
       label={label}
       onChange={onChange}
+      onRemove={onRemove}
       units={['%']}
       steps={{ '%': 0.1 }}
       {...props}
@@ -306,6 +313,7 @@ const PercentageInput = ({
 const ResponsiveLengthInput = ({
   value,
   onChange,
+  onRemove,
   label,
   property,
   ...props
@@ -316,6 +324,7 @@ const ResponsiveLengthInput = ({
       value={value}
       defaultValue={DEFAULT_LENGTH}
       onChange={onChange}
+      onRemove={onRemove}
       Component={LengthInput}
       property={property}
       componentProps={{
@@ -329,6 +338,7 @@ const ResponsiveLengthInput = ({
 const MultidimensionLengthInput = ({
   value,
   onChange,
+  onRemove,
   label,
   ...props
 }: EditorPropsWithLabel<Responsive<CSSUnitValue | MultidimensionalLength>> & {
@@ -340,6 +350,7 @@ const MultidimensionLengthInput = ({
       value={value}
       defaultValue={DEFAULT_LENGTH as CSSUnitValue}
       onChange={onChange}
+      onRemove={onRemove}
       Component={MultidimensionInput}
       componentProps={{
         ...props,
@@ -353,6 +364,7 @@ const DEFAULT_KEYWORD = 'inherit'
 const KeywordInput = ({
   value,
   onChange,
+  onRemove,
   label,
   keywords,
   responsive,
@@ -364,6 +376,7 @@ const KeywordInput = ({
         value={value}
         onChange={(newValue: any) => onChange(newValue)}
         defaultValue={DEFAULT_KEYWORD}
+        onRemove={onRemove}
         Component={SelectInput}
         componentProps={{
           options: keywords,
@@ -377,6 +390,7 @@ const KeywordInput = ({
       label={label}
       value={value || DEFAULT_KEYWORD}
       onChange={onChange}
+      onRemove={onRemove}
       options={keywords}
     />
   )
@@ -385,17 +399,24 @@ const KeywordInput = ({
 const TextInput = ({
   value,
   onChange,
+  onRemove,
   label,
 }: EditorPropsWithLabel<string>) => {
   const id = `${useId()}-${kebabCase(label)}`
   return (
     <div>
       <Label htmlFor={id}>{label}</Label>
-      <input
-        type="text"
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-      />
+      <div sx={{ display: 'flex', flexDirection: 'row' }}>
+        <input
+          type="text"
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          sx={{ mr: 1 }}
+        />
+        {onRemove && (
+          <DeletePropButton onRemove={onRemove} />
+        )}
+      </div>
     </div>
   )
 }

@@ -2,9 +2,10 @@ import { getInputProps } from '../../lib/util'
 import { Position } from '../../types/css'
 import { EditorPropsWithLabel } from '../../types/editor'
 import { Label } from '../primitives'
+import { DeletePropButton } from './Dimension/Input'
 import { LengthInput } from './LengthInput'
 
-export function PositionInput(props: EditorPropsWithLabel<Position>) {
+export function PositionInput({ onRemove, ...props }: EditorPropsWithLabel<Position>) {
   return (
     <div>
       <Label>{props.label}</Label>
@@ -19,6 +20,9 @@ export function PositionInput(props: EditorPropsWithLabel<Position>) {
           percentage
           keywords={['top', 'center', 'bottom']}
         />
+        {onRemove && (
+          <DeletePropButton onRemove={onRemove} />
+        )}
       </div>
     </div>
   )

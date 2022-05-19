@@ -1,5 +1,6 @@
 import { EditorPropsWithLabel } from '../../types/editor'
 import { Label } from '../primitives'
+import { DeletePropButton } from './Dimension/Input'
 
 interface StringValue {
   value: string
@@ -19,12 +20,13 @@ export function StringInput({
   label,
   value = DEFAULT_STRING_VALUE,
   onChange,
+  onRemove,
   keywords = [],
 }: Props) {
   return (
     <div>
       <Label>{label}</Label>
-      <div>
+      <div sx={{ display: 'flex', flexDirection: 'row' }}>
         {value.unit === 'string' ? (
           <input
             type="text"
@@ -46,10 +48,14 @@ export function StringInput({
         <select
           value={value.unit}
           onChange={(e) => onChange({ ...value, unit: e.target.value as any })}
+          sx={{ mr: 1 }}
         >
           <option value="string">string</option>
           <option value="keyword">keyword</option>
         </select>
+        {onRemove && (
+          <DeletePropButton onRemove={onRemove} />
+        )}
       </div>
     </div>
   )

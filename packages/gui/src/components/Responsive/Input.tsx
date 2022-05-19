@@ -4,6 +4,7 @@ import { Breakpoint } from '../../types/theme'
 import { useTheme } from '../providers/ThemeContext'
 import { Label } from '../primitives'
 import { useEditorConfig } from '../providers/EditorConfigContext'
+import { DeletePropButton } from '../inputs/Dimension/Input'
 
 const DEFAULT_BREAKPOINT_COUNT = 3
 
@@ -12,6 +13,7 @@ type ResponsiveInputProps<T> = {
   value?: Responsive<T>
   defaultValue: Responsive<T>
   onChange: (newValue: Responsive<T>) => void
+  onRemove?: () => void
   label: string
   property?: string
   // TODO: Type this component
@@ -21,6 +23,7 @@ type ResponsiveInputProps<T> = {
 export function ResponsiveInput<T>({
   value,
   onChange,
+  onRemove,
   label,
   Component,
   componentProps = {},
@@ -99,6 +102,9 @@ export function ResponsiveInput<T>({
             onSwitchFromResponsive={handleSwitchFromResponsive}
             onSwitchToResponsive={handleSwitchToResponsive}
           />
+          {onRemove && (
+            <DeletePropButton onRemove={onRemove}/>
+          )}
         </div>
       </Label>
       {editors}
