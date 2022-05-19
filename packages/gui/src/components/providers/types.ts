@@ -1,6 +1,7 @@
 export interface FieldProps<V> {
   value: V
   onChange(value: V): void
+  onRemove?(): void
   label?: string | number
   showLabel?: boolean
 }

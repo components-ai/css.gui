@@ -43,15 +43,18 @@ import { getDefaultValue } from '../../lib/defaults'
 import { MultidimensionInput } from '../inputs/Multidimension'
 import { Responsive } from '../Responsive/Input'
 import { addPseudoSyntax } from '../../lib/pseudos'
+import { AddPropertyControl } from '../AddProperty'
+import { DeletePropButton } from '../inputs/Dimension/Input'
 
 interface ControlProps extends InputProps {
   field: KeyArg
+  showRemove?: boolean
 }
-const Control = ({ field, ...props }: ControlProps) => {
-  const { getField, setField } = useEditor()
+const Control = ({ field, showRemove = false, ...props }: ControlProps) => {
+  const { getField, setField, removeField } = useEditor()
   const fieldset = useFieldset()
   const property = field.toString()
-  const Component: ComponentType<any> = getInputComponent(property)
+  const Component: ComponentType<any> | null = getInputComponent(property)
   const themeValues = useThemeProperty(property)
   const keywords = [
     ...(properties[property].keywords ?? []),
@@ -83,6 +86,8 @@ const Control = ({ field, ...props }: ControlProps) => {
       <ComponentWithPropertyGroup
         dependantProperties={dependantProperties}
         property={property}
+        fullField={fullField}
+        showRemove
         {...componentProps}
       />
     )
@@ -94,6 +99,8 @@ const Control = ({ field, ...props }: ControlProps) => {
       onChange={(newValue: any) => {
         setField(fullField, newValue)
       }}
+      onRemove={showRemove ?() => removeField(fullField) : null}
+      property={property}
       {...componentProps}
     />
   )
@@ -102,19 +109,29 @@ const Control = ({ field, ...props }: ControlProps) => {
 interface ComponentGroupProps {
   dependantProperties: string[]
   property: string
+  fullField: KeyArg
+  showRemove: boolean
 }
 const ComponentWithPropertyGroup = ({
   dependantProperties,
   property,
+  fullField,
+  showRemove = false,
   ...props
 }: ComponentGroupProps) => {
-  const Component: ComponentType<any> = getInputComponent(property)
-  const { getFields, setFields } = useEditor()
+  const Component: ComponentType<any> | null = getInputComponent(property)
+  const { getFields, setFields, removeField } = useEditor()
+
+  if (!Component) {
+    console.error(`Unknown field: ${property}, ignoring`)
+    return null
+  }
 
   return (
     <Component
       value={getFields([...dependantProperties, property])}
       onChange={(newValue: any) => setFields(newValue, dependantProperties)}
+      onRemove={showRemove ?() => removeField(fullField) : null}
       {...props}
     />
   )
@@ -132,12 +149,13 @@ Object.keys(properties).forEach((field: string) => {
   Inputs[pascalCase(field)] = Component
 })
 
-type ControlsProps = {
+interface ControlsProps {
   styles: Styles
   theme?: Theme
   onChange: (newStyles: any) => void
   children?: ReactNode
   hideResponsiveControls?: boolean
+  showAddProperties?: boolean
 }
 export const Editor = ({
   theme,
@@ -145,6 +163,7 @@ export const Editor = ({
   onChange,
   children,
   hideResponsiveControls,
+  showAddProperties,
 }: ControlsProps) => {
   const properties = uniq(Object.keys(styles).map((p) => p.replace(/^:+/, '')))
 
@@ -175,7 +194,7 @@ export const Editor = ({
   ) : (
     <>
       {properties.map((property) => {
-        return <Control key={property} field={property} />
+        return <Control key={property} field={property} showRemove/>
       })}
     </>
   )
@@ -188,6 +207,7 @@ export const Editor = ({
       hideResponsiveControls={hideResponsiveControls}
     >
       {controls}
+      {showAddProperties ? <AddPropertyControl styles={styles} /> : null}
     </EditorProvider>
   )
 }
@@ -222,6 +242,8 @@ function getPrimitiveInput(type: string) {
       return ColorInput
     case 'position':
       return PositionInput
+    case 'none':
+      return null
     default:
       return TextInput
   }
@@ -234,6 +256,7 @@ type EditorPropsWithLabel<T> = EditorProps<T> & {
 const NumberInput = ({
   value,
   onChange,
+  onRemove,
   label,
   ...props
 }: EditorPropsWithLabel<CSSUnitValue>) => {
@@ -242,6 +265,7 @@ const NumberInput = ({
       value={value}
       label={label}
       onChange={onChange}
+      onRemove={onRemove}
       units={['number']}
       steps={{ number: 0.1 }}
       {...props}
@@ -252,6 +276,7 @@ const NumberInput = ({
 const IntegerInput = ({
   value,
   onChange,
+  onRemove,
   label,
   ...props
 }: EditorPropsWithLabel<CSSUnitValue>) => {
@@ -260,6 +285,7 @@ const IntegerInput = ({
       value={value}
       label={label}
       onChange={onChange}
+      onRemove={onRemove}
       units={['number']}
       steps={{ number: 1 }}
       {...props}
@@ -270,6 +296,7 @@ const IntegerInput = ({
 const PercentageInput = ({
   value,
   onChange,
+  onRemove,
   label,
   ...props
 }: EditorPropsWithLabel<CSSUnitValue>) => {
@@ -278,6 +305,7 @@ const PercentageInput = ({
       value={value}
       label={label}
       onChange={onChange}
+      onRemove={onRemove}
       units={['%']}
       steps={{ '%': 0.1 }}
       {...props}
@@ -288,7 +316,9 @@ const PercentageInput = ({
 const ResponsiveLengthInput = ({
   value,
   onChange,
+  onRemove,
   label,
+  property,
   ...props
 }: EditorPropsWithLabel<Length | ResponsiveLength> & { property: string }) => {
   return (
@@ -297,7 +327,9 @@ const ResponsiveLengthInput = ({
       value={value}
       defaultValue={DEFAULT_LENGTH}
       onChange={onChange}
+      onRemove={onRemove}
       Component={LengthInput}
+      property={property}
       componentProps={{
         ...props,
         keyword: true,
@@ -309,6 +341,7 @@ const ResponsiveLengthInput = ({
 const MultidimensionLengthInput = ({
   value,
   onChange,
+  onRemove,
   label,
   ...props
 }: EditorPropsWithLabel<Responsive<CSSUnitValue | MultidimensionalLength>> & {
@@ -320,6 +353,7 @@ const MultidimensionLengthInput = ({
       value={value}
       defaultValue={DEFAULT_LENGTH as CSSUnitValue}
       onChange={onChange}
+      onRemove={onRemove}
       Component={MultidimensionInput}
       componentProps={{
         ...props,
@@ -333,6 +367,7 @@ const DEFAULT_KEYWORD = 'inherit'
 const KeywordInput = ({
   value,
   onChange,
+  onRemove,
   label,
   keywords,
   responsive,
@@ -344,6 +379,7 @@ const KeywordInput = ({
         value={value}
         onChange={(newValue: any) => onChange(newValue)}
         defaultValue={DEFAULT_KEYWORD}
+        onRemove={onRemove}
         Component={SelectInput}
         componentProps={{
           options: keywords,
@@ -357,6 +393,7 @@ const KeywordInput = ({
       label={label}
       value={value || DEFAULT_KEYWORD}
       onChange={onChange}
+      onRemove={onRemove}
       options={keywords}
     />
   )
@@ -365,17 +402,22 @@ const KeywordInput = ({
 const TextInput = ({
   value,
   onChange,
+  onRemove,
   label,
 }: EditorPropsWithLabel<string>) => {
   const id = `${useId()}-${kebabCase(label)}`
   return (
     <div>
       <Label htmlFor={id}>{label}</Label>
-      <input
-        type="text"
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-      />
+      <div sx={{ display: 'flex', flexDirection: 'row' }}>
+        <input
+          type="text"
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          sx={{ mr: 1 }}
+        />
+        {onRemove && <DeletePropButton onRemove={onRemove} />}
+      </div>
     </div>
   )
 }

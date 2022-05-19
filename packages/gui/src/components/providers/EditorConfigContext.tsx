@@ -2,10 +2,12 @@ import { createContext, ReactChild, useContext } from 'react'
 
 const DEFAULT_EDITOR_CONFIG = {
   hideResponsiveControls: false,
+  showAddProperties: false,
 }
 
 export type EditorConfig = {
   hideResponsiveControls?: boolean
+  showAddProperties?: boolean
 }
 
 export function useEditorConfig() {

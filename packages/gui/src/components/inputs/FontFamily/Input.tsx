@@ -5,6 +5,7 @@ import { FontFamilyType } from '../../../types/css'
 import { EditorProps } from '../../../types/editor'
 import { Label } from '../../primitives'
 import { NumberInput } from '../NumberInput'
+import { DeletePropButton } from '../Dimension/Input'
 
 type Font = {
   name: string
@@ -37,7 +38,7 @@ interface Props extends EditorProps<FontFamilyType> {
   defaultValue?: FontFamilyType
 }
 
-export function FontFamilyInput({ label, value, onChange }: Props) {
+export function FontFamilyInput({ label, value, onChange, onRemove }: Props) {
   const id = React.useId()
   const fullId = `${id}-${label ? kebabCase(label) : 'font-family'}`
 
@@ -152,21 +153,26 @@ export function FontFamilyInput({ label, value, onChange }: Props) {
           {label}
         </Label>
       )}
-      <input
-        type="text"
-        value={value}
-        {...getInputProps({
-          ref: inputRef,
-          onChange: (e: any) => handleFontChange(e.target.value),
-        })}
-        onFocus={() => {
-          if (!isOpen) {
-            toggleMenu()
-            handleFilterItems('')
-          }
-        }}
-        sx={{ width: '100%' }}
-      />
+      <div sx={{ display: 'flex', flexDirection: 'row' }}>
+        <input
+          type="text"
+          value={value.fontFamily}
+          {...getInputProps({
+            ref: inputRef,
+            onChange: (e: any) => handleFontChange(e.target.value),
+          })}
+          onFocus={() => {
+            if (!isOpen) {
+              toggleMenu()
+              handleFilterItems('')
+            }
+          }}
+          sx={{ width: '100%', }}
+        />
+        {onRemove && (
+          <DeletePropButton onRemove={onRemove} />
+        )}
+      </div>
       <div
         sx={{
           position: 'relative',

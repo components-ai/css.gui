@@ -81,25 +81,30 @@ export function useEditor() {
 
 interface EditorContextProviderValue<V> extends EditorData<V> {
   onChange(recipe: Recipe<EditorData<V>>): void
+  onRemove?(): void
   theme?: Theme
 }
 
 const EditorContext = createContext<EditorContextProviderValue<any>>({
   value: {},
   onChange: () => {},
+  onRemove: () => {},
 })
 
 export function EditorProvider<V>({
   children,
   theme,
   hideResponsiveControls,
+  showAddProperties,
   ...values
 }: EditorContextProviderValue<V> & {
   hideResponsiveControls?: boolean
+  showAddProperties?: boolean
   children: ReactNode
 }) {
   const editorConfig: EditorConfig = {
     hideResponsiveControls: hideResponsiveControls ?? false,
+    showAddProperties: showAddProperties ?? false,
   }
 
   return (
