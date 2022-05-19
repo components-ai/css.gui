@@ -113,7 +113,7 @@ export function EditorProvider<V>({
         <EditorConfigProvider config={editorConfig}>
           <DynamicControlsProvider
             dynamicProperties={dynamicProps}
-            setDynamicProperties={setDynamicProps}
+            setDynamicProperties={(properties) => setDynamicProps(properties)}
           >
             <EditorContext.Provider value={values}>
               {children}
@@ -125,12 +125,7 @@ export function EditorProvider<V>({
   )
 }
 
-
-export function useDynamicControls() {
-  const context = useContext(DynamicControlsContext)
-  return context
-}
-
+// TODO - on remove of property
 interface DynamicControlsContextProps {
   dynamicProperties: string[]
   setDynamicProperties(properties: string[]): void 
@@ -139,6 +134,10 @@ const DynamicControlsContext = createContext<DynamicControlsContextProps>({
   dynamicProperties: [],
   setDynamicProperties: (properties: string[]) => {}
 })
+export function useDynamicControls() {
+  const context = useContext(DynamicControlsContext)
+  return context
+}
 
 interface DynamicControlsProviderProps {
   dynamicProperties: string[],
