@@ -48,7 +48,6 @@ export const Sidebar = ({
         order: [2, 1, 1],
       }}
     >
-      <SectionTitle>Element</SectionTitle>
       <SelectInput
         label="Element"
         value={element.name}
