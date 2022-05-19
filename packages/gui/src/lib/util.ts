@@ -3,6 +3,7 @@ import { isElement } from './elements'
 import { lowerCase, startCase, upperFirst } from 'lodash-es'
 import { EditorProps, EditorPropsWithLabel } from '../types/editor'
 import { MultidimensionalLength } from '../types/css'
+import { isInternalCSSClass } from './classes'
 
 /**
  * Populate props to be used for an input control for a subproperty of a value.
@@ -30,6 +31,7 @@ export function isNestedSelector(selector: string): boolean {
     isElement(selector) ||
     isPseudoClass(selector) ||
     isPseudoElement(selector) ||
+    isInternalCSSClass(selector) ||
     false
   )
 }

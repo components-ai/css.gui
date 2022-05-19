@@ -1,5 +1,7 @@
 import { isEmpty, kebabCase } from 'lodash-es'
+import { isCSSClass } from '../classes'
 import { isElement } from '../elements'
+import { isPseudo } from '../pseudos'
 
 const objectToDecls = (obj: any): string => {
   return Object.entries(obj)
@@ -26,8 +28,16 @@ const flattenCSSObject = (
         ...flattenedGroups,
       }
       return
-    } else if (key.startsWith(':')) {
+    } else if (isPseudo(key)) {
       const fullSelector = selector + key
+      const flattenedGroups = flattenCSSObject(value, fullSelector)
+      cssDeclGroups = {
+        ...cssDeclGroups,
+        ...flattenedGroups,
+      }
+      return
+    } else if (isCSSClass(key)) {
+      const fullSelector = selector + ' ' + key
       const flattenedGroups = flattenCSSObject(value, fullSelector)
       cssDeclGroups = {
         ...cssDeclGroups,
