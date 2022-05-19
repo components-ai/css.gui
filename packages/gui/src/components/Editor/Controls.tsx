@@ -48,8 +48,9 @@ import { DeletePropButton } from '../inputs/Dimension/Input'
 
 interface ControlProps extends InputProps {
   field: KeyArg
+  showRemove: boolean
 }
-const Control = ({ field, ...props }: ControlProps) => {
+const Control = ({ field, showRemove = false, ...props }: ControlProps) => {
   const { getField, setField, removeField } = useEditor()
   const fieldset = useFieldset()
   const property = field.toString()
@@ -86,6 +87,7 @@ const Control = ({ field, ...props }: ControlProps) => {
         dependantProperties={dependantProperties}
         property={property}
         fullField={fullField}
+        showRemove
         {...componentProps}
       />
     )
@@ -97,7 +99,7 @@ const Control = ({ field, ...props }: ControlProps) => {
       onChange={(newValue: any) => {
         setField(fullField, newValue)
       }}
-      onRemove={() => removeField(fullField)}
+      onRemove={showRemove ?() => removeField(fullField) : null}
       property={property}
       {...componentProps}
     />
@@ -108,11 +110,13 @@ interface ComponentGroupProps {
   dependantProperties: string[]
   property: string
   fullField: KeyArg
+  showRemove: boolean
 }
 const ComponentWithPropertyGroup = ({
   dependantProperties,
   property,
   fullField,
+  showRemove = false,
   ...props
 }: ComponentGroupProps) => {
   const Component: ComponentType<any> | null = getInputComponent(property)
@@ -127,7 +131,7 @@ const ComponentWithPropertyGroup = ({
     <Component
       value={getFields([...dependantProperties, property])}
       onChange={(newValue: any) => setFields(newValue, dependantProperties)}
-      onRemove={() => removeField(fullField)}
+      onRemove={showRemove ?() => removeField(fullField) : null}
       {...props}
     />
   )
@@ -190,7 +194,7 @@ export const Editor = ({
   ) : (
     <>
       {properties.map((property) => {
-        return <Control key={property} field={property} />
+        return <Control key={property} field={property} showRemove/>
       })}
     </>
   )
