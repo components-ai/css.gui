@@ -56,7 +56,7 @@ export const Sidebar = ({
         />
         <TextInput
           label="Text"
-          value={element.children}
+          value={element.children || ''}
           onChange={(children: string) =>
             onElementChange({ ...element, children })
           }
