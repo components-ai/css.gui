@@ -40,7 +40,6 @@ export const Sidebar = ({
         borderLeftStyle: 'solid',
         borderLeftColor: 'border',
         py: [2, 3],
-        px: 2,
         overflowY: 'auto',
         top: 0,
         right: 0,
@@ -48,21 +47,33 @@ export const Sidebar = ({
         order: [2, 1, 1],
       }}
     >
-      <SelectInput
-        label="Element"
-        value={element.name}
-        onChange={(name: string) => onElementChange({ ...element, name })}
-        options={['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'a']}
-      />
-      <TextInput
-        label="Text"
-        value={element.children}
-        onChange={(children: string) =>
-          onElementChange({ ...element, children })
-        }
-      />
-      <SectionTitle>Styling</SectionTitle>
-      <Editor styles={styles} onChange={onChange} showAddProperties />
+      <div sx={{ px: 2, pb: 1 }}>
+        <SelectInput
+          label="Element"
+          value={element.name}
+          onChange={(name: string) => onElementChange({ ...element, name })}
+          options={['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'a']}
+        />
+        <TextInput
+          label="Text"
+          value={element.children}
+          onChange={(children: string) =>
+            onElementChange({ ...element, children })
+          }
+        />
+      </div>
+      <div
+        sx={{
+          mt: 3,
+          px: 2,
+          borderTopStyle: 'solid',
+          borderTopColor: 'border',
+          borderTopWidth: 'thin',
+        }}
+      >
+        <SectionTitle>Styling</SectionTitle>
+        <Editor styles={styles} onChange={onChange} showAddProperties />
+      </div>
     </section>
   )
 }
