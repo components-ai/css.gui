@@ -97,14 +97,14 @@ export function ResponsiveInput<T>({
           }}
         >
           <span>{label}</span>
-          <ResponsiveToggle
-            isResponsive={isResponsiveControls}
-            onSwitchFromResponsive={handleSwitchFromResponsive}
-            onSwitchToResponsive={handleSwitchToResponsive}
-          />
-          {onRemove && (
-            <DeletePropButton onRemove={onRemove}/>
-          )}
+          <div sx={{ display: 'flex' }}>
+            <ResponsiveToggle
+              isResponsive={isResponsiveControls}
+              onSwitchFromResponsive={handleSwitchFromResponsive}
+              onSwitchToResponsive={handleSwitchToResponsive}
+            />
+            {onRemove ? <DeletePropButton onRemove={onRemove} /> : null}
+          </div>
         </div>
       </Label>
       {editors}
@@ -131,15 +131,32 @@ const ResponsiveToggle = ({
   return isResponsive ? (
     <button
       title="Remove responsive controls"
-      sx={{ all: 'unset', color: 'muted', display: 'flex', alignItems: 'center', gap: '1em', cursor: 'pointer', }}
+      sx={{
+        all: 'unset',
+        color: 'muted',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '.5em',
+        cursor: 'pointer',
+        mr: 2,
+      }}
       onClick={onSwitchFromResponsive}
     >
-      Responsive <ToggleRight size={16} strokeWidth={2} sx={{color: 'text'}}/>
+      Responsive{' '}
+      <ToggleRight size={16} strokeWidth={2} sx={{ color: 'text' }} />
     </button>
   ) : (
     <button
       title="Switch to responsive controls"
-      sx={{ all: 'unset', cursor: 'pointer', color: 'muted', display: 'flex', alignItems: 'center', gap: '1em',}}
+      sx={{
+        all: 'unset',
+        cursor: 'pointer',
+        color: 'muted',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '.5em',
+        mr: 2,
+      }}
       onClick={onSwitchToResponsive}
     >
       Responsive <ToggleLeft size={16} strokeWidth={2} />

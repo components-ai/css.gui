@@ -106,8 +106,8 @@ const Control = ({ field, ...props }: ControlProps) => {
 
 interface ComponentGroupProps {
   dependantProperties: string[]
-  property: string,
-  fullField: KeyArg,
+  property: string
+  fullField: KeyArg
 }
 const ComponentWithPropertyGroup = ({
   dependantProperties,
@@ -192,7 +192,6 @@ export const Editor = ({
       {properties.map((property) => {
         return <Control key={property} field={property} />
       })}
-      {showAddProperties && <AddPropertyControl styles={styles} />}
     </>
   )
 
@@ -204,6 +203,7 @@ export const Editor = ({
       hideResponsiveControls={hideResponsiveControls}
     >
       {controls}
+      {showAddProperties ? <AddPropertyControl styles={styles} /> : null}
     </EditorProvider>
   )
 }
@@ -412,9 +412,7 @@ const TextInput = ({
           onChange={(e) => onChange(e.target.value)}
           sx={{ mr: 1 }}
         />
-        {onRemove && (
-          <DeletePropButton onRemove={onRemove} />
-        )}
+        {onRemove && <DeletePropButton onRemove={onRemove} />}
       </div>
     </div>
   )
