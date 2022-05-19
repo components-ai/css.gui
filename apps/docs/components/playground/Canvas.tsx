@@ -18,7 +18,7 @@ export const Canvas = ({ styles, element }: CanvasProps) => {
         flexGrow: 1,
       }}
     >
-      <Element styles={styles} children={element.children ?? null} />
+      <Element styles={styles}>{element.children ?? null}</Element>
     </section>
   )
 }
