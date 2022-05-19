@@ -1,5 +1,12 @@
 # @compai/css-gui
 
+## 0.0.57
+
+### Patch Changes
+
+- 5005fb5: Allow properties to be added dynamically
+- 4fc1aae: Add fieldsets for classes
+
 ## 0.0.56
 
 ### Patch Changes
