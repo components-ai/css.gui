@@ -65,7 +65,7 @@ export default function TextDecoration() {
         <div sx={{ flexGrow: 1, padding: 5 }}>
           <styled.p styles={styles}>
             “The parameters comprise sequences which are theoretically infinite
-            but limits are, of course, set to them in practice."
+            but limits are, of course, set to them in practice.“
             <br /> 
             <em sx={{ fontSize: '50%' }}>
               In{' '}
