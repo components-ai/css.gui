@@ -1,10 +1,11 @@
 import { useCombobox } from 'downshift'
+import { property } from 'lodash-es'
 import { useEffect, useId, useRef, useState } from 'react'
 import { properties as propertyList } from '../data/properties'
 import { getDefaultValue } from '../lib/defaults'
 import { Styles } from '../types/css'
 import { Label } from './primitives'
-import { useEditor } from './providers/EditorContext'
+import { DynamicControlsProvider, useEditor } from './providers/EditorContext'
 
 interface Props {
   styles: Styles
@@ -23,6 +24,7 @@ export const AddPropertyControl = ({ styles }: Props) => {
 
   const [inputItems, setInputItems] = useState<string[]>([])
   const [filterValue, setFilterValue] = useState<string>('')
+  const [addedProps, setAddedProps] = useState<string[]>([])
 
   useEffect(() => {
     handleFilterItems(filterValue)
@@ -63,10 +65,12 @@ export const AddPropertyControl = ({ styles }: Props) => {
   const handleAddProperty = (propertyName: string) => {
     setFilterValue(propertyName)
     setField(propertyName, getDefaultValue(propertyName))
+    setAddedProps([...addedProps, propertyName])
   }
 
   return (
     <div {...getComboboxProps()}>
+      <DynamicControlsProvider dynamicProperties={addedProps}>
       <Label htmlFor={id} sx={{ display: 'block' }}>
         Add Property
       </Label>
@@ -185,6 +189,7 @@ export const AddPropertyControl = ({ styles }: Props) => {
             })}
         </ul>
       </div>
+      </DynamicControlsProvider>
     </div>
   )
 }

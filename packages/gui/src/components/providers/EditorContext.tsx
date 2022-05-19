@@ -1,6 +1,6 @@
 import { ThemeProvider as ThemeUIProvider } from 'theme-ui'
-import { get, unset } from 'lodash-es'
-import { createContext, ReactChild, ReactNode, useContext } from 'react'
+import { get, property, unset } from 'lodash-es'
+import { createContext, ReactChild, ReactNode, useContext, useState } from 'react'
 import { KeyArg, Recipe, EditorData } from './types'
 import { applyRecipe } from './util'
 import { ThemeProvider } from './ThemeContext'
@@ -106,16 +106,57 @@ export function EditorProvider<V>({
     hideResponsiveControls: hideResponsiveControls ?? false,
     showAddProperties: showAddProperties ?? false,
   }
-
+  const [dynamicProps, setDynamicProps] = useState<string[]>([])
   return (
     <ThemeProvider theme={theme}>
       <ThemeUIProvider theme={uiTheme}>
         <EditorConfigProvider config={editorConfig}>
-          <EditorContext.Provider value={values}>
-            {children}
-          </EditorContext.Provider>
+          <DynamicControlsProvider
+            dynamicProperties={dynamicProps}
+            setDynamicProperties={setDynamicProps}
+          >
+            <EditorContext.Provider value={values}>
+              {children}
+            </EditorContext.Provider>
+          </DynamicControlsProvider>
         </EditorConfigProvider>
       </ThemeUIProvider>
     </ThemeProvider>
+  )
+}
+
+
+export function useDynamicControls() {
+  const context = useContext(DynamicControlsContext)
+  return context
+}
+
+interface DynamicControlsContextProps {
+  dynamicProperties: string[]
+  setDynamicProperties(properties: string[]): void 
+}
+const DynamicControlsContext = createContext<DynamicControlsContextProps>({
+  dynamicProperties: [],
+  setDynamicProperties: (properties: string[]) => {}
+})
+
+interface DynamicControlsProviderProps {
+  dynamicProperties: string[],
+  setDynamicProperties: (properties: string[]) => {}
+  children: ReactChild
+}
+export function DynamicControlsProvider({
+  dynamicProperties,
+  setDynamicProperties,
+  children
+}: DynamicControlsProviderProps) {
+  
+  return (
+    <DynamicControlsContext.Provider value={{
+      dynamicProperties,
+      setDynamicProperties
+    }}>
+      {children}
+    </DynamicControlsContext.Provider>
   )
 }
