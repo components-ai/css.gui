@@ -4,14 +4,22 @@ import {
   Length,
   MultidimensionalLength,
   Position,
-  CSSFunctionCalc
+  CSSFunctionCalc,
 } from '../types/css'
+import {
+  addCSSClassSyntax,
+  isInternalCSSClass,
+  removeInternalCSSClassSyntax,
+} from './classes'
 import { addPseudoSyntax } from './pseudos'
 import { isMultidimensionalLength } from './util'
 
 export function stringifySelector(selector: string): string {
   if (isElement(selector)) {
     return selector
+  }
+  if (isInternalCSSClass(selector)) {
+    return addCSSClassSyntax(removeInternalCSSClassSyntax(selector))
   }
 
   return addPseudoSyntax(selector)

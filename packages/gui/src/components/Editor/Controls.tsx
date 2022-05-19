@@ -42,9 +42,14 @@ import { DEFAULT_LENGTH } from '../../lib/constants'
 import { getDefaultValue } from '../../lib/defaults'
 import { MultidimensionInput } from '../inputs/Multidimension'
 import { Responsive } from '../Responsive/Input'
-import { addPseudoSyntax } from '../../lib/pseudos'
 import { AddPropertyControl } from '../AddProperty'
 import { DeletePropButton } from '../inputs/Dimension/Input'
+import { addPseudoSyntax, isPseudo } from '../../lib/pseudos'
+import {
+  addInternalCSSClassSyntax,
+  isInternalCSSClass,
+} from '../../lib/classes'
+import { addFieldsetNameSyntax } from './util'
 
 interface ControlProps extends InputProps {
   field: KeyArg
@@ -67,10 +72,9 @@ const Control = ({ field, showRemove = false, ...props }: ControlProps) => {
     return null
   }
 
-  const fieldsetName =
-    fieldset && getField(fieldset.name)
-      ? fieldset.name
-      : addPseudoSyntax(fieldset?.name as string)
+  const fieldsetName = fieldset?.name
+    ? addFieldsetNameSyntax(fieldset.name as string, fieldset.type)
+    : null
 
   const fullField = fieldsetName ? joinPath(fieldsetName, field) : field
   const componentProps = {
@@ -99,7 +103,7 @@ const Control = ({ field, showRemove = false, ...props }: ControlProps) => {
       onChange={(newValue: any) => {
         setField(fullField, newValue)
       }}
-      onRemove={showRemove ?() => removeField(fullField) : null}
+      onRemove={showRemove ? () => removeField(fullField) : null}
       property={property}
       {...componentProps}
     />
@@ -131,7 +135,7 @@ const ComponentWithPropertyGroup = ({
     <Component
       value={getFields([...dependantProperties, property])}
       onChange={(newValue: any) => setFields(newValue, dependantProperties)}
-      onRemove={showRemove ?() => removeField(fullField) : null}
+      onRemove={showRemove ? () => removeField(fullField) : null}
       {...props}
     />
   )
@@ -194,7 +198,7 @@ export const Editor = ({
   ) : (
     <>
       {properties.map((property) => {
-        return <Control key={property} field={property} showRemove/>
+        return <Control key={property} field={property} showRemove />
       })}
     </>
   )

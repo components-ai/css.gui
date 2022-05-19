@@ -7,11 +7,16 @@ import { addPseudoSyntax } from '../../lib/pseudos'
 type PseudoElementTypes = typeof pseudoElements[number]
 type PseudoClassTypes = typeof pseudoClasses[number]
 type ElementTypes = typeof elements[number]
+type ClassTypes = string
 
-type FieldsetNames = PseudoElementTypes | PseudoClassTypes | ElementTypes
+type FieldsetNames =
+  | PseudoElementTypes
+  | PseudoClassTypes
+  | ElementTypes
+  | ClassTypes
 
 type FieldsetContextProps = {
-  type: 'pseudo-element' | 'pseudo-class' | 'element'
+  type: 'pseudo-element' | 'pseudo-class' | 'element' | 'class'
   name: FieldsetNames | FieldsetNames[]
 }
 
@@ -27,6 +32,7 @@ export const Fieldset = ({ type, name, children }: FieldsetProps) => {
   const fullName = outerNames.length
     ? [...outerNames, name]
     : (name as FieldsetNames)
+
   return (
     // @ts-ignore
     <FieldsetContext.Provider value={{ type, name: fullName }}>

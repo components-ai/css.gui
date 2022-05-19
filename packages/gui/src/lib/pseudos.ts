@@ -9,6 +9,10 @@ export const isPseudoElement = (str: string): boolean => {
   return !!pseudoElements.filter((value) => value === str).length
 }
 
+export const isPseudo = (str: string): boolean => {
+  return isPseudoClass(str) || isPseudoElement(str)
+}
+
 export const addPseudoSyntax = (str: string): string => {
   if (isPseudoClass(str)) {
     return ':' + str
