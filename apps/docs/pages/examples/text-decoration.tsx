@@ -65,13 +65,9 @@ export default function TextDecoration() {
         <div sx={{ flexGrow: 1, padding: 5 }}>
           <styled.p styles={styles}>
             “The parameters comprise sequences which are theoretically infinite
-            but limits are, of course, set to them in practice. There is an
-            upward limit to size and certainly a downward one... Within these
-            sequences there are reasonable bounds; extremes set by technical and
-            functional experience”
-            <br /> <br />
-            <em>
-              In{' '}
+            but limits are, of course, set to them in practice."
+            <br /> 
+            <em sx={{ fontSize: '50%' }}>
               <Link
                 href="https://www.lars-mueller-publishers.com/designing-programmes-0"
                 passHref={true}
