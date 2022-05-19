@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Monitor, Smartphone, X } from 'react-feather'
+import { ToggleRight, ToggleLeft } from 'react-feather'
 import { Breakpoint } from '../../types/theme'
 import { useTheme } from '../providers/ThemeContext'
 import { Label } from '../primitives'
@@ -125,22 +125,18 @@ const ResponsiveToggle = ({
   return isResponsive ? (
     <button
       title="Remove responsive controls"
-      sx={{ all: 'unset', color: 'muted' }}
+      sx={{ all: 'unset', color: 'muted', display: 'flex', alignItems: 'center', gap: '1em', cursor: 'pointer', }}
       onClick={onSwitchFromResponsive}
     >
-      <X size={14} sx={{ position: 'relative', top: '1px' }} />
+      Responsive <ToggleRight size={16} strokeWidth={2} sx={{color: 'text'}}/>
     </button>
   ) : (
     <button
       title="Switch to responsive controls"
-      sx={{ all: 'unset', color: 'muted' }}
+      sx={{ all: 'unset', cursor: 'pointer', color: 'muted', display: 'flex', alignItems: 'center', gap: '1em',}}
       onClick={onSwitchToResponsive}
     >
-      <Smartphone
-        size={8}
-        sx={{ position: 'relative', right: '-1px', top: '-1px' }}
-      />
-      <Monitor size={13} />
+      Responsive <ToggleLeft size={16} strokeWidth={2} />
     </button>
   )
 }

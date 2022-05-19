@@ -226,10 +226,26 @@ interface DeleteProps {
 }
 export const DeletePropButton = ({ onRemove }: DeleteProps) => {
   return (
-    <button onClick={() => {
+    <button 
+    sx={{
+        cursor: 'pointer',
+        appearance: 'none',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'right',
+        p: 0,
+        bg: 'rgba(0,0,0,0)',
+        border: 0,
+        color: 'muted',
+        transition: '.2s color ease-in-out',
+        ':hover': {
+          color: 'text',
+        }
+    }}
+    onClick={() => {
       if (onRemove) onRemove()
     }}>
-      <X size={14}/>
+      <X size={14} strokeWidth={3} color='currentColor' />
     </button>
   )
 }
