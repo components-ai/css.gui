@@ -148,10 +148,10 @@ export function DynamicControlsProvider({
   children
 }: DynamicControlsProviderProps) {
   
-  const [dynamicProps, setDynamicProps] = useState<string[]>([])
+  const [dynamicProps, setDynamicProps] = useState<string[]>(dynamicProperties)
   return (
     <DynamicControlsContext.Provider value={{
-      dynamicProperties,
+      dynamicProperties: dynamicProps,
       addDynamicProperty: (newProperty: string) => setDynamicProps([...dynamicProps, newProperty])
     }}>
       {children}
