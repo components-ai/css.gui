@@ -396,12 +396,18 @@ export const theme: Theme = {
       fontFamily: 'heading',
       fontWeight: 500,
       lineHeight: 'heading',
+      a: {
+        color: 'text',
+      },
     },
     h2: {
       fontSize: [2, 3, 4],
       fontFamily: 'heading',
       fontWeight: 'heading',
       lineHeight: 'heading',
+      a: {
+        color: 'text',
+      },
     },
     h3: {
       mt: 5,
@@ -409,23 +415,35 @@ export const theme: Theme = {
       fontFamily: 'heading',
       fontWeight: 'heading',
       lineHeight: 'heading',
+      a: {
+        color: 'text',
+      },
     },
     h4: {
       fontSize: 2,
       fontFamily: 'heading',
       fontWeight: 'heading',
       lineHeight: 'heading',
+      a: {
+        color: 'text',
+      },
     },
     h5: {
       fontSize: 1,
       fontFamily: 'heading',
       lineHeight: 'heading',
+      a: {
+        color: 'text',
+      },
     },
     h6: {
       fontSize: 0,
       fontFamily: 'heading',
       fontWeight: 'heading',
       lineHeight: 'heading',
+      a: {
+        color: 'text',
+      },
     },
     hr: {
       border: 'thin solid #ccc',
