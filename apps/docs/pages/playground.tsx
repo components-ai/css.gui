@@ -1,21 +1,12 @@
 import { useState } from 'react'
 import { Canvas } from '../components/playground/Canvas'
 import { Sidebar } from '../components/playground/Sidebar'
+import * as initialStyles from '../data/elements'
 
 export default function Playground() {
-  const [styles, setStyles] = useState({
-    fontSize: {
-      value: 16,
-      unit: 'px',
-    },
-    textAlign: 'center',
-    lineHeight: {
-      value: 1.6,
-      unit: 'number',
-    },
-  })
+  const [styles, setStyles] = useState(initialStyles.a)
   const [element, setElement] = useState({
-    name: 'p',
+    name: 'a',
     children: 'Hello, world!',
   })
 

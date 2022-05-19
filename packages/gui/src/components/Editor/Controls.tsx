@@ -45,12 +45,7 @@ import { MultidimensionInput } from '../inputs/Multidimension'
 import { Responsive } from '../Responsive/Input'
 import { AddPropertyControl } from '../AddProperty'
 import { DeletePropButton } from '../inputs/Dimension/Input'
-import { addPseudoSyntax, isPseudo } from '../../lib/pseudos'
-import {
-  addInternalCSSClassSyntax,
-  isInternalCSSClass,
-} from '../../lib/classes'
-import { addFieldsetNameSyntax } from './util'
+import { addFieldsetNameSyntax, isFieldsetGroup } from './util'
 
 interface ControlProps extends InputProps {
   field: KeyArg
@@ -117,6 +112,11 @@ const Control = ({ field, showRemove = false, ...props }: ControlProps) => {
       {...componentProps}
     />
   )
+}
+
+// TODO: Create a fieldset group
+const FieldsetControl = ({ field }: ControlProps) => {
+  return <>{field}</>
 }
 
 interface ComponentGroupProps {
@@ -207,7 +207,11 @@ export const Editor = ({
   ) : (
     <>
       {properties.map((property) => {
-        return <Control key={property} field={property} showRemove />
+        return isFieldsetGroup(property) ? (
+          <FieldsetControl key={property} field={property} />
+        ) : (
+          <Control key={property} field={property} showRemove />
+        )
       })}
     </>
   )
@@ -239,6 +243,7 @@ const DynamicControls = () => {
 }
 
 function getInputComponent(property: string) {
+  console.log(property)
   const propertyData = properties[property]
   if (typeof propertyData.type === 'function') {
     return propertyData.type

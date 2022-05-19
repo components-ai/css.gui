@@ -2,6 +2,7 @@ import {
   addInternalCSSClassSyntax,
   isInternalCSSClass,
 } from '../../lib/classes'
+import { isElement } from '../../lib/elements'
 import { addPseudoSyntax, isPseudo } from '../../lib/pseudos'
 
 export const addFieldsetNameSyntax = (
@@ -15,4 +16,8 @@ export const addFieldsetNameSyntax = (
   }
 
   return fieldsetName
+}
+
+export const isFieldsetGroup = (str: string) => {
+  return isPseudo(str) || isElement(str) || isInternalCSSClass(str)
 }
