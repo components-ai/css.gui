@@ -48,7 +48,7 @@ import { DeletePropButton } from '../inputs/Dimension/Input'
 
 interface ControlProps extends InputProps {
   field: KeyArg
-  showRemove: boolean
+  showRemove?: boolean
 }
 const Control = ({ field, showRemove = false, ...props }: ControlProps) => {
   const { getField, setField, removeField } = useEditor()
