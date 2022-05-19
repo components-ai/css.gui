@@ -1,10 +1,12 @@
 import { AppProps } from 'next/app'
-import Router from 'next/router'
+import Router, { NextRouter, useRouter } from 'next/router'
+import { ReactChild } from 'react'
 import { ThemeProvider } from 'theme-ui'
 import { theme } from '@compai/css-gui'
 import { Sidebar } from '../components/Sidebar'
 import { PageWrap } from '../components/PageWrap'
 import { Layout } from '../components/Layout'
+import { Layout as PlaygroundLayout } from '../components/playground/Layout'
 import { Head } from '../components/Head'
 import '../public/code-styles.css'
 
@@ -13,16 +15,32 @@ Router.events.on('routeChangeComplete', (url) => {
   window?.analytics?.page(url)
 })
 
+const isPlayground = (router: NextRouter) => {
+  return router.pathname === '/playground'
+}
+
+type DocsLayoutProps = {
+  children: ReactChild
+}
+const DocsLayout = ({ children }: DocsLayoutProps) => {
+  return (
+    <Layout>
+      <Sidebar />
+      <PageWrap>{children}</PageWrap>
+    </Layout>
+  )
+}
+
 const App = ({ Component, pageProps }: AppProps) => {
+  const router = useRouter()
+  const AppLayout = isPlayground(router) ? PlaygroundLayout : DocsLayout
+
   return (
     <ThemeProvider theme={theme}>
-        <Head />
-        <Layout>
-          <Sidebar />
-          <PageWrap>
-            <Component {...pageProps} />
-          </PageWrap>
-        </Layout>
+      <Head />
+      <AppLayout>
+        <Component {...pageProps} />
+      </AppLayout>
     </ThemeProvider>
   )
 }
