@@ -1,23 +1,7 @@
 import { HTMLAttributes } from 'react'
-import { Editor, SelectInput, TextInput } from '@compai/css-gui'
+import { Editor } from '@compai/css-gui'
+import { ElementEditor } from './ElementEditor'
 import { Element } from './types'
-
-interface SectionTitleProps extends HTMLAttributes<HTMLHeadingElement> {}
-export const SectionTitle = (props: SectionTitleProps) => {
-  return (
-    <h3
-      sx={{
-        lineHeight: '1.25',
-        fontWeight: 500,
-        fontSize: 2,
-        pt: [2, 3],
-        pb: 1,
-        m: 0,
-      }}
-      {...props}
-    />
-  )
-}
 
 type SidebarProps = {
   styles: any
@@ -48,19 +32,7 @@ export const Sidebar = ({
       }}
     >
       <div sx={{ px: 2, pb: 1 }}>
-        <SelectInput
-          label="Element"
-          value={element.name}
-          onChange={(name: string) => onElementChange({ ...element, name })}
-          options={['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'a']}
-        />
-        <TextInput
-          label="Text"
-          value={element.children || ''}
-          onChange={(children: string) =>
-            onElementChange({ ...element, children })
-          }
-        />
+        <ElementEditor element={element} onChange={onElementChange} />
       </div>
       <div
         sx={{
@@ -75,5 +47,22 @@ export const Sidebar = ({
         <Editor styles={styles} onChange={onChange} showAddProperties />
       </div>
     </section>
+  )
+}
+
+interface SectionTitleProps extends HTMLAttributes<HTMLHeadingElement> {}
+export const SectionTitle = (props: SectionTitleProps) => {
+  return (
+    <h3
+      sx={{
+        lineHeight: '1.25',
+        fontWeight: 500,
+        fontSize: 2,
+        pt: [2, 3],
+        pb: 1,
+        m: 0,
+      }}
+      {...props}
+    />
   )
 }

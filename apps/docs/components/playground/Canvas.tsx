@@ -1,5 +1,4 @@
 import { styled } from '@compai/css-gui'
-import { ReactChild } from 'react'
 import { Element } from './types'
 
 type CanvasProps = {

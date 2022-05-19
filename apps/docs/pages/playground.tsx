@@ -8,6 +8,11 @@ export default function Playground() {
       value: 16,
       unit: 'px',
     },
+    textAlign: 'center',
+    lineHeight: {
+      value: 1.6,
+      unit: 'number',
+    },
   })
   const [element, setElement] = useState({
     name: 'p',
