@@ -3,6 +3,7 @@ import { Color } from '../../types/css'
 import { EditorProps } from '../../types/editor'
 import { ColorPopover, Label } from '../primitives'
 import { useTheme } from '../providers/ThemeContext'
+import { DeletePropButton } from './Dimension/Input'
 
 interface Props extends EditorProps<Color> {
   label: string
@@ -13,6 +14,7 @@ export function ColorInput({
   label,
   value,
   onChange,
+  onRemove,
   defaultValue = '#000',
 }: Props) {
   const theme = useTheme()
@@ -21,12 +23,17 @@ export function ColorInput({
   return (
     <div>
       <Label htmlFor={fullId}>{label}</Label>
-      <ColorPopover
-        id={fullId}
-        value={value || defaultValue}
-        onChange={onChange}
-        theme={theme}
-      />
+      <div sx={{ display: 'flex', flexDirection: 'row' }}>
+        <ColorPopover
+          id={fullId}
+          value={value || defaultValue}
+          onChange={onChange}
+          theme={theme}
+        />
+        {onRemove && (
+          <DeletePropButton onRemove={onRemove} />
+        )}
+      </div>
     </div>
   )
 }

@@ -1,9 +1,10 @@
 import * as React from 'react'
-import { Monitor, Smartphone, X } from 'react-feather'
+import { ToggleRight, ToggleLeft } from 'react-feather'
 import { Breakpoint } from '../../types/theme'
 import { useTheme } from '../providers/ThemeContext'
 import { Label } from '../primitives'
 import { useEditorConfig } from '../providers/EditorConfigContext'
+import { DeletePropButton } from '../inputs/Dimension/Input'
 
 const DEFAULT_BREAKPOINT_COUNT = 3
 
@@ -12,6 +13,7 @@ type ResponsiveInputProps<T> = {
   value?: Responsive<T>
   defaultValue: Responsive<T>
   onChange: (newValue: Responsive<T>) => void
+  onRemove?: () => void
   label: string
   property?: string
   // TODO: Type this component
@@ -21,6 +23,7 @@ type ResponsiveInputProps<T> = {
 export function ResponsiveInput<T>({
   value,
   onChange,
+  onRemove,
   label,
   Component,
   componentProps = {},
@@ -94,11 +97,14 @@ export function ResponsiveInput<T>({
           }}
         >
           <span>{label}</span>
-          <ResponsiveToggle
-            isResponsive={isResponsiveControls}
-            onSwitchFromResponsive={handleSwitchFromResponsive}
-            onSwitchToResponsive={handleSwitchToResponsive}
-          />
+          <div sx={{ display: 'flex' }}>
+            <ResponsiveToggle
+              isResponsive={isResponsiveControls}
+              onSwitchFromResponsive={handleSwitchFromResponsive}
+              onSwitchToResponsive={handleSwitchToResponsive}
+            />
+            {onRemove ? <DeletePropButton onRemove={onRemove} /> : null}
+          </div>
         </div>
       </Label>
       {editors}
@@ -125,22 +131,35 @@ const ResponsiveToggle = ({
   return isResponsive ? (
     <button
       title="Remove responsive controls"
-      sx={{ all: 'unset', color: 'muted' }}
+      sx={{
+        all: 'unset',
+        color: 'muted',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '.5em',
+        cursor: 'pointer',
+        mr: 2,
+      }}
       onClick={onSwitchFromResponsive}
     >
-      <X size={14} sx={{ position: 'relative', top: '1px' }} />
+      Responsive{' '}
+      <ToggleRight size={16} strokeWidth={2} sx={{ color: 'text' }} />
     </button>
   ) : (
     <button
       title="Switch to responsive controls"
-      sx={{ all: 'unset', color: 'muted' }}
+      sx={{
+        all: 'unset',
+        cursor: 'pointer',
+        color: 'muted',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '.5em',
+        mr: 2,
+      }}
       onClick={onSwitchToResponsive}
     >
-      <Smartphone
-        size={8}
-        sx={{ position: 'relative', right: '-1px', top: '-1px' }}
-      />
-      <Monitor size={13} />
+      Responsive <ToggleLeft size={16} strokeWidth={2} />
     </button>
   )
 }
