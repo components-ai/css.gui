@@ -127,7 +127,7 @@ const ComponentWithPropertyGroup = ({
     <Component
       value={getFields([...dependantProperties, property])}
       onChange={(newValue: any) => setFields(newValue, dependantProperties)}
-      onRemove={() => removeField(fullField)} //
+      onRemove={() => removeField(fullField)}
       {...props}
     />
   )
@@ -217,7 +217,6 @@ function getInputComponent(property: string) {
 }
 
 function getPrimitiveInput(type: string) {
-  console.log(type, "type")
   switch (type) {
     case 'keyword':
       return KeywordInput
