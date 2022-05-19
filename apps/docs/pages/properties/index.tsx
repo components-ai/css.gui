@@ -11,6 +11,12 @@ import { BackgroundColorPreview } from '../../components/examples/BackgroundColo
 import { BorderColorPreview } from '../../components/examples/BorderColorPreview'
 import { BorderWidthPreview } from '../../components/examples/BorderWidthPreview'
 import { BorderStylePreview } from '../../components/examples/BorderStylePreview'
+
+import { OutlineColorPreview } from '../../components/examples/OutlineColorPreview'
+import { OutlineWidthPreview } from '../../components/examples/OutlineWidthPreview'
+import { OutlineStylePreview } from '../../components/examples/OutlineStylePreview'
+import { OutlineOffsetPreview } from '../../components/examples/OutlineOffsetPreview'
+
 import { ColorsPreview } from '../../components/examples/ColorsPreview'
 import { ColorPairPreview } from '../../components/examples/ColorPairPreview'
 import { TextDecorationColorPreview } from '../../components/examples/TextDecorationColorPreview'
@@ -80,6 +86,10 @@ export default function Docs() {
             <AccentColorPreview />
             <BorderWidthPreview />
             <BorderStylePreview />
+            <OutlineColorPreview />
+            <OutlineWidthPreview />
+            <OutlineStylePreview />
+            <OutlineOffsetPreview />
             <BorderRadiusPreview />
             <FilterPreview />
             <BackgroundImagePreview />
