@@ -22,7 +22,6 @@ export default function BorderRadius() {
   return (
     <>
       <div
-        className="full-bleed"
         sx={{
           display: 'flex',
           py: [2, 3, 4],
