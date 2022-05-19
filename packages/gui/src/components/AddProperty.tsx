@@ -12,7 +12,7 @@ interface Props {
 }
 export const AddPropertyControl = ({ styles }: Props) => {
   const { setField } = useEditor()
-  const { dynamicProperties, setDynamicProperties } = useDynamicControls()
+  const { dynamicProperties, addDynamicProperty } = useDynamicControls()
   const id = useId()
   const inputRef = useRef(null)
 
@@ -65,7 +65,7 @@ export const AddPropertyControl = ({ styles }: Props) => {
   const handleAddProperty = (propertyName: string) => {
     setFilterValue(propertyName)
     setField(propertyName, getDefaultValue(propertyName))
-    setDynamicProperties([propertyName])
+    addDynamicProperty(propertyName)
   }
 
   return (

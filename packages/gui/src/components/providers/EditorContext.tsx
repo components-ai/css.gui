@@ -106,14 +106,13 @@ export function EditorProvider<V>({
     hideResponsiveControls: hideResponsiveControls ?? false,
     showAddProperties: showAddProperties ?? false,
   }
-  const [dynamicProps, setDynamicProps] = useState<string[]>([])
+
   return (
     <ThemeProvider theme={theme}>
       <ThemeUIProvider theme={uiTheme}>
         <EditorConfigProvider config={editorConfig}>
           <DynamicControlsProvider
-            dynamicProperties={dynamicProps}
-            setDynamicProperties={(properties) => setDynamicProps(properties)}
+            dynamicProperties={[]}
           >
             <EditorContext.Provider value={values}>
               {children}
@@ -128,11 +127,12 @@ export function EditorProvider<V>({
 // TODO - on remove of property
 interface DynamicControlsContextProps {
   dynamicProperties: string[]
-  setDynamicProperties(properties: string[]): void 
+  addDynamicProperty(property: string): void
 }
 const DynamicControlsContext = createContext<DynamicControlsContextProps>({
   dynamicProperties: [],
-  setDynamicProperties: (properties: string[]) => {}
+  addDynamicProperty: (property: string) => {}
+
 })
 export function useDynamicControls() {
   const context = useContext(DynamicControlsContext)
@@ -141,19 +141,18 @@ export function useDynamicControls() {
 
 interface DynamicControlsProviderProps {
   dynamicProperties: string[],
-  setDynamicProperties: (properties: string[]) => {}
   children: ReactChild
 }
 export function DynamicControlsProvider({
   dynamicProperties,
-  setDynamicProperties,
   children
 }: DynamicControlsProviderProps) {
   
+  const [dynamicProps, setDynamicProps] = useState<string[]>([])
   return (
     <DynamicControlsContext.Provider value={{
       dynamicProperties,
-      setDynamicProperties
+      addDynamicProperty: (newProperty: string) => setDynamicProps([...dynamicProps, newProperty])
     }}>
       {children}
     </DynamicControlsContext.Provider>
