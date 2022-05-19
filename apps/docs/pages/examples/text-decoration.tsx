@@ -76,7 +76,7 @@ export default function TextDecoration() {
                 href="https://www.lars-mueller-publishers.com/designing-programmes-0"
                 passHref={true}
               >
-                <a style={{ color: styles.color }}>Designing Programmes</a>
+                <a style={{ color: 'inherit' }}>Designing Programmes</a>
               </Link>{' '}
               by Karl Gerstner
             </em>
