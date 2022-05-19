@@ -11,22 +11,18 @@ export default function Playground() {
   })
   const [element, setElement] = useState({
     name: 'p',
+    children: 'Hello, world!',
   })
 
   return (
-    <main
-      sx={{
-        display: 'flex',
-        width: '100%',
-      }}
-    >
+    <>
       <Sidebar
         styles={styles}
         onChange={setStyles}
         element={element}
         onElementChange={setElement}
       />
-      <Canvas styles={styles} element={element} children="Hello, world!" />
-    </main>
+      <Canvas styles={styles} element={element} />
+    </>
   )
 }

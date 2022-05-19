@@ -4,6 +4,8 @@ export { RenderElement } from './components/RenderElement'
 
 export { Number as NumberInput } from './components/primitives'
 export { LengthInput } from './components/inputs/LengthInput'
+export { SelectInput } from './components/inputs/SelectInput'
+export { TextInput } from './components/inputs/TextInput'
 export { DimensionInput } from './components/inputs/Dimension'
 export { ResponsiveInput } from './components/Responsive'
 export { UnitSelect } from './components/primitives/UnitSelect'

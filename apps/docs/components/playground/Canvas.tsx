@@ -5,9 +5,8 @@ import { Element } from './types'
 type CanvasProps = {
   element: Element
   styles: any
-  children: ReactChild
 }
-export const Canvas = ({ styles, element, children }: CanvasProps) => {
+export const Canvas = ({ styles, element }: CanvasProps) => {
   const Element = styled[element.name]
 
   return (
@@ -19,7 +18,7 @@ export const Canvas = ({ styles, element, children }: CanvasProps) => {
         flexGrow: 1,
       }}
     >
-      <Element styles={styles} children={children} />
+      <Element styles={styles} children={element.children ?? null} />
     </section>
   )
 }
