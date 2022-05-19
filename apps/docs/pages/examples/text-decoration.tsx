@@ -22,7 +22,7 @@ const initialStyles = {
     unit: 'keyword',
   },
   lineHeight: {
-    value: '1.5',
+    value: '1.25',
     unit: 'number',
   },
   fontFamily: 'Space Mono',
@@ -68,6 +68,7 @@ export default function TextDecoration() {
             but limits are, of course, set to them in practice."
             <br /> 
             <em sx={{ fontSize: '50%' }}>
+              In{' '}
               <Link
                 href="https://www.lars-mueller-publishers.com/designing-programmes-0"
                 passHref={true}
