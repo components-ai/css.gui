@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.58
+
+### Patch Changes
+
+- 8587cf3: Export some primitive inputs
+
 ## 0.0.57
 
 ### Patch Changes
