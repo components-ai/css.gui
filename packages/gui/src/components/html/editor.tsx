@@ -253,52 +253,6 @@ interface AttributeEditorProps {
   onChange(value: Record<string, string>): void
 }
 
-function _AttributeEditor({ value = {}, onChange }: AttributeEditorProps) {
-  const [currentValue, setCurrentValue] = useState('')
-  console.log(value, "value")
-  return (
-    <div>
-      {Object.entries(value).map(([key, attrValue]) => {
-        return (
-          <div sx={{ display: 'flex' }}>
-            <Label>
-              {key}
-              <input
-                value={attrValue}
-                onChange={(e) => onChange({ ...value, [key]: e.target.value })}
-              />
-            </Label>
-            <IconButton>
-              <Trash2 size={14} />
-            </IconButton>
-          </div>
-        )
-      })}
-      <div sx={{ display: 'flex' }}>
-        <input
-          type="text"
-          value={currentValue}
-          onChange={(e) => setCurrentValue(e.target.value)}
-          onKeyDown={(e) => {
-            if (['Enter', 'Tab'].includes(e.key)) {
-              onChange({ ...value, [currentValue]: '' })
-              setCurrentValue('')
-            }
-          }}
-        />
-        <button
-          onClick={() => {
-            onChange({ ...value, [currentValue]: '' })
-            setCurrentValue('')
-          }}
-        >
-          + Add attribute
-        </button>
-      </div>
-    </div>
-  )
-}
-
 function getChildAtPath(element: HtmlNode, path: ElementPath): HtmlNode {
   if (path.length === 0) {
     return element
