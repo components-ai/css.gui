@@ -2,12 +2,23 @@ import { Editor } from '../Editor'
 import { HtmlNode } from './types'
 import * as Collapsible from '@radix-ui/react-collapsible'
 import { useState } from 'react'
-import { isNil, values } from 'lodash-es'
+import { filter, isNil, values } from 'lodash-es'
 import IconButton from '../ui/IconButton'
 import { Trash2 } from 'react-feather'
-import { Label } from '../primitives'
+import { Label, Combobox } from '../primitives'
 import { SelectInput } from '../inputs/SelectInput'
 import { AttributeEditor } from './AttributeEditor'
+
+const HTML_TAGS = [
+  'span',
+  'p',
+  'h1',
+  'h2',
+  'h3',
+  'h4',
+  'h5',
+  'h6',
+]
 
 interface EditorProps {
   value: HtmlNode
@@ -88,15 +99,18 @@ function NodeSwitch({ value, onChange }: EditorProps) {
       </div>
     )
   }
+  
   return (
     <div>
       <div>
         <Label>Tag name</Label>{' '}
-        {/* TODO should probably be a select/combobox instead for validity */}
-        <input
-          type="text"
+        <Combobox 
+          onFilterItems={(filterValue) => {
+            return HTML_TAGS.filter((el) => el.startsWith(filterValue))
+          }}
+          onItemSelected={(selectedItem) => onChange({ ...value, tagName: selectedItem })}
+          items={HTML_TAGS}
           value={value.tagName}
-          onChange={(e) => onChange({ ...value, tagName: e.target.value })}
         />
       </div>
       <div>
@@ -106,7 +120,7 @@ function NodeSwitch({ value, onChange }: EditorProps) {
           onChange={(newAttributes) =>
             onChange({ ...value, attributes: newAttributes })
           }
-          element={'p'}
+          element={value.tagName}
         />
       </div>
       <div>
