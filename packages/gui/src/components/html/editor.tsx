@@ -34,6 +34,7 @@ export function HtmlEditor({ value, onChange }: EditorProps) {
           }
           onRemove={() => {
             onChange(removeChildAtPath(value, selected))
+            setSelected(null)
           }}
         />
       )}
