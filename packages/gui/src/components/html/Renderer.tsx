@@ -7,7 +7,7 @@ interface Props {
 
 export function HtmlRenderer({ value }: Props) {
   const { tagName, attributes = {}, style = {}, children = [] } = value
-  const Tag: any = value.tagName
+  const Tag: any = value.tagName || 'div'
   return (
     <Tag {...attributes} sx={{ ...toCSSObject(style) }}>
       {children.map((child) => {

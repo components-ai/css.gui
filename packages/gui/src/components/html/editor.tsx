@@ -25,15 +25,28 @@ export function HtmlEditor({ value, onChange }: EditorProps) {
       {selected && (
         <Editor
           value={getChildAtPath(value, selected)}
-          onChange={(newItem) => setChildAtPath(value, selected, newItem)}
+          onChange={(newItem) =>
+            onChange(setChildAtPath(value, selected, newItem))
+          }
         />
       )}
     </div>
   )
 }
 
-function Editor({ value }: EditorProps) {
-  return <div>tagName: {value.tagName}</div>
+function Editor({ value, onChange }: EditorProps) {
+  return (
+    <div>
+      <div>
+        <label>tagName</label>{' '}
+        <input
+          type="text"
+          value={value.tagName}
+          onChange={(e) => onChange({ ...value, tagName: e.target.value })}
+        />
+      </div>
+    </div>
+  )
 }
 
 interface TreeNodeProps extends EditorProps {
@@ -119,10 +132,16 @@ function setChildAtPath(
   }
   return {
     ...element,
-    children: element.children.splice(
+    children: replaceAt(
+      element.children,
       head,
-      1,
       setChildAtPath(child, rest, newChild)
     ),
   }
+}
+
+function replaceAt<T>(items: T[], index: number, newItem: T) {
+  const spliced = [...items]
+  spliced.splice(index, 1, newItem)
+  return spliced
 }
