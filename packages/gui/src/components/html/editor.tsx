@@ -1,3 +1,4 @@
+import { Editor } from '../Editor'
 import { ElementData } from './types'
 import * as Collapsible from '@radix-ui/react-collapsible'
 import { useState } from 'react'
@@ -23,7 +24,7 @@ export function HtmlEditor({ value, onChange }: EditorProps) {
         onChange={onChange}
       />
       {selected && (
-        <Editor
+        <TagEditor
           value={getChildAtPath(value, selected)}
           onChange={(newItem) =>
             onChange(setChildAtPath(value, selected, newItem))
@@ -34,7 +35,7 @@ export function HtmlEditor({ value, onChange }: EditorProps) {
   )
 }
 
-function Editor({ value, onChange }: EditorProps) {
+function TagEditor({ value, onChange }: EditorProps) {
   return (
     <div>
       <div>
@@ -43,6 +44,14 @@ function Editor({ value, onChange }: EditorProps) {
           type="text"
           value={value.tagName}
           onChange={(e) => onChange({ ...value, tagName: e.target.value })}
+        />
+      </div>
+      <div>
+        <h2>Styles</h2>
+        <Editor
+          styles={value.style ?? {}}
+          onChange={(newStyles) => onChange({ ...value, style: newStyles })}
+          showAddProperties
         />
       </div>
     </div>
