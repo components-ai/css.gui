@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.63
+
+### Patch Changes
+
+- a2dfb96: Combobox input and attribute editor
+
 ## 0.0.62
 
 ### Patch Changes
