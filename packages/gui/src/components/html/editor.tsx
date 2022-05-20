@@ -1,11 +1,11 @@
 import { Editor } from '../Editor'
-import { ElementData } from './types'
+import { ElementData, HtmlNode } from './types'
 import * as Collapsible from '@radix-ui/react-collapsible'
 import { useState } from 'react'
 
 interface EditorProps {
-  value: ElementData
-  onChange(value: ElementData): void
+  value: HtmlNode
+  onChange(value: HtmlNode): void
 }
 
 type ElementPath = number[]
@@ -36,6 +36,9 @@ export function HtmlEditor({ value, onChange }: EditorProps) {
 }
 
 function TagEditor({ value, onChange }: EditorProps) {
+  if (typeof value === 'string') {
+    return <div>{value}</div>
+  }
   return (
     <div>
       <div>
@@ -65,6 +68,9 @@ interface TreeNodeProps extends EditorProps {
 
 function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
   const [open, setOpen] = useState(true)
+  if (typeof value === 'string') {
+    return <div>"{value}"</div>
+  }
   return (
     <Collapsible.Root open={open} onOpenChange={setOpen}>
       <Collapsible.Trigger
@@ -94,9 +100,6 @@ function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
       <Collapsible.Content>
         <div sx={{ ml: 4 }}>
           {value.children.map((child, i) => {
-            if (typeof child === 'string') {
-              return <div>"{child}"</div>
-            }
             return (
               <TreeNode
                 value={child}
@@ -113,8 +116,11 @@ function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
   )
 }
 
-function getChildAtPath(element: ElementData, path: ElementPath): ElementData {
+function getChildAtPath(element: HtmlNode, path: ElementPath): HtmlNode {
   if (path.length === 0) {
+    return element
+  }
+  if (typeof element === 'string') {
     return element
   }
   const [head, ...rest] = path
@@ -126,13 +132,16 @@ function getChildAtPath(element: ElementData, path: ElementPath): ElementData {
 }
 
 function setChildAtPath(
-  element: ElementData,
+  element: HtmlNode,
   path: ElementPath,
-  newChild: ElementData
-): ElementData {
+  newChild: HtmlNode
+): HtmlNode {
   // if no path, replace the element
   if (path.length === 0) {
     return newChild
+  }
+  if (typeof element === 'string') {
+    return element
   }
   const [head, ...rest] = path
   const child = element.children?.[head]

@@ -3,5 +3,7 @@ export interface ElementData {
   attributes: Record<string, string>
   // `style` is an attribute, but we treat it specially for CSS.gui
   style: Record<string, any>
-  children: (ElementData | string)[]
+  children: HtmlNode[]
 }
+
+export type HtmlNode = ElementData | string
