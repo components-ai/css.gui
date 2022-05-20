@@ -14,6 +14,13 @@ export default function IconButton(props: Props) {
         border: 'none',
         cursor: 'pointer',
         color: 'muted',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        transition: 'color .2s ease-in-out',
+        ':hover': {
+          color: 'text',
+        },
         ':disabled': {
           opacity: '50%',
           cursor: 'initial',

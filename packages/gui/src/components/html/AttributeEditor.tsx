@@ -1,4 +1,4 @@
-import { Trash2 } from "react-feather"
+import { X } from "react-feather"
 import { Label } from "../primitives"
 import IconButton from "../ui/IconButton"
 import { useEffect } from 'react'
@@ -63,7 +63,7 @@ export const AttributeEditor = ({
       {/* @ts-ignore */}
       {Object.entries(value).map(([key, attrValue]) => {
         return (
-          <div sx={{ display: 'flex' }}>
+          <div sx={{ display: 'flex', alignItems: 'center', gap: '.5rem' }}>
             <Label>
               {key}
               <input
@@ -72,7 +72,7 @@ export const AttributeEditor = ({
               />
             </Label>
             <IconButton>
-              <Trash2 size={14} />
+              <X size={14} strokeWidth={3} />
             </IconButton>
           </div>
         )
