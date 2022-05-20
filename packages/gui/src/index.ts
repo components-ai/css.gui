@@ -19,12 +19,13 @@ export {
 } from './components/providers/ThemeContext'
 export { EditorProvider } from './components/providers/EditorContext'
 export { Layout } from './components/ui/Layout'
+export { HtmlEditor } from './components/html/editor'
+export { HtmlRenderer } from './components/html/Renderer'
 
 export { theme } from './components/ui/theme'
 export { supportedProperties, unsupportedProperties } from './data/properties'
 export { allProperties } from './data/css-properties'
 export { mdnProperties } from './data/mdn-properties'
-export { HtmlEditor } from './components/html/editor'
 
 export * from './lib'
 export * from './types/theme'
