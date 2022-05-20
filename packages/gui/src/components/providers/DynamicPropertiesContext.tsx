@@ -13,7 +13,6 @@ export function useDynamicControls() {
 }
 
 interface DynamicControlsProviderProps {
-  dynamicProperties: string[]
   children: ReactChild
 }
 export function DynamicControlsProvider({
