@@ -30,9 +30,7 @@ export function ColorInput({
           onChange={onChange}
           theme={theme}
         />
-        {onRemove && (
-          <DeletePropButton onRemove={onRemove} />
-        )}
+        {onRemove && <DeletePropButton onRemove={onRemove} />}
       </div>
     </div>
   )

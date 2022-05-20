@@ -46,6 +46,7 @@ import { Responsive } from '../Responsive/Input'
 import { AddPropertyControl } from '../AddProperty'
 import { DeletePropButton } from '../inputs/Dimension/Input'
 import { isFieldsetGroup, sortProperties } from './util'
+import { stylesToEditorSchema } from '../../lib/transformers/styles-to-editor-schema'
 
 export const getPropertyFromField = (field: KeyArg) => {
   if (Array.isArray(field)) {
@@ -179,7 +180,7 @@ export const Editor = ({
   showAddProperties,
 }: ControlsProps) => {
   const handleStylesChange = (recipe: Recipe<EditorData<any>>) => {
-    const newData = produce(styles, (draft: any) => {
+    const newData = produce(stylesToEditorSchema(styles), (draft: any) => {
       const valueData: EditorData<any> = {
         value: draft,
       }
