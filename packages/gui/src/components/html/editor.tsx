@@ -262,6 +262,12 @@ function AttributeEditor({ value = {}, onChange }: AttributeEditorProps) {
           type="text"
           value={currentValue}
           onChange={(e) => setCurrentValue(e.target.value)}
+          onKeyDown={(e) => {
+            if (['Enter', 'Tab'].includes(e.key)) {
+              onChange({ ...value, [currentValue]: '' })
+              setCurrentValue('')
+            }
+          }}
         />
         <button
           onClick={() => {
