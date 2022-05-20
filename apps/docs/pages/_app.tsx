@@ -15,8 +15,12 @@ Router.events.on('routeChangeComplete', (url) => {
   window?.analytics?.page(url)
 })
 
-const isPlayground = (router: NextRouter) => {
-  return router.pathname === '/playground'
+const NO_NAV_PAGES: Record<string, boolean> = {
+  '/playground': true,
+  '/components/html-editor': true,
+}
+const isNoNavPage = (router: NextRouter) => {
+  return NO_NAV_PAGES[router.pathname] ?? false
 }
 
 type DocsLayoutProps = {
@@ -33,7 +37,7 @@ const DocsLayout = ({ children }: DocsLayoutProps) => {
 
 const App = ({ Component, pageProps }: AppProps) => {
   const router = useRouter()
-  const AppLayout = isPlayground(router) ? PlaygroundLayout : DocsLayout
+  const AppLayout = isNoNavPage(router) ? PlaygroundLayout : DocsLayout
 
   return (
     <ThemeProvider theme={theme}>
