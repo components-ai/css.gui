@@ -10,7 +10,6 @@ import { SelectInput } from '../inputs/SelectInput'
 import { AttributeEditor } from './AttributeEditor'
 
 const HTML_TAGS = [
-  'span',
   'p',
   'img',
   'button',
@@ -22,6 +21,8 @@ const HTML_TAGS = [
   'h4',
   'h5',
   'h6',
+  'span',
+  'div',
 ]
 
 interface EditorProps {
