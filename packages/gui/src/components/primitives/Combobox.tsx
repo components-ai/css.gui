@@ -40,13 +40,18 @@ export function Combobox({
       handleFilterItems(inputValue!)
     },
     onSelectedItemChange: ({ selectedItem }) => {
-      onItemSelected(selectedItem ?? '')
+      handleItemSelected(selectedItem ?? '')
     },
   })
 
   const handleFilterItems = (newValue: string) => {
     const filteredItems = onFilterItems(newValue)
     setInputItems(filteredItems)
+  }
+
+  const handleItemSelected = (selectedItem: string) => {
+    setFilterValue(selectedItem)
+    onItemSelected(selectedItem)
   }
 
   return (
@@ -123,7 +128,7 @@ export function Combobox({
                   alignItems: 'center',
                 }}
                 onClick={() => {
-                  onItemSelected('')
+                  handleItemSelected('')
                   // @ts-ignore
                   inputRef.current.focus()
                   if (!isOpen) {
@@ -156,7 +161,7 @@ export function Combobox({
                   key={`${item}${index}`}
                   {...getItemProps({ item, index })}
                   onClick={() => {
-                    onItemSelected(inputItems[highlightedIndex])
+                    handleItemSelected(inputItems[highlightedIndex])
                     toggleMenu()
                   }}
                 >
