@@ -13,6 +13,14 @@ export const isPseudo = (str: string): boolean => {
   return isPseudoClass(str) || isPseudoElement(str)
 }
 
+export const hasPseudoSyntax = (str: string): boolean => {
+  return /^:/.test(str)
+}
+
+export const removePseudoSyntax = (str: string): string => {
+  return str.replace(/^:+/, '')
+}
+
 export const addPseudoSyntax = (str: string): string => {
   if (isPseudoClass(str)) {
     return ':' + str

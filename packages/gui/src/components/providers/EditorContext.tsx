@@ -8,6 +8,7 @@ import { EditorConfigProvider, EditorConfig } from './EditorConfigContext'
 import { theme as uiTheme } from '../ui/theme'
 import { Theme } from '../../types/theme'
 import { DynamicControlsProvider } from './DynamicPropertiesContext'
+import { stylesToEditorSchema } from '../../lib/transformers/styles-to-editor-schema'
 
 export interface EditorContextValue<V> extends EditorData<V> {
   theme?: Theme
@@ -97,6 +98,7 @@ export function EditorProvider<V>({
   theme,
   hideResponsiveControls,
   showAddProperties,
+  value: providedValue,
   ...values
 }: EditorContextProviderValue<V> & {
   hideResponsiveControls?: boolean
@@ -108,12 +110,14 @@ export function EditorProvider<V>({
     showAddProperties: showAddProperties ?? false,
   }
 
+  const value = stylesToEditorSchema(providedValue)
+
   return (
     <ThemeProvider theme={theme}>
       <ThemeUIProvider theme={uiTheme}>
         <EditorConfigProvider config={editorConfig}>
           <DynamicControlsProvider>
-            <EditorContext.Provider value={values}>
+            <EditorContext.Provider value={{ value, ...values }}>
               {children}
             </EditorContext.Provider>
           </DynamicControlsProvider>

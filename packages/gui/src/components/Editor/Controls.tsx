@@ -19,7 +19,7 @@ import { Theme } from '../../types/theme'
 import { EditorProvider, useEditor } from '../providers/EditorContext'
 import { useDynamicControls } from '../providers/DynamicPropertiesContext'
 import { EditorData, KeyArg, Recipe } from '../providers/types'
-import { useFieldset } from './Fieldset'
+import { GenericFieldset, useFieldset } from './Fieldset'
 import { joinPath } from '../providers/util'
 import { properties } from '../../data/properties'
 import { ColorInput } from '../inputs/ColorInput'
@@ -45,12 +45,21 @@ import { MultidimensionInput } from '../inputs/Multidimension'
 import { Responsive } from '../Responsive/Input'
 import { AddPropertyControl } from '../AddProperty'
 import { DeletePropButton } from '../inputs/Dimension/Input'
-import { addPseudoSyntax, isPseudo } from '../../lib/pseudos'
 import {
-  addInternalCSSClassSyntax,
-  isInternalCSSClass,
-} from '../../lib/classes'
-import { addFieldsetNameSyntax } from './util'
+  getFieldsetPropsFromProperty,
+  isFieldsetGroup,
+  sortProperties,
+} from './util'
+import { stylesToEditorSchema } from '../../lib/transformers/styles-to-editor-schema'
+import { removeInternalCSSClassSyntax } from '../../lib/classes'
+
+export const getPropertyFromField = (field: KeyArg) => {
+  if (Array.isArray(field)) {
+    return field[field.length - 1].toString()
+  }
+
+  return field.toString()
+}
 
 interface ControlProps extends InputProps {
   field: KeyArg
@@ -60,7 +69,7 @@ const Control = ({ field, showRemove = false, ...props }: ControlProps) => {
   const { getField, setField, removeField } = useEditor()
   const { removeDynamicProperty } = useDynamicControls()
   const fieldset = useFieldset()
-  const property = field.toString()
+  const property = getPropertyFromField(field)
   const Component: ComponentType<any> | null = getInputComponent(property)
   const themeValues = useThemeProperty(property)
   const keywords = [
@@ -74,10 +83,7 @@ const Control = ({ field, showRemove = false, ...props }: ControlProps) => {
     return null
   }
 
-  const fieldsetName = fieldset?.name
-    ? addFieldsetNameSyntax(fieldset.name as string, fieldset.type)
-    : null
-
+  const fieldsetName = fieldset?.name ?? null
   const fullField = fieldsetName ? joinPath(fieldsetName, field) : field
   const componentProps = {
     label: sentenceCase(property),
@@ -178,10 +184,8 @@ export const Editor = ({
   hideResponsiveControls,
   showAddProperties,
 }: ControlsProps) => {
-  const properties = uniq(Object.keys(styles).map((p) => p.replace(/^:+/, '')))
-
   const handleStylesChange = (recipe: Recipe<EditorData<any>>) => {
-    const newData = produce(styles, (draft: any) => {
+    const newData = produce(stylesToEditorSchema(styles), (draft: any) => {
       const valueData: EditorData<any> = {
         value: draft,
       }
@@ -202,16 +206,6 @@ export const Editor = ({
     }
   }, [])
 
-  const controls = children ? (
-    children
-  ) : (
-    <>
-      {properties.map((property) => {
-        return <Control key={property} field={property} showRemove />
-      })}
-    </>
-  )
-
   return (
     <EditorProvider
       theme={theme}
@@ -219,10 +213,31 @@ export const Editor = ({
       onChange={handleStylesChange}
       hideResponsiveControls={hideResponsiveControls}
     >
+      <EditorControls showAddProperties={showAddProperties}>
+        {children}
+      </EditorControls>
+    </EditorProvider>
+  )
+}
+
+interface EditorControlsProps {
+  children?: ReactNode
+  showAddProperties?: boolean
+}
+export const EditorControls = ({
+  children,
+  showAddProperties,
+}: EditorControlsProps) => {
+  const { value: styles } = useEditor()
+  const properties = sortProperties(uniq(Object.keys(styles)))
+  const controls = children ? children : <ControlSet properties={properties} />
+
+  return (
+    <>
       {controls}
       {children ? <DynamicControls /> : null}
       {showAddProperties ? <AddPropertyControl styles={styles} /> : null}
-    </EditorProvider>
+    </>
   )
 }
 
@@ -230,12 +245,47 @@ const DynamicControls = () => {
   const { dynamicProperties } = useDynamicControls()
 
   return dynamicProperties?.length ? (
-    <>
-      {dynamicProperties.map((property) => (
-        <Control key={property} field={property} showRemove />
-      ))}
-    </>
+    <ControlSet properties={dynamicProperties} />
   ) : null
+}
+
+type ControlSetProps = {
+  field?: KeyArg
+  properties: string[]
+}
+const ControlSet = ({ field, properties }: ControlSetProps) => {
+  return (
+    <>
+      {properties.map((property) => {
+        const fullField = field ? joinPath(field, property) : property
+
+        return isFieldsetGroup(property) ? (
+          <FieldsetControl key={property} property={property} />
+        ) : (
+          <Control key={property} field={fullField} showRemove />
+        )
+      })}
+    </>
+  )
+}
+
+type FieldsetControlProps = {
+  field?: KeyArg
+  property: string
+}
+const FieldsetControl = ({ field, property }: FieldsetControlProps) => {
+  const { getField } = useEditor()
+  const styles = getField(field || property)
+  const properties = Object.keys(styles)
+
+  return (
+    <section>
+      <h3>{removeInternalCSSClassSyntax(property)}</h3>
+      <GenericFieldset property={property}>
+        <ControlSet field={field} properties={properties} />
+      </GenericFieldset>
+    </section>
+  )
 }
 
 function getInputComponent(property: string) {
