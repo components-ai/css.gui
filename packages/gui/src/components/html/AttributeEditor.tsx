@@ -1,8 +1,8 @@
-import { X } from "react-feather"
-import { Label } from "../primitives"
-import IconButton from "../ui/IconButton"
+import { X } from 'react-feather'
+import { Label } from '../primitives'
+import IconButton from '../ui/IconButton'
 import { useEffect } from 'react'
-import { Combobox } from "../primitives"
+import { Combobox } from '../primitives'
 
 interface AttributeEditorProps {
   value: Record<string, string>
@@ -22,36 +22,37 @@ const ATTRIBUTE_MAP: Record<string, string[]> = {
   h4: GLOBAL_ATTRIBUTES,
   h5: GLOBAL_ATTRIBUTES,
   h6: GLOBAL_ATTRIBUTES,
-  span: GLOBAL_ATTRIBUTES,
   p: GLOBAL_ATTRIBUTES,
-} 
+  span: GLOBAL_ATTRIBUTES,
+  div: GLOBAL_ATTRIBUTES,
+}
 
 export const AttributeEditor = ({
   value = {},
   onChange,
-  element
+  element,
 }: AttributeEditorProps) => {
   useEffect(() => {
     handleElementChange()
   }, [element])
 
   const handleElementChange = () => {
-    const newAttributes = Object.entries(value).reduce((acc: any, [k, v]: any) => {
-      return ATTRIBUTE_MAP[element].includes(k)
-        ? { ...acc, [k]: v }
-        : acc
-    }, {})
+    const newAttributes = Object.entries(value).reduce(
+      (acc: any, [k, v]: any) => {
+        return ATTRIBUTE_MAP[element].includes(k) ? { ...acc, [k]: v } : acc
+      },
+      {}
+    )
 
     onChange(newAttributes)
   }
 
   const handleFilterItems = (input: string) => {
-    return ATTRIBUTE_MAP[element]
-      .filter((item) => {
-        if (item.toLowerCase().startsWith(input.toLowerCase() || '')) {
-          return !Object.keys(value).includes(item)
-        }
-      })
+    return ATTRIBUTE_MAP[element].filter((item) => {
+      if (item.toLowerCase().startsWith(input.toLowerCase() || '')) {
+        return !Object.keys(value).includes(item)
+      }
+    })
   }
 
   const handleItemSelected = (selectedItem: string) => {
