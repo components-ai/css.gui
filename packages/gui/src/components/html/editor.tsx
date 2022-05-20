@@ -5,6 +5,8 @@ import { useState } from 'react'
 import { isNil } from 'lodash-es'
 import IconButton from '../ui/IconButton'
 import { Trash2 } from 'react-feather'
+import { Label } from '../primitives'
+import { SelectInput } from '../inputs/SelectInput'
 
 interface EditorProps {
   value: HtmlNode
@@ -27,7 +29,7 @@ export function HtmlEditor({ value, onChange }: EditorProps) {
         onChange={onChange}
       />
       {selected && (
-        <TagEditor
+        <NodeEditor
           value={getChildAtPath(value, selected)}
           onChange={(newItem) =>
             onChange(setChildAtPath(value, selected, newItem))
@@ -46,27 +48,49 @@ interface TagEditorProps extends EditorProps {
   onRemove(): void
 }
 
-function TagEditor({ value, onChange, onRemove }: TagEditorProps) {
-  if (typeof value === 'string') {
-    return (
-      <div>
+function NodeEditor({ value, onChange, onRemove }: TagEditorProps) {
+  const nodeType = typeof value === 'string' ? 'text' : 'tag'
+  return (
+    <div>
+      <div sx={{ display: 'grid', gridTemplateColumns: '1fr max-content' }}>
+        <SelectInput
+          label="type"
+          value={nodeType}
+          onChange={(value) => {
+            if (value === 'text') {
+              onChange('')
+            } else {
+              onChange({
+                tagName: 'div',
+              })
+            }
+          }}
+          options={['text', 'tag']}
+        />
         <IconButton onClick={onRemove}>
           <Trash2 size={16} />
         </IconButton>
-        <label>
+      </div>
+      <NodeSwitch value={value} onChange={onChange} />
+    </div>
+  )
+}
+
+function NodeSwitch({ value, onChange }: EditorProps) {
+  if (typeof value === 'string') {
+    return (
+      <div>
+        <Label>
           Content
           <input value={value} onChange={(e) => onChange(e.target.value)} />
-        </label>
+        </Label>
       </div>
     )
   }
   return (
     <div>
-      <IconButton onClick={onRemove}>
-        <Trash2 size={16} />
-      </IconButton>
       <div>
-        <label>tagName</label>{' '}
+        <Label>Tag name</Label>{' '}
         {/* TODO should probably be a select/combobox instead for validity */}
         <input
           type="text"
@@ -75,7 +99,7 @@ function TagEditor({ value, onChange, onRemove }: TagEditorProps) {
         />
       </div>
       <div>
-        <h2>Styles</h2>
+        <Label>Styles</Label>
         <Editor
           styles={value.style ?? {}}
           onChange={(newStyles) => onChange({ ...value, style: newStyles })}
@@ -137,7 +161,7 @@ function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
       </button>
       <Collapsible.Content>
         <div sx={{ ml: 4 }}>
-          {value.children.map((child, i) => {
+          {value.children?.map((child, i) => {
             return (
               <TreeNode
                 value={child}
@@ -189,7 +213,7 @@ function setChildAtPath(
   return {
     ...element,
     children: replaceAt(
-      element.children,
+      element.children ?? [],
       head,
       setChildAtPath(child, rest, newChild)
     ),
@@ -207,7 +231,7 @@ function removeChildAtPath(element: HtmlNode, path: ElementPath): HtmlNode {
   if (path.length === 1) {
     return {
       ...element,
-      children: removeAt(element.children, path[0]),
+      children: removeAt(element.children ?? [], path[0]),
     }
   }
   const [head, ...rest] = path
@@ -217,7 +241,11 @@ function removeChildAtPath(element: HtmlNode, path: ElementPath): HtmlNode {
   }
   return {
     ...element,
-    children: replaceAt(element.children, head, removeChildAtPath(child, rest)),
+    children: replaceAt(
+      element.children ?? [],
+      head,
+      removeChildAtPath(child, rest)
+    ),
   }
 }
 
