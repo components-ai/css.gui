@@ -1,18 +1,13 @@
 import { ThemeProvider as ThemeUIProvider } from 'theme-ui'
 import { get, unset } from 'lodash-es'
-import {
-  createContext,
-  ReactChild,
-  ReactNode,
-  useContext,
-  useState,
-} from 'react'
+import { createContext, ReactNode, useContext } from 'react'
 import { KeyArg, Recipe, EditorData } from './types'
 import { applyRecipe } from './util'
 import { ThemeProvider } from './ThemeContext'
 import { EditorConfigProvider, EditorConfig } from './EditorConfigContext'
 import { theme as uiTheme } from '../ui/theme'
 import { Theme } from '../../types/theme'
+import { DynamicControlsProvider } from './DynamicPropertiesContext'
 
 export interface EditorContextValue<V> extends EditorData<V> {
   theme?: Theme
@@ -125,41 +120,5 @@ export function EditorProvider<V>({
         </EditorConfigProvider>
       </ThemeUIProvider>
     </ThemeProvider>
-  )
-}
-
-// TODO - on remove of property
-interface DynamicControlsContextProps {
-  dynamicProperties: string[]
-  addDynamicProperty(property: string): void
-}
-const DynamicControlsContext = createContext<DynamicControlsContextProps>({
-  dynamicProperties: [],
-  addDynamicProperty: (property: string) => {},
-})
-
-export function useDynamicControls() {
-  const context = useContext(DynamicControlsContext)
-  return context
-}
-
-interface DynamicControlsProviderProps {
-  dynamicProperties: string[]
-  children: ReactChild
-}
-export function DynamicControlsProvider({
-  children,
-}: DynamicControlsProviderProps) {
-  const [dynamicProps, setDynamicProps] = useState<string[]>([])
-  return (
-    <DynamicControlsContext.Provider
-      value={{
-        dynamicProperties: dynamicProps,
-        addDynamicProperty: (newProperty: string) =>
-          setDynamicProps([...dynamicProps, newProperty]),
-      }}
-    >
-      {children}
-    </DynamicControlsContext.Provider>
   )
 }

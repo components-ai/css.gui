@@ -16,7 +16,8 @@ import {
   Styles,
 } from '../../types/css'
 import { Theme } from '../../types/theme'
-import { EditorProvider, useDynamicControls, useEditor } from '../providers/EditorContext'
+import { EditorProvider, useEditor } from '../providers/EditorContext'
+import { useDynamicControls } from '../providers/DynamicPropertiesContext'
 import { EditorData, KeyArg, Recipe } from '../providers/types'
 import { useFieldset } from './Fieldset'
 import { joinPath } from '../providers/util'
@@ -30,7 +31,7 @@ import { DimensionInput } from '../inputs/Dimension'
 import { SelectInput } from '../inputs/SelectInput'
 import { GLOBAL_KEYWORDS } from '../../data/global-keywords'
 import { Label } from '../primitives'
-import { camelCase, kebabCase, property, uniq } from 'lodash-es'
+import { camelCase, kebabCase, uniq } from 'lodash-es'
 import { useThemeProperty } from '../providers/ThemeContext'
 import { PositionInput } from '../inputs/PositionInput'
 import { TimeInput } from '../inputs/TimeInput'
@@ -99,7 +100,7 @@ const Control = ({ field, showRemove = false, ...props }: ControlProps) => {
       onChange={(newValue: any) => {
         setField(fullField, newValue)
       }}
-      onRemove={showRemove ?() => removeField(fullField) : null}
+      onRemove={showRemove ? () => removeField(fullField) : null}
       property={property}
       {...componentProps}
     />
@@ -131,7 +132,7 @@ const ComponentWithPropertyGroup = ({
     <Component
       value={getFields([...dependantProperties, property])}
       onChange={(newValue: any) => setFields(newValue, dependantProperties)}
-      onRemove={showRemove ?() => removeField(fullField) : null}
+      onRemove={showRemove ? () => removeField(fullField) : null}
       {...props}
     />
   )
@@ -165,8 +166,6 @@ export const Editor = ({
   hideResponsiveControls,
   showAddProperties,
 }: ControlsProps) => {
-  const { dynamicProperties } = useDynamicControls()
-  console.log(dynamicProperties, "props")
   const properties = uniq(Object.keys(styles).map((p) => p.replace(/^:+/, '')))
 
   const handleStylesChange = (recipe: Recipe<EditorData<any>>) => {
@@ -196,10 +195,6 @@ export const Editor = ({
   ) : (
     <>
       {properties.map((property) => {
-        
-        // return dynamicProperties.includes(property) 
-        //   ? null
-        //   : <Control key={property} field={property} showRemove />
         return <Control key={property} field={property} showRemove />
       })}
     </>
@@ -213,12 +208,21 @@ export const Editor = ({
       hideResponsiveControls={hideResponsiveControls}
     >
       {controls}
-      {dynamicProperties.map((property) => {
-        return <Control key={property} field={property} showRemove />
-      })}
+      {children ? <DynamicControls /> : null}
       {showAddProperties ? <AddPropertyControl styles={styles} /> : null}
     </EditorProvider>
   )
+}
+
+const DynamicControls = () => {
+  const { dynamicProperties } = useDynamicControls()
+  return dynamicProperties?.length ? (
+    <>
+      {dynamicProperties.map((property) => (
+        <Control key={property} field={property} showRemove />
+      ))}
+    </>
+  ) : null
 }
 
 function getInputComponent(property: string) {

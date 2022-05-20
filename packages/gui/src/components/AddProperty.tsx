@@ -1,18 +1,18 @@
 import { useCombobox } from 'downshift'
-import { property } from 'lodash-es'
 import { useEffect, useId, useRef, useState } from 'react'
 import { properties as propertyList } from '../data/properties'
 import { getDefaultValue } from '../lib/defaults'
 import { Styles } from '../types/css'
 import { Label } from './primitives'
-import { DynamicControlsProvider, useDynamicControls, useEditor } from './providers/EditorContext'
+import { useDynamicControls } from './providers/DynamicPropertiesContext'
+import { useEditor } from './providers/EditorContext'
 
 interface Props {
   styles: Styles
 }
 export const AddPropertyControl = ({ styles }: Props) => {
   const { setField } = useEditor()
-  const { dynamicProperties, addDynamicProperty } = useDynamicControls()
+  const { addDynamicProperty } = useDynamicControls()
   const id = useId()
   const inputRef = useRef(null)
 

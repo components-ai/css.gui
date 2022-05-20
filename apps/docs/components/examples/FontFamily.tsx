@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Editor, FontFamilyInput, styled } from '@compai/css-gui'
+import { Inputs } from '@compai/css-gui'
 
 export const FontFamilyExample = () => {
   const [styles, setStyles] = useState<any>({
@@ -24,7 +25,9 @@ export const FontFamilyExample = () => {
       <styled.p styles={styles}>Fun with fonts!</styled.p>
       <div sx={{ '& > div': { display: 'grid', gap: '1rem' } }}>
         {/* <FontFamilyInput value={styles} onChange={setStyles}/> */}
-        <Editor styles={styles} onChange={setStyles} showAddProperties/>
+        <Editor styles={styles} onChange={setStyles} showAddProperties>
+          <Inputs.FontFamily />
+        </Editor>
       </div>
     </>
   )
