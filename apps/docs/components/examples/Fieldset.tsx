@@ -1,28 +1,20 @@
 import { useState } from 'react'
-import {
-  Editor,
-  styled,
-  Fieldset as FieldsetInput,
-  Inputs,
-  toCSSObject,
-} from '@compai/css-gui'
+import { Editor, styled, toCSSObject } from '@compai/css-gui'
 
 export const Fieldset = () => {
   const [styles, setStyles] = useState<any>({
     '::first-letter': {
-      fontSize: { unit: 'px', value: 32 },
+      fontSize: { value: 32, unit: 'px' },
+      color: 'purple',
     },
-    '.some-class': {
-      color: 'tomato',
-    },
-    fontSize: { unit: 'px', value: 16 },
+    fontSize: { value: 16, unit: 'px' },
   })
 
   return (
     <>
       <Editor styles={styles} onChange={setStyles} />
       <styled.p styles={styles}>
-        Hello, <b>world!</b>
+        Hello, <b className="some-class">world!</b>
       </styled.p>
       <pre>{JSON.stringify(toCSSObject(styles), null, 2)}</pre>
     </>
