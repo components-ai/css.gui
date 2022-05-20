@@ -59,6 +59,12 @@ export const AttributeEditor = ({
     onChange({ ...value, [selectedItem]: '' })
   }
 
+  const handleItemRemoved = (removedItem: string) => {
+    const newValue = { ...value }
+    delete newValue[removedItem]
+    onChange(newValue)
+  }
+
   return (
     <div>
       {/* @ts-ignore */}
@@ -72,7 +78,7 @@ export const AttributeEditor = ({
                 onChange={(e) => onChange({ ...value, [key]: e.target.value })}
               />
             </Label>
-            <IconButton>
+            <IconButton onClick={() => handleItemRemoved(key)}>
               <X size={14} strokeWidth={3} />
             </IconButton>
           </div>
