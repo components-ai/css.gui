@@ -112,7 +112,7 @@ function NodeSwitch({ value, onChange }: EditorProps) {
 
 interface TreeNodeProps extends EditorProps {
   path: ElementPath
-  onSelect(path: ElementPath): void
+  onSelect(path: ElementPath | null): void
 }
 
 function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
@@ -163,18 +163,64 @@ function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
         <div sx={{ ml: 4 }}>
           {value.children?.map((child, i) => {
             return (
-              <TreeNode
-                value={child}
-                onSelect={onSelect}
-                path={[...path, i]}
-                onChange={onChange}
-              />
+              <>
+                <AddChildButton
+                  onClick={() => {
+                    onChange(addChildAtPath(value, [...path, i], ''))
+                    onSelect(null)
+                  }}
+                />
+                <TreeNode
+                  value={child}
+                  onSelect={onSelect}
+                  path={[...path, i]}
+                  onChange={onChange}
+                />
+              </>
             )
           })}
+          <AddChildButton
+            onClick={() => {
+              onChange(
+                addChildAtPath(
+                  value,
+                  [...path, (value.children || []).length],
+                  ''
+                )
+              )
+              onSelect(null)
+            }}
+          />
         </div>
         <div sx={{ ml: '1rem' }}>&lt;/{value.tagName}&gt;</div>
       </Collapsible.Content>
     </Collapsible.Root>
+  )
+}
+
+function AddChildButton({ onClick }: { onClick(): void }) {
+  return (
+    <button
+      onClick={onClick}
+      sx={{
+        display: 'block',
+        background: 'none',
+        border: 'none',
+        textAlign: 'left',
+        color: 'transparent',
+        fontSize: '0.75rem',
+        height: '0.25rem',
+        m: 0,
+        p: 0,
+        transition: 'height 250ms',
+        ':hover': {
+          color: 'muted',
+          height: '1rem',
+        },
+      }}
+    >
+      + Add child
+    </button>
   )
 }
 
@@ -191,6 +237,39 @@ function getChildAtPath(element: HtmlNode, path: ElementPath): HtmlNode {
     throw new Error('bad path')
   }
   return getChildAtPath(child, rest)
+}
+
+function addChildAtPath(
+  element: HtmlNode,
+  path: ElementPath,
+  item: HtmlNode
+): HtmlNode {
+  // if no path, replace the element
+  if (path.length === 0) {
+    throw new Error('Cannot add to root path')
+  }
+  if (typeof element === 'string') {
+    return element
+  }
+  if (path.length === 1) {
+    return {
+      ...element,
+      children: addAt(element.children ?? [], path[0], item),
+    }
+  }
+  const [head, ...rest] = path
+  const child = element.children?.[head]
+  if (isNil(child)) {
+    throw new Error('bad path')
+  }
+  return {
+    ...element,
+    children: replaceAt(
+      element.children ?? [],
+      head,
+      addChildAtPath(child, rest, item)
+    ),
+  }
 }
 
 function setChildAtPath(
@@ -247,6 +326,12 @@ function removeChildAtPath(element: HtmlNode, path: ElementPath): HtmlNode {
       removeChildAtPath(child, rest)
     ),
   }
+}
+
+function addAt<T>(items: T[], index: number, newItem: T) {
+  const spliced = [...items]
+  spliced.splice(index, 0, newItem)
+  return spliced
 }
 
 function replaceAt<T>(items: T[], index: number, newItem: T) {
