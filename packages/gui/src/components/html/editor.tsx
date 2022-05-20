@@ -1,7 +1,7 @@
 import { Editor } from '../Editor'
 import { HtmlNode } from './types'
 import * as Collapsible from '@radix-ui/react-collapsible'
-import { useState } from 'react'
+import { Fragment, useState } from 'react'
 import { filter, isNil, values } from 'lodash-es'
 import IconButton from '../ui/IconButton'
 import { Trash2 } from 'react-feather'
@@ -194,7 +194,7 @@ function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
         <div sx={{ ml: 4 }}>
           {value.children?.map((child, i) => {
             return (
-              <>
+              <Fragment key={i}>
                 <AddChildButton
                   onClick={() => {
                     onChange(addChildAtPath(value, [i], ''))
@@ -212,7 +212,7 @@ function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
                     })
                   }}
                 />
-              </>
+              </Fragment>
             )
           })}
           <AddChildButton

@@ -10,11 +10,11 @@ export function HtmlRenderer({ value }: Props) {
   const Tag: any = value.tagName || 'div'
   return (
     <Tag {...attributes} sx={{ ...toCSSObject(style) }}>
-      {children.map((child) => {
+      {children.map((child, i) => {
         if (typeof child === 'string') {
           return child
         }
-        return <HtmlRenderer value={child} />
+        return <HtmlRenderer key={i} value={child} />
       })}
     </Tag>
   )
