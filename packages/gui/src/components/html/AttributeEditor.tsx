@@ -78,6 +78,7 @@ export const AttributeEditor = ({
           </div>
         )
       })}
+      <Label>Add Attribute</Label>
       <Combobox
         onFilterItems={handleFilterItems}
         onItemSelected={handleItemSelected}

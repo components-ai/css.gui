@@ -103,22 +103,23 @@ function NodeSwitch({ value, onChange }: EditorProps) {
       </div>
     )
   }
-  
+
   return (
     <div>
       <div>
         <Label>Tag name</Label>{' '}
-        <Combobox 
+        <Combobox
           onFilterItems={(filterValue) => {
             return HTML_TAGS.filter((el) => el.startsWith(filterValue))
           }}
-          onItemSelected={(selectedItem) => onChange({ ...value, tagName: selectedItem })}
+          onItemSelected={(selectedItem) =>
+            onChange({ ...value, tagName: selectedItem })
+          }
           items={HTML_TAGS}
           value={value.tagName}
         />
       </div>
       <div>
-        <Label>Add Attribute</Label>
         <AttributeEditor
           value={value.attributes ?? {}}
           onChange={(newAttributes) =>
