@@ -1,9 +1,9 @@
 import { createContext, ReactChild, useContext, useState } from 'react'
 
-// TODO - on remove of property
 interface DynamicControlsContextProps {
   dynamicProperties?: string[]
   addDynamicProperty?: (property: string) => void
+  removeDynamicProperty?: (property: string) => void
 }
 const DynamicControlsContext = createContext<DynamicControlsContextProps>({})
 
@@ -20,8 +20,10 @@ export function DynamicControlsProvider({
 }: DynamicControlsProviderProps) {
   const [dynamicProps, setDynamicProps] = useState<string[]>([])
   const handleAddDynamicProperty = (newProperty: string) => {
-    console.log(newProperty)
     setDynamicProps([...dynamicProps, newProperty])
+  }
+  const handleRemoveDynamicProperty = (property: string) => {
+    setDynamicProps(dynamicProps.filter((p) => p !== property))
   }
 
   return (
@@ -29,6 +31,7 @@ export function DynamicControlsProvider({
       value={{
         dynamicProperties: dynamicProps,
         addDynamicProperty: handleAddDynamicProperty,
+        removeDynamicProperty: handleRemoveDynamicProperty,
       }}
     >
       {children}
