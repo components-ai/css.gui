@@ -65,7 +65,9 @@ export const AddPropertyControl = ({ styles }: Props) => {
   const handleAddProperty = (propertyName: string) => {
     setFilterValue(propertyName)
     setField(propertyName, getDefaultValue(propertyName))
-    addDynamicProperty(propertyName)
+    if (addDynamicProperty) {
+      addDynamicProperty(propertyName)
+    }
   }
 
   return (

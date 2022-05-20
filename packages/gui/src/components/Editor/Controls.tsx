@@ -58,6 +58,7 @@ interface ControlProps extends InputProps {
 }
 const Control = ({ field, showRemove = false, ...props }: ControlProps) => {
   const { getField, setField, removeField } = useEditor()
+  const { removeDynamicProperty } = useDynamicControls()
   const fieldset = useFieldset()
   const property = field.toString()
   const Component: ComponentType<any> | null = getInputComponent(property)
@@ -98,13 +99,20 @@ const Control = ({ field, showRemove = false, ...props }: ControlProps) => {
     )
   }
 
+  const handleRemoveProperty = () => {
+    if (removeDynamicProperty) {
+      removeDynamicProperty(property)
+    }
+    removeField(fullField)
+  }
+
   return (
     <Component
       value={getField(fullField)}
       onChange={(newValue: any) => {
         setField(fullField, newValue)
       }}
-      onRemove={showRemove ? () => removeField(fullField) : null}
+      onRemove={showRemove ? handleRemoveProperty : null}
       property={property}
       {...componentProps}
     />
@@ -220,6 +228,7 @@ export const Editor = ({
 
 const DynamicControls = () => {
   const { dynamicProperties } = useDynamicControls()
+  console.log(dynamicProperties, "properties")
   return dynamicProperties?.length ? (
     <>
       {dynamicProperties.map((property) => (
