@@ -2,7 +2,7 @@ import { Editor } from '../Editor'
 import { HtmlNode } from './types'
 import * as Collapsible from '@radix-ui/react-collapsible'
 import { useState } from 'react'
-import { isNil } from 'lodash-es'
+import { isNil, values } from 'lodash-es'
 import IconButton from '../ui/IconButton'
 import { Trash2 } from 'react-feather'
 import { Label } from '../primitives'
@@ -96,6 +96,15 @@ function NodeSwitch({ value, onChange }: EditorProps) {
           type="text"
           value={value.tagName}
           onChange={(e) => onChange({ ...value, tagName: e.target.value })}
+        />
+      </div>
+      <div>
+        <Label>Attributes</Label>
+        <AttributeEditor
+          value={value.attributes ?? {}}
+          onChange={(newAttributes) =>
+            onChange({ ...value, attributes: newAttributes })
+          }
         />
       </div>
       <div>
@@ -220,6 +229,50 @@ function AddChildButton({ onClick }: { onClick(): void }) {
     >
       + Add child
     </button>
+  )
+}
+
+interface AttributeEditorProps {
+  value: Record<string, string>
+  onChange(value: Record<string, string>): void
+}
+
+function AttributeEditor({ value = {}, onChange }: AttributeEditorProps) {
+  const [currentValue, setCurrentValue] = useState('')
+  return (
+    <div>
+      {Object.entries(value).map(([key, attrValue]) => {
+        return (
+          <div sx={{ display: 'flex' }}>
+            <Label>
+              {key}
+              <input
+                value={attrValue}
+                onChange={(e) => onChange({ ...value, [key]: e.target.value })}
+              />
+            </Label>
+            <IconButton>
+              <Trash2 size={14} />
+            </IconButton>
+          </div>
+        )
+      })}
+      <div sx={{ display: 'flex' }}>
+        <input
+          type="text"
+          value={currentValue}
+          onChange={(e) => setCurrentValue(e.target.value)}
+        />
+        <button
+          onClick={() => {
+            onChange({ ...value, [currentValue]: '' })
+            setCurrentValue('')
+          }}
+        >
+          + Add attribute
+        </button>
+      </div>
+    </div>
   )
 }
 
