@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.61
+
+### Patch Changes
+
+- dbb0ffd: Add basic HTML import to HTML editor
+
 ## 0.0.60
 
 ### Patch Changes
