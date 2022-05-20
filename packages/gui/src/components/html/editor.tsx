@@ -4,18 +4,30 @@ import { useState } from 'react'
 
 interface EditorProps {
   value: ElementData
-  // onChange(value: ElementData): void
+  onChange(value: ElementData): void
 }
+
+type ElementPath = number[]
 
 /**
  * An HTML tree-based editor that lets you add HTML nodes and mess around with their styles
  */
-export function HtmlEditor({ value }: EditorProps) {
-  const [selected, setSelected] = useState<ElementData | null>(null)
+export function HtmlEditor({ value, onChange }: EditorProps) {
+  const [selected, setSelected] = useState<ElementPath | null>(null)
   return (
     <div sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 3 }}>
-      <TreeNode value={value} onSelect={setSelected} />
-      {selected && <Editor value={selected} />}
+      <TreeNode
+        value={value}
+        onSelect={setSelected}
+        path={[]}
+        onChange={onChange}
+      />
+      {selected && (
+        <Editor
+          value={getChildAtPath(value, selected)}
+          onChange={(newItem) => setChildAtPath(value, selected, newItem)}
+        />
+      )}
     </div>
   )
 }
@@ -25,10 +37,11 @@ function Editor({ value }: EditorProps) {
 }
 
 interface TreeNodeProps extends EditorProps {
-  onSelect(element: ElementData): void
+  path: ElementPath
+  onSelect(path: ElementPath): void
 }
 
-function TreeNode({ value, onSelect }: TreeNodeProps) {
+function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
   const [open, setOpen] = useState(true)
   return (
     <Collapsible.Root open={open} onOpenChange={setOpen}>
@@ -51,22 +64,65 @@ function TreeNode({ value, onSelect }: TreeNodeProps) {
           color: 'text',
           fontSize: '1rem',
         }}
-        onClick={() => onSelect(value)}
+        onClick={() => onSelect(path)}
       >
         &lt;{value.tagName}
         {!open && '/'}&gt;
       </button>
       <Collapsible.Content>
         <div sx={{ ml: 4 }}>
-          {value.children.map((child) => {
+          {value.children.map((child, i) => {
             if (typeof child === 'string') {
               return <div>"{child}"</div>
             }
-            return <TreeNode value={child} onSelect={onSelect} />
+            return (
+              <TreeNode
+                value={child}
+                onSelect={onSelect}
+                path={[...path, i]}
+                onChange={onChange}
+              />
+            )
           })}
         </div>
         <div sx={{ ml: '1rem' }}>&lt;/{value.tagName}&gt;</div>
       </Collapsible.Content>
     </Collapsible.Root>
   )
+}
+
+function getChildAtPath(element: ElementData, path: ElementPath): ElementData {
+  if (path.length === 0) {
+    return element
+  }
+  const [head, ...rest] = path
+  const child = element.children?.[head]
+  if (!child || typeof child === 'string') {
+    throw new Error('bad path')
+  }
+  return getChildAtPath(child, rest)
+}
+
+function setChildAtPath(
+  element: ElementData,
+  path: ElementPath,
+  newChild: ElementData
+): ElementData {
+  // if no path, replace the element
+  if (path.length === 0) {
+    return newChild
+  }
+  const [head, ...rest] = path
+  const child = element.children?.[head]
+  if (!child || typeof child === 'string') {
+    throw new Error('bad path')
+  }
+  return {
+    ...element,
+    children: element.children.splice(
+      head,
+      1,
+      setChildAtPath(child, rest, newChild)
+    ),
+  }
 }
