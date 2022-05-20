@@ -4,6 +4,7 @@ import { properties as propertyList } from '../data/properties'
 import { getDefaultValue } from '../lib/defaults'
 import { Styles } from '../types/css'
 import { Label } from './primitives'
+import { useDynamicControls } from './providers/DynamicPropertiesContext'
 import { useEditor } from './providers/EditorContext'
 
 interface Props {
@@ -11,6 +12,7 @@ interface Props {
 }
 export const AddPropertyControl = ({ styles }: Props) => {
   const { setField } = useEditor()
+  const { addDynamicProperty } = useDynamicControls()
   const id = useId()
   const inputRef = useRef(null)
 
@@ -63,6 +65,7 @@ export const AddPropertyControl = ({ styles }: Props) => {
   const handleAddProperty = (propertyName: string) => {
     setFilterValue(propertyName)
     setField(propertyName, getDefaultValue(propertyName))
+    addDynamicProperty(propertyName)
   }
 
   return (
