@@ -1,7 +1,8 @@
 import { Editor } from '../Editor'
-import { ElementData, HtmlNode } from './types'
+import { HtmlNode } from './types'
 import * as Collapsible from '@radix-ui/react-collapsible'
 import { useState } from 'react'
+import { isNil } from 'lodash-es'
 
 interface EditorProps {
   value: HtmlNode
@@ -37,7 +38,12 @@ export function HtmlEditor({ value, onChange }: EditorProps) {
 
 function TagEditor({ value, onChange }: EditorProps) {
   if (typeof value === 'string') {
-    return <div>{value}</div>
+    return (
+      <label>
+        Content
+        <input value={value} onChange={(e) => onChange(e.target.value)} />
+      </label>
+    )
   }
   return (
     <div>
@@ -69,7 +75,20 @@ interface TreeNodeProps extends EditorProps {
 function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
   const [open, setOpen] = useState(true)
   if (typeof value === 'string') {
-    return <div>"{value}"</div>
+    return (
+      <div>
+        <button
+          sx={{
+            border: 'none',
+            backgroundColor: 'background',
+            color: 'text',
+          }}
+          onClick={() => onSelect(path)}
+        >
+          "{value}"
+        </button>
+      </div>
+    )
   }
   return (
     <Collapsible.Root open={open} onOpenChange={setOpen}>
@@ -125,7 +144,7 @@ function getChildAtPath(element: HtmlNode, path: ElementPath): HtmlNode {
   }
   const [head, ...rest] = path
   const child = element.children?.[head]
-  if (!child || typeof child === 'string') {
+  if (isNil(child)) {
     throw new Error('bad path')
   }
   return getChildAtPath(child, rest)
@@ -145,7 +164,7 @@ function setChildAtPath(
   }
   const [head, ...rest] = path
   const child = element.children?.[head]
-  if (!child || typeof child === 'string') {
+  if (isNil(child)) {
     throw new Error('bad path')
   }
   return {
