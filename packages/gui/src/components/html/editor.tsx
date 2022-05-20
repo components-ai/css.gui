@@ -4,7 +4,7 @@ import * as Collapsible from '@radix-ui/react-collapsible'
 import { Fragment, useState } from 'react'
 import { filter, isNil, values } from 'lodash-es'
 import IconButton from '../ui/IconButton'
-import { Trash2 } from 'react-feather'
+import { X } from 'react-feather'
 import { Label, Combobox } from '../primitives'
 import { SelectInput } from '../inputs/SelectInput'
 import { AttributeEditor } from './AttributeEditor'
@@ -38,13 +38,28 @@ type ElementPath = number[]
 export function HtmlEditor({ value, onChange }: EditorProps) {
   const [selected, setSelected] = useState<ElementPath | null>(null)
   return (
-    <div sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 3 }}>
+    <div sx={{ 
+      display: 'flex', 
+      width: 'auto',
+    }}>
+    <div sx={{ 
+      pt: 3, 
+      pb: 3,
+      borderColor: 'border',
+      borderRightWidth: '1px',
+      borderRightStyle: 'solid',
+      borderBottomWidth: '1px',
+      borderBottomStyle: 'solid',
+      overflowX: 'auto',
+      resize: 'horizontal',
+      }}>
       <TreeNode
         value={value}
         onSelect={setSelected}
         path={[]}
         onChange={onChange}
       />
+     </div>
       {selected && (
         <NodeEditor
           value={getChildAtPath(value, selected)}
@@ -68,10 +83,19 @@ interface TagEditorProps extends EditorProps {
 function NodeEditor({ value, onChange, onRemove }: TagEditorProps) {
   const nodeType = typeof value === 'string' ? 'text' : 'tag'
   return (
-    <div>
-      <div sx={{ display: 'grid', gridTemplateColumns: '1fr max-content' }}>
+    <div sx={{ 
+    resize: 'horizontal',
+    overflowX: 'auto',
+    p: 3, 
+    borderRightWidth: '1px',
+    borderRightStyle: 'solid',
+    borderBottomWidth: '1px',
+    borderBottomStyle: 'solid',
+    borderColor: 'border',
+    }}>
+      <div sx={{ mb: 2, display: 'flex', alignItems: 'flex-end'}}>
         <SelectInput
-          label="type"
+          label="Type"
           value={nodeType}
           onChange={(value) => {
             if (value === 'text') {
@@ -84,9 +108,11 @@ function NodeEditor({ value, onChange, onRemove }: TagEditorProps) {
           }}
           options={['text', 'tag']}
         />
-        <IconButton onClick={onRemove}>
-          <Trash2 size={16} />
-        </IconButton>
+        <div sx={{ position: 'relative', top: '-4px' }}>
+          <IconButton onClick={onRemove}>
+            <X size={14} />
+          </IconButton>
+        </div>
       </div>
       <NodeSwitch value={value} onChange={onChange} />
     </div>
@@ -107,35 +133,44 @@ function NodeSwitch({ value, onChange }: EditorProps) {
 
   return (
     <div>
+      <article sx={{ 
+        borderBottomWidth: '1px',
+        borderBottomStyle: 'solid',
+        borderBottomColor: 'border',
+        mb: 3, 
+      }}>
+        <div sx={{ mb: 2 }}>
+          <Label>Tag name</Label>{' '}
+          <Combobox
+            onFilterItems={(filterValue) => {
+              return HTML_TAGS.filter((el) => el.startsWith(filterValue))
+            }}
+            onItemSelected={(selectedItem) =>
+              onChange({ ...value, tagName: selectedItem })
+            }
+            items={HTML_TAGS}
+            value={value.tagName}
+          />
+        </div>
+        <div>
+          <AttributeEditor
+            value={value.attributes ?? {}}
+            onChange={(newAttributes) =>
+              onChange({ ...value, attributes: newAttributes })
+            }
+            element={value.tagName}
+          />
+        </div>
+      </article>
       <div>
-        <Label>Tag name</Label>{' '}
-        <Combobox
-          onFilterItems={(filterValue) => {
-            return HTML_TAGS.filter((el) => el.startsWith(filterValue))
-          }}
-          onItemSelected={(selectedItem) =>
-            onChange({ ...value, tagName: selectedItem })
-          }
-          items={HTML_TAGS}
-          value={value.tagName}
-        />
-      </div>
-      <div>
-        <AttributeEditor
-          value={value.attributes ?? {}}
-          onChange={(newAttributes) =>
-            onChange({ ...value, attributes: newAttributes })
-          }
-          element={value.tagName}
-        />
-      </div>
-      <div>
-        <Label>Styles</Label>
+        <Label> 🎨 Styles</Label>
+        <div sx={{ mt: 2 }}>
         <Editor
           styles={value.style ?? {}}
           onChange={(newStyles) => onChange({ ...value, style: newStyles })}
           showAddProperties
         />
+        </div>
       </div>
     </div>
   )
@@ -172,9 +207,13 @@ function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
           backgroundColor: 'background',
           color: 'text',
           ':before': {
+            cursor: 'pointer',
             content: open ? '"▼"' : '"▶︎"',
+            display: 'inline-block',
             width: '1rem',
             height: '1rem',
+            position: 'relative',
+            top: '-2px',
           },
         }}
       ></Collapsible.Trigger>
@@ -233,6 +272,7 @@ function AddChildButton({ onClick }: { onClick(): void }) {
     <button
       onClick={onClick}
       sx={{
+        cursor: 'pointer',
         display: 'block',
         background: 'none',
         border: 'none',
@@ -243,6 +283,8 @@ function AddChildButton({ onClick }: { onClick(): void }) {
         m: 0,
         p: 0,
         transition: 'height 250ms',
+        whiteSpace: 'nowrap',
+        zIndex: '99',
         ':hover': {
           color: 'muted',
           height: '1rem',

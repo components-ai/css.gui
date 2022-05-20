@@ -14,7 +14,7 @@ const initialValue = htmlToEditorSchema(`
 export default function HtmlEditorExample() {
   const [html, setHtml] = useState(initialValue)
   return (
-    <div sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
+    <div sx={{ display: 'flex' }}>
       <HtmlEditor value={html} onChange={setHtml} />
       <HtmlRenderer value={html} />
     </div>
