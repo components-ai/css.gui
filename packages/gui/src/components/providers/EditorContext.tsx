@@ -41,6 +41,8 @@ export function useEditor() {
   }
 
   function setField<T>(field: KeyArg, recipe: Recipe<T>) {
+    console.log(field)
+    console.log('--------------')
     editComponentData((draft) => {
       applyRecipe(draft.value, field, recipe)
     })

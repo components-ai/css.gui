@@ -11,7 +11,7 @@ export const isInternalCSSClass = (str: string): boolean => {
 
 export const addInternalCSSClassSyntax = (str: string): string => {
   if (!isInternalCSSClass(str)) {
-    return SPECIAL_INTERNAL_CSS_CLASS_SYNTAX + str
+    return SPECIAL_INTERNAL_CSS_CLASS_SYNTAX + str.replace(/^./, '')
   }
 
   return str

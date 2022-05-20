@@ -15,7 +15,7 @@ type FieldsetNames =
   | ElementTypes
   | ClassTypes
 
-type FieldsetContextProps = {
+export type FieldsetContextProps = {
   type: 'pseudo-element' | 'pseudo-class' | 'element' | 'class'
   name: FieldsetNames | FieldsetNames[]
 }

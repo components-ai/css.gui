@@ -23,11 +23,12 @@ import { Editor, Fieldset, Inputs, styled } from '@compai/css-gui'
 
 const MyEditor = () => {
   const [styles, setStyles] = useState({
-    '::first-letter': {
-      fontSize: { unit: 'px', value: 32 }
+    h1: {
+      '::first-letter': {
+        fontSize: { unit: 'px', value: 32 },
+      },
     },
-    fontSize: { unit: 'px', value: 16 },
-  }))
+  })
 
   return (
     <>

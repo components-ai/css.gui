@@ -12,34 +12,15 @@ export const Fieldset = () => {
     '::first-letter': {
       fontSize: { unit: 'px', value: 32 },
     },
+    '.some-class': {
+      color: 'tomato',
+    },
     fontSize: { unit: 'px', value: 16 },
   })
 
   return (
     <>
-      <Editor styles={styles} onChange={setStyles}>
-        <>
-          <Inputs.FontSize />
-          <FieldsetInput type="pseudo-element" name="first-letter">
-            <>
-              <h2>First letter</h2>
-              <Inputs.FontSize />
-            </>
-          </FieldsetInput>
-          <FieldsetInput type="pseudo-element" name="selection">
-            <>
-              <h2>Selection</h2>
-              <Inputs.BackgroundColor />
-            </>
-          </FieldsetInput>
-          <FieldsetInput type="element" name="b">
-            <>
-              <h2>Bold</h2>
-              <Inputs.Color />
-            </>
-          </FieldsetInput>
-        </>
-      </Editor>
+      <Editor styles={styles} onChange={setStyles} />
       <styled.p styles={styles}>
         Hello, <b>world!</b>
       </styled.p>
