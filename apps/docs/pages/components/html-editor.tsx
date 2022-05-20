@@ -1,18 +1,15 @@
-import { HtmlEditor, HtmlRenderer } from '@compai/css-gui'
+import { HtmlEditor, HtmlRenderer, htmlToEditorSchema } from '@compai/css-gui'
 import { useState } from 'react'
-const initialValue: any = {
-  tagName: 'div',
-  children: [
-    'hello ',
-    {
-      tagName: 'span',
-      children: ['world'],
-      style: {
-        color: 'tomato',
-      },
-    },
-  ],
-}
+
+// TODO: Handle style attrs
+const initialValue = htmlToEditorSchema(`
+<div class="section">
+  <h1>Hello, world!</h1>
+  <h2>Weeee!</h2>
+  <button>I'm a CTA</button>
+  <a href="https://components.ai">I'm a link!</a>
+</div>
+`)
 
 export default function HtmlEditorExample() {
   const [html, setHtml] = useState(initialValue)
