@@ -3,6 +3,8 @@ import { HtmlNode } from './types'
 import * as Collapsible from '@radix-ui/react-collapsible'
 import { useState } from 'react'
 import { isNil } from 'lodash-es'
+import IconButton from '../ui/IconButton'
+import { Trash2 } from 'react-feather'
 
 interface EditorProps {
   value: HtmlNode
@@ -30,23 +32,38 @@ export function HtmlEditor({ value, onChange }: EditorProps) {
           onChange={(newItem) =>
             onChange(setChildAtPath(value, selected, newItem))
           }
+          onRemove={() => {
+            onChange(removeChildAtPath(value, selected))
+          }}
         />
       )}
     </div>
   )
 }
 
-function TagEditor({ value, onChange }: EditorProps) {
+interface TagEditorProps extends EditorProps {
+  onRemove(): void
+}
+
+function TagEditor({ value, onChange, onRemove }: TagEditorProps) {
   if (typeof value === 'string') {
     return (
-      <label>
-        Content
-        <input value={value} onChange={(e) => onChange(e.target.value)} />
-      </label>
+      <div>
+        <IconButton onClick={onRemove}>
+          <Trash2 />
+        </IconButton>
+        <label>
+          Content
+          <input value={value} onChange={(e) => onChange(e.target.value)} />
+        </label>
+      </div>
     )
   }
   return (
     <div>
+      <IconButton onClick={onRemove}>
+        <Trash2 />
+      </IconButton>
       <div>
         <label>tagName</label>{' '}
         <input
@@ -177,8 +194,39 @@ function setChildAtPath(
   }
 }
 
+function removeChildAtPath(element: HtmlNode, path: ElementPath): HtmlNode {
+  // if no path, invalid
+  if (path.length === 0) {
+    throw new Error('Cannot remove top-level')
+  }
+  if (typeof element === 'string') {
+    return element
+  }
+  if (path.length === 1) {
+    return {
+      ...element,
+      children: removeAt(element.children, path[0]),
+    }
+  }
+  const [head, ...rest] = path
+  const child = element.children?.[head]
+  if (isNil(child)) {
+    throw new Error('bad path')
+  }
+  return {
+    ...element,
+    children: replaceAt(element.children, head, removeChildAtPath(child, rest)),
+  }
+}
+
 function replaceAt<T>(items: T[], index: number, newItem: T) {
   const spliced = [...items]
   spliced.splice(index, 1, newItem)
+  return spliced
+}
+
+function removeAt<T>(items: T[], index: number) {
+  const spliced = [...items]
+  spliced.splice(index, 1)
   return spliced
 }
