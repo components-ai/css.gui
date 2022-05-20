@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.62
+
+### Patch Changes
+
+- 72b59e4: Improve initialization of fieldsets that don't use composition API
+
 ## 0.0.61
 
 ### Patch Changes
