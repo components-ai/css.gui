@@ -50,7 +50,7 @@ function TagEditor({ value, onChange, onRemove }: TagEditorProps) {
     return (
       <div>
         <IconButton onClick={onRemove}>
-          <Trash2 />
+          <Trash2 size={16} />
         </IconButton>
         <label>
           Content
@@ -62,7 +62,7 @@ function TagEditor({ value, onChange, onRemove }: TagEditorProps) {
   return (
     <div>
       <IconButton onClick={onRemove}>
-        <Trash2 />
+        <Trash2 size={16} />
       </IconButton>
       <div>
         <label>tagName</label>{' '}
