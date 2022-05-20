@@ -67,6 +67,7 @@ function TagEditor({ value, onChange, onRemove }: TagEditorProps) {
       </IconButton>
       <div>
         <label>tagName</label>{' '}
+        {/* TODO should probably be a select/combobox instead for validity */}
         <input
           type="text"
           value={value.tagName}
