@@ -2,11 +2,28 @@ import { Editor } from '../Editor'
 import { HtmlNode } from './types'
 import * as Collapsible from '@radix-ui/react-collapsible'
 import { useState } from 'react'
-import { isNil, values } from 'lodash-es'
+import { filter, isNil, values } from 'lodash-es'
 import IconButton from '../ui/IconButton'
 import { Trash2 } from 'react-feather'
-import { Label } from '../primitives'
+import { Label, Combobox } from '../primitives'
 import { SelectInput } from '../inputs/SelectInput'
+import { AttributeEditor } from './AttributeEditor'
+
+const HTML_TAGS = [
+  'p',
+  'img',
+  'button',
+  'a',
+  'input',
+  'h1',
+  'h2',
+  'h3',
+  'h4',
+  'h5',
+  'h6',
+  'span',
+  'div',
+]
 
 interface EditorProps {
   value: HtmlNode
@@ -87,24 +104,29 @@ function NodeSwitch({ value, onChange }: EditorProps) {
       </div>
     )
   }
+
   return (
     <div>
       <div>
         <Label>Tag name</Label>{' '}
-        {/* TODO should probably be a select/combobox instead for validity */}
-        <input
-          type="text"
+        <Combobox
+          onFilterItems={(filterValue) => {
+            return HTML_TAGS.filter((el) => el.startsWith(filterValue))
+          }}
+          onItemSelected={(selectedItem) =>
+            onChange({ ...value, tagName: selectedItem })
+          }
+          items={HTML_TAGS}
           value={value.tagName}
-          onChange={(e) => onChange({ ...value, tagName: e.target.value })}
         />
       </div>
       <div>
-        <Label>Attributes</Label>
         <AttributeEditor
           value={value.attributes ?? {}}
           onChange={(newAttributes) =>
             onChange({ ...value, attributes: newAttributes })
           }
+          element={value.tagName}
         />
       </div>
       <div>
@@ -235,51 +257,6 @@ function AddChildButton({ onClick }: { onClick(): void }) {
 interface AttributeEditorProps {
   value: Record<string, string>
   onChange(value: Record<string, string>): void
-}
-
-function AttributeEditor({ value = {}, onChange }: AttributeEditorProps) {
-  const [currentValue, setCurrentValue] = useState('')
-  return (
-    <div>
-      {Object.entries(value).map(([key, attrValue]) => {
-        return (
-          <div sx={{ display: 'flex' }}>
-            <Label>
-              {key}
-              <input
-                value={attrValue}
-                onChange={(e) => onChange({ ...value, [key]: e.target.value })}
-              />
-            </Label>
-            <IconButton>
-              <Trash2 size={14} />
-            </IconButton>
-          </div>
-        )
-      })}
-      <div sx={{ display: 'flex' }}>
-        <input
-          type="text"
-          value={currentValue}
-          onChange={(e) => setCurrentValue(e.target.value)}
-          onKeyDown={(e) => {
-            if (['Enter', 'Tab'].includes(e.key)) {
-              onChange({ ...value, [currentValue]: '' })
-              setCurrentValue('')
-            }
-          }}
-        />
-        <button
-          onClick={() => {
-            onChange({ ...value, [currentValue]: '' })
-            setCurrentValue('')
-          }}
-        >
-          + Add attribute
-        </button>
-      </div>
-    </div>
-  )
 }
 
 function getChildAtPath(element: HtmlNode, path: ElementPath): HtmlNode {
