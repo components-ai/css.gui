@@ -17,6 +17,7 @@ import {
 } from '../../types/css'
 import { Theme } from '../../types/theme'
 import { EditorProvider, useEditor } from '../providers/EditorContext'
+import { useDynamicControls } from '../providers/DynamicPropertiesContext'
 import { EditorData, KeyArg, Recipe } from '../providers/types'
 import { useFieldset } from './Fieldset'
 import { joinPath } from '../providers/util'
@@ -211,9 +212,21 @@ export const Editor = ({
       hideResponsiveControls={hideResponsiveControls}
     >
       {controls}
+      {children ? <DynamicControls /> : null}
       {showAddProperties ? <AddPropertyControl styles={styles} /> : null}
     </EditorProvider>
   )
+}
+
+const DynamicControls = () => {
+  const { dynamicProperties } = useDynamicControls()
+  return dynamicProperties?.length ? (
+    <>
+      {dynamicProperties.map((property) => (
+        <Control key={property} field={property} showRemove />
+      ))}
+    </>
+  ) : null
 }
 
 function getInputComponent(property: string) {

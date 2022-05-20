@@ -1,12 +1,13 @@
 import { ThemeProvider as ThemeUIProvider } from 'theme-ui'
 import { get, unset } from 'lodash-es'
-import { createContext, ReactChild, ReactNode, useContext } from 'react'
+import { createContext, ReactNode, useContext } from 'react'
 import { KeyArg, Recipe, EditorData } from './types'
 import { applyRecipe } from './util'
 import { ThemeProvider } from './ThemeContext'
 import { EditorConfigProvider, EditorConfig } from './EditorConfigContext'
 import { theme as uiTheme } from '../ui/theme'
 import { Theme } from '../../types/theme'
+import { DynamicControlsProvider } from './DynamicPropertiesContext'
 
 export interface EditorContextValue<V> extends EditorData<V> {
   theme?: Theme
@@ -111,9 +112,11 @@ export function EditorProvider<V>({
     <ThemeProvider theme={theme}>
       <ThemeUIProvider theme={uiTheme}>
         <EditorConfigProvider config={editorConfig}>
-          <EditorContext.Provider value={values}>
-            {children}
-          </EditorContext.Provider>
+          <DynamicControlsProvider>
+            <EditorContext.Provider value={values}>
+              {children}
+            </EditorContext.Provider>
+          </DynamicControlsProvider>
         </EditorConfigProvider>
       </ThemeUIProvider>
     </ThemeProvider>
