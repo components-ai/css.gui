@@ -166,7 +166,7 @@ function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
               <>
                 <AddChildButton
                   onClick={() => {
-                    onChange(addChildAtPath(value, [...path, i], ''))
+                    onChange(addChildAtPath(value, [i], ''))
                     onSelect(null)
                   }}
                 />
@@ -174,20 +174,19 @@ function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
                   value={child}
                   onSelect={onSelect}
                   path={[...path, i]}
-                  onChange={onChange}
+                  onChange={(newChild) => {
+                    onChange({
+                      ...value,
+                      children: replaceAt(value.children ?? [], i, newChild),
+                    })
+                  }}
                 />
               </>
             )
           })}
           <AddChildButton
             onClick={() => {
-              onChange(
-                addChildAtPath(
-                  value,
-                  [...path, (value.children || []).length],
-                  ''
-                )
-              )
+              onChange(addChildAtPath(value, [value.children?.length ?? 0], ''))
               onSelect(null)
             }}
           />
@@ -244,6 +243,7 @@ function addChildAtPath(
   path: ElementPath,
   item: HtmlNode
 ): HtmlNode {
+  console.log({ element, path })
   // if no path, replace the element
   if (path.length === 0) {
     throw new Error('Cannot add to root path')
@@ -252,6 +252,7 @@ function addChildAtPath(
     return element
   }
   if (path.length === 1) {
+    console.log('path length 1')
     return {
       ...element,
       children: addAt(element.children ?? [], path[0], item),
