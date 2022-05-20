@@ -45,8 +45,13 @@ import { MultidimensionInput } from '../inputs/Multidimension'
 import { Responsive } from '../Responsive/Input'
 import { AddPropertyControl } from '../AddProperty'
 import { DeletePropButton } from '../inputs/Dimension/Input'
-import { isFieldsetGroup, sortProperties } from './util'
+import {
+  getFieldsetPropsFromProperty,
+  isFieldsetGroup,
+  sortProperties,
+} from './util'
 import { stylesToEditorSchema } from '../../lib/transformers/styles-to-editor-schema'
+import { removeInternalCSSClassSyntax } from '../../lib/classes'
 
 export const getPropertyFromField = (field: KeyArg) => {
   if (Array.isArray(field)) {
@@ -275,7 +280,7 @@ const FieldsetControl = ({ field, property }: FieldsetControlProps) => {
 
   return (
     <section>
-      <h3>{property}</h3>
+      <h3>{removeInternalCSSClassSyntax(property)}</h3>
       <GenericFieldset property={property}>
         <ControlSet field={field} properties={properties} />
       </GenericFieldset>

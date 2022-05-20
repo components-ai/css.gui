@@ -5,7 +5,7 @@ export const Fieldset = () => {
   const [styles, setStyles] = useState<any>({
     '::first-letter': {
       fontSize: { value: 32, unit: 'px' },
-      color: 'purple',
+      color: 'tomato',
     },
     fontSize: { value: 16, unit: 'px' },
   })
