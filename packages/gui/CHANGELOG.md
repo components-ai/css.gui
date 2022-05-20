@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.59
+
+### Patch Changes
+
+- e451db4: Add ability to add new controls to composition based API
+
 ## 0.0.58
 
 ### Patch Changes
