@@ -7,6 +7,7 @@ import IconButton from '../ui/IconButton'
 import { Trash2 } from 'react-feather'
 import { Label } from '../primitives'
 import { SelectInput } from '../inputs/SelectInput'
+import { AttributeEditor } from './AttributeEditor'
 
 interface EditorProps {
   value: HtmlNode
@@ -99,12 +100,13 @@ function NodeSwitch({ value, onChange }: EditorProps) {
         />
       </div>
       <div>
-        <Label>Attributes</Label>
+        <Label>Add Attribute</Label>
         <AttributeEditor
           value={value.attributes ?? {}}
           onChange={(newAttributes) =>
             onChange({ ...value, attributes: newAttributes })
           }
+          element={'p'}
         />
       </div>
       <div>
@@ -237,8 +239,9 @@ interface AttributeEditorProps {
   onChange(value: Record<string, string>): void
 }
 
-function AttributeEditor({ value = {}, onChange }: AttributeEditorProps) {
+function _AttributeEditor({ value = {}, onChange }: AttributeEditorProps) {
   const [currentValue, setCurrentValue] = useState('')
+  console.log(value, "value")
   return (
     <div>
       {Object.entries(value).map(([key, attrValue]) => {
