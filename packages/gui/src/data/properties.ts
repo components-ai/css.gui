@@ -141,7 +141,8 @@ export const properties: Record<string, PropertyData> = {
     ],
     defaultValue: 'center',
   },
-  alignmentBaseline: { // Can be used with tspan tref altGlyph and textPath SVG elements
+  alignmentBaseline: {
+    // Can be used with tspan tref altGlyph and textPath SVG elements
     type: 'keyword',
     keywords: [
       'baseline',
@@ -188,24 +189,24 @@ export const properties: Record<string, PropertyData> = {
     defaultValue: [DEFAULT_ANIMATION],
   },
   // TODO array of time values
-  animationDelay: { 
+  animationDelay: {
     type: 'time',
     defaultValue: {
       value: 0,
-      unit: 'ms'
-    }
+      unit: 'ms',
+    },
   },
   animationDirection: {
     type: 'keyword',
     keywords: ['normal', 'reverse', 'alternate', 'alternate-reverse'],
     defaultValue: 'normal',
   },
-  animationDuration: { 
+  animationDuration: {
     type: 'time',
     defaultValue: {
       value: 500,
       unit: 'ms',
-    }
+    },
   },
   animationFillMode: {
     type: 'keyword',
@@ -348,7 +349,7 @@ export const properties: Record<string, PropertyData> = {
     defaultValue: {
       value: 6,
       unit: 'px',
-    }
+    },
   },
   backgroundRepeat: {
     type: 'keyword',
@@ -396,9 +397,9 @@ export const properties: Record<string, PropertyData> = {
     type: 'length',
     number: true,
     defaultValue: {
-      value:  4,
+      value: 4,
       unit: 'px',
-    }
+    },
   },
   // TODO: 2-positional arguments separated by spaces
   borderImageRepeat: {
@@ -427,7 +428,7 @@ export const properties: Record<string, PropertyData> = {
     defaultValue: {
       value: 4,
       unit: 'px',
-    }
+    },
   },
   borderBottomColor: {
     type: 'color',
@@ -472,7 +473,7 @@ export const properties: Record<string, PropertyData> = {
     defaultValue: {
       value: 2,
       unit: 'px',
-    }
+    },
   },
   borderLeftColor: {
     type: 'color',
@@ -942,13 +943,13 @@ export const properties: Record<string, PropertyData> = {
       'fit-content',
       'content',
     ],
-    defaultValue: 'auto'
+    defaultValue: 'auto',
   },
   flexDirection: {
     type: 'keyword',
     responsive: true,
     keywords: ['row', 'row-reverse', 'column', 'column-reverse'],
-    defaultValue: 'row'
+    defaultValue: 'row',
   },
   flexFlow: {
     type: 'keyword',
@@ -970,7 +971,7 @@ export const properties: Record<string, PropertyData> = {
       'row-reverse wrap',
       'column-reverse wrap',
     ],
-    defaultValue: 'row wrap'
+    defaultValue: 'row wrap',
   },
   flexGrow: {
     type: 'number',
@@ -1011,7 +1012,7 @@ export const properties: Record<string, PropertyData> = {
     defaultValue: {
       value: 0,
       unit: 'px',
-    }
+    },
   },
   floatReference: {
     type: 'keyword',
@@ -1026,7 +1027,7 @@ export const properties: Record<string, PropertyData> = {
     type: 'percentage',
     defaultValue: {
       value: 100,
-      unit: '%'
+      unit: '%',
     },
   },
   fontFamily: {
@@ -1072,7 +1073,7 @@ export const properties: Record<string, PropertyData> = {
     defaultValue: {
       value: 24,
       unit: 'px',
-    }
+    },
   },
   fontStretch: {
     type: 'percentage',
@@ -1088,7 +1089,7 @@ export const properties: Record<string, PropertyData> = {
       'ultra-expanded',
     ],
     range: { [PercentageLengthUnits.Pct]: [50, 200] },
-    defaultValue: 'ultra-condensed', 
+    defaultValue: 'ultra-condensed',
   },
   fontStyle: {
     type: 'keyword',
@@ -1201,6 +1202,11 @@ export const properties: Record<string, PropertyData> = {
   forceColorAdjust: {
     type: 'keyword',
     keywords: ['auto', 'none'],
+  },
+  // TODO two-valued syntax
+  gap: {
+    type: 'length',
+    percentage: true,
   },
   gridAutoColumns: {
     type: TrackSizeListInput,
@@ -1379,7 +1385,7 @@ export const properties: Record<string, PropertyData> = {
     defaultValue: {
       value: 0,
       unit: 'px',
-    }
+    },
   },
   letterSpacing: {
     type: 'length',
@@ -1436,7 +1442,7 @@ export const properties: Record<string, PropertyData> = {
     defaultValue: {
       value: 1.5,
       unit: 'number',
-    }
+    },
   },
   lineHeightStep: {
     type: 'length',
@@ -1454,7 +1460,7 @@ export const properties: Record<string, PropertyData> = {
     defaultValue: {
       value: 0,
       unit: 'px',
-    }
+    },
   },
   marginTop: {
     type: 'length',
@@ -1463,7 +1469,7 @@ export const properties: Record<string, PropertyData> = {
     defaultValue: {
       value: 0,
       unit: 'px',
-    }
+    },
   },
   marginLeft: {
     type: 'length',
@@ -1472,7 +1478,7 @@ export const properties: Record<string, PropertyData> = {
     defaultValue: {
       value: 0,
       unit: 'px',
-    }
+    },
   },
   marginBottom: {
     type: 'length',
@@ -1481,7 +1487,7 @@ export const properties: Record<string, PropertyData> = {
     defaultValue: {
       value: 0,
       unit: 'px',
-    }
+    },
   },
   marginRight: {
     type: 'length',
@@ -1490,7 +1496,7 @@ export const properties: Record<string, PropertyData> = {
     defaultValue: {
       value: 0,
       unit: 'px',
-    }
+    },
   },
   marqueeDirection: {
     type: 'keyword',
@@ -1539,7 +1545,7 @@ export const properties: Record<string, PropertyData> = {
     defaultValue: {
       value: 8,
       unit: 'px',
-    }
+    },
   },
   maskBorderRepeat: {
     type: 'keyword',
@@ -1614,7 +1620,7 @@ export const properties: Record<string, PropertyData> = {
       'padding-box, content-box',
       'view-box, fill-box, border-box',
     ],
-    defaultValue: 'border-box', 
+    defaultValue: 'border-box',
   },
   maskPosition: { type: 'position' },
   maskRepeat: {
@@ -1655,7 +1661,7 @@ export const properties: Record<string, PropertyData> = {
     defaultValue: {
       value: 100,
       unit: '%',
-    }
+    },
   },
   maxInlineSize: {
     type: 'length',
@@ -1675,7 +1681,7 @@ export const properties: Record<string, PropertyData> = {
     defaultValue: {
       value: 100,
       unit: '%',
-    }
+    },
   },
   minHeight: {
     type: 'length',
@@ -1684,7 +1690,7 @@ export const properties: Record<string, PropertyData> = {
     defaultValue: {
       value: 48,
       unit: 'px',
-    }
+    },
   },
   minBlockSize: {
     type: 'length',
@@ -1693,7 +1699,7 @@ export const properties: Record<string, PropertyData> = {
     defaultValue: {
       value: 0,
       unit: 'px',
-    }
+    },
   },
   minInlineSize: {
     type: 'length',
@@ -1702,7 +1708,7 @@ export const properties: Record<string, PropertyData> = {
     defaultValue: {
       value: 0,
       unit: 'px',
-    }
+    },
   },
   // TODO: add fit-content function
   minWidth: {
@@ -1744,7 +1750,7 @@ export const properties: Record<string, PropertyData> = {
     defaultValue: {
       value: 0,
       unit: 'px',
-    }
+    },
   },
   offsetPath: {
     type: OffsetPathInput,
@@ -1769,7 +1775,7 @@ export const properties: Record<string, PropertyData> = {
     defaultValue: {
       value: 100,
       unit: '%',
-    }
+    },
   },
   order: {
     type: 'integer',
@@ -1791,7 +1797,7 @@ export const properties: Record<string, PropertyData> = {
     defaultValue: {
       value: 4,
       unit: 'px',
-    }
+    },
   },
   outlineStyle: {
     type: 'keyword',
@@ -1812,10 +1818,10 @@ export const properties: Record<string, PropertyData> = {
     type: 'length',
     percentage: true,
     keywords: ['thin', 'medium', 'thick'],
-    defaultValue:{
+    defaultValue: {
       value: 2,
       unit: 'px',
-    }
+    },
   },
   overflow: {
     type: 'keyword',
@@ -1888,7 +1894,7 @@ export const properties: Record<string, PropertyData> = {
     defaultValue: {
       value: 0,
       unit: 'px',
-    }
+    },
   },
   paddingTop: {
     type: 'length',
@@ -1896,7 +1902,7 @@ export const properties: Record<string, PropertyData> = {
     defaultValue: {
       value: 0,
       unit: 'px',
-    }
+    },
   },
   paddingLeft: {
     type: 'length',
@@ -1904,7 +1910,7 @@ export const properties: Record<string, PropertyData> = {
     defaultValue: {
       value: 0,
       unit: 'px',
-    }
+    },
   },
   paddingBottom: {
     type: 'length',
@@ -1912,7 +1918,7 @@ export const properties: Record<string, PropertyData> = {
     defaultValue: {
       value: 0,
       unit: 'px',
-    }
+    },
   },
   paddingRight: {
     type: 'length',
@@ -1920,7 +1926,7 @@ export const properties: Record<string, PropertyData> = {
     defaultValue: {
       value: 0,
       unit: 'px',
-    }
+    },
   },
   // TODO: Add defaultValue
   perspective: {
@@ -2012,7 +2018,7 @@ export const properties: Record<string, PropertyData> = {
     defaultValue: {
       value: 0,
       unit: 'px',
-    }
+    },
   },
   rowGap: {
     type: 'length',
@@ -2028,7 +2034,7 @@ export const properties: Record<string, PropertyData> = {
     defaultValue: {
       value: 2,
       unit: 'em',
-    }
+    },
   },
   rubyAlign: {
     type: 'keyword',
@@ -2167,7 +2173,7 @@ export const properties: Record<string, PropertyData> = {
     defaultValue: {
       value: 0,
       unit: 'px',
-    }
+    },
   },
   // TODO: Add defaultValue
   shapeOutside: {
@@ -2239,7 +2245,7 @@ export const properties: Record<string, PropertyData> = {
     defaultValue: {
       value: 4,
       unit: 'px',
-    }
+    },
   },
   // TODO: Add defaultValue
   tabSize: {
@@ -2324,7 +2330,7 @@ export const properties: Record<string, PropertyData> = {
     defaultValue: {
       value: 4,
       unit: 'px',
-    }
+    },
   },
   textDecorationSkip: {
     type: 'keyword',
@@ -2388,7 +2394,7 @@ export const properties: Record<string, PropertyData> = {
     defaultValue: {
       value: 1,
       unit: 'em',
-    }
+    },
   },
   textJustify: {
     type: 'keyword',
@@ -2421,7 +2427,7 @@ export const properties: Record<string, PropertyData> = {
       'optimzeLegibility',
       'geometricPrecision',
     ],
-    defaultValue: 'optimizeLegibility', 
+    defaultValue: 'optimizeLegibility',
   },
   textShadow: {
     type: TextShadowPicker,
@@ -2468,7 +2474,7 @@ export const properties: Record<string, PropertyData> = {
     defaultValue: {
       value: 0,
       unit: 'px',
-    }
+    },
   },
   touchAction: {
     type: 'keyword',
