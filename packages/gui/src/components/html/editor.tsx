@@ -12,6 +12,10 @@ import { AttributeEditor } from './AttributeEditor'
 const HTML_TAGS = [
   'span',
   'p',
+  'img',
+  'button',
+  'a',
+  'input',
   'h1',
   'h2',
   'h3',
