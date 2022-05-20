@@ -228,7 +228,7 @@ export const Editor = ({
 
 const DynamicControls = () => {
   const { dynamicProperties } = useDynamicControls()
-  console.log(dynamicProperties, "properties")
+ 
   return dynamicProperties?.length ? (
     <>
       {dynamicProperties.map((property) => (
