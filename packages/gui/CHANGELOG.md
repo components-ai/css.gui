@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.60
+
+### Patch Changes
+
+- 135f774: remove dynamic properties
+
 ## 0.0.59
 
 ### Patch Changes
