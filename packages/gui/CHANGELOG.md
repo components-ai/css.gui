@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.64
+
+### Patch Changes
+
+- dd21b63: Clears the combobox value after you add a property
+
 ## 0.0.63
 
 ### Patch Changes
