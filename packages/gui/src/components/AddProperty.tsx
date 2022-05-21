@@ -63,7 +63,6 @@ export const AddPropertyControl = ({ styles }: Props) => {
   }
 
   const handleAddProperty = (propertyName: string) => {
-    setFilterValue(propertyName)
     setField(propertyName, getDefaultValue(propertyName))
     if (addDynamicProperty) {
       addDynamicProperty(propertyName)
@@ -73,23 +72,23 @@ export const AddPropertyControl = ({ styles }: Props) => {
   return (
     <div {...getComboboxProps()}>
       <Label htmlFor={id} sx={{ display: 'block' }}>
-        Add Property
+        <span>Add property</span>
+        <input
+          type="text"
+          value={filterValue}
+          {...getInputProps({
+            ref: inputRef,
+            onChange: (e: any) => setFilterValue(e.target.value),
+          })}
+          onFocus={() => {
+            if (!isOpen) {
+              toggleMenu()
+              handleFilterItems('')
+            }
+          }}
+          sx={{ display: 'block', width: '100%' }}
+        />
       </Label>
-      <input
-        type="text"
-        value={filterValue}
-        {...getInputProps({
-          ref: inputRef,
-          onChange: (e: any) => setFilterValue(e.target.value),
-        })}
-        onFocus={() => {
-          if (!isOpen) {
-            toggleMenu()
-            handleFilterItems('')
-          }
-        }}
-        sx={{ width: '100%' }}
-      />
       <div
         sx={{
           position: 'relative',
