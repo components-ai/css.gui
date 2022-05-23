@@ -1,5 +1,12 @@
 # @compai/css-gui
 
+## 0.0.65
+
+### Patch Changes
+
+- 26eeecb: Point to documentation if styles object is absent
+- e2cc0a2: Add property controls for fieldsets
+
 ## 0.0.64
 
 ### Patch Changes
