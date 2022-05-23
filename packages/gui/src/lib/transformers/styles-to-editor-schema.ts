@@ -7,7 +7,9 @@ import { hasPseudoSyntax, removePseudoSyntax } from '../pseudos'
 
 export const stylesToEditorSchema = (styles: any) => {
   if (!styles) {
-    console.error("A styles object is required. For more information please read https://components.ai/open-source/css-gui/components/editor")
+    console.error(
+      'A styles object is required. For more information please read https://components.ai/open-source/css-gui/components/editor'
+    )
     return {}
   }
   const stylesSchema = Object.entries(styles).reduce((acc, curr) => {
