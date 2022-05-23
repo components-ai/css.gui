@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.67
+
+### Patch Changes
+
+- 5dc4b27: Fix sorting for properties
+
 ## 0.0.66
 
 ### Patch Changes
