@@ -231,9 +231,7 @@ export const EditorControls = ({
   ) : (
     <ControlSet properties={sortProperties(properties)} />
   )
-  const fieldsetControls = children ? (
-    children
-  ) : (
+  const fieldsetControls = children ? null : (
     <ControlSet properties={sortProperties(fieldsets)} />
   )
 
