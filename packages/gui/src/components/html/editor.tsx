@@ -1,28 +1,29 @@
 import { Editor } from '../Editor'
-import { HtmlNode } from './types'
+import { HtmlNode, HTMLTag } from './types'
 import * as Collapsible from '@radix-ui/react-collapsible'
 import { Fragment, useState } from 'react'
-import { filter, isNil, values } from 'lodash-es'
+import { isNil } from 'lodash-es'
 import IconButton from '../ui/IconButton'
 import { X } from 'react-feather'
 import { Label, Combobox } from '../primitives'
 import { SelectInput } from '../inputs/SelectInput'
 import { AttributeEditor } from './AttributeEditor'
+import { DEFAULT_STYLES } from './default-styles'
 
 const HTML_TAGS = [
-  'p',
-  'img',
-  'button',
-  'a',
-  'input',
-  'h1',
-  'h2',
-  'h3',
-  'h4',
-  'h5',
-  'h6',
-  'span',
-  'div',
+  HTMLTag.P,
+  HTMLTag.Img,
+  HTMLTag.Button,
+  HTMLTag.A,
+  HTMLTag.Input,
+  HTMLTag.H1,
+  HTMLTag.H2,
+  HTMLTag.H3,
+  HTMLTag.H4,
+  HTMLTag.H5,
+  HTMLTag.H6,
+  HTMLTag.Span,
+  HTMLTag.Div,
 ]
 
 interface EditorProps {
@@ -145,9 +146,15 @@ function NodeSwitch({ value, onChange }: EditorProps) {
             onFilterItems={(filterValue) => {
               return HTML_TAGS.filter((el) => el.startsWith(filterValue))
             }}
-            onItemSelected={(selectedItem) =>
-              onChange({ ...value, tagName: selectedItem })
-            }
+            onItemSelected={(selectedItem) => {
+              const defaultStyles = DEFAULT_STYLES[selectedItem] || {}
+              const mergedStyles = { ...defaultStyles, ...value.style }
+              onChange({
+                ...value,
+                tagName: selectedItem,
+                style: mergedStyles
+              })
+            }}
             items={HTML_TAGS}
             value={value.tagName}
           />
