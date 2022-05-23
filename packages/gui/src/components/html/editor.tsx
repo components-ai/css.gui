@@ -8,6 +8,7 @@ import { X } from 'react-feather'
 import { Label, Combobox } from '../primitives'
 import { SelectInput } from '../inputs/SelectInput'
 import { AttributeEditor } from './AttributeEditor'
+import { DEFAULT_STYLES } from './default-styles'
 
 const HTML_TAGS = [
   'p',
@@ -145,9 +146,15 @@ function NodeSwitch({ value, onChange }: EditorProps) {
             onFilterItems={(filterValue) => {
               return HTML_TAGS.filter((el) => el.startsWith(filterValue))
             }}
-            onItemSelected={(selectedItem) =>
-              onChange({ ...value, tagName: selectedItem })
-            }
+            onItemSelected={(selectedItem) => {
+              const defaultStyles = DEFAULT_STYLES[selectedItem] || {}
+              const mergedStyles = { ...defaultStyles, ...value.style }
+              onChange({
+                ...value,
+                tagName: selectedItem,
+                style: mergedStyles
+              })
+            }}
             items={HTML_TAGS}
             value={value.tagName}
           />
