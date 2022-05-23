@@ -17,7 +17,7 @@ Router.events.on('routeChangeComplete', (url) => {
 
 const NO_NAV_PAGES: Record<string, boolean> = {
   '/playground': true,
-  '/components/html-editor': true,
+  '/html-editor': true,
 }
 const isNoNavPage = (router: NextRouter) => {
   return NO_NAV_PAGES[router.pathname] ?? false

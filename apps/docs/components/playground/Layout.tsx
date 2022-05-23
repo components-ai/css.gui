@@ -5,7 +5,7 @@ interface Props extends HTMLAttributes<HTMLDivElement> {}
 export const Layout = (props: Props) => {
   return (
     <>
-      <Header />
+      <Header showDocsLink={true} />
       <div
         sx={{
           fontFamily: 'body',

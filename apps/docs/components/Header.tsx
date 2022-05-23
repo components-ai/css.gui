@@ -3,7 +3,10 @@ import Link from 'next/link'
 import { Logo } from '@compai/logo'
 import pkg from '../../../packages/gui/package.json'
 
-export const Header = () => {
+type HeaderProps = {
+  showDocsLink?: boolean
+}
+export const Header = ({ showDocsLink }: HeaderProps) => {
   const id = useId()
 
   return (
@@ -56,38 +59,56 @@ export const Header = () => {
           </span>
         </a>
       </Link>
-      <Link href="/properties" passHref={true}>
+      <div sx={{ ml: 'auto', display: 'flex' }}>
+        {showDocsLink ? (
+          <Link href="/home" passHref={true}>
+            <a
+              sx={{
+                fontWeight: 500,
+                color: 'text',
+                textDecoration: 'none',
+                display: 'flex',
+                alignItems: 'center',
+                fontSize: [0, 1, 2],
+                px: 3,
+              }}
+            >
+              Docs
+            </a>
+          </Link>
+        ) : null}
+        <Link href="/properties" passHref={true}>
+          <a
+            sx={{
+              fontWeight: 500,
+              color: 'text',
+              textDecoration: 'none',
+              display: 'flex',
+              alignItems: 'center',
+              fontSize: [0, 1, 2],
+              px: 3,
+            }}
+          >
+            Properties
+          </a>
+        </Link>
         <a
           sx={{
-            ml: 'auto',
-            fontWeight: 500,
-            color: 'text',
             textDecoration: 'none',
-            display: 'flex',
-            alignItems: 'center',
-            fontSize: [0, 1, 2],
+            color: 'currentColor',
+            fontWeight: 600,
+            transition: 'color .2s ease-in-out',
             px: 3,
+            fontSize: [0, 1, 1],
+            ':hover': {
+              color: 'primary',
+            },
           }}
+          href="https://github.com/components-ai/css.gui"
         >
-          Properties
+          GitHub
         </a>
-      </Link>
-      <a
-        sx={{
-          textDecoration: 'none',
-          color: 'currentColor',
-          fontWeight: 600,
-          transition: 'color .2s ease-in-out',
-          px: 3,
-          fontSize: [0, 1, 1],
-          ':hover': {
-            color: 'primary',
-          },
-        }}
-        href="https://github.com/components-ai/css.gui"
-      >
-        GitHub
-      </a>
+      </div>
     </header>
   )
 }
