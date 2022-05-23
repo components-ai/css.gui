@@ -73,11 +73,12 @@ export const AddPropertyControl = ({
   const handleAddProperty = (propertyName: string) => {
     const fullField = field ? joinPath(field, propertyName) : propertyName
 
-    setFilterValue(propertyName)
     setField(fullField, getDefaultValue(propertyName))
     if (addDynamicProperty && !field) {
       addDynamicProperty(propertyName)
     }
+
+    setFilterValue('')
   }
 
   return (

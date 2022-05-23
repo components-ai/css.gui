@@ -73,6 +73,7 @@ export const AttributeEditor = ({
         onFilterItems={handleFilterItems}
         onItemSelected={handleItemSelected}
         items={ATTRIBUTE_MAP[element]}
+        clearOnSelect
       />
     </div>
   )

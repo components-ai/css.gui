@@ -6,13 +6,15 @@ interface ComboboxInterface {
   onItemSelected: (selectedItem: string) => void
   items: string[]
   value?: string
+  clearOnSelect?: boolean
 }
 
 export function Combobox({
   onFilterItems,
   onItemSelected,
   items,
-  value
+  value,
+  clearOnSelect = false
 }: ComboboxInterface) {
   const id = useId()
   const inputRef = useRef(null)
@@ -50,8 +52,8 @@ export function Combobox({
   }
 
   const handleItemSelected = (selectedItem: string) => {
-    setFilterValue(selectedItem)
     onItemSelected(selectedItem)
+    setFilterValue(clearOnSelect ? '' : selectedItem)
   }
 
   return (
