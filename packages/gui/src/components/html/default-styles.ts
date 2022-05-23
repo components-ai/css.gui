@@ -1,16 +1,18 @@
+import { HTMLTag } from "./types";
+
 export const DEFAULT_STYLES: Record<string, any> = {
-  'button': { 
+  [HTMLTag.Button]: { 
     padding: { value: 16, unit: 'px' },
     borderRadius: { value: 5, unit: 'px' },
     display: 'block',
     borderStyle: 'none'
   },
-  a: {  },
-  input: { },
-  h1: { textAlign: 'left' },
-  h2: { textAlign: 'left' },
-  h3: { textAlign: 'left' },
-  h4: { textAlign: 'left' },
-  h5: { textAlign: 'left' },
-  h6: { textAlign: 'left' },
+  [HTMLTag.A]: {  },
+  [HTMLTag.Input]: { },
+  [HTMLTag.H1]: { textAlign: 'left' },
+  [HTMLTag.H2]: { textAlign: 'left' },
+  [HTMLTag.H3]: { textAlign: 'left' },
+  [HTMLTag.H4]: { textAlign: 'left' },
+  [HTMLTag.H5]: { textAlign: 'left' },
+  [HTMLTag.H6]: { textAlign: 'left' },
 }
