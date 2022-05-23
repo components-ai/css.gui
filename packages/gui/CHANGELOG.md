@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.68
+
+### Patch Changes
+
+- d43581d: Fix duplicates bug
+
 ## 0.0.67
 
 ### Patch Changes
