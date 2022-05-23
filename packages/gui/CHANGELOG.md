@@ -1,5 +1,13 @@
 # @compai/css-gui
 
+## 0.0.66
+
+### Patch Changes
+
+- cec7fb8: Add default styles when a html tag is selected
+- 0ffe9ca: Adds more HTML elements to the list
+- fff36f0: Clears combobox when item selected
+
 ## 0.0.65
 
 ### Patch Changes
