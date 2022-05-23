@@ -8,6 +8,7 @@ import {
   useEffect,
   useId,
 } from 'react'
+import { camelCase, kebabCase, uniq } from 'lodash-es'
 import {
   CSSUnitValue,
   Length,
@@ -31,7 +32,6 @@ import { DimensionInput } from '../inputs/Dimension'
 import { SelectInput } from '../inputs/SelectInput'
 import { GLOBAL_KEYWORDS } from '../../data/global-keywords'
 import { Label } from '../primitives'
-import { camelCase, kebabCase, uniq } from 'lodash-es'
 import { useThemeProperty } from '../providers/ThemeContext'
 import { PositionInput } from '../inputs/PositionInput'
 import { TimeInput } from '../inputs/TimeInput'
@@ -226,11 +226,15 @@ export const EditorControls = ({
 }: EditorControlsProps) => {
   const { value: styles } = useEditor()
   const [fieldsets, properties] = partitionProperties(uniq(Object.keys(styles)))
-  const controls = children ? children : <ControlSet properties={properties} />
+  const controls = children ? (
+    children
+  ) : (
+    <ControlSet properties={sortProperties(properties)} />
+  )
   const fieldsetControls = children ? (
     children
   ) : (
-    <ControlSet properties={fieldsets} />
+    <ControlSet properties={sortProperties(fieldsets)} />
   )
 
   return (
