@@ -6,11 +6,19 @@ import { Styles } from '../types/css'
 import { Label } from './primitives'
 import { useDynamicControls } from './providers/DynamicPropertiesContext'
 import { useEditor } from './providers/EditorContext'
+import { KeyArg } from './providers/types'
+import { joinPath } from './providers/util'
 
 interface Props {
+  field?: KeyArg
   styles: Styles
+  label?: string
 }
-export const AddPropertyControl = ({ styles }: Props) => {
+export const AddPropertyControl = ({
+  field,
+  styles,
+  label = 'Add property',
+}: Props) => {
   const { setField } = useEditor()
   const { addDynamicProperty } = useDynamicControls()
   const id = useId()
@@ -63,8 +71,11 @@ export const AddPropertyControl = ({ styles }: Props) => {
   }
 
   const handleAddProperty = (propertyName: string) => {
-    setField(propertyName, getDefaultValue(propertyName))
-    if (addDynamicProperty) {
+    const fullField = field ? joinPath(field, propertyName) : propertyName
+
+    setFilterValue(propertyName)
+    setField(fullField, getDefaultValue(propertyName))
+    if (addDynamicProperty && !field) {
       addDynamicProperty(propertyName)
     }
   }
@@ -72,7 +83,7 @@ export const AddPropertyControl = ({ styles }: Props) => {
   return (
     <div {...getComboboxProps()}>
       <Label htmlFor={id} sx={{ display: 'block' }}>
-        <span>Add property</span>
+        <span>{label}</span>
         <input
           type="text"
           value={filterValue}

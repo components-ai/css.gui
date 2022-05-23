@@ -50,7 +50,11 @@ export const getFieldsetPropsFromProperty = (
   }
 }
 
+export const partitionProperties = (properties: string[]) => {
+  return partition(properties, isFieldsetGroup)
+}
+
 export const sortProperties = (properties: string[]) => {
-  const [fieldsets, props] = partition(properties, isFieldsetGroup)
+  const [fieldsets, props] = partitionProperties(properties)
   return [...sortBy(props), ...sortBy(fieldsets).reverse()]
 }
