@@ -68,7 +68,6 @@ export function Combobox({
             handleFilterItems('')
           }
         }}
-        // value={filterValue}
         sx={{ width: '100%' }}
       />
       <div
