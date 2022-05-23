@@ -15,6 +15,6 @@ const withMDX = nextMDX({
 
 export default withMDX({
   reactStrictMode: true,
-  basePath: '/open-source/css-gui',
+  basePath: '/css-gui',
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
 })

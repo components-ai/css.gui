@@ -4,7 +4,7 @@ const Page = () => {
   const router = useRouter()
 
   if (router.asPath === '/') {
-    router.push('/home')
+    router.push('/html-editor')
   }
 
   return <h1>404: We couldn&apos;t find that page</h1>
