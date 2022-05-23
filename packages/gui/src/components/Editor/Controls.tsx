@@ -45,11 +45,7 @@ import { MultidimensionInput } from '../inputs/Multidimension'
 import { Responsive } from '../Responsive/Input'
 import { AddPropertyControl } from '../AddProperty'
 import { DeletePropButton } from '../inputs/Dimension/Input'
-import {
-  getFieldsetPropsFromProperty,
-  isFieldsetGroup,
-  sortProperties,
-} from './util'
+import { isFieldsetGroup, partitionProperties, sortProperties } from './util'
 import { stylesToEditorSchema } from '../../lib/transformers/styles-to-editor-schema'
 import { removeInternalCSSClassSyntax } from '../../lib/classes'
 
@@ -229,14 +225,24 @@ export const EditorControls = ({
   showAddProperties,
 }: EditorControlsProps) => {
   const { value: styles } = useEditor()
-  const properties = sortProperties(uniq(Object.keys(styles)))
+  const [fieldsets, properties] = partitionProperties(uniq(Object.keys(styles)))
   const controls = children ? children : <ControlSet properties={properties} />
+  const fieldsetControls = children ? (
+    children
+  ) : (
+    <ControlSet properties={fieldsets} />
+  )
 
   return (
     <>
       {controls}
+      {showAddProperties ? (
+        <div sx={{ mt: 3 }}>
+          <AddPropertyControl styles={styles} />
+        </div>
+      ) : null}
+      {fieldsetControls}
       {children ? <DynamicControls /> : null}
-      {showAddProperties ? <AddPropertyControl styles={styles} /> : null}
     </>
   )
 }
@@ -283,6 +289,11 @@ const FieldsetControl = ({ field, property }: FieldsetControlProps) => {
       <h3>{removeInternalCSSClassSyntax(property)}</h3>
       <GenericFieldset property={property}>
         <ControlSet field={field} properties={properties} />
+        <AddPropertyControl
+          field={field || property}
+          styles={styles}
+          label={`Add property to ${property}`}
+        />
       </GenericFieldset>
     </section>
   )
