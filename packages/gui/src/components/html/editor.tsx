@@ -226,6 +226,7 @@ function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
       ></Collapsible.Trigger>
       <button
         sx={{
+          cursor: 'pointer',
           border: 'none',
           backgroundColor: 'background',
           color: 'text',
