@@ -44,29 +44,7 @@ const getFontFamiliesData = async (fonts: string[]): Promise<FontFamilyData[]> =
 
 export const buildFontFamiliesHref = async (fonts: string[]): Promise<string | null> => {
   const fontData = await getFontFamiliesData(fonts)
-  const href = toGoogleFontUrl(fontData)
-  console.log(href, "href")
-  return href
-}
-
-const getFontFamilyHref = async (font: string) => {
-  try {
-    const res = await fetch(`https://components.ai/api/v1/typefaces/${font}`)
-    const rawFontData = await res.json()
-
-    const styles = Object.keys(rawFontData?.variants)
-    const weights = Object.keys(rawFontData?.variants[styles[0]])
-    const fontData = {
-      name: rawFontData?.name,
-      weights,
-      styles,
-    }
-
-    return toGoogleFontUrl([fontData])
-  } catch (e) {
-    console.error(`failed to fetch ${font} font`)
-    return null
-  }
+  return toGoogleFontUrl(fontData)
 }
 
 const getVariableStyleSheet = async (
@@ -79,7 +57,7 @@ const getVariableStyleSheet = async (
 const debouncedVariableStyleSheet = debounce(getVariableStyleSheet, 1000)
 
 const getStyleSheet = async (fontFamily: string, setStyleSheet: Function) => {
-  const sheet = await getFontFamilyHref(fontFamily)
+  const sheet = await buildFontFamiliesHref([fontFamily])
   setStyleSheet(sheet)
 }
 const debouncedGetStyleSheet = debounce(getStyleSheet, 1000)

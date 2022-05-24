@@ -13,7 +13,6 @@ const initialValue = htmlToEditorSchema(`
 
 export default function HtmlEditorExample() {
   const [html, setHtml] = useState(initialValue)
-  console.log(html, "html")
   return (
     <div sx={{ display: 'flex' }}>
       <HtmlEditor value={html} onChange={setHtml} />
