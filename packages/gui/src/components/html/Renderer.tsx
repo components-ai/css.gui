@@ -11,7 +11,7 @@ export function HtmlRenderer({ value }: HtmlRendererProps) {
   return (
     <>
       <HTMLFontTags htmlTree={value} />
-      <ElementRenderer value={value} path={[]} />
+      <ElementRenderer value={value} path={[] as ElementPath} />
     </>
   )
 }

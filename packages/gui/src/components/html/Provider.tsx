@@ -1,4 +1,4 @@
-import { createContext, ReactChild, useContext, useState } from 'react'
+import { createContext, ReactNode, useContext, useState } from 'react'
 import { htmlToEditorSchema } from '../../lib'
 import { HtmlNode, ElementPath } from './types'
 
@@ -17,8 +17,8 @@ const DEFAULT_HTML_EDITOR_VALUE = {
 
 export type HtmlEditor = {
   value: HtmlNode
-  selected: ElementPath
-  setSelected: (newSelection: ElementPath) => void
+  selected: ElementPath | null
+  setSelected: (newSelection: ElementPath | null) => void
 }
 
 export function useHtmlEditor() {
@@ -28,20 +28,21 @@ export function useHtmlEditor() {
 
 const HtmlEditorContext = createContext<HtmlEditor>(DEFAULT_HTML_EDITOR_VALUE)
 
-type HtmlEditorProviderProps = HtmlEditor & {
-  children: ReactChild
+type HtmlEditorProviderProps = {
+  value: HtmlNode
+  children: ReactNode
 }
 export function HtmlEditorProvider({
   children,
-  selected: providedSelected,
-  ...props
+  value,
 }: HtmlEditorProviderProps) {
-  const [selected, setSelected] = useState(providedSelected)
+  const [selected, setSelected] = useState<ElementPath | null>([])
 
   const fullContext = {
-    ...props,
+    value,
     selected,
-    setSelected: (newSelection: ElementPath) => setSelected(newSelection),
+    setSelected: (newSelection: ElementPath | null) =>
+      setSelected(newSelection),
   }
 
   return (

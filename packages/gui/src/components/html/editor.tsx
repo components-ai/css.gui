@@ -27,15 +27,14 @@ const HTML_TAGS = [
   HTMLTag.Div,
 ]
 
-interface EditorProps {
-  value: HtmlNode
+interface HtmlEditorProps {
   onChange(value: HtmlNode): void
 }
 
 /**
  * An HTML tree-based editor that lets you add HTML nodes and mess around with their styles
  */
-export function HtmlEditor({ onChange }: EditorProps) {
+export function HtmlEditor({ onChange }: HtmlEditorProps) {
   const { value, selected, setSelected } = useHtmlEditor()
 
   return (
@@ -81,6 +80,10 @@ export function HtmlEditor({ onChange }: EditorProps) {
   )
 }
 
+interface EditorProps {
+  value: HtmlNode
+  onChange(value: HtmlNode): void
+}
 interface TagEditorProps extends EditorProps {
   onRemove(): void
 }
