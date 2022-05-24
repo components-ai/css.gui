@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.72
+
+### Patch Changes
+
+- f5460f6: Select outer root when html editor mounts
+
 ## 0.0.71
 
 ### Patch Changes
