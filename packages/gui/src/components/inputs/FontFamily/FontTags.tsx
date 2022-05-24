@@ -1,6 +1,10 @@
 import * as React from 'react'
 import { debounce } from 'lodash-es'
-import { toGoogleFontUrl, toGoogleVariableFontUrl, FontFamilyData } from '../../../lib/util'
+import {
+  toGoogleFontUrl,
+  toGoogleVariableFontUrl,
+  FontFamilyData,
+} from '../../../lib/util'
 
 export const getVariableFontFamilyHref = async (fontFamily: string) => {
   const formattedName = fontFamily?.replace(/['"]+/g, '')
@@ -20,9 +24,11 @@ export const getVariableFontFamilyHref = async (fontFamily: string) => {
   }
 }
 
-const getFontFamiliesData = async (fonts: string[]): Promise<FontFamilyData[]> => {
+const getFontFamiliesData = async (
+  fonts: string[]
+): Promise<FontFamilyData[]> => {
   const data: FontFamilyData[] = []
-  for(const font of fonts) {
+  for (const font of fonts) {
     try {
       const res = await fetch(`https://components.ai/api/v1/typefaces/${font}`)
       const rawFontData = await res.json()
@@ -38,11 +44,13 @@ const getFontFamiliesData = async (fonts: string[]): Promise<FontFamilyData[]> =
       console.error(`Failed to fetch ${font}`)
     }
   }
-    
+
   return data
 }
 
-export const buildFontFamiliesHref = async (fonts: string[]): Promise<string | null> => {
+export const buildFontFamiliesHref = async (
+  fonts: string[]
+): Promise<string | null> => {
   const fontData = await getFontFamiliesData(fonts)
   return toGoogleFontUrl(fontData)
 }

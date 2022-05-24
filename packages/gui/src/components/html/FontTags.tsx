@@ -8,13 +8,13 @@ function getStyleFonts(style: any): string[] {
   if (style.fontFamily) {
     fonts.push(style.fontFamily)
   }
-  
+
   for (const [_, v] of Object.entries(style)) {
-    if (typeof(v) === 'object') {
-      fonts = [ ...fonts, ...getStyleFonts(v)]
+    if (typeof v === 'object') {
+      fonts = [...fonts, ...getStyleFonts(v)]
     }
   }
-  
+
   return uniq(fonts)
 }
 
@@ -32,9 +32,5 @@ export function HTMLFontTags({ style }: any) {
     debouncedBuildHref(style || {}, setHref)
   }, [style])
 
-  return (
-    <>
-      {href ? <link rel="stylesheet" href={href} /> : null}
-    </>
-  )
+  return <>{href ? <link rel="stylesheet" href={href} /> : null}</>
 }

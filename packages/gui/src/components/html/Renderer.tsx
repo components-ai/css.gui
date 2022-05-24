@@ -12,7 +12,7 @@ export function HtmlRenderer({ value }: Props) {
 
   return (
     <>
-      <HTMLFontTags style={value.style}/>
+      <HTMLFontTags style={value.style} />
       <Tag {...attributes} sx={{ ...toCSSObject(style) }}>
         {children.map((child, i) => {
           if (typeof child === 'string') {
@@ -24,4 +24,3 @@ export function HtmlRenderer({ value }: Props) {
     </>
   )
 }
-
