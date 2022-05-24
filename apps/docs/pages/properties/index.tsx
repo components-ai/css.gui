@@ -12,6 +12,10 @@ import { BorderColorPreview } from '../../components/examples/BorderColorPreview
 import { BorderWidthPreview } from '../../components/examples/BorderWidthPreview'
 import { BorderStylePreview } from '../../components/examples/BorderStylePreview'
 
+import { AlignItemsPreview } from '../../components/examples/AlignItemsPreview'
+import { JustifyContentPreview } from '../../components/examples/JustifyContentPreview'
+import { FlexWrapPreview } from '../../components/examples/FlexWrapPreview'
+
 import { OutlineColorPreview } from '../../components/examples/OutlineColorPreview'
 import { OutlineWidthPreview } from '../../components/examples/OutlineWidthPreview'
 import { OutlineStylePreview } from '../../components/examples/OutlineStylePreview'
@@ -68,6 +72,9 @@ export default function Docs() {
               gap: '2rem',
             }}
           >
+            <AlignItemsPreview />
+            <JustifyContentPreview />
+            <FlexWrapPreview />
             <FontSizePreview />
             <FontFamilyPreview />
             <FontStylePreview />
