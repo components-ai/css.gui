@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.69
+
+### Patch Changes
+
+- 60842c6: Adjust some types
+
 ## 0.0.68
 
 ### Patch Changes
