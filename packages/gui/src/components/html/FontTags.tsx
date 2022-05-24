@@ -19,7 +19,7 @@ export function getStyleFonts(style: any): string[] {
   return uniq(fonts)
 }
 
-export function getHTMLTreeFonts(root: any): string[]  {
+export function getHTMLTreeFonts(root: any): string[] {
   if (!root) return []
   let treeFonts: any[] = []
 
@@ -28,8 +28,8 @@ export function getHTMLTreeFonts(root: any): string[]  {
   }
 
   for (const node of root.children) {
-    if (typeof(node) === 'object') {
-      treeFonts = [...treeFonts, ...getHTMLTreeFonts(node)]  
+    if (typeof node === 'object') {
+      treeFonts = [...treeFonts, ...getHTMLTreeFonts(node)]
     }
   }
 
@@ -58,11 +58,10 @@ export function HTMLFontTags({ htmlTree = {}, style }: Props) {
 
   useEffect(() => {
     debouncedBuildHref({
-      tree: htmlTree, 
+      tree: htmlTree,
       style,
       setHref,
     })
-    
   }, [htmlTree, style])
 
   return <>{href ? <link rel="stylesheet" href={href} /> : null}</>
