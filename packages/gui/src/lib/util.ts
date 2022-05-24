@@ -64,7 +64,7 @@ export function randomInt(min: number, max: number) {
 /**
  * Create a google font style sheet from an array of font data.
  */
-type FontFamilyData = {
+export type FontFamilyData = {
   name: string
   weights: (string | number)[]
   styles: string[]
