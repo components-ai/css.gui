@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.70
+
+### Patch Changes
+
+- 02d3cac: Adds font tags to html editor
+
 ## 0.0.69
 
 ### Patch Changes
