@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.71
+
+### Patch Changes
+
+- 2082101: Keep combobox value in sync
+
 ## 0.0.70
 
 ### Patch Changes
