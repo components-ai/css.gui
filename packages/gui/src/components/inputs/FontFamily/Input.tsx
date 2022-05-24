@@ -128,7 +128,7 @@ export function FontFamilyInput({ label, value, onChange, onRemove }: Props) {
     setVariableFont(fontData)
   }
 
-  const handleCustomAxesChange = (axisKey: string, newValue: any) => {
+  const handleCustomAxisChange = (axisKey: string, newValue: any) => {
     const axisDict: Record<string, any> = {}
     value.fontVariationSettings?.split(',').forEach((axis: string) => {
       const axisSplit = axis.split(' ')
@@ -316,7 +316,7 @@ export function FontFamilyInput({ label, value, onChange, onRemove }: Props) {
                 axisKey={k}
                 defaultValue={v.default}
                 value={value.fontVariationSettings ?? `'${k}' ${v.default};`}
-                onChange={(e: any) => handleCustomAxesChange(k, e)}
+                onChange={(e: any) => handleCustomAxisChange(k, e)}
                 min={v.min}
                 max={v.max}
                 step={v.step}
@@ -348,7 +348,7 @@ export function FontFamilyInput({ label, value, onChange, onRemove }: Props) {
               key={k}
               defaultValue={v.default}
               value={value.fontVariationSettings}
-              onChange={(e: any) => handleCustomAxesChange(k, e)}
+              onChange={(e: any) => handleCustomAxisChange(k, e)}
               axisKey={k}
               min={v.min}
               max={v.max}
