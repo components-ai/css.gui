@@ -36,8 +36,13 @@ export function getHTMLTreeFonts(root: any): string[]  {
   return treeFonts
 }
 
-async function buildHref(tree: any, setHref: Function) {
-  const fonts = getHTMLTreeFonts(tree)
+interface BuildHrefProps {
+  tree: any
+  style: any
+  setHref: Function
+}
+async function buildHref({ tree, style, setHref }: BuildHrefProps) {
+  const fonts = style ? getStyleFonts(style) : getHTMLTreeFonts(tree)
   const href = await buildFontFamiliesHref(fonts)
   setHref(href)
 }
@@ -45,15 +50,20 @@ async function buildHref(tree: any, setHref: Function) {
 const debouncedBuildHref = debounce(buildHref, 1500)
 
 interface Props {
-  htmlTree?: any
+  htmlTree: any
   style?: any
 }
 export function HTMLFontTags({ htmlTree = {}, style }: Props) {
   const [href, setHref] = useState<string>('')
 
   useEffect(() => {
-    debouncedBuildHref(htmlTree || {}, setHref)
-  }, [htmlTree])
+    debouncedBuildHref({
+      tree: htmlTree, 
+      style,
+      setHref,
+    })
+    
+  }, [htmlTree, style])
 
   return <>{href ? <link rel="stylesheet" href={href} /> : null}</>
 }
