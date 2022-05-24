@@ -33,7 +33,7 @@ export function getHTMLTreeFonts(root: any): string[] {
     }
   }
 
-  return treeFonts
+  return uniq(treeFonts)
 }
 
 interface BuildHrefProps {
