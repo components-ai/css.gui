@@ -1,6 +1,6 @@
 import { stringifyValues } from '../../lib/stringify'
 import { getInputProps } from '../../lib/util'
-import { EditorProps } from '../../types/editor'
+import { EditorPropsWithLabel } from '../../types/editor'
 import { Label } from '../primitives'
 import { SelectInput } from './SelectInput'
 
@@ -12,7 +12,9 @@ interface ScrollSnapAlign {
 const snapPositions = ['none', 'start', 'center', 'end'] as const
 type SnapPosition = typeof snapPositions[number]
 
-export function ScrollSnapAlignInput(props: EditorProps<ScrollSnapAlign>) {
+export function ScrollSnapAlignInput(
+  props: EditorPropsWithLabel<ScrollSnapAlign>
+) {
   return (
     <div>
       <Label>{props.label}</Label>
