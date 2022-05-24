@@ -6,24 +6,44 @@ import {
   FontFamilyData,
 } from '../../../lib/util'
 
-export const getVariableFontFamilyHref = async (fontFamily: string) => {
-  const formattedName = fontFamily?.replace(/['"]+/g, '')
-  try {
-    const res = await fetch(
-      `https://components.ai/api/v1/typefaces/variable?name=${formattedName}`
-    )
-    const varFontData = await res.json()
-    const fullData = {
-      name: fontFamily,
-      ...(varFontData ?? {}),
+// export const getVariableFontFamilyHref = async (fontFamily: string) => {
+//   const formattedName = fontFamily?.replace(/['"]+/g, '')
+//   try {
+//     const res = await fetch(
+//       `https://components.ai/api/v1/typefaces/variable?name=${formattedName}`
+//     )
+//     const varFontData = await res.json()
+//     const fullData = {
+//       name: fontFamily,
+//       ...(varFontData ?? {}),
+//     }
+
+//     return toGoogleVariableFontUrl([fullData])
+//   } catch {
+//     return null
+//   }
+// }
+
+const getVariableFontFamiliesData = async (fonts: string[]) => {
+  const data = []
+  for (const font of fonts) {
+    const formattedName = font.replace(/['"]+/g, '')
+    try {
+      const res = await fetch(
+        `https://components.ai/api/v1/typefaces/variable?name=${formattedName}`
+      )
+      const varFontData = await res.json()
+      data.push({
+        name: font,
+        ...(varFontData ?? {}),
+      })
+    } catch (e) {
+      console.error(`Failed to fetch variable font ${font}`)
     }
-
-    return toGoogleVariableFontUrl([fullData])
-  } catch {
-    return null
   }
-}
 
+  return data
+}
 const getFontFamiliesData = async (
   fonts: string[]
 ): Promise<FontFamilyData[]> => {
@@ -47,7 +67,13 @@ const getFontFamiliesData = async (
 
   return data
 }
-
+export const buildVariableFontFamiliesHref = async (
+  fonts: string[]
+): Promise<string | null> => {
+  const fontData = await getVariableFontFamiliesData(fonts)
+  console.log(fontData, "variable font data")  
+  return toGoogleVariableFontUrl(fontData)
+}
 export const buildFontFamiliesHref = async (
   fonts: string[]
 ): Promise<string | null> => {
@@ -59,7 +85,7 @@ const getVariableStyleSheet = async (
   fontFamily: string,
   setVariableStyleSheet: Function
 ) => {
-  const sheet = await getVariableFontFamilyHref(fontFamily)
+  const sheet = await buildVariableFontFamiliesHref([fontFamily])
   setVariableStyleSheet(sheet)
 }
 const debouncedVariableStyleSheet = debounce(getVariableStyleSheet, 1000)

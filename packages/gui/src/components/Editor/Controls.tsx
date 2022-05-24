@@ -75,6 +75,7 @@ const Control = ({ field, showRemove = false, ...props }: ControlProps) => {
   const dependantProperties = properties[property].dependantProperties ?? []
 
   if (!Component) {
+    console.log("broken here")
     console.error(`Unknown field: ${field}, ignoring`)
     return null
   }
