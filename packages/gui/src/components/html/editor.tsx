@@ -1,5 +1,5 @@
 import { Editor } from '../Editor'
-import { HtmlNode, HTMLTag } from './types'
+import { HtmlNode, HTMLTag, ElementPath } from './types'
 import * as Collapsible from '@radix-ui/react-collapsible'
 import { Fragment, useState } from 'react'
 import { isNil } from 'lodash-es'
@@ -9,6 +9,7 @@ import { Label, Combobox } from '../primitives'
 import { SelectInput } from '../inputs/SelectInput'
 import { AttributeEditor } from './AttributeEditor'
 import { DEFAULT_STYLES } from './default-styles'
+import { useHtmlEditor } from './Provider'
 
 const HTML_TAGS = [
   HTMLTag.P,
@@ -31,15 +32,12 @@ interface EditorProps {
   onChange(value: HtmlNode): void
 }
 
-type ElementPath = number[]
-
 /**
  * An HTML tree-based editor that lets you add HTML nodes and mess around with their styles
  */
-export function HtmlEditor({ value, onChange }: EditorProps) {
-  const [selected, setSelected] = useState<ElementPath | null>(
-    value ? [0] : null
-  )
+export function HtmlEditor({ onChange }: EditorProps) {
+  const { value, selected, setSelected } = useHtmlEditor()
+
   return (
     <div
       sx={{

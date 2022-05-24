@@ -1,4 +1,9 @@
-import { HtmlEditor, HtmlRenderer, htmlToEditorSchema } from '@compai/css-gui'
+import {
+  HtmlEditor,
+  HtmlRenderer,
+  HtmlEditorProvider,
+  htmlToEditorSchema,
+} from '@compai/css-gui'
 import { useState } from 'react'
 
 // TODO: Handle style attrs
@@ -13,10 +18,13 @@ const initialValue = htmlToEditorSchema(`
 
 export default function HtmlEditorExample() {
   const [html, setHtml] = useState(initialValue)
+
   return (
     <div sx={{ display: 'flex' }}>
-      <HtmlEditor value={html} onChange={setHtml} />
-      <HtmlRenderer value={html} />
+      <HtmlEditorProvider value={html}>
+        <HtmlEditor onChange={setHtml} />
+        <HtmlRenderer value={html} />
+      </HtmlEditorProvider>
     </div>
   )
 }
