@@ -1,5 +1,5 @@
-import { useCombobox } from "downshift"
-import { useEffect, useId, useRef, useState } from "react"
+import { useCombobox } from 'downshift'
+import { useEffect, useId, useRef, useState } from 'react'
 
 interface ComboboxInterface {
   onFilterItems: (filterValue: string) => string[]
@@ -14,7 +14,7 @@ export function Combobox({
   onItemSelected,
   items,
   value,
-  clearOnSelect = false
+  clearOnSelect = false,
 }: ComboboxInterface) {
   const id = useId()
   const inputRef = useRef(null)
@@ -36,6 +36,7 @@ export function Combobox({
     getItemProps,
   } = useCombobox({
     id,
+    inputValue: value,
     items: inputItems,
     selectedItem: filterValue,
     onInputValueChange: ({ inputValue }) => {
@@ -59,7 +60,7 @@ export function Combobox({
   return (
     <div {...getComboboxProps()}>
       <input
-        type='text'          
+        type="text"
         {...getInputProps({
           ref: inputRef,
           onChange: (e: any) => setFilterValue(e.target.value),
