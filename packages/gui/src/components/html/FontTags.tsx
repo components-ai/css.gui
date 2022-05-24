@@ -2,7 +2,8 @@ import { debounce, uniq } from 'lodash-es'
 import { useEffect, useState } from 'react'
 import { buildFontFamiliesHref } from '../inputs/FontFamily/FontTags'
 
-function getStyleFonts(style: any): string[] {
+export function getStyleFonts(style: any): string[] {
+  if (!style) return []
   let fonts: string[] = []
 
   if (style.fontFamily) {
@@ -18,19 +19,41 @@ function getStyleFonts(style: any): string[] {
   return uniq(fonts)
 }
 
-async function buildHref(style: any, setHref: Function) {
-  const fonts = getStyleFonts(style)
+export function getHTMLTreeFonts(root: any): string[]  {
+  if (!root) return []
+  let treeFonts: any[] = []
+
+  if (root.style) {
+    treeFonts = [...getStyleFonts(root.style)]
+  }
+
+  for (const node of root.children) {
+    if (typeof(node) === 'object') {
+      treeFonts = [...treeFonts, ...getHTMLTreeFonts(node)]  
+    }
+  }
+
+  return treeFonts
+}
+
+async function buildHref(tree: any, setHref: Function) {
+  const fonts = getHTMLTreeFonts(tree)
   const href = await buildFontFamiliesHref(fonts)
   setHref(href)
 }
+
 const debouncedBuildHref = debounce(buildHref, 1500)
 
-export function HTMLFontTags({ style }: any) {
+interface Props {
+  htmlTree?: any
+  style?: any
+}
+export function HTMLFontTags({ htmlTree = {}, style }: Props) {
   const [href, setHref] = useState<string>('')
 
   useEffect(() => {
-    debouncedBuildHref(style || {}, setHref)
-  }, [style])
+    debouncedBuildHref(htmlTree || {}, setHref)
+  }, [htmlTree])
 
   return <>{href ? <link rel="stylesheet" href={href} /> : null}</>
 }
