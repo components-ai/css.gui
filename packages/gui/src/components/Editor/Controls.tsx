@@ -263,7 +263,7 @@ type ControlSetProps = {
 }
 const ControlSet = ({ field, properties }: ControlSetProps) => {
   return (
-    <>
+    <div sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
       {properties.map((property) => {
         const fullField = field ? joinPath(field, property) : property
 
@@ -273,7 +273,7 @@ const ControlSet = ({ field, properties }: ControlSetProps) => {
           <Control key={property} field={fullField} showRemove />
         )
       })}
-    </>
+    </div>
   )
 }
 
