@@ -3,6 +3,7 @@ import { ElementData, ElementPath } from './types'
 import { HTMLFontTags } from './FontTags'
 import { useHtmlEditor } from './Provider'
 import { isVoidElement } from '../../lib/elements'
+import { isSamePath } from './util'
 
 interface HtmlRendererProps {
   value: ElementData
@@ -28,7 +29,7 @@ function ElementRenderer({ value, path }: ElementRendererProps) {
 
   const sx = toCSSObject(style)
 
-  if (selected && isSamePath(path, selected)) {
+  if (isSamePath(path, selected)) {
     sx.outline = 'thin solid tomato'
   }
 
@@ -67,8 +68,4 @@ const cleanAttributes = (attributes: Record<string, string>) => {
   }
 
   return newAttributes
-}
-
-const isSamePath = (path1: ElementPath, path2: ElementPath) => {
-  return path1.join('-') === path2.join('-')
 }
