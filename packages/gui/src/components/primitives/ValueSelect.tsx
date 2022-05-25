@@ -35,6 +35,7 @@ export const ValueSelect = ({
           border: '1px solid',
           borderColor: 'border',
           borderRadius: '0.5rem',
+          fontSize: 1,
         }}
       >
         <Select.Viewport>

@@ -34,6 +34,7 @@ export const UnitSelect = ({ units, value, onChange }: Props) => {
           border: '1px solid',
           borderColor: 'border',
           borderRadius: '0.5rem',
+          fontSize: 1,
         }}
       >
         <Select.Viewport>
