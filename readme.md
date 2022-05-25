@@ -135,4 +135,4 @@ and its supporting packages.
 - [**dat.gui**](https://github.com/dataarts/dat.gui): well known, especially in the generative design/three space
 - [**leva**](https://github.com/pmndrs/leva): a React-based [pmndrs](https://pmnd.rs/) project that builds the entire control set from hooks
 - [**Blender**](https://blender.org): Shader and Geometry nodes allow for rapid exploration withiin the available rendering space
-- [**MDN Docs**](https://developer.mozilla.org/en-US/): have long been an amazing introduction to how various CSS property values will affect the appearance of a DOM element.
+- [**MDN docs**](https://developer.mozilla.org/en-US/): have long been an amazing introduction to how various CSS property values will affect the appearance of a DOM element.
