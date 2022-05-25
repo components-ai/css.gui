@@ -21,7 +21,7 @@ export const ValueSelect = ({
           color: 'text',
           width: 'max-content',
           ':hover': {
-            background: 'backgroundOffset',
+            background: 'primary',
           },
         }}
       >

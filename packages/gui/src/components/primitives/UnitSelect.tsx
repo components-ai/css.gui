@@ -35,6 +35,7 @@ export const UnitSelect = ({ units, value, onChange }: Props) => {
           borderColor: 'border',
           borderRadius: '0.5rem',
           fontSize: 1,
+          cursor: 'pointer',
         }}
       >
         <Select.Viewport>
@@ -45,7 +46,7 @@ export const UnitSelect = ({ units, value, onChange }: Props) => {
                 sx={{
                   px: 3,
                   ':hover': {
-                    backgroundColor: 'backgroundOffset',
+                    backgroundColor: 'primary',
                   },
                 }}
               >
