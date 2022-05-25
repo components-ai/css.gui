@@ -1,11 +1,12 @@
 import * as React from 'react'
-import { kebabCase } from 'lodash-es'
+import { kebabCase, uniq } from 'lodash-es'
 import { useCombobox } from 'downshift'
 import { FontFamilyType } from '../../../types/css'
 import { EditorProps } from '../../../types/editor'
 import { Label } from '../../primitives'
 import { NumberInput } from '../NumberInput'
 import { DeletePropButton } from '../Dimension/Input'
+import { useEditor } from '../../providers/EditorContext'
 
 type Font = {
   name: string
@@ -41,6 +42,7 @@ interface Props extends EditorProps<FontFamilyType> {
 }
 
 export function FontFamilyInput({ label, value, onChange, onRemove }: Props) {
+  const { theme } = useEditor()
   const id = React.useId()
   const fullId = `${id}-${label ? kebabCase(label) : 'font-family'}`
 
@@ -68,6 +70,7 @@ export function FontFamilyInput({ label, value, onChange, onRemove }: Props) {
     getFontData()
   }, [])
 
+  const themeFonts = uniq(theme.fonts?.map((f) => f.stack) || [])
   const [includeSans, setIncSans] = React.useState<boolean>(true)
   const [includeSerif, setIncSerif] = React.useState<boolean>(true)
   const [includeMono, setIncMono] = React.useState<boolean>(true)
@@ -118,7 +121,7 @@ export function FontFamilyInput({ label, value, onChange, onRemove }: Props) {
     })
 
     const items = filteredOptions.map((opt) => opt.name).sort()
-    setInputItems(items)
+    setInputItems([...themeFonts, ...items])
   }
 
   const handleFontChange = (name: string) => {
@@ -281,6 +284,7 @@ export function FontFamilyInput({ label, value, onChange, onRemove }: Props) {
                     margin: 0,
                     pl: 3,
                     py: 1,
+                    fontWeight: themeFonts.includes(item) ? 600 : 400,
                     backgroundColor:
                       highlightedIndex === index
                         ? 'backgroundOffset'

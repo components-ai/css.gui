@@ -40,6 +40,29 @@ export const importColors = (colors?: ColorModesScale): ColorGroup[] => {
     })
 }
 
+type FontsObject = Record<string, string>
+type FontsArray = string[]
+type Fonts = FontsObject | FontsArray
+export const importFonts = (fonts: Fonts) => {
+  if (Array.isArray(fonts)) {
+    return fonts.map((value: string) => {
+      return {
+        id: uuid(),
+        name: value,
+        stack: value,
+      }
+    })
+  }
+
+  return Object.entries(fonts).map(([key, value]) => {
+    return {
+      id: uuid(),
+      name: key,
+      stack: value,
+    }
+  })
+}
+
 type RawLength = number | string
 type FullLength = {
   id: string
@@ -65,6 +88,7 @@ export const importRawLengths = (fontSizes: RawLength[]): FullLength[] => {
 
 export const importTheme = (theme: any): Theme => {
   const colors = importColors(theme.colors)
+  const fonts = importFonts(theme.fonts || [])
   const fontSizes = importRawLengths(theme.fontSizes || [])
   const lineHeights = importRawLengths(theme.lineHeights || [])
   const space = importRawLengths(theme.space || [])
@@ -73,6 +97,7 @@ export const importTheme = (theme: any): Theme => {
 
   return {
     colors,
+    fonts,
     fontSizes,
     lineHeights,
     space,
