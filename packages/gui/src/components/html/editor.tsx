@@ -10,6 +10,7 @@ import { SelectInput } from '../inputs/SelectInput'
 import { AttributeEditor } from './AttributeEditor'
 import { DEFAULT_STYLES } from './default-styles'
 import { useHtmlEditor } from './Provider'
+import { isVoidElement } from '../../lib/elements'
 
 const HTML_TAGS = [
   HTMLTag.P,
@@ -217,6 +218,27 @@ function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
       </div>
     )
   }
+
+  const tagButton = (
+    <button
+      sx={{
+        cursor: 'pointer',
+        border: 'none',
+        backgroundColor: 'background',
+        color: 'text',
+        fontSize: '1rem',
+      }}
+      onClick={() => onSelect(path)}
+    >
+      &lt;{value.tagName}
+      {!open || isVoidElement(value.tagName) ? ' /' : null}&gt;
+    </button>
+  )
+
+  if (isVoidElement(value.tagName)) {
+    return tagButton
+  }
+
   return (
     <Collapsible.Root open={open} onOpenChange={setOpen}>
       <Collapsible.Trigger
@@ -234,20 +256,8 @@ function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
             top: '-2px',
           },
         }}
-      ></Collapsible.Trigger>
-      <button
-        sx={{
-          cursor: 'pointer',
-          border: 'none',
-          backgroundColor: 'background',
-          color: 'text',
-          fontSize: '1rem',
-        }}
-        onClick={() => onSelect(path)}
-      >
-        &lt;{value.tagName}
-        {!open && '/'}&gt;
-      </button>
+      />
+      {tagButton}
       <Collapsible.Content>
         <div sx={{ ml: 4 }}>
           {value.children?.map((child, i) => {

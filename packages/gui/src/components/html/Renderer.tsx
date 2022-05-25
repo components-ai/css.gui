@@ -2,6 +2,7 @@ import { toCSSObject } from '../../lib'
 import { ElementData, ElementPath } from './types'
 import { HTMLFontTags } from './FontTags'
 import { useHtmlEditor } from './Provider'
+import { isVoidElement } from '../../lib/elements'
 
 interface HtmlRendererProps {
   value: ElementData
@@ -31,16 +32,22 @@ function ElementRenderer({ value, path }: ElementRendererProps) {
     sx.outline = 'thin solid tomato'
   }
 
+  const props = {
+    ...cleanAttributes(attributes),
+    sx,
+    onClick: (e: MouseEvent) => {
+      e.stopPropagation()
+      setSelected(path)
+    },
+  }
+
+  if (isVoidElement(Tag)) {
+    return <Tag {...props} />
+  }
+
   return (
     <>
-      <Tag
-        {...cleanAttributes(attributes)}
-        sx={sx}
-        onClick={(e: MouseEvent) => {
-          e.stopPropagation()
-          setSelected(path)
-        }}
-      >
+      <Tag {...props}>
         {children.map((child, i) => {
           if (typeof child === 'string') {
             return child

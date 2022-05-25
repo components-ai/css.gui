@@ -24,6 +24,10 @@ const NO_NAV_PAGES: Record<string, boolean> = {
   '/html-editor': true,
 }
 const isNoNavPage = (router: NextRouter) => {
+  if (router.pathname.startsWith('/library')) {
+    return true
+  }
+
   return NO_NAV_PAGES[router.pathname] ?? false
 }
 
