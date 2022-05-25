@@ -1,4 +1,3 @@
-import { stringifyUnit } from '../../lib/stringify'
 import * as Select from '@radix-ui/react-select'
 
 interface ValueInputProps {
@@ -20,6 +19,7 @@ export const ValueSelect = ({
           background: 'none',
           border: 'none',
           color: 'text',
+          width: 'max-content',
           ':hover': {
             background: 'backgroundOffset',
           },
