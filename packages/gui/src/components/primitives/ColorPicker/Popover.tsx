@@ -4,8 +4,6 @@ import ColorField, { Props as PickerProps } from './Field'
 import { hasAlpha, withFallback } from './util'
 
 interface Props extends PickerProps {
-  /** Whether the text value of the color should be displayed  */
-  showText?: boolean
   /** The element to render on the swatch preview */
   swatch?: JSX.Element
   id?: string
@@ -18,7 +16,6 @@ interface Props extends PickerProps {
 export default function ColorPopover({
   value,
   onChange,
-  showText,
   swatch,
   ...props
 }: Props) {
@@ -26,20 +23,28 @@ export default function ColorPopover({
     <Popover.Root>
       <Popover.Trigger
         sx={{
-          p: 0,
+          pl: 1,
+          pr: 2,
+          py: 1,
+          cursor: 'pointer',
           color: 'text',
           backgroundColor: 'transparent',
-          border: 'none',
-          width: '100%',
+          border: '1px solid',
+          borderColor: 'border',
+          borderRadius: '0.25rem',
+          width: 'max-content',
           fontSize: '0.875rem',
           textOverflow: 'ellipsis',
           overflow: 'hidden',
           whiteSpace: 'nowrap',
+          display: 'flex',
+          alignItems: 'center',
+          gap: 2,
         }}
       >
         {/* swatch */}
         <Popover.Anchor>{swatch || <Swatch value={value} />}</Popover.Anchor>
-        {showText ? value : null}
+        {value}
       </Popover.Trigger>
       <Popover.Content
         sx={{
@@ -63,9 +68,9 @@ function Swatch({ value }: { value: string }) {
     <div
       sx={{
         position: 'relative',
-        width: '2rem',
+        width: '1.25rem',
         aspectRatio: '1 / 1',
-        borderRadius: '0.5rem',
+        borderRadius: '0.25rem',
         overflow: 'hidden',
         border: '1px solid',
         borderColor: 'border',
