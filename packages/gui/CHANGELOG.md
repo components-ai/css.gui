@@ -1,5 +1,12 @@
 # @compai/css-gui
 
+## 0.0.75
+
+### Patch Changes
+
+- a4373e2: Fix theme font families to the top of the input
+- b2e9ea5: Add ability to provide a theme as a provider
+
 ## 0.0.74
 
 ### Patch Changes
