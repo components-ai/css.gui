@@ -356,7 +356,6 @@ function addChildAtPath(
   path: ElementPath,
   item: HtmlNode
 ): HtmlNode {
-  console.log({ element, path })
   // if no path, replace the element
   if (path.length === 0) {
     throw new Error('Cannot add to root path')
@@ -365,7 +364,6 @@ function addChildAtPath(
     return element
   }
   if (path.length === 1) {
-    console.log('path length 1')
     return {
       ...element,
       children: addAt(element.children ?? [], path[0], item),
