@@ -75,7 +75,6 @@ const Control = ({ field, showRemove = false, ...props }: ControlProps) => {
   const dependantProperties = properties[property].dependantProperties ?? []
 
   if (!Component) {
-    console.log("broken here")
     console.error(`Unknown field: ${field}, ignoring`)
     return null
   }
@@ -146,10 +145,7 @@ const ComponentWithPropertyGroup = ({
   return (
     <Component
       value={getFields([...dependantProperties, property])}
-      onChange={(newValue: any) => {
-        console.log(newValue, "new value")
-        setFields(newValue, dependantProperties)
-      }}
+      onChange={(newValue: any) => setFields(newValue, dependantProperties)}
       onRemove={showRemove ? () => removeField(fullField) : null}
       {...props}
     />
