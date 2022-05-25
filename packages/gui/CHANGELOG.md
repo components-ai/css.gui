@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.78
+
+### Patch Changes
+
+- b0adbe2: Add selection indicator to tree view
+
 ## 0.0.77
 
 ### Patch Changes
