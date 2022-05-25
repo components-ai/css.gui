@@ -11,6 +11,7 @@ import { AttributeEditor } from './AttributeEditor'
 import { DEFAULT_STYLES } from './default-styles'
 import { useHtmlEditor } from './Provider'
 import { isVoidElement } from '../../lib/elements'
+import { isSamePath } from './util'
 
 const HTML_TAGS = [
   HTMLTag.P,
@@ -201,7 +202,10 @@ interface TreeNodeProps extends EditorProps {
 }
 
 function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
+  const { selected } = useHtmlEditor()
   const [open, setOpen] = useState(true)
+  const isSelected = isSamePath(path, selected)
+
   if (typeof value === 'string') {
     return (
       <div>
@@ -210,6 +214,7 @@ function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
             border: 'none',
             backgroundColor: 'background',
             color: 'text',
+            fontWeight: isSelected ? 600 : 400,
           }}
           onClick={() => onSelect(path)}
         >
@@ -227,6 +232,7 @@ function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
         backgroundColor: 'background',
         color: 'text',
         fontSize: '1rem',
+        fontWeight: isSelected ? 600 : 400,
       }}
       onClick={() => onSelect(path)}
     >
