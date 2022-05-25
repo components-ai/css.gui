@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.76
+
+### Patch Changes
+
+- 6ec180e: Better handle void elements
+
 ## 0.0.75
 
 ### Patch Changes
