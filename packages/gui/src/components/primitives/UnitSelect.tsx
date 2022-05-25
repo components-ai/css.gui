@@ -9,10 +9,22 @@ interface Props extends EditorProps<string> {
 export const UnitSelect = ({ units, value, onChange }: Props) => {
   return (
     <Select.Root value={value} onValueChange={onChange}>
-      <Select.Trigger sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
-        <Select.Value></Select.Value>
+      <Select.Trigger
+        sx={{
+          display: 'flex',
+          gap: 1,
+          alignItems: 'center',
+          appearance: 'none',
+          border: 'none',
+          background: 'none',
+          color: 'text',
+        }}
+      >
+        <Select.Value>
+          {!['number', 'keyword'].includes(value) && value}
+        </Select.Value>
         <Select.Icon>
-          <ChevronDown size={14} />
+          <ChevronDown size={14} sx={{ transform: 'translateY(3px)' }} />
         </Select.Icon>
       </Select.Trigger>
       <Select.Content

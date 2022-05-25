@@ -72,6 +72,9 @@ export const DraggableInput = ({
         // so we don't get "jitters" moving between fractional and integer values
         minWidth: `${step.toString().length + 1}ch`,
         textAlign: 'right',
+        background: 'none',
+        color: 'text',
+        border: 'none',
       }}
       {...bind()}
     />

@@ -99,18 +99,21 @@ export const DimensionInput = ({
       <div
         sx={{
           display: 'flex',
-          width: '100%',
           alignItems: 'center',
+          borderRadius: '0.25rem',
+          border: '1px solid',
+          borderColor: 'border',
+          px: 1,
         }}
       >
         {state.unit === KeywordUnits.Keyword ? (
           <ValueSelect
             value={state.value}
             values={keywords}
-            onChange={(e: any) => {
+            onChange={(value) => {
               dispatch({
                 type: 'CHANGED_INPUT_VALUE',
-                value: e.target.value,
+                value,
               })
             }}
           />
