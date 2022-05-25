@@ -7,6 +7,7 @@ export interface ElementData {
 }
 
 export type HtmlNode = ElementData | string
+export type ElementPath = number[]
 
 export const enum HTMLTag {
   // Text
@@ -69,7 +70,7 @@ export const enum HTMLTag {
   Th = 'th',
   Thead = 'thead',
   Tr = 'tr',
-  // 
+  //
   Details = 'details',
   Dialog = 'dialog',
   Summary = 'summary',
