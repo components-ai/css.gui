@@ -1039,7 +1039,7 @@ export const properties: Record<string, PropertyData> = {
   },
   fontFamily: {
     type: FontFamily,
-    dependantProperties: ['fontStyle', 'fontWeight', 'fontVariationSettings'],
+    dependantProperties: ['fontStyle', 'fontVariationSettings'],
     defaultValue: 'Inter',
   },
   fontKerning: {
