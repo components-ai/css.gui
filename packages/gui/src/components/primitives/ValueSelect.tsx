@@ -21,7 +21,7 @@ export const ValueSelect = ({
           color: 'text',
           width: 'max-content',
           ':hover': {
-            background: 'primary',
+            background: 'backgroundOffset',
           },
         }}
       >
@@ -44,13 +44,22 @@ export const ValueSelect = ({
               <Select.Item
                 value={value}
                 sx={{
-                  px: 2,
+                  pr: 3,
+                  pl: 4,
                   cursor: 'pointer',
                   ':hover': {
-                    backgroundColor: 'backgroundOffset',
+                    backgroundColor: 'primary',
                   },
                 }}
               >
+                <Select.ItemIndicator
+                  sx={{
+                    position: 'absolute',
+                    left: 3,
+                  }}
+                >
+                  ✓
+                </Select.ItemIndicator>
                 <Select.ItemText>{value}</Select.ItemText>
               </Select.Item>
             )

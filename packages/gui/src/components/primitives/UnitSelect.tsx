@@ -44,12 +44,22 @@ export const UnitSelect = ({ units, value, onChange }: Props) => {
               <Select.Item
                 value={unit}
                 sx={{
-                  px: 3,
+                  position: 'relative',
+                  pr: 3,
+                  pl: 4,
                   ':hover': {
                     backgroundColor: 'primary',
                   },
                 }}
               >
+                <Select.ItemIndicator
+                  sx={{
+                    position: 'absolute',
+                    left: 3,
+                  }}
+                >
+                  ✓
+                </Select.ItemIndicator>
                 <Select.ItemText>{unit}</Select.ItemText>
               </Select.Item>
             )
