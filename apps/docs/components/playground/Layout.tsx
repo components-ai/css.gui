@@ -9,8 +9,7 @@ export const Layout = (props: Props) => {
       <div
         sx={{
           fontFamily: 'body',
-          display: 'grid',
-          gridTemplateColumns: ['1fr', 'auto 320px', 'auto 320px'],
+          marginRight: '1px',
         }}
         {...props}
       />
