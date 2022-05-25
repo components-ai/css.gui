@@ -25,7 +25,6 @@ import { CalcInput } from '../../primitives/CalcInput'
 import { X } from 'react-feather'
 import { isCSSUnitValue } from '../../../lib/codegen/to-css-object'
 
-
 // Mapping of units to [min, max] tuple
 type UnitRanges = Record<string, [min: number, max: number]>
 // Mapping of units to steps
@@ -38,18 +37,25 @@ const getInitialState = (
 ): State => {
   const defaultState = {
     value: (value as CSSUnitValue)?.value || 0,
-    unit: (value as CSSUnitValue)?.unit || (units && units[0]) || AbsoluteLengthUnits.Px,
+    unit:
+      (value as CSSUnitValue)?.unit ||
+      (units && units[0]) ||
+      AbsoluteLengthUnits.Px,
     themeId: (value as CSSUnitValue)?.themeId,
     key: 0,
   }
-  
-  for (const { unit, value: themeValue, id } of themeValues || []) {      
-    if (isCSSUnitValue(value) && unit === value.unit && themeValue === value.value) {
+
+  for (const { unit, value: themeValue, id } of themeValues || []) {
+    if (
+      isCSSUnitValue(value) &&
+      unit === value.unit &&
+      themeValue === value.value
+    ) {
       return {
         value: themeValue,
         unit,
         themeId: id,
-        key: 0
+        key: 0,
       }
     }
   }
