@@ -4,7 +4,7 @@ import { useDrag } from 'react-use-gesture'
 import { roundToStep } from '../../../lib/math'
 
 interface DraggableLabelProps {
-  step: number
+  step?: number
   onUpdate: (newValue: any) => void
   value: number
   min?: number
@@ -14,7 +14,7 @@ interface DraggableLabelProps {
 export const DraggableInput = ({
   value,
   onUpdate,
-  step,
+  step = 1,
   min,
   max,
 }: DraggableLabelProps) => {
@@ -43,9 +43,21 @@ export const DraggableInput = ({
 
   return (
     <input
-      type="number"
+      type="text"
       value={value}
-      onChange={({ target: { value: inputValue }}: any) => {
+      onKeyDown={(e) => {
+        switch (e.key) {
+          case 'ArrowUp': {
+            onUpdate(roundToStep(value + step, step))
+            return
+          }
+          case 'ArrowDown': {
+            onUpdate(roundToStep(value - step, step))
+            return
+          }
+        }
+      }}
+      onChange={({ target: { value: inputValue } }: any) => {
         let newValue = parseFloat(inputValue)
         if (dragging && (min || min === 0)) newValue = Math.max(newValue, min)
         if (dragging && (max || max === 0)) newValue = Math.min(newValue, max)
@@ -55,7 +67,10 @@ export const DraggableInput = ({
       sx={{
         cursor: dragging ? 'ew-resize' : 'default',
         minHeight: '1.6em',
-        width: '100%',
+        width: `${value.toString().length + 1}ch`,
+        // Use fractional steps to approximate the minimum width
+        // so we don't get "jitters" moving between fractional and integer values
+        minWidth: `${step.toString().length + 1}ch`,
         textAlign: 'right',
       }}
       {...bind()}
