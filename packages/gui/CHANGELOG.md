@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.73
+
+### Patch Changes
+
+- 71c8bc4: Add selection state to HTML editor
+
 ## 0.0.72
 
 ### Patch Changes
