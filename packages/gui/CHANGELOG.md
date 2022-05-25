@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.74
+
+### Patch Changes
+
+- 300787d: Adds variable font tag support to html editor
+
 ## 0.0.73
 
 ### Patch Changes
