@@ -10,7 +10,7 @@ export function CheckboxInput({
 }: EditorProps<boolean | undefined> & { label: string }) {
   const id = `${useId()}-${kebabCase(label)}`
   return (
-    <>
+    <div>
       <Label htmlFor={id}>{label}</Label>
       <input
         id={id}
@@ -18,6 +18,6 @@ export function CheckboxInput({
         value={value.toString()}
         onChange={(e) => onChange(e.target.checked)}
       />
-    </>
+    </div>
   )
 }

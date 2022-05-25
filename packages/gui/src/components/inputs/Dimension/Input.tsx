@@ -99,7 +99,7 @@ export const DimensionInput = ({
       }}
     >
       {label && (
-        <Label htmlFor={id} sx={{ display: 'block' }}>
+        <Label htmlFor={id} sx={{ display: 'block', width: 'max-content' }}>
           {label}
         </Label>
       )}
