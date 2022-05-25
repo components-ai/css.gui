@@ -48,14 +48,19 @@ type FullLength = {
   name?: string
 }
 export const importRawLengths = (fontSizes: RawLength[]): FullLength[] => {
-  return fontSizes?.map((value: number | string) => {
-    // TODO: If a string we should parse for other units and/or keywords
-    return {
-      id: uuid(),
-      value,
-      unit: 'px',
-    }
-  })
+  // TODO: Handle object mappings
+  if (Array.isArray(fontSizes)) {
+    return fontSizes?.map((value: number | string) => {
+      // TODO: If a string we should parse for other units and/or keywords
+      return {
+        id: uuid(),
+        value,
+        unit: 'px',
+      }
+    })
+  }
+
+  return []
 }
 
 export const importTheme = (theme: any): Theme => {

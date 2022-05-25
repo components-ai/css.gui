@@ -3,7 +3,7 @@ import { get, unset } from 'lodash-es'
 import { createContext, ReactNode, useContext } from 'react'
 import { KeyArg, Recipe, EditorData } from './types'
 import { applyRecipe } from './util'
-import { ThemeProvider } from './ThemeContext'
+import { ThemeProvider, useTheme } from './ThemeContext'
 import { EditorConfigProvider, EditorConfig } from './EditorConfigContext'
 import { theme as uiTheme } from '../ui/theme'
 import { Theme } from '../../types/theme'
@@ -21,6 +21,7 @@ export interface EditorContextValue<V> extends EditorData<V> {
 
 export function useEditor() {
   const context = useContext(EditorContext)
+  const theme = useTheme()
   const { onChange: editComponentData, value } = context
 
   function getField<T = any>(field: KeyArg | undefined) {
@@ -78,6 +79,7 @@ export function useEditor() {
     setFields,
     onChange,
     removeField,
+    theme,
   }
 }
 
@@ -105,6 +107,7 @@ export function EditorProvider<V>({
   showAddProperties?: boolean
   children: ReactNode
 }) {
+  const outerTheme = useTheme()
   const editorConfig: EditorConfig = {
     hideResponsiveControls: hideResponsiveControls ?? false,
     showAddProperties: showAddProperties ?? false,
@@ -113,7 +116,7 @@ export function EditorProvider<V>({
   const value = stylesToEditorSchema(providedValue)
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme || outerTheme}>
       <ThemeUIProvider theme={uiTheme}>
         <EditorConfigProvider config={editorConfig}>
           <DynamicControlsProvider>

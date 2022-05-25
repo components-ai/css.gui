@@ -2,7 +2,11 @@ import { AppProps } from 'next/app'
 import Router, { NextRouter, useRouter } from 'next/router'
 import { ReactChild } from 'react'
 import { ThemeProvider } from 'theme-ui'
-import { theme } from '@compai/css-gui'
+import {
+  ThemeProvider as EditorThemeProvider,
+  theme,
+  importTheme,
+} from '@compai/css-gui'
 import { Sidebar } from '../components/Sidebar'
 import { PageWrap } from '../components/PageWrap'
 import { Layout } from '../components/Layout'
@@ -41,10 +45,12 @@ const App = ({ Component, pageProps }: AppProps) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Head />
-      <AppLayout>
-        <Component {...pageProps} />
-      </AppLayout>
+      <EditorThemeProvider theme={importTheme(theme)}>
+        <Head />
+        <AppLayout>
+          <Component {...pageProps} />
+        </AppLayout>
+      </EditorThemeProvider>
     </ThemeProvider>
   )
 }
