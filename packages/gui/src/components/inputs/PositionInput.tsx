@@ -5,11 +5,14 @@ import { Label } from '../primitives'
 import { DeletePropButton } from './Dimension/Input'
 import { LengthInput } from './LengthInput'
 
-export function PositionInput({ onRemove, ...props }: EditorPropsWithLabel<Position>) {
+export function PositionInput({
+  onRemove,
+  ...props
+}: EditorPropsWithLabel<Position>) {
   return (
     <div>
       <Label>{props.label}</Label>
-      <div sx={{ display: 'grid', gap: 1 }}>
+      <div sx={{ display: 'grid', gap: 1, gridTemplateColumns: '1fr 1fr' }}>
         <LengthInput
           {...getInputProps(props, 'x')}
           percentage
@@ -20,9 +23,7 @@ export function PositionInput({ onRemove, ...props }: EditorPropsWithLabel<Posit
           percentage
           keywords={['top', 'center', 'bottom']}
         />
-        {onRemove && (
-          <DeletePropButton onRemove={onRemove} />
-        )}
+        {onRemove && <DeletePropButton onRemove={onRemove} />}
       </div>
     </div>
   )

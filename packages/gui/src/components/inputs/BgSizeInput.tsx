@@ -23,7 +23,7 @@ interface BgSizeDimensions {
  */
 export function BgSizeInput(props: EditorPropsWithLabel<BgSize>) {
   return (
-    <div>
+    <div sx={{ display: 'grid', gap: 2 }}>
       <div
         sx={{
           display: 'grid',
@@ -61,6 +61,7 @@ export function BgSizeInput(props: EditorPropsWithLabel<BgSize>) {
         <div
           sx={{
             display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
             gap: 1,
           }}
         >
