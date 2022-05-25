@@ -136,7 +136,6 @@ const ComponentWithPropertyGroup = ({
 }: ComponentGroupProps) => {
   const Component: ComponentType<any> | null = getInputComponent(property)
   const { getFields, setFields, removeField } = useEditor()
-  
   if (!Component) {
     console.error(`Unknown field: ${property}, ignoring`)
     return null
