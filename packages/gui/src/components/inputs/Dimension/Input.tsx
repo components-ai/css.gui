@@ -115,7 +115,7 @@ export const DimensionInput = ({
       >
         {state.unit === KeywordUnits.Keyword ? (
           <ValueSelect
-            value={state.value}
+            value={`${state.value}`}
             values={keywords}
             onChange={(value) => {
               dispatch({
