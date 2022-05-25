@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.77
+
+### Patch Changes
+
+- d076466: Ensure class attrs don't drop styling
+
 ## 0.0.76
 
 ### Patch Changes
