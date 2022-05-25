@@ -1,5 +1,5 @@
 import { Editor } from '../Editor'
-import { HtmlNode, HTMLTag } from './types'
+import { HtmlNode, HTMLTag, ElementPath } from './types'
 import * as Collapsible from '@radix-ui/react-collapsible'
 import { Fragment, useState } from 'react'
 import { isNil } from 'lodash-es'
@@ -9,6 +9,7 @@ import { Label, Combobox } from '../primitives'
 import { SelectInput } from '../inputs/SelectInput'
 import { AttributeEditor } from './AttributeEditor'
 import { DEFAULT_STYLES } from './default-styles'
+import { useHtmlEditor } from './Provider'
 
 const HTML_TAGS = [
   HTMLTag.P,
@@ -26,41 +27,43 @@ const HTML_TAGS = [
   HTMLTag.Div,
 ]
 
-interface EditorProps {
-  value: HtmlNode
+interface HtmlEditorProps {
   onChange(value: HtmlNode): void
 }
-
-type ElementPath = number[]
 
 /**
  * An HTML tree-based editor that lets you add HTML nodes and mess around with their styles
  */
-export function HtmlEditor({ value, onChange }: EditorProps) {
-  const [selected, setSelected] = useState<ElementPath | null>(null)
+export function HtmlEditor({ onChange }: HtmlEditorProps) {
+  const { value, selected, setSelected } = useHtmlEditor()
+
   return (
-    <div sx={{ 
-      display: 'flex', 
-      width: 'auto',
-    }}>
-    <div sx={{ 
-      pt: 3, 
-      pb: 3,
-      borderColor: 'border',
-      borderRightWidth: '1px',
-      borderRightStyle: 'solid',
-      borderBottomWidth: '1px',
-      borderBottomStyle: 'solid',
-      overflowX: 'auto',
-      resize: 'horizontal',
-      }}>
-      <TreeNode
-        value={value}
-        onSelect={setSelected}
-        path={[]}
-        onChange={onChange}
-      />
-     </div>
+    <div
+      sx={{
+        display: 'flex',
+        width: 'auto',
+      }}
+    >
+      <div
+        sx={{
+          pt: 3,
+          pb: 3,
+          borderColor: 'border',
+          borderRightWidth: '1px',
+          borderRightStyle: 'solid',
+          borderBottomWidth: '1px',
+          borderBottomStyle: 'solid',
+          overflowX: 'auto',
+          resize: 'horizontal',
+        }}
+      >
+        <TreeNode
+          value={value}
+          onSelect={setSelected}
+          path={[]}
+          onChange={onChange}
+        />
+      </div>
       {selected && (
         <NodeEditor
           value={getChildAtPath(value, selected)}
@@ -77,6 +80,10 @@ export function HtmlEditor({ value, onChange }: EditorProps) {
   )
 }
 
+interface EditorProps {
+  value: HtmlNode
+  onChange(value: HtmlNode): void
+}
 interface TagEditorProps extends EditorProps {
   onRemove(): void
 }
@@ -84,17 +91,19 @@ interface TagEditorProps extends EditorProps {
 function NodeEditor({ value, onChange, onRemove }: TagEditorProps) {
   const nodeType = typeof value === 'string' ? 'text' : 'tag'
   return (
-    <div sx={{ 
-    resize: 'horizontal',
-    overflowX: 'auto',
-    p: 3, 
-    borderRightWidth: '1px',
-    borderRightStyle: 'solid',
-    borderBottomWidth: '1px',
-    borderBottomStyle: 'solid',
-    borderColor: 'border',
-    }}>
-      <div sx={{ mb: 2, display: 'flex', alignItems: 'flex-end'}}>
+    <div
+      sx={{
+        resize: 'horizontal',
+        overflowX: 'auto',
+        p: 3,
+        borderRightWidth: '1px',
+        borderRightStyle: 'solid',
+        borderBottomWidth: '1px',
+        borderBottomStyle: 'solid',
+        borderColor: 'border',
+      }}
+    >
+      <div sx={{ mb: 2, display: 'flex', alignItems: 'flex-end' }}>
         <SelectInput
           label="Type"
           value={nodeType}
@@ -134,12 +143,14 @@ function NodeSwitch({ value, onChange }: EditorProps) {
 
   return (
     <div>
-      <article sx={{ 
-        borderBottomWidth: '1px',
-        borderBottomStyle: 'solid',
-        borderBottomColor: 'border',
-        mb: 3, 
-      }}>
+      <article
+        sx={{
+          borderBottomWidth: '1px',
+          borderBottomStyle: 'solid',
+          borderBottomColor: 'border',
+          mb: 3,
+        }}
+      >
         <div sx={{ mb: 2 }}>
           <Label>Tag name</Label>{' '}
           <Combobox
@@ -152,7 +163,7 @@ function NodeSwitch({ value, onChange }: EditorProps) {
               onChange({
                 ...value,
                 tagName: selectedItem,
-                style: mergedStyles
+                style: mergedStyles,
               })
             }}
             items={HTML_TAGS}
@@ -172,11 +183,11 @@ function NodeSwitch({ value, onChange }: EditorProps) {
       <div>
         <Label> 🎨 Styles</Label>
         <div sx={{ mt: 2 }}>
-        <Editor
-          styles={value.style ?? {}}
-          onChange={(newStyles) => onChange({ ...value, style: newStyles })}
-          showAddProperties
-        />
+          <Editor
+            styles={value.style ?? {}}
+            onChange={(newStyles) => onChange({ ...value, style: newStyles })}
+            showAddProperties
+          />
         </div>
       </div>
     </div>

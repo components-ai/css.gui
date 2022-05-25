@@ -55,7 +55,7 @@ export const DimensionInput = ({
   property,
 }: DimensionInputProps) => {
   const id = `${React.useId()}-${kebabCase(label)}`
-  
+
   const [state, dispatch] = React.useReducer(reducer, {
     value: (value as CSSUnitValue)?.value || 0,
     unit: (value as CSSUnitValue)?.unit || units[0] || AbsoluteLengthUnits.Px,
@@ -90,27 +90,37 @@ export const DimensionInput = ({
   ])
 
   return (
-    <div sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+    <div
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: 1,
+        width: 'min-content',
+      }}
+    >
       {label && (
-        <Label htmlFor={id} sx={{ display: 'block' }}>
+        <Label htmlFor={id} sx={{ display: 'block', width: 'max-content' }}>
           {label}
         </Label>
       )}
       <div
         sx={{
           display: 'flex',
-          width: '100%',
           alignItems: 'center',
+          borderRadius: '0.25rem',
+          border: '1px solid',
+          borderColor: 'border',
+          px: 1,
         }}
       >
         {state.unit === KeywordUnits.Keyword ? (
           <ValueSelect
-            value={state.value}
+            value={`${state.value}`}
             values={keywords}
-            onChange={(e: any) => {
+            onChange={(value) => {
               dispatch({
                 type: 'CHANGED_INPUT_VALUE',
-                value: e.target.value,
+                value,
               })
             }}
           />
@@ -159,9 +169,7 @@ export const DimensionInput = ({
         <UnitSelect
           units={allUnits}
           value={state.themeId ? ThemeUnits.Theme : state.unit}
-          onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-            const newUnit = e.target.value
-
+          onChange={(newUnit) => {
             if (newUnit === KeywordUnits.Keyword) {
               dispatch({
                 type: 'CHANGED_INPUT_VALUE',
@@ -210,12 +218,9 @@ export const DimensionInput = ({
               conversions,
             })
           }}
-          sx={{ marginLeft: 1, minHeight: '1.6em', width: 72 }}
         />
       </div>
-      {onRemove && (
-        <DeletePropButton onRemove={onRemove}/>
-      )}
+      {onRemove && <DeletePropButton onRemove={onRemove} />}
     </div>
   )
 }
@@ -225,7 +230,7 @@ interface DeleteProps {
 }
 export const DeletePropButton = ({ onRemove }: DeleteProps) => {
   return (
-    <button 
+    <button
       sx={{
         cursor: 'pointer',
         appearance: 'none',
@@ -239,11 +244,11 @@ export const DeletePropButton = ({ onRemove }: DeleteProps) => {
         transition: '.2s color ease-in-out',
         ':hover': {
           color: 'text',
-        }
+        },
       }}
       onClick={() => onRemove()}
     >
-      <X size={14} strokeWidth={3} color='currentColor' />
+      <X size={14} strokeWidth={3} color="currentColor" />
     </button>
   )
 }

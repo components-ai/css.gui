@@ -1,5 +1,29 @@
 # @compai/css-gui
 
+## 0.0.73
+
+### Patch Changes
+
+- 71c8bc4: Add selection state to HTML editor
+
+## 0.0.72
+
+### Patch Changes
+
+- f5460f6: Select outer root when html editor mounts
+
+## 0.0.71
+
+### Patch Changes
+
+- 2082101: Keep combobox value in sync
+
+## 0.0.70
+
+### Patch Changes
+
+- 02d3cac: Adds font tags to html editor
+
 ## 0.0.69
 
 ### Patch Changes

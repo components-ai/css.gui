@@ -15,7 +15,17 @@ export function NumberInput({ label, value, ...props }: Props) {
   return (
     <div>
       <Label htmlFor={id}>{label}</Label>
-      <Number id={id} value={value} {...props} />
+      <div
+        sx={{
+          px: 1,
+          border: '1px solid',
+          borderColor: 'border',
+          borderRadius: '0.25rem',
+          width: 'min-content',
+        }}
+      >
+        <Number id={id} value={value} {...props} />
+      </div>
     </div>
   )
 }

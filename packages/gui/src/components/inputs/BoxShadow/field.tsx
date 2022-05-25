@@ -32,13 +32,11 @@ export default function BoxShadowInput(
 
 export const BoxShadowEditor = (props: LayerProps<BoxShadow>) => {
   return (
-    <div sx={{ margin: 3 }}>
-      <section sx={{ display: 'flex', alignItems: 'center' }}>
-        <div sx={{ width: '50%' }}>
-          <ColorInput {...getInputProps(props, 'color')} />
-        </div>
-        <CheckboxInput {...getInputProps(props, 'inset')} />
-      </section>
+    <div
+      sx={{ margin: 3, display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)' }}
+    >
+      <ColorInput {...getInputProps(props, 'color')} />
+      <CheckboxInput {...getInputProps(props, 'inset')} />
       <LengthInput {...getInputProps(props, 'offsetX')} label="Offset X" />
       <LengthInput {...getInputProps(props, 'offsetY')} label="Offset Y" />
       <LengthInput {...getInputProps(props, 'spread')} />

@@ -169,11 +169,9 @@ export function FontFamilyInput({ label, value, onChange, onRemove }: Props) {
               handleFilterItems('')
             }
           }}
-          sx={{ width: '100%', }}
+          sx={{ width: '100%' }}
         />
-        {onRemove && (
-          <DeletePropButton onRemove={onRemove} />
-        )}
+        {onRemove && <DeletePropButton onRemove={onRemove} />}
       </div>
       <div
         sx={{

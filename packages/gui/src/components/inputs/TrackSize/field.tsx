@@ -54,7 +54,7 @@ export function TrackSizeSwitch(props: EditorProps<TrackSize>) {
     case 'minmax': {
       const _props = props as EditorProps<MinMax>
       return (
-        <div>
+        <div sx={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)' }}>
           <LengthInput
             percentage
             {...getInputProps(_props, 'min')}

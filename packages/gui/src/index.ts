@@ -21,6 +21,7 @@ export { EditorProvider } from './components/providers/EditorContext'
 export { Layout } from './components/ui/Layout'
 export { HtmlEditor } from './components/html/editor'
 export { HtmlRenderer } from './components/html/Renderer'
+export { HtmlEditorProvider } from './components/html/Provider'
 
 export { theme } from './components/ui/theme'
 export { supportedProperties, unsupportedProperties } from './data/properties'

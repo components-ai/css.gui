@@ -5,12 +5,11 @@ interface Props extends HTMLAttributes<HTMLDivElement> {}
 export const Layout = (props: Props) => {
   return (
     <>
-      <Header showDocsLink={true} />
+      <Header />
       <div
         sx={{
           fontFamily: 'body',
-          display: 'grid',
-          gridTemplateColumns: ['1fr', 'auto 320px', 'auto 320px'],
+          marginRight: '1px',
         }}
         {...props}
       />

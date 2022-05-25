@@ -127,6 +127,7 @@ export const CalcInput = ({
 }
 
 interface NumberUnitInput extends EditorProps<CSSUnitValue> {
+  label?: string
   units: readonly string[]
   steps?: UnitSteps
   range?: UnitRanges
@@ -171,11 +172,9 @@ const NumberUnitInput = ({
         />
       )}
       <UnitSelect
-        sx={{ ml: 1 }}
         units={validUnits}
         value={value.unit}
-        onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-          const newUnit = e.target.value
+        onChange={(newUnit) => {
           const convertedValue = convertUnits(
             newUnit,
             value,

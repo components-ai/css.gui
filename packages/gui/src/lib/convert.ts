@@ -24,6 +24,10 @@ export const convertUnits = (
     return newSteps ? roundToStep(newValue, newSteps) : newValue
   }
 
+  if (value.unit === 'keyword') {
+    return conversions[newUnit] ?? 0
+  }
+
   // If the new unit has a value but the old one doesn't, return the new one
   if (conversions[newUnit] && value.unit !== UnitlessUnits.Calc) {
     return conversions[newUnit]
