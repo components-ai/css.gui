@@ -31,6 +31,8 @@ const nameMap: any = {
   CRSV: 'Cursive',
   MONO: 'Mono',
   slnt: 'Slant',
+  wdth: 'Width',
+  wght: 'Weight',
 }
 
 interface Props extends EditorProps<FontFamilyType> {
@@ -128,7 +130,7 @@ export function FontFamilyInput({ label, value, onChange, onRemove }: Props) {
     setVariableFont(fontData)
   }
 
-  const handleCustomAxesChange = (axisKey: string, newValue: any) => {
+  const handleCustomAxisChange = (axisKey: string, newValue: any) => {
     const axisDict: Record<string, any> = {}
     value.fontVariationSettings?.split(',').forEach((axis: string) => {
       const axisSplit = axis.split(' ')
@@ -307,45 +309,12 @@ export function FontFamilyInput({ label, value, onChange, onRemove }: Props) {
           if (['name', 'ital'].includes(k)) return null
           if (typeof v === 'string') return null
 
-          if (k === 'wdth') {
-            return (
-              <CustomAxis
-                key={k}
-                axisKey={k}
-                defaultValue={v.default}
-                value={value.fontVariationSettings ?? `'${k}' ${v.default};`}
-                onChange={(e: any) => handleCustomAxesChange(k, e)}
-                min={v.min}
-                max={v.max}
-                step={v.step}
-                label="Width"
-                sx={{ width: '100%' }}
-              />
-            )
-          }
-
-          if (k === 'wght') {
-            return (
-              <NumberInput
-                key={k}
-                value={value.fontWeight ?? v.default}
-                onChange={(newVal: number) =>
-                  onChange({ ...value, fontWeight: newVal })
-                }
-                min={v.min}
-                max={v.max}
-                step={v.step}
-                label="Font Weight"
-              />
-            )
-          }
-
           return (
             <CustomAxis
               key={k}
               defaultValue={v.default}
               value={value.fontVariationSettings}
-              onChange={(e: any) => handleCustomAxesChange(k, e)}
+              onChange={(e: any) => handleCustomAxisChange(k, e)}
               axisKey={k}
               min={v.min}
               max={v.max}
