@@ -1,5 +1,13 @@
 # @compai/css-gui
 
+## 0.0.79
+
+### Patch Changes
+
+- ad49603: Sets value to theme unit on mount if init value matches a theme
+- d8d15c6: Set cursor to default in canvas
+- aae59ca: Improve selection styles
+
 ## 0.0.78
 
 ### Patch Changes
