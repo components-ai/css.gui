@@ -219,7 +219,7 @@ function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
   const [open, setOpen] = useState(true)
   const isSelected = isSamePath(path, selected)
 
-  if (typeof value === 'string') {
+  if (value.type === 'text') {
     return (
       <div sx={{ cursor: 'default' }}>
         <button
@@ -231,7 +231,7 @@ function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
           }}
           onClick={() => onSelect(path)}
         >
-          "{value}"
+          "{value.value}"
         </button>
       </div>
     )
