@@ -18,11 +18,10 @@ import {
 } from '../types/css'
 import { ANIMATABLE_PROPERTIES } from './animatable'
 import {
-  stringifyTextDecoration,
-  TextDecorationInput,
+  textDecoration,
   textDecorationLines,
   textDecorationStyles,
-} from '../components/inputs/TextDecoration'
+} from '../components/schemas/text-decoration'
 import { UnitSteps } from '../lib'
 import ImageSourcePicker from '../components/inputs/ImageSource/field'
 import { stringifyImageSource } from '../components/inputs/ImageSource/stringify'
@@ -2314,11 +2313,7 @@ export const properties: Record<string, PropertyData> = {
     keywords: ['none', 'all'],
     defaultValue: 'none',
   },
-  // TODO: Add defaultValue
-  textDecoration: {
-    type: TextDecorationInput,
-    stringify: stringifyTextDecoration,
-  },
+  textDecoration,
   textDecorationColor: {
     type: 'color',
     keywords: ['currentcolor', 'transparent'],

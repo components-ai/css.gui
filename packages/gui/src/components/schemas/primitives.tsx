@@ -4,7 +4,7 @@ import { ColorPopover } from '../primitives'
 import { DataTypeSchema } from './data-type'
 
 export const color: DataTypeSchema<Color> = {
-  component: ColorPopover,
+  type: ColorPopover,
   stringify: (value) => value,
   defaultValue: 'transparent',
 }
@@ -14,7 +14,7 @@ export function keywordSchema<T extends string>(
 ): { schema: DataTypeSchema<T>; props: any } {
   return {
     schema: {
-      component: SelectInput as any,
+      type: SelectInput as any,
       stringify: (value) => value,
       defaultValue: options[0],
     },

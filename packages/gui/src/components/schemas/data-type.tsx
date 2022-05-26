@@ -5,7 +5,7 @@ import { EditorPropsWithLabel } from '../../types/editor'
 import { Label } from '../primitives'
 
 export interface DataTypeSchema<T> {
-  component: ComponentType<EditorPropsWithLabel<T>>
+  type: ComponentType<EditorPropsWithLabel<T>>
   stringify(value: T): string
   defaultValue: T
 }
@@ -30,13 +30,13 @@ export function createObjectSchema<T extends object>({
   defaultValue,
 }: CreateObjectSchema<T>): DataTypeSchema<T> {
   return {
-    component(props) {
+    type(props) {
       return (
         <div>
           <Label>{props.label}</Label>
           {keyOrder.map((key) => {
             const { schema, props: componentProps = {} } = fields[key]
-            const Component = schema.component
+            const Component = schema.type
             return (
               <Component {...getInputProps(props, key)} {...componentProps} />
             )
