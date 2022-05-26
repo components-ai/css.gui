@@ -30,7 +30,7 @@ export function GridLineInput(props: Props) {
             backgroundColor: 'background',
             color: 'muted',
             '&[data-state=on]': {
-              backgroundColor: 'text',
+              backgroundColor: 'primary',
               color: 'background',
             },
           }}
