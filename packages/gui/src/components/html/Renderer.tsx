@@ -66,7 +66,7 @@ const cleanAttributes = (attributes: Record<string, string>) => {
   const newAttributes = { ...attributes }
 
   if (newAttributes.href) {
-    newAttributes.href = '#'
+    delete newAttributes.href
   }
 
   if (newAttributes.class) {
