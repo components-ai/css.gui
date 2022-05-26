@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.81
+
+### Patch Changes
+
+- 26e8157: Use text node rather than string
+
 ## 0.0.80
 
 ### Patch Changes
