@@ -1,8 +1,8 @@
 import { mapValues } from 'lodash-es'
 import { ComponentType } from 'react'
-import { getInputProps } from '../lib/util'
-import { EditorPropsWithLabel } from '../types/editor'
-import { Label } from './primitives'
+import { getInputProps } from '../../lib/util'
+import { EditorPropsWithLabel } from '../../types/editor'
+import { Label } from '../primitives'
 
 export interface DataTypeSchema<T> {
   component: ComponentType<EditorPropsWithLabel<T>>
