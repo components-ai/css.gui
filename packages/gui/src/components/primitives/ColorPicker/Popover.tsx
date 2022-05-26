@@ -19,7 +19,6 @@ export default function ColorPopover({
   swatch,
   ...props
 }: Props) {
-  console.log(props, 'my props')
   return (
     <Popover.Root>
       <Popover.Trigger

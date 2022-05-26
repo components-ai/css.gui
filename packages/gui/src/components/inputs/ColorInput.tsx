@@ -20,7 +20,6 @@ export function ColorInput({
   const theme = useTheme()
   const id = useId()
   const fullId = `${id}-${label}`
-  console.log(theme, 'theme 2')
   return (
     <div>
       <Label htmlFor={fullId}>{label}</Label>

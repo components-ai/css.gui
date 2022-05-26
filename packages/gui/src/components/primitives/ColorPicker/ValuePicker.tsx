@@ -18,7 +18,7 @@ interface Props {
 
 // The "normal" color picker that lets you set a color value directly
 export default function ColorPicker(props: Props) {
-  const { value, onChange, theme = {}, onTabChange } = props
+  const { value, onChange, theme = {} } = props
   const normedValue = isValidColor(value) ? value : '#000000'
   const mode = getColorMode(normedValue)
 
