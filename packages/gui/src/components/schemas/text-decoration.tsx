@@ -32,3 +32,5 @@ export const textDecoration = createObjectSchema({
     },
   },
 })
+
+// TODO I think we can define the individual text-decoration properties here as well?

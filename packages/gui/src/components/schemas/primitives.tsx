@@ -29,10 +29,3 @@ export function keywordSchema<T extends string>(
     props: { options },
   }
 }
-
-// export const keyword: DataTypeSchema<string> = {
-//   component: SelectInput as any,
-//   stringify: (value) => value,
-//   // FIXME uh oh.
-//   defaultValue: (props) => props.options[0],
-// }
