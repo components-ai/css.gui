@@ -1,5 +1,5 @@
 import { createObjectSchema } from './data-type'
-import { color, keywordSchema } from './primitives'
+import { color, length, keywordSchema } from './primitives'
 
 export const textDecorationLines = [
   'none',
@@ -26,5 +26,9 @@ export const textDecoration = createObjectSchema({
     color: { schema: color },
     line: keywordSchema(textDecorationLines),
     style: keywordSchema(textDecorationStyles),
+    thickness: {
+      schema: length,
+      props: { percentage: true, keywords: ['auto', 'from-font'] },
+    },
   },
 })
