@@ -1,6 +1,10 @@
 import { debounce, uniq } from 'lodash-es'
 import { useEffect, useState } from 'react'
-import { buildFontFamiliesHref, buildVariableFontFamiliesHref } from '../inputs/FontFamily/FontTags'
+import {
+  buildFontFamiliesHref,
+  buildVariableFontFamiliesHref,
+} from '../inputs/FontFamily/FontTags'
+import { HtmlNode } from './types'
 
 export function getStyleFonts(style: any): string[] {
   if (!style) return []
@@ -28,7 +32,7 @@ export function getHTMLTreeFonts(root: any): string[] {
   }
 
   for (const node of root.children) {
-    if (typeof node === 'object') {
+    if (node.type !== 'text') {
       treeFonts = [...treeFonts, ...getHTMLTreeFonts(node)]
     }
   }
@@ -47,11 +51,11 @@ async function buildHrefs({
   style,
   setStaticHref,
   setVariableHref,
- }: BuildHrefProps) {
+}: BuildHrefProps) {
   const fonts = style ? getStyleFonts(style) : getHTMLTreeFonts(tree)
   const staticHref = await buildFontFamiliesHref(fonts)
   const variableHref = await buildVariableFontFamiliesHref(fonts)
-  
+
   setStaticHref(staticHref)
   setVariableHref(variableHref)
 }

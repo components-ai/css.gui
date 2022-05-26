@@ -52,8 +52,8 @@ function ElementRenderer({ value, path }: ElementRendererProps) {
     <span sx={{ cursor: 'default', a: { cursor: 'default' } }}>
       <Tag {...props}>
         {children.map((child, i) => {
-          if (typeof child === 'string') {
-            return child
+          if (child.type === 'text') {
+            return child.value
           }
           return <ElementRenderer key={i} value={child} path={[...path, i]} />
         })}
