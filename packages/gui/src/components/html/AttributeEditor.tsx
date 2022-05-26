@@ -3,7 +3,7 @@ import { Label } from '../primitives'
 import IconButton from '../ui/IconButton'
 import { useEffect } from 'react'
 import { Combobox } from '../primitives'
-import { ATTRIBUTE_MAP } from '../../data/attributes'
+import { getAttributesForElement } from '../../lib/attributes'
 
 interface AttributeEditorProps {
   value: Record<string, string>
@@ -23,7 +23,9 @@ export const AttributeEditor = ({
   const handleElementChange = () => {
     const newAttributes = Object.entries(value).reduce(
       (acc: any, [k, v]: any) => {
-        return ATTRIBUTE_MAP[element].includes(k) ? { ...acc, [k]: v } : acc
+        return getAttributesForElement(element).includes(k)
+          ? { ...acc, [k]: v }
+          : acc
       },
       {}
     )
@@ -32,7 +34,7 @@ export const AttributeEditor = ({
   }
 
   const handleFilterItems = (input: string) => {
-    return ATTRIBUTE_MAP[element].filter((item) => {
+    return getAttributesForElement(element).filter((item) => {
       if (item.toLowerCase().startsWith(input.toLowerCase() || '')) {
         return !Object.keys(value).includes(item)
       }
@@ -72,7 +74,7 @@ export const AttributeEditor = ({
       <Combobox
         onFilterItems={handleFilterItems}
         onItemSelected={handleItemSelected}
-        items={ATTRIBUTE_MAP[element]}
+        items={getAttributesForElement(element)}
         clearOnSelect
       />
     </div>

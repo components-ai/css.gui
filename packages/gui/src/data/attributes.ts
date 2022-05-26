@@ -1,4 +1,4 @@
-const GLOBAL_ATTRIBUTES = ['class', 'id', 'title']
+export const GLOBAL_ATTRIBUTES = ['class', 'id', 'title']
 
 export const ATTRIBUTE_MAP: Record<string, string[]> = {
   a: [...GLOBAL_ATTRIBUTES, 'href', 'target'],

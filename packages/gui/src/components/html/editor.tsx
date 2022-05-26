@@ -12,22 +12,9 @@ import { DEFAULT_STYLES } from './default-styles'
 import { useHtmlEditor } from './Provider'
 import { isVoidElement } from '../../lib/elements'
 import { isSamePath } from './util'
+import { elements } from '../../data/elements'
 
-const HTML_TAGS = [
-  HTMLTag.P,
-  HTMLTag.Img,
-  HTMLTag.Button,
-  HTMLTag.A,
-  HTMLTag.Input,
-  HTMLTag.H1,
-  HTMLTag.H2,
-  HTMLTag.H3,
-  HTMLTag.H4,
-  HTMLTag.H5,
-  HTMLTag.H6,
-  HTMLTag.Span,
-  HTMLTag.Div,
-]
+const HTML_TAGS = elements
 
 interface HtmlEditorProps {
   onChange(value: HtmlNode): void

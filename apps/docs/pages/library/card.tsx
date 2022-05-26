@@ -1,9 +1,4 @@
-import {
-  HtmlEditor,
-  HtmlRenderer,
-  HtmlEditorProvider,
-  htmlToEditorSchema,
-} from '@compai/css-gui'
+import { HtmlEditor, HtmlRenderer, HtmlEditorProvider } from '@compai/css-gui'
 import { useState } from 'react'
 
 const initialValue: any = {
