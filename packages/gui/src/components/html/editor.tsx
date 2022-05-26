@@ -55,6 +55,7 @@ export function HtmlEditor({ onChange }: HtmlEditorProps) {
           borderRightStyle: 'solid',
           borderBottomWidth: '1px',
           borderBottomStyle: 'solid',
+          width: '320px',
           overflowX: 'auto',
           resize: 'horizontal',
         }}
@@ -98,6 +99,7 @@ function NodeEditor({ value, onChange, onRemove }: TagEditorProps) {
         resize: 'horizontal',
         overflowX: 'auto',
         p: 3,
+        width: '320px',
         borderRightWidth: '1px',
         borderRightStyle: 'solid',
         borderBottomWidth: '1px',
