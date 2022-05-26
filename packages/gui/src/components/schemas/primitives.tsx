@@ -1,12 +1,12 @@
 import { stringifyUnit } from '../../lib/stringify'
 import { Color, Length } from '../../types/css'
+import { ColorInput } from '../inputs/ColorInput'
 import { LengthInput } from '../inputs/LengthInput'
 import { SelectInput } from '../inputs/SelectInput'
-import { ColorPopover } from '../primitives'
 import { DataTypeSchema } from './data-type'
 
 export const color: DataTypeSchema<Color> = {
-  type: ColorPopover,
+  type: ColorInput,
   stringify: (value) => value,
   defaultValue: 'transparent',
 }
