@@ -98,7 +98,7 @@ export const AddPropertyControl = ({
               handleFilterItems('')
             }
           }}
-          sx={{ display: 'block', width: '100%' }}
+          sx={{ display: 'block', width: '100%', mt: '2px' }}
         />
       </Label>
       <div
