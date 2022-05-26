@@ -48,7 +48,7 @@ const initialValue: any = {
           unit: 'number',
         },
       },
-      children: ['CSS.GUI'],
+      children: [{ type: 'text', value: 'CSS.GUI' }],
     },
     {
       tagName: 'h2',
@@ -72,7 +72,11 @@ const initialValue: any = {
         },
       },
       children: [
-        'Quickly build components with custom styling panels. No coding required.',
+        {
+          type: 'text',
+          value:
+            'Quickly build components with custom styling panels. No coding required.',
+        },
       ],
     },
     {
@@ -89,7 +93,10 @@ const initialValue: any = {
         },
       },
       children: [
-        'Click anywhere on the canvas to start. Go ahead. Click away.',
+        {
+          type: 'text',
+          value: 'Click anywhere on the canvas to start. Go ahead. Click away.',
+        },
       ],
     },
     {
@@ -140,7 +147,12 @@ const initialValue: any = {
         },
       },
       tagName: 'a',
-      children: ['Primary CTA'],
+      children: [
+        {
+          type: 'text',
+          value: 'Primary CTA',
+        },
+      ],
     },
     {
       attributes: { href: 'https://components.ai' },
@@ -182,7 +194,12 @@ const initialValue: any = {
         },
       },
       tagName: 'a',
-      children: ['Secondary link'],
+      children: [
+        {
+          type: 'text',
+          value: 'Secondary link',
+        },
+      ],
     },
   ],
 }

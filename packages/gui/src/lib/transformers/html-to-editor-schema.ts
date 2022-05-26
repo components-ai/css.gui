@@ -16,7 +16,6 @@ export const htmlToEditorSchema = (text: string) => {
     .use(cleanNewLines)
     // @ts-ignore
     .use(propertiesToAttributes)
-    .use(textNodesToStrings)
     .runSync(tree)
 
   const htmlBody = processedTree.children[0]

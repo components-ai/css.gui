@@ -93,7 +93,7 @@ interface TagEditorProps extends EditorProps {
 }
 
 function NodeEditor({ value, onChange, onRemove }: TagEditorProps) {
-  const nodeType = typeof value === 'string' ? 'text' : 'tag'
+  const nodeType = value.type === 'text' ? 'text' : 'tag'
   return (
     <div
       sx={{
@@ -115,9 +115,10 @@ function NodeEditor({ value, onChange, onRemove }: TagEditorProps) {
           value={nodeType}
           onChange={(value) => {
             if (value === 'text') {
-              onChange('')
+              onChange({ type: 'text', value: '' })
             } else {
               onChange({
+                type: 'element',
                 tagName: 'div',
               })
             }
@@ -136,12 +137,20 @@ function NodeEditor({ value, onChange, onRemove }: TagEditorProps) {
 }
 
 function NodeSwitch({ value, onChange }: EditorProps) {
-  if (typeof value === 'string') {
+  if (value.type === 'text') {
     return (
       <div>
         <Label>
           Content
-          <input value={value} onChange={(e) => onChange(e.target.value)} />
+          <input
+            value={value.value}
+            onChange={(e) =>
+              onChange({
+                ...value,
+                value: e.target.value,
+              })
+            }
+          />
         </Label>
       </div>
     )
@@ -182,7 +191,7 @@ function NodeSwitch({ value, onChange }: EditorProps) {
             onChange={(newAttributes) =>
               onChange({ ...value, attributes: newAttributes })
             }
-            element={value.tagName}
+            element={value.tagName as string}
           />
         </div>
       </article>
@@ -241,11 +250,11 @@ function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
       onClick={() => onSelect(path)}
     >
       &lt;{value.tagName}
-      {!open || isVoidElement(value.tagName) ? ' /' : null}&gt;
+      {!open || isVoidElement(value.tagName as string) ? ' /' : null}&gt;
     </button>
   )
 
-  if (isVoidElement(value.tagName)) {
+  if (isVoidElement(value.tagName as string)) {
     return tagButton
   }
 
@@ -276,7 +285,12 @@ function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
               <Fragment key={i}>
                 <AddChildButton
                   onClick={() => {
-                    onChange(addChildAtPath(value, [i], ''))
+                    onChange(
+                      addChildAtPath(value, [i], {
+                        type: 'text',
+                        value: '',
+                      })
+                    )
                     onSelect(null)
                   }}
                 />
@@ -296,7 +310,12 @@ function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
           })}
           <AddChildButton
             onClick={() => {
-              onChange(addChildAtPath(value, [value.children?.length ?? 0], ''))
+              onChange(
+                addChildAtPath(value, [value.children?.length ?? 0], {
+                  type: 'text',
+                  value: '',
+                })
+              )
               onSelect(null)
             }}
           />
