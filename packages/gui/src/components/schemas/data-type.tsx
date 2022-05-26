@@ -14,7 +14,7 @@ interface CreateObjectSchema<T extends object> {
   fields: {
     [Property in keyof T]: {
       schema: DataTypeSchema<T[Property]>
-      props: Record<string, any>
+      props?: Record<string, any>
     }
   }
   // component?: ComponentType
@@ -35,7 +35,7 @@ export function createObjectSchema<T extends object>({
         <div>
           <Label>{props.label}</Label>
           {keyOrder.map((key) => {
-            const { schema, props: componentProps } = fields[key]
+            const { schema, props: componentProps = {} } = fields[key]
             const Component = schema.component
             return (
               <Component {...getInputProps(props, key)} {...componentProps} />
