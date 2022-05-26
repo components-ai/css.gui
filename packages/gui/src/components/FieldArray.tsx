@@ -1,5 +1,5 @@
 import { Trash, ChevronUp, ChevronDown } from 'react-feather'
-import { useState, ComponentType, useId, ReactNode } from 'react'
+import { useState, ComponentType, useId } from 'react'
 import * as Collapsible from '@radix-ui/react-collapsible'
 import IconButton from './ui/IconButton'
 import { kebabCase } from 'lodash-es'
