@@ -24,7 +24,7 @@ export function SelectInput<T extends string>({
     <div>
       <Label htmlFor={id}>
         <span>{label}</span>
-        <div sx={{ display: 'flex', flexDirection: 'row' }}>
+        <div sx={{ display: 'flex', flexDirection: 'row', mt: '2px' }}>
           <select
             id={id}
             value={value}
@@ -39,9 +39,7 @@ export function SelectInput<T extends string>({
               )
             })}
           </select>
-          {onRemove && (
-            <DeletePropButton onRemove={onRemove}/>
-          )}
+          {onRemove && <DeletePropButton onRemove={onRemove} />}
         </div>
       </Label>
     </div>

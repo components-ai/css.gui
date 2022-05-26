@@ -30,7 +30,9 @@ function ElementRenderer({ value, path }: ElementRendererProps) {
   const sx = toCSSObject(style)
 
   if (isSamePath(path, selected)) {
-    sx.outline = 'thin solid tomato'
+    sx.outlineWidth = 'thin'
+    sx.outlineStyle = 'solid'
+    sx.outlineColor = 'primary'
   }
 
   const props = {
@@ -47,7 +49,7 @@ function ElementRenderer({ value, path }: ElementRendererProps) {
   }
 
   return (
-    <>
+    <span sx={{ cursor: 'default', a: { cursor: 'default' } }}>
       <Tag {...props}>
         {children.map((child, i) => {
           if (typeof child === 'string') {
@@ -56,7 +58,7 @@ function ElementRenderer({ value, path }: ElementRendererProps) {
           return <ElementRenderer key={i} value={child} path={[...path, i]} />
         })}
       </Tag>
-    </>
+    </span>
   )
 }
 
@@ -64,7 +66,7 @@ const cleanAttributes = (attributes: Record<string, string>) => {
   const newAttributes = { ...attributes }
 
   if (newAttributes.href) {
-    newAttributes.href = '#'
+    delete newAttributes.href
   }
 
   if (newAttributes.class) {

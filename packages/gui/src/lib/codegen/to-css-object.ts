@@ -52,7 +52,7 @@ export const toCSSObject = (styles: Styles): any => {
   }, {})
 }
 
-function isCSSUnitValue(value: unknown): value is CSSUnitValue {
+export function isCSSUnitValue(value: unknown): value is CSSUnitValue {
   if (typeof value !== 'object') {
     return false
   }
@@ -65,5 +65,5 @@ function isCSSUnitValue(value: unknown): value is CSSUnitValue {
 }
 
 export function isCSSFunctionCalc(value: unknown): value is CSSFunctionCalc {
-  return (value as CSSFunctionCalc).type === UnitlessUnits.Calc
+  return (value as CSSFunctionCalc)?.type === UnitlessUnits.Calc
 }
