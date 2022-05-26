@@ -63,13 +63,11 @@ export function createObjectSchema<T extends object>({
 
 interface CreateArraySchema<T> {
   itemSchema: DataTypeSchema<T>
-  itemProps: Record<string, any>
   separator: string
 }
 
 export function createArraySchema<T>({
   itemSchema,
-  itemProps,
   separator,
 }: CreateArraySchema<T>): DataTypeSchema<T[]> {
   const stringify = (value: T[]) => {
