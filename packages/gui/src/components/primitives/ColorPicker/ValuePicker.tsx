@@ -5,16 +5,22 @@ import ColorValueDisplay from './ValueDisplay'
 import { format, getColorMode, isValidColor } from './util'
 import LchColorPicker from './LCHPicker'
 import LabColorPicker from './LabPicker'
+import { Theme } from '../../../types/theme'
+import { PreviewPalettePicker } from './ThemePreviewPalettePicker'
+import { Label } from '../Label'
+import * as Tabs from '@radix-ui/react-tabs'
 
 type Color = string
 interface Props {
   value: Color
   onChange(value: Color): void
+  theme?: Theme
+  onTabChange?(value: string): void
 }
 
 // The "normal" color picker that lets you set a color value directly
 export default function ColorPicker(props: Props) {
-  const { value, onChange } = props
+  const { value, onChange, theme = {}, onTabChange } = props
   const normedValue = isValidColor(value) ? value : '#000000'
   const mode = getColorMode(normedValue)
 
@@ -62,6 +68,7 @@ export default function ColorPicker(props: Props) {
       ) : (
         <HsvColorPicker value={normedValue} onChange={onChange} mode={mode} />
       )}
+      {theme && <PreviewPalettePicker value={normedValue} onChange={onChange} theme={theme} />}
     </div>
   )
 }
