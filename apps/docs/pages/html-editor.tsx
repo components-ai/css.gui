@@ -26,7 +26,7 @@ const initialValue: any = {
     {
       tagName: 'h1',
       attributes: {},
-      style: { 
+      style: {
         color: 'primary',
         fontSize: {
           value: 10,
@@ -34,7 +34,7 @@ const initialValue: any = {
         },
         fontWeight: 900,
         fontFamily: 'Inter',
-        letterSpacing: { value: -8, unit: 'px',},
+        letterSpacing: { value: -8, unit: 'px' },
         marginTop: {
           value: 0,
           unit: 'px',
@@ -46,7 +46,7 @@ const initialValue: any = {
         lineHeight: {
           value: 1.25,
           unit: 'number',
-        }
+        },
       },
       children: ['CSS.GUI'],
     },
@@ -69,9 +69,11 @@ const initialValue: any = {
         lineHeight: {
           value: 1.25,
           unit: 'number',
-        }
+        },
       },
-      children: ['Quickly build components with custom styling panels. No coding required.'],
+      children: [
+        'Quickly build components with custom styling panels. No coding required.',
+      ],
     },
     {
       tagName: 'p',
@@ -84,13 +86,15 @@ const initialValue: any = {
         fontSize: {
           value: 20,
           unit: 'px',
-        }
+        },
       },
-      children: ['Click anywhere on the canvas to start. Go ahead. Click away.'],
+      children: [
+        'Click anywhere on the canvas to start. Go ahead. Click away.',
+      ],
     },
     {
       attributes: {
-        href: '#0'
+        href: '#0',
       },
       style: {
         paddingTop: {
@@ -110,13 +114,13 @@ const initialValue: any = {
           unit: 'px',
         },
         textDecorationColor: 'transparent',
-        textDecorationThickness: { value: 0, unit: 'px', },
+        textDecorationThickness: { value: 0, unit: 'px' },
         textDecorationStyle: 'none',
         textDecorationLine: 'none',
         color: 'background',
         backgroundColor: 'text',
         borderWidth: {
-          value: 2, 
+          value: 2,
           unit: 'px',
         },
         borderStyle: 'solid',
@@ -127,16 +131,16 @@ const initialValue: any = {
         },
         borderRadius: {
           value: 6,
-          unit: 'px'
+          unit: 'px',
         },
         whiteSpace: 'nowrap',
-        ':hover':{
+        ':hover': {
           backgroundColor: 'primary',
           borderColor: 'primary',
-        }
+        },
       },
       tagName: 'a',
-      children: ["Primary CTA"],
+      children: ['Primary CTA'],
     },
     {
       attributes: { href: 'https://components.ai' },
@@ -158,27 +162,27 @@ const initialValue: any = {
           unit: 'px',
         },
         textDecorationColor: 'transparent',
-        textDecorationThickness: { value: 0, unit: 'px', },
+        textDecorationThickness: { value: 0, unit: 'px' },
         textDecorationStyle: 'none',
         textDecorationLine: 'none',
         color: 'text',
         whiteSpace: 'nowrap',
         borderWidth: {
-          value: 2, 
+          value: 2,
           unit: 'px',
         },
         borderStyle: 'solid',
         borderColor: 'currentColor',
         borderRadius: {
           value: 6,
-          unit: 'px'
+          unit: 'px',
         },
-        ':hover':{
+        ':hover': {
           color: 'primary',
-        }
+        },
       },
       tagName: 'a',
-      children: ["Secondary link"],
+      children: ['Secondary link'],
     },
   ],
 }
