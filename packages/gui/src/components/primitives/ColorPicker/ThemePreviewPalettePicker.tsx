@@ -18,7 +18,7 @@ export function PreviewPalettePicker({
   const collapsedRows = 2
   return (
     <>
-      <Label sx={{ py: 2}}>Theme Colors</Label>
+      <Label sx={{ py: 2 }}>Theme Colors</Label>
       <div sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
         {theme?.colors?.map((colorGroup: any, i: number) => {
           if (isCollapsed && i >= collapsedRows) {
@@ -53,17 +53,17 @@ export function PreviewPalettePicker({
           )
         })}
       </div>
-      <a 
+      <a
         sx={{
           width: '100%',
           display: 'block',
           textAlign: 'right',
           pt: 2,
-          fontSize: 0
-        }} 
+          fontSize: 0,
+        }}
         onClick={() => setIsCollapsed(!isCollapsed)}
       >
-          {`${isCollapsed ? 'View Full Theme' : 'Hide'}`}
+        {`${isCollapsed ? 'View Full Theme' : 'Hide'}`}
       </a>
     </>
   )

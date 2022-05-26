@@ -7,8 +7,6 @@ import LchColorPicker from './LCHPicker'
 import LabColorPicker from './LabPicker'
 import { Theme } from '../../../types/theme'
 import { PreviewPalettePicker } from './ThemePreviewPalettePicker'
-import { Label } from '../Label'
-import * as Tabs from '@radix-ui/react-tabs'
 
 type Color = string
 interface Props {
@@ -68,7 +66,13 @@ export default function ColorPicker(props: Props) {
       ) : (
         <HsvColorPicker value={normedValue} onChange={onChange} mode={mode} />
       )}
-      {theme && <PreviewPalettePicker value={normedValue} onChange={onChange} theme={theme} />}
+      {theme && (
+        <PreviewPalettePicker
+          value={normedValue}
+          onChange={onChange}
+          theme={theme}
+        />
+      )}
     </div>
   )
 }

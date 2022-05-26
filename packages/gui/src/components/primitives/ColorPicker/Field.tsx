@@ -52,7 +52,7 @@ export default function ColorPicker({
   onRegenerate,
 }: Props) {
   const [tab, setTab] = useState(initialTab)
-  console.log(theme, "theme 33")
+  console.log(theme, 'theme 33')
   return (
     <div>
       <Tabs.Root value={tab} onValueChange={setTab}>
@@ -129,7 +129,12 @@ export default function ColorPicker({
           </div>
         </div>
         <Tabs.Content value="picker">
-          <ValuePicker value={value} onChange={onChange} theme={theme} onTabChange={setTab} />
+          <ValuePicker
+            value={value}
+            onChange={onChange}
+            theme={theme}
+            onTabChange={setTab}
+          />
         </Tabs.Content>
         {!hideSystemColors && (
           <Tabs.Content value="system">
