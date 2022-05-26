@@ -23,11 +23,45 @@ import { UnitConversions } from '../../../lib/convert'
 import { compact, kebabCase } from 'lodash-es'
 import { CalcInput } from '../../primitives/CalcInput'
 import { X } from 'react-feather'
+import { isCSSUnitValue } from '../../../lib/codegen/to-css-object'
 
 // Mapping of units to [min, max] tuple
 type UnitRanges = Record<string, [min: number, max: number]>
 // Mapping of units to steps
 type UnitSteps = Record<string, number>
+
+const getInitialState = (
+  value: Dimension,
+  themeValues?: (CSSUnitValue & { id: string })[],
+  units?: readonly string[]
+): State => {
+  const defaultState = {
+    value: (value as CSSUnitValue)?.value || 0,
+    unit:
+      (value as CSSUnitValue)?.unit ||
+      (units && units[0]) ||
+      AbsoluteLengthUnits.Px,
+    themeId: (value as CSSUnitValue)?.themeId,
+    key: 0,
+  }
+
+  for (const { unit, value: themeValue, id } of themeValues || []) {
+    if (
+      isCSSUnitValue(value) &&
+      unit === value.unit &&
+      themeValue === value.value
+    ) {
+      return {
+        value: themeValue,
+        unit,
+        themeId: id,
+        key: 0,
+      }
+    }
+  }
+
+  return defaultState
+}
 
 export interface DimensionInputProps extends EditorProps<Dimension> {
   label?: string
@@ -56,12 +90,11 @@ export const DimensionInput = ({
 }: DimensionInputProps) => {
   const id = `${React.useId()}-${kebabCase(label)}`
 
-  const [state, dispatch] = React.useReducer(reducer, {
-    value: (value as CSSUnitValue)?.value || 0,
-    unit: (value as CSSUnitValue)?.unit || units[0] || AbsoluteLengthUnits.Px,
-    themeId: (value as CSSUnitValue)?.themeId,
-    key: 0,
-  } as State)
+  const [state, dispatch] = React.useReducer(
+    reducer,
+    getInitialState(value, themeValues, units)
+  )
+
   React.useEffect(() => {
     if ((value as CSSFunctionCalc)?.type === 'calc') return
     const unitValue = value as CSSUnitValue
