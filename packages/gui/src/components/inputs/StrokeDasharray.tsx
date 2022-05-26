@@ -14,25 +14,9 @@ export function StrokeDasharrayInput({
       label={label}
       value={value}
       onChange={onChange}
-      content={StrokeDasharrayContent}
+      content={LengthInput}
       stringify={stringifyStrokeDasharray}
       newItem={() => ({ value: 0, unit: 'number' })}
-    />
-  )
-}
-
-function StrokeDasharrayContent({
-  label,
-  value,
-  onChange,
-}: EditorPropsWithLabel<Length>) {
-  return (
-    <LengthInput
-      percentage
-      number
-      label={label}
-      value={value}
-      onChange={onChange}
     />
   )
 }
