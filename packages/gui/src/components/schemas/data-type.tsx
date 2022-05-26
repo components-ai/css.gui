@@ -2,6 +2,7 @@ import { mapValues } from 'lodash-es'
 import { ComponentType } from 'react'
 import { getInputProps } from '../../lib/util'
 import { EditorPropsWithLabel } from '../../types/editor'
+import Layers from '../Layers'
 import { Label } from '../primitives'
 
 export interface DataTypeSchema<T> {
@@ -57,5 +58,37 @@ export function createObjectSchema<T extends object>({
       ...mapValues(fields, (field) => field.schema.defaultValue),
       ...defaultValue,
     } as any, // IDK why the typing doesn't work,
+  }
+}
+
+interface CreateArraySchema<T> {
+  itemSchema: DataTypeSchema<T>
+  itemProps: Record<string, any>
+  separator: string
+}
+
+export function createArraySchema<T>({
+  itemSchema,
+  itemProps,
+  separator,
+}: CreateArraySchema<T>): DataTypeSchema<T[]> {
+  const stringify = (value: T[]) => {
+    const stringified = value.map((item) => itemSchema.stringify(item))
+    return stringified.join(separator)
+  }
+
+  return {
+    type(props) {
+      return (
+        <Layers
+          {...props}
+          newItem={() => itemSchema.defaultValue}
+          stringify={stringify}
+          content={itemSchema.type as any}
+        />
+      )
+    },
+    stringify,
+    defaultValue: [itemSchema.defaultValue],
   }
 }
