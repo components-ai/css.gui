@@ -5,9 +5,7 @@ import EasingFunctionPicker from '../components/inputs/EasingFunction/picker'
 import { stringifyEasingFunction } from '../components/inputs/EasingFunction/stringify'
 import FilterPicker from '../components/inputs/Filter/field'
 import { stringifyFilter } from '../components/inputs/Filter/stringify'
-import TextShadowPicker from '../components/inputs/TextShadow/field'
 import { FontFamily } from '../components/inputs/FontFamily'
-import { stringifyTextShadow } from '../components/inputs/TextShadow/stringify'
 import TransformPicker from '../components/inputs/Transform/field'
 import { stringifyTransform } from '../components/inputs/Transform/stringify'
 import {
@@ -74,6 +72,7 @@ import { DEFAULT_ANIMATION } from '../components/inputs/Animation/types'
 import { DEFAULT_TRANSITION } from '../components/inputs/Transition/types'
 import { DEFAULT_BOX_SHADOW } from '../components/inputs/BoxShadow/types'
 import { DEFAULT_TEXT_SHADOW } from '../components/inputs/TextShadow/types'
+import { textShadow } from '../components/schemas/text-shadow'
 
 type PropertyData = {
   type: string | ComponentType<EditorPropsWithLabel<any>>
@@ -2431,11 +2430,7 @@ export const properties: Record<string, PropertyData> = {
     ],
     defaultValue: 'optimizeLegibility',
   },
-  textShadow: {
-    type: TextShadowPicker,
-    stringify: stringifyTextShadow,
-    defaultValue: [DEFAULT_TEXT_SHADOW],
-  },
+  textShadow,
   textSpaceCollapse: {
     type: 'keyword',
     keywords: [
