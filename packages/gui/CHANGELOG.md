@@ -1,5 +1,13 @@
 # @compai/css-gui
 
+## 0.0.80
+
+### Patch Changes
+
+- c8cfc1f: Delete href in canvas to avoid browser jump
+- 29cb0a3: Use default cursor in tree view
+- 607f95e: Make label spacing more consistent
+
 ## 0.0.79
 
 ### Patch Changes
