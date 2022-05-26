@@ -1,5 +1,12 @@
 # @compai/css-gui
 
+## 0.0.82
+
+### Patch Changes
+
+- 1b14e3b: Adds theme preview picker to color popover
+- dd9fff9: Fix tree view
+
 ## 0.0.81
 
 ### Patch Changes
