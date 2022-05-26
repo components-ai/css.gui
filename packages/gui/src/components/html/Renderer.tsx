@@ -30,7 +30,9 @@ function ElementRenderer({ value, path }: ElementRendererProps) {
   const sx = toCSSObject(style)
 
   if (isSamePath(path, selected)) {
-    sx.outline = 'thin solid tomato'
+    sx.outlineWidth = 'thin'
+    sx.outlineStyle = 'solid'
+    sx.outlineColor = 'primary'
   }
 
   const props = {
