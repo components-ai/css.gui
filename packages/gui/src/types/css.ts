@@ -47,7 +47,7 @@ export const enum CalcOperand {
   Mult = '*',
   Plus = '+',
   Sub = '-',
-  Div = '/'
+  Div = '/',
 }
 // Only use a subset for now to keep things simpler
 export type LengthPercentageUnit = LengthUnit | PercentageLengthUnits.Pct
@@ -154,3 +154,18 @@ export const GEOMETRY_BOX_KEYWORDS = [
   'view-box',
 ] as const
 export type GeometryBox = typeof GEOMETRY_BOX_KEYWORDS[number]
+
+const primitives = [
+  'keyword',
+  'number',
+  'integer',
+  'percentage',
+  'length',
+  'time',
+  'string',
+  'color',
+] as const
+export type Primitive = typeof primitives[number]
+export function isPrimitive(type: string): type is Primitive {
+  return (primitives as readonly string[]).includes(type)
+}

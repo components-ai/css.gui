@@ -6,14 +6,12 @@ import {
   isValidElement,
   ReactNode,
   useEffect,
-  useId,
 } from 'react'
-import { camelCase, kebabCase, uniq } from 'lodash-es'
+import { camelCase, uniq } from 'lodash-es'
 import {
   CSSUnitValue,
-  Length,
+  isPrimitive,
   MultidimensionalLength,
-  ResponsiveLength,
   Styles,
 } from '../../types/css'
 import { Theme } from '../../types/theme'
@@ -23,31 +21,24 @@ import { EditorData, KeyArg, Recipe } from '../providers/types'
 import { GenericFieldset, useFieldset } from './Fieldset'
 import { joinPath } from '../providers/util'
 import { properties } from '../../data/properties'
-import { ColorInput } from '../inputs/ColorInput'
-import { LengthInput } from '../inputs/LengthInput'
 import { ResponsiveInput } from '../Responsive'
 import { sentenceCase } from '../../lib/util'
 import { EditorProps } from '../../types/editor'
-import { DimensionInput } from '../inputs/Dimension'
-import { SelectInput } from '../inputs/SelectInput'
 import { GLOBAL_KEYWORDS } from '../../data/global-keywords'
-import { Label } from '../primitives'
 import { useThemeProperty } from '../providers/ThemeContext'
 import { PositionInput } from '../inputs/PositionInput'
-import { TimeInput } from '../inputs/TimeInput'
 import { UnitSteps } from '../../lib'
 import { pascalCase } from '../../lib/util'
 import { UnitRanges } from '../../data/ranges'
-import { StringInput } from '../inputs/StringInput'
 import { DEFAULT_LENGTH } from '../../lib/constants'
 import { getDefaultValue } from '../../lib/defaults'
 import { MultidimensionInput } from '../inputs/Multidimension'
 import { Responsive } from '../Responsive/Input'
 import { AddPropertyControl } from '../AddProperty'
-import { DeletePropButton } from '../inputs/Dimension/Input'
 import { isFieldsetGroup, partitionProperties, sortProperties } from './util'
 import { stylesToEditorSchema } from '../../lib/transformers/styles-to-editor-schema'
 import { removeInternalCSSClassSyntax } from '../../lib/classes'
+import { PrimitiveInput } from '../inputs/PrimitiveInput'
 
 export const getPropertyFromField = (field: KeyArg) => {
   if (Array.isArray(field)) {
@@ -302,38 +293,22 @@ const FieldsetControl = ({ field, property }: FieldsetControlProps) => {
 
 function getInputComponent(property: string) {
   const propertyData = properties[property]
-  if (typeof propertyData.type === 'function') {
-    return propertyData.type
+  const type = propertyData.type
+  if (typeof type === 'function') {
+    return type
   }
-  return getPrimitiveInput(propertyData.type)
-}
-
-function getPrimitiveInput(type: string) {
+  if (isPrimitive(type)) {
+    return PrimitiveInput
+  }
   switch (type) {
-    case 'keyword':
-      return KeywordInput
-    case 'number':
-      return NumberInput
-    case 'integer':
-      return IntegerInput
-    case 'percentage':
-      return PercentageInput
-    case 'length':
-      return ResponsiveLengthInput
     case 'multiLength':
       return MultidimensionLengthInput
-    case 'time':
-      return TimeInput
-    case 'string':
-      return StringInput
-    case 'color':
-      return ColorInput
     case 'position':
       return PositionInput
     case 'none':
       return null
     default:
-      return TextInput
+      return null
   }
 }
 
@@ -341,92 +316,8 @@ type EditorPropsWithLabel<T> = EditorProps<T> & {
   label: string
   responsive: boolean
 }
-const NumberInput = ({
-  value,
-  onChange,
-  onRemove,
-  label,
-  ...props
-}: EditorPropsWithLabel<CSSUnitValue>) => {
-  return (
-    <DimensionInput
-      value={value}
-      label={label}
-      onChange={onChange}
-      onRemove={onRemove}
-      units={['number']}
-      steps={{ number: 0.1 }}
-      {...props}
-    />
-  )
-}
 
-const IntegerInput = ({
-  value,
-  onChange,
-  onRemove,
-  label,
-  ...props
-}: EditorPropsWithLabel<CSSUnitValue>) => {
-  return (
-    <DimensionInput
-      value={value}
-      label={label}
-      onChange={onChange}
-      onRemove={onRemove}
-      units={['number']}
-      steps={{ number: 1 }}
-      {...props}
-    />
-  )
-}
-
-const PercentageInput = ({
-  value,
-  onChange,
-  onRemove,
-  label,
-  ...props
-}: EditorPropsWithLabel<CSSUnitValue>) => {
-  return (
-    <DimensionInput
-      value={value}
-      label={label}
-      onChange={onChange}
-      onRemove={onRemove}
-      units={['%']}
-      steps={{ '%': 0.1 }}
-      {...props}
-    />
-  )
-}
-
-const ResponsiveLengthInput = ({
-  value,
-  onChange,
-  onRemove,
-  label,
-  property,
-  ...props
-}: EditorPropsWithLabel<Length | ResponsiveLength> & { property: string }) => {
-  return (
-    <ResponsiveInput
-      label={label}
-      value={value}
-      defaultValue={DEFAULT_LENGTH}
-      onChange={onChange}
-      onRemove={onRemove}
-      Component={LengthInput}
-      property={property}
-      componentProps={{
-        ...props,
-        keyword: true,
-      }}
-    />
-  )
-}
-
-const MultidimensionLengthInput = ({
+function MultidimensionLengthInput({
   value,
   onChange,
   onRemove,
@@ -434,7 +325,7 @@ const MultidimensionLengthInput = ({
   ...props
 }: EditorPropsWithLabel<Responsive<CSSUnitValue | MultidimensionalLength>> & {
   property: string
-}) => {
+}) {
   return (
     <ResponsiveInput
       label={label}
@@ -450,66 +341,6 @@ const MultidimensionLengthInput = ({
     />
   )
 }
-
-const DEFAULT_KEYWORD = 'inherit'
-const KeywordInput = ({
-  value,
-  onChange,
-  onRemove,
-  label,
-  keywords,
-  responsive,
-}: EditorPropsWithLabel<string> & { keywords: string[] }) => {
-  if (responsive) {
-    return (
-      <ResponsiveInput
-        label={label}
-        value={value}
-        onChange={(newValue: any) => onChange(newValue)}
-        defaultValue={DEFAULT_KEYWORD}
-        onRemove={onRemove}
-        Component={SelectInput}
-        componentProps={{
-          options: keywords,
-        }}
-      />
-    )
-  }
-
-  return (
-    <SelectInput
-      label={label}
-      value={value || DEFAULT_KEYWORD}
-      onChange={onChange}
-      onRemove={onRemove}
-      options={keywords}
-    />
-  )
-}
-
-const TextInput = ({
-  value,
-  onChange,
-  onRemove,
-  label,
-}: EditorPropsWithLabel<string>) => {
-  const id = `${useId()}-${kebabCase(label)}`
-  return (
-    <div>
-      <Label htmlFor={id}>{label}</Label>
-      <div sx={{ display: 'flex', flexDirection: 'row' }}>
-        <input
-          type="text"
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          sx={{ mr: 1 }}
-        />
-        {onRemove && <DeletePropButton onRemove={onRemove} />}
-      </div>
-    </div>
-  )
-}
-
 /**
  * Extract the defaults from the editor's children
  */
