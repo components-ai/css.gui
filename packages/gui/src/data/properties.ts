@@ -316,11 +316,14 @@ export const properties: Record<string, PropertyData> = {
     ],
     defaultValue: 'border-box',
   },
-  // TODO: Add defaultValue
   backgroundImage: {
     type: ImageSourcePicker,
     stringify: stringifyImageSource,
     label: 'Background Image',
+    defaultValue: [{
+      type: 'url', 
+      arguments: ['https://source.unsplash.com/random/1920x1080']
+    }],
   },
   backgroundOrigin: {
     type: 'keyword',
@@ -2462,7 +2465,6 @@ export const properties: Record<string, PropertyData> = {
       'full-width',
       'full-size-kana',
     ],
-    defaultValue: 'none',
   },
   textUnderlinePosition: {
     type: 'keyword',
@@ -2502,6 +2504,9 @@ export const properties: Record<string, PropertyData> = {
   transform: {
     type: TransformPicker,
     stringify: stringifyTransform,
+    defaultValue: [
+      { type: 'rotate', amount: { value: 45, unit: 'deg' } }
+    ]
   },
   transformBox: {
     type: 'keyword',
@@ -2517,6 +2522,11 @@ export const properties: Record<string, PropertyData> = {
   transformOrigin: {
     type: TransformOriginInput,
     stringify: stringifyTransformOrigin,
+    defaultValue: {
+      x: { unit: 'keyword', value: 'center' },
+      y: { unit: 'keyword', value: 'center' },
+      z: { unit: 'px', value: 0 },
+    }
   },
   transformStyle: {
     type: 'keyword',
