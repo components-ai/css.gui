@@ -212,7 +212,7 @@ function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
 
   if (typeof value === 'string') {
     return (
-      <div>
+      <div sx={{ cursor: 'default' }}>
         <button
           sx={{
             border: 'none',
@@ -256,8 +256,9 @@ function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
           border: 'none',
           backgroundColor: 'background',
           color: 'text',
+          cursor: 'default',
           ':before': {
-            cursor: 'pointer',
+            cursor: 'default',
             content: open ? '"▼"' : '"▶︎"',
             display: 'inline-block',
             width: '1rem',
@@ -311,7 +312,7 @@ function AddChildButton({ onClick }: { onClick(): void }) {
     <button
       onClick={onClick}
       sx={{
-        cursor: 'pointer',
+        cursor: 'default',
         display: 'block',
         background: 'none',
         border: 'none',
