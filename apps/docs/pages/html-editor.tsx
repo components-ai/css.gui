@@ -29,9 +29,12 @@ const initialValue: any = {
       style: { 
         color: 'primary',
         fontSize: {
-          value: 4,
+          value: 10,
           unit: 'rem',
         },
+        fontWeight: 900,
+        fontFamily: 'Inter',
+        letterSpacing: { value: -8, unit: 'px',},
         marginTop: {
           value: 0,
           unit: 'px',
@@ -45,7 +48,7 @@ const initialValue: any = {
           unit: 'number',
         }
       },
-      children: ['Hello, world!'],
+      children: ['CSS.GUI'],
     },
     {
       tagName: 'h2',
@@ -54,9 +57,21 @@ const initialValue: any = {
         marginBottom: {
           value: 0,
           unit: 'px',
+        },
+        fontSize: {
+          value: 48,
+          unit: 'px',
+        },
+        maxWidth: {
+          value: 40,
+          unit: 'em',
+        },
+        lineHeight: {
+          value: 1.25,
+          unit: 'number',
         }
       },
-      children: ['A playground for CSS GUI! Quickly build components with custom styling panels. No coding required.'],
+      children: ['Quickly build components with custom styling panels. No coding required.'],
     },
     {
       tagName: 'p',
@@ -71,7 +86,7 @@ const initialValue: any = {
           unit: 'px',
         }
       },
-      children: ['Click anywhere on the canvas to start'],
+      children: ['Click anywhere on the canvas to start. Go ahead. Click away.'],
     },
     {
       attributes: {

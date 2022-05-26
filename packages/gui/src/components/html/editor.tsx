@@ -58,6 +58,7 @@ export function HtmlEditor({ onChange }: HtmlEditorProps) {
           width: '320px',
           overflowX: 'auto',
           resize: 'horizontal',
+          minHeight: '100svh',
         }}
       >
         <TreeNode
@@ -105,6 +106,7 @@ function NodeEditor({ value, onChange, onRemove }: TagEditorProps) {
         borderBottomWidth: '1px',
         borderBottomStyle: 'solid',
         borderColor: 'border',
+        minHeight: '100svh',
       }}
     >
       <div sx={{ mb: 2, display: 'flex', alignItems: 'flex-end' }}>
