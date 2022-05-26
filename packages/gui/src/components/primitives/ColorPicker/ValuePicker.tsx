@@ -6,7 +6,7 @@ import { format, getColorMode, isValidColor } from './util'
 import LchColorPicker from './LCHPicker'
 import LabColorPicker from './LabPicker'
 import { Theme } from '../../../types/theme'
-import { PreviewPalettePicker } from './ThemePreviewPalettePicker'
+import { PreviewPalettePicker } from './PreviewPalettePicker'
 
 type Color = string
 interface Props {

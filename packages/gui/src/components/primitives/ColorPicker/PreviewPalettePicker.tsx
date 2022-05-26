@@ -60,6 +60,7 @@ export function PreviewPalettePicker({
           textAlign: 'right',
           pt: 2,
           fontSize: 0,
+          cursor: 'pointer',
         }}
         onClick={() => setIsCollapsed(!isCollapsed)}
       >
