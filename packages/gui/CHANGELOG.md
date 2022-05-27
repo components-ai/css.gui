@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.85
+
+### Patch Changes
+
+- 95aec83: Only wrap elements in span when in canvas
+
 ## 0.0.84
 
 ### Patch Changes
