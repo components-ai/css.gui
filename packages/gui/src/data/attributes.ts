@@ -3,7 +3,7 @@ const GLOBAL_ATTRIBUTES = ['class', 'id', 'title']
 export const ATTRIBUTE_MAP: Record<string, string[]> = {
   a: [...GLOBAL_ATTRIBUTES, 'href', 'target'],
   button: ['disabled'],
-  img: [...GLOBAL_ATTRIBUTES, 'src', 'alt'],
+  img: [...GLOBAL_ATTRIBUTES, 'src', 'alt', 'href'],
   input: [...GLOBAL_ATTRIBUTES, 'type', 'name', 'disabled', 'required'],
   h1: GLOBAL_ATTRIBUTES,
   h2: GLOBAL_ATTRIBUTES,
