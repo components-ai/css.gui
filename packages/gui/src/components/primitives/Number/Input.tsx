@@ -19,13 +19,14 @@ export const DraggableInput = ({
   max,
 }: DraggableLabelProps) => {
   const [dragging, setDragging] = React.useState<boolean>(false)
+  const [internalValue, setInternalValue] = React.useState<number | string>(value)
   const initialValue = React.useRef<number>(value)
 
   const bind = useDrag(
     ({ dragging, first, last, tap, movement: [dx] }) => {
       setDragging(dragging)
-      const parsedValue = typeof value === 'string' ? parseFloat(value) : value
 
+      const parsedValue = typeof value === 'string' ? parseFloat(value) : value
       if (tap || last) return
       if (first) {
         initialValue.current = parsedValue
@@ -36,6 +37,7 @@ export const DraggableInput = ({
       if (dragging && (min || min === 0)) newValue = Math.max(newValue, min)
       if (dragging && (max || max === 0)) newValue = Math.min(newValue, max)
 
+      setInternalValue(newValue)
       onUpdate(newValue)
     },
     { pointerEvents: true }
@@ -44,7 +46,7 @@ export const DraggableInput = ({
   return (
     <input
       type="text"
-      value={value}
+      value={internalValue}
       onKeyDown={(e) => {
         switch (e.key) {
           case 'ArrowUp': {
@@ -59,10 +61,16 @@ export const DraggableInput = ({
       }}
       onChange={({ target: { value: inputValue } }: any) => {
         let newValue = parseFloat(inputValue)
-        if (dragging && (min || min === 0)) newValue = Math.max(newValue, min)
-        if (dragging && (max || max === 0)) newValue = Math.min(newValue, max)
 
-        onUpdate(newValue)
+        if (min || min === 0) newValue = Math.max(newValue, min)
+        if (max || max === 0) newValue = Math.min(newValue, max)
+
+        setInternalValue(
+          newValue || newValue === 0 
+          ? newValue 
+          : inputValue === '-' ? '-' : ''
+        )
+        onUpdate(newValue || 0)
       }}
       sx={{
         cursor: dragging ? 'ew-resize' : 'default',
