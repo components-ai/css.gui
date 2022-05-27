@@ -28,10 +28,20 @@ const initialValue: any = {
       attributes: {},
       style: {
         color: 'primary',
-        fontSize: {
+        fontSize: [
+        {
+          value: 4,
+          unit: 'rem',
+        },
+        {
+          value: 6,
+          unit: 'rem',
+        },
+        {
           value: 10,
           unit: 'rem',
         },
+        ],
         fontWeight: 900,
         fontFamily: 'Inter',
         letterSpacing: { value: -8, unit: 'px' },
@@ -208,13 +218,25 @@ export default function HtmlEditorExample() {
   const [html, setHtml] = useState(initialValue)
 
   return (
-    <div sx={{ display: 'flex' }}>
       <HtmlEditorProvider value={html}>
-        <HtmlEditor onChange={setHtml} />
-        <div sx={{ width: '100%' }}>
-          <HtmlRenderer value={html} />
+        <div sx={{ 
+          display: 'grid', 
+          gridTemplateAreas: '"nav content"',
+          gridTemplateColumns: 'auto 1fr',
+          gridTemplateRows: 'auto',
+          height: 'calc(100vh - 64px)',
+          }}>
+            <div sx={{ 
+              gridArea: 'nav',
+              maxheight: 'calc(100vh - 64px)',
+              overflow: 'auto', 
+            }}>
+              <HtmlEditor onChange={setHtml} />
+            </div>
+            <div sx={{ overflow: 'auto',  width: '100%', gridArea: 'content', }}>
+              <HtmlRenderer value={html} />
+            </div>
         </div>
       </HtmlEditorProvider>
-    </div>
   )
 }

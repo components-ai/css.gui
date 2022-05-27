@@ -227,12 +227,12 @@ export const EditorControls = ({
 
   return (
     <>
-      {controls}
       {showAddProperties ? (
-        <div sx={{ mt: 3 }}>
+        <div sx={{ my: 3 }}>
           <AddPropertyControl styles={styles} />
         </div>
       ) : null}
+      {controls}
       {fieldsetControls}
       {children ? <DynamicControls /> : null}
     </>

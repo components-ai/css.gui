@@ -84,7 +84,7 @@ export const AddPropertyControl = ({
   return (
     <div {...getComboboxProps()}>
       <Label htmlFor={id} sx={{ display: 'block' }}>
-        <span>{label}</span>
+        <span sx={{ display: 'block', pb: 1,}}>{label}</span>
         <input
           type="text"
           value={filterValue}
