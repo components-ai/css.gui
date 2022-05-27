@@ -97,20 +97,22 @@ export function createArraySchema<T>({
   }
 }
 
-interface CreateUnionSchema<V extends string, T extends { type: V }> {
+interface CreateUnionSchema<V extends string, T extends object> {
   variants: Record<
     V,
     {
       schema: DataTypeSchema<T>
-      props: Record<string, any>
+      props?: Record<string, any>
     }
   >
   order?: V[]
+  stringify?(variant: V, value: string): string
 }
-export function createUnionSchema<V extends string, T extends { type: V }>({
+export function createUnionSchema<V extends string, T extends object>({
   variants,
   order = Object.keys(variants) as any,
-}: CreateUnionSchema<V, T>): DataTypeSchema<T> {
+  stringify,
+}: CreateUnionSchema<V, T>): DataTypeSchema<T & { type: V }> {
   return {
     type(props) {
       const Component = variants[props.value.type].schema.type
@@ -121,16 +123,22 @@ export function createUnionSchema<V extends string, T extends { type: V }>({
             options={order}
             onChange={(newType) => {
               // if the type changes, reset the value to the default value of that type
-              return variants[newType].schema.defaultValue
+              return {
+                type: newType,
+                ...variants[newType].schema.defaultValue,
+              }
             }}
           />
           <Component {...props} />
         </div>
       )
     },
-    stringify(value: T) {
+    stringify(value: T & { type: V }) {
       return variants[value.type].schema.stringify(value)
     },
-    defaultValue: variants[order[0]].schema.defaultValue,
+    defaultValue: {
+      ...variants[order[0]].schema.defaultValue,
+      type: order[0],
+    },
   }
 }
