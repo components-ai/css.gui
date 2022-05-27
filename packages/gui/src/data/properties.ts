@@ -328,8 +328,8 @@ export const properties: Record<string, PropertyData> = {
   },
   backgroundColor: {
     type: 'color',
-    defaultValue: 'tomato',
     keywords: ['currentcolor', 'transparent'],
+    defaultValue: 'tomato',
   },
   backgroundClip: {
     type: 'keyword',
@@ -358,6 +358,10 @@ export const properties: Record<string, PropertyData> = {
   },
   backgroundPosition: {
     type: 'position',
+    defaultValue: {
+        x: { value: 'center', unit: 'keyword' },
+        y: { value: 'center', unit: 'keyword' },
+    }
   },
   backgroundPositionX: {
     // TODO: Add side relative values option and multiple values option
@@ -414,14 +418,14 @@ export const properties: Record<string, PropertyData> = {
       [FontRelativeLengthUnits.Rem]: [0, 8],
       [PercentageLengthUnits.Pct]: [0.1, 100],
     },
-    defaultValue: 'cover',
+    defaultValue: { value: 'cover', unit: 'keyword' }
   },
   blockSize: {
     // TODO: Add fit-content function
     type: 'length',
     percentage: true,
     keywords: ['max-content', 'min-content', 'auto'],
-    defaultValue: 'auto',
+    defaultValue: { value: 'auto', unit: 'keyword' }
   },
   borderCollapse: {
     type: 'keyword',
