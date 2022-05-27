@@ -50,11 +50,13 @@ export function createObjectSchema<T extends object>({
     },
     // TODO custom stringify
     stringify(value) {
-      const stringified = mapValues(value, (value, key: keyof T) =>
-        fields[key].schema.stringify(value)
-      )
       // By default, join the stringified values with spaces in key order
-      return keyOrder.map((key) => stringified[key]).join(' ')
+      return keyOrder
+        .map((key) => {
+          const schema = fields[key].schema
+          return schema.stringify(value[key])
+        })
+        .join(' ')
     },
     // TODO override defaults
     defaultValue: {
@@ -111,25 +113,30 @@ interface CreateUnionSchema<V extends string, T extends object> {
 export function createUnionSchema<V extends string, T extends object>({
   variants,
   order = Object.keys(variants) as any,
-  stringify = (value) => value,
+  stringify = (variant, value) => value,
 }: CreateUnionSchema<V, T>): DataTypeSchema<T & { type: V }> {
   return {
     type(props) {
       const Component = variants[props.value.type].schema.type
       return (
         <div>
+          <Label>{props.label}</Label>
           <SelectInput
             {...getInputProps(props, 'type')}
             options={order}
             onChange={(newType) => {
               // if the type changes, reset the value to the default value of that type
-              return {
-                type: newType,
+              props.onChange({
                 ...variants[newType].schema.defaultValue,
-              }
+                type: newType,
+              })
             }}
           />
-          <Component {...props} />
+          <Component
+            {...props}
+            {...variants[props.value.type].props}
+            label={''}
+          />
         </div>
       )
     },

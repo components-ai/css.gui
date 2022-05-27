@@ -36,8 +36,8 @@ const amountFilter = createObjectSchema({
 const singleFilter = createUnionSchema({
   variants: {
     blur: { schema: blur },
-    dropShadow: { schema: dropShadow },
-    hueRotate: { schema: hueRotate },
+    'drop-shadow': { schema: dropShadow },
+    'hue-rotate': { schema: hueRotate },
     brightness: { schema: amountFilter },
     contrast: { schema: amountFilter },
     grayscale: { schema: amountFilter },
