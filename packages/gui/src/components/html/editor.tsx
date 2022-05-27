@@ -12,6 +12,7 @@ import { DEFAULT_STYLES } from './default-styles'
 import { useHtmlEditor } from './Provider'
 import { isVoidElement } from '../../lib/elements'
 import { isSamePath } from './util'
+import { TreeView } from './TreeView'
 
 const HTML_TAGS = [
   HTMLTag.P,
@@ -72,12 +73,13 @@ export function HtmlEditor({ onChange }: HtmlEditorProps) {
           minHeight: '100svh',
         }}
       >
-        <TreeNode
+        <TreeView value={value} />
+        {/* <TreeNode
           value={value}
           onSelect={setSelected}
           path={[]}
           onChange={onChange}
-        />
+        /> */}
       </div>
       {selected && (
         <NodeEditor
@@ -367,11 +369,6 @@ function AddChildButton({ onClick }: { onClick(): void }) {
       + Add child
     </button>
   )
-}
-
-interface AttributeEditorProps {
-  value: Record<string, string>
-  onChange(value: Record<string, string>): void
 }
 
 function getChildAtPath(element: HtmlNode, path: ElementPath): HtmlNode {
