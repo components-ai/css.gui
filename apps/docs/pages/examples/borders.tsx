@@ -41,7 +41,6 @@ export default function BorderImage() {
   return (
     <>
       <div
-        className="full-bleed"
         sx={{
           py: [2, 3, 4],
           px: 5,
