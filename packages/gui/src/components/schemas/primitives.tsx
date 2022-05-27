@@ -1,5 +1,12 @@
+import { bindProps } from '../../lib/components'
 import { stringifyUnit } from '../../lib/stringify'
-import { Angle, Color, Length, NumberPercentage } from '../../types/css'
+import {
+  Angle,
+  Color,
+  CSSUnitValue,
+  Length,
+  NumberPercentage,
+} from '../../types/css'
 import { AngleInput } from '../inputs/AngleInput'
 import { ColorInput } from '../inputs/ColorInput'
 import { LengthInput } from '../inputs/LengthInput'
@@ -7,37 +14,75 @@ import { NumberPercentageInput } from '../inputs/NumberPercentageInput'
 import { SelectInput } from '../inputs/SelectInput'
 import { DataTypeSchema } from './data-type'
 
-export const color: DataTypeSchema<Color> = {
-  input: ColorInput,
-  stringify: (value) => value,
-  defaultValue: 'transparent',
-}
-
-export const length: DataTypeSchema<Length> = {
-  input: LengthInput,
-  stringify: stringifyUnit as any,
-  defaultValue: { value: 0, unit: 'px' },
-}
-
-export const angle: DataTypeSchema<Angle> = {
-  input: AngleInput,
-  stringify: stringifyUnit as any,
-  defaultValue: { value: 0, unit: 'deg' },
-}
-
-export const numberPercentage: DataTypeSchema<NumberPercentage> = {
-  input: NumberPercentageInput,
-  stringify: stringifyUnit as any,
-  defaultValue: { value: 0, unit: '%' },
-}
-
-export function keyword<T extends string>(
-  options: readonly T[]
-): DataTypeSchema<T> {
-  // FIXME bind options props to SelectInput
+export function color({
+  defaultValue = 'transparent',
+}: {
+  defaultValue: Color
+}): DataTypeSchema<Color> {
   return {
-    input: SelectInput as any,
+    input: ColorInput,
     stringify: (value) => value,
-    defaultValue: options[0],
+    defaultValue,
+  }
+}
+
+export function angle({
+  defaultValue = { value: 0, unit: 'deg' },
+}: {
+  defaultValue: Angle
+}) {
+  return {
+    input: AngleInput,
+    stringify: stringifyUnit as any,
+    defaultValue,
+  }
+}
+
+export function numberPercentage({
+  defaultValue = { value: 0, unit: '%' },
+}: {
+  defaultValue: NumberPercentage
+}) {
+  return {
+    input: NumberPercentageInput,
+    stringify: stringifyUnit as any,
+    defaultValue,
+  }
+}
+
+interface LengthProps {
+  defaultValue?: Length
+  keywords?: string[]
+  number?: boolean
+  percentage?: boolean
+  flex?: boolean
+  themeValues?: (CSSUnitValue & { id: string })[]
+}
+export function length({
+  defaultValue = { value: 0, unit: 'px' },
+  ...props
+}: LengthProps) {
+  return {
+    input: bindProps(LengthInput, props),
+    stringify: stringifyUnit as any,
+    defaultValue,
+  }
+}
+
+export function lengthPercentage(props: Omit<LengthProps, 'percentage'>) {
+  return length({ ...props, percentage: true })
+}
+
+export function keyword<T extends string>({
+  keywords,
+  defaultValue = keywords[0],
+}: {
+  keywords: readonly T[]
+  defaultValue?: T
+}): DataTypeSchema<T> {
+  return {
+    input: bindProps(SelectInput, { options: keywords }),
+    stringify: (value) => value,
+    defaultValue,
   }
 }
