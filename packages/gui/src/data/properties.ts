@@ -1011,7 +1011,7 @@ export const properties: Record<string, PropertyData> = {
       'hanging',
       'text-top',
     ],
-    defaultvalue: 'auto',
+    defaultValue: 'auto',
   },
   emptyCells: {
     type: 'keyword',
@@ -2367,7 +2367,7 @@ export const properties: Record<string, PropertyData> = {
   tabSize: {
     type: 'length',
     number: true,
-    defaultvalue: 1,
+    defaultValue: 1,
   },
   tableLayout: {
     // TODO: Only have control appear when display: table
