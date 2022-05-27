@@ -161,7 +161,7 @@ export const DimensionInput = ({
           <ThemeValue
             value={themeValues.findIndex((tv) => tv.id === state.themeId) + 1}
             onChange={(newValue: number) => {
-              const themeValue = themeValues[newValue - 1]
+              const themeValue = themeValues[Math.max(0, newValue - 1)]
               dispatch({
                 type: 'CHANGED_INPUT_TO_THEME_VALUE',
                 value: themeValue?.value ?? 0,
