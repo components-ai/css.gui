@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.84
+
+### Patch Changes
+
+- 6e4b786: fixes negative value entry and NaN values
+
 ## 0.0.83
 
 ### Patch Changes
