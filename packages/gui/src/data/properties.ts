@@ -189,6 +189,7 @@ export const properties: Record<string, PropertyData> = {
   all: {
     type: 'keyword',
     keywords: [],
+    defaultValue: 'unset',
   },
   animation: {
     type: AnimationInput,
@@ -218,13 +219,13 @@ export const properties: Record<string, PropertyData> = {
   animationFillMode: {
     type: 'keyword',
     keywords: ['none', 'forwards', 'backwards', 'both'],
-    defaultValue: 'forwards',
+    defaultValue: 'none',
   },
   animationIterationCount: {
     type: 'number',
     keywords: ['infinite'],
     range: { number: [0, Infinity] },
-    defaultValue: 'infinite',
+    defaultValue: { value: 'infinite', type: 'keyword' },
   },
   animationPlayState: {
     type: 'keyword',
@@ -239,6 +240,13 @@ export const properties: Record<string, PropertyData> = {
   animationTimingFunction: {
     type: EasingFunctionPicker,
     stringify: stringifyEasingFunction,
+    defaultValue: {
+      type: 'cubic-bezier',
+      p1: 0.42,
+      p2: 0,
+      p3: .58,
+      p4: 1,
+    }
   },
   appearance: {
     type: 'keyword',
@@ -267,10 +275,28 @@ export const properties: Record<string, PropertyData> = {
     keywords: ['visible', 'hidden'],
     defaultValue: 'hidden',
   },
-  // TODO: Add defaultValue
   background: {
     type: BackgroundInput,
     stringify: stringifyBackgroundList,
+    defaultValue: [{
+      image: {
+        type: 'url',
+        arguments: ['https://source.unsplash.com/random/1920x1080'],
+      },
+      position: {
+        x: { value: 'center', unit: 'keyword' },
+        y: { value: 'center', unit: 'keyword' },
+      },
+      repeat: { x: 'no-repeat', y: 'no-repeat' },
+      size: {
+        type: 'dimensions',
+        x: { value: 100, unit: '%' },
+        y: { value: 100, unit: '%' },
+      },
+      attachment: 'fixed',
+      origin: 'border-box',
+      clip: 'border-box',
+    }],
   },
   backgroundAttachment: {
     type: 'keyword',
@@ -423,6 +449,10 @@ export const properties: Record<string, PropertyData> = {
     number: true,
     percentage: true,
     range: { number: [-1, 2000] },
+    defaultValue: {
+      value: 1,
+      unit: 'number',
+    }
   },
   // TODO this actually can only accept *one* image value, not an array
   // TODO: Add defaultValue
@@ -430,6 +460,10 @@ export const properties: Record<string, PropertyData> = {
     type: ImageSourcePicker,
     stringify: stringifyImageSource,
     label: 'Border Image',
+    defaultValue: {
+      type: 'url',
+      arguments: ['https://source.unsplash.com/random'],
+    }
   },
   // TODO this can accept multiple values
   borderImageWidth: {
@@ -517,6 +551,10 @@ export const properties: Record<string, PropertyData> = {
       [ViewportPercentageLengthUnits.Vw]: [0, 100],
       [PercentageLengthUnits.Pct]: [0.1, 100],
     },
+    defaultValue: {
+      value: 1,
+      unit: 'px',
+    }
   },
   borderRightColor: {
     type: 'color',
@@ -550,6 +588,10 @@ export const properties: Record<string, PropertyData> = {
       [ViewportPercentageLengthUnits.Vw]: [0, 100],
       [PercentageLengthUnits.Pct]: [0.1, 100],
     },
+    defaultValue: {
+      value: 1,
+      unit: 'px',
+    }
   },
   borderTopColor: {
     type: 'color',
@@ -591,11 +633,17 @@ export const properties: Record<string, PropertyData> = {
       [ViewportPercentageLengthUnits.Vw]: [0, 100],
       [PercentageLengthUnits.Pct]: [0.1, 100],
     },
+    defaultValue: {
+      value: 1,
+      unit: 'px',
+    }
   },
   borderColor: {
     type: 'color',
     keywords: ['currentcolor', 'transparent'],
+    defaultValue: '#6465ff'
   },
+  // TODO: Add defaultValue
   borderSpacing: {
     type: BorderSpacingInput,
     stringify: stringifyBorderSpacing,
@@ -627,15 +675,21 @@ export const properties: Record<string, PropertyData> = {
       [ViewportPercentageLengthUnits.Vw]: [0, 100],
       [PercentageLengthUnits.Pct]: [0.1, 100],
     },
+    defaultValue: {
+      value: 1,
+      unit: 'px',
+    }
   },
   bottom: {
     type: 'length',
     percentage: true,
     keywords: ['auto'],
+    defaultValue: { value: 'auto', unit: 'keyword' }
   },
   boxDecorationBreak: {
     type: 'keyword',
     keywords: ['slice', 'clone'],
+    defaultValue: 'initial', 
   },
   boxShadow: {
     type: BoxShadowPicker,
@@ -677,6 +731,7 @@ export const properties: Record<string, PropertyData> = {
       'avoid-region',
       'region',
     ],
+    defaultValue: 'auto',
   },
   breakBefore: {
     type: 'keyword',
@@ -696,10 +751,12 @@ export const properties: Record<string, PropertyData> = {
       'avoid-region',
       'region',
     ],
+    defaultValue: 'auto',
   },
   breakInside: {
     type: 'keyword',
     keywords: ['auto', 'avoid', 'avoid-page', 'avoid-column', 'avoid-region'],
+    defaultValue: 'auto',
   },
   captionSide: {
     type: 'keyword',
@@ -711,11 +768,12 @@ export const properties: Record<string, PropertyData> = {
       'inline-start',
       'inline-end',
     ],
+    defaultValue: 'bottom',
   },
   caretColor: {
     type: 'color',
-    defaultValue: '#6465ff',
     keywords: ['currentcolor', 'transparent'],
+    defaultValue: '#6465ff',
   },
   clear: {
     type: 'keyword',
@@ -725,11 +783,23 @@ export const properties: Record<string, PropertyData> = {
   clipPath: {
     type: ClipPathInput,
     stringify: stringifyClipPath,
+    defaultValue: {
+      shape: {
+        type: 'inset',
+        top: { value: 2, unit: 'px' },
+        right: { value: 2, unit: 'px' },
+        bottom: { value: 2, unit: 'px' },
+        left: { value: 2, unit: 'px' },
+        borderRadius: { value: 16, unit: 'px' },
+      },
+      box: 'margin-box',
+    }
   },
   clipRule: {
     // SVG
     type: 'keyword',
     keywords: ['nonzero', 'evenodd'],
+    defaultValue: 'nonzero',
   },
   color: {
     type: 'color',
@@ -749,15 +819,16 @@ export const properties: Record<string, PropertyData> = {
   columnCount: {
     type: 'integer',
     keywords: ['auto'],
+    defaultValue: 3,
   },
   columnFill: {
     type: 'keyword',
     keywords: ['auto', 'balance', 'balance-all'],
+    defaultValue: 'auto',
   },
   columnGap: {
     type: 'length',
     percentage: true,
-    defaultValue: 0,
     range: {
       [AbsoluteLengthUnits.Px]: [0, 128],
       [FontRelativeLengthUnits.Em]: [0, 8],
@@ -767,10 +838,12 @@ export const properties: Record<string, PropertyData> = {
       [PercentageLengthUnits.Pct]: [0.1, 100],
     },
     keywords: ['normal'],
+    defaultValue: { value: 0, unit: '%'} ,
   },
   columnRuleColor: {
     type: 'color',
     keywords: ['currentcolor', 'transparent'],
+    defaultValue: '#6465ff',
   },
   columnRuleStyle: {
     type: 'keyword',
@@ -786,6 +859,7 @@ export const properties: Record<string, PropertyData> = {
       'inset',
       'outset',
     ],
+    defaultValue: 'solid',
   },
   columnRuleWidth: {
     type: 'length',
@@ -797,10 +871,15 @@ export const properties: Record<string, PropertyData> = {
       [PercentageLengthUnits.Pct]: [0.1, 100],
     },
     keywords: ['thin', 'medium', 'thick'],
+    defaultValue: {
+      value: 8,
+      unit: 'px',
+    }
   },
   columnSpan: {
     type: 'keyword',
     keywords: ['none', 'all'],
+    defaultValue: 'all',
   },
   columnWidth: {
     type: 'length',
@@ -812,6 +891,10 @@ export const properties: Record<string, PropertyData> = {
       [PercentageLengthUnits.Pct]: [0.1, 100],
     },
     keywords: ['auto'],
+    defaultValue: {
+      value: 'auto',
+      unit: 'keyword',
+    }
   },
   contain: {
     type: 'keyword',
@@ -828,6 +911,7 @@ export const properties: Record<string, PropertyData> = {
       'size layout paint style',
       'size layout paint style content',
     ],
+    defaultValue: 'none',
   },
   contentVisibility: {
     type: 'keyword',
@@ -923,18 +1007,22 @@ export const properties: Record<string, PropertyData> = {
       'hanging',
       'text-top',
     ],
+    defaultvalue: 'auto',
   },
   emptyCells: {
     type: 'keyword',
     keywords: ['show', 'hide'],
+    defaultValue: 'hide',
   },
   fill: {
     type: 'color',
     keywords: ['none', 'context-fill', 'context-stroke'],
+    defaultValue: '#6465ff',
   },
   filter: {
     type: FilterPicker,
     stringify: stringifyFilter,
+    defaultValue: [{ type: 'sepia', amount: { value: 50, unit: '%' } }],
   },
   flexBasis: {
     type: 'length',
@@ -953,7 +1041,7 @@ export const properties: Record<string, PropertyData> = {
       'fit-content',
       'content',
     ],
-    defaultValue: 'auto',
+    defaultValue: { value: 'auto', unit: 'keyword', },
   },
   flexDirection: {
     type: 'keyword',
