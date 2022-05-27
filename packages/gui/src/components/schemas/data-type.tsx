@@ -111,7 +111,7 @@ interface CreateUnionSchema<V extends string, T extends object> {
 export function createUnionSchema<V extends string, T extends object>({
   variants,
   order = Object.keys(variants) as any,
-  stringify,
+  stringify = (value) => value,
 }: CreateUnionSchema<V, T>): DataTypeSchema<T & { type: V }> {
   return {
     type(props) {
@@ -134,7 +134,8 @@ export function createUnionSchema<V extends string, T extends object>({
       )
     },
     stringify(value: T & { type: V }) {
-      return variants[value.type].schema.stringify(value)
+      const type = value.type
+      return stringify(type, variants[type].schema.stringify(value))
     },
     defaultValue: {
       ...variants[order[0]].schema.defaultValue,
