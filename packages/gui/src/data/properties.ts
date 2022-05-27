@@ -2261,9 +2261,12 @@ export const properties: Record<string, PropertyData> = {
     ],
     defaultValue: 'none',
   },
-  // TODO: Add defaultValue
   shapeImageThreshold: {
     type: NumberPercentageInput,
+    defaultValue: {
+      value: 0,
+      unit: '%'
+    }
   },
   shapeMargin: {
     type: 'length',
@@ -2273,10 +2276,21 @@ export const properties: Record<string, PropertyData> = {
       unit: 'px',
     },
   },
-  // TODO: Add defaultValue
   shapeOutside: {
     type: ShapeOutsideInput,
     stringify: stringifyShapeOutside,
+    defaultValue: {
+      type: 'shape',
+      shape: {
+        type: 'inset',
+        top: { value: 2, unit: 'px' },
+        right: { value: 2, unit: 'px' },
+        bottom: { value: 2, unit: 'px' },
+        left: { value: 2, unit: 'px' },
+        borderRadius: { value: 16, unit: 'px' },
+      },
+      box: 'margin-box',
+    }
   },
   stroke: {
     // TODO URL <color> values
@@ -2303,7 +2317,7 @@ export const properties: Record<string, PropertyData> = {
     type: 'length',
     percentage: true,
     keywords: ['none'],
-    defaultValue: 'none',
+    defaultValue: { value: 'none', unit: 'keyword' },
   },
   strokeDashoffset: {
     type: 'number',
@@ -2324,8 +2338,8 @@ export const properties: Record<string, PropertyData> = {
   },
   strokeMiterlimit: {
     type: 'number',
-    defaultValue: 4,
     range: { number: [1, 256] }, // 256 seems reasonable but can adjust +/- if needed
+    defaultValue: 4,
   },
   strokeOpacity: {
     type: 'percentage',
@@ -2349,6 +2363,7 @@ export const properties: Record<string, PropertyData> = {
   tabSize: {
     type: 'length',
     number: true,
+    defaultvalue: 1,
   },
   tableLayout: {
     // TODO: Only have control appear when display: table
@@ -2626,13 +2641,29 @@ export const properties: Record<string, PropertyData> = {
     defaultValue: [DEFAULT_TRANSITION],
   },
   // TODO array of time values
-  transitionDelay: { type: 'time' },
-  transitionDuration: { type: 'time' },
+  transitionDelay: { 
+    type: 'time',
+    defaultValue: {
+      value: 0, 
+      unit: 'ms',
+    }
+  },
+  transitionDuration: { 
+    type: 'time',
+    defaultValue: { value: 250, unit: 'ms' },
+  },
   // TODO this should be a combobox
-  transitionProperty: { type: 'keyword', keywords: ANIMATABLE_PROPERTIES },
+  transitionProperty: { type: 'keyword', keywords: ANIMATABLE_PROPERTIES, defaultValue: 'all' },
   transitionTimingFunction: {
     type: EasingFunctionPicker,
     stringify: stringifyEasingFunction,
+    defaultValue: {
+      type: 'cubic-bezier',
+      p1: 0.1,
+      p2: 0.2,
+      p3: 0.9,
+      p4: 0.75,
+    },
   },
   unicodeBidi: {
     type: 'keyword',
@@ -2670,7 +2701,10 @@ export const properties: Record<string, PropertyData> = {
       'top',
       'bottom',
     ],
-    defaultValue: 'baseline',
+    defaultValue: { 
+      value: 'baseline',
+      unit: 'keyword'
+    }
   },
   visibility: {
     type: 'keyword',
