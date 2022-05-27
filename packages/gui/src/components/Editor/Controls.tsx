@@ -293,14 +293,14 @@ const FieldsetControl = ({ field, property }: FieldsetControlProps) => {
 
 function getInputComponent(property: string) {
   const propertyData = properties[property]
-  const type = propertyData.type
-  if (typeof type === 'function') {
-    return type
+  const input = propertyData.input
+  if (typeof input === 'function') {
+    return input
   }
-  if (isPrimitive(type)) {
+  if (isPrimitive(input)) {
     return PrimitiveInput
   }
-  switch (type) {
+  switch (input) {
     case 'multiLength':
       return MultidimensionLengthInput
     case 'position':

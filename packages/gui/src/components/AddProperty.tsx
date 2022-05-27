@@ -27,7 +27,7 @@ export const AddPropertyControl = ({
   // @ts-ignore
   const allProperties: string[] = Object.entries(propertyList)
     .map(([name, data]) => {
-      return data.type !== 'none' ? name : null
+      return data.input !== 'none' ? name : null
     })
     .filter(Boolean)
 
@@ -84,7 +84,7 @@ export const AddPropertyControl = ({
   return (
     <div {...getComboboxProps()}>
       <Label htmlFor={id} sx={{ display: 'block' }}>
-        <span sx={{ display: 'block', pb: 1,}}>{label}</span>
+        <span sx={{ display: 'block', pb: 1 }}>{label}</span>
         <input
           type="text"
           value={filterValue}

@@ -6,7 +6,7 @@ export function getDefaultValue(property: string) {
   if (propertyDefinition.defaultValue) {
     return propertyDefinition.defaultValue
   }
-  switch (propertyDefinition.type) {
+  switch (propertyDefinition.input) {
     case 'keyword':
       return { value: propertyDefinition.keywords![0], unit: 'keyword' }
     case 'number':

@@ -15,13 +15,13 @@ import { StringInput } from './StringInput'
 import { TimeInput } from './TimeInput'
 
 interface Props extends EditorPropsWithLabel<any> {
-  type: Primitive
+  input: Primitive
   // TODO more robustly type the possible props of primitive inputs
   [prop: string]: any
 }
 
-export function PrimitiveInput({ type, ...props }: Props) {
-  const Component = getPrimitiveInput(type)
+export function PrimitiveInput({ input, ...props }: Props) {
+  const Component = getPrimitiveInput(input)
   return <Component {...(props as any)} />
 }
 
