@@ -2,6 +2,7 @@ import { mapValues } from 'lodash-es'
 import { ComponentType } from 'react'
 import { getInputProps } from '../../lib/util'
 import { EditorPropsWithLabel } from '../../types/editor'
+import { SelectInput } from '../inputs/SelectInput'
 import Layers from '../Layers'
 import { Label } from '../primitives'
 
@@ -93,5 +94,43 @@ export function createArraySchema<T>({
     },
     stringify,
     defaultValue: [itemSchema.defaultValue],
+  }
+}
+
+interface CreateUnionSchema<V extends string, T extends { type: V }> {
+  variants: Record<
+    V,
+    {
+      schema: DataTypeSchema<T>
+      props: Record<string, any>
+    }
+  >
+  order?: V[]
+}
+export function createUnionSchema<V extends string, T extends { type: V }>({
+  variants,
+  order = Object.keys(variants) as any,
+}: CreateUnionSchema<V, T>): DataTypeSchema<T> {
+  return {
+    type(props) {
+      const Component = variants[props.value.type].schema.type
+      return (
+        <div>
+          <SelectInput
+            {...getInputProps(props, 'type')}
+            options={order}
+            onChange={(newType) => {
+              // if the type changes, reset the value to the default value of that type
+              return variants[newType].schema.defaultValue
+            }}
+          />
+          <Component {...props} />
+        </div>
+      )
+    },
+    stringify(value: T) {
+      return variants[value.type].schema.stringify(value)
+    },
+    defaultValue: variants[order[0]].schema.defaultValue,
   }
 }
