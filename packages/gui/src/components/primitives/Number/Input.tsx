@@ -19,7 +19,9 @@ export const DraggableInput = ({
   max,
 }: DraggableLabelProps) => {
   const [dragging, setDragging] = React.useState<boolean>(false)
-  const [internalValue, setInternalValue] = React.useState<number | string>(value)
+  const [internalValue, setInternalValue] = React.useState<number | string>(
+    value
+  )
   const initialValue = React.useRef<number>(value)
 
   const bind = useDrag(
@@ -67,8 +69,8 @@ export const DraggableInput = ({
 
         setInternalValue(
           newValue || newValue === 0 
-          ? newValue 
-          : inputValue === '-' ? '-' : ''
+            ? newValue 
+            : inputValue === '-' ? '-' : ''
         )
         onUpdate(newValue || 0)
       }}
