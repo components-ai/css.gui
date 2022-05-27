@@ -90,7 +90,7 @@ export function Demo() {
           </styled.p>
         </section>
       </div>
-      <div className="full-bleed">
+      <div>
         <pre
           sx={{
             p: [2, 3, 5],

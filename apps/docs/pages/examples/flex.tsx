@@ -88,7 +88,7 @@ export default function TextDecoration() {
           </styled.div>
         </div>
       </div>
-      <div className="full-bleed">
+      <div>
         <pre
           sx={{
             p: [2, 3, 4],

@@ -26,7 +26,17 @@ const HTML_TAGS = [
   HTMLTag.H5,
   HTMLTag.H6,
   HTMLTag.Span,
+  HTMLTag.Main,
   HTMLTag.Div,
+  HTMLTag.Section,
+  HTMLTag.Article,
+  HTMLTag.Header,
+  HTMLTag.Nav,
+  HTMLTag.Footer,
+  HTMLTag.Aside,
+  HTMLTag.Dl,
+  HTMLTag.Dt,
+  HTMLTag.Dd,
 ]
 
 interface HtmlEditorProps {
@@ -44,6 +54,7 @@ export function HtmlEditor({ onChange }: HtmlEditorProps) {
       sx={{
         display: 'flex',
         width: 'auto',
+        height: '100%',
       }}
     >
       <div
@@ -93,31 +104,31 @@ interface TagEditorProps extends EditorProps {
 }
 
 function NodeEditor({ value, onChange, onRemove }: TagEditorProps) {
-  const nodeType = typeof value === 'string' ? 'text' : 'tag'
+  const nodeType = value.type === 'text' ? 'text' : 'tag'
   return (
     <div
       sx={{
         resize: 'horizontal',
         overflowX: 'auto',
-        p: 3,
         width: '320px',
         borderRightWidth: '1px',
         borderRightStyle: 'solid',
         borderBottomWidth: '1px',
         borderBottomStyle: 'solid',
         borderColor: 'border',
-        minHeight: '100svh',
+        minHeight: '100%',
       }}
     >
-      <div sx={{ mb: 2, display: 'flex', alignItems: 'flex-end' }}>
+      <div sx={{ mb: 2, display: 'flex', alignItems: 'flex-end', px: 3, pt: 3, }}>
         <SelectInput
           label="Type"
           value={nodeType}
           onChange={(value) => {
             if (value === 'text') {
-              onChange('')
+              onChange({ type: 'text', value: '' })
             } else {
               onChange({
+                type: 'element',
                 tagName: 'div',
               })
             }
@@ -136,12 +147,24 @@ function NodeEditor({ value, onChange, onRemove }: TagEditorProps) {
 }
 
 function NodeSwitch({ value, onChange }: EditorProps) {
-  if (typeof value === 'string') {
+  if (value.type === 'text') {
     return (
-      <div>
+      <div sx={{ px: 3 }}>
         <Label>
-          Content
-          <input value={value} onChange={(e) => onChange(e.target.value)} />
+          <span sx={{ display: 'block' }}>Content</span>
+          <input
+            type='text'
+            sx={{ 
+              width: '100%'
+            }}
+            value={value.value}
+            onChange={(e) =>
+              onChange({
+                ...value,
+                value: e.target.value,
+              })
+            }
+          />
         </Label>
       </div>
     )
@@ -154,10 +177,10 @@ function NodeSwitch({ value, onChange }: EditorProps) {
           borderBottomWidth: '1px',
           borderBottomStyle: 'solid',
           borderBottomColor: 'border',
-          mb: 3,
+          pb: 3,
         }}
       >
-        <div sx={{ mb: 2 }}>
+        <div sx={{ mb: 2, px: 3,  }}>
           <Label>Tag name</Label>{' '}
           <Combobox
             onFilterItems={(filterValue) => {
@@ -182,11 +205,11 @@ function NodeSwitch({ value, onChange }: EditorProps) {
             onChange={(newAttributes) =>
               onChange({ ...value, attributes: newAttributes })
             }
-            element={value.tagName}
+            element={value.tagName as string}
           />
         </div>
       </article>
-      <div>
+      <div sx={{ pt: 3, px: 3  }}>
         <Label> 🎨 Styles</Label>
         <div sx={{ mt: 2 }}>
           <Editor
@@ -210,7 +233,7 @@ function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
   const [open, setOpen] = useState(true)
   const isSelected = isSamePath(path, selected)
 
-  if (typeof value === 'string') {
+  if (value.type === 'text') {
     return (
       <div sx={{ cursor: 'default' }}>
         <button
@@ -222,7 +245,7 @@ function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
           }}
           onClick={() => onSelect(path)}
         >
-          "{value}"
+          "{value.value}"
         </button>
       </div>
     )
@@ -241,11 +264,11 @@ function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
       onClick={() => onSelect(path)}
     >
       &lt;{value.tagName}
-      {!open || isVoidElement(value.tagName) ? ' /' : null}&gt;
+      {!open || isVoidElement(value.tagName as string) ? ' /' : null}&gt;
     </button>
   )
 
-  if (isVoidElement(value.tagName)) {
+  if (isVoidElement(value.tagName as string)) {
     return tagButton
   }
 
@@ -276,7 +299,12 @@ function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
               <Fragment key={i}>
                 <AddChildButton
                   onClick={() => {
-                    onChange(addChildAtPath(value, [i], ''))
+                    onChange(
+                      addChildAtPath(value, [i], {
+                        type: 'text',
+                        value: '',
+                      })
+                    )
                     onSelect(null)
                   }}
                 />
@@ -296,7 +324,12 @@ function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
           })}
           <AddChildButton
             onClick={() => {
-              onChange(addChildAtPath(value, [value.children?.length ?? 0], ''))
+              onChange(
+                addChildAtPath(value, [value.children?.length ?? 0], {
+                  type: 'text',
+                  value: '',
+                })
+              )
               onSelect(null)
             }}
           />
@@ -318,7 +351,7 @@ function AddChildButton({ onClick }: { onClick(): void }) {
         border: 'none',
         textAlign: 'left',
         color: 'transparent',
-        fontSize: '0.75rem',
+        fontSize: 0,
         height: '0.25rem',
         m: 0,
         p: 0,

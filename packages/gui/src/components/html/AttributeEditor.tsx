@@ -51,30 +51,35 @@ export const AttributeEditor = ({
 
   return (
     <div>
+      <div sx={{ px: 3, }}>
+        <Label>Add attribute</Label>
+        <Combobox
+          onFilterItems={handleFilterItems}
+          onItemSelected={handleItemSelected}
+          items={ATTRIBUTE_MAP[element]}
+          clearOnSelect
+        />
+      </div>
       {/* @ts-ignore */}
       {Object.entries(value).map(([key, attrValue]) => {
         return (
-          <div sx={{ display: 'flex', alignItems: 'center', gap: '.5rem' }}>
+          <div sx={{ px: 3, pt: 3 }}>
             <Label>
-              {key}
-              <input
-                value={attrValue}
-                onChange={(e) => onChange({ ...value, [key]: e.target.value })}
-              />
+              <span sx={{display: 'block', width: '100%'}}>{key}</span>
+              <div sx={{ display: 'flex', alignItems: 'center', gap: '.5rem', }}>
+                <input
+                  value={attrValue}
+                  onChange={(e) => onChange({ ...value, [key]: e.target.value })}
+                />
+                <IconButton onClick={() => handleItemRemoved(key)}>
+                  <X size={14} strokeWidth={3} />
+                </IconButton>
+              </div>
             </Label>
-            <IconButton onClick={() => handleItemRemoved(key)}>
-              <X size={14} strokeWidth={3} />
-            </IconButton>
           </div>
         )
       })}
-      <Label>Add Attribute</Label>
-      <Combobox
-        onFilterItems={handleFilterItems}
-        onItemSelected={handleItemSelected}
-        items={ATTRIBUTE_MAP[element]}
-        clearOnSelect
-      />
+      
     </div>
   )
 }

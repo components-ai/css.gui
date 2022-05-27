@@ -8,38 +8,36 @@ import { SelectInput } from '../inputs/SelectInput'
 import { DataTypeSchema } from './data-type'
 
 export const color: DataTypeSchema<Color> = {
-  type: ColorInput,
+  input: ColorInput,
   stringify: (value) => value,
   defaultValue: 'transparent',
 }
 
 export const length: DataTypeSchema<Length> = {
-  type: LengthInput,
+  input: LengthInput,
   stringify: stringifyUnit as any,
   defaultValue: { value: 0, unit: 'px' },
 }
 
 export const angle: DataTypeSchema<Angle> = {
-  type: AngleInput,
+  input: AngleInput,
   stringify: stringifyUnit as any,
   defaultValue: { value: 0, unit: 'deg' },
 }
 
 export const numberPercentage: DataTypeSchema<NumberPercentage> = {
-  type: NumberPercentageInput,
+  input: NumberPercentageInput,
   stringify: stringifyUnit as any,
   defaultValue: { value: 0, unit: '%' },
 }
 
-export function keywordSchema<T extends string>(
+export function keyword<T extends string>(
   options: readonly T[]
-): { schema: DataTypeSchema<T>; props: any } {
+): DataTypeSchema<T> {
+  // FIXME bind options props to SelectInput
   return {
-    schema: {
-      type: SelectInput as any,
-      stringify: (value) => value,
-      defaultValue: options[0],
-    },
-    props: { options },
+    input: SelectInput as any,
+    stringify: (value) => value,
+    defaultValue: options[0],
   }
 }

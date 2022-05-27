@@ -128,7 +128,11 @@ export default function ColorPicker({
           </div>
         </div>
         <Tabs.Content value="picker">
-          <ValuePicker value={value} onChange={onChange} />
+          <ValuePicker
+            value={value}
+            onChange={onChange}
+            theme={theme}
+          />
         </Tabs.Content>
         {!hideSystemColors && (
           <Tabs.Content value="system">

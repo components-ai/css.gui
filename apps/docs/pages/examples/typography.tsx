@@ -129,7 +129,7 @@ export default function Typography() {
             </div>
             </>
           </Editor>
-      <div className="full-bleed">
+      <div>
         <pre
           sx={{
             p: [2, 3, 4],

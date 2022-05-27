@@ -1,12 +1,14 @@
 export interface ElementData {
-  tagName: string
+  type: 'element' | 'text'
+  tagName?: string
   attributes?: Record<string, string>
   // `style` is an attribute, but we treat it specially for CSS.gui
   style?: Record<string, any>
+  value?: string
   children?: HtmlNode[]
 }
 
-export type HtmlNode = ElementData | string
+export type HtmlNode = ElementData
 export type ElementPath = number[]
 
 export const enum HTMLTag {

@@ -7,17 +7,14 @@ import Layers from '../Layers'
 import { Label } from '../primitives'
 
 export interface DataTypeSchema<T> {
-  type: ComponentType<EditorPropsWithLabel<T>>
+  input: ComponentType<EditorPropsWithLabel<T>>
   stringify(value: T): string
   defaultValue: T
 }
 
 interface CreateObjectSchema<T extends object> {
   fields: {
-    [Property in keyof T]: {
-      schema: DataTypeSchema<T[Property]>
-      props?: Record<string, any>
-    }
+    [Property in keyof T]: DataTypeSchema<T[Property]>
   }
   // component?: ComponentType
   keyOrder?: (keyof T)[]
@@ -32,17 +29,15 @@ export function createObjectSchema<T extends object>({
   defaultValue,
 }: CreateObjectSchema<T>): DataTypeSchema<T> {
   return {
-    type(props) {
+    input(props) {
       return (
         <div>
           <Label>{props.label}</Label>
           <div sx={{ display: 'grid', gap: 2 }}>
             {keyOrder.map((key) => {
-              const { schema, props: componentProps = {} } = fields[key]
-              const Component = schema.type
-              return (
-                <Component {...getInputProps(props, key)} {...componentProps} />
-              )
+              const schema = fields[key]
+              const Component = schema.input
+              return <Component {...getInputProps(props, key)} />
             })}
           </div>
         </div>
@@ -53,14 +48,14 @@ export function createObjectSchema<T extends object>({
       // By default, join the stringified values with spaces in key order
       return keyOrder
         .map((key) => {
-          const schema = fields[key].schema
+          const schema = fields[key]
           return schema.stringify(value[key])
         })
         .join(' ')
     },
     // TODO override defaults
     defaultValue: {
-      ...mapValues(fields, (field) => field.schema.defaultValue),
+      ...mapValues(fields, (schema) => schema.defaultValue),
       ...defaultValue,
     } as any, // IDK why the typing doesn't work,
   }
@@ -83,13 +78,13 @@ export function createArraySchema<T>({
   }
 
   return {
-    type(props) {
+    input(props) {
       return (
         <Layers
           {...props}
           newItem={() => itemSchema.defaultValue}
           stringify={stringify}
-          content={itemSchema.type as any}
+          content={itemSchema.input as any}
           thumbnail={thumbnail}
         />
       )
@@ -116,8 +111,8 @@ export function createUnionSchema<V extends string, T extends object>({
   stringify = (variant, value) => value,
 }: CreateUnionSchema<V, T>): DataTypeSchema<T & { type: V }> {
   return {
-    type(props) {
-      const Component = variants[props.value.type].schema.type
+    input(props) {
+      const Component = variants[props.value.type].schema.input
       return (
         <div>
           <Label>{props.label}</Label>

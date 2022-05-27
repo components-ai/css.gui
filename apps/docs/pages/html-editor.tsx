@@ -28,10 +28,20 @@ const initialValue: any = {
       attributes: {},
       style: {
         color: 'primary',
-        fontSize: {
+        fontSize: [
+        {
+          value: 4,
+          unit: 'rem',
+        },
+        {
+          value: 6,
+          unit: 'rem',
+        },
+        {
           value: 10,
           unit: 'rem',
         },
+        ],
         fontWeight: 900,
         fontFamily: 'Inter',
         letterSpacing: { value: -8, unit: 'px' },
@@ -48,7 +58,7 @@ const initialValue: any = {
           unit: 'number',
         },
       },
-      children: ['CSS.GUI'],
+      children: [{ type: 'text', value: 'CSS.GUI' }],
     },
     {
       tagName: 'h2',
@@ -72,7 +82,11 @@ const initialValue: any = {
         },
       },
       children: [
-        'Quickly build components with custom styling panels. No coding required.',
+        {
+          type: 'text',
+          value:
+            'Quickly build components with custom styling panels. No coding required.',
+        },
       ],
     },
     {
@@ -89,7 +103,10 @@ const initialValue: any = {
         },
       },
       children: [
-        'Click anywhere on the canvas to start. Go ahead. Click away.',
+        {
+          type: 'text',
+          value: 'Click anywhere on the canvas to start. Go ahead. Click away.',
+        },
       ],
     },
     {
@@ -140,7 +157,12 @@ const initialValue: any = {
         },
       },
       tagName: 'a',
-      children: ['Primary CTA'],
+      children: [
+        {
+          type: 'text',
+          value: 'Primary CTA',
+        },
+      ],
     },
     {
       attributes: { href: 'https://components.ai' },
@@ -182,7 +204,12 @@ const initialValue: any = {
         },
       },
       tagName: 'a',
-      children: ['Secondary link'],
+      children: [
+        {
+          type: 'text',
+          value: 'Secondary link',
+        },
+      ],
     },
   ],
 }
@@ -191,13 +218,25 @@ export default function HtmlEditorExample() {
   const [html, setHtml] = useState(initialValue)
 
   return (
-    <div sx={{ display: 'flex' }}>
       <HtmlEditorProvider value={html}>
-        <HtmlEditor onChange={setHtml} />
-        <div sx={{ width: '100%' }}>
-          <HtmlRenderer value={html} />
+        <div sx={{ 
+          display: 'grid', 
+          gridTemplateAreas: '"nav content"',
+          gridTemplateColumns: 'auto 1fr',
+          gridTemplateRows: 'auto',
+          height: 'calc(100vh - 64px)',
+          }}>
+            <div sx={{ 
+              gridArea: 'nav',
+              maxheight: 'calc(100vh - 64px)',
+              overflow: 'auto', 
+            }}>
+              <HtmlEditor onChange={setHtml} />
+            </div>
+            <div sx={{ overflow: 'auto',  width: '100%', gridArea: 'content', }}>
+              <HtmlRenderer value={html} />
+            </div>
         </div>
       </HtmlEditorProvider>
-    </div>
   )
 }

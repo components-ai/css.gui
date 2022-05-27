@@ -1,14 +1,14 @@
-import { HTMLTag } from "./types";
+import { HTMLTag } from './types'
 
 export const DEFAULT_STYLES: Record<string, any> = {
-  [HTMLTag.Button]: { 
+  [HTMLTag.Button]: {
     padding: { value: 16, unit: 'px' },
     borderRadius: { value: 5, unit: 'px' },
     display: 'block',
-    borderStyle: 'none'
+    borderStyle: 'none',
   },
-  [HTMLTag.A]: {  },
-  [HTMLTag.Input]: { },
+  [HTMLTag.A]: {},
+  [HTMLTag.Input]: {},
   [HTMLTag.H1]: { textAlign: 'left' },
   [HTMLTag.H2]: { textAlign: 'left' },
   [HTMLTag.H3]: { textAlign: 'left' },

@@ -34,7 +34,6 @@ export default function TextDecoration() {
   return (
     <>
       <div
-        className="full-bleed"
         sx={{
           display: 'flex',
           py: [2, 3, 4],
@@ -80,7 +79,7 @@ export default function TextDecoration() {
           </styled.p>
         </div>
       </div>
-      <div className="full-bleed">
+      <div>
         <pre
           sx={{
             p: [2, 3, 4],

@@ -1,5 +1,37 @@
 # @compai/css-gui
 
+## 0.0.85
+
+### Patch Changes
+
+- 95aec83: Only wrap elements in span when in canvas
+
+## 0.0.84
+
+### Patch Changes
+
+- 6e4b786: fixes negative value entry and NaN values
+
+## 0.0.83
+
+### Patch Changes
+
+- 2f746c0: New default values
+- f6b2ab6: Adds additional default values
+
+## 0.0.82
+
+### Patch Changes
+
+- 1b14e3b: Adds theme preview picker to color popover
+- dd9fff9: Fix tree view
+
+## 0.0.81
+
+### Patch Changes
+
+- 26e8157: Use text node rather than string
+
 ## 0.0.80
 
 ### Patch Changes

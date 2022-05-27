@@ -1,3 +1,4 @@
+import { Fragment, HTMLAttributes } from 'react'
 import { toCSSObject } from '../../lib'
 import { ElementData, ElementPath } from './types'
 import { HTMLFontTags } from './FontTags'
@@ -8,12 +9,13 @@ import { isSamePath } from './util'
 interface HtmlRendererProps {
   value: ElementData
   path?: ElementPath
+  canvas?: boolean
 }
-export function HtmlRenderer({ value }: HtmlRendererProps) {
+export function HtmlRenderer({ value, canvas = true }: HtmlRendererProps) {
   return (
     <>
       <HTMLFontTags htmlTree={value} />
-      <ElementRenderer value={value} path={[] as ElementPath} />
+      <ElementRenderer value={value} canvas={canvas} path={[] as ElementPath} />
     </>
   )
 }
@@ -21,12 +23,14 @@ export function HtmlRenderer({ value }: HtmlRendererProps) {
 interface ElementRendererProps {
   value: ElementData
   path: ElementPath
+  canvas: boolean
 }
-function ElementRenderer({ value, path }: ElementRendererProps) {
+function ElementRenderer({ value, canvas, path }: ElementRendererProps) {
   const { selected, setSelected } = useHtmlEditor()
   const { attributes = {}, style = {}, children = [] } = value
   const Tag: any = value.tagName || 'div'
 
+  const Wrap = canvas ? ElementWrap : Fragment
   const sx = toCSSObject(style)
 
   if (isSamePath(path, selected)) {
@@ -36,7 +40,7 @@ function ElementRenderer({ value, path }: ElementRendererProps) {
   }
 
   const props = {
-    ...cleanAttributes(attributes),
+    ...(canvas ? cleanAttributes(attributes) : attributes),
     sx,
     onClick: (e: MouseEvent) => {
       e.stopPropagation()
@@ -45,20 +49,37 @@ function ElementRenderer({ value, path }: ElementRendererProps) {
   }
 
   if (isVoidElement(Tag)) {
-    return <Tag {...props} />
+    return (
+      <Wrap>
+        <Tag {...props} />
+      </Wrap>
+    )
   }
 
   return (
-    <span sx={{ cursor: 'default', a: { cursor: 'default' } }}>
+    <Wrap>
       <Tag {...props}>
         {children.map((child, i) => {
-          if (typeof child === 'string') {
-            return child
+          if (child.type === 'text') {
+            return child.value
           }
-          return <ElementRenderer key={i} value={child} path={[...path, i]} />
+          return (
+            <ElementRenderer
+              key={i}
+              value={child}
+              canvas={canvas}
+              path={[...path, i]}
+            />
+          )
         })}
       </Tag>
-    </span>
+    </Wrap>
+  )
+}
+
+function ElementWrap(props: HTMLAttributes<HTMLSpanElement>) {
+  return (
+    <span sx={{ cursor: 'default', a: { cursor: 'default' } }} {...props} />
   )
 }
 
