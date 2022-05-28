@@ -7,44 +7,44 @@ import { angle, color, length, numberPercentage } from './primitives'
 
 const blur = createObjectSchema({
   fields: {
-    radius: { schema: length },
+    radius: length(),
   },
 })
 
 const dropShadow = createObjectSchema({
   fields: {
-    color: { schema: color },
-    offsetX: { schema: length },
-    offsetY: { schema: length },
-    blurRadius: { schema: length },
+    color: color(),
+    offsetX: length(),
+    offsetY: length(),
+    blurRadius: length(),
   },
 })
 
 const hueRotate = createObjectSchema({
   fields: {
-    angle: { schema: angle },
+    angle: angle(),
   },
 })
 
 const amountFilter = createObjectSchema({
   fields: {
-    amount: { schema: numberPercentage },
+    amount: numberPercentage(),
   },
 })
 
 // TODO URL schema
 const singleFilter = createUnionSchema({
   variants: {
-    blur: { schema: blur },
-    'drop-shadow': { schema: dropShadow },
-    'hue-rotate': { schema: hueRotate },
-    brightness: { schema: amountFilter },
-    contrast: { schema: amountFilter },
-    grayscale: { schema: amountFilter },
-    invert: { schema: amountFilter },
-    opacity: { schema: amountFilter },
-    saturate: { schema: amountFilter },
-    sepia: { schema: amountFilter },
+    blur: blur,
+    'drop-shadow': dropShadow,
+    'hue-rotate': hueRotate,
+    brightness: amountFilter,
+    contrast: amountFilter,
+    grayscale: amountFilter,
+    invert: amountFilter,
+    opacity: amountFilter,
+    saturate: amountFilter,
+    sepia: amountFilter,
   },
   stringify(type, value) {
     return `${type}(${value})`

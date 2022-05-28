@@ -17,8 +17,8 @@ import { DataTypeSchema } from './data-type'
 export function color({
   defaultValue = 'transparent',
 }: {
-  defaultValue: Color
-}): DataTypeSchema<Color> {
+  defaultValue?: Color
+} = {}): DataTypeSchema<Color> {
   return {
     input: ColorInput,
     stringify: (value) => value,
@@ -29,8 +29,8 @@ export function color({
 export function angle({
   defaultValue = { value: 0, unit: 'deg' },
 }: {
-  defaultValue: Angle
-}) {
+  defaultValue?: Angle
+} = {}) {
   return {
     input: AngleInput,
     stringify: stringifyUnit as any,
@@ -41,8 +41,8 @@ export function angle({
 export function numberPercentage({
   defaultValue = { value: 0, unit: '%' },
 }: {
-  defaultValue: NumberPercentage
-}) {
+  defaultValue?: NumberPercentage
+} = {}) {
   return {
     input: NumberPercentageInput,
     stringify: stringifyUnit as any,
@@ -61,7 +61,7 @@ interface LengthProps {
 export function length({
   defaultValue = { value: 0, unit: 'px' },
   ...props
-}: LengthProps) {
+}: LengthProps = {}) {
   return {
     input: bindProps(LengthInput, props),
     stringify: stringifyUnit as any,
@@ -69,19 +69,20 @@ export function length({
   }
 }
 
-export function lengthPercentage(props: Omit<LengthProps, 'percentage'>) {
+export function lengthPercentage(props: Omit<LengthProps, 'percentage'> = {}) {
   return length({ ...props, percentage: true })
 }
 
-export function keyword<T extends string>({
-  keywords,
-  defaultValue = keywords[0],
-}: {
-  keywords: readonly T[]
-  defaultValue?: T
-}): DataTypeSchema<T> {
+export function keyword<T extends string>(
+  options: readonly T[],
+  {
+    defaultValue = options[0],
+  }: {
+    defaultValue?: T
+  } = {}
+): DataTypeSchema<T> {
   return {
-    input: bindProps(SelectInput, { options: keywords }),
+    input: bindProps(SelectInput, { options: options }),
     stringify: (value) => value,
     defaultValue,
   }

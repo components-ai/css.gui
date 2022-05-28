@@ -13,11 +13,7 @@ import {
   PercentageLengthUnits,
 } from '../types/css'
 import { ANIMATABLE_PROPERTIES } from './animatable'
-import {
-  textDecoration,
-  textDecorationLines,
-  textDecorationStyles,
-} from '../components/schemas/text-decoration'
+import * as textDecorationProperties from '../components/schemas/text-decoration'
 import { UnitSteps } from '../lib'
 import ImageSourcePicker from '../components/inputs/ImageSource/field'
 import { stringifyImageSource } from '../components/inputs/ImageSource/stringify'
@@ -2420,27 +2416,7 @@ export const properties: Record<string, PropertyData> = {
     keywords: ['none', 'all'],
     defaultValue: 'none',
   },
-  textDecoration,
-  textDecorationColor: {
-    input: 'color',
-    keywords: ['currentcolor', 'transparent'],
-    defaultValue: '#6465ff',
-  },
-  textDecorationLine: {
-    input: 'keyword',
-    keywords: textDecorationLines,
-    defaultValue: 'underline',
-  },
-  textDecorationThickness: {
-    //TODO: Add value ranges
-    input: 'length',
-    percentage: true,
-    keywords: ['auto', 'from-font'],
-    defaultValue: {
-      value: 4,
-      unit: 'px',
-    },
-  },
+  ...textDecorationProperties,
   textDecorationSkip: {
     input: 'keyword',
     keywords: [
@@ -2459,11 +2435,6 @@ export const properties: Record<string, PropertyData> = {
     input: 'keyword',
     keywords: ['none', 'auto', 'all'],
     defaultValue: 'auto',
-  },
-  textDecorationStyle: {
-    input: 'keyword',
-    keywords: textDecorationStyles,
-    defaultValue: 'solid',
   },
   textEmphasisColor: {
     input: 'color',

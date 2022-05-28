@@ -3,10 +3,11 @@ import { color, length } from './primitives'
 
 const singleTextShadow = createObjectSchema({
   fields: {
-    color: { schema: color },
-    offsetX: { schema: length },
-    offsetY: { schema: length },
-    blur: { schema: length },
+    color: color(),
+    offsetX: length(),
+    offsetY: length(),
+    // TODO ensure this is positive
+    blur: length(),
   },
 })
 

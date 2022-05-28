@@ -1,7 +1,7 @@
 import { createObjectSchema } from './data-type'
-import { color, length, keyword } from './primitives'
+import { color, keyword, lengthPercentage } from './primitives'
 
-export const textDecorationLines = [
+const textDecorationLineKeywords = [
   'none',
   'underline',
   'overline',
@@ -12,24 +12,34 @@ export const textDecorationLines = [
   'overline line-through',
   'underline overline line-through',
 ] as const
+export const textDecorationLine = keyword(textDecorationLineKeywords, {
+  defaultValue: 'underline',
+})
 
-export const textDecorationStyles = [
+const textDecorationStyleKeywords = [
   'solid',
   'double',
   'dotted',
   'dashed',
   'wavy',
 ] as const
+export const textDecorationStyle = keyword(textDecorationStyleKeywords)
+export const textDecorationLength = lengthPercentage({
+  keywords: ['auto', 'from-font'],
+})
+
+export const textDecorationColor = color({ defaultValue: '#6465ff' })
+export const textDecorationThickness = lengthPercentage({
+  keywords: ['auto', 'from-font'],
+  defaultValue: { value: 4, unit: 'px' },
+})
 
 export const textDecoration = createObjectSchema({
   fields: {
-    color: { schema: color },
-    line: keyword(textDecorationLines),
-    style: keyword(textDecorationStyles),
-    thickness: {
-      schema: length,
-      props: { percentage: true, keywords: ['auto', 'from-font'] },
-    },
+    color: textDecorationColor,
+    line: textDecorationLine,
+    style: textDecorationStyle,
+    thickness: textDecorationThickness,
   },
 })
 
