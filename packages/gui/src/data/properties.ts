@@ -3,11 +3,7 @@ import BoxShadowPicker from '../components/inputs/BoxShadow/field'
 import { stringifyBoxShadow } from '../components/inputs/BoxShadow/stringify'
 import EasingFunctionPicker from '../components/inputs/EasingFunction/picker'
 import { stringifyEasingFunction } from '../components/inputs/EasingFunction/stringify'
-import FilterPicker from '../components/inputs/Filter/field'
-import { stringifyFilter } from '../components/inputs/Filter/stringify'
-import TextShadowPicker from '../components/inputs/TextShadow/field'
 import { FontFamily } from '../components/inputs/FontFamily'
-import { stringifyTextShadow } from '../components/inputs/TextShadow/stringify'
 import TransformPicker from '../components/inputs/Transform/field'
 import { stringifyTransform } from '../components/inputs/Transform/stringify'
 import {
@@ -17,20 +13,12 @@ import {
   PercentageLengthUnits,
 } from '../types/css'
 import { ANIMATABLE_PROPERTIES } from './animatable'
-import {
-  stringifyTextDecoration,
-  TextDecorationInput,
-  textDecorationLines,
-  textDecorationStyles,
-} from '../components/inputs/TextDecoration'
 import { UnitSteps } from '../lib'
 import ImageSourcePicker from '../components/inputs/ImageSource/field'
 import { stringifyImageSource } from '../components/inputs/ImageSource/stringify'
 import { allProperties } from './css-properties'
 import { camelCase, uniqBy } from 'lodash-es'
 import { positiveRanges, UnitRanges } from './ranges'
-import TransitionInput from '../components/inputs/Transition/field'
-import { stringifyTransitionList } from '../components/inputs/Transition/stringify'
 import BackgroundInput from '../components/inputs/Background/field'
 import { stringifyBackgroundList } from '../components/inputs/Background/stringify'
 import MaskInput from '../components/inputs/Mask/field'
@@ -72,9 +60,11 @@ import {
 import { AngleInput } from '../components/inputs/AngleInput'
 import { EditorPropsWithLabel } from '../types/editor'
 import { DEFAULT_ANIMATION } from '../components/inputs/Animation/types'
-import { DEFAULT_TRANSITION } from '../components/inputs/Transition/types'
 import { DEFAULT_BOX_SHADOW } from '../components/inputs/BoxShadow/types'
-import { DEFAULT_TEXT_SHADOW } from '../components/inputs/TextShadow/types'
+import { textShadow } from '../components/schemas/text-shadow'
+import { filter } from '../components/schemas/filter'
+import * as textDecorationProperties from '../components/schemas/text-decoration'
+import * as transitionProperties from '../components/schemas/transition'
 
 type PropertyData = {
   input: string | ComponentType<EditorPropsWithLabel<any>>
@@ -1027,11 +1017,7 @@ export const properties: Record<string, PropertyData> = {
     keywords: ['none', 'context-fill', 'context-stroke'],
     defaultValue: '#6465ff',
   },
-  filter: {
-    input: FilterPicker,
-    stringify: stringifyFilter,
-    defaultValue: [{ type: 'sepia', amount: { value: 50, unit: '%' } }],
-  },
+  filter,
   flexBasis: {
     input: 'length',
     percentage: true,
@@ -2428,31 +2414,7 @@ export const properties: Record<string, PropertyData> = {
     keywords: ['none', 'all'],
     defaultValue: 'none',
   },
-  // TODO: Add defaultValue
-  textDecoration: {
-    input: TextDecorationInput,
-    stringify: stringifyTextDecoration,
-  },
-  textDecorationColor: {
-    input: 'color',
-    keywords: ['currentcolor', 'transparent'],
-    defaultValue: '#6465ff',
-  },
-  textDecorationLine: {
-    input: 'keyword',
-    keywords: textDecorationLines,
-    defaultValue: 'underline',
-  },
-  textDecorationThickness: {
-    //TODO: Add value ranges
-    input: 'length',
-    percentage: true,
-    keywords: ['auto', 'from-font'],
-    defaultValue: {
-      value: 4,
-      unit: 'px',
-    },
-  },
+  ...textDecorationProperties,
   textDecorationSkip: {
     input: 'keyword',
     keywords: [
@@ -2471,11 +2433,6 @@ export const properties: Record<string, PropertyData> = {
     input: 'keyword',
     keywords: ['none', 'auto', 'all'],
     defaultValue: 'auto',
-  },
-  textDecorationStyle: {
-    input: 'keyword',
-    keywords: textDecorationStyles,
-    defaultValue: 'solid',
   },
   textEmphasisColor: {
     input: 'color',
@@ -2550,11 +2507,7 @@ export const properties: Record<string, PropertyData> = {
     ],
     defaultValue: 'optimizeLegibility',
   },
-  textShadow: {
-    input: TextShadowPicker,
-    stringify: stringifyTextShadow,
-    defaultValue: [DEFAULT_TEXT_SHADOW],
-  },
+  textShadow,
   textSpaceCollapse: {
     input: 'keyword',
     keywords: [
@@ -2641,40 +2594,7 @@ export const properties: Record<string, PropertyData> = {
     input: 'keyword',
     keywords: ['flat', 'preserve-3d'],
   },
-  transition: {
-    input: TransitionInput,
-    stringify: stringifyTransitionList,
-    defaultValue: [DEFAULT_TRANSITION],
-  },
-  // TODO array of time values
-  transitionDelay: {
-    input: 'time',
-    defaultValue: {
-      value: 0,
-      unit: 'ms',
-    },
-  },
-  transitionDuration: {
-    input: 'time',
-    defaultValue: { value: 250, unit: 'ms' },
-  },
-  // TODO this should be a combobox
-  transitionProperty: {
-    input: 'keyword',
-    keywords: ANIMATABLE_PROPERTIES,
-    defaultValue: 'all',
-  },
-  transitionTimingFunction: {
-    input: EasingFunctionPicker,
-    stringify: stringifyEasingFunction,
-    defaultValue: {
-      type: 'cubic-bezier',
-      p1: 0.1,
-      p2: 0.2,
-      p3: 0.9,
-      p4: 0.75,
-    },
-  },
+  ...transitionProperties,
   unicodeBidi: {
     input: 'keyword',
     keywords: [

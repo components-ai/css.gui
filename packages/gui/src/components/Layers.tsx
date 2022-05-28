@@ -180,6 +180,7 @@ export default function Layers<T>({
                       sx={{
                         borderBottom: '1px solid',
                         borderColor: 'border',
+                        p: 3,
                       }}
                     >
                       <Content
