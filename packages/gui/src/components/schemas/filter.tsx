@@ -3,6 +3,7 @@ import {
   createObjectSchema,
   createUnionSchema,
 } from './data-type'
+import { url } from './functions'
 import { angle, color, length, numberPercentage } from './primitives'
 
 const blur = createObjectSchema({
@@ -32,9 +33,9 @@ const amountFilter = createObjectSchema({
   },
 })
 
-// TODO URL schema
 const singleFilter = createUnionSchema({
   variants: {
+    url: url(),
     blur,
     'drop-shadow': dropShadow,
     'hue-rotate': hueRotate,
@@ -47,7 +48,7 @@ const singleFilter = createUnionSchema({
     sepia: amountFilter,
   },
   stringify(type, value) {
-    return `${type}(${value})`
+    return type === 'url' ? value : `${type}(${value})`
   },
 })
 
