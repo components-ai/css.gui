@@ -35,7 +35,7 @@ const amountFilter = createObjectSchema({
 // TODO URL schema
 const singleFilter = createUnionSchema({
   variants: {
-    blur: blur,
+    blur,
     'drop-shadow': dropShadow,
     'hue-rotate': hueRotate,
     brightness: amountFilter,
