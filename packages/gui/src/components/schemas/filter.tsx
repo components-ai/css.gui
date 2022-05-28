@@ -2,7 +2,7 @@ import {
   createArraySchema,
   createObjectSchema,
   createUnionSchema,
-} from './data-type'
+} from './compose'
 import { url } from './functions'
 import { angle, color, length, numberPercentage } from './primitives'
 

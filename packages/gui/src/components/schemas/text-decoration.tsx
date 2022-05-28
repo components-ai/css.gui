@@ -1,4 +1,4 @@
-import { createObjectSchema } from './data-type'
+import { createObjectSchema } from './compose'
 import { color, keyword, lengthPercentage } from './primitives'
 
 const textDecorationLineKeywords = [

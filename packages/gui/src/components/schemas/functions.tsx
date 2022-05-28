@@ -1,5 +1,5 @@
 import { URLInput } from '../primitives/URLInput'
-import { DataTypeSchema } from './data-type'
+import { DataTypeSchema } from './compose'
 
 type URL = string
 export function url({

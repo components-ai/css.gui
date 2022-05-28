@@ -1,4 +1,4 @@
-import { createArraySchema, createObjectSchema } from './data-type'
+import { createArraySchema, createObjectSchema } from './compose'
 import { color, length } from './primitives'
 
 const singleTextShadow = createObjectSchema({

@@ -12,7 +12,7 @@ import { ColorInput } from '../inputs/ColorInput'
 import { LengthInput } from '../inputs/LengthInput'
 import { NumberPercentageInput } from '../inputs/NumberPercentageInput'
 import { SelectInput } from '../inputs/SelectInput'
-import { DataTypeSchema } from './data-type'
+import { DataTypeSchema } from './compose'
 
 export function color({
   defaultValue = 'transparent',
