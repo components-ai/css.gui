@@ -63,6 +63,8 @@ import { DEFAULT_ANIMATION } from '../components/inputs/Animation/types'
 import { DEFAULT_BOX_SHADOW } from '../components/inputs/BoxShadow/types'
 import { textShadow } from '../components/schemas/text-shadow'
 import { filter } from '../components/schemas/filter'
+
+import * as overscrollProperties from '../components/schemas/overscroll'
 import * as textDecorationProperties from '../components/schemas/text-decoration'
 import * as transitionProperties from '../components/schemas/transition'
 
@@ -1955,31 +1957,7 @@ export const properties: Record<string, PropertyData> = {
     keywords: ['visible', 'hidden', 'clip', 'scroll', 'auto'],
     defaultValue: 'auto',
   },
-  overscrollBehavior: {
-    input: 'keyword',
-    keywords: ['auto', 'contain', 'none', 'auto contain'],
-    defaultValue: 'auto',
-  },
-  overscrollBehaviorBlock: {
-    input: 'keyword',
-    keywords: ['auto', 'contain', 'none'],
-    defaultValue: 'auto',
-  },
-  overscrollBehaviorInline: {
-    input: 'keyword',
-    keywords: ['auto', 'contain', 'none'],
-    defaultValue: 'auto',
-  },
-  overscrollBehaviorX: {
-    input: 'keyword',
-    keywords: ['auto', 'contain', 'none'],
-    defaultValue: 'auto',
-  },
-  overscrollBehaviorY: {
-    input: 'keyword',
-    keywords: ['auto', 'contain', 'none'],
-    defaultValue: 'auto',
-  },
+  ...overscrollProperties,
   padding: {
     input: 'length',
     percentage: true,
