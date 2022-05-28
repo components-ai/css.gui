@@ -7,7 +7,7 @@ export function url({
 }: { defaultValue?: URL } = {}): DataTypeSchema<URL> {
   return {
     input: URLInput,
-    stringify: (value) => `url(${value})`,
+    stringify: (value) => `url("${value}")`,
     defaultValue,
   }
 }

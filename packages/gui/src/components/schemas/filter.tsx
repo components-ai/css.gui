@@ -35,7 +35,6 @@ const amountFilter = createObjectSchema({
 
 const singleFilter = createUnionSchema({
   variants: {
-    url: url(),
     blur,
     'drop-shadow': dropShadow,
     'hue-rotate': hueRotate,
@@ -46,9 +45,11 @@ const singleFilter = createUnionSchema({
     opacity: amountFilter,
     saturate: amountFilter,
     sepia: amountFilter,
+    // url: url(),
   },
   stringify(type, value) {
-    return type === 'url' ? value : `${type}(${value})`
+    // return type === 'url' ? value : `${type}(${value})`
+    return `${type}(${value})`
   },
 })
 
