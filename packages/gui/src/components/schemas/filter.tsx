@@ -1,4 +1,3 @@
-import { url } from './functions'
 import { listSchema } from './list'
 import { objectSchema } from './object'
 import { optionsSchema } from './options'
@@ -43,10 +42,8 @@ const singleFilter = optionsSchema({
     opacity: amountFilter,
     saturate: amountFilter,
     sepia: amountFilter,
-    // url: url(),
   },
   stringify(type, value) {
-    // return type === 'url' ? value : `${type}(${value})`
     return `${type}(${value})`
   },
 })
