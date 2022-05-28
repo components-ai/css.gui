@@ -1,4 +1,4 @@
-import { object } from './compose'
+import { object } from './object'
 import { color, keyword, lengthPercentage } from './primitives'
 
 const textDecorationLineKeywords = [

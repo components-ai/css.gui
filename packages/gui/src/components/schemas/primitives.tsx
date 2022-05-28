@@ -14,7 +14,7 @@ import { LengthInput } from '../inputs/LengthInput'
 import { NumberPercentageInput } from '../inputs/NumberPercentageInput'
 import { SelectInput } from '../inputs/SelectInput'
 import { TimeInput } from '../inputs/TimeInput'
-import { DataTypeSchema } from './compose'
+import { DataTypeSchema } from './types'
 
 export function color({
   defaultValue = 'transparent',

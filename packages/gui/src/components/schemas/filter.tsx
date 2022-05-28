@@ -1,5 +1,7 @@
-import { list, object, union } from './compose'
 import { url } from './functions'
+import { list } from './list'
+import { object } from './object'
+import { options } from './options'
 import { angle, color, length, numberPercentage } from './primitives'
 
 const blur = object({
@@ -29,7 +31,7 @@ const amountFilter = object({
   },
 })
 
-const singleFilter = union({
+const singleFilter = options({
   variants: {
     blur,
     'drop-shadow': dropShadow,

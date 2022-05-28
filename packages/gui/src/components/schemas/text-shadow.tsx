@@ -1,4 +1,5 @@
-import { list, object } from './compose'
+import { list } from './list'
+import { object } from './object'
 import { color, length } from './primitives'
 
 const singleTextShadow = object({

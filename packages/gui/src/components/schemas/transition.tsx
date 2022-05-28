@@ -3,8 +3,10 @@ import { EasingFunctionEditor } from '../inputs/EasingFunction'
 import { keywordValues } from '../inputs/EasingFunction/keywords'
 import { stringifyEasingFunction } from '../inputs/EasingFunction/stringify'
 import { EasingFunction } from '../inputs/EasingFunction/types'
-import { list, object, DataTypeSchema } from './compose'
+import { list } from './list'
+import { object } from './object'
 import { keyword, time } from './primitives'
+import { DataTypeSchema } from './types'
 
 const singleProperty = keyword(ANIMATABLE_PROPERTIES, { defaultValue: 'all' })
 
