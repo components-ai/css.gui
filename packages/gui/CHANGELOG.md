@@ -1,5 +1,12 @@
 # @compai/css-gui
 
+## 0.0.86
+
+### Patch Changes
+
+- db6f904: Add HTML codegen
+- 6fff7cd: Make text input on HTML editor a textarea
+
 ## 0.0.85
 
 ### Patch Changes
