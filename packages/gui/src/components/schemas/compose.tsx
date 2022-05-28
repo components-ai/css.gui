@@ -2,6 +2,7 @@ import { mapValues } from 'lodash-es'
 import { ComponentType } from 'react'
 import { getInputProps } from '../../lib/util'
 import { EditorPropsWithLabel } from '../../types/editor'
+import FieldArray from '../FieldArray'
 import { SelectInput } from '../inputs/SelectInput'
 import Layers from '../Layers'
 import { Label } from '../primitives'
@@ -12,7 +13,7 @@ export interface DataTypeSchema<T> {
   defaultValue: T
 }
 
-interface CreateObjectSchema<T extends object> {
+interface CreateObject<T extends object> {
   fields: {
     [Property in keyof T]: DataTypeSchema<T[Property]>
   }
@@ -22,12 +23,12 @@ interface CreateObjectSchema<T extends object> {
   defaultValue?: Partial<T>
 }
 
-export function createObjectSchema<T extends object>({
+export function object<T extends object>({
   fields,
   stringify,
   keyOrder = Object.keys(fields) as (keyof T)[],
   defaultValue,
-}: CreateObjectSchema<T>): DataTypeSchema<T> {
+}: CreateObject<T>): DataTypeSchema<T> {
   return {
     input(props) {
       return (
@@ -61,17 +62,19 @@ export function createObjectSchema<T extends object>({
   }
 }
 
-interface CreateArraySchema<T> {
+interface CreateList<T> {
   itemSchema: DataTypeSchema<T>
-  separator: string
+  separator?: string
+  variant?: 'layers' | 'list'
   thumbnail?: ComponentType<{ value: string }>
 }
 
-export function createArraySchema<T>({
+export function list<T>({
   itemSchema,
-  separator,
+  separator = ', ',
+  variant = 'layers',
   thumbnail,
-}: CreateArraySchema<T>): DataTypeSchema<T[]> {
+}: CreateList<T>): DataTypeSchema<T[]> {
   const stringify = (value: T[]) => {
     const stringified = value.map((item) => itemSchema.stringify(item))
     return stringified.join(separator)
@@ -79,32 +82,44 @@ export function createArraySchema<T>({
 
   return {
     input(props) {
-      return (
-        <Layers
-          {...props}
-          newItem={() => itemSchema.defaultValue}
-          stringify={stringify}
-          content={itemSchema.input as any}
-          thumbnail={thumbnail}
-        />
-      )
+      switch (variant) {
+        case 'layers':
+          return (
+            <Layers
+              {...props}
+              newItem={() => itemSchema.defaultValue}
+              stringify={stringify}
+              content={itemSchema.input as any}
+              thumbnail={thumbnail}
+            />
+          )
+        case 'list':
+          return (
+            <FieldArray
+              {...props}
+              newItem={() => itemSchema.defaultValue}
+              stringify={stringify}
+              content={itemSchema.input as any}
+            />
+          )
+      }
     },
     stringify,
     defaultValue: [itemSchema.defaultValue],
   }
 }
 
-interface CreateUnionSchema<V extends string, T extends object> {
+interface CreateUnion<V extends string, T extends object> {
   // TODO figure out how to type the different union options correctly
   variants: Record<V, DataTypeSchema<any>>
   order?: V[]
   stringify?(variant: V, value: string): string
 }
-export function createUnionSchema<V extends string, T extends object>({
+export function union<V extends string, T extends object>({
   variants,
   order = Object.keys(variants) as any,
   stringify = (variant, value) => value,
-}: CreateUnionSchema<V, T>): DataTypeSchema<T & { type: V }> {
+}: CreateUnion<V, T>): DataTypeSchema<T & { type: V }> {
   return {
     input(props) {
       const Component = variants[props.value.type].input

@@ -1,7 +1,7 @@
-import { createArraySchema, createObjectSchema } from './compose'
+import { list, object } from './compose'
 import { color, length } from './primitives'
 
-const singleTextShadow = createObjectSchema({
+const singleTextShadow = object({
   fields: {
     color: color(),
     offsetX: length(),
@@ -11,9 +11,8 @@ const singleTextShadow = createObjectSchema({
   },
 })
 
-export const textShadow = createArraySchema({
+export const textShadow = list({
   itemSchema: singleTextShadow,
-  separator: ' ',
   thumbnail: Thumbnail,
 })
 

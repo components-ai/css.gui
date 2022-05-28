@@ -1,18 +1,14 @@
-import {
-  createArraySchema,
-  createObjectSchema,
-  createUnionSchema,
-} from './compose'
+import { list, object, union } from './compose'
 import { url } from './functions'
 import { angle, color, length, numberPercentage } from './primitives'
 
-const blur = createObjectSchema({
+const blur = object({
   fields: {
     radius: length(),
   },
 })
 
-const dropShadow = createObjectSchema({
+const dropShadow = object({
   fields: {
     color: color(),
     offsetX: length(),
@@ -21,19 +17,19 @@ const dropShadow = createObjectSchema({
   },
 })
 
-const hueRotate = createObjectSchema({
+const hueRotate = object({
   fields: {
     angle: angle(),
   },
 })
 
-const amountFilter = createObjectSchema({
+const amountFilter = object({
   fields: {
     amount: numberPercentage(),
   },
 })
 
-const singleFilter = createUnionSchema({
+const singleFilter = union({
   variants: {
     blur,
     'drop-shadow': dropShadow,
@@ -53,7 +49,7 @@ const singleFilter = createUnionSchema({
   },
 })
 
-export const filter = createArraySchema({
+export const filter = list({
   itemSchema: singleFilter,
   separator: '',
   thumbnail: Thumbnail,

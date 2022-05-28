@@ -6,12 +6,14 @@ import {
   CSSUnitValue,
   Length,
   NumberPercentage,
+  Time,
 } from '../../types/css'
 import { AngleInput } from '../inputs/AngleInput'
 import { ColorInput } from '../inputs/ColorInput'
 import { LengthInput } from '../inputs/LengthInput'
 import { NumberPercentageInput } from '../inputs/NumberPercentageInput'
 import { SelectInput } from '../inputs/SelectInput'
+import { TimeInput } from '../inputs/TimeInput'
 import { DataTypeSchema } from './compose'
 
 export function color({
@@ -33,6 +35,18 @@ export function angle({
 } = {}) {
   return {
     input: AngleInput,
+    stringify: stringifyUnit as any,
+    defaultValue,
+  }
+}
+
+export function time({
+  defaultValue = { value: 0, unit: 's' },
+}: {
+  defaultValue?: Time
+} = {}) {
+  return {
+    input: TimeInput,
     stringify: stringifyUnit as any,
     defaultValue,
   }

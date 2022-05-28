@@ -13,15 +13,12 @@ import {
   PercentageLengthUnits,
 } from '../types/css'
 import { ANIMATABLE_PROPERTIES } from './animatable'
-import * as textDecorationProperties from '../components/schemas/text-decoration'
 import { UnitSteps } from '../lib'
 import ImageSourcePicker from '../components/inputs/ImageSource/field'
 import { stringifyImageSource } from '../components/inputs/ImageSource/stringify'
 import { allProperties } from './css-properties'
 import { camelCase, uniqBy } from 'lodash-es'
 import { positiveRanges, UnitRanges } from './ranges'
-import TransitionInput from '../components/inputs/Transition/field'
-import { stringifyTransitionList } from '../components/inputs/Transition/stringify'
 import BackgroundInput from '../components/inputs/Background/field'
 import { stringifyBackgroundList } from '../components/inputs/Background/stringify'
 import MaskInput from '../components/inputs/Mask/field'
@@ -63,10 +60,11 @@ import {
 import { AngleInput } from '../components/inputs/AngleInput'
 import { EditorPropsWithLabel } from '../types/editor'
 import { DEFAULT_ANIMATION } from '../components/inputs/Animation/types'
-import { DEFAULT_TRANSITION } from '../components/inputs/Transition/types'
 import { DEFAULT_BOX_SHADOW } from '../components/inputs/BoxShadow/types'
 import { textShadow } from '../components/schemas/text-shadow'
 import { filter } from '../components/schemas/filter'
+import * as textDecorationProperties from '../components/schemas/text-decoration'
+import * as transitionProperties from '../components/schemas/transition'
 
 type PropertyData = {
   input: string | ComponentType<EditorPropsWithLabel<any>>
@@ -2596,40 +2594,7 @@ export const properties: Record<string, PropertyData> = {
     input: 'keyword',
     keywords: ['flat', 'preserve-3d'],
   },
-  transition: {
-    input: TransitionInput,
-    stringify: stringifyTransitionList,
-    defaultValue: [DEFAULT_TRANSITION],
-  },
-  // TODO array of time values
-  transitionDelay: {
-    input: 'time',
-    defaultValue: {
-      value: 0,
-      unit: 'ms',
-    },
-  },
-  transitionDuration: {
-    input: 'time',
-    defaultValue: { value: 250, unit: 'ms' },
-  },
-  // TODO this should be a combobox
-  transitionProperty: {
-    input: 'keyword',
-    keywords: ANIMATABLE_PROPERTIES,
-    defaultValue: 'all',
-  },
-  transitionTimingFunction: {
-    input: EasingFunctionPicker,
-    stringify: stringifyEasingFunction,
-    defaultValue: {
-      type: 'cubic-bezier',
-      p1: 0.1,
-      p2: 0.2,
-      p3: 0.9,
-      p4: 0.75,
-    },
-  },
+  ...transitionProperties,
   unicodeBidi: {
     input: 'keyword',
     keywords: [
