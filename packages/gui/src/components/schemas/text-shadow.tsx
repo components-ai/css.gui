@@ -1,8 +1,8 @@
-import { list } from './list'
-import { object } from './object'
+import { listSchema } from './list'
+import { objectSchema } from './object'
 import { color, length } from './primitives'
 
-const singleTextShadow = object({
+const singleTextShadow = objectSchema({
   fields: {
     color: color(),
     offsetX: length(),
@@ -12,7 +12,7 @@ const singleTextShadow = object({
   },
 })
 
-export const textShadow = list({
+export const textShadow = listSchema({
   itemSchema: singleTextShadow,
   thumbnail: Thumbnail,
 })

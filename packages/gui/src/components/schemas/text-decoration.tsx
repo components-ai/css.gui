@@ -1,4 +1,4 @@
-import { object } from './object'
+import { objectSchema } from './object'
 import { color, keyword, lengthPercentage } from './primitives'
 
 const textDecorationLineKeywords = [
@@ -34,7 +34,7 @@ export const textDecorationThickness = lengthPercentage({
   defaultValue: { value: 4, unit: 'px' },
 })
 
-export const textDecoration = object({
+export const textDecoration = objectSchema({
   fields: {
     color: textDecorationColor,
     line: textDecorationLine,

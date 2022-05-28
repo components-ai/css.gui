@@ -13,7 +13,7 @@ interface CreateObject<T extends object> {
   defaultValue?: Partial<T>
 }
 
-export function object<T extends object>({
+export function objectSchema<T extends object>({
   fields,
   stringify,
   keyOrder = Object.keys(fields) as (keyof T)[],

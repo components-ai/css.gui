@@ -9,7 +9,7 @@ interface CreateList<T> {
   thumbnail?: ComponentType<{ value: string }>
 }
 
-export function list<T>({
+export function listSchema<T>({
   itemSchema,
   separator = ', ',
   variant = 'layers',

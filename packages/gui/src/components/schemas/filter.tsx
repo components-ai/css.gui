@@ -1,16 +1,16 @@
 import { url } from './functions'
-import { list } from './list'
-import { object } from './object'
-import { options } from './options'
+import { listSchema } from './list'
+import { objectSchema } from './object'
+import { optionsSchema } from './options'
 import { angle, color, length, numberPercentage } from './primitives'
 
-const blur = object({
+const blur = objectSchema({
   fields: {
     radius: length(),
   },
 })
 
-const dropShadow = object({
+const dropShadow = objectSchema({
   fields: {
     color: color(),
     offsetX: length(),
@@ -19,19 +19,19 @@ const dropShadow = object({
   },
 })
 
-const hueRotate = object({
+const hueRotate = objectSchema({
   fields: {
     angle: angle(),
   },
 })
 
-const amountFilter = object({
+const amountFilter = objectSchema({
   fields: {
     amount: numberPercentage(),
   },
 })
 
-const singleFilter = options({
+const singleFilter = optionsSchema({
   variants: {
     blur,
     'drop-shadow': dropShadow,
@@ -51,7 +51,7 @@ const singleFilter = options({
   },
 })
 
-export const filter = list({
+export const filter = listSchema({
   itemSchema: singleFilter,
   separator: '',
   thumbnail: Thumbnail,

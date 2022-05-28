@@ -9,7 +9,7 @@ interface CreateOptions<V extends string, T extends object> {
   order?: V[]
   stringify?(variant: V, value: string): string
 }
-export function options<V extends string, T extends object>({
+export function optionsSchema<V extends string, T extends object>({
   variants,
   order = Object.keys(variants) as any,
   stringify = (variant, value) => value,

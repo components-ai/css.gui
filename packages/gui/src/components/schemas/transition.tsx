@@ -3,8 +3,8 @@ import { EasingFunctionEditor } from '../inputs/EasingFunction'
 import { keywordValues } from '../inputs/EasingFunction/keywords'
 import { stringifyEasingFunction } from '../inputs/EasingFunction/stringify'
 import { EasingFunction } from '../inputs/EasingFunction/types'
-import { list } from './list'
-import { object } from './object'
+import { listSchema } from './list'
+import { objectSchema } from './object'
 import { keyword, time } from './primitives'
 import { DataTypeSchema } from './types'
 
@@ -23,27 +23,27 @@ const singleTimingFunction: DataTypeSchema<EasingFunction> = {
   defaultValue: keywordValues.ease,
 }
 
-export const transitionProperty = list({
+export const transitionProperty = listSchema({
   itemSchema: singleProperty,
   variant: 'list',
 })
 
-export const transitionDuration = list({
+export const transitionDuration = listSchema({
   itemSchema: singleDuration,
   variant: 'list',
 })
 
-export const transitionDelay = list({
+export const transitionDelay = listSchema({
   itemSchema: singleDelay,
   variant: 'list',
 })
 
-export const transitionTimingFunction = list({
+export const transitionTimingFunction = listSchema({
   itemSchema: singleTimingFunction,
   variant: 'list',
 })
 
-const singleTransition = object({
+const singleTransition = objectSchema({
   fields: {
     property: singleProperty,
     duration: singleDuration,
@@ -53,6 +53,6 @@ const singleTransition = object({
   keyOrder: ['property', 'duration', 'delay', 'timingFunction'],
 })
 
-export const transition = list({
+export const transition = listSchema({
   itemSchema: singleTransition,
 })
