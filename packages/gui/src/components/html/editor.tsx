@@ -119,7 +119,9 @@ function NodeEditor({ value, onChange, onRemove }: TagEditorProps) {
         minHeight: '100%',
       }}
     >
-      <div sx={{ mb: 2, display: 'flex', alignItems: 'flex-end', px: 3, pt: 3, }}>
+      <div
+        sx={{ mb: 2, display: 'flex', alignItems: 'flex-end', px: 3, pt: 3 }}
+      >
         <SelectInput
           label="Type"
           value={nodeType}
@@ -152,10 +154,10 @@ function NodeSwitch({ value, onChange }: EditorProps) {
       <div sx={{ px: 3 }}>
         <Label>
           <span sx={{ display: 'block' }}>Content</span>
-          <input
-            type='text'
-            sx={{ 
-              width: '100%'
+          <textarea
+            rows={8}
+            sx={{
+              width: '100%',
             }}
             value={value.value}
             onChange={(e) =>
@@ -180,7 +182,7 @@ function NodeSwitch({ value, onChange }: EditorProps) {
           pb: 3,
         }}
       >
-        <div sx={{ mb: 2, px: 3,  }}>
+        <div sx={{ mb: 2, px: 3 }}>
           <Label>Tag name</Label>{' '}
           <Combobox
             onFilterItems={(filterValue) => {
@@ -209,7 +211,7 @@ function NodeSwitch({ value, onChange }: EditorProps) {
           />
         </div>
       </article>
-      <div sx={{ pt: 3, px: 3  }}>
+      <div sx={{ pt: 3, px: 3 }}>
         <Label> 🎨 Styles</Label>
         <div sx={{ mt: 2 }}>
           <Editor
