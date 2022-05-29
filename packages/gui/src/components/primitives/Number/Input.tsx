@@ -24,6 +24,11 @@ export const DraggableInput = ({
   )
   const initialValue = React.useRef<number>(value)
 
+  const updateValue = (newValue: number | string) => {
+      setInternalValue(newValue)
+      onUpdate(newValue)
+  }
+
   const bind = useDrag(
     ({ dragging, first, last, tap, movement: [dx] }) => {
       setDragging(dragging)
@@ -39,8 +44,7 @@ export const DraggableInput = ({
       if (dragging && (min || min === 0)) newValue = Math.max(newValue, min)
       if (dragging && (max || max === 0)) newValue = Math.min(newValue, max)
 
-      setInternalValue(newValue)
-      onUpdate(newValue)
+      updateValue(newValue)
     },
     { pointerEvents: true }
   )
@@ -52,11 +56,11 @@ export const DraggableInput = ({
       onKeyDown={(e) => {
         switch (e.key) {
           case 'ArrowUp': {
-            onUpdate(roundToStep(value + step, step))
+            updateValue(roundToStep(value + step, step))
             return
           }
           case 'ArrowDown': {
-            onUpdate(roundToStep(value - step, step))
+            updateValue(roundToStep(value - step, step))
             return
           }
         }
@@ -68,8 +72,8 @@ export const DraggableInput = ({
         if (max || max === 0) newValue = Math.min(newValue, max)
 
         setInternalValue(
-          newValue || newValue === 0 
-            ? newValue 
+          newValue || newValue === 0
+            ? newValue
             : inputValue === '-' ? '-' : ''
         )
         onUpdate(newValue || 0)
