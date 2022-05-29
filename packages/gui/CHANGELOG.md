@@ -1,5 +1,12 @@
 # @compai/css-gui
 
+## 0.0.88
+
+### Patch Changes
+
+- dc0f8a9: Improve selection after adding and removing nodes
+- f6630f1: Turn off user select in canvas
+
 ## 0.0.87
 
 ### Patch Changes
