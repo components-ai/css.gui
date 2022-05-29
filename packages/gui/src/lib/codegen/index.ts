@@ -7,6 +7,8 @@ import { isNestedSelector, isNestedSelectorWithSyntax } from '../util'
 import { stringifyCSSObject } from './stringify-css-object'
 import { toCSSObject } from './to-css-object'
 
+export { html } from './html'
+
 const DEFAULT_BREAKPOINTS_COUNT = 3
 
 const getStylesByBreakpoint = (obj: any, breakpoint: number): any => {
