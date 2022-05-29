@@ -87,7 +87,9 @@ export function HtmlEditor({ onChange }: HtmlEditorProps) {
           }
           onRemove={() => {
             onChange(removeChildAtPath(value, selected))
-            setSelected(null)
+            const newPath = [...selected]
+            newPath.pop()
+            setSelected(newPath)
           }}
         />
       )}
@@ -132,6 +134,7 @@ function NodeEditor({ value, onChange, onRemove }: TagEditorProps) {
               onChange({
                 type: 'element',
                 tagName: 'div',
+                children: [],
               })
             }
           }}
@@ -307,7 +310,7 @@ function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
                         value: '',
                       })
                     )
-                    onSelect(null)
+                    onSelect([i])
                   }}
                 />
                 <TreeNode
