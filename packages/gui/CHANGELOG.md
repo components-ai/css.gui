@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.87
+
+### Patch Changes
+
+- 4c12a85: Fix DraggableInput to be immediately reflected value when keyed down
+
 ## 0.0.86
 
 ### Patch Changes
