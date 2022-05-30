@@ -73,7 +73,7 @@ export function HtmlEditor({ onChange }: HtmlEditorProps) {
           minHeight: '100svh',
         }}
       >
-        <TreeView value={value} />
+        <TreeView value={value} onChange={onChange} />
         {/* <TreeNode
           value={value}
           onSelect={setSelected}
