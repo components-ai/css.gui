@@ -7,7 +7,7 @@ import PalettePicker from './PalettePicker'
 import IconButton from '../../ui/IconButton'
 import { RefreshCw, Trash } from 'react-feather'
 import { Theme } from '../../../types/theme'
-import { randomHexColor as random } from '../../../lib/color'
+import { randomHexColor, randomColor } from '../../../lib/color'
 
 type Color = string
 
@@ -119,7 +119,7 @@ export default function ColorPicker({
                   return
                 } else {
                   // Otherwise, regenerate a random color based on theme
-                  onChange(random()) //{ theme }))
+                  onChange(randomColor(theme))
                 }
               }}
             >
