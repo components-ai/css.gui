@@ -7,7 +7,7 @@ interface Props<T extends string> extends EditorPropsWithLabel<T> {
 }
 export function KeywordInput<T extends string>(props: Props<T>) {
   return (
-    <div>
+    <div sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
       <Label>{props.label}</Label>
       <div
         sx={{

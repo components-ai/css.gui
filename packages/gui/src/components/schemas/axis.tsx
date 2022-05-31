@@ -21,10 +21,11 @@ CreateAxisSchema<T, K>): DataTypeSchema<{ x: T; y?: T }> {
       return (
         <div>
           <Label>{props.label}</Label>
-          <div sx={{ display: 'flex' }}>
-            <ItemInput {...getInputProps(props, 'x')} />
+          <div sx={{ display: 'flex', gap: 2 }}>
             <Toggle.Root
+              title="Link inputs"
               sx={{
+                p: 0,
                 background: 'none',
                 border: 'none',
                 color: 'muted',
@@ -42,8 +43,9 @@ CreateAxisSchema<T, K>): DataTypeSchema<{ x: T; y?: T }> {
                 }
               }}
             >
-              <Link size={16} />
+              <Link size={14} />
             </Toggle.Root>
+            <ItemInput {...getInputProps(props, 'x')} />
             {!linked ? (
               <ItemInput {...getInputProps(props, 'y' as any)} />
             ) : (
@@ -55,10 +57,10 @@ CreateAxisSchema<T, K>): DataTypeSchema<{ x: T; y?: T }> {
       )
     },
     stringify(value) {
-      // if (typeof value === 'string') {
-      //   return value
-      // }
-      const { x, y = x } = value
+      const { x, y } = value
+      if (isNil(y)) {
+        return itemSchema.stringify(x)
+      }
       return `${itemSchema.stringify(x)} ${itemSchema.stringify(y)}`
     },
     defaultValue: { x: itemSchema.defaultValue, y: itemSchema.defaultValue },
