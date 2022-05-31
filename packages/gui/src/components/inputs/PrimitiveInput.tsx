@@ -1,4 +1,3 @@
-import { GLOBAL_KEYWORDS } from '../../data/global-keywords'
 import { DEFAULT_LENGTH } from '../../lib/constants'
 import {
   CSSUnitValue,
@@ -8,11 +7,10 @@ import {
 } from '../../types/css'
 import { EditorPropsWithLabel } from '../../types/editor'
 import { ResponsiveInput } from '../Responsive'
-import { keyword } from '../schemas/primitives'
 import { ColorInput } from './ColorInput'
 import { DimensionInput } from './Dimension'
+import { KeywordInput } from './KeywordInput'
 import { LengthInput } from './LengthInput'
-import { SelectInput } from './SelectInput'
 import { StringInput } from './StringInput'
 import { TimeInput } from './TimeInput'
 
@@ -30,7 +28,7 @@ export function PrimitiveInput({ input, ...props }: Props) {
 function getPrimitiveInput(type: Primitive) {
   switch (type) {
     case 'keyword':
-      return KeywordInput
+      return ResponsiveKeywordInput
     case 'number':
       return NumberInput
     case 'integer':
@@ -49,7 +47,7 @@ function getPrimitiveInput(type: Primitive) {
 }
 
 const DEFAULT_KEYWORD = 'inherit'
-const KeywordInput = ({
+const ResponsiveKeywordInput = ({
   value,
   onChange,
   onRemove,
@@ -61,7 +59,6 @@ const KeywordInput = ({
   keywords: string[]
   responsive?: boolean
 }) => {
-  const options = topLevel ? [...keywords, ...GLOBAL_KEYWORDS] : keywords
   if (responsive) {
     return (
       <ResponsiveInput
@@ -70,19 +67,20 @@ const KeywordInput = ({
         onChange={(newValue: any) => onChange(newValue)}
         defaultValue={DEFAULT_KEYWORD}
         onRemove={onRemove}
-        Component={SelectInput}
-        componentProps={{ options }}
+        Component={KeywordInput}
+        componentProps={{ options: keywords, topLevel }}
       />
     )
   }
 
   return (
-    <SelectInput
+    <KeywordInput
       label={label}
       value={value || DEFAULT_KEYWORD}
       onChange={onChange}
       onRemove={onRemove}
-      options={options}
+      options={keywords}
+      topLevel={topLevel}
     />
   )
 }

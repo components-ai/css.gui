@@ -9,22 +9,16 @@ import {
   ThemeUnits,
   UnitlessUnits,
 } from '../../../types/css'
-import {
-  Label,
-  Number,
-  ThemeValue,
-  UnitSelect,
-  ValueSelect,
-} from '../../primitives'
+import { Label, Number, ThemeValue, UnitSelect } from '../../primitives'
 import { reducer } from './reducer'
 import { State } from './types'
-import { EditorProps, EditorPropsWithLabel } from '../../../types/editor'
+import { EditorPropsWithLabel } from '../../../types/editor'
 import { UnitConversions } from '../../../lib/convert'
 import { compact, kebabCase } from 'lodash-es'
 import { CalcInput } from '../../primitives/CalcInput'
 import { X } from 'react-feather'
 import { isCSSUnitValue } from '../../../lib/codegen/to-css-object'
-import { GLOBAL_KEYWORDS } from '../../../data/global-keywords'
+import { KeywordSelect } from '../../primitives/KeywordSelect'
 
 // Mapping of units to [min, max] tuple
 type UnitRanges = Record<string, [min: number, max: number]>
@@ -87,7 +81,6 @@ export const DimensionInput = ({
   steps,
   conversions = {},
   topLevel,
-  property,
 }: DimensionInputProps) => {
   const id = `${React.useId()}-${kebabCase(label)}`
 
@@ -148,9 +141,11 @@ export const DimensionInput = ({
         }}
       >
         {state.unit === KeywordUnits.Keyword ? (
-          <ValueSelect
+          <KeywordSelect
+            hideIcon
             value={`${state.value}`}
-            values={topLevel ? [...keywords, ...GLOBAL_KEYWORDS] : keywords}
+            options={keywords}
+            topLevel={topLevel}
             onChange={(value) => {
               dispatch({
                 type: 'CHANGED_INPUT_VALUE',
