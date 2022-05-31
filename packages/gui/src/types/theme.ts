@@ -1,5 +1,11 @@
 import { Color, Length } from './css'
 
+// TODO - naming ?
+export type FullTheme =  {
+  name: string,
+  theme: Theme
+}
+
 export type Theme = {
   borderRadius?: BorderRadius[]
   borderStyles?: BorderStyle[]

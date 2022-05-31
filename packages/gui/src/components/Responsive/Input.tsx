@@ -30,7 +30,8 @@ export function ResponsiveInput<T>({
   property,
   defaultValue,
 }: ResponsiveInputProps<T>) {
-  const { breakpoints } = useTheme()
+  const { theme } = useTheme()
+  const breakpoints = theme.breakpoints
   const breakpointCount = breakpoints?.length || DEFAULT_BREAKPOINT_COUNT
 
   const handleResponsiveChange =

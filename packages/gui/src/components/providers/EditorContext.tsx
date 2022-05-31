@@ -21,7 +21,7 @@ export interface EditorContextValue<V> extends EditorData<V> {
 
 export function useEditor() {
   const context = useContext(EditorContext)
-  const theme = useTheme()
+  const { theme } = useTheme()
   const { onChange: editComponentData, value } = context
 
   function getField<T = any>(field: KeyArg | undefined) {
@@ -107,7 +107,7 @@ export function EditorProvider<V>({
   showAddProperties?: boolean
   children: ReactNode
 }) {
-  const outerTheme = useTheme()
+  const { theme: outerTheme } = useTheme()
   const editorConfig: EditorConfig = {
     hideResponsiveControls: hideResponsiveControls ?? false,
     showAddProperties: showAddProperties ?? false,
@@ -116,7 +116,7 @@ export function EditorProvider<V>({
   const value = stylesToEditorSchema(providedValue)
 
   return (
-    <ThemeProvider theme={theme || outerTheme}>
+    <ThemeProvider themes={[(theme || outerTheme)]}>
       <ThemeUIProvider theme={uiTheme}>
         <EditorConfigProvider config={editorConfig}>
           <DynamicControlsProvider>

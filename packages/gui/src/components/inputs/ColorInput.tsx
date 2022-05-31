@@ -17,7 +17,7 @@ export function ColorInput({
   onRemove,
   defaultValue = '#000',
 }: Props) {
-  const theme = useTheme()
+  const { theme } = useTheme()
   const id = useId()
   const fullId = `${id}-${label}`
   return (
