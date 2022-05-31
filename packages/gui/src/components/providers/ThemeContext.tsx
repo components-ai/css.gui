@@ -4,14 +4,16 @@ import { Theme } from '../../types/theme'
 const DEFAULT_THEME: Theme = {}
 interface ThemeContext {
   theme: Theme,
-  setActiveTheme?: (index: number) => void
-  getThemes?: () => Theme[]
+  setActiveTheme: (theme: Theme) => void
+  themes: Theme[]
 }
 const ThemeContext = React.createContext<ThemeContext>({
-  theme: DEFAULT_THEME
+  theme: DEFAULT_THEME,
+  themes: [DEFAULT_THEME],
+  setActiveTheme: (theme: Theme) => {}
 })
 
-export const useTheme = () => {
+export const useTheme = (): ThemeContext => {
   return React.useContext(ThemeContext)
 }
 // export const useTheme = (): Theme => React.useContext(ThemeContext)
@@ -29,30 +31,20 @@ export const useThemeProperty = (property?: string): any[] => {
 }
 
 type ThemeProviderProps = {
-  // theme?: Theme
+  // theme: Theme
   themes: Theme[]
   children: React.ReactChild
 }
 export const ThemeProvider = ({ themes, children }: ThemeProviderProps) => {
-  console.log(themes, 'these themes')
   const [theme, setTheme] = React.useState<Theme>(
     (themes.length && themes[0]) || {}
   )
 
-  const handleSetActiveTheme = (idx: number) => {
-    const t = (themes?.length && themes[idx]) || theme
-    setTheme(t)
-  }
-
-  const handleGetThemes = () => {
-    return themes || []
-  }
-
   return (
     <ThemeContext.Provider value={{
       theme,
-      setActiveTheme: handleSetActiveTheme,
-      getThemes: handleGetThemes,
+      themes,
+      setActiveTheme: (newTheme) => setTheme(newTheme),
     }}>
       {children}
     </ThemeContext.Provider>

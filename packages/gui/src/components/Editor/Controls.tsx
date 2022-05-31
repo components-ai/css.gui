@@ -35,6 +35,7 @@ import { getDefaultValue } from '../../lib/defaults'
 import { MultidimensionInput } from '../inputs/Multidimension'
 import { Responsive } from '../Responsive/Input'
 import { AddPropertyControl } from '../AddProperty'
+import { ThemeSelect } from '../ThemeSelect'
 import { isFieldsetGroup, partitionProperties, sortProperties } from './util'
 import { stylesToEditorSchema } from '../../lib/transformers/styles-to-editor-schema'
 import { removeInternalCSSClassSyntax } from '../../lib/classes'
@@ -199,6 +200,7 @@ export const Editor = ({
       onChange={handleStylesChange}
       hideResponsiveControls={hideResponsiveControls}
     >
+      <ThemeSelect />
       <EditorControls showAddProperties={showAddProperties}>
         {children}
       </EditorControls>
