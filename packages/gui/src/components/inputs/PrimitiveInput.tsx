@@ -1,3 +1,4 @@
+import { GLOBAL_KEYWORDS } from '../../data/global-keywords'
 import { DEFAULT_LENGTH } from '../../lib/constants'
 import {
   CSSUnitValue,
@@ -7,6 +8,7 @@ import {
 } from '../../types/css'
 import { EditorPropsWithLabel } from '../../types/editor'
 import { ResponsiveInput } from '../Responsive'
+import { keyword } from '../schemas/primitives'
 import { ColorInput } from './ColorInput'
 import { DimensionInput } from './Dimension'
 import { LengthInput } from './LengthInput'
@@ -54,10 +56,12 @@ const KeywordInput = ({
   label,
   keywords,
   responsive,
+  topLevel,
 }: EditorPropsWithLabel<string> & {
   keywords: string[]
   responsive?: boolean
 }) => {
+  const options = topLevel ? [...keywords, ...GLOBAL_KEYWORDS] : keywords
   if (responsive) {
     return (
       <ResponsiveInput
@@ -67,9 +71,7 @@ const KeywordInput = ({
         defaultValue={DEFAULT_KEYWORD}
         onRemove={onRemove}
         Component={SelectInput}
-        componentProps={{
-          options: keywords,
-        }}
+        componentProps={{ options }}
       />
     )
   }
@@ -80,7 +82,7 @@ const KeywordInput = ({
       value={value || DEFAULT_KEYWORD}
       onChange={onChange}
       onRemove={onRemove}
-      options={keywords}
+      options={options}
     />
   )
 }

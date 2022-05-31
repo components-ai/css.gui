@@ -24,7 +24,6 @@ import { properties } from '../../data/properties'
 import { ResponsiveInput } from '../Responsive'
 import { sentenceCase } from '../../lib/util'
 import { EditorProps } from '../../types/editor'
-import { GLOBAL_KEYWORDS } from '../../data/global-keywords'
 import { useThemeProperty } from '../providers/ThemeContext'
 import { PositionInput } from '../inputs/PositionInput'
 import { UnitSteps } from '../../lib'
@@ -59,10 +58,7 @@ const Control = ({ field, showRemove = false, ...props }: ControlProps) => {
   const property = getPropertyFromField(field)
   const Component: ComponentType<any> | null = getInputComponent(property)
   const themeValues = useThemeProperty(property)
-  const keywords = [
-    ...(properties[property].keywords ?? []),
-    ...GLOBAL_KEYWORDS,
-  ]
+  const keywords = properties[property].keywords
   const dependantProperties = properties[property].dependantProperties ?? []
 
   if (!Component) {
@@ -74,7 +70,8 @@ const Control = ({ field, showRemove = false, ...props }: ControlProps) => {
   const fullField = fieldsetName ? joinPath(fieldsetName, field) : field
   const componentProps = {
     label: sentenceCase(property),
-    themeValues: themeValues,
+    themeValues,
+    topLevel: true,
     ...properties[property],
     ...props,
     keywords,

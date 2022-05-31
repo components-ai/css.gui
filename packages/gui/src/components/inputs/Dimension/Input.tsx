@@ -18,12 +18,13 @@ import {
 } from '../../primitives'
 import { reducer } from './reducer'
 import { State } from './types'
-import { EditorProps } from '../../../types/editor'
+import { EditorProps, EditorPropsWithLabel } from '../../../types/editor'
 import { UnitConversions } from '../../../lib/convert'
 import { compact, kebabCase } from 'lodash-es'
 import { CalcInput } from '../../primitives/CalcInput'
 import { X } from 'react-feather'
 import { isCSSUnitValue } from '../../../lib/codegen/to-css-object'
+import { GLOBAL_KEYWORDS } from '../../../data/global-keywords'
 
 // Mapping of units to [min, max] tuple
 type UnitRanges = Record<string, [min: number, max: number]>
@@ -63,8 +64,7 @@ const getInitialState = (
   return defaultState
 }
 
-export interface DimensionInputProps extends EditorProps<Dimension> {
-  label?: string
+export interface DimensionInputProps extends EditorPropsWithLabel<Dimension> {
   range?: UnitRanges
   steps?: UnitSteps
   units?: readonly string[]
@@ -86,6 +86,7 @@ export const DimensionInput = ({
   themeValues = [],
   steps,
   conversions = {},
+  topLevel,
   property,
 }: DimensionInputProps) => {
   const id = `${React.useId()}-${kebabCase(label)}`
@@ -149,7 +150,7 @@ export const DimensionInput = ({
         {state.unit === KeywordUnits.Keyword ? (
           <ValueSelect
             value={`${state.value}`}
-            values={keywords}
+            values={topLevel ? [...keywords, ...GLOBAL_KEYWORDS] : keywords}
             onChange={(value) => {
               dispatch({
                 type: 'CHANGED_INPUT_VALUE',
