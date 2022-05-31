@@ -67,6 +67,7 @@ import { filter } from '../components/schemas/filter'
 import * as overscrollProperties from '../components/schemas/overscroll'
 import * as textDecorationProperties from '../components/schemas/text-decoration'
 import * as transitionProperties from '../components/schemas/transition'
+import * as overflowProperties from '../components/schemas/overflow'
 
 type PropertyData = {
   input: string | ComponentType<EditorPropsWithLabel<any>>
@@ -1917,19 +1918,10 @@ export const properties: Record<string, PropertyData> = {
       unit: 'px',
     },
   },
-  overflow: {
-    input: 'keyword',
-    keywords: ['visible', 'hidden', 'clip', 'scroll', 'auto', 'hidden visible'],
-    defaultValue: 'visible',
-  },
+  ...overflowProperties,
   overflowAnchor: {
     input: 'keyword',
     keywords: ['auto', 'none'],
-    defaultValue: 'auto',
-  },
-  overflowBlock: {
-    input: 'keyword',
-    keywords: ['visible', 'hidden', 'scroll', 'auto'],
     defaultValue: 'auto',
   },
   overflowClipMargin: {
@@ -1937,25 +1929,10 @@ export const properties: Record<string, PropertyData> = {
     input: 'length',
     percentage: true,
   },
-  overflowInline: {
-    input: 'keyword',
-    keywords: ['visible', 'hidden', 'scroll', 'auto'],
-    defaultValue: 'auto',
-  },
   overflowWrap: {
     input: 'keyword',
     keywords: ['normal', 'break-word', 'anywhere'],
     defaultValue: 'normal',
-  },
-  overflowX: {
-    input: 'keyword',
-    keywords: ['visible', 'hidden', 'clip', 'scroll', 'auto'],
-    defaultValue: 'auto',
-  },
-  overflowY: {
-    input: 'keyword',
-    keywords: ['visible', 'hidden', 'clip', 'scroll', 'auto'],
-    defaultValue: 'auto',
   },
   ...overscrollProperties,
   padding: {
