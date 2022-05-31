@@ -24,7 +24,7 @@ export function ThemeSelect() {
             p: 2,
           }}
         >
-          <ThemeSwatch theme={theme} />
+          <ThemeSwatch key={Math.random()} theme={theme} /> 
         </Popover.Trigger>
         <Popover.Content>
           <div sx={{
@@ -57,7 +57,6 @@ function ThemeSwatch({ theme, onSetTheme }: ThemeSwatchProps) {
 
   useEffect(() => {
     const colors: string[] = []
-    
     for (const group of theme.colors || []) {
       if (colors.length >= 15) break
       for (const themeValue of group.colors) {
@@ -70,7 +69,7 @@ function ThemeSwatch({ theme, onSetTheme }: ThemeSwatchProps) {
   }, [])
   return (
     <div 
-      sx={{ width: '100%', display: 'flex' }}
+      sx={{ width: '100%', display: 'flex', p: 2 }}
       onClick={() => onSetTheme && onSetTheme()}>
       {flatColors.map((color, i) => (
         <div
