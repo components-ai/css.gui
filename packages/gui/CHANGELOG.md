@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.89
+
+### Patch Changes
+
+- a985b87: Fixes regen for color input
+
 ## 0.0.88
 
 ### Patch Changes
