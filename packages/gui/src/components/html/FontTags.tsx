@@ -31,6 +31,10 @@ export function getHTMLTreeFonts(root: any): string[] {
     treeFonts = [...getStyleFonts(root.style)]
   }
 
+  if (!root.children) {
+    return treeFonts
+  }
+
   for (const node of root.children) {
     if (node.type !== 'text') {
       treeFonts = [...treeFonts, ...getHTMLTreeFonts(node)]

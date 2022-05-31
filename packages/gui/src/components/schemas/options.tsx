@@ -3,26 +3,31 @@ import { SelectInput } from '../inputs/SelectInput'
 import { Label } from '../primitives'
 import { DataTypeSchema } from './types'
 
-interface CreateOptions<V extends string, T extends object> {
-  // TODO figure out how to type the different union options correctly
-  variants: Record<V, DataTypeSchema<any>>
-  order?: V[]
-  stringify?(variant: V, value: string): string
+interface CreateOptions<T extends Record<string, any>> {
+  variants: { [V in keyof T]: DataTypeSchema<T[V]> }
+  order?: (keyof T)[]
+  stringify?(variant: keyof T, value: string): string
 }
-export function optionsSchema<V extends string, T extends object>({
+
+/**
+ * Create a schema that lets a user choose between several types,
+ * each with a distinct structure as specified by the given `variants`.
+ */
+export function optionsSchema<T extends Record<string, any>>({
   variants,
-  order = Object.keys(variants) as any,
+  order = Object.keys(variants),
   stringify = (variant, value) => value,
-}: CreateOptions<V, T>): DataTypeSchema<T & { type: V }> {
+}: CreateOptions<T>): DataTypeSchema<Unionize<T>> {
   return {
     input(props) {
-      const Component = variants[props.value.type].input
+      const type = props.value.type as keyof T
+      const Component = variants[type].input
       return (
         <div>
           <Label>{props.label}</Label>
           <SelectInput
             {...getInputProps(props, 'type')}
-            options={order}
+            options={order as string[]}
             onChange={(newType) => {
               // if the type changes, reset the value to the default value of that type
               props.onChange({
@@ -35,8 +40,8 @@ export function optionsSchema<V extends string, T extends object>({
         </div>
       )
     },
-    stringify(value: T & { type: V }) {
-      const type = value.type
+    stringify(value) {
+      const type = value.type as keyof T
       return stringify(type, variants[type].stringify(value))
     },
     defaultValue: {
@@ -45,3 +50,7 @@ export function optionsSchema<V extends string, T extends object>({
     },
   }
 }
+
+// Utility types to help typecheck these options correctly,
+// based on: https://stackoverflow.com/questions/62591230/typescript-convert-a-tagged-union-into-an-union-type
+type Unionize<T> = { [K in keyof T]: { type: K } & T[K] }[keyof T]

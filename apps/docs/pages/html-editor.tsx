@@ -29,18 +29,18 @@ const initialValue: any = {
       style: {
         color: 'primary',
         fontSize: [
-        {
-          value: 4,
-          unit: 'rem',
-        },
-        {
-          value: 6,
-          unit: 'rem',
-        },
-        {
-          value: 10,
-          unit: 'rem',
-        },
+          {
+            value: 4,
+            unit: 'rem',
+          },
+          {
+            value: 6,
+            unit: 'rem',
+          },
+          {
+            value: 10,
+            unit: 'rem',
+          },
         ],
         fontWeight: 900,
         fontFamily: 'Inter',
@@ -218,25 +218,29 @@ export default function HtmlEditorExample() {
   const [html, setHtml] = useState(initialValue)
 
   return (
-      <HtmlEditorProvider value={html}>
-        <div sx={{ 
-          display: 'grid', 
+    <HtmlEditorProvider value={html}>
+      <div
+        sx={{
+          display: 'grid',
           gridTemplateAreas: '"nav content"',
           gridTemplateColumns: 'auto 1fr',
           gridTemplateRows: 'auto',
           height: 'calc(100vh - 64px)',
-          }}>
-            <div sx={{ 
-              gridArea: 'nav',
-              maxheight: 'calc(100vh - 64px)',
-              overflow: 'auto', 
-            }}>
-              <HtmlEditor onChange={setHtml} />
-            </div>
-            <div sx={{ overflow: 'auto',  width: '100%', gridArea: 'content', }}>
-              <HtmlRenderer value={html} />
-            </div>
+        }}
+      >
+        <div
+          sx={{
+            gridArea: 'nav',
+            maxheight: 'calc(100vh - 64px)',
+            overflow: 'auto',
+          }}
+        >
+          <HtmlEditor onChange={setHtml} />
         </div>
-      </HtmlEditorProvider>
+        <div sx={{ overflow: 'auto', width: '100%', gridArea: 'content' }}>
+          <HtmlRenderer value={html} />
+        </div>
+      </div>
+    </HtmlEditorProvider>
   )
 }

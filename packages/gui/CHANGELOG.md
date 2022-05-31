@@ -1,5 +1,31 @@
 # @compai/css-gui
 
+## 0.0.89
+
+### Patch Changes
+
+- a985b87: Fixes regen for color input
+
+## 0.0.88
+
+### Patch Changes
+
+- dc0f8a9: Improve selection after adding and removing nodes
+- f6630f1: Turn off user select in canvas
+
+## 0.0.87
+
+### Patch Changes
+
+- 4c12a85: Fix DraggableInput to be immediately reflected value when keyed down
+
+## 0.0.86
+
+### Patch Changes
+
+- db6f904: Add HTML codegen
+- 6fff7cd: Make text input on HTML editor a textarea
+
 ## 0.0.85
 
 ### Patch Changes
