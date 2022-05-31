@@ -32,7 +32,7 @@ export const useThemeProperty = (property?: string): any[] => {
 
 type ThemeProviderProps = {
   themes: Theme[]
-  children: React.ReactChild
+  children: any
 }
 export const ThemeProvider = ({ themes, children }: ThemeProviderProps) => {
   const [theme, setTheme] = React.useState<Theme>(
