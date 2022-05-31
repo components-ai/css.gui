@@ -39,7 +39,6 @@ export const ThemeProvider = ({ themes, children }: ThemeProviderProps) => {
     (themes.length && themes[0]) || {}
   )
 
-  console.log(themes, 'themes')
   return (
     <ThemeContext.Provider value={{
       theme,
