@@ -16,7 +16,7 @@ const ThemeContext = React.createContext<ThemeContext>({
 export const useTheme = (): ThemeContext => {
   return React.useContext(ThemeContext)
 }
-// export const useTheme = (): Theme => React.useContext(ThemeContext)
+
 
 export const useThemeProperty = (property?: string): any[] => {
   const { theme } = React.useContext(ThemeContext)
@@ -31,7 +31,6 @@ export const useThemeProperty = (property?: string): any[] => {
 }
 
 type ThemeProviderProps = {
-  // theme: Theme
   themes: Theme[]
   children: React.ReactChild
 }

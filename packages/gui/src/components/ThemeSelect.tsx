@@ -72,7 +72,7 @@ function ThemeSwatch({ theme, onSetTheme }: ThemeSwatchProps) {
     <div 
       sx={{ width: '100%', display: 'flex' }}
       onClick={() => onSetTheme && onSetTheme()}>
-      {flatColors.slice(0, 15)?.map((color, i) => (
+      {flatColors.map((color, i) => (
         <div
           key={i}
           sx={{
