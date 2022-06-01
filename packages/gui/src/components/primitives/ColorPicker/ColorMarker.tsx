@@ -12,6 +12,7 @@ export default function ColorMarker(props: Props) {
         zIndex: 10,
         cursor: 'grab',
         width: '2rem',
+        height: '2rem',
         aspectRatio: '1 / 1',
         borderRadius: '9999px',
         border: '2px solid',

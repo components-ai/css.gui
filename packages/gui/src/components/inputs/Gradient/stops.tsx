@@ -237,6 +237,7 @@ function Marker({ value, isSelected, ...props }: MarkerProps) {
         position: 'absolute',
         borderRadius: '9999px',
         width: '2rem',
+        height: '2rem',
         aspectRatio: '1 / 1',
         border: '2px solid',
         borderColor: 'white',

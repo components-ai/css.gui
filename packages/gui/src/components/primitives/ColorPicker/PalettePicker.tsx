@@ -34,6 +34,7 @@ export default function PalettePicker({ value, onChange, theme }: Props) {
                       padding: 0,
                       margin: 0,
                       width: '1.5rem',
+                      height: '1.5rem',
                       aspectRatio: '1 / 1',
                       backgroundColor: color.value,
                     }}
