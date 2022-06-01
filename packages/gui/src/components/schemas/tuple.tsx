@@ -3,6 +3,7 @@ import { Label } from '../primitives'
 import { DataTypeSchema } from './types'
 import * as Toggle from '@radix-ui/react-toggle'
 import { Link } from 'react-feather'
+import { InputHeader } from '../ui/InputHeader'
 
 interface CreateTupleSchema<K, T> {
   itemSchema: DataTypeSchema<T>
@@ -27,7 +28,7 @@ export function tupleSchema<K extends string, T>({
       const ItemInput = itemSchema.input
       return (
         <div>
-          <Label>{props.label}</Label>
+          <InputHeader {...props} />
           <div sx={{ display: 'flex', gap: 2 }}>
             <Toggle.Root
               title="Link inputs"

@@ -4,6 +4,7 @@ import { Label } from '../primitives'
 import { DataTypeSchema } from './types'
 import * as Toggle from '@radix-ui/react-toggle'
 import { Link } from 'react-feather'
+import { InputHeader } from '../ui/InputHeader'
 
 interface CreateBoxSideSchema<T> {
   itemSchema: DataTypeSchema<T>
@@ -60,7 +61,7 @@ export function boxSideSchema<T>({
       if (linked) {
         return (
           <div>
-            <Label>{props.label}</Label>
+            <InputHeader {...props} />
             <div sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
               {linkToggle}
               <ItemInput {...getInputProps(props, 'top')} label="" />
