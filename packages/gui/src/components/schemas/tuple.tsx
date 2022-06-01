@@ -1,9 +1,9 @@
 import { getInputProps } from '../../lib/util'
-import { Label } from '../primitives'
 import { DataTypeSchema } from './types'
 import * as Toggle from '@radix-ui/react-toggle'
 import { Link } from 'react-feather'
 import { InputHeader } from '../ui/InputHeader'
+import { replace } from '../../lib/array'
 
 interface CreateTupleSchema<K, T> {
   itemSchema: DataTypeSchema<T>
@@ -53,26 +53,25 @@ export function tupleSchema<K extends string, T>({
             >
               <Link size={14} />
             </Toggle.Root>
-            {linked ? (
-              <ItemInput {...getInputProps(props, 0)} label="" />
-            ) : (
-              labels.map((label, i) => {
-                return (
-                  <ItemInput
-                    key={label}
-                    {...getInputProps(props, i)}
-                    label={label}
-                  />
-                )
-              })
-            )}
+            {props.value.map((value, i) => {
+              return (
+                <ItemInput
+                  key={i}
+                  {...getInputProps(props, i)}
+                  onChange={(newItem) =>
+                    props.onChange(replace(props.value, i, newItem))
+                  }
+                  label={linked ? '' : labels[i]}
+                />
+              )
+            })}
           </div>
         </div>
       )
     },
     stringify(value) {
-      return value.map(itemSchema.stringify).join(' ')
+      return value.map((item) => itemSchema.stringify(item)).join(' ')
     },
-    defaultValue: labels.map(() => itemSchema.defaultValue),
+    defaultValue: [itemSchema.defaultValue],
   }
 }
