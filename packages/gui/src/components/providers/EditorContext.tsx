@@ -100,17 +100,20 @@ export function EditorProvider<V>({
   theme,
   hideResponsiveControls,
   showAddProperties,
+  showThemeSelect,
   value: providedValue,
   ...values
 }: EditorContextProviderValue<V> & {
   hideResponsiveControls?: boolean
   showAddProperties?: boolean
+  showThemeSelect?: boolean
   children: ReactNode
 }) {
   const { theme: outerTheme } = useTheme()
   const editorConfig: EditorConfig = {
     hideResponsiveControls: hideResponsiveControls ?? false,
     showAddProperties: showAddProperties ?? false,
+    showThemeSelect: showThemeSelect ?? false
   }
 
   const value = stylesToEditorSchema(providedValue)

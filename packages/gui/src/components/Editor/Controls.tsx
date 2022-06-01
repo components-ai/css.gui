@@ -162,6 +162,7 @@ interface ControlsProps {
   children?: ReactNode
   hideResponsiveControls?: boolean
   showAddProperties?: boolean
+  showThemeSelect?: boolean
 }
 export const Editor = ({
   theme,
@@ -170,6 +171,7 @@ export const Editor = ({
   children,
   hideResponsiveControls,
   showAddProperties,
+  showThemeSelect,
 }: ControlsProps) => {
   const handleStylesChange = (recipe: Recipe<EditorData<any>>) => {
     const newData = produce(stylesToEditorSchema(styles), (draft: any) => {
@@ -200,7 +202,7 @@ export const Editor = ({
       onChange={handleStylesChange}
       hideResponsiveControls={hideResponsiveControls}
     >
-      <ThemeSelect />
+      {showThemeSelect && <ThemeSelect />}
       <EditorControls showAddProperties={showAddProperties}>
         {children}
       </EditorControls>

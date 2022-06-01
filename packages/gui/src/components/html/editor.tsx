@@ -221,6 +221,7 @@ function NodeSwitch({ value, onChange }: EditorProps) {
             styles={value.style ?? {}}
             onChange={(newStyles) => onChange({ ...value, style: newStyles })}
             showAddProperties
+            showThemeSelect
           />
         </div>
       </div>
