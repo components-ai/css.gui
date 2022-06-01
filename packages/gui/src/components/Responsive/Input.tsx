@@ -16,6 +16,7 @@ type ResponsiveInputProps<T> = {
   onRemove?: () => void
   label: string
   property?: string
+  defaultValue?: T
   // TODO: Type this component
   Component: React.ComponentType<any>
   componentProps?: any
