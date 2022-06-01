@@ -1,11 +1,13 @@
+import { omit } from 'lodash-es'
 import { EditorPropsWithLabel } from '../../types/editor'
 import { Label } from '../primitives'
 import { KeywordSelect } from '../primitives/KeywordSelect'
+import { ResponsiveInput } from '../Responsive'
 
 interface Props<T extends string> extends EditorPropsWithLabel<T> {
   options: T[]
 }
-export function KeywordInput<T extends string>(props: Props<T>) {
+export function BaseKeywordInput<T extends string>(props: Props<T>) {
   return (
     <div sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
       <Label>{props.label}</Label>
@@ -22,4 +24,18 @@ export function KeywordInput<T extends string>(props: Props<T>) {
       </div>
     </div>
   )
+}
+
+export function KeywordInput<T extends string>(props: Props<T>) {
+  if (props.topLevel) {
+    return (
+      <ResponsiveInput
+        {...(props as any)}
+        Component={BaseKeywordInput}
+        componentProps={omit(props, ['label', 'value', 'onChange'])}
+      />
+    )
+  }
+
+  return <KeywordInput {...props} />
 }

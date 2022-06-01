@@ -11,7 +11,6 @@ const DEFAULT_BREAKPOINT_COUNT = 3
 export type Responsive<T> = T | T[]
 type ResponsiveInputProps<T> = {
   value?: Responsive<T>
-  defaultValue: Responsive<T>
   onChange: (newValue: Responsive<T>) => void
   onRemove?: () => void
   label: string
@@ -28,7 +27,6 @@ export function ResponsiveInput<T>({
   Component,
   componentProps = {},
   property,
-  defaultValue,
 }: ResponsiveInputProps<T>) {
   const { breakpoints } = useTheme()
   const breakpointCount = breakpoints?.length || DEFAULT_BREAKPOINT_COUNT
@@ -50,10 +48,8 @@ export function ResponsiveInput<T>({
   }
 
   const handleSwitchFromResponsive = () => {
-    const newValue: Responsive<T> | undefined = Array.isArray(value)
-      ? value[0]
-      : value
-    onChange(newValue ?? defaultValue)
+    const newValue: Responsive<T> = Array.isArray(value) ? value[0] : value!
+    onChange(newValue)
   }
 
   const isResponsiveControls = Array.isArray(value)

@@ -14,11 +14,12 @@ import { reducer } from './reducer'
 import { State } from './types'
 import { EditorPropsWithLabel } from '../../../types/editor'
 import { UnitConversions } from '../../../lib/convert'
-import { compact, kebabCase } from 'lodash-es'
+import { compact, kebabCase, omit } from 'lodash-es'
 import { CalcInput } from '../../primitives/CalcInput'
 import { X } from 'react-feather'
 import { isCSSUnitValue } from '../../../lib/codegen/to-css-object'
 import { KeywordSelect } from '../../primitives/KeywordSelect'
+import { ResponsiveInput } from '../../Responsive'
 
 // Mapping of units to [min, max] tuple
 type UnitRanges = Record<string, [min: number, max: number]>
@@ -69,7 +70,22 @@ export interface DimensionInputProps extends EditorPropsWithLabel<Dimension> {
   conversions?: UnitConversions
   property?: string
 }
-export const DimensionInput = ({
+
+export function DimensionInput(props: DimensionInputProps) {
+  if (props.topLevel) {
+    return (
+      <ResponsiveInput
+        {...(props as any)}
+        Component={BaseDimensionInput}
+        componentProps={omit(props, ['label', 'value', 'onChange'])}
+      />
+    )
+  }
+
+  return <DimensionInput {...props} />
+}
+
+const BaseDimensionInput = ({
   value,
   onChange,
   onRemove,
