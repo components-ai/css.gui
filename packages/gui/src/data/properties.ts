@@ -64,6 +64,7 @@ import { DEFAULT_BOX_SHADOW } from '../components/inputs/BoxShadow/types'
 import { textShadow } from '../components/schemas/text-shadow'
 import { filter } from '../components/schemas/filter'
 
+import * as borderProperties from '../components/schemas/border'
 import * as marginProperties from '../components/schemas/margin'
 import * as overflowProperties from '../components/schemas/overflow'
 import * as overscrollProperties from '../components/schemas/overscroll'
@@ -476,11 +477,7 @@ export const properties: Record<string, PropertyData> = {
       unit: 'px',
     },
   },
-  borderBottomColor: {
-    input: 'color',
-    keywords: ['currentcolor', 'transparent'],
-    defaultValue: '#6465ff',
-  },
+  ...borderProperties,
   borderBottomLeftRadius: {
     input: 'multiLength',
     dimensions: 2,
@@ -488,117 +485,6 @@ export const properties: Record<string, PropertyData> = {
   borderBottomRightRadius: {
     input: 'multiLength',
     dimensions: 2,
-  },
-  borderBottomStyle: {
-    input: 'keyword',
-    keywords: [
-      'none',
-      'hidden',
-      'dotted',
-      'dashed',
-      'solid',
-      'double',
-      'groove',
-      'ridge',
-      'inset',
-      'outset',
-    ],
-    defaultValue: 'solid',
-  },
-  borderBottomWidth: {
-    input: 'length',
-    keywords: ['thin', 'medium', 'thick'],
-    range: {
-      [AbsoluteLengthUnits.Px]: [0, 512],
-      [FontRelativeLengthUnits.Em]: [0, 16],
-      [FontRelativeLengthUnits.Rem]: [0, 16],
-      [ViewportPercentageLengthUnits.Vh]: [0, 100],
-      [ViewportPercentageLengthUnits.Vw]: [0, 100],
-      [PercentageLengthUnits.Pct]: [0.1, 100],
-    },
-    defaultValue: {
-      value: 2,
-      unit: 'px',
-    },
-  },
-  borderLeftColor: {
-    input: 'color',
-    keywords: ['currentcolor', 'transparent'],
-    defaultValue: '#6465ff',
-  },
-  borderLeftStyle: {
-    input: 'keyword',
-    keywords: [
-      'none',
-      'hidden',
-      'dotted',
-      'dashed',
-      'solid',
-      'double',
-      'groove',
-      'ridge',
-      'inset',
-      'outset',
-    ],
-    defaultValue: 'solid',
-  },
-  borderLeftWidth: {
-    input: 'length',
-    keywords: ['thin', 'medium', 'thick'],
-    range: {
-      [AbsoluteLengthUnits.Px]: [0, 512],
-      [FontRelativeLengthUnits.Em]: [0, 16],
-      [FontRelativeLengthUnits.Rem]: [0, 16],
-      [ViewportPercentageLengthUnits.Vh]: [0, 100],
-      [ViewportPercentageLengthUnits.Vw]: [0, 100],
-      [PercentageLengthUnits.Pct]: [0.1, 100],
-    },
-    defaultValue: {
-      value: 1,
-      unit: 'px',
-    },
-  },
-  borderRightColor: {
-    input: 'color',
-    keywords: ['currentcolor', 'transparent'],
-    defaultValue: '#6465ff',
-  },
-  borderRightStyle: {
-    input: 'keyword',
-    keywords: [
-      'none',
-      'hidden',
-      'dotted',
-      'dashed',
-      'solid',
-      'double',
-      'groove',
-      'ridge',
-      'inset',
-      'outset',
-    ],
-    defaultValue: 'solid',
-  },
-  borderRightWidth: {
-    input: 'length',
-    keywords: ['thin', 'medium', 'thick'],
-    range: {
-      [AbsoluteLengthUnits.Px]: [0, 512],
-      [FontRelativeLengthUnits.Em]: [0, 16],
-      [FontRelativeLengthUnits.Rem]: [0, 16],
-      [ViewportPercentageLengthUnits.Vh]: [0, 100],
-      [ViewportPercentageLengthUnits.Vw]: [0, 100],
-      [PercentageLengthUnits.Pct]: [0.1, 100],
-    },
-    defaultValue: {
-      value: 1,
-      unit: 'px',
-    },
-  },
-  borderTopColor: {
-    input: 'color',
-    keywords: ['currentcolor', 'transparent'],
-    defaultValue: '#6465ff',
   },
   borderTopLeftRadius: {
     input: 'multiLength',
@@ -608,79 +494,10 @@ export const properties: Record<string, PropertyData> = {
     input: 'multiLength',
     dimensions: 2,
   },
-  borderTopStyle: {
-    input: 'keyword',
-    keywords: [
-      'none',
-      'hidden',
-      'dotted',
-      'dashed',
-      'solid',
-      'double',
-      'groove',
-      'ridge',
-      'inset',
-      'outset',
-    ],
-    defaultValue: 'solid',
-  },
-  borderTopWidth: {
-    input: 'length',
-    keywords: ['thin', 'medium', 'thick'],
-    range: {
-      [AbsoluteLengthUnits.Px]: [0, 512],
-      [FontRelativeLengthUnits.Em]: [0, 16],
-      [FontRelativeLengthUnits.Rem]: [0, 16],
-      [ViewportPercentageLengthUnits.Vh]: [0, 100],
-      [ViewportPercentageLengthUnits.Vw]: [0, 100],
-      [PercentageLengthUnits.Pct]: [0.1, 100],
-    },
-    defaultValue: {
-      value: 1,
-      unit: 'px',
-    },
-  },
-  borderColor: {
-    input: 'color',
-    keywords: ['currentcolor', 'transparent'],
-    defaultValue: '#6465ff',
-  },
   // TODO: Add defaultValue
   borderSpacing: {
     input: BorderSpacingInput,
     stringify: stringifyBorderSpacing,
-  },
-  borderStyle: {
-    input: 'keyword',
-    keywords: [
-      'none',
-      'hidden',
-      'dotted',
-      'dashed',
-      'solid',
-      'double',
-      'groove',
-      'ridge',
-      'inset',
-      'outset',
-    ],
-    defaultValue: 'solid',
-  },
-  borderWidth: {
-    input: 'length',
-    keywords: ['thin', 'medium', 'thick'],
-    range: {
-      [AbsoluteLengthUnits.Px]: [0, 512],
-      [FontRelativeLengthUnits.Em]: [0, 16],
-      [FontRelativeLengthUnits.Rem]: [0, 16],
-      [ViewportPercentageLengthUnits.Vh]: [0, 100],
-      [ViewportPercentageLengthUnits.Vw]: [0, 100],
-      [PercentageLengthUnits.Pct]: [0.1, 100],
-    },
-    defaultValue: {
-      value: 1,
-      unit: 'px',
-    },
   },
   bottom: {
     input: 'length',
