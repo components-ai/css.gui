@@ -26,7 +26,7 @@ export function BaseKeywordInput<T extends string>(props: Props<T>) {
   )
 }
 
-export function KeywordInput<T extends string>(props: Props<T>) {
+export function KeywordInput<T extends string>({ ...props }: Props<T>) {
   if (props.topLevel) {
     return (
       <ResponsiveInput
@@ -37,5 +37,5 @@ export function KeywordInput<T extends string>(props: Props<T>) {
     )
   }
 
-  return <KeywordInput {...props} />
+  return <BaseKeywordInput {...props} />
 }

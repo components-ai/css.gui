@@ -82,7 +82,7 @@ export function DimensionInput(props: DimensionInputProps) {
     )
   }
 
-  return <DimensionInput {...props} />
+  return <BaseDimensionInput {...props} />
 }
 
 const BaseDimensionInput = ({

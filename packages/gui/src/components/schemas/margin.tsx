@@ -1,4 +1,4 @@
-import { BoxSide, boxSideSchema } from './boxSide'
+import { boxSideSchema } from './boxSide'
 import { lengthPercentage } from './primitives'
 
 const marginItem = lengthPercentage({
