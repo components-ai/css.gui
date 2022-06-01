@@ -1,7 +1,5 @@
-import { Header } from '@radix-ui/react-accordion'
 import { mapValues } from 'lodash-es'
 import { getInputProps } from '../../lib/util'
-import { Label } from '../primitives'
 import { InputHeader } from '../ui/InputHeader'
 import { DataTypeSchema } from './types'
 
