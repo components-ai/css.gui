@@ -116,5 +116,5 @@ export function boxSideSchema<T>({
 }
 
 function isLinked(value: BoxSide<any>) {
-  return isNil(value.bottom) && isNil(value.left) && isNil(value.right)
+  return isNil(value?.bottom) && isNil(value?.left) && isNil(value?.right)
 }
