@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.90
+
+### Patch Changes
+
+- e552e6e: Adds html elements and attributes
+
 ## 0.0.89
 
 ### Patch Changes
