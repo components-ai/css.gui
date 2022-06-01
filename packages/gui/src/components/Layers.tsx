@@ -7,11 +7,10 @@ import { kebabCase } from 'lodash-es'
 import { Label } from './primitives'
 import LayerHeader from './LayerHeader'
 import { flip, replace, remove } from '../lib/array'
+import { InputHeader } from './ui/InputHeader'
+import { EditorPropsWithLabel } from '../types/editor'
 
-interface LayersProps<T> {
-  label: string
-  value: T[]
-  onChange(newValue: T[]): void
+interface LayersProps<T> extends EditorPropsWithLabel<T[]> {
   /**
    * The component to render each of the individual input values.
    * (See `LayerProps` for what props this takes)
@@ -41,6 +40,7 @@ export default function Layers<T>({
   stringify,
   newItem,
   thumbnail,
+  ...props
 }: LayersProps<T>) {
   const id = `${useId()}-${kebabCase(label)}`
   const [expandedLayer, setExpandedLayer] = useState(-1)
@@ -51,7 +51,7 @@ export default function Layers<T>({
 
   return (
     <div>
-      <Label htmlFor={id}>{label}</Label>
+      <InputHeader label={label} {...props} />
       <Collapsible.Root id={id} defaultOpen>
         <Collapsible.Trigger
           sx={{
