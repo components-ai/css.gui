@@ -1,5 +1,14 @@
 # @compai/css-gui
 
+## 0.0.91
+
+### Patch Changes
+
+- 1b7b5b4: Improve stringification to handle edge cases
+- 5fad1da: Improve dimensional controls for space and border
+- 76a9a8b: Fix palette swatches/gradient stops
+- 32b0449: Export a schema version
+
 ## 0.0.90
 
 ### Patch Changes
