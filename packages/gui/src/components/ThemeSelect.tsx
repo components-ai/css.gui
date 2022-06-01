@@ -76,7 +76,7 @@ function ThemeSwatch({ theme, onSetTheme }: ThemeSwatchProps) {
           key={i}
           sx={{
             width: '1rem',
-            aspectRatio: '1 / 1',
+            height: '1rem',
             backgroundColor: color,
           }}
         />
