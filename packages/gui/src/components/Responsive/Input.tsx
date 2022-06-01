@@ -5,6 +5,7 @@ import { useTheme } from '../providers/ThemeContext'
 import { Label } from '../primitives'
 import { useEditorConfig } from '../providers/EditorConfigContext'
 import { DeletePropButton } from '../inputs/Dimension/Input'
+import { omit } from 'lodash-es'
 
 const DEFAULT_BREAKPOINT_COUNT = 3
 
@@ -75,7 +76,7 @@ export function ResponsiveInput<T>({
       value={value}
       onChange={handleChange}
       property={property}
-      {...componentProps}
+      {...omit(componentProps, ['label', 'value', 'onChange', 'onRemove'])}
     />
   )
 

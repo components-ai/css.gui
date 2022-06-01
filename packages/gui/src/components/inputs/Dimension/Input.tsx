@@ -77,7 +77,7 @@ export function DimensionInput(props: DimensionInputProps) {
       <ResponsiveInput
         {...(props as any)}
         Component={BaseDimensionInput}
-        componentProps={omit(props, ['label', 'value', 'onChange'])}
+        componentProps={omit(props, 'label', 'value', 'onChange', 'onRemove')}
       />
     )
   }

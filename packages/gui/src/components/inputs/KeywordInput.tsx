@@ -32,7 +32,7 @@ export function KeywordInput<T extends string>(props: Props<T>) {
       <ResponsiveInput
         {...(props as any)}
         Component={BaseKeywordInput}
-        componentProps={omit(props, ['label', 'value', 'onChange'])}
+        componentProps={omit(props, 'label', 'value', 'onChange', 'onRemove')}
       />
     )
   }

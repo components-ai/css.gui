@@ -1,11 +1,5 @@
-import {
-  CSSUnitValue,
-  Length,
-  Primitive,
-  ResponsiveLength,
-} from '../../types/css'
+import { CSSUnitValue, Primitive } from '../../types/css'
 import { EditorPropsWithLabel } from '../../types/editor'
-import { ResponsiveInput } from '../Responsive'
 import { ColorInput } from './ColorInput'
 import { DimensionInput } from './Dimension'
 import { KeywordInput } from './KeywordInput'
@@ -27,7 +21,7 @@ export function PrimitiveInput({ input, ...props }: Props) {
 function getPrimitiveInput(type: Primitive) {
   switch (type) {
     case 'keyword':
-      return KeywordInput
+      return KeywordInput2
     case 'number':
       return NumberInput
     case 'integer':
@@ -43,6 +37,11 @@ function getPrimitiveInput(type: Primitive) {
     case 'color':
       return ColorInput
   }
+}
+
+// remap the prop names
+const KeywordInput2 = ({ keywords, ...props }: any) => {
+  return <KeywordInput options={keywords} {...props} />
 }
 
 const NumberInput = ({
@@ -101,30 +100,6 @@ const PercentageInput = ({
       units={['%']}
       steps={{ '%': 0.1 }}
       {...props}
-    />
-  )
-}
-
-const ResponsiveLengthInput = ({
-  value,
-  onChange,
-  onRemove,
-  label,
-  property,
-  ...props
-}: EditorPropsWithLabel<Length | ResponsiveLength> & { property: string }) => {
-  return (
-    <ResponsiveInput
-      label={label}
-      value={value}
-      onChange={onChange}
-      onRemove={onRemove}
-      Component={LengthInput}
-      property={property}
-      componentProps={{
-        ...props,
-        keyword: true,
-      }}
     />
   )
 }

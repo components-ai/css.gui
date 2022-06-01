@@ -29,7 +29,6 @@ import { PositionInput } from '../inputs/PositionInput'
 import { UnitSteps } from '../../lib'
 import { pascalCase } from '../../lib/util'
 import { UnitRanges } from '../../data/ranges'
-import { DEFAULT_LENGTH } from '../../lib/constants'
 import { getDefaultValue } from '../../lib/defaults'
 import { MultidimensionInput } from '../inputs/Multidimension'
 import { Responsive } from '../Responsive/Input'
@@ -327,7 +326,6 @@ function MultidimensionLengthInput({
     <ResponsiveInput
       label={label}
       value={value}
-      defaultValue={DEFAULT_LENGTH as CSSUnitValue}
       onChange={onChange}
       onRemove={onRemove}
       Component={MultidimensionInput}
