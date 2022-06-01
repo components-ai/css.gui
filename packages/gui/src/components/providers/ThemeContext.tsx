@@ -5,11 +5,11 @@ const DEFAULT_THEME: Theme = {}
 interface ThemeContext {
   theme: Theme,
   setActiveTheme: (theme: Theme) => void
-  themes: Theme[]
+  themeOptions: Theme[]
 }
 const ThemeContext = React.createContext<ThemeContext>({
   theme: DEFAULT_THEME,
-  themes: [DEFAULT_THEME],
+  themeOptions: [DEFAULT_THEME],
   setActiveTheme: (theme: Theme) => {}
 })
 
@@ -42,7 +42,7 @@ export const ThemeProvider = ({ themes, children }: ThemeProviderProps) => {
   return (
     <ThemeContext.Provider value={{
       theme,
-      themes,
+      themeOptions: themes,
       setActiveTheme: (newTheme) => setTheme(newTheme),
     }}>
       {children}
