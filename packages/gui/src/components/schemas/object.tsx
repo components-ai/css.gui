@@ -24,7 +24,15 @@ export function objectSchema<T extends object>({
       return (
         <div>
           <Label>{props.label}</Label>
-          <div sx={{ display: 'grid', gap: 2 }}>
+          <div
+            sx={{
+              display: 'grid',
+              gap: 2,
+              px: 3,
+              borderLeft: '2px solid',
+              borderColor: 'border',
+            }}
+          >
             {keyOrder.map((key) => {
               const schema = fields[key]
               const Component = schema.input
