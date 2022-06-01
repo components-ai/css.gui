@@ -69,6 +69,8 @@ import * as marginProperties from '../components/schemas/margin'
 import * as overflowProperties from '../components/schemas/overflow'
 import * as overscrollProperties from '../components/schemas/overscroll'
 import * as paddingProperties from '../components/schemas/padding'
+import * as scrollMarginProperties from '../components/schemas/scroll-margin'
+import * as scrollPaddingProperties from '../components/schemas/scroll-padding'
 import * as textDecorationProperties from '../components/schemas/text-decoration'
 import * as transitionProperties from '../components/schemas/transition'
 
@@ -1854,73 +1856,8 @@ export const properties: Record<string, PropertyData> = {
     keywords: ['auto', 'thin', 'none'],
     defaultValue: 'auto',
   },
-  // TODO positional syntax
-  scrollPadding: {
-    input: 'length',
-    percentage: true,
-    keywords: ['auto'],
-    defaultValue: 'auto',
-  },
-  scrollPaddingBlock: {
-    input: 'length',
-    percentage: true,
-    keywords: ['auto'],
-    defaultValue: 'auto',
-  },
-  scrollPaddingBlockEnd: {
-    input: 'length',
-    percentage: true,
-    keywords: ['auto'],
-    defaultValue: 'auto',
-  },
-  scrollPaddingBlockStart: {
-    input: 'length',
-    percentage: true,
-    keywords: ['auto'],
-    defaultValue: 'auto',
-  },
-  scrollPaddingBottom: {
-    input: 'length',
-    percentage: true,
-    keywords: ['auto'],
-    defaultValue: 'auto',
-  },
-  scrollPaddingInline: {
-    input: 'length',
-    percentage: true,
-    keywords: ['auto'],
-    defaultValue: 'auto',
-  },
-  scrollPaddingInlineEnd: {
-    input: 'length',
-    percentage: true,
-    keywords: ['auto'],
-    defaultValue: 'auto',
-  },
-  scrollPaddingInlineStart: {
-    input: 'length',
-    percentage: true,
-    keywords: ['auto'],
-    defaultValue: 'auto',
-  },
-  scrollPaddingLeft: {
-    input: 'length',
-    percentage: true,
-    keywords: ['auto'],
-    defaultValue: 'auto',
-  },
-  scrollPaddingRight: {
-    input: 'length',
-    percentage: true,
-    keywords: ['auto'],
-    defaultValue: 'auto',
-  },
-  scrollPaddingTop: {
-    input: 'length',
-    percentage: true,
-    keywords: ['auto'],
-    defaultValue: 'auto',
-  },
+  ...scrollMarginProperties,
+  ...scrollPaddingProperties,
   // TODO: Add defaultValue
   scrollSnapAlign: {
     input: ScrollSnapAlignInput,
