@@ -1,6 +1,6 @@
 import { getInputProps } from '../../lib/util'
 import { SelectInput } from '../inputs/SelectInput'
-import { Label } from '../primitives'
+import { InputHeader } from '../ui/InputHeader'
 import { DataTypeSchema } from './types'
 
 interface CreateOptions<T extends Record<string, any>> {
@@ -24,7 +24,7 @@ export function optionsSchema<T extends Record<string, any>>({
       const Component = variants[type].input
       return (
         <div>
-          <Label>{props.label}</Label>
+          <InputHeader {...props} />
           <SelectInput
             {...getInputProps(props, 'type')}
             options={order as string[]}

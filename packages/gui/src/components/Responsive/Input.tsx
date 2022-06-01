@@ -5,17 +5,18 @@ import { useTheme } from '../providers/ThemeContext'
 import { Label } from '../primitives'
 import { useEditorConfig } from '../providers/EditorConfigContext'
 import { DeletePropButton } from '../inputs/Dimension/Input'
+import { omit } from 'lodash-es'
 
 const DEFAULT_BREAKPOINT_COUNT = 3
 
 export type Responsive<T> = T | T[]
 type ResponsiveInputProps<T> = {
   value?: Responsive<T>
-  defaultValue: Responsive<T>
   onChange: (newValue: Responsive<T>) => void
   onRemove?: () => void
   label: string
   property?: string
+  defaultValue?: T
   // TODO: Type this component
   Component: React.ComponentType<any>
   componentProps?: any
@@ -28,7 +29,6 @@ export function ResponsiveInput<T>({
   Component,
   componentProps = {},
   property,
-  defaultValue,
 }: ResponsiveInputProps<T>) {
   const { theme } = useTheme()
   const breakpoints = theme.breakpoints
@@ -51,10 +51,8 @@ export function ResponsiveInput<T>({
   }
 
   const handleSwitchFromResponsive = () => {
-    const newValue: Responsive<T> | undefined = Array.isArray(value)
-      ? value[0]
-      : value
-    onChange(newValue ?? defaultValue)
+    const newValue: Responsive<T> = Array.isArray(value) ? value[0] : value!
+    onChange(newValue)
   }
 
   const isResponsiveControls = Array.isArray(value)
@@ -80,7 +78,7 @@ export function ResponsiveInput<T>({
       value={value}
       onChange={handleChange}
       property={property}
-      {...componentProps}
+      {...omit(componentProps, ['label', 'value', 'onChange', 'onRemove'])}
     />
   )
 

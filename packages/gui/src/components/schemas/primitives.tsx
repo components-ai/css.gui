@@ -10,9 +10,9 @@ import {
 } from '../../types/css'
 import { AngleInput } from '../inputs/AngleInput'
 import { ColorInput } from '../inputs/ColorInput'
+import { KeywordInput } from '../inputs/KeywordInput'
 import { LengthInput } from '../inputs/LengthInput'
 import { NumberPercentageInput } from '../inputs/NumberPercentageInput'
-import { SelectInput } from '../inputs/SelectInput'
 import { TimeInput } from '../inputs/TimeInput'
 import { DataTypeSchema } from './types'
 
@@ -96,7 +96,7 @@ export function keyword<T extends string>(
   } = {}
 ): DataTypeSchema<T> {
   return {
-    input: bindProps(SelectInput, { options: options }),
+    input: bindProps(KeywordInput, { options }),
     stringify: (value) => value,
     defaultValue,
   }

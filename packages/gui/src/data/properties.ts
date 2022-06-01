@@ -63,6 +63,14 @@ import { DEFAULT_ANIMATION } from '../components/inputs/Animation/types'
 import { DEFAULT_BOX_SHADOW } from '../components/inputs/BoxShadow/types'
 import { textShadow } from '../components/schemas/text-shadow'
 import { filter } from '../components/schemas/filter'
+
+import * as borderProperties from '../components/schemas/border'
+import * as marginProperties from '../components/schemas/margin'
+import * as overflowProperties from '../components/schemas/overflow'
+import * as overscrollProperties from '../components/schemas/overscroll'
+import * as paddingProperties from '../components/schemas/padding'
+import * as scrollMarginProperties from '../components/schemas/scroll-margin'
+import * as scrollPaddingProperties from '../components/schemas/scroll-padding'
 import * as textDecorationProperties from '../components/schemas/text-decoration'
 import * as transitionProperties from '../components/schemas/transition'
 
@@ -472,11 +480,7 @@ export const properties: Record<string, PropertyData> = {
       unit: 'px',
     },
   },
-  borderBottomColor: {
-    input: 'color',
-    keywords: ['currentcolor', 'transparent'],
-    defaultValue: '#6465ff',
-  },
+  ...borderProperties,
   borderBottomLeftRadius: {
     input: 'multiLength',
     dimensions: 2,
@@ -484,117 +488,6 @@ export const properties: Record<string, PropertyData> = {
   borderBottomRightRadius: {
     input: 'multiLength',
     dimensions: 2,
-  },
-  borderBottomStyle: {
-    input: 'keyword',
-    keywords: [
-      'none',
-      'hidden',
-      'dotted',
-      'dashed',
-      'solid',
-      'double',
-      'groove',
-      'ridge',
-      'inset',
-      'outset',
-    ],
-    defaultValue: 'solid',
-  },
-  borderBottomWidth: {
-    input: 'length',
-    keywords: ['thin', 'medium', 'thick'],
-    range: {
-      [AbsoluteLengthUnits.Px]: [0, 512],
-      [FontRelativeLengthUnits.Em]: [0, 16],
-      [FontRelativeLengthUnits.Rem]: [0, 16],
-      [ViewportPercentageLengthUnits.Vh]: [0, 100],
-      [ViewportPercentageLengthUnits.Vw]: [0, 100],
-      [PercentageLengthUnits.Pct]: [0.1, 100],
-    },
-    defaultValue: {
-      value: 2,
-      unit: 'px',
-    },
-  },
-  borderLeftColor: {
-    input: 'color',
-    keywords: ['currentcolor', 'transparent'],
-    defaultValue: '#6465ff',
-  },
-  borderLeftStyle: {
-    input: 'keyword',
-    keywords: [
-      'none',
-      'hidden',
-      'dotted',
-      'dashed',
-      'solid',
-      'double',
-      'groove',
-      'ridge',
-      'inset',
-      'outset',
-    ],
-    defaultValue: 'solid',
-  },
-  borderLeftWidth: {
-    input: 'length',
-    keywords: ['thin', 'medium', 'thick'],
-    range: {
-      [AbsoluteLengthUnits.Px]: [0, 512],
-      [FontRelativeLengthUnits.Em]: [0, 16],
-      [FontRelativeLengthUnits.Rem]: [0, 16],
-      [ViewportPercentageLengthUnits.Vh]: [0, 100],
-      [ViewportPercentageLengthUnits.Vw]: [0, 100],
-      [PercentageLengthUnits.Pct]: [0.1, 100],
-    },
-    defaultValue: {
-      value: 1,
-      unit: 'px',
-    },
-  },
-  borderRightColor: {
-    input: 'color',
-    keywords: ['currentcolor', 'transparent'],
-    defaultValue: '#6465ff',
-  },
-  borderRightStyle: {
-    input: 'keyword',
-    keywords: [
-      'none',
-      'hidden',
-      'dotted',
-      'dashed',
-      'solid',
-      'double',
-      'groove',
-      'ridge',
-      'inset',
-      'outset',
-    ],
-    defaultValue: 'solid',
-  },
-  borderRightWidth: {
-    input: 'length',
-    keywords: ['thin', 'medium', 'thick'],
-    range: {
-      [AbsoluteLengthUnits.Px]: [0, 512],
-      [FontRelativeLengthUnits.Em]: [0, 16],
-      [FontRelativeLengthUnits.Rem]: [0, 16],
-      [ViewportPercentageLengthUnits.Vh]: [0, 100],
-      [ViewportPercentageLengthUnits.Vw]: [0, 100],
-      [PercentageLengthUnits.Pct]: [0.1, 100],
-    },
-    defaultValue: {
-      value: 1,
-      unit: 'px',
-    },
-  },
-  borderTopColor: {
-    input: 'color',
-    keywords: ['currentcolor', 'transparent'],
-    defaultValue: '#6465ff',
   },
   borderTopLeftRadius: {
     input: 'multiLength',
@@ -604,79 +497,10 @@ export const properties: Record<string, PropertyData> = {
     input: 'multiLength',
     dimensions: 2,
   },
-  borderTopStyle: {
-    input: 'keyword',
-    keywords: [
-      'none',
-      'hidden',
-      'dotted',
-      'dashed',
-      'solid',
-      'double',
-      'groove',
-      'ridge',
-      'inset',
-      'outset',
-    ],
-    defaultValue: 'solid',
-  },
-  borderTopWidth: {
-    input: 'length',
-    keywords: ['thin', 'medium', 'thick'],
-    range: {
-      [AbsoluteLengthUnits.Px]: [0, 512],
-      [FontRelativeLengthUnits.Em]: [0, 16],
-      [FontRelativeLengthUnits.Rem]: [0, 16],
-      [ViewportPercentageLengthUnits.Vh]: [0, 100],
-      [ViewportPercentageLengthUnits.Vw]: [0, 100],
-      [PercentageLengthUnits.Pct]: [0.1, 100],
-    },
-    defaultValue: {
-      value: 1,
-      unit: 'px',
-    },
-  },
-  borderColor: {
-    input: 'color',
-    keywords: ['currentcolor', 'transparent'],
-    defaultValue: '#6465ff',
-  },
   // TODO: Add defaultValue
   borderSpacing: {
     input: BorderSpacingInput,
     stringify: stringifyBorderSpacing,
-  },
-  borderStyle: {
-    input: 'keyword',
-    keywords: [
-      'none',
-      'hidden',
-      'dotted',
-      'dashed',
-      'solid',
-      'double',
-      'groove',
-      'ridge',
-      'inset',
-      'outset',
-    ],
-    defaultValue: 'solid',
-  },
-  borderWidth: {
-    input: 'length',
-    keywords: ['thin', 'medium', 'thick'],
-    range: {
-      [AbsoluteLengthUnits.Px]: [0, 512],
-      [FontRelativeLengthUnits.Em]: [0, 16],
-      [FontRelativeLengthUnits.Rem]: [0, 16],
-      [ViewportPercentageLengthUnits.Vh]: [0, 100],
-      [ViewportPercentageLengthUnits.Vw]: [0, 100],
-      [PercentageLengthUnits.Pct]: [0.1, 100],
-    },
-    defaultValue: {
-      value: 1,
-      unit: 'px',
-    },
   },
   bottom: {
     input: 'length',
@@ -1545,51 +1369,7 @@ export const properties: Record<string, PropertyData> = {
     keywords: ['none', 'baseline', 'contain'],
     defaultValue: 'none',
   },
-  margin: {
-    input: 'length',
-    percentage: true,
-    keywords: ['auto'],
-    defaultValue: {
-      value: 0,
-      unit: 'px',
-    },
-  },
-  marginTop: {
-    input: 'length',
-    percentage: true,
-    keywords: ['auto'],
-    defaultValue: {
-      value: 0,
-      unit: 'px',
-    },
-  },
-  marginLeft: {
-    input: 'length',
-    percentage: true,
-    keywords: ['auto'],
-    defaultValue: {
-      value: 0,
-      unit: 'px',
-    },
-  },
-  marginBottom: {
-    input: 'length',
-    percentage: true,
-    keywords: ['auto'],
-    defaultValue: {
-      value: 0,
-      unit: 'px',
-    },
-  },
-  marginRight: {
-    input: 'length',
-    percentage: true,
-    keywords: ['auto'],
-    defaultValue: {
-      value: 0,
-      unit: 'px',
-    },
-  },
+  ...marginProperties,
   marqueeDirection: {
     input: 'keyword',
     keywords: ['forward', 'reverse'],
@@ -1915,19 +1695,10 @@ export const properties: Record<string, PropertyData> = {
       unit: 'px',
     },
   },
-  overflow: {
-    input: 'keyword',
-    keywords: ['visible', 'hidden', 'clip', 'scroll', 'auto', 'hidden visible'],
-    defaultValue: 'visible',
-  },
+  ...overflowProperties,
   overflowAnchor: {
     input: 'keyword',
     keywords: ['auto', 'none'],
-    defaultValue: 'auto',
-  },
-  overflowBlock: {
-    input: 'keyword',
-    keywords: ['visible', 'hidden', 'scroll', 'auto'],
     defaultValue: 'auto',
   },
   overflowClipMargin: {
@@ -1935,91 +1706,13 @@ export const properties: Record<string, PropertyData> = {
     input: 'length',
     percentage: true,
   },
-  overflowInline: {
-    input: 'keyword',
-    keywords: ['visible', 'hidden', 'scroll', 'auto'],
-    defaultValue: 'auto',
-  },
   overflowWrap: {
     input: 'keyword',
     keywords: ['normal', 'break-word', 'anywhere'],
     defaultValue: 'normal',
   },
-  overflowX: {
-    input: 'keyword',
-    keywords: ['visible', 'hidden', 'clip', 'scroll', 'auto'],
-    defaultValue: 'auto',
-  },
-  overflowY: {
-    input: 'keyword',
-    keywords: ['visible', 'hidden', 'clip', 'scroll', 'auto'],
-    defaultValue: 'auto',
-  },
-  overscrollBehavior: {
-    input: 'keyword',
-    keywords: ['auto', 'contain', 'none', 'auto contain'],
-    defaultValue: 'auto',
-  },
-  overscrollBehaviorBlock: {
-    input: 'keyword',
-    keywords: ['auto', 'contain', 'none'],
-    defaultValue: 'auto',
-  },
-  overscrollBehaviorInline: {
-    input: 'keyword',
-    keywords: ['auto', 'contain', 'none'],
-    defaultValue: 'auto',
-  },
-  overscrollBehaviorX: {
-    input: 'keyword',
-    keywords: ['auto', 'contain', 'none'],
-    defaultValue: 'auto',
-  },
-  overscrollBehaviorY: {
-    input: 'keyword',
-    keywords: ['auto', 'contain', 'none'],
-    defaultValue: 'auto',
-  },
-  padding: {
-    input: 'length',
-    percentage: true,
-    defaultValue: {
-      value: 0,
-      unit: 'px',
-    },
-  },
-  paddingTop: {
-    input: 'length',
-    percentage: true,
-    defaultValue: {
-      value: 0,
-      unit: 'px',
-    },
-  },
-  paddingLeft: {
-    input: 'length',
-    percentage: true,
-    defaultValue: {
-      value: 0,
-      unit: 'px',
-    },
-  },
-  paddingBottom: {
-    input: 'length',
-    percentage: true,
-    defaultValue: {
-      value: 0,
-      unit: 'px',
-    },
-  },
-  paddingRight: {
-    input: 'length',
-    percentage: true,
-    defaultValue: {
-      value: 0,
-      unit: 'px',
-    },
-  },
+  ...overscrollProperties,
+  ...paddingProperties,
   // TODO: Add defaultValue
   perspective: {
     input: 'length',
@@ -2163,73 +1856,8 @@ export const properties: Record<string, PropertyData> = {
     keywords: ['auto', 'thin', 'none'],
     defaultValue: 'auto',
   },
-  // TODO positional syntax
-  scrollPadding: {
-    input: 'length',
-    percentage: true,
-    keywords: ['auto'],
-    defaultValue: 'auto',
-  },
-  scrollPaddingBlock: {
-    input: 'length',
-    percentage: true,
-    keywords: ['auto'],
-    defaultValue: 'auto',
-  },
-  scrollPaddingBlockEnd: {
-    input: 'length',
-    percentage: true,
-    keywords: ['auto'],
-    defaultValue: 'auto',
-  },
-  scrollPaddingBlockStart: {
-    input: 'length',
-    percentage: true,
-    keywords: ['auto'],
-    defaultValue: 'auto',
-  },
-  scrollPaddingBottom: {
-    input: 'length',
-    percentage: true,
-    keywords: ['auto'],
-    defaultValue: 'auto',
-  },
-  scrollPaddingInline: {
-    input: 'length',
-    percentage: true,
-    keywords: ['auto'],
-    defaultValue: 'auto',
-  },
-  scrollPaddingInlineEnd: {
-    input: 'length',
-    percentage: true,
-    keywords: ['auto'],
-    defaultValue: 'auto',
-  },
-  scrollPaddingInlineStart: {
-    input: 'length',
-    percentage: true,
-    keywords: ['auto'],
-    defaultValue: 'auto',
-  },
-  scrollPaddingLeft: {
-    input: 'length',
-    percentage: true,
-    keywords: ['auto'],
-    defaultValue: 'auto',
-  },
-  scrollPaddingRight: {
-    input: 'length',
-    percentage: true,
-    keywords: ['auto'],
-    defaultValue: 'auto',
-  },
-  scrollPaddingTop: {
-    input: 'length',
-    percentage: true,
-    keywords: ['auto'],
-    defaultValue: 'auto',
-  },
+  ...scrollMarginProperties,
+  ...scrollPaddingProperties,
   // TODO: Add defaultValue
   scrollSnapAlign: {
     input: ScrollSnapAlignInput,

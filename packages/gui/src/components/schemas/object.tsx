@@ -1,6 +1,6 @@
 import { mapValues } from 'lodash-es'
 import { getInputProps } from '../../lib/util'
-import { Label } from '../primitives'
+import { InputHeader } from '../ui/InputHeader'
 import { DataTypeSchema } from './types'
 
 interface CreateObject<T extends object> {
@@ -23,8 +23,13 @@ export function objectSchema<T extends object>({
     input(props) {
       return (
         <div>
-          <Label>{props.label}</Label>
-          <div sx={{ display: 'grid', gap: 2 }}>
+          <InputHeader {...props} />
+          <div
+            sx={{
+              display: 'grid',
+              gap: 2,
+            }}
+          >
             {keyOrder.map((key) => {
               const schema = fields[key]
               const Component = schema.input

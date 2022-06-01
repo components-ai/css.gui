@@ -1,16 +1,9 @@
-import { DEFAULT_LENGTH } from '../../lib/constants'
-import {
-  CSSUnitValue,
-  Length,
-  Primitive,
-  ResponsiveLength,
-} from '../../types/css'
+import { CSSUnitValue, Primitive } from '../../types/css'
 import { EditorPropsWithLabel } from '../../types/editor'
-import { ResponsiveInput } from '../Responsive'
 import { ColorInput } from './ColorInput'
 import { DimensionInput } from './Dimension'
+import { KeywordInput } from './KeywordInput'
 import { LengthInput } from './LengthInput'
-import { SelectInput } from './SelectInput'
 import { StringInput } from './StringInput'
 import { TimeInput } from './TimeInput'
 
@@ -28,7 +21,7 @@ export function PrimitiveInput({ input, ...props }: Props) {
 function getPrimitiveInput(type: Primitive) {
   switch (type) {
     case 'keyword':
-      return KeywordInput
+      return KeywordInput2
     case 'number':
       return NumberInput
     case 'integer':
@@ -36,7 +29,7 @@ function getPrimitiveInput(type: Primitive) {
     case 'percentage':
       return PercentageInput
     case 'length':
-      return ResponsiveLengthInput
+      return LengthInput
     case 'time':
       return TimeInput
     case 'string':
@@ -46,43 +39,9 @@ function getPrimitiveInput(type: Primitive) {
   }
 }
 
-const DEFAULT_KEYWORD = 'inherit'
-const KeywordInput = ({
-  value,
-  onChange,
-  onRemove,
-  label,
-  keywords,
-  responsive,
-}: EditorPropsWithLabel<string> & {
-  keywords: string[]
-  responsive?: boolean
-}) => {
-  if (responsive) {
-    return (
-      <ResponsiveInput
-        label={label}
-        value={value}
-        onChange={(newValue: any) => onChange(newValue)}
-        defaultValue={DEFAULT_KEYWORD}
-        onRemove={onRemove}
-        Component={SelectInput}
-        componentProps={{
-          options: keywords,
-        }}
-      />
-    )
-  }
-
-  return (
-    <SelectInput
-      label={label}
-      value={value || DEFAULT_KEYWORD}
-      onChange={onChange}
-      onRemove={onRemove}
-      options={keywords}
-    />
-  )
+// remap the prop names
+const KeywordInput2 = ({ keywords, ...props }: any) => {
+  return <KeywordInput options={keywords} {...props} />
 }
 
 const NumberInput = ({
@@ -141,31 +100,6 @@ const PercentageInput = ({
       units={['%']}
       steps={{ '%': 0.1 }}
       {...props}
-    />
-  )
-}
-
-const ResponsiveLengthInput = ({
-  value,
-  onChange,
-  onRemove,
-  label,
-  property,
-  ...props
-}: EditorPropsWithLabel<Length | ResponsiveLength> & { property: string }) => {
-  return (
-    <ResponsiveInput
-      label={label}
-      value={value}
-      defaultValue={DEFAULT_LENGTH}
-      onChange={onChange}
-      onRemove={onRemove}
-      Component={LengthInput}
-      property={property}
-      componentProps={{
-        ...props,
-        keyword: true,
-      }}
     />
   )
 }

@@ -1,5 +1,7 @@
 import { AbsoluteLengthUnits, Length } from '../types/css'
 
+export const SCHEMA_VERSION = 1
+
 export const THEME_ALIASES: Record<string, string> = {
   bg: 'backgroundColor',
   m: 'margin',
