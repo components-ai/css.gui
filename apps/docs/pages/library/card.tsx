@@ -15,14 +15,14 @@ const initialValue: any = {
     alignItems: 'stretch',
     flexDirection: 'column',
     textDecoration: 'none',
-    overflow: 'hidden',
+    overflow: ['hidden'],
     height: 'auto',
   },
   children: [
     {
       tagName: 'section',
       style: {
-        overflow: 'hidden',
+        overflow: ['hidden'],
         maxHeight: { value: 40, unit: 'vh' },
         minHeight: [
           { value: 160, unit: 'px' },
