@@ -5,15 +5,14 @@ import { DataTypeSchema } from './types'
 import * as Toggle from '@radix-ui/react-toggle'
 import { Link } from 'react-feather'
 
-interface CreateAxisSchema<T, K extends string> {
+interface CreateAxisSchema<T> {
   itemSchema: DataTypeSchema<T>
-  keywords?: K[]
 }
 
-export function axisSchema<T, K extends string>({
+export function axisSchema<T>({
   itemSchema,
 }: // keywords = [],
-CreateAxisSchema<T, K>): DataTypeSchema<{ x: T; y?: T }> {
+CreateAxisSchema<T>): DataTypeSchema<{ x: T; y?: T }> {
   return {
     input(props) {
       const linked = isNil(props.value.y)
@@ -46,12 +45,7 @@ CreateAxisSchema<T, K>): DataTypeSchema<{ x: T; y?: T }> {
               <Link size={14} />
             </Toggle.Root>
             <ItemInput {...getInputProps(props, 'x')} />
-            {!linked ? (
-              <ItemInput {...getInputProps(props, 'y' as any)} />
-            ) : (
-              // TODO should disable this input
-              <ItemInput {...getInputProps(props, 'x')} label="Y" />
-            )}
+            {!linked && <ItemInput {...getInputProps(props, 'y' as any)} />}
           </div>
         </div>
       )
