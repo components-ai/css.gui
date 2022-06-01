@@ -10,7 +10,7 @@ export const DimensionExample = () => {
     <div>
       <div sx={{ width: 256, ml: 0 }}>
         <DimensionInput
-          label="Dimension"
+          label="Font Size"
           value={value}
           onChange={setValue}
           units={['px', 'em', 'rem']}

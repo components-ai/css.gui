@@ -14,29 +14,101 @@ import { isVoidElement } from '../../lib/elements'
 import { isSamePath } from './util'
 
 const HTML_TAGS = [
-  HTMLTag.P,
-  HTMLTag.Img,
-  HTMLTag.Button,
   HTMLTag.A,
-  HTMLTag.Input,
+  HTMLTag.Abbr,
+  HTMLTag.Address,
+  HTMLTag.Article,
+  HTMLTag.Aside,
+  HTMLTag.Audio,
+  HTMLTag.B,
+  HTMLTag.Bdi,
+  HTMLTag.Bdo,
+  HTMLTag.Blockquote,
+  HTMLTag.Br,
+  HTMLTag.Button,
+  HTMLTag.Caption,
+  HTMLTag.Code,
+  HTMLTag.Col,
+  HTMLTag.Colgroup,
+  HTMLTag.Data,
+  HTMLTag.Datalist,
+  HTMLTag.Dd,
+  HTMLTag.Del,
+  HTMLTag.Details,
+  HTMLTag.Dfn,
+  HTMLTag.Dialog,
+  HTMLTag.Div,
+  HTMLTag.Dl,
+  HTMLTag.Dt,
+  HTMLTag.Em,
+  HTMLTag.Fieldset,
+  HTMLTag.Figcaption,
+  HTMLTag.Figure,
+  HTMLTag.Footer,
+  HTMLTag.Form,
   HTMLTag.H1,
   HTMLTag.H2,
   HTMLTag.H3,
   HTMLTag.H4,
   HTMLTag.H5,
   HTMLTag.H6,
-  HTMLTag.Span,
-  HTMLTag.Main,
-  HTMLTag.Div,
-  HTMLTag.Section,
-  HTMLTag.Article,
   HTMLTag.Header,
+  HTMLTag.Hr,
+  HTMLTag.I,
+  HTMLTag.Img,
+  HTMLTag.Input,
+  HTMLTag.Ins,
+  HTMLTag.Kbd,
+  HTMLTag.Label,
+  HTMLTag.Legend,
+  HTMLTag.Li,
+  HTMLTag.Main,
+  HTMLTag.Mark,
+  HTMLTag.Menu,
+  HTMLTag.Menuitem,
+  HTMLTag.Meter,
   HTMLTag.Nav,
-  HTMLTag.Footer,
-  HTMLTag.Aside,
-  HTMLTag.Dl,
-  HTMLTag.Dt,
-  HTMLTag.Dd,
+  HTMLTag.Noscript,
+  HTMLTag.Ol,
+  HTMLTag.Optgroup,
+  HTMLTag.Option,
+  HTMLTag.Output,
+  HTMLTag.P,
+  HTMLTag.Picture,
+  HTMLTag.Pre,
+  HTMLTag.Progress,
+  HTMLTag.Q,
+  HTMLTag.Rp,
+  HTMLTag.Rt,
+  HTMLTag.Rtc,
+  HTMLTag.Ruby,
+  HTMLTag.S,
+  HTMLTag.Samp,
+  HTMLTag.Span,
+  HTMLTag.Section,
+  HTMLTag.Select,
+  HTMLTag.Source,
+  HTMLTag.Slot,
+  HTMLTag.Small,
+  HTMLTag.Sub,
+  HTMLTag.Summary,
+  HTMLTag.Sup,
+  HTMLTag.Table,
+  HTMLTag.Tbody,
+  HTMLTag.Td,
+  HTMLTag.Template,
+  HTMLTag.TextArea,
+  HTMLTag.Tfoot,
+  HTMLTag.Th,
+  HTMLTag.Thead,
+  HTMLTag.Time,
+  HTMLTag.Tr,
+  HTMLTag.Track,
+  HTMLTag.U,
+  HTMLTag.Ul,
+  HTMLTag.Var,
+  HTMLTag.Video,
+  HTMLTag.Wbr,
 ]
 
 interface HtmlEditorProps {
@@ -55,6 +127,16 @@ export function HtmlEditor({ onChange }: HtmlEditorProps) {
         display: 'flex',
         width: 'auto',
         height: '100%',
+        '*': {
+          boxSizing: 'border-box',
+          //outline: '1px solid rgba(125,125,180,.5)',
+        },
+        '*:before': {
+          boxSizing: 'border-box'
+        },
+        '*:after': {
+          boxSizing: 'border-box'
+        },
       }}
     >
       <div
@@ -243,10 +325,13 @@ function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
       <div sx={{ cursor: 'default' }}>
         <button
           sx={{
+            appearance: 'none',
             border: 'none',
             backgroundColor: 'background',
             color: 'text',
             fontWeight: isSelected ? 600 : 400,
+            textAlign: 'start',
+            fontSize: 0,
           }}
           onClick={() => onSelect(path)}
         >
@@ -263,8 +348,12 @@ function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
         border: 'none',
         backgroundColor: 'background',
         color: 'text',
-        fontSize: '1rem',
+        fontSize: 1,
         fontWeight: isSelected ? 600 : 400,
+        px: 0,
+        mr: 0,
+        ml: 0,
+        textAlign: 'start',
       }}
       onClick={() => onSelect(path)}
     >
@@ -284,19 +373,24 @@ function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
           border: 'none',
           backgroundColor: 'background',
           color: 'text',
-          cursor: 'default',
+          cursor: 'pointer',
+          width: '16px',
+          height: '16px',
+          display: 'inline-flex',
+          alignItems: 'center',
+          fontFamily: 'monospace',
           ':before': {
             cursor: 'default',
             content: open ? '"▼"' : '"▶︎"',
-            display: 'inline-block',
-            width: '1rem',
-            height: '1rem',
-            position: 'relative',
-            top: '-2px',
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: '100%',
+            width: '100%',
           },
         }}
       />
-      {tagButton}
+      <span sx={{ lineHeight: 1, fontFamily: 'monospace' }}>{tagButton}</span>
       <Collapsible.Content>
         <div sx={{ ml: 4 }}>
           {value.children?.map((child, i) => {
@@ -339,7 +433,34 @@ function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
             }}
           />
         </div>
-        <div sx={{ ml: '1rem' }}>&lt;/{value.tagName}&gt;</div>
+        <div sx={{ display: 'flex', alignItems: 'center', }}>
+          <div
+          sx={{
+            border: '0',
+            backgroundColor: 'background',
+            color: 'text',
+            cursor: 'pointer',
+            width: '16px',
+            height: '16px',
+            display: 'flex',
+            alignItems: 'center',
+            fontFamily: 'monospace',
+            fontSize: 1,
+            p: 0,
+            mr: '1px',
+            ':before': {
+              boxSizing: 'border-box',
+              cursor: 'default',
+              content: '" "',
+              whiteSpace: 'pre',
+              height: '100%',
+              width: '100%',
+            },
+          }}>
+          </div>
+          <div sx={{ 
+            fontWeight: isSelected ? 600 : 400, lineHeight: 1, p: 0, fontSize: 1, fontFamily: 'monospace' }}>&lt;/{value.tagName}&gt;</div>
+        </div>
       </Collapsible.Content>
     </Collapsible.Root>
   )
