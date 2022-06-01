@@ -6,7 +6,7 @@ import { useTheme } from "./providers/ThemeContext";
 
 export function ThemeSelect() {
   const [open, setOpen] = useState<boolean>(false)
-  const { theme, setActiveTheme, themeOptions } = useTheme()
+  const { theme, setTheme, themeOptions } = useTheme()
 
   return (
     <div>
@@ -36,7 +36,7 @@ export function ThemeSelect() {
             {themeOptions.map((themeVal) => {
               return (
                 <ThemeSwatch theme={themeVal} onSetTheme={() => {
-                  setActiveTheme(themeVal)
+                  setTheme(themeVal)
                   setOpen(false)
                 }} />
               )

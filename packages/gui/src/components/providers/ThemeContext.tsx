@@ -4,13 +4,13 @@ import { Theme } from '../../types/theme'
 const DEFAULT_THEME: Theme = {}
 interface ThemeContext {
   theme: Theme,
-  setActiveTheme: (theme: Theme) => void
+  setTheme: (theme: Theme) => void
   themeOptions: Theme[]
 }
 const ThemeContext = React.createContext<ThemeContext>({
   theme: DEFAULT_THEME,
   themeOptions: [DEFAULT_THEME],
-  setActiveTheme: (theme: Theme) => {}
+  setTheme: (theme: Theme) => {}
 })
 
 export const useTheme = (): ThemeContext => {
@@ -43,7 +43,7 @@ export const ThemeProvider = ({ themes, children }: ThemeProviderProps) => {
     <ThemeContext.Provider value={{
       theme,
       themeOptions: themes,
-      setActiveTheme: (newTheme) => setTheme(newTheme),
+      setTheme,
     }}>
       {children}
     </ThemeContext.Provider>
