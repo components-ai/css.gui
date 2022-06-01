@@ -3,11 +3,13 @@ import { createContext, ReactChild, useContext } from 'react'
 const DEFAULT_EDITOR_CONFIG = {
   hideResponsiveControls: false,
   showAddProperties: false,
+  showThemeSelect: false
 }
 
 export type EditorConfig = {
   hideResponsiveControls?: boolean
   showAddProperties?: boolean
+  showThemeSelect?: boolean
 }
 
 export function useEditorConfig() {
