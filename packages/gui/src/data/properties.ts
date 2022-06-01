@@ -64,10 +64,11 @@ import { DEFAULT_BOX_SHADOW } from '../components/inputs/BoxShadow/types'
 import { textShadow } from '../components/schemas/text-shadow'
 import { filter } from '../components/schemas/filter'
 
+import * as marginProperties from '../components/schemas/margin'
+import * as overflowProperties from '../components/schemas/overflow'
 import * as overscrollProperties from '../components/schemas/overscroll'
 import * as textDecorationProperties from '../components/schemas/text-decoration'
 import * as transitionProperties from '../components/schemas/transition'
-import * as overflowProperties from '../components/schemas/overflow'
 
 type PropertyData = {
   input: string | ComponentType<EditorPropsWithLabel<any>>
@@ -1548,51 +1549,7 @@ export const properties: Record<string, PropertyData> = {
     keywords: ['none', 'baseline', 'contain'],
     defaultValue: 'none',
   },
-  margin: {
-    input: 'length',
-    percentage: true,
-    keywords: ['auto'],
-    defaultValue: {
-      value: 0,
-      unit: 'px',
-    },
-  },
-  marginTop: {
-    input: 'length',
-    percentage: true,
-    keywords: ['auto'],
-    defaultValue: {
-      value: 0,
-      unit: 'px',
-    },
-  },
-  marginLeft: {
-    input: 'length',
-    percentage: true,
-    keywords: ['auto'],
-    defaultValue: {
-      value: 0,
-      unit: 'px',
-    },
-  },
-  marginBottom: {
-    input: 'length',
-    percentage: true,
-    keywords: ['auto'],
-    defaultValue: {
-      value: 0,
-      unit: 'px',
-    },
-  },
-  marginRight: {
-    input: 'length',
-    percentage: true,
-    keywords: ['auto'],
-    defaultValue: {
-      value: 0,
-      unit: 'px',
-    },
-  },
+  ...marginProperties,
   marqueeDirection: {
     input: 'keyword',
     keywords: ['forward', 'reverse'],

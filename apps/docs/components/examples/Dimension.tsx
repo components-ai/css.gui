@@ -1,9 +1,5 @@
 import { useState } from 'react'
-import {
-  DimensionInput,
-  Dimension,
-  stringifyProperty,
-} from '@compai/css-gui'
+import { DimensionInput, Dimension, stringifyProperty } from '@compai/css-gui'
 
 export const DimensionExample = () => {
   const [value, setValue] = useState<Dimension>({
@@ -14,6 +10,7 @@ export const DimensionExample = () => {
     <div>
       <div sx={{ width: 256, ml: 0 }}>
         <DimensionInput
+          label="Dimension"
           value={value}
           onChange={setValue}
           units={['px', 'em', 'rem']}
