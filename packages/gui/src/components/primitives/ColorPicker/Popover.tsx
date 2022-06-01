@@ -69,6 +69,7 @@ function Swatch({ value }: { value: string }) {
       sx={{
         position: 'relative',
         width: '1.25rem',
+        height: '1.25rem',
         aspectRatio: '1 / 1',
         borderRadius: '0.25rem',
         overflow: 'hidden',
