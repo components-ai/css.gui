@@ -119,7 +119,7 @@ export function EditorProvider<V>({
   const value = stylesToEditorSchema(providedValue)
 
   return (
-    <ThemeProvider themes={[(theme || outerTheme)]}>
+    <ThemeProvider theme={(theme || outerTheme)}>
       <ThemeUIProvider theme={uiTheme}>
         <EditorConfigProvider config={editorConfig}>
           <DynamicControlsProvider>

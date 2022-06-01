@@ -31,18 +31,19 @@ export const useThemeProperty = (property?: string): any[] => {
 }
 
 type ThemeProviderProps = {
-  themes: Theme[]
+  theme: Theme
+  themes?: Theme[]
   children: any
 }
-export const ThemeProvider = ({ themes, children }: ThemeProviderProps) => {
+export const ThemeProvider = ({ theme: providedTheme, themes, children }: ThemeProviderProps) => {
   const [theme, setTheme] = React.useState<Theme>(
-    (themes.length && themes[0]) || {}
+    providedTheme || (themes?.length && themes[0]) || {}
   )
 
   return (
     <ThemeContext.Provider value={{
       theme,
-      themeOptions: themes,
+      themeOptions: themes || [theme],
       setTheme,
     }}>
       {children}

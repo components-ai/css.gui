@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Theme } from "../types/theme";
 import { Label } from "./primitives";
 import { useTheme } from "./providers/ThemeContext";
+import hash from 'object-hash'
 
 export function ThemeSelect() {
   const [open, setOpen] = useState<boolean>(false)
@@ -24,7 +25,7 @@ export function ThemeSelect() {
             p: 2,
           }}
         >
-          <ThemeSwatch key={Math.random()} theme={theme} /> 
+          <ThemeSwatch key={hash(theme)} theme={theme} /> 
         </Popover.Trigger>
         <Popover.Content>
           <div sx={{

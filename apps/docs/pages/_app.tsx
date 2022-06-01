@@ -49,7 +49,7 @@ const App = ({ Component, pageProps }: AppProps) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <EditorThemeProvider themes={[importTheme(theme)]}>
+      <EditorThemeProvider theme={importTheme(theme)}>
         <Head />
         <AppLayout>
           <Component {...pageProps} />
