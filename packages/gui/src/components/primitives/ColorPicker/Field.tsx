@@ -155,6 +155,7 @@ function ActionButton(props: ButtonHTMLAttributes<HTMLButtonElement>) {
         padding: 1,
         borderRadius: '9999px',
         aspectRatio: '1 / 1',
+        height: '1.5rem',
         width: '1.5rem',
         ':hover': {
           backgroundColor: 'backgroundOffset',

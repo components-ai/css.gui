@@ -70,7 +70,11 @@ export function tupleSchema<K extends string, T>({
       )
     },
     stringify(value) {
-      return value.map((item) => itemSchema.stringify(item)).join(' ')
+      if (typeof value === 'string') {
+        return value
+      }
+
+      return value?.map((item) => itemSchema.stringify(item)).join(' ') ?? null
     },
     defaultValue: [itemSchema.defaultValue],
   }
