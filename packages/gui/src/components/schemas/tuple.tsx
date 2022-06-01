@@ -1,21 +1,29 @@
-import { isNil } from 'lodash-es'
 import { getInputProps } from '../../lib/util'
 import { Label } from '../primitives'
 import { DataTypeSchema } from './types'
 import * as Toggle from '@radix-ui/react-toggle'
 import { Link } from 'react-feather'
 
-interface CreateAxisSchema<T> {
+interface CreateTupleSchema<K, T> {
   itemSchema: DataTypeSchema<T>
+  labels: K[]
 }
 
-export function axisSchema<T>({
+/**
+ * Schema for elements that take a set of values
+ * in a defined order that may be linked together
+ * (e.g. x/y, row/column, start/end)
+ */
+export function tupleSchema<K extends string, T>({
   itemSchema,
-}: // keywords = [],
-CreateAxisSchema<T>): DataTypeSchema<{ x: T; y?: T }> {
+  labels,
+}: CreateTupleSchema<K, T>): DataTypeSchema<T[]> {
+  function isLinked(value: T[]) {
+    return value.length <= 1
+  }
   return {
     input(props) {
-      const linked = isNil(props.value.y)
+      const linked = isLinked(props.value)
       const ItemInput = itemSchema.input
       return (
         <div>
@@ -36,27 +44,34 @@ CreateAxisSchema<T>): DataTypeSchema<{ x: T; y?: T }> {
               pressed={linked}
               onPressedChange={(pressed) => {
                 if (pressed) {
-                  props.onChange({ x: props.value.x })
+                  props.onChange([props.value[0]])
                 } else {
-                  props.onChange({ x: props.value.x, y: props.value.x })
+                  props.onChange(labels.map(() => props.value[0]))
                 }
               }}
             >
               <Link size={14} />
             </Toggle.Root>
-            <ItemInput {...getInputProps(props, 'x')} />
-            {!linked && <ItemInput {...getInputProps(props, 'y' as any)} />}
+            {linked ? (
+              <ItemInput {...getInputProps(props, 0)} label="" />
+            ) : (
+              labels.map((label, i) => {
+                return (
+                  <ItemInput
+                    key={label}
+                    {...getInputProps(props, i)}
+                    label={label}
+                  />
+                )
+              })
+            )}
           </div>
         </div>
       )
     },
     stringify(value) {
-      const { x, y } = value
-      if (isNil(y)) {
-        return itemSchema.stringify(x)
-      }
-      return `${itemSchema.stringify(x)} ${itemSchema.stringify(y)}`
+      return value.map(itemSchema.stringify).join(' ')
     },
-    defaultValue: { x: itemSchema.defaultValue, y: itemSchema.defaultValue },
+    defaultValue: labels.map(() => itemSchema.defaultValue),
   }
 }

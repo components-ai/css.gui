@@ -1,4 +1,4 @@
-import { axisSchema } from './axis'
+import { tupleSchema } from './tuple'
 import { keyword } from './primitives'
 
 const overflowKeywords = [
@@ -15,4 +15,7 @@ export const overflowY = overflowAxis
 export const overflowInline = overflowAxis
 export const overflowBlock = overflowAxis
 
-export const overflow = axisSchema({ itemSchema: overflowAxis })
+export const overflow = tupleSchema({
+  itemSchema: overflowAxis,
+  labels: ['x', 'y'],
+})
