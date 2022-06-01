@@ -68,6 +68,7 @@ import * as borderProperties from '../components/schemas/border'
 import * as marginProperties from '../components/schemas/margin'
 import * as overflowProperties from '../components/schemas/overflow'
 import * as overscrollProperties from '../components/schemas/overscroll'
+import * as paddingProperties from '../components/schemas/padding'
 import * as textDecorationProperties from '../components/schemas/text-decoration'
 import * as transitionProperties from '../components/schemas/transition'
 
@@ -1709,46 +1710,7 @@ export const properties: Record<string, PropertyData> = {
     defaultValue: 'normal',
   },
   ...overscrollProperties,
-  padding: {
-    input: 'length',
-    percentage: true,
-    defaultValue: {
-      value: 0,
-      unit: 'px',
-    },
-  },
-  paddingTop: {
-    input: 'length',
-    percentage: true,
-    defaultValue: {
-      value: 0,
-      unit: 'px',
-    },
-  },
-  paddingLeft: {
-    input: 'length',
-    percentage: true,
-    defaultValue: {
-      value: 0,
-      unit: 'px',
-    },
-  },
-  paddingBottom: {
-    input: 'length',
-    percentage: true,
-    defaultValue: {
-      value: 0,
-      unit: 'px',
-    },
-  },
-  paddingRight: {
-    input: 'length',
-    percentage: true,
-    defaultValue: {
-      value: 0,
-      unit: 'px',
-    },
-  },
+  ...paddingProperties,
   // TODO: Add defaultValue
   perspective: {
     input: 'length',
