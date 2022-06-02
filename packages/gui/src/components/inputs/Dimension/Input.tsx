@@ -59,20 +59,22 @@ const getInitialState = (
   return defaultState
 }
 
-export interface DimensionInputProps
-  extends EditorPropsWithLabel<Dimension, string> {
+export interface DimensionInputProps<K>
+  extends EditorPropsWithLabel<Dimension, K> {
   range?: UnitRanges
   steps?: UnitSteps
   units?: readonly string[]
   /** The available keyword values for the property. If provided, 'keyword' will be appended as a unit */
-  keywords?: string[]
+  keywords?: K[]
   /** The available theme values for the property. If provided, 'theme' will be appended as a unit */
   themeValues?: (CSSUnitValue & { id: string })[]
   conversions?: UnitConversions
   property?: string
 }
 
-export function DimensionInput(props: DimensionInputProps) {
+export function DimensionInput<K extends string = never>(
+  props: DimensionInputProps<K>
+) {
   if (props.topLevel) {
     return (
       <ResponsiveInput
@@ -86,7 +88,7 @@ export function DimensionInput(props: DimensionInputProps) {
   return <BaseDimensionInput {...props} />
 }
 
-const BaseDimensionInput = ({
+function BaseDimensionInput<K extends string = never>({
   value,
   onChange,
   onRemove,
@@ -98,12 +100,12 @@ const BaseDimensionInput = ({
   steps,
   conversions = {},
   topLevel,
-}: DimensionInputProps) => {
+}: DimensionInputProps<K>) {
   const id = `${React.useId()}-${kebabCase(label)}`
 
   const [state, dispatch] = React.useReducer(
     reducer,
-    getInitialState(value, themeValues, units)
+    getInitialState(value as any, themeValues, units)
   )
 
   React.useEffect(() => {
