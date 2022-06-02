@@ -55,6 +55,7 @@ import { filter } from '../components/schemas/filter'
 import * as borderProperties from '../components/schemas/border'
 import { borderSpacing } from '../components/schemas/borderSpacing'
 import { boxShadow } from '../components/schemas/box-shadow'
+import * as columnProperties from '../components/schemas/columns'
 import * as gapProperties from '../components/schemas/gap'
 import * as marginProperties from '../components/schemas/margin'
 import * as overflowProperties from '../components/schemas/overflow'
@@ -623,11 +624,7 @@ export const properties: Record<string, PropertyData> = {
     keywords: ['auto', 'sRGB', 'linearRGB'],
     defaultValue: 'auto',
   },
-  columnCount: {
-    input: 'integer',
-    keywords: ['auto'],
-    defaultValue: 3,
-  },
+  ...columnProperties,
   columnFill: {
     input: 'keyword',
     keywords: ['auto', 'balance', 'balance-all'],
@@ -673,21 +670,6 @@ export const properties: Record<string, PropertyData> = {
     input: 'keyword',
     keywords: ['none', 'all'],
     defaultValue: 'all',
-  },
-  columnWidth: {
-    input: 'length',
-    percentage: true,
-    range: {
-      [AbsoluteLengthUnits.Px]: [0, 512],
-      [FontRelativeLengthUnits.Em]: [0, 16],
-      [FontRelativeLengthUnits.Rem]: [0, 16],
-      [PercentageLengthUnits.Pct]: [0.1, 100],
-    },
-    keywords: ['auto'],
-    defaultValue: {
-      value: 'auto',
-      unit: 'keyword',
-    },
   },
   contain: {
     input: 'keyword',

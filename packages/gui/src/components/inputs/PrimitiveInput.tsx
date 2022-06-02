@@ -64,7 +64,7 @@ const NumberInput = ({
   )
 }
 
-const IntegerInput = ({
+export const IntegerInput = ({
   value,
   onChange,
   onRemove,

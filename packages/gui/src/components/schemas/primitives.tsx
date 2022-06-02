@@ -13,6 +13,7 @@ import { ColorInput } from '../inputs/ColorInput'
 import { KeywordInput } from '../inputs/KeywordInput'
 import { LengthInput } from '../inputs/LengthInput'
 import { NumberPercentageInput } from '../inputs/NumberPercentageInput'
+import { IntegerInput } from '../inputs/PrimitiveInput'
 import { TimeInput } from '../inputs/TimeInput'
 import { DataTypeSchema } from './types'
 
@@ -85,6 +86,21 @@ export function length({
 
 export function lengthPercentage(props: Omit<LengthProps, 'percentage'> = {}) {
   return length({ ...props, percentage: true })
+}
+
+export function integer({
+  defaultValue = { value: 0, unit: 'number' },
+  keywords,
+}: {
+  defaultValue?: CSSUnitValue
+  keywords?: string[]
+} = {}) {
+  return {
+    input: IntegerInput,
+    stringify: stringifyUnit as any,
+    defaultValue,
+    keywords,
+  }
 }
 
 export function keyword<T extends string>(
