@@ -63,7 +63,7 @@ export function InputContainer<T, K extends string = never>(
             value={inputType}
             onValueChange={(newInputType) => {
               if (newInputType === 'keyword' && inputType !== 'keyword') {
-                onChange(keywords?.[0] ?? 'initial')
+                onChange(keywords?.[0] ?? 'inherit')
               } else if (newInputType === 'value' && inputType !== 'value') {
                 onChange(defaultValue)
               }
