@@ -59,7 +59,8 @@ const getInitialState = (
   return defaultState
 }
 
-export interface DimensionInputProps extends EditorPropsWithLabel<Dimension> {
+export interface DimensionInputProps
+  extends EditorPropsWithLabel<Dimension, string> {
   range?: UnitRanges
   steps?: UnitSteps
   units?: readonly string[]
