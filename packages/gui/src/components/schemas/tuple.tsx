@@ -2,12 +2,13 @@ import { getInputProps } from '../../lib/util'
 import { DataTypeSchema } from './types'
 import * as Toggle from '@radix-ui/react-toggle'
 import { Link } from 'react-feather'
-import { InputHeader } from '../ui/InputHeader'
 import { replace } from '../../lib/array'
+import { InputContainer } from '../inputs/InputContainer'
 
-interface CreateTupleSchema<K, T> {
+interface CreateTupleSchema<T, K> {
   itemSchema: DataTypeSchema<T>
-  labels: K[]
+  labels: string[]
+  keywords?: K[]
 }
 
 /**
@@ -15,67 +16,77 @@ interface CreateTupleSchema<K, T> {
  * in a defined order that may be linked together
  * (e.g. x/y, row/column, start/end)
  */
-export function tupleSchema<K extends string, T>({
+export function tupleSchema<T, K extends string = never>({
   itemSchema,
   labels,
-}: CreateTupleSchema<K, T>): DataTypeSchema<T[]> {
-  function isLinked(value: T[]) {
+}: CreateTupleSchema<T, K>): DataTypeSchema<T[] | K> {
+  function isLinked(value: T[] | K) {
     return value.length <= 1
   }
+
+  const defaultValue = [itemSchema.defaultValue]
+
+  function stringify(value: T[] | K) {
+    if (typeof value === 'string') {
+      return value
+    }
+
+    return value?.map((item) => itemSchema.stringify(item)).join(' ') ?? null
+  }
+
   return {
     input(props) {
-      const linked = isLinked(props.value)
+      const { value, onChange } = props
+      const linked = isLinked(value)
       const ItemInput = itemSchema.input
       return (
-        <div>
-          <InputHeader {...props} />
-          <div sx={{ display: 'flex', gap: 2 }}>
-            <Toggle.Root
-              title="Link inputs"
-              sx={{
-                p: 0,
-                background: 'none',
-                border: 'none',
-                color: 'muted',
+        <InputContainer
+          {...props}
+          stringify={stringify}
+          defaultValue={defaultValue}
+        >
+          {!(typeof value === 'string') && (
+            <div sx={{ display: 'flex', gap: 2 }}>
+              <Toggle.Root
+                title="Link inputs"
+                sx={{
+                  p: 0,
+                  background: 'none',
+                  border: 'none',
+                  color: 'muted',
 
-                '&[data-state=on]': {
-                  color: 'text',
-                },
-              }}
-              pressed={linked}
-              onPressedChange={(pressed) => {
-                if (pressed) {
-                  props.onChange([props.value[0]])
-                } else {
-                  props.onChange(labels.map(() => props.value[0]))
-                }
-              }}
-            >
-              <Link size={14} />
-            </Toggle.Root>
-            {props.value.map((value, i) => {
-              return (
-                <ItemInput
-                  key={i}
-                  {...getInputProps(props, i)}
-                  onChange={(newItem) =>
-                    props.onChange(replace(props.value, i, newItem))
+                  '&[data-state=on]': {
+                    color: 'text',
+                  },
+                }}
+                pressed={linked}
+                onPressedChange={(pressed) => {
+                  if (pressed) {
+                    props.onChange([value[0]])
+                  } else {
+                    props.onChange(labels.map(() => value[0]))
                   }
-                  label={linked ? '' : labels[i]}
-                />
-              )
-            })}
-          </div>
-        </div>
+                }}
+              >
+                <Link size={14} />
+              </Toggle.Root>
+              {value.map((item, i) => {
+                return (
+                  <ItemInput
+                    key={i}
+                    // @ts-ignore
+                    {...getInputProps(props, i)}
+                    onChange={(newItem) => onChange(replace(value, i, newItem))}
+                    label={linked ? '' : labels[i]}
+                  />
+                )
+              })}
+            </div>
+          )}
+        </InputContainer>
       )
     },
-    stringify(value) {
-      if (typeof value === 'string') {
-        return value
-      }
-
-      return value?.map((item) => itemSchema.stringify(item)).join(' ') ?? null
-    },
-    defaultValue: [itemSchema.defaultValue],
+    stringify,
+    defaultValue,
   }
 }
