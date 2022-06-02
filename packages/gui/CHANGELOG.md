@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.93
+
+### Patch Changes
+
+- 665fe5e: Fixes importing theme and theme value ranges
+
 ## 0.0.92
 
 ### Patch Changes
