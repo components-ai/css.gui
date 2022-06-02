@@ -37,14 +37,6 @@ import {
   TransformOriginInput,
 } from '../components/inputs/TransformOrigin'
 import { GridLineInput, stringifyGridLine } from '../components/inputs/GridLine'
-import {
-  ScrollSnapAlignInput,
-  stringifyScrollSnapAlign,
-} from '../components/inputs/ScrollSnapAlign'
-import {
-  BorderSpacingInput,
-  stringifyBorderSpacing,
-} from '../components/inputs/BorderSpacing'
 import { ClipPathInput, stringifyClipPath } from '../components/inputs/ClipPath'
 import {
   ShapeOutsideInput,
@@ -70,6 +62,7 @@ import * as overscrollProperties from '../components/schemas/overscroll'
 import * as paddingProperties from '../components/schemas/padding'
 import * as scrollMarginProperties from '../components/schemas/scroll-margin'
 import * as scrollPaddingProperties from '../components/schemas/scroll-padding'
+import { scrollSnapAlign } from '../components/schemas/scroll-snap-align'
 import * as textDecorationProperties from '../components/schemas/text-decoration'
 import { textShadow } from '../components/schemas/text-shadow'
 import * as transitionProperties from '../components/schemas/transition'
@@ -1817,11 +1810,7 @@ export const properties: Record<string, PropertyData> = {
   },
   ...scrollMarginProperties,
   ...scrollPaddingProperties,
-  // TODO: Add defaultValue
-  scrollSnapAlign: {
-    input: ScrollSnapAlignInput,
-    stringify: stringifyScrollSnapAlign,
-  },
+  scrollSnapAlign,
   scrollSnapStop: {
     input: 'keyword',
     keywords: ['normal', 'always'],
