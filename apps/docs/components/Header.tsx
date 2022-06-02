@@ -64,7 +64,7 @@ export const Header = () => {
             textDecoration: 'none',
             display: 'flex',
             alignItems: 'center',
-            fontSize: [0, 1, 2],
+            fontSize: [0, 1, 1],
             px: 3,
             ml: 'auto',
           }}
@@ -80,7 +80,7 @@ export const Header = () => {
             textDecoration: 'none',
             display: 'flex',
             alignItems: 'center',
-            fontSize: [0, 1, 2],
+            fontSize: [0, 1, 1],
             px: 3,
           }}
         >

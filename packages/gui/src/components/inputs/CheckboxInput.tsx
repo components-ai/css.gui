@@ -10,7 +10,7 @@ export function CheckboxInput({
 }: EditorProps<boolean | undefined> & { label: string }) {
   const id = `${useId()}-${kebabCase(label)}`
   return (
-    <div>
+    <div sx={{ display: 'flex' }}>
       <Label htmlFor={id}>{label}</Label>
       <input
         id={id}

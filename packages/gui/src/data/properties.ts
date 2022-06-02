@@ -1,6 +1,4 @@
 import { ComponentType } from 'react'
-import BoxShadowPicker from '../components/inputs/BoxShadow/field'
-import { stringifyBoxShadow } from '../components/inputs/BoxShadow/stringify'
 import EasingFunctionPicker from '../components/inputs/EasingFunction/picker'
 import { stringifyEasingFunction } from '../components/inputs/EasingFunction/stringify'
 import { FontFamily } from '../components/inputs/FontFamily'
@@ -39,14 +37,6 @@ import {
   TransformOriginInput,
 } from '../components/inputs/TransformOrigin'
 import { GridLineInput, stringifyGridLine } from '../components/inputs/GridLine'
-import {
-  ScrollSnapAlignInput,
-  stringifyScrollSnapAlign,
-} from '../components/inputs/ScrollSnapAlign'
-import {
-  BorderSpacingInput,
-  stringifyBorderSpacing,
-} from '../components/inputs/BorderSpacing'
 import { ClipPathInput, stringifyClipPath } from '../components/inputs/ClipPath'
 import {
   ShapeOutsideInput,
@@ -60,18 +50,21 @@ import {
 import { AngleInput } from '../components/inputs/AngleInput'
 import { EditorPropsWithLabel } from '../types/editor'
 import { DEFAULT_ANIMATION } from '../components/inputs/Animation/types'
-import { DEFAULT_BOX_SHADOW } from '../components/inputs/BoxShadow/types'
-import { textShadow } from '../components/schemas/text-shadow'
 import { filter } from '../components/schemas/filter'
 
 import * as borderProperties from '../components/schemas/border'
+import { borderSpacing } from '../components/schemas/borderSpacing'
+import { boxShadow } from '../components/schemas/box-shadow'
+import * as gapProperties from '../components/schemas/gap'
 import * as marginProperties from '../components/schemas/margin'
 import * as overflowProperties from '../components/schemas/overflow'
 import * as overscrollProperties from '../components/schemas/overscroll'
 import * as paddingProperties from '../components/schemas/padding'
 import * as scrollMarginProperties from '../components/schemas/scroll-margin'
 import * as scrollPaddingProperties from '../components/schemas/scroll-padding'
+import { scrollSnapAlign } from '../components/schemas/scroll-snap-align'
 import * as textDecorationProperties from '../components/schemas/text-decoration'
+import { textShadow } from '../components/schemas/text-shadow'
 import * as transitionProperties from '../components/schemas/transition'
 
 type PropertyData = {
@@ -497,11 +490,7 @@ export const properties: Record<string, PropertyData> = {
     input: 'multiLength',
     dimensions: 2,
   },
-  // TODO: Add defaultValue
-  borderSpacing: {
-    input: BorderSpacingInput,
-    stringify: stringifyBorderSpacing,
-  },
+  borderSpacing,
   bottom: {
     input: 'length',
     percentage: true,
@@ -513,11 +502,7 @@ export const properties: Record<string, PropertyData> = {
     keywords: ['slice', 'clone'],
     defaultValue: 'initial',
   },
-  boxShadow: {
-    input: BoxShadowPicker,
-    stringify: stringifyBoxShadow,
-    defaultValue: [DEFAULT_BOX_SHADOW],
-  },
+  boxShadow,
   boxSnap: {
     input: 'keyword',
     defaultValue: 'none',
@@ -647,20 +632,6 @@ export const properties: Record<string, PropertyData> = {
     input: 'keyword',
     keywords: ['auto', 'balance', 'balance-all'],
     defaultValue: 'auto',
-  },
-  columnGap: {
-    input: 'length',
-    percentage: true,
-    range: {
-      [AbsoluteLengthUnits.Px]: [0, 128],
-      [FontRelativeLengthUnits.Em]: [0, 8],
-      [FontRelativeLengthUnits.Rem]: [0, 8],
-      [ViewportPercentageLengthUnits.Vh]: [0, 100],
-      [ViewportPercentageLengthUnits.Vw]: [0, 100],
-      [PercentageLengthUnits.Pct]: [0.1, 100],
-    },
-    keywords: ['normal'],
-    defaultValue: { value: 0, unit: '%' },
   },
   columnRuleColor: {
     input: 'color',
@@ -1120,10 +1091,7 @@ export const properties: Record<string, PropertyData> = {
     keywords: ['auto', 'none'],
   },
   // TODO two-valued syntax
-  gap: {
-    input: 'length',
-    percentage: true,
-  },
+  ...gapProperties,
   gridAutoColumns: {
     input: TrackSizeListInput,
     stringify: stringifyTrackSizeList,
@@ -1805,22 +1773,6 @@ export const properties: Record<string, PropertyData> = {
       unit: 'px',
     },
   },
-  rowGap: {
-    input: 'length',
-    percentage: true,
-    range: {
-      [AbsoluteLengthUnits.Px]: [0, 128],
-      [FontRelativeLengthUnits.Em]: [0, 8],
-      [FontRelativeLengthUnits.Rem]: [0, 8],
-      [ViewportPercentageLengthUnits.Vh]: [0, 100],
-      [ViewportPercentageLengthUnits.Vw]: [0, 100],
-      [PercentageLengthUnits.Pct]: [0.1, 100],
-    },
-    defaultValue: {
-      value: 2,
-      unit: 'em',
-    },
-  },
   rubyAlign: {
     input: 'keyword',
     keywords: ['start', 'center', 'space-between', 'space-around'],
@@ -1858,11 +1810,7 @@ export const properties: Record<string, PropertyData> = {
   },
   ...scrollMarginProperties,
   ...scrollPaddingProperties,
-  // TODO: Add defaultValue
-  scrollSnapAlign: {
-    input: ScrollSnapAlignInput,
-    stringify: stringifyScrollSnapAlign,
-  },
+  scrollSnapAlign,
   scrollSnapStop: {
     input: 'keyword',
     keywords: ['normal', 'always'],
