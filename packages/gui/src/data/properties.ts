@@ -1003,13 +1003,8 @@ export const properties: Record<string, PropertyData> = {
     input: 'keyword',
     keywords: ['auto', 'none'],
   },
-  // TODO two-valued syntax
   ...gapProperties,
   ...gridProperties,
-  gridAutoFlow: {
-    input: 'keyword',
-    keywords: ['row', 'column', 'dense', 'row dense', 'column dense'],
-  },
   gridColumnStart: {
     input: GridLineInput,
     stringify: stringifyGridLine,

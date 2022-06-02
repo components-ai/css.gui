@@ -1,7 +1,7 @@
 import { listSchema } from './list'
 import { objectSchema } from './object'
 import { optionsSchema } from './options'
-import { integer, lengthPercentage } from './primitives'
+import { integer, keyword, lengthPercentage } from './primitives'
 
 const inflexibleBreadth = lengthPercentage({
   keywords: ['min-content', 'max-content', 'auto'],
@@ -58,6 +58,13 @@ const trackList = optionsSchema({
 
 export const gridAutoRow = listSchema({ itemSchema: trackSize })
 export const gridAutoColumns = listSchema({ itemSchema: trackSize })
+export const gridAutoFlow = keyword([
+  'row',
+  'column',
+  'dense',
+  'row dense',
+  'column dense',
+])
 
 export const gridTemplateRows = listSchema({ itemSchema: trackList })
 export const gridTemplateColumns = listSchema({ itemSchema: trackList })
