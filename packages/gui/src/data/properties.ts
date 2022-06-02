@@ -44,7 +44,7 @@ import { filter } from '../components/schemas/filter'
 
 import * as animationProperties from '../components/schemas/animation'
 import * as borderProperties from '../components/schemas/border'
-import { borderSpacing } from '../components/schemas/borderSpacing'
+import { borderSpacing } from '../components/schemas/border-spacing'
 import { boxShadow } from '../components/schemas/box-shadow'
 import * as columnProperties from '../components/schemas/columns'
 import * as gapProperties from '../components/schemas/gap'
