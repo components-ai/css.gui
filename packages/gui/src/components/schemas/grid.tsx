@@ -42,7 +42,7 @@ const trackList = optionsSchema({
     ...trackSizeVariants,
     repeat: objectSchema({
       fields: {
-        count: integer(),
+        count: integer({ defaultValue: { value: 1, unit: 'number' } }),
         trackList: trackSize,
       },
       separator: ', ',
