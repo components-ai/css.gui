@@ -20,6 +20,7 @@ export const Trigger = (props: PropsType<typeof Select.Trigger>) => {
         border: 'none',
         background: 'none',
         color: 'text',
+        width: 'max-content',
       }}
       {...props}
     />

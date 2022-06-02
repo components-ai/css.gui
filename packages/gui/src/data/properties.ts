@@ -58,10 +58,10 @@ import {
 import { AngleInput } from '../components/inputs/AngleInput'
 import { EditorPropsWithLabel } from '../types/editor'
 import { DEFAULT_ANIMATION } from '../components/inputs/Animation/types'
-import { DEFAULT_BOX_SHADOW } from '../components/inputs/BoxShadow/types'
 import { filter } from '../components/schemas/filter'
 
 import * as borderProperties from '../components/schemas/border'
+import { borderSpacing } from '../components/schemas/borderSpacing'
 import { boxShadow } from '../components/schemas/box-shadow'
 import * as gapProperties from '../components/schemas/gap'
 import * as marginProperties from '../components/schemas/margin'
@@ -497,11 +497,7 @@ export const properties: Record<string, PropertyData> = {
     input: 'multiLength',
     dimensions: 2,
   },
-  // TODO: Add defaultValue
-  borderSpacing: {
-    input: BorderSpacingInput,
-    stringify: stringifyBorderSpacing,
-  },
+  borderSpacing,
   bottom: {
     input: 'length',
     percentage: true,
