@@ -22,10 +22,6 @@ import {
   stringifyStrokeDasharray,
   StrokeDasharrayInput,
 } from '../components/inputs/StrokeDasharray'
-import TrackSizeListInput from '../components/inputs/TrackSize/field'
-import { stringifyTrackSizeList } from '../components/inputs/TrackSize/stringify'
-import GridTrackListInput from '../components/inputs/GridTrack/field'
-import { stringifyGridTrackList } from '../components/inputs/GridTrack/stringify'
 import { BgSizeInput, stringifyBgSize } from '../components/inputs/BgSizeInput'
 import {
   stringifyTransformOrigin,
@@ -52,6 +48,7 @@ import { borderSpacing } from '../components/schemas/borderSpacing'
 import { boxShadow } from '../components/schemas/box-shadow'
 import * as columnProperties from '../components/schemas/columns'
 import * as gapProperties from '../components/schemas/gap'
+import * as gridProperties from '../components/schemas/grid'
 import * as insetProperties from '../components/schemas/inset'
 import * as marginProperties from '../components/schemas/margin'
 import * as overflowProperties from '../components/schemas/overflow'
@@ -1008,17 +1005,10 @@ export const properties: Record<string, PropertyData> = {
   },
   // TODO two-valued syntax
   ...gapProperties,
-  gridAutoColumns: {
-    input: TrackSizeListInput,
-    stringify: stringifyTrackSizeList,
-  },
+  ...gridProperties,
   gridAutoFlow: {
     input: 'keyword',
     keywords: ['row', 'column', 'dense', 'row dense', 'column dense'],
-  },
-  gridAutoRows: {
-    input: TrackSizeListInput,
-    stringify: stringifyTrackSizeList,
   },
   gridColumnStart: {
     input: GridLineInput,
@@ -1035,14 +1025,6 @@ export const properties: Record<string, PropertyData> = {
   gridRowEnd: {
     input: GridLineInput,
     stringify: stringifyGridLine,
-  },
-  gridTemplateColumns: {
-    input: GridTrackListInput,
-    stringify: stringifyGridTrackList,
-  },
-  gridTemplateRows: {
-    input: GridTrackListInput,
-    stringify: stringifyGridTrackList,
   },
   hangingPunctuation: {
     input: 'keyword',

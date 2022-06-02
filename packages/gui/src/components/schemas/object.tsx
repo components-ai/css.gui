@@ -10,6 +10,7 @@ interface CreateObject<T extends object> {
   // component?: ComponentType
   keyOrder?: (keyof T)[]
   stringify?(): string
+  separator?: string
   defaultValue?: Partial<T>
 }
 
@@ -17,6 +18,7 @@ export function objectSchema<T extends object>({
   fields,
   stringify,
   keyOrder = Object.keys(fields) as (keyof T)[],
+  separator = ' ',
   defaultValue,
 }: CreateObject<T>): DataTypeSchema<T> {
   return {
@@ -47,7 +49,7 @@ export function objectSchema<T extends object>({
           const schema = fields[key]
           return schema.stringify(value[key])
         })
-        .join(' ')
+        .join(separator)
     },
     // TODO override defaults
     defaultValue: {
