@@ -65,6 +65,7 @@ import { textShadow } from '../components/schemas/text-shadow'
 import { filter } from '../components/schemas/filter'
 
 import * as borderProperties from '../components/schemas/border'
+import * as gapProperties from '../components/schemas/gap'
 import * as marginProperties from '../components/schemas/margin'
 import * as overflowProperties from '../components/schemas/overflow'
 import * as overscrollProperties from '../components/schemas/overscroll'
@@ -648,20 +649,6 @@ export const properties: Record<string, PropertyData> = {
     keywords: ['auto', 'balance', 'balance-all'],
     defaultValue: 'auto',
   },
-  columnGap: {
-    input: 'length',
-    percentage: true,
-    range: {
-      [AbsoluteLengthUnits.Px]: [0, 128],
-      [FontRelativeLengthUnits.Em]: [0, 8],
-      [FontRelativeLengthUnits.Rem]: [0, 8],
-      [ViewportPercentageLengthUnits.Vh]: [0, 100],
-      [ViewportPercentageLengthUnits.Vw]: [0, 100],
-      [PercentageLengthUnits.Pct]: [0.1, 100],
-    },
-    keywords: ['normal'],
-    defaultValue: { value: 0, unit: '%' },
-  },
   columnRuleColor: {
     input: 'color',
     keywords: ['currentcolor', 'transparent'],
@@ -1120,10 +1107,7 @@ export const properties: Record<string, PropertyData> = {
     keywords: ['auto', 'none'],
   },
   // TODO two-valued syntax
-  gap: {
-    input: 'length',
-    percentage: true,
-  },
+  ...gapProperties,
   gridAutoColumns: {
     input: TrackSizeListInput,
     stringify: stringifyTrackSizeList,
@@ -1803,22 +1787,6 @@ export const properties: Record<string, PropertyData> = {
     defaultValue: {
       value: 0,
       unit: 'px',
-    },
-  },
-  rowGap: {
-    input: 'length',
-    percentage: true,
-    range: {
-      [AbsoluteLengthUnits.Px]: [0, 128],
-      [FontRelativeLengthUnits.Em]: [0, 8],
-      [FontRelativeLengthUnits.Rem]: [0, 8],
-      [ViewportPercentageLengthUnits.Vh]: [0, 100],
-      [ViewportPercentageLengthUnits.Vw]: [0, 100],
-      [PercentageLengthUnits.Pct]: [0.1, 100],
-    },
-    defaultValue: {
-      value: 2,
-      unit: 'em',
     },
   },
   rubyAlign: {
