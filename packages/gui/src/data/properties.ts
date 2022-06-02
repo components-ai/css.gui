@@ -1,6 +1,4 @@
 import { ComponentType } from 'react'
-import BoxShadowPicker from '../components/inputs/BoxShadow/field'
-import { stringifyBoxShadow } from '../components/inputs/BoxShadow/stringify'
 import EasingFunctionPicker from '../components/inputs/EasingFunction/picker'
 import { stringifyEasingFunction } from '../components/inputs/EasingFunction/stringify'
 import { FontFamily } from '../components/inputs/FontFamily'
@@ -61,10 +59,10 @@ import { AngleInput } from '../components/inputs/AngleInput'
 import { EditorPropsWithLabel } from '../types/editor'
 import { DEFAULT_ANIMATION } from '../components/inputs/Animation/types'
 import { DEFAULT_BOX_SHADOW } from '../components/inputs/BoxShadow/types'
-import { textShadow } from '../components/schemas/text-shadow'
 import { filter } from '../components/schemas/filter'
 
 import * as borderProperties from '../components/schemas/border'
+import { boxShadow } from '../components/schemas/box-shadow'
 import * as gapProperties from '../components/schemas/gap'
 import * as marginProperties from '../components/schemas/margin'
 import * as overflowProperties from '../components/schemas/overflow'
@@ -73,6 +71,7 @@ import * as paddingProperties from '../components/schemas/padding'
 import * as scrollMarginProperties from '../components/schemas/scroll-margin'
 import * as scrollPaddingProperties from '../components/schemas/scroll-padding'
 import * as textDecorationProperties from '../components/schemas/text-decoration'
+import { textShadow } from '../components/schemas/text-shadow'
 import * as transitionProperties from '../components/schemas/transition'
 
 type PropertyData = {
@@ -514,11 +513,7 @@ export const properties: Record<string, PropertyData> = {
     keywords: ['slice', 'clone'],
     defaultValue: 'initial',
   },
-  boxShadow: {
-    input: BoxShadowPicker,
-    stringify: stringifyBoxShadow,
-    defaultValue: [DEFAULT_BOX_SHADOW],
-  },
+  boxShadow,
   boxSnap: {
     input: 'keyword',
     defaultValue: 'none',
