@@ -57,6 +57,7 @@ import { borderSpacing } from '../components/schemas/borderSpacing'
 import { boxShadow } from '../components/schemas/box-shadow'
 import * as columnProperties from '../components/schemas/columns'
 import * as gapProperties from '../components/schemas/gap'
+import * as insetProperties from '../components/schemas/inset'
 import * as marginProperties from '../components/schemas/margin'
 import * as overflowProperties from '../components/schemas/overflow'
 import * as overscrollProperties from '../components/schemas/overscroll'
@@ -492,12 +493,6 @@ export const properties: Record<string, PropertyData> = {
     dimensions: 2,
   },
   borderSpacing,
-  bottom: {
-    input: 'length',
-    percentage: true,
-    keywords: ['auto'],
-    defaultValue: { value: 'auto', unit: 'keyword' },
-  },
   boxDecorationBreak: {
     input: 'keyword',
     keywords: ['slice', 'clone'],
@@ -1170,6 +1165,7 @@ export const properties: Record<string, PropertyData> = {
     keywords: ['none', 'first', 'all', 'grid'],
     defaultValue: 'none',
   },
+  ...insetProperties,
   imageRendering: {
     input: 'keyword',
     keywords: ['auto', 'crisp-edges', 'pixelated'],
@@ -1243,15 +1239,6 @@ export const properties: Record<string, PropertyData> = {
       'unsafe center',
     ],
     defaultValue: 'center',
-  },
-  left: {
-    input: 'length',
-    percentage: true,
-    keywords: ['auto'],
-    defaultValue: {
-      value: 0,
-      unit: 'px',
-    },
   },
   letterSpacing: {
     input: 'length',
@@ -1746,15 +1733,6 @@ export const properties: Record<string, PropertyData> = {
     keywords: ['none', 'both', 'horizontal', 'vertical', 'block', 'inline'],
     defaultValue: 'none',
   },
-  right: {
-    input: 'length',
-    percentage: true,
-    keywords: ['auto'],
-    defaultValue: {
-      value: 0,
-      unit: 'px',
-    },
-  },
   rubyAlign: {
     input: 'keyword',
     keywords: ['start', 'center', 'space-between', 'space-around'],
@@ -2097,15 +2075,6 @@ export const properties: Record<string, PropertyData> = {
     input: 'keyword',
     keywords: ['wrap', 'nowrap', 'balance', 'stable', 'pretty'],
     defaultValue: 'wrap',
-  },
-  top: {
-    input: 'length',
-    percentage: true,
-    keywords: ['auto'],
-    defaultValue: {
-      value: 0,
-      unit: 'px',
-    },
   },
   touchAction: {
     input: 'keyword',
