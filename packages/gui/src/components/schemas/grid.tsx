@@ -68,3 +68,5 @@ export const gridAutoFlow = keyword([
 
 export const gridTemplateRows = listSchema({ itemSchema: trackList })
 export const gridTemplateColumns = listSchema({ itemSchema: trackList })
+
+// TODO grid-template, grid-template-areas, grid
