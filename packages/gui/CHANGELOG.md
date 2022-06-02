@@ -1,5 +1,12 @@
 # @compai/css-gui
 
+## 0.0.92
+
+### Patch Changes
+
+- 159bfb1: Bump react and @types/react
+- 167af9a: Bump react-feather from 2.0.9 to 2.0.10
+
 ## 0.0.91
 
 ### Patch Changes
