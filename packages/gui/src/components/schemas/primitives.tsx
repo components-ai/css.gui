@@ -108,7 +108,7 @@ export function ident({
   defaultValue = '',
 }: {
   defaultValue?: string
-}): DataTypeSchema<string> {
+} = {}): DataTypeSchema<string> {
   return {
     // Right now, just use a text input.
     // In the future we may want to do smart-identification of identifiers

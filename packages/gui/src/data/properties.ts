@@ -1,6 +1,4 @@
 import { ComponentType } from 'react'
-import EasingFunctionPicker from '../components/inputs/EasingFunction/picker'
-import { stringifyEasingFunction } from '../components/inputs/EasingFunction/stringify'
 import { FontFamily } from '../components/inputs/FontFamily'
 import TransformPicker from '../components/inputs/Transform/field'
 import { stringifyTransform } from '../components/inputs/Transform/stringify'
@@ -10,7 +8,6 @@ import {
   ViewportPercentageLengthUnits,
   PercentageLengthUnits,
 } from '../types/css'
-import { ANIMATABLE_PROPERTIES } from './animatable'
 import { UnitSteps } from '../lib'
 import ImageSourcePicker from '../components/inputs/ImageSource/field'
 import { stringifyImageSource } from '../components/inputs/ImageSource/stringify'
@@ -21,8 +18,6 @@ import BackgroundInput from '../components/inputs/Background/field'
 import { stringifyBackgroundList } from '../components/inputs/Background/stringify'
 import MaskInput from '../components/inputs/Mask/field'
 import { stringifyMaskList } from '../components/inputs/Mask/stringify'
-import AnimationInput from '../components/inputs/Animation/field'
-import { stringifyAnimationList } from '../components/inputs/Animation/stringify'
 import {
   stringifyStrokeDasharray,
   StrokeDasharrayInput,
@@ -49,9 +44,9 @@ import {
 } from '../components/inputs/OffsetPath'
 import { AngleInput } from '../components/inputs/AngleInput'
 import { EditorPropsWithLabel } from '../types/editor'
-import { DEFAULT_ANIMATION } from '../components/inputs/Animation/types'
 import { filter } from '../components/schemas/filter'
 
+import * as animationProperties from '../components/schemas/animation'
 import * as borderProperties from '../components/schemas/border'
 import { borderSpacing } from '../components/schemas/borderSpacing'
 import { boxShadow } from '../components/schemas/box-shadow'
@@ -184,63 +179,7 @@ export const properties: Record<string, PropertyData> = {
     keywords: [],
     defaultValue: 'unset',
   },
-  animation: {
-    input: AnimationInput,
-    stringify: stringifyAnimationList,
-    defaultValue: [DEFAULT_ANIMATION],
-  },
-  // TODO array of time values
-  animationDelay: {
-    input: 'time',
-    defaultValue: {
-      value: 0,
-      unit: 'ms',
-    },
-  },
-  animationDirection: {
-    input: 'keyword',
-    keywords: ['normal', 'reverse', 'alternate', 'alternate-reverse'],
-    defaultValue: 'normal',
-  },
-  animationDuration: {
-    input: 'time',
-    defaultValue: {
-      value: 500,
-      unit: 'ms',
-    },
-  },
-  animationFillMode: {
-    input: 'keyword',
-    keywords: ['none', 'forwards', 'backwards', 'both'],
-    defaultValue: 'none',
-  },
-  animationIterationCount: {
-    input: 'number',
-    keywords: ['infinite'],
-    range: { number: [0, Infinity] },
-    defaultValue: { value: 'infinite', type: 'keyword' },
-  },
-  animationPlayState: {
-    input: 'keyword',
-    keywords: ['running', 'paused'],
-    defaultValue: 'running',
-  },
-  // TODO this should be a combobox
-  animationProperty: {
-    input: 'keyword',
-    keywords: ANIMATABLE_PROPERTIES,
-  },
-  animationTimingFunction: {
-    input: EasingFunctionPicker,
-    stringify: stringifyEasingFunction,
-    defaultValue: {
-      type: 'cubic-bezier',
-      p1: 0.42,
-      p2: 0,
-      p3: 0.58,
-      p4: 1,
-    },
-  },
+  ...animationProperties,
   appearance: {
     input: 'keyword',
     keywords: [
