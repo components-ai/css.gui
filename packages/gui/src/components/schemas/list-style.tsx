@@ -4,7 +4,7 @@ import { keyword } from './primitives'
 
 export const listStyleImage = image
 export const listStylePosition = keyword(['inside', 'outside'])
-// TODO there are a *lot* more values for this
+// TODO there are a *lot* more values for this, as well as `symbol` values
 export const listStyleType = keyword([
   'none',
   'disc',
