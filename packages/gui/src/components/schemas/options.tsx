@@ -7,6 +7,7 @@ interface CreateOptions<T extends Record<string, any>> {
   variants: { [V in keyof T]: DataTypeSchema<T[V]> }
   order?: (keyof T)[]
   stringify?(variant: keyof T, value: string): string
+  convert?(oldValue: Unionize<T>[any], newType: keyof T): Partial<T[any]>
 }
 
 /**
@@ -17,6 +18,7 @@ export function optionsSchema<T extends Record<string, any>>({
   variants,
   order = Object.keys(variants),
   stringify = (variant, value) => value,
+  convert = () => ({}),
 }: CreateOptions<T>): DataTypeSchema<Unionize<T>> {
   return {
     input(props) {
@@ -33,6 +35,7 @@ export function optionsSchema<T extends Record<string, any>>({
               props.onChange({
                 ...variants[newType].defaultValue,
                 type: newType,
+                ...convert(props.value, newType),
               })
             }}
           />

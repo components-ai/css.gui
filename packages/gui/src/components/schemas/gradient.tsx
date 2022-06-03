@@ -114,4 +114,10 @@ export const gradient = optionsSchema({
     'repeating-conic': repeatingConic,
   },
   stringify: (type, value) => `${type}-gradient(${value})`,
+  // TODO keep values when switching between repeating and non-
+  convert: (oldValue, newType) => {
+    return {
+      stops: oldValue.stops,
+    }
+  },
 })
