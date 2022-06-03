@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.95
+
+### Patch Changes
+
+- 28f0e9d: Fix combobox init
+
 ## 0.0.94
 
 ### Patch Changes
