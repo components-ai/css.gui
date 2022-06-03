@@ -1326,7 +1326,7 @@ export const properties: Record<string, PropertyData> = {
   },
   position: {
     input: 'keyword',
-    keywords: ['static', 'relative', 'asbolsute', 'fixed', 'sticky'],
+    keywords: ['static', 'relative', 'absolute', 'fixed', 'sticky'],
     defaultValue: 'static',
   },
   printColorAdjust: {
