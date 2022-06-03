@@ -9,8 +9,6 @@ import {
   PercentageLengthUnits,
 } from '../types/css'
 import { UnitSteps } from '../lib'
-import ImageSourcePicker from '../components/inputs/ImageSource/field'
-import { stringifyImageSource } from '../components/inputs/ImageSource/stringify'
 import { allProperties } from './css-properties'
 import { camelCase, uniqBy } from 'lodash-es'
 import { positiveRanges, UnitRanges } from './ranges'
@@ -47,6 +45,7 @@ import * as columnProperties from '../components/schemas/columns'
 import * as gapProperties from '../components/schemas/gap'
 import * as gridProperties from '../components/schemas/grid'
 import * as insetProperties from '../components/schemas/inset'
+import * as listStyleProperties from '../components/schemas/list-style'
 import * as marginProperties from '../components/schemas/margin'
 import * as maskProperties from '../components/schemas/mask'
 import * as maskBorderProperties from '../components/schemas/mask-border'
@@ -1010,32 +1009,7 @@ export const properties: Record<string, PropertyData> = {
     keywords: ['auto', 'loose', 'normal', 'strict', 'anywhere'],
     defaultValue: 'auto',
   },
-  listStyleImage: {
-    // TODO only accepts a single image
-    input: ImageSourcePicker,
-    stringify: stringifyImageSource,
-    label: 'List Style Image',
-  },
-  listStylePosition: {
-    input: 'keyword',
-    keywords: ['inside', 'outside'],
-    defaultValue: 'outside',
-  },
-  listStyleType: {
-    input: 'keyword',
-    keywords: [
-      'none',
-      'disc',
-      'circle',
-      'square',
-      'decimal',
-      'georgian',
-      'trad-chinese-informal',
-      'kannada',
-      'custom-counter-style',
-    ],
-    defaultValue: 'disc',
-  },
+  ...listStyleProperties,
   lineGrid: {
     input: 'keyword',
     keywords: ['match-parent', 'create'],
