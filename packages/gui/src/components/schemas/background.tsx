@@ -44,3 +44,26 @@ const singleBackground = objectSchema({
   slash: ['size'],
 })
 export const background = listSchema({ itemSchema: singleBackground })
+
+const blendMode = keyword([
+  'normal',
+  'multiply',
+  'screen',
+  'overlay',
+  'darken',
+  'lighten',
+  'color-dodge',
+  'color-burn',
+  'hard-light',
+  'soft-light',
+  'difference',
+  'exclusion',
+  'hue',
+  'saturation',
+  'color',
+  'luminosity',
+])
+export const backgroundBlendMode = listSchema({
+  itemSchema: blendMode,
+  variant: 'list',
+})
