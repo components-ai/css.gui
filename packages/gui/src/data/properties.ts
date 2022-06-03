@@ -34,6 +34,7 @@ import * as offsetProperties from '../components/schemas/offset'
 import * as overflowProperties from '../components/schemas/overflow'
 import * as overscrollProperties from '../components/schemas/overscroll'
 import * as paddingProperties from '../components/schemas/padding'
+import * as perspectiveProperties from '../components/schemas/perspective'
 import * as scrollMarginProperties from '../components/schemas/scroll-margin'
 import * as scrollPaddingProperties from '../components/schemas/scroll-padding'
 import { scrollSnapAlign } from '../components/schemas/scroll-snap-align'
@@ -1201,15 +1202,7 @@ export const properties: Record<string, PropertyData> = {
   },
   ...overscrollProperties,
   ...paddingProperties,
-  // TODO: Add defaultValue
-  perspective: {
-    input: 'length',
-    keywords: ['none'],
-  },
-  // TODO: Add defaultValue
-  perspectiveOrigin: {
-    input: 'position',
-  },
+  ...perspectiveProperties,
   placeItems: {
     input: 'keyword',
     keywords: [

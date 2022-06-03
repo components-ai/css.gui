@@ -9,7 +9,7 @@ export const position: DataTypeSchema<Position> = {
   input: PositionInput,
   stringify: stringifyPosition,
   defaultValue: {
-    x: { value: 'center', unit: 'keyword' },
-    y: { value: 'center', unit: 'keyword' },
+    x: { value: 50, unit: '%' },
+    y: { value: 50, unit: '%' },
   },
 }
