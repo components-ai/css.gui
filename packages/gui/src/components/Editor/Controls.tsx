@@ -27,6 +27,7 @@ import { isFieldsetGroup, partitionProperties, sortProperties } from './util'
 import { stylesToEditorSchema } from '../../lib/transformers/styles-to-editor-schema'
 import { removeInternalCSSClassSyntax } from '../../lib/classes'
 import { PrimitiveInput } from '../inputs/PrimitiveInput'
+import { AddFieldsetControl } from '../AddFieldset'
 
 export const getPropertyFromField = (field: KeyArg) => {
   if (Array.isArray(field)) {
@@ -219,6 +220,11 @@ export const EditorControls = ({
         </div>
       ) : null}
       {controls}
+      {showAddProperties ? (
+        <div sx={{ my: 3 }}>
+          <AddFieldsetControl styles={styles} />
+        </div>
+      ) : null}
       {fieldsetControls}
       {children ? <DynamicControls /> : null}
     </>
