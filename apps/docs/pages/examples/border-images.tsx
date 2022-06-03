@@ -2,40 +2,47 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { Editor, Inputs, styled, codegen } from '@compai/css-gui'
 import { defaultTheme } from '../../data/default-theme'
-import { Container } from '../../components/Container'
 
 const initialStyles = {
   padding: {
     value: 64,
     unit: 'px',
   },
-  borderStyle: 'solid',
-  borderWidth: {
-    value: 128,
-    unit: 'px',
-  },
-  borderImageWidth: {
-    value: 128,
-    unit: 'px',
-  },
-  borderImageOutset: {
-    value: 0,
-    unit: 'px',
+  borderStyle: {
+    top: 'solid',
   },
   borderRadius: {
     value: 0,
     unit: 'px',
   },
-  borderImageSlice: {
-    value: 1,
-    unit: 'number',
-  },
-  borderImageSource: [
-    {
+  borderImage: {
+    source: {
+      value: 'https://source.unsplash.com/random',
       type: 'url',
-      arguments: ['https://source.unsplash.com/random'],
     },
-  ],
+    slice: {
+      value: {
+        top: {
+          value: 15,
+          unit: '%',
+        },
+      },
+      fill: false,
+    },
+    width: {
+      top: {
+        value: 25,
+        unit: 'px',
+      },
+    },
+    outset: {
+      top: {
+        value: 54,
+        unit: 'px',
+      },
+    },
+    repeat: ['stretch'],
+  },
 }
 
 export default function BorderImage() {
@@ -53,12 +60,9 @@ export default function BorderImage() {
         <div sx={{ px: [2, 3, 4] }}>
           <Editor styles={styles} onChange={setStyles} theme={defaultTheme}>
             <div sx={{ display: 'grid', gap: '.5rem', width: '240px' }}>
-              <Inputs.BorderImageSource />
-              <Inputs.BorderImageSlice />
-              <Inputs.BorderImageWidth />
-              <Inputs.BorderImageOutset />
-              <Inputs.BorderImageRepeat />
-              <Inputs.BorderWidth />
+              <Inputs.BorderImage />
+              <Inputs.BorderRadius />
+              <Inputs.BorderStyle />
               <Inputs.Padding />
             </div>
           </Editor>
