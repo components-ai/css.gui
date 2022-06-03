@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.94
+
+### Patch Changes
+
+- 0b91ab3: Begin generating controls from schema
+
 ## 0.0.93
 
 ### Patch Changes
