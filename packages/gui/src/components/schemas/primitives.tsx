@@ -33,13 +33,16 @@ export function color({
 
 export function angle({
   defaultValue = { value: 0, unit: 'deg' },
+  keywords = [],
 }: {
   defaultValue?: Angle
+  keywords?: readonly string[]
 } = {}) {
   return {
     input: AngleInput,
     stringify: stringifyUnit as any,
     defaultValue,
+    keywords,
   }
 }
 

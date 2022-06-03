@@ -10,7 +10,9 @@ export const image = optionsSchema({
         value: string({ defaultValue: 'https://source.unsplash.com/random' }),
       },
     }),
-    gradient,
+    gradient: objectSchema({
+      fields: { value: gradient },
+    }),
   },
   stringify(type, value) {
     if (type === 'url') {

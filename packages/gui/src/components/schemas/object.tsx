@@ -9,7 +9,7 @@ interface CreateObject<T extends object> {
   }
   // component?: ComponentType
   keyOrder?: (keyof T)[]
-  stringify?(): string
+  stringify?(values: Record<keyof T, string>): string
   /**
    * Designates keys that should be preceded by a slash when stringified.
    */
@@ -46,8 +46,13 @@ export function objectSchema<T extends object>({
         </div>
       )
     },
-    // TODO custom stringify
     stringify(value) {
+      if (stringify) {
+        const stringifiedFields = mapValues(fields, (schema, key: keyof T) => {
+          return schema.stringify(value[key])
+        }) as any
+        return stringify(stringifiedFields)
+      }
       // By default, join the stringified values with spaces in key order
       return keyOrder
         .map((key) => {

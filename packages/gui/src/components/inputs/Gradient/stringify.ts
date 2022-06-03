@@ -36,7 +36,7 @@ export function stringifyGradient(gradient: Gradient): string {
   }
 }
 
-const stringifyStops = (gradient: Gradient, unit: string) => {
+export const stringifyStops = (gradient: Gradient, unit: string) => {
   return sortBy(gradient?.stops, (stop) => stop.hinting)
     ?.filter(Boolean)
     ?.map(({ color, hinting }) => `${color} ${hinting}${unit}`)
