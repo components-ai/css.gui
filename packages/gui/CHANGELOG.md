@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.96
+
+### Patch Changes
+
+- a679ce7: Implement dynamic fieldsets for pseudos
+
 ## 0.0.95
 
 ### Patch Changes
