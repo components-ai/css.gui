@@ -23,11 +23,6 @@ import {
 import { GridLineInput, stringifyGridLine } from '../components/inputs/GridLine'
 import { ClipPathInput, stringifyClipPath } from '../components/inputs/ClipPath'
 import {
-  ShapeOutsideInput,
-  stringifyShapeOutside,
-} from '../components/inputs/ShapeOutside'
-import { NumberPercentageInput } from '../components/inputs/NumberPercentageInput'
-import {
   OffsetPathInput,
   stringifyOffsetPath,
 } from '../components/inputs/OffsetPath'
@@ -55,6 +50,7 @@ import * as paddingProperties from '../components/schemas/padding'
 import * as scrollMarginProperties from '../components/schemas/scroll-margin'
 import * as scrollPaddingProperties from '../components/schemas/scroll-padding'
 import { scrollSnapAlign } from '../components/schemas/scroll-snap-align'
+import * as shapeOutsideProperties from '../components/schemas/shape-outside'
 import * as textDecorationProperties from '../components/schemas/text-decoration'
 import { textShadow } from '../components/schemas/text-shadow'
 import * as transitionProperties from '../components/schemas/transition'
@@ -1397,37 +1393,7 @@ export const properties: Record<string, PropertyData> = {
     ],
     defaultValue: 'none',
   },
-  shapeImageThreshold: {
-    input: NumberPercentageInput,
-    defaultValue: {
-      value: 0,
-      unit: '%',
-    },
-  },
-  shapeMargin: {
-    input: 'length',
-    percentage: true,
-    defaultValue: {
-      value: 0,
-      unit: 'px',
-    },
-  },
-  shapeOutside: {
-    input: ShapeOutsideInput,
-    stringify: stringifyShapeOutside,
-    defaultValue: {
-      type: 'shape',
-      shape: {
-        type: 'inset',
-        top: { value: 2, unit: 'px' },
-        right: { value: 2, unit: 'px' },
-        bottom: { value: 2, unit: 'px' },
-        left: { value: 2, unit: 'px' },
-        borderRadius: { value: 16, unit: 'px' },
-      },
-      box: 'margin-box',
-    },
-  },
+  ...shapeOutsideProperties,
   stroke: {
     // TODO URL <color> values
     input: 'color',
