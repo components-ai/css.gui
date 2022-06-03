@@ -21,7 +21,6 @@ import {
   TransformOriginInput,
 } from '../components/inputs/TransformOrigin'
 import { GridLineInput, stringifyGridLine } from '../components/inputs/GridLine'
-import { ClipPathInput, stringifyClipPath } from '../components/inputs/ClipPath'
 import {
   OffsetPathInput,
   stringifyOffsetPath,
@@ -35,6 +34,7 @@ import * as borderProperties from '../components/schemas/border'
 import * as borderImageProperties from '../components/schemas/border-image'
 import { borderSpacing } from '../components/schemas/border-spacing'
 import { boxShadow } from '../components/schemas/box-shadow'
+import { clipPath } from '../components/schemas/clip-path'
 import * as columnProperties from '../components/schemas/columns'
 import { filter } from '../components/schemas/filter'
 import * as gapProperties from '../components/schemas/gap'
@@ -353,21 +353,7 @@ export const properties: Record<string, PropertyData> = {
     keywords: ['none', 'left', 'right', 'both', 'inline-start', 'inline-end'],
     defaultValue: 'both',
   },
-  clipPath: {
-    input: ClipPathInput,
-    stringify: stringifyClipPath,
-    defaultValue: {
-      shape: {
-        type: 'inset',
-        top: { value: 2, unit: 'px' },
-        right: { value: 2, unit: 'px' },
-        bottom: { value: 2, unit: 'px' },
-        left: { value: 2, unit: 'px' },
-        borderRadius: { value: 16, unit: 'px' },
-      },
-      box: 'margin-box',
-    },
-  },
+  clipPath,
   clipRule: {
     // SVG
     input: 'keyword',

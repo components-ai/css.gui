@@ -1,3 +1,4 @@
+import { stringifyUnit } from '../../lib/stringify'
 import { getInputProps } from '../../lib/util'
 import { LengthPercentage } from '../../types/css'
 import { EditorPropsWithLabel } from '../../types/editor'
@@ -57,7 +58,8 @@ const polygon = objectSchema({
     points: listSchema({
       itemSchema: {
         input: PointInput,
-        stringify: (point) => `${point.x} ${point.y}`,
+        stringify: (point) =>
+          `${stringifyUnit(point.x)} ${stringifyUnit(point.y)}`,
         defaultValue: {
           x: { value: 0, unit: 'px' },
           y: { value: 0, unit: 'px' },
