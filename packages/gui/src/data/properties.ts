@@ -10,10 +10,6 @@ import { UnitSteps } from '../lib'
 import { allProperties } from './css-properties'
 import { camelCase, uniqBy } from 'lodash-es'
 import { positiveRanges, UnitRanges } from './ranges'
-import {
-  stringifyTransformOrigin,
-  TransformOriginInput,
-} from '../components/inputs/TransformOrigin'
 import { GridLineInput, stringifyGridLine } from '../components/inputs/GridLine'
 import { EditorPropsWithLabel } from '../types/editor'
 
@@ -1567,15 +1563,6 @@ export const properties: Record<string, PropertyData> = {
       'view-box',
     ],
     defaultValue: 'view-box',
-  },
-  transformOrigin: {
-    input: TransformOriginInput,
-    stringify: stringifyTransformOrigin,
-    defaultValue: {
-      x: { unit: 'keyword', value: 'center' },
-      y: { unit: 'keyword', value: 'center' },
-      z: { unit: 'px', value: 0 },
-    },
   },
   transformStyle: {
     input: 'keyword',

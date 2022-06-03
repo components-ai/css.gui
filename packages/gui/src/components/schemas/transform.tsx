@@ -180,3 +180,11 @@ export const transform = listSchema({
   itemSchema: singleTransform,
   separator: '',
 })
+
+export const transformOrigin = objectSchema({
+  fields: {
+    x: lengthPercentage({ keywords: ['left', 'center', 'right'] }),
+    y: lengthPercentage({ keywords: ['top', 'center', 'bottom'] }),
+    z: length(),
+  },
+})
