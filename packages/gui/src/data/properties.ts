@@ -45,6 +45,7 @@ import * as scrollMarginProperties from '../components/schemas/scroll-margin'
 import * as scrollPaddingProperties from '../components/schemas/scroll-padding'
 import { scrollSnapAlign } from '../components/schemas/scroll-snap-align'
 import * as shapeOutsideProperties from '../components/schemas/shape-outside'
+import * as strokeProperties from '../components/schemas/stroke'
 import * as textDecorationProperties from '../components/schemas/text-decoration'
 import { textShadow } from '../components/schemas/text-shadow'
 import * as transformProperties from '../components/schemas/transform'
@@ -1356,74 +1357,7 @@ export const properties: Record<string, PropertyData> = {
     defaultValue: 'none',
   },
   ...shapeOutsideProperties,
-  stroke: {
-    // TODO URL <color> values
-    input: 'color',
-    keywords: ['none', 'context-fill', 'context-stroke'],
-    defaultValue: '#6465ff',
-  },
-  strokeAlignment: {
-    input: 'keyword',
-    keywords: ['center', 'inner', 'outer'],
-    defaultValue: 'center',
-  },
-  // TODO: Add defaultValue
-  strokeDasharray: {
-    input: StrokeDasharrayInput,
-    stringify: stringifyStrokeDasharray,
-  },
-  strokeDashadjust: {
-    input: 'keyword',
-    keywords: ['none', 'stretch', 'compress', 'dashed', 'gaps'],
-    defaultValue: 'none',
-  },
-  strokeDashcorner: {
-    input: 'length',
-    percentage: true,
-    keywords: ['none'],
-    defaultValue: { value: 'none', unit: 'keyword' },
-  },
-  strokeDashoffset: {
-    input: 'number',
-    percentage: true,
-    number: true, // for SVG, raw numbers are counted as pixels
-    range: { number: [-9999, 9999] }, // Todo add %
-    defaultValue: 0,
-  },
-  strokeLinejoin: {
-    input: 'keyword',
-    keywords: ['miter', 'miter-clip', 'round', 'bevel', 'arcs'],
-    defaultValue: 'miter',
-  },
-  strokeLinecap: {
-    input: 'keyword',
-    keywords: ['butt', 'round', 'square'],
-    defaultValue: 'round',
-  },
-  strokeMiterlimit: {
-    input: 'number',
-    range: { number: [1, 256] }, // 256 seems reasonable but can adjust +/- if needed
-    defaultValue: 4,
-  },
-  strokeOpacity: {
-    input: 'percentage',
-    defaultValue: 1,
-  },
-  strokeWidth: {
-    input: 'length',
-    percentage: true,
-    range: {
-      [AbsoluteLengthUnits.Px]: [0, 512],
-      [FontRelativeLengthUnits.Em]: [0, 16],
-      [FontRelativeLengthUnits.Rem]: [0, 16],
-      [PercentageLengthUnits.Pct]: [0.1, 400],
-    },
-    defaultValue: {
-      value: 4,
-      unit: 'px',
-    },
-  },
-  // TODO: Add defaultValue
+  ...strokeProperties,
   tabSize: {
     input: 'length',
     number: true,
