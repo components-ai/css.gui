@@ -6,7 +6,7 @@ export const Sidebar = () => {
     <nav
       sx={{
         minHeight: '100vh',
-        height: '100%',
+        height: '100vh',
         borderRightWidth: '1px',
         borderRightStyle: 'solid',
         borderRightColor: 'border',
