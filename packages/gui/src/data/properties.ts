@@ -44,6 +44,7 @@ import { filter } from '../components/schemas/filter'
 
 import * as animationProperties from '../components/schemas/animation'
 import * as borderProperties from '../components/schemas/border'
+import * as borderImageProperties from '../components/schemas/border-image'
 import { borderSpacing } from '../components/schemas/border-spacing'
 import { boxShadow } from '../components/schemas/box-shadow'
 import * as columnProperties from '../components/schemas/columns'
@@ -365,53 +366,8 @@ export const properties: Record<string, PropertyData> = {
     keywords: ['collapse', 'separate'],
     defaultValue: 'collapse',
   },
-  // TODO: 4-positional arguments separated by spaces
-  borderImageOutset: {
-    input: 'length',
-    number: true,
-    defaultValue: {
-      value: 4,
-      unit: 'px',
-    },
-  },
-  // TODO: 2-positional arguments separated by spaces
-  borderImageRepeat: {
-    input: 'keyword',
-    keywords: ['stretch', 'repeat', 'round', 'space'],
-    defaultValue: 'stretch',
-  },
-  // TODO: Add defaultValue
-  borderImageSlice: {
-    input: 'length',
-    number: true,
-    percentage: true,
-    range: { number: [-1, 2000] },
-    defaultValue: {
-      value: 1,
-      unit: 'number',
-    },
-  },
-  // TODO this actually can only accept *one* image value, not an array
-  // TODO: Add defaultValue
-  borderImageSource: {
-    input: ImageSourcePicker,
-    stringify: stringifyImageSource,
-    label: 'Border Image',
-    defaultValue: {
-      type: 'url',
-      arguments: ['https://source.unsplash.com/random'],
-    },
-  },
-  // TODO this can accept multiple values
-  borderImageWidth: {
-    input: 'length',
-    keywords: ['thin', 'medium', 'thick'],
-    defaultValue: {
-      value: 4,
-      unit: 'px',
-    },
-  },
   ...borderProperties,
+  ...borderImageProperties,
   borderBottomLeftRadius: {
     input: 'multiLength',
     dimensions: 2,

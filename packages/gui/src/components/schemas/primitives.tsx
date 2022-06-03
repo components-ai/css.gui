@@ -14,6 +14,7 @@ import { KeywordInput } from '../inputs/KeywordInput'
 import { LengthInput } from '../inputs/LengthInput'
 import { NumberPercentageInput } from '../inputs/NumberPercentageInput'
 import { IntegerInput } from '../inputs/PrimitiveInput'
+import { StringInput } from '../inputs/StringInput'
 import { TextInput } from '../inputs/TextInput'
 import { TimeInput } from '../inputs/TimeInput'
 import { DataTypeSchema } from './types'
@@ -115,6 +116,21 @@ export function ident({
     // the user has used in other places
     input: TextInput,
     stringify: (value) => value,
+    defaultValue,
+  }
+}
+
+export function string({
+  defaultValue = '',
+}: {
+  defaultValue?: string
+} = {}): DataTypeSchema<string> {
+  return {
+    // Right now, just use a text input.
+    // In the future we may want to do smart-identification of identifiers
+    // the user has used in other places
+    input: TextInput,
+    stringify: (value) => `"${value}"`,
     defaultValue,
   }
 }
