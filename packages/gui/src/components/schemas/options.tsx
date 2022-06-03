@@ -21,7 +21,6 @@ export function optionsSchema<T extends Record<string, any>>({
   return {
     input(props) {
       const type = props.value.type as keyof T
-      console.log(variants, type)
       const Component = variants[type].input
       return (
         <div>
