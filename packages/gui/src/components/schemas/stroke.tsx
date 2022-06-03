@@ -13,6 +13,7 @@ export const stroke = color()
 
 export const strokeDasharray = listSchema({
   itemSchema: length({ number: true }),
+  variant: 'list',
 })
 export const strokeDashoffset = lengthPercentage({ number: true })
 export const strokeLinejoin = keyword([
