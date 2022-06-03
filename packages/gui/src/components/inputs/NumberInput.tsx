@@ -13,7 +13,7 @@ interface Props extends EditorProps<number> {
 export function NumberInput({ label, value, ...props }: Props) {
   const id = `${useId()}-${kebabCase(label)}`
   return (
-    <div>
+    <div sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
       <Label htmlFor={id}>{label}</Label>
       <div
         sx={{
