@@ -21,11 +21,6 @@ import {
   TransformOriginInput,
 } from '../components/inputs/TransformOrigin'
 import { GridLineInput, stringifyGridLine } from '../components/inputs/GridLine'
-import {
-  OffsetPathInput,
-  stringifyOffsetPath,
-} from '../components/inputs/OffsetPath'
-import { AngleInput } from '../components/inputs/AngleInput'
 import { EditorPropsWithLabel } from '../types/editor'
 
 import * as animationProperties from '../components/schemas/animation'
@@ -44,6 +39,7 @@ import * as listStyleProperties from '../components/schemas/list-style'
 import * as marginProperties from '../components/schemas/margin'
 import * as maskProperties from '../components/schemas/mask'
 import * as maskBorderProperties from '../components/schemas/mask-border'
+import * as offsetProperties from '../components/schemas/offset'
 import * as overflowProperties from '../components/schemas/overflow'
 import * as overscrollProperties from '../components/schemas/overscroll'
 import * as paddingProperties from '../components/schemas/padding'
@@ -1136,26 +1132,7 @@ export const properties: Record<string, PropertyData> = {
     ],
     defaultValue: 'overlay',
   },
-  offsetAnchor: {
-    input: 'position',
-    keywords: ['auto'], // TODO the keyword isn't being populated currently
-    defaultValue: 'auto',
-  },
-  offsetDistance: {
-    input: 'length',
-    percentage: true,
-    defaultValue: {
-      value: 0,
-      unit: 'px',
-    },
-  },
-  offsetPath: {
-    input: OffsetPathInput,
-    stringify: stringifyOffsetPath,
-  },
-  offsetRotate: {
-    input: AngleInput,
-  },
+  ...offsetProperties,
   objectFit: {
     input: 'keyword',
     keywords: ['contain', 'cover', 'fill', 'none', 'scale-down'],
