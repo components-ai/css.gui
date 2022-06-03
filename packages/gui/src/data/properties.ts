@@ -14,8 +14,6 @@ import { stringifyImageSource } from '../components/inputs/ImageSource/stringify
 import { allProperties } from './css-properties'
 import { camelCase, uniqBy } from 'lodash-es'
 import { positiveRanges, UnitRanges } from './ranges'
-import MaskInput from '../components/inputs/Mask/field'
-import { stringifyMaskList } from '../components/inputs/Mask/stringify'
 import {
   stringifyStrokeDasharray,
   StrokeDasharrayInput,
@@ -51,6 +49,7 @@ import * as gapProperties from '../components/schemas/gap'
 import * as gridProperties from '../components/schemas/grid'
 import * as insetProperties from '../components/schemas/inset'
 import * as marginProperties from '../components/schemas/margin'
+import * as maskProperties from '../components/schemas/mask'
 import * as overflowProperties from '../components/schemas/overflow'
 import * as overscrollProperties from '../components/schemas/overscroll'
 import * as paddingProperties from '../components/schemas/padding'
@@ -1083,10 +1082,7 @@ export const properties: Record<string, PropertyData> = {
     keywords: ['slow', 'normal', 'fast'],
     defaultValue: 'slow',
   },
-  mask: {
-    input: MaskInput,
-    stringify: stringifyMaskList,
-  },
+  ...maskProperties,
   maskBorderMode: {
     input: 'keyword',
     keywords: ['luminance', 'alpha'],
@@ -1133,80 +1129,6 @@ export const properties: Record<string, PropertyData> = {
       'space repeat',
     ],
     defaultValue: 'stretch',
-  },
-  maskClip: {
-    input: 'keyword',
-    keywords: [
-      'content-box',
-      'padding-box',
-      'border-box',
-      'margin-box',
-      'fill-box',
-      'stroke-box',
-      'view-box',
-      'no-clip',
-    ],
-    defaultValue: 'border-box',
-  },
-  maskComposite: {
-    // TODO should be an array of values
-    input: 'keyword',
-    keywords: ['add', 'subtract', 'intersect', 'exclude'],
-    defaultValue: 'add',
-  },
-  maskImage: {
-    input: ImageSourcePicker,
-    stringify: stringifyImageSource,
-    label: 'Mask Image',
-  },
-  maskMode: {
-    input: 'keyword',
-    keywords: [
-      'alpha',
-      'luminance',
-      'match-source',
-      'alpha, luminance',
-      'alpha, match-source',
-      'alpha, match-source, luminance',
-      'match-source, luminance',
-    ],
-    defaultValue: 'luminance',
-  },
-  maskOrigin: {
-    input: 'keyword',
-    keywords: [
-      'content-box',
-      'padding-box',
-      'border-box',
-      'margin-box',
-      'fill-box',
-      'stroke-box',
-      'view-box',
-      'padding-box, content-box',
-      'view-box, fill-box, border-box',
-    ],
-    defaultValue: 'border-box',
-  },
-  maskPosition: { input: 'position' },
-  maskRepeat: {
-    input: 'keyword',
-    keywords: [
-      'repeat-x',
-      'repeat-y',
-      'repeat',
-      'space',
-      'round',
-      'no-repeat',
-      'repeat space',
-      'repeat repeat',
-      'round space',
-      'no-repeat round',
-    ],
-    defaultValue: 'no-repeat',
-  },
-  maskSize: {
-    input: BgSizeInput,
-    stringify: stringifyBgSize,
   },
   maskType: {
     input: 'keyword',
