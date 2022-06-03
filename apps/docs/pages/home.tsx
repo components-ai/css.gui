@@ -22,26 +22,38 @@ import pkg from '../../../packages/gui/package.json'
 export default function Docs() {
   return (
     <div>
-      <header sx={{ pt: [5,6,7], display: 'block', px: 5,  }}>
-        <h1 sx={{ fontSize: [4,6,8], my: 0, lineHeight: 1, maxWidth: '100%', overflow: 'hidden', }}>
+      <header sx={{ pt: [5, 6, 7], display: 'block', px: 5 }}>
+        <h1
+          sx={{
+            fontSize: [4, 6, 8],
+            my: 0,
+            lineHeight: 1,
+            maxWidth: '100%',
+            overflow: 'hidden',
+          }}
+        >
           CSS GUI
           <span sx={{ fontSize: 1 }}>v{pkg.version}</span>
         </h1>
         <h2 sx={{ fontWeight: 500, my: 0 }}>
-          A composable, extensible, and themeable controls for visually editing CSS.
+          A composable, extensible, and themeable controls for visually editing
+          CSS.
         </h2>
-      <p sx={{
-        mt: 4,
-        fontSize: ['18px', '1.5rem', '2rem'],
-        fontWeight: 400,
-        mb: 0,
-        maxWidth: '40em',
-        }}>
-         Everyone should be able to explore the creative potential of CSS.
-         This project is a growing set of parametric controls for rapidly editing CSS properties. 
-         Designed for composability, mix and match any combination of properties
-         to create custom components and tap into the vast and beautiful world of CSS. 
-      </p>
+        <p
+          sx={{
+            mt: 4,
+            fontSize: ['18px', '1.5rem', '2rem'],
+            fontWeight: 400,
+            mb: 0,
+            maxWidth: '40em',
+          }}
+        >
+          Everyone should be able to explore the creative potential of CSS. This
+          project is a growing set of parametric controls for rapidly editing
+          CSS properties. Designed for composability, mix and match any
+          combination of properties to create custom components and tap into the
+          vast and beautiful world of CSS.
+        </p>
         <h4 sx={{ mt: 5 }}>Install</h4>
         <code
           sx={{
@@ -55,61 +67,71 @@ export default function Docs() {
           npm install --save @compai/css-gui
         </code>
         <h4>Demo</h4>
-        <a href='https://codesandbox.io/s/cssgui-example-w1c9h5'
-        sx={{
-          color: 'text',
-          textDecoration: 'none',
-          display: 'inline-flex', 
-          alignItems: 'center',
-          gap: '1em',
-          bg: 'backgroundOffset',
-          py: 3,
-          pl: 3, 
-          pr: 4,
-          fontSize: 1,
-          borderRadius: '6px',
-          transition: 'background-color .2s ease-in-out',
-          ':hover': {
-            bg: '#6465ff',
-            color: '#ffffff',
-          }
-        }}
+        <a
+          href="https://codesandbox.io/s/cssgui-example-w1c9h5"
+          sx={{
+            color: 'text',
+            textDecoration: 'none',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '1em',
+            bg: 'backgroundOffset',
+            py: 3,
+            pl: 3,
+            pr: 4,
+            fontSize: 1,
+            borderRadius: '6px',
+            transition: 'background-color .2s ease-in-out',
+            ':hover': {
+              bg: '#6465ff',
+              color: '#ffffff',
+            },
+          }}
         >
-          <Codesandbox /> 
+          <Codesandbox />
           <span>Codesandbox</span>
         </a>
-      <h4 sx={{ fontSize: 3, mt: 5 }}>Features</h4>
-      <ul
-        sx={{
-          listStyleType: 'none',
-          mb: 7,
-          display: 'grid',
-          gap: '2rem',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(16rem, 1fr))', 
-          ml: 0, 
-          pl: 0,
-        }}
-      >
-        <li>Controls for 280 CSS properties</li>
-        <li>+1000 Google Fonts</li>
-        <li>Full variable fonts support</li>
-        <li>Responsive value arrays</li>
-        <li>Theme aware inputs</li>
-        <li>Scrubbable number inputs</li>
-        <li>Supports all CSS units</li>
-        <li>Advanced layer based gradient editor</li>
-        <li>Nested elements</li>
-        <li>Cubic bezier editor for custom easings</li>
-        <li>Style pseudo-elements and pseudo-classes</li>
-        <li>Completely open source</li>
-      </ul>
+        <h4 sx={{ fontSize: 3, mt: 5 }}>Features</h4>
+        <ul
+          sx={{
+            listStyleType: 'none',
+            mb: 7,
+            display: 'grid',
+            gap: '2rem',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(16rem, 1fr))',
+            ml: 0,
+            pl: 0,
+          }}
+        >
+          <li>Controls for 280 CSS properties</li>
+          <li>+1000 Google Fonts</li>
+          <li>Full variable fonts support</li>
+          <li>Responsive value arrays</li>
+          <li>Theme aware inputs</li>
+          <li>Scrubbable number inputs</li>
+          <li>Supports all CSS units</li>
+          <li>Advanced layer based gradient editor</li>
+          <li>Nested elements</li>
+          <li>Cubic bezier editor for custom easings</li>
+          <li>Style pseudo-elements and pseudo-classes</li>
+          <li>Completely open source</li>
+        </ul>
       </header>
       <section sx={{ pb: 6 }}>
         <header sx={{ mb: 5 }}>
           <h2 sx={{ textAlign: 'center' }}>Demo</h2>
-          <p sx={{ fontSize: 3, textAlign: 'center', }}>Previews of CSS controls</p>
+          <p sx={{ fontSize: 3, textAlign: 'center' }}>
+            Previews of CSS controls
+          </p>
         </header>
-        <div sx={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(16rem, 1fr))', gap: '2rem', px: [4,5,5], }}>
+        <div
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(16rem, 1fr))',
+            gap: '2rem',
+            px: [4, 5, 5],
+          }}
+        >
           <FontSizePreview />
           <FontFamilyPreview />
           <TextAlignPreview />
@@ -119,9 +141,8 @@ export default function Docs() {
           <BackgroundBlendModePreview />
           <BorderRadiusPreview />
           <FilterPreview />
-        
         </div>
-<Link href="/properties" passHref={true}>
+        <Link href="/properties" passHref={true}>
           <a
             sx={{
               fontWeight: 500,
@@ -141,32 +162,33 @@ export default function Docs() {
               maxWidth: '16em',
               textAlign: 'center',
               ':hover': {
-                bg: '#3e38b0'
-              }
+                bg: '#3e38b0',
+              },
             }}
           >
-            <span>
-              View more properties
-            </span>
+            <span>View more properties</span>
           </a>
         </Link>
       </section>
-      <section sx={{ display: 'none', pb: 6, px: [4,5,5]  }}>
+      <section sx={{ display: 'none', pb: 6, px: [4, 5, 5] }}>
         <header sx={{ mb: 5 }}>
           <h2 sx={{ textAlign: 'center' }}>Composable</h2>
-          <p sx={{ fontSize: 3, textAlign: 'center', }}>
-            Mix and match controls to create your own custom component design interfaces. 
+          <p sx={{ fontSize: 3, textAlign: 'center' }}>
+            Mix and match controls to create your own custom component design
+            interfaces.
           </p>
         </header>
-        <div sx={{
-          display: 'flex',
-          gap: '8em',
-          }}>
+        <div
+          sx={{
+            display: 'flex',
+            gap: '8em',
+          }}
+        >
           <ColorPairPreview />
           <ColorsPreview />
         </div>
-          <LinkPreview />
-        </section>
+        <LinkPreview />
+      </section>
     </div>
   )
 }
