@@ -25,7 +25,6 @@ import { ResponsiveInput } from '../Responsive'
 import { sentenceCase } from '../../lib/util'
 import { EditorProps } from '../../types/editor'
 import { useThemeProperty } from '../providers/ThemeContext'
-import { PositionInput } from '../inputs/PositionInput'
 import { UnitSteps } from '../../lib'
 import { pascalCase } from '../../lib/util'
 import { UnitRanges } from '../../data/ranges'
@@ -299,8 +298,6 @@ function getInputComponent(property: string) {
   switch (input) {
     case 'multiLength':
       return MultidimensionLengthInput
-    case 'position':
-      return PositionInput
     case 'none':
       return null
     default:
