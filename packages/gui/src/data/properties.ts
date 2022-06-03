@@ -14,8 +14,6 @@ import { stringifyImageSource } from '../components/inputs/ImageSource/stringify
 import { allProperties } from './css-properties'
 import { camelCase, uniqBy } from 'lodash-es'
 import { positiveRanges, UnitRanges } from './ranges'
-import BackgroundInput from '../components/inputs/Background/field'
-import { stringifyBackgroundList } from '../components/inputs/Background/stringify'
 import MaskInput from '../components/inputs/Mask/field'
 import { stringifyMaskList } from '../components/inputs/Mask/stringify'
 import {
@@ -43,6 +41,7 @@ import { EditorPropsWithLabel } from '../types/editor'
 import { filter } from '../components/schemas/filter'
 
 import * as animationProperties from '../components/schemas/animation'
+import * as backgroundProperties from '../components/schemas/background'
 import * as borderProperties from '../components/schemas/border'
 import * as borderImageProperties from '../components/schemas/border-image'
 import { borderSpacing } from '../components/schemas/border-spacing'
@@ -205,36 +204,7 @@ export const properties: Record<string, PropertyData> = {
     keywords: ['visible', 'hidden'],
     defaultValue: 'hidden',
   },
-  background: {
-    input: BackgroundInput,
-    stringify: stringifyBackgroundList,
-    defaultValue: [
-      {
-        image: {
-          type: 'url',
-          arguments: ['https://source.unsplash.com/random/1920x1080'],
-        },
-        position: {
-          x: { value: 'center', unit: 'keyword' },
-          y: { value: 'center', unit: 'keyword' },
-        },
-        repeat: { x: 'no-repeat', y: 'no-repeat' },
-        size: {
-          type: 'dimensions',
-          x: { value: 100, unit: '%' },
-          y: { value: 100, unit: '%' },
-        },
-        attachment: 'fixed',
-        origin: 'border-box',
-        clip: 'border-box',
-      },
-    ],
-  },
-  backgroundAttachment: {
-    input: 'keyword',
-    keywords: ['scroll', 'fixed', 'local', 'local, scroll', 'scroll, local'],
-    defaultValue: 'scroll',
-  },
+  ...backgroundProperties,
   backgroundBlendMode: {
     // TODO multiple properties
     input: 'keyword',
@@ -263,40 +233,6 @@ export const properties: Record<string, PropertyData> = {
     keywords: ['currentcolor', 'transparent'],
     defaultValue: 'tomato',
   },
-  backgroundClip: {
-    input: 'keyword',
-    keywords: [
-      'border-box',
-      'padding-box',
-      'content-box',
-      'text',
-      'content-box, border-box',
-    ],
-    defaultValue: 'border-box',
-  },
-  backgroundImage: {
-    input: ImageSourcePicker,
-    stringify: stringifyImageSource,
-    label: 'Background Image',
-    defaultValue: [
-      {
-        type: 'url',
-        arguments: ['https://source.unsplash.com/random/1920x1080'],
-      },
-    ],
-  },
-  backgroundOrigin: {
-    input: 'keyword',
-    keywords: ['border-box', 'padding-box', 'content-box'],
-    defaultValue: 'border-box',
-  },
-  backgroundPosition: {
-    input: 'position',
-    defaultValue: {
-      x: { value: 'center', unit: 'keyword' },
-      y: { value: 'center', unit: 'keyword' },
-    },
-  },
   backgroundPositionX: {
     // TODO: Add side relative values option and multiple values option
     input: 'length',
@@ -324,35 +260,6 @@ export const properties: Record<string, PropertyData> = {
       value: 6,
       unit: 'px',
     },
-  },
-  backgroundRepeat: {
-    input: 'keyword',
-    keywords: [
-      'repeat-x',
-      'repeat-y',
-      'repeat',
-      'space',
-      'round',
-      'no-repeat',
-      'repeat space',
-      'repeat repeat',
-      'round space',
-      'no-repeat round',
-    ],
-    defaultValue: 'no-repeat',
-  },
-  backgroundSize: {
-    // TODO: Add two value syntax
-    input: 'length',
-    percentage: true,
-    keywords: ['cover', 'contain', 'auto'],
-    range: {
-      [AbsoluteLengthUnits.Px]: [0, 128],
-      [FontRelativeLengthUnits.Em]: [0, 8],
-      [FontRelativeLengthUnits.Rem]: [0, 8],
-      [PercentageLengthUnits.Pct]: [0.1, 100],
-    },
-    defaultValue: { value: 'cover', unit: 'keyword' },
   },
   blockSize: {
     // TODO: Add fit-content function

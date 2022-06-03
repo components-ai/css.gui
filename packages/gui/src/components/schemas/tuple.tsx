@@ -19,6 +19,7 @@ interface CreateTupleSchema<T, K> {
 export function tupleSchema<T, K extends string = never>({
   itemSchema,
   labels,
+  keywords,
 }: CreateTupleSchema<T, K>): DataTypeSchema<T[] | K> {
   function isLinked(value: T[] | K) {
     return value.length <= 1
@@ -44,6 +45,7 @@ export function tupleSchema<T, K extends string = never>({
           {...props}
           stringify={stringify}
           defaultValue={defaultValue}
+          keywords={keywords}
         >
           {!(typeof value === 'string') && (
             <div sx={{ display: 'flex', gap: 2 }}>
