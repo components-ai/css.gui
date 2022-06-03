@@ -29,6 +29,7 @@ import * as listStyleProperties from '../components/schemas/list-style'
 import * as marginProperties from '../components/schemas/margin'
 import * as maskProperties from '../components/schemas/mask'
 import * as maskBorderProperties from '../components/schemas/mask-border'
+import * as objectProperties from '../components/schemas/object-position'
 import * as offsetProperties from '../components/schemas/offset'
 import * as overflowProperties from '../components/schemas/overflow'
 import * as overscrollProperties from '../components/schemas/overscroll'
@@ -1124,15 +1125,8 @@ export const properties: Record<string, PropertyData> = {
     ],
     defaultValue: 'overlay',
   },
+  ...objectProperties,
   ...offsetProperties,
-  objectFit: {
-    input: 'keyword',
-    keywords: ['contain', 'cover', 'fill', 'none', 'scale-down'],
-    defaultValue: 'cover',
-  },
-  objectPosition: {
-    input: 'position',
-  },
   opacity: {
     input: 'percentage',
     range: {
