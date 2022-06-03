@@ -16,6 +16,10 @@ export function listSchema<T>({
   thumbnail,
 }: CreateList<T>): DataTypeSchema<T[]> {
   const stringify = (value: T[]) => {
+    if (typeof value === 'string') {
+      return value
+    }
+
     const stringified = value.map((item) => itemSchema.stringify(item))
     return stringified.join(separator)
   }

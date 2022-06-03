@@ -3,7 +3,15 @@ import { useState } from 'react'
 import { Container } from '../../components/Container'
 
 export default function Filters() {
-  const [styles, setStyles] = useState<any>({})
+  const [styles, setStyles] = useState<any>({
+    filter: [
+      {
+        type: 'blur',
+        radius: { value: 8, unit: 'px' },
+      },
+    ],
+  })
+
   return (
     <div sx={{ pt: 5 }}>
       <Container>
@@ -24,7 +32,7 @@ export default function Filters() {
               backgroundImage: [
                 {
                   type: 'url',
-                  arguments: ['https://source.unsplash.com/random'],
+                  value: 'https://source.unsplash.com/random',
                 },
               ],
               backgroundSize: 'cover',
