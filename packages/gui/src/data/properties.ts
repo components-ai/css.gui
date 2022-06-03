@@ -9,13 +9,14 @@ import {
 import { UnitSteps } from '../lib'
 import { allProperties } from './css-properties'
 import { camelCase, uniqBy } from 'lodash-es'
-import { positiveRanges, UnitRanges } from './ranges'
+import { UnitRanges } from './ranges'
 import { GridLineInput, stringifyGridLine } from '../components/inputs/GridLine'
 import { EditorPropsWithLabel } from '../types/editor'
 
 import * as animationProperties from '../components/schemas/animation'
 import * as backgroundProperties from '../components/schemas/background'
 import * as borderProperties from '../components/schemas/border'
+import * as borderRadiusProperties from '../components/schemas/border-radius'
 import * as borderImageProperties from '../components/schemas/border-image'
 import { borderSpacing } from '../components/schemas/border-spacing'
 import { boxShadow } from '../components/schemas/box-shadow'
@@ -208,20 +209,7 @@ export const properties: Record<string, PropertyData> = {
     keywords: ['top', 'center', 'bottom'],
     defaultValue: 'center',
   },
-  borderRadius: {
-    input: 'length',
-    percentage: true,
-    range: {
-      ...positiveRanges(),
-      [AbsoluteLengthUnits.Px]: [0, Infinity],
-      [FontRelativeLengthUnits.Em]: [0, 64],
-      [FontRelativeLengthUnits.Rem]: [0, 64],
-    },
-    defaultValue: {
-      value: 6,
-      unit: 'px',
-    },
-  },
+  ...borderRadiusProperties,
   blockSize: {
     // TODO: Add fit-content function
     input: 'length',
@@ -236,22 +224,6 @@ export const properties: Record<string, PropertyData> = {
   },
   ...borderProperties,
   ...borderImageProperties,
-  borderBottomLeftRadius: {
-    input: 'multiLength',
-    dimensions: 2,
-  },
-  borderBottomRightRadius: {
-    input: 'multiLength',
-    dimensions: 2,
-  },
-  borderTopLeftRadius: {
-    input: 'multiLength',
-    dimensions: 2,
-  },
-  borderTopRightRadius: {
-    input: 'multiLength',
-    dimensions: 2,
-  },
   borderSpacing,
   boxDecorationBreak: {
     input: 'keyword',
