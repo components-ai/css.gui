@@ -9,6 +9,8 @@ interface CreateTupleSchema<T, K> {
   itemSchema: DataTypeSchema<T>
   labels: string[]
   keywords?: K[]
+  linkable?: boolean
+  separator?: string
 }
 
 /**
@@ -20,19 +22,25 @@ export function tupleSchema<T, K extends string = never>({
   itemSchema,
   labels,
   keywords,
+  linkable = true,
+  separator = ' ',
 }: CreateTupleSchema<T, K>): DataTypeSchema<T[] | K> {
   function isLinked(value: T[] | K) {
     return value.length <= 1
   }
 
-  const defaultValue = [itemSchema.defaultValue]
+  const defaultValue = linkable
+    ? [itemSchema.defaultValue]
+    : labels.map(() => itemSchema.defaultValue)
 
   function stringify(value: T[] | K) {
     if (typeof value === 'string') {
       return value
     }
 
-    return value?.map((item) => itemSchema.stringify(item)).join(' ') ?? null
+    return (
+      value?.map((item) => itemSchema.stringify(item)).join(separator) ?? null
+    )
   }
 
   return {
@@ -49,29 +57,31 @@ export function tupleSchema<T, K extends string = never>({
         >
           {!(typeof value === 'string') && (
             <div sx={{ display: 'flex', gap: 2 }}>
-              <Toggle.Root
-                title="Link inputs"
-                sx={{
-                  p: 0,
-                  background: 'none',
-                  border: 'none',
-                  color: 'muted',
+              {linkable && (
+                <Toggle.Root
+                  title="Link inputs"
+                  sx={{
+                    p: 0,
+                    background: 'none',
+                    border: 'none',
+                    color: 'muted',
 
-                  '&[data-state=on]': {
-                    color: 'text',
-                  },
-                }}
-                pressed={linked}
-                onPressedChange={(pressed) => {
-                  if (pressed) {
-                    props.onChange([value[0]])
-                  } else {
-                    props.onChange(labels.map(() => value[0]))
-                  }
-                }}
-              >
-                <Link size={14} />
-              </Toggle.Root>
+                    '&[data-state=on]': {
+                      color: 'text',
+                    },
+                  }}
+                  pressed={linked}
+                  onPressedChange={(pressed) => {
+                    if (pressed) {
+                      props.onChange([value[0]])
+                    } else {
+                      props.onChange(labels.map(() => value[0]))
+                    }
+                  }}
+                >
+                  <Link size={14} />
+                </Toggle.Root>
+              )}
               {value.map((item, i) => {
                 return (
                   <ItemInput

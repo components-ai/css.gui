@@ -1,7 +1,5 @@
 import { ComponentType } from 'react'
 import { FontFamily } from '../components/inputs/FontFamily'
-import TransformPicker from '../components/inputs/Transform/field'
-import { stringifyTransform } from '../components/inputs/Transform/stringify'
 import {
   AbsoluteLengthUnits,
   FontRelativeLengthUnits,
@@ -49,6 +47,7 @@ import { scrollSnapAlign } from '../components/schemas/scroll-snap-align'
 import * as shapeOutsideProperties from '../components/schemas/shape-outside'
 import * as textDecorationProperties from '../components/schemas/text-decoration'
 import { textShadow } from '../components/schemas/text-shadow'
+import * as transformProperties from '../components/schemas/transform'
 import * as transitionProperties from '../components/schemas/transition'
 
 type PropertyData = {
@@ -1627,11 +1626,7 @@ export const properties: Record<string, PropertyData> = {
     ],
     defaultValue: 'auto',
   },
-  transform: {
-    input: TransformPicker,
-    stringify: stringifyTransform,
-    defaultValue: [{ type: 'rotate', amount: { value: 45, unit: 'deg' } }],
-  },
+  ...transformProperties,
   transformBox: {
     input: 'keyword',
     keywords: [
