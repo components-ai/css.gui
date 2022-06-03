@@ -50,6 +50,7 @@ import * as gridProperties from '../components/schemas/grid'
 import * as insetProperties from '../components/schemas/inset'
 import * as marginProperties from '../components/schemas/margin'
 import * as maskProperties from '../components/schemas/mask'
+import * as maskBorderProperties from '../components/schemas/mask-border'
 import * as overflowProperties from '../components/schemas/overflow'
 import * as overscrollProperties from '../components/schemas/overscroll'
 import * as paddingProperties from '../components/schemas/padding'
@@ -1083,53 +1084,7 @@ export const properties: Record<string, PropertyData> = {
     defaultValue: 'slow',
   },
   ...maskProperties,
-  maskBorderMode: {
-    input: 'keyword',
-    keywords: ['luminance', 'alpha'],
-    defaultValue: 'luminance',
-  },
-  maskBorderSource: {
-    input: ImageSourcePicker,
-    stringify: stringifyImageSource,
-    label: 'Mask Border Source',
-  },
-  maskBorderSize: {
-    input: BgSizeInput,
-    stringify: stringifyBgSize,
-  },
-  maskBorderWidth: {
-    // TODO: add multiple sides (top, bottom, left, right)
-    input: 'length',
-    percentage: true,
-    number: true,
-    keywords: ['auto'],
-    defaultValue: {
-      value: 8,
-      unit: 'px',
-    },
-  },
-  maskBorderRepeat: {
-    input: 'keyword',
-    keywords: [
-      'stretch',
-      'repeat',
-      'round',
-      'space',
-      'round stretch',
-      'round repeat',
-      'round space',
-      'stretch repeat',
-      'stretch round',
-      'stretch space',
-      'repeat stretch',
-      'repeat round',
-      'repeat space',
-      'space stretch',
-      'space round',
-      'space repeat',
-    ],
-    defaultValue: 'stretch',
-  },
+  ...maskBorderProperties,
   maskType: {
     input: 'keyword',
     keywords: ['luminance', 'alpha'],
