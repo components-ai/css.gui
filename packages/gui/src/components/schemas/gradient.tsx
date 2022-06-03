@@ -116,6 +116,12 @@ export const gradient = optionsSchema({
   stringify: (type, value) => `${type}-gradient(${value})`,
   // TODO keep values when switching between repeating and non-
   convert: (oldValue, newType) => {
+    if (
+      oldValue.type === `repeating-${newType}` ||
+      newType === `repeating-${oldValue.type}`
+    ) {
+      return oldValue
+    }
     return {
       stops: oldValue.stops,
     }

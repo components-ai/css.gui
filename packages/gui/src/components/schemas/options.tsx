@@ -34,8 +34,8 @@ export function optionsSchema<T extends Record<string, any>>({
               // if the type changes, reset the value to the default value of that type
               props.onChange({
                 ...variants[newType].defaultValue,
-                type: newType,
                 ...convert(props.value, newType),
+                type: newType,
               })
             }}
           />
