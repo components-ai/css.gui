@@ -44,7 +44,7 @@ export const Sidebar = () => {
       <NavItem href="/examples/clip-path">Clip Path</NavItem>
       <NavItem href="/examples/filters">Filters</NavItem>
       <NavItem href="/examples/flex">Flex</NavItem>
-      <NavItem href="/examples/grid">Grid</NavItem>
+      {false && <NavItem href="/examples/grid">Grid</NavItem>}
       <NavItem href="/examples/masks">Masks</NavItem>
       <NavItem href="/examples/offset">Offset</NavItem>
       <NavItem href="/examples/shadows">Shadows</NavItem>
