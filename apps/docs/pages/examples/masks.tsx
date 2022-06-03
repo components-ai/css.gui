@@ -9,22 +9,18 @@ const initialStyles = {
       clip: 'border-box',
       image: {
         type: 'url',
-        arguments: ['https://source.unsplash.com/random'],
+        value: 'https://source.unsplash.com/random',
       },
       origin: 'border-box',
       position: {
         x: { value: 0, type: '%' },
         y: { value: 0, type: '%' },
       },
-      repeat: {
-        x: 'no-repeat',
-        y: 'no-repeat',
-      },
-      size: {
-        type: 'dimensions',
-        x: { value: 100, unit: '%' },
-        y: { value: 100, unit: '%' },
-      },
+      repeat: ['no-repeat', 'no-repeat'],
+      size: [
+        { value: 100, unit: '%' },
+        { value: 100, unit: '%' },
+      ],
       composite: 'add',
       mode: 'luminance',
     },
@@ -35,13 +31,16 @@ export default function MaskExample() {
   const [styles, setStyles] = useState<any>(initialStyles)
   return (
     <div sx={{ pt: 5 }}>
-    <Container>
-      <div sx={{ mb: 5, '& > img': {maxWidth: '100%', display: 'block'} }}>
-        <img src="https://source.unsplash.com/random" sx={toCSSObject(styles)} />
-      </div>
-      <Editor styles={styles} onChange={setStyles} theme={defaultTheme}>
-        <Inputs.Mask />
-      </Editor>
+      <Container>
+        <div sx={{ mb: 5, '& > img': { maxWidth: '100%', display: 'block' } }}>
+          <img
+            src="https://source.unsplash.com/random"
+            sx={toCSSObject(styles)}
+          />
+        </div>
+        <Editor styles={styles} onChange={setStyles} theme={defaultTheme}>
+          <Inputs.Mask />
+        </Editor>
       </Container>
     </div>
   )
