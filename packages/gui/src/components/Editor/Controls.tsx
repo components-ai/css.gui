@@ -8,12 +8,7 @@ import {
   useEffect,
 } from 'react'
 import { camelCase, uniq } from 'lodash-es'
-import {
-  CSSUnitValue,
-  isPrimitive,
-  MultidimensionalLength,
-  Styles,
-} from '../../types/css'
+import { isPrimitive, Styles } from '../../types/css'
 import { Theme } from '../../types/theme'
 import { EditorProvider, useEditor } from '../providers/EditorContext'
 import { useDynamicControls } from '../providers/DynamicPropertiesContext'
@@ -21,16 +16,12 @@ import { EditorData, KeyArg, Recipe } from '../providers/types'
 import { GenericFieldset, useFieldset } from './Fieldset'
 import { joinPath } from '../providers/util'
 import { properties } from '../../data/properties'
-import { ResponsiveInput } from '../Responsive'
 import { sentenceCase } from '../../lib/util'
-import { EditorProps } from '../../types/editor'
 import { useThemeProperty } from '../providers/ThemeContext'
 import { UnitSteps } from '../../lib'
 import { pascalCase } from '../../lib/util'
 import { UnitRanges } from '../../data/ranges'
 import { getDefaultValue } from '../../lib/defaults'
-import { MultidimensionInput } from '../inputs/Multidimension'
-import { Responsive } from '../Responsive/Input'
 import { AddPropertyControl } from '../AddProperty'
 import { isFieldsetGroup, partitionProperties, sortProperties } from './util'
 import { stylesToEditorSchema } from '../../lib/transformers/styles-to-editor-schema'
@@ -295,44 +286,9 @@ function getInputComponent(property: string) {
   if (isPrimitive(input)) {
     return PrimitiveInput
   }
-  switch (input) {
-    case 'multiLength':
-      return MultidimensionLengthInput
-    case 'none':
-      return null
-    default:
-      return null
-  }
+  return null
 }
 
-type EditorPropsWithLabel<T> = EditorProps<T> & {
-  label: string
-  responsive: boolean
-}
-
-function MultidimensionLengthInput({
-  value,
-  onChange,
-  onRemove,
-  label,
-  ...props
-}: EditorPropsWithLabel<Responsive<CSSUnitValue | MultidimensionalLength>> & {
-  property: string
-}) {
-  return (
-    <ResponsiveInput
-      label={label}
-      value={value}
-      onChange={onChange}
-      onRemove={onRemove}
-      Component={MultidimensionInput}
-      componentProps={{
-        ...props,
-        keyword: true,
-      }}
-    />
-  )
-}
 /**
  * Extract the defaults from the editor's children
  */
