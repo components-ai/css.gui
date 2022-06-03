@@ -18,7 +18,6 @@ import {
   stringifyStrokeDasharray,
   StrokeDasharrayInput,
 } from '../components/inputs/StrokeDasharray'
-import { BgSizeInput, stringifyBgSize } from '../components/inputs/BgSizeInput'
 import {
   stringifyTransformOrigin,
   TransformOriginInput,
