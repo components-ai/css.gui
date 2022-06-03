@@ -11,10 +11,6 @@ import { allProperties } from './css-properties'
 import { camelCase, uniqBy } from 'lodash-es'
 import { positiveRanges, UnitRanges } from './ranges'
 import {
-  stringifyStrokeDasharray,
-  StrokeDasharrayInput,
-} from '../components/inputs/StrokeDasharray'
-import {
   stringifyTransformOrigin,
   TransformOriginInput,
 } from '../components/inputs/TransformOrigin'
