@@ -27,11 +27,11 @@ export function InputHeader({ children, label, onRemove, reorder }: Props) {
             gap: '-0.5rem',
           }}
         >
-          <IconButton disabled={!!reorder.onMoveUp} onClick={reorder.onMoveUp}>
+          <IconButton disabled={!reorder.onMoveUp} onClick={reorder.onMoveUp}>
             <ChevronUp size={16} />
           </IconButton>
           <IconButton
-            disabled={!!reorder.onMoveDown}
+            disabled={!reorder.onMoveDown}
             onClick={reorder.onMoveDown}
           >
             <ChevronDown size={16} />

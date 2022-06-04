@@ -50,7 +50,7 @@ const singleFilter = optionsSchema({
 
 export const filter = listSchema({
   itemSchema: singleFilter,
-  separator: '',
+  separator: ' ',
   thumbnail: Thumbnail,
 })
 

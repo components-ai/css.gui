@@ -178,7 +178,7 @@ const singleTransform = optionsSchema({
 
 export const transform = listSchema({
   itemSchema: singleTransform,
-  separator: '',
+  separator: ' ',
 })
 
 export const transformOrigin = objectSchema({

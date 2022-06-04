@@ -16,7 +16,7 @@ interface CreateObject<T extends object, K> {
   slash?: (keyof T)[]
   separator?: string
   defaultValue?: Partial<T>
-  keywords: K[]
+  keywords?: K[]
 }
 
 export function objectSchema<T extends object, K extends string = never>({

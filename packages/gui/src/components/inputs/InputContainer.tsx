@@ -51,7 +51,20 @@ export function InputContainer<T, K extends string = never>(
               topLevel={topLevel}
             />
           ) : (
-            <output sx={{ fontSize: 1, color: 'muted' }}>
+            <output
+              sx={{
+                fontSize: 1,
+                color: 'text',
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                width: 'max-content',
+                maxWidth: '12rem',
+                // maxWidth: '100%',
+                maxHeight: '1.25rem',
+              }}
+              title={stringify(value)}
+            >
               {stringify(value)}
             </output>
           )}

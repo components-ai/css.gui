@@ -1,6 +1,7 @@
 import { ComponentType } from 'react'
 import FieldArray from '../FieldArray'
 import { DataTypeSchema } from './types'
+
 interface CreateList<T> {
   itemSchema: DataTypeSchema<T>
   separator?: string
@@ -20,19 +21,21 @@ export function listSchema<T>({
     const stringified = value.map((item) => itemSchema.stringify(item))
     return stringified.join(separator)
   }
+  const defaultValue = [itemSchema.defaultValue]
 
   return {
+    stringify,
+    defaultValue,
     input(props) {
       return (
         <FieldArray
           {...props}
+          defaultValue={defaultValue}
           newItem={() => itemSchema.defaultValue}
           stringify={stringify}
           content={itemSchema.input}
         />
       )
     },
-    stringify,
-    defaultValue: [itemSchema.defaultValue],
   }
 }
