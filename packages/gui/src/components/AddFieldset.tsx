@@ -165,6 +165,8 @@ export const AddFieldsetControl = ({
                     margin: 0,
                     pl: 3,
                     py: 1,
+                    cursor: 'auto',
+                    userSelect: 'none',
                     backgroundColor:
                       highlightedIndex === index
                         ? 'backgroundOffset'
