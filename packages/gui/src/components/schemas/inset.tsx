@@ -1,4 +1,4 @@
-import { boxSideSchema } from './boxSide'
+import { boxSideSchema } from './box-side'
 import { lengthPercentage } from './primitives'
 
 const insetItem = lengthPercentage({

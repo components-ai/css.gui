@@ -1,4 +1,4 @@
-import { boxSideSchema } from './boxSide'
+import { boxSideSchema } from './box-side'
 import { objectSchema } from './object'
 import { color, keyword, length } from './primitives'
 import { tupleSchema } from './tuple'

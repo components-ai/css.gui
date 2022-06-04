@@ -1,5 +1,5 @@
 import { CheckboxInput } from '../inputs/CheckboxInput'
-import { boxSideSchema } from './boxSide'
+import { boxSideSchema } from './box-side'
 import { image } from './image'
 import { objectSchema } from './object'
 import {
