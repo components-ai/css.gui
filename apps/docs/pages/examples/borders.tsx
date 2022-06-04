@@ -6,9 +6,41 @@ import { Container } from '../../components/Container'
 
 const initialStyles = {
   padding: {
-    value: 64,
-    unit: 'px',
+    top: {
+      value: 64,
+      unit: 'px',
+    },
   },
+  margin: {
+    top: {
+      value: 0,
+      unit: 'px',
+    },
+  },
+  borderTopLeftRadius: [
+    {
+      value: 16,
+      unit: 'px',
+    },
+  ],
+  borderTopRightRadius: [
+    {
+      value: 16,
+      unit: 'px',
+    },
+  ],
+  borderBottomLeftRadius: [
+    {
+      value: 16,
+      unit: 'px',
+    },
+  ],
+  borderBottomRightRadius: [
+    {
+      value: 16,
+      unit: 'px',
+    },
+  ],
   borderLeftColor: '#6465ff',
   borderLeftStyle: 'double',
   borderLeftWidth: {
@@ -47,7 +79,7 @@ export default function BorderImage() {
           borderTopWidth: 'thin',
         }}
       >
-        <div sx={{ flexGrow: 1, fontSize: [4,5,5], my: 4 }}>
+        <div sx={{ flexGrow: 1, fontSize: [4, 5, 5], my: 4 }}>
           <styled.p styles={styles}>
             “The parameters comprise sequences which are theoretically infinite
             but limits are, of course, set to them in practice. There is an
@@ -67,37 +99,45 @@ export default function BorderImage() {
             </em>
           </styled.p>
         </div>
-          <Editor styles={styles} onChange={setStyles} theme={defaultTheme}>
-            <div>
-                <h4>Borders</h4>
-                <article sx={{ display: 'grid', gap: '1rem', gridTemplateColumns: '1.25fr 2fr 2fr', maxWidth: '32rem', width: '100%', }}>
-                  <Inputs.BorderLeftColor />
-                  <Inputs.BorderLeftStyle />
-                  <Inputs.BorderLeftWidth />
-                  <Inputs.BorderRightColor />
-                  <Inputs.BorderRightStyle />
-                  <Inputs.BorderRightWidth />
-                  <Inputs.BorderTopColor />
-                  <Inputs.BorderTopStyle />
-                  <Inputs.BorderTopWidth />
-                  <Inputs.BorderBottomColor />
-                  <Inputs.BorderBottomStyle />
-                  <Inputs.BorderBottomWidth />
-                </article>
-                <article sx={{ maxWidth: '32rem', width: '100%', }}>
-                <h4>Radius</h4>
-                <Inputs.BorderTopLeftRadius />
-                <Inputs.BorderTopRightRadius />
-                <Inputs.BorderBottomLeftRadius />
-                <Inputs.BorderBottomRightRadius />
-                </article>
-                <article sx={{ maxWidth: '32rem', width: '100%', }}>
-                <h4>Spacing</h4>
-                <Inputs.Padding />
-                <Inputs.Margin />
-                </article>
-            </div>
-          </Editor>
+        <Editor styles={styles} onChange={setStyles} theme={defaultTheme}>
+          <div>
+            <h4>Borders</h4>
+            <article
+              sx={{
+                display: 'grid',
+                gap: '1rem',
+                gridTemplateColumns: '1.25fr 2fr 2fr',
+                maxWidth: '32rem',
+                width: '100%',
+              }}
+            >
+              <Inputs.BorderLeftColor />
+              <Inputs.BorderLeftStyle />
+              <Inputs.BorderLeftWidth />
+              <Inputs.BorderRightColor />
+              <Inputs.BorderRightStyle />
+              <Inputs.BorderRightWidth />
+              <Inputs.BorderTopColor />
+              <Inputs.BorderTopStyle />
+              <Inputs.BorderTopWidth />
+              <Inputs.BorderBottomColor />
+              <Inputs.BorderBottomStyle />
+              <Inputs.BorderBottomWidth />
+            </article>
+            <article sx={{ maxWidth: '32rem', width: '100%' }}>
+              <h4>Radius</h4>
+              <Inputs.BorderTopLeftRadius />
+              <Inputs.BorderTopRightRadius />
+              <Inputs.BorderBottomLeftRadius />
+              <Inputs.BorderBottomRightRadius />
+            </article>
+            <article sx={{ maxWidth: '32rem', width: '100%' }}>
+              <h4>Spacing</h4>
+              <Inputs.Padding />
+              <Inputs.Margin />
+            </article>
+          </div>
+        </Editor>
       </div>
       <div>
         <pre

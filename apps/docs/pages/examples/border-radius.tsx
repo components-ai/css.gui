@@ -2,15 +2,24 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { Editor, Inputs, styled, codegen } from '@compai/css-gui'
 import { defaultTheme } from '../../data/default-theme'
-import { Container } from '../../components/Container'
 
 const initialStyles = {
   padding: {
-    value: 64,
-    unit: 'px',
+    top: {
+      value: 64,
+      unit: 'px',
+    },
   },
-  borderStyle: 'solid',
+  borderStyle: {
+    top: 'solid',
+  },
   borderWidth: {
+    top: {
+      value: 16,
+      unit: 'px',
+    },
+  },
+  borderRadius: {
     value: 16,
     unit: 'px',
   },
@@ -32,10 +41,7 @@ export default function BorderRadius() {
           <Editor styles={styles} onChange={setStyles} theme={defaultTheme}>
             <div sx={{ display: 'grid', gap: '.5rem', width: '240px' }}>
               <h3>Radius</h3>
-              <Inputs.BorderTopLeftRadius />
-              <Inputs.BorderTopRightRadius />
-              <Inputs.BorderBottomLeftRadius />
-              <Inputs.BorderBottomRightRadius />
+              <Inputs.BorderRadius />
             </div>
           </Editor>
         </div>

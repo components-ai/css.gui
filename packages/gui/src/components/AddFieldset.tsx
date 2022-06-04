@@ -1,26 +1,29 @@
 import { useCombobox } from 'downshift'
 import { useEffect, useId, useRef, useState } from 'react'
+import { pseudoClasses } from '../data/pseudo-classes'
+import { pseudoElements } from '../data/pseudo-elements'
+import { Styles } from '../types/css'
+import { Label } from './primitives'
+import { useEditor } from './providers/EditorContext'
+import { KeyArg } from './providers/types'
+import { joinPath } from './providers/util'
 
-interface ComboboxInterface {
-  onFilterItems: (filterValue: string) => string[]
-  onItemSelected: (selectedItem: string) => void
-  items: string[]
-  value?: string
-  clearOnSelect?: boolean
+interface Props {
+  field?: KeyArg
+  styles: Styles
+  label?: string
 }
-
-export function Combobox({
-  onFilterItems,
-  onItemSelected,
-  items,
-  value,
-  clearOnSelect = false,
-}: ComboboxInterface) {
+export const AddFieldsetControl = ({
+  field,
+  styles,
+  label = 'Add fieldset',
+}: Props) => {
+  const { setField } = useEditor()
   const id = useId()
   const inputRef = useRef(null)
 
-  const [inputItems, setInputItems] = useState<string[]>(items)
-  const [filterValue, setFilterValue] = useState<string>(value || '')
+  const [inputItems, setInputItems] = useState<string[]>([])
+  const [filterValue, setFilterValue] = useState<string>('')
 
   useEffect(() => {
     handleFilterItems(filterValue)
@@ -31,48 +34,60 @@ export function Combobox({
     toggleMenu,
     getMenuProps,
     getInputProps,
+    getItemProps,
     getComboboxProps,
     highlightedIndex,
-    getItemProps,
   } = useCombobox({
     id,
-    initialInputValue: value,
     items: inputItems,
     selectedItem: filterValue,
     onInputValueChange: ({ inputValue }) => {
       handleFilterItems(inputValue!)
     },
     onSelectedItemChange: ({ selectedItem }) => {
-      handleItemSelected(selectedItem ?? '')
+      handleAddFieldset(selectedItem ?? '')
     },
   })
 
-  const handleFilterItems = (newValue: string) => {
-    const filteredItems = onFilterItems(newValue)
+  const handleFilterItems = (input: string) => {
+    const styleItems = Object.keys(styles)
+    const filteredItems = [...pseudoClasses, ...pseudoElements]
+      .filter((item) => {
+        if (item.toLowerCase().startsWith(input.toLowerCase() || '')) {
+          return !styleItems.includes(item)
+        }
+      })
+      .sort()
     setInputItems(filteredItems)
   }
 
-  const handleItemSelected = (selectedItem: string) => {
-    onItemSelected(selectedItem)
-    setFilterValue(clearOnSelect ? '' : selectedItem)
+  const handleAddFieldset = (propertyName: string) => {
+    const fullField = field ? joinPath(field, propertyName) : propertyName
+
+    setField(fullField, {})
+    setFilterValue('')
   }
 
   return (
     <div {...getComboboxProps()}>
-      <input
-        type="text"
-        {...getInputProps({
-          ref: inputRef,
-          onChange: (e: any) => setFilterValue(e.target.value),
-        })}
-        onFocus={() => {
-          if (!isOpen) {
-            toggleMenu()
-            handleFilterItems('')
-          }
-        }}
-        sx={{ width: '100%' }}
-      />
+      <Label htmlFor={id} sx={{ display: 'block' }}>
+        <span sx={{ display: 'block', pb: 1 }}>{label}</span>
+        <input
+          type="text"
+          value={filterValue}
+          {...getInputProps({
+            ref: inputRef,
+            onChange: (e: any) => setFilterValue(e.target.value),
+          })}
+          onFocus={() => {
+            if (!isOpen) {
+              toggleMenu()
+              handleFilterItems('')
+            }
+          }}
+          sx={{ display: 'block', width: '100%', mt: '2px' }}
+        />
+      </Label>
       <div
         sx={{
           position: 'relative',
@@ -130,7 +145,7 @@ export function Combobox({
                   alignItems: 'center',
                 }}
                 onClick={() => {
-                  handleItemSelected('')
+                  handleAddFieldset('')
                   // @ts-ignore
                   inputRef.current.focus()
                   if (!isOpen) {
@@ -165,7 +180,7 @@ export function Combobox({
                   key={`${item}${index}`}
                   {...getItemProps({ item, index })}
                   onClick={() => {
-                    handleItemSelected(inputItems[highlightedIndex])
+                    handleAddFieldset(inputItems[highlightedIndex])
                     toggleMenu()
                   }}
                 >

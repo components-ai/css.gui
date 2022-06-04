@@ -32,6 +32,7 @@ export function InputContainer<T, K extends string = never>(
   } = props
   const isKeyword = typeof value === 'string'
   const inputType = isKeyword ? 'keyword' : 'value'
+  const showTypeSelect = topLevel || keywords.length > 0
 
   return (
     <div>
@@ -59,31 +60,33 @@ export function InputContainer<T, K extends string = never>(
               {stringify(value)}
             </output>
           )}
-          <Select.Root
-            value={inputType}
-            onValueChange={(newInputType) => {
-              if (newInputType === 'keyword' && inputType !== 'keyword') {
-                onChange(keywords?.[0] ?? 'inherit')
-              } else if (newInputType === 'value' && inputType !== 'value') {
-                onChange(defaultValue)
-              }
-            }}
-          >
-            <Select.Trigger>
-              <Select.Value>{''}</Select.Value>
-              <Select.Icon />
-            </Select.Trigger>
-            <Select.Content>
-              {['value', 'keyword'].map((typeOption) => {
-                return (
-                  <Select.Item value={typeOption}>
-                    <Select.ItemText>{typeOption}</Select.ItemText>
-                    <Select.ItemIndicator />
-                  </Select.Item>
-                )
-              })}
-            </Select.Content>
-          </Select.Root>
+          {showTypeSelect && (
+            <Select.Root
+              value={inputType}
+              onValueChange={(newInputType) => {
+                if (newInputType === 'keyword' && inputType !== 'keyword') {
+                  onChange(keywords?.[0] ?? 'inherit')
+                } else if (newInputType === 'value' && inputType !== 'value') {
+                  onChange(defaultValue)
+                }
+              }}
+            >
+              <Select.Trigger>
+                <Select.Value>{''}</Select.Value>
+                <Select.Icon />
+              </Select.Trigger>
+              <Select.Content>
+                {['value', 'keyword'].map((typeOption) => {
+                  return (
+                    <Select.Item value={typeOption}>
+                      <Select.ItemText>{typeOption}</Select.ItemText>
+                      <Select.ItemIndicator />
+                    </Select.Item>
+                  )
+                })}
+              </Select.Content>
+            </Select.Root>
+          )}
         </div>
         <div sx={{ ml: 'auto' }}>
           {onRemove && <DeleteButton onRemove={onRemove} />}

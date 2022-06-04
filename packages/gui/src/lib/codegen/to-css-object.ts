@@ -1,7 +1,17 @@
-import { Styles, Length, CSSUnitValue, CSSFunctionCalc, UnitlessUnits } from '../../types/css'
-import { stringifySelector, stringifyUnit, stringifyCalcFunction } from '../stringify'
+import {
+  Styles,
+  Length,
+  CSSUnitValue,
+  CSSFunctionCalc,
+  UnitlessUnits,
+} from '../../types/css'
+import {
+  stringifySelector,
+  stringifyUnit,
+  stringifyCalcFunction,
+} from '../stringify'
 import { has } from 'lodash-es'
-import { isMultidimensionalLength, isNestedSelector } from '../util'
+import { isNestedSelector } from '../util'
 import { properties } from '../../data/properties'
 
 export const stringifyProperty = (
@@ -24,10 +34,7 @@ export const stringifyProperty = (
     return stringifyCalcFunction(value)
   }
 
-  if (isMultidimensionalLength(value)) {
-    return stringifyUnit(value)
-  }
-
+  // font-family?
   if (!isCSSUnitValue(value)) {
     return String(value) ?? null
   }

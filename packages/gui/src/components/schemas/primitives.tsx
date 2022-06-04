@@ -12,9 +12,9 @@ import { AngleInput } from '../inputs/AngleInput'
 import { ColorInput } from '../inputs/ColorInput'
 import { KeywordInput } from '../inputs/KeywordInput'
 import { LengthInput } from '../inputs/LengthInput'
+import { NumberInput } from '../inputs/NumberInput'
 import { NumberPercentageInput } from '../inputs/NumberPercentageInput'
-import { IntegerInput } from '../inputs/PrimitiveInput'
-import { StringInput } from '../inputs/StringInput'
+import { IntegerInput, PercentageInput } from '../inputs/PrimitiveInput'
 import { TextInput } from '../inputs/TextInput'
 import { TimeInput } from '../inputs/TimeInput'
 import { DataTypeSchema } from './types'
@@ -54,6 +54,30 @@ export function time({
   return {
     input: TimeInput,
     stringify: stringifyUnit as any,
+    defaultValue,
+  }
+}
+
+export function percentage({
+  defaultValue = { value: 0, unit: '%' },
+}: {
+  defaultValue?: CSSUnitValue
+} = {}) {
+  return {
+    input: PercentageInput,
+    stringify: stringifyUnit as any,
+    defaultValue,
+  }
+}
+
+export function number({
+  defaultValue = 0,
+}: {
+  defaultValue?: number
+} = {}) {
+  return {
+    input: NumberInput,
+    stringify: (x: number) => x.toString(),
     defaultValue,
   }
 }
@@ -129,9 +153,6 @@ export function string({
   defaultValue?: string
 } = {}): DataTypeSchema<string> {
   return {
-    // Right now, just use a text input.
-    // In the future we may want to do smart-identification of identifiers
-    // the user has used in other places
     input: TextInput,
     stringify: (value) => `"${value}"`,
     defaultValue,

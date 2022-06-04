@@ -1,5 +1,23 @@
 # @compai/css-gui
 
+## 0.0.96
+
+### Patch Changes
+
+- a679ce7: Implement dynamic fieldsets for pseudos
+
+## 0.0.95
+
+### Patch Changes
+
+- 28f0e9d: Fix combobox init
+
+## 0.0.94
+
+### Patch Changes
+
+- 0b91ab3: Begin generating controls from schema
+
 ## 0.0.93
 
 ### Patch Changes

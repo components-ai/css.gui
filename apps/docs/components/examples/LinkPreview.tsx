@@ -9,26 +9,37 @@ export function LinkPreview() {
 
   return (
     <>
-      <article 
-      id='link'
-      sx={{ 
-        display: 'flex',
-        flexDirection: 'column',
-        width: '100%', 
-        overflow: 'hidden',
-        }}>
-        <section sx={{
-          fontWeight: 900,
-          maxWidth: '100%',
-          position: 'relative',
+      <article
+        id="link"
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          width: '100%',
           overflow: 'hidden',
-          mb: 3,
-          }}>
-          <styled.a styles={styles} href='https://github.com/components-ai/css.gui'>
+        }}
+      >
+        <section
+          sx={{
+            fontWeight: 900,
+            maxWidth: '100%',
+            position: 'relative',
+            overflow: 'hidden',
+            mb: 3,
+          }}
+        >
+          <styled.a
+            styles={styles}
+            href="https://github.com/components-ai/css.gui"
+          >
             <h1 style={{ margin: 0, fontSize: '1.25em' }}>A cool title</h1>
-            
-            <p style={{ fontSize: '.75em', fontWeight: 400 }}>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
 
+            <p style={{ fontSize: '.75em', fontWeight: 400 }}>
+              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+              nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
+              erat, sed diam voluptua. At vero eos et accusam et justo duo
+              dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
+              sanctus est Lorem ipsum dolor sit amet.
+            </p>
           </styled.a>
         </section>
         <Editor styles={styles} onChange={setStyles} theme={defaultTheme}>
@@ -38,7 +49,7 @@ export function LinkPreview() {
               pt: 3,
               width: '100%',
               color: 'text',
-              '& > div': { 
+              '& > div': {
                 display: 'grid',
                 gap: '.5rem',
               },
@@ -58,23 +69,25 @@ export function LinkPreview() {
             <Inputs.Padding />
           </div>
         </Editor>
-      <div sx={{
-        mt: 'auto',
-        px: 5,
-        pb: 4,
-        maxWidth: '100%',
-        overflow: 'auto',
-            color: 'text',
-        }}>
-        <pre
+        <div
           sx={{
-            width: '100%',
-            fontSize: 2,
+            mt: 'auto',
+            px: 5,
+            pb: 4,
+            maxWidth: '100%',
+            overflow: 'auto',
+            color: 'text',
           }}
         >
-          {codegen.css(styles)}
-        </pre>
-      </div>
+          <pre
+            sx={{
+              width: '100%',
+              fontSize: 2,
+            }}
+          >
+            {codegen.css(styles)}
+          </pre>
+        </div>
       </article>
     </>
   )

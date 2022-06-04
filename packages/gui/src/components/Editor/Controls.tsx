@@ -8,12 +8,7 @@ import {
   useEffect,
 } from 'react'
 import { camelCase, uniq } from 'lodash-es'
-import {
-  CSSUnitValue,
-  isPrimitive,
-  MultidimensionalLength,
-  Styles,
-} from '../../types/css'
+import { Styles } from '../../types/css'
 import { Theme } from '../../types/theme'
 import { EditorProvider, useEditor } from '../providers/EditorContext'
 import { useDynamicControls } from '../providers/DynamicPropertiesContext'
@@ -21,22 +16,17 @@ import { EditorData, KeyArg, Recipe } from '../providers/types'
 import { GenericFieldset, useFieldset } from './Fieldset'
 import { joinPath } from '../providers/util'
 import { properties } from '../../data/properties'
-import { ResponsiveInput } from '../Responsive'
 import { sentenceCase } from '../../lib/util'
-import { EditorProps } from '../../types/editor'
 import { useThemeProperty } from '../providers/ThemeContext'
-import { PositionInput } from '../inputs/PositionInput'
 import { UnitSteps } from '../../lib'
 import { pascalCase } from '../../lib/util'
 import { UnitRanges } from '../../data/ranges'
 import { getDefaultValue } from '../../lib/defaults'
-import { MultidimensionInput } from '../inputs/Multidimension'
-import { Responsive } from '../Responsive/Input'
 import { AddPropertyControl } from '../AddProperty'
 import { isFieldsetGroup, partitionProperties, sortProperties } from './util'
 import { stylesToEditorSchema } from '../../lib/transformers/styles-to-editor-schema'
 import { removeInternalCSSClassSyntax } from '../../lib/classes'
-import { PrimitiveInput } from '../inputs/PrimitiveInput'
+import { AddFieldsetControl } from '../AddFieldset'
 
 export const getPropertyFromField = (field: KeyArg) => {
   if (Array.isArray(field)) {
@@ -57,8 +47,8 @@ const Control = ({ field, showRemove = false, ...props }: ControlProps) => {
   const property = getPropertyFromField(field)
   const Component: ComponentType<any> | null = getInputComponent(property)
   const themeValues = useThemeProperty(property)
-  const keywords = properties[property].keywords
-  const dependantProperties = properties[property].dependantProperties ?? []
+  const dependantProperties =
+    (properties[property] as any).dependantProperties ?? []
 
   if (!Component) {
     console.error(`Unknown field: ${field}, ignoring`)
@@ -71,9 +61,7 @@ const Control = ({ field, showRemove = false, ...props }: ControlProps) => {
     label: sentenceCase(property),
     themeValues,
     topLevel: true,
-    ...properties[property],
     ...props,
-    keywords,
   }
 
   if (dependantProperties.length) {
@@ -229,6 +217,11 @@ export const EditorControls = ({
         </div>
       ) : null}
       {controls}
+      {showAddProperties ? (
+        <div sx={{ my: 3 }}>
+          <AddFieldsetControl styles={styles} />
+        </div>
+      ) : null}
       {fieldsetControls}
       {children ? <DynamicControls /> : null}
     </>
@@ -289,53 +282,9 @@ const FieldsetControl = ({ field, property }: FieldsetControlProps) => {
 
 function getInputComponent(property: string) {
   const propertyData = properties[property]
-  const input = propertyData.input
-  if (typeof input === 'function') {
-    return input
-  }
-  if (isPrimitive(input)) {
-    return PrimitiveInput
-  }
-  switch (input) {
-    case 'multiLength':
-      return MultidimensionLengthInput
-    case 'position':
-      return PositionInput
-    case 'none':
-      return null
-    default:
-      return null
-  }
+  return propertyData.input
 }
 
-type EditorPropsWithLabel<T> = EditorProps<T> & {
-  label: string
-  responsive: boolean
-}
-
-function MultidimensionLengthInput({
-  value,
-  onChange,
-  onRemove,
-  label,
-  ...props
-}: EditorPropsWithLabel<Responsive<CSSUnitValue | MultidimensionalLength>> & {
-  property: string
-}) {
-  return (
-    <ResponsiveInput
-      label={label}
-      value={value}
-      onChange={onChange}
-      onRemove={onRemove}
-      Component={MultidimensionInput}
-      componentProps={{
-        ...props,
-        keyword: true,
-      }}
-    />
-  )
-}
 /**
  * Extract the defaults from the editor's children
  */
