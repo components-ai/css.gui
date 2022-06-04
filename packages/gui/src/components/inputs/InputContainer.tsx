@@ -72,8 +72,9 @@ export function InputContainer<T, K extends string = never>(
           ) : (
             <output
               sx={{
+                cursor: 'default',
                 fontSize: 1,
-                color: 'text',
+                color: 'muted',
                 textOverflow: 'ellipsis',
                 whiteSpace: 'nowrap',
                 overflow: 'hidden',
