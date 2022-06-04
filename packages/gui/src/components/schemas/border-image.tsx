@@ -36,7 +36,11 @@ export const borderImageSlice = objectSchema({
 export const borderImageSource = image
 
 export const borderImageWidth = boxSideSchema({
-  itemSchema: lengthPercentage({ number: true, keywords: ['auto'] }),
+  itemSchema: lengthPercentage({
+    number: true,
+    range: 'nonnegative',
+    keywords: ['auto'],
+  }),
 })
 
 export const borderImage = objectSchema({

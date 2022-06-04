@@ -6,6 +6,7 @@ import { tupleSchema } from './tuple'
 /* Border width */
 
 const borderWidthItem = length({
+  range: 'nonnegative',
   keywords: ['thin', 'medium', 'thick'],
 })
 

@@ -2,7 +2,7 @@ import { lengthPercentage } from './primitives'
 import { tupleSchema } from './tuple'
 
 const borderRadiusItem = tupleSchema({
-  itemSchema: lengthPercentage(),
+  itemSchema: lengthPercentage({ range: 'nonnegative' }),
   labels: ['x', 'y'],
 })
 

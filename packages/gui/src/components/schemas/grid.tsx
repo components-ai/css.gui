@@ -4,10 +4,12 @@ import { optionsSchema } from './options'
 import { integer, keyword, lengthPercentage } from './primitives'
 
 const inflexibleBreadth = lengthPercentage({
+  range: 'nonnegative',
   keywords: ['min-content', 'max-content', 'auto'],
 })
 const trackBreadth = lengthPercentage({
   flex: true,
+  range: 'nonnegative',
   keywords: ['min-content', 'max-content', 'auto'],
 })
 
