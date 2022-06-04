@@ -13,9 +13,7 @@ const initialValue: any = {
       value: 128,
       unit: 'px',
     },
-    paddingLeft: {
-      value: 64,
-      unit: 'px',
+    paddingLeft: { value: 64, unit: 'px',
     },
     paddingRight: {
       value: 64,
@@ -167,6 +165,8 @@ const initialValue: any = {
     {
       attributes: { href: 'https://components.ai' },
       style: {
+        boxSizing: 'border-box',
+        display: 'inline-block',
         paddingTop: {
           value: 16,
           unit: 'px',
@@ -204,6 +204,9 @@ const initialValue: any = {
         },
       },
       tagName: 'a',
+      style: {
+        display: 'inline-block',
+      },
       children: [
         {
           type: 'text',
@@ -211,6 +214,135 @@ const initialValue: any = {
         },
       ],
     },
+    {
+      tagName: 'section',
+      style: {
+        borderTopWidth: { value: 1, unit: 'px' },
+        borderTopStyle: 'solid',
+        display: 'block',
+        paddingTop: { value: 128, unit: 'px' },
+        marginTop: { value: 128, unit: 'px' }
+      },
+      children: [
+        { 
+          tagName: 'label',
+          style: { display: 'block' },
+          children: [ 
+            {
+              tagName: 'span', 
+              style: { display: 'block' },
+              children : [{
+                type: 'text',
+                value: 'Username',
+              }]
+            },
+            {
+              tagName: 'input',
+              attributes: { type: 'text' },
+            },
+          ],
+        },
+        {
+          tagName: 'progress',
+          attributes: { min: 0, max: 100, value: 20 },
+        },
+        {
+          tagName: 'input',
+          attributes: { type: 'range' },
+        },
+        {
+          tagName: 'input',
+          attributes: { type: 'password' },
+        },
+        {
+          tagName: 'input',
+          attributes: { type: 'radio' },
+        },
+        {
+          tagName: 'input',
+          attributes: { type: 'checkbox' },
+        },
+        {
+          tagName: 'button',
+        },
+        {
+          tagName: 'img',
+          style: { display: 'block', width: '100%',  },
+          attributes: { src: 'https://source.unsplash.com/1920x1080' },
+        },
+        {
+          tagName: 'h1', 
+          children : [{
+            type: 'text',
+            value: 'Heading One',
+          }]
+        },
+        {
+          tagName: 'h2', 
+          children : [{
+            type: 'text',
+            value: 'Heading Two',
+          }]
+        },
+        {
+          tagName: 'h3', 
+          children : [{
+            type: 'text',
+            value: 'Heading Three',
+          }]
+        },
+        {
+          tagName: 'h4', 
+          children : [{
+            type: 'text',
+            value: 'Heading Four',
+          }]
+        },
+        {
+          tagName: 'h5', 
+          children : [{
+            type: 'text',
+            value: 'Heading Five',
+          }]
+        },
+        {
+          tagName: 'h6', 
+          children : [{
+            type: 'text',
+            value: 'Heading Six',
+          }]
+        },
+        {
+          tagName: 'hr', 
+        },
+        {
+          tagName: 'p', 
+          children : [{
+            type: 'text',
+            value: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
+          }]
+        },
+        {
+          tagName: 'dl', 
+          children : [
+          {
+            tagName: 'dt', 
+            children : [{
+              type: 'text',
+              value: 'Definition term',
+            }]
+          },
+          {
+            tagName: 'dd', 
+            children : [{
+              type: 'text',
+              value: 'Definition description',
+            }]
+          },
+          ]
+        },
+      ]
+    }, // end of section
   ],
 }
 
