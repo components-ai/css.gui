@@ -16,29 +16,12 @@ const singleBoxShadow = objectSchema({
     color: color(),
     offsetX: length(),
     offsetY: length(),
-    // TODO ensure this is positive
-    blur: length(),
+    blur: length({ range: 'nonnegative' }),
     spread: length(),
   },
 })
 
 export const boxShadow = listSchema({
   itemSchema: singleBoxShadow,
-  thumbnail: Thumbnail,
+  keywords: ['none'],
 })
-
-function Thumbnail({ value }: { value: string }) {
-  return (
-    <div
-      sx={{
-        width: '100%',
-        height: '100%',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      <div sx={{ width: '1rem', height: '1rem', boxShadow: value }} />
-    </div>
-  )
-}

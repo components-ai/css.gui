@@ -2,18 +2,20 @@ import { ComponentType } from 'react'
 import FieldArray from '../FieldArray'
 import { DataTypeSchema } from './types'
 
-interface CreateList<T> {
+interface CreateList<T, K> {
   itemSchema: DataTypeSchema<T>
   separator?: string
   variant?: 'layers' | 'list'
   thumbnail?: ComponentType<{ value: string }>
+  keywords?: K[]
 }
 
-export function listSchema<T>({
+export function listSchema<T, K extends string = never>({
   itemSchema,
+  keywords,
   separator = ', ',
-}: CreateList<T>): DataTypeSchema<T[]> {
-  const stringify = (value: T[]) => {
+}: CreateList<T, K>): DataTypeSchema<T[] | K> {
+  const stringify = (value: T[] | K) => {
     if (typeof value === 'string') {
       return value
     }
@@ -30,6 +32,7 @@ export function listSchema<T>({
       return (
         <FieldArray
           {...props}
+          keywords={keywords}
           defaultValue={defaultValue}
           newItem={() => itemSchema.defaultValue}
           stringify={stringify}

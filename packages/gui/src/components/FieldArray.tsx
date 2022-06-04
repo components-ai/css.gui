@@ -5,8 +5,8 @@ import { InputContainer } from './inputs/InputContainer'
 
 interface FieldArrayProps<T, K> {
   label: string
-  value: T[]
-  onChange(newValue: T[]): void
+  value: T[] | K
+  onChange(newValue: T[] | K): void
   /**
    * The component to render each of the individual input values.
    * (See `LayerProps` for what props this takes)
@@ -29,6 +29,9 @@ export default function FieldArray<T, K extends string = never>(
   const { label = '', value = [], onChange, content: Content, newItem } = props
 
   const handleReorder = (i1: number, i2: number) => {
+    if (typeof value === 'string') {
+      return
+    }
     onChange(flip(value, i1, i2))
   }
 

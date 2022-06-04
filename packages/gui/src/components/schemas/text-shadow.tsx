@@ -7,14 +7,14 @@ const singleTextShadow = objectSchema({
     color: color(),
     offsetX: length(),
     offsetY: length(),
-    // TODO ensure this is positive
-    blur: length(),
+    blur: length({ range: 'nonnegative' }),
   },
 })
 
 export const textShadow = listSchema({
   itemSchema: singleTextShadow,
   thumbnail: Thumbnail,
+  keywords: ['none'],
 })
 
 function Thumbnail({ value }: { value: string }) {
