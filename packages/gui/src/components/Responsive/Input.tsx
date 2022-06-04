@@ -6,19 +6,21 @@ import { Label } from '../primitives'
 import { useEditorConfig } from '../providers/EditorConfigContext'
 import { DeletePropButton } from '../inputs/Dimension/Input'
 import { omit } from 'lodash-es'
+import { replace } from '../../lib/array'
+import { EditorProps } from '../../types/editor'
 
 const DEFAULT_BREAKPOINT_COUNT = 3
 
-export type Responsive<T> = T | T[]
+type Responsive_<T> = { type: 'responsive'; values: T[] }
+export type Responsive<T> = T | Responsive_<T>
 type ResponsiveInputProps<T> = {
-  value?: Responsive<T>
+  value: Responsive<T>
   onChange: (newValue: Responsive<T>) => void
   onRemove?: () => void
   label: string
   property?: string
   defaultValue?: T
-  // TODO: Type this component
-  Component: React.ComponentType<any>
+  Component: React.ComponentType<EditorProps<T>>
   componentProps?: any
 }
 export function ResponsiveInput<T>({
@@ -33,28 +35,26 @@ export function ResponsiveInput<T>({
   const { breakpoints } = useTheme()
   const breakpointCount = breakpoints?.length || DEFAULT_BREAKPOINT_COUNT
 
-  const handleResponsiveChange =
-    (breakpointIndex: number) => (newItemValue: Responsive<T>) => {
-      const newValue: any[] = Array.isArray(value) ? [...value] : []
-      newValue[breakpointIndex] = newItemValue
-      onChange(newValue)
-    }
+  const handleResponsiveChange = (breakpointIndex: number) => (newValue: T) => {
+    const values = (value as any).values
+    const newValues = replace(values, breakpointIndex, newValue)
+    onChange({ ...value, values: newValues })
+  }
 
   const handleChange = (newItemValue: Responsive<T>) => {
     onChange(newItemValue)
   }
 
   const handleSwitchToResponsive = () => {
-    const newValue: any[] = Array(breakpointCount).fill(value ?? null)
-    onChange(newValue)
+    const newValue: T[] = Array(breakpointCount).fill(value ?? null)
+    onChange({ type: 'responsive', values: newValue })
   }
 
   const handleSwitchFromResponsive = () => {
-    const newValue: Responsive<T> = Array.isArray(value) ? value[0] : value!
-    onChange(newValue)
+    onChange((value as any).values[0])
   }
 
-  const isResponsiveControls = Array.isArray(value)
+  const isResponsiveControls = isResponsive(value)
 
   const editors = isResponsiveControls ? (
     Array(breakpointCount)
@@ -63,7 +63,7 @@ export function ResponsiveInput<T>({
         return (
           <div key={breakpoints?.[i].id ?? i} sx={{ pb: 1 }}>
             <Component
-              value={value[i] ?? null}
+              value={value.values[i] ?? null}
               onChange={handleResponsiveChange(i)}
               label={i.toString()}
               property={property}
@@ -76,7 +76,6 @@ export function ResponsiveInput<T>({
     <Component
       value={value}
       onChange={handleChange}
-      property={property}
       {...omit(componentProps, ['label', 'value', 'onChange', 'onRemove'])}
     />
   )
@@ -160,4 +159,11 @@ const ResponsiveToggle = ({
       Responsive <ToggleLeft size={16} strokeWidth={2} />
     </button>
   )
+}
+
+export function isResponsive<T>(value: Responsive<T>): value is Responsive_<T> {
+  if (value instanceof Object && value.type === 'responsive') {
+    return true
+  }
+  return false
 }
