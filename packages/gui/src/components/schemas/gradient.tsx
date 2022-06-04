@@ -2,7 +2,7 @@ import { sortBy } from 'lodash-es'
 import { bindProps } from '../../lib/components'
 import GradientStopsField from '../inputs/Gradient/stops'
 import { GradientStop } from '../inputs/Gradient/types'
-import { objectSchema } from './object'
+import { functionSchema } from './function'
 import { optionsSchema } from './options'
 import { position } from './position'
 import { angle, keyword } from './primitives'
@@ -37,22 +37,20 @@ const directions = [
   'to bottom left',
 ] as const
 
-const linear = objectSchema({
+const linear = functionSchema('linear-gradient', {
   fields: {
     angle: angle({ keywords: directions }),
     stops: stops(),
   },
-  separator: ', ',
 })
-const repeatingLinear = objectSchema({
+const repeatingLinear = functionSchema('repeating-linear-gradient', {
   fields: {
     angle: angle({ keywords: directions }),
     stops: stops(true),
   },
-  separator: ', ',
 })
 
-const radial = objectSchema({
+const radial = functionSchema('radial-gradient', {
   fields: {
     shape: keyword(['circle', 'ellipse']),
     // TODO length sizes
@@ -69,7 +67,7 @@ const radial = objectSchema({
     `${shape} ${size} at ${position}, ${stops}`,
 })
 
-const repeatingRadial = objectSchema({
+const repeatingRadial = functionSchema('repeating-radial-gradient', {
   fields: {
     shape: keyword(['circle', 'ellipse']),
     size: keyword([
@@ -85,7 +83,7 @@ const repeatingRadial = objectSchema({
     `${shape} ${size} at ${position}, ${stops}`,
 })
 
-const conic = objectSchema({
+const conic = functionSchema('conic-gradient', {
   fields: {
     angle: angle(),
     position,
@@ -94,7 +92,7 @@ const conic = objectSchema({
   stringify: ({ angle, position, stops }) =>
     `from ${angle} at ${position}, ${stops}`,
 })
-const repeatingConic = objectSchema({
+const repeatingConic = functionSchema('repeating-conic-gradient', {
   fields: {
     angle: angle(),
     position,
@@ -113,7 +111,6 @@ export const gradient = optionsSchema({
     conic,
     'repeating-conic': repeatingConic,
   },
-  stringify: (type, value) => `${type}-gradient(${value})`,
   // TODO keep values when switching between repeating and non-
   convert: (oldValue, newType) => {
     if (

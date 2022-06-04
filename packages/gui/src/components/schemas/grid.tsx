@@ -1,3 +1,4 @@
+import { functionSchema } from './function'
 import { listSchema } from './list'
 import { objectSchema } from './object'
 import { optionsSchema } from './options'
@@ -17,44 +18,28 @@ const trackSizeVariants = {
   breadth: objectSchema({
     fields: { value: trackBreadth },
   }),
-  minmax: objectSchema({
-    fields: {
-      min: inflexibleBreadth,
-      max: trackBreadth,
-    },
-    separator: ', ',
+  minmax: functionSchema('minmax', {
+    fields: { min: inflexibleBreadth, max: trackBreadth },
   }),
-  'fit-content': objectSchema({
+  'fit-content': functionSchema('fit-content', {
     fields: { value: lengthPercentage() },
   }),
 }
 
 const trackSize = optionsSchema({
   variants: trackSizeVariants,
-  stringify(variant, value) {
-    if (variant === 'breadth') {
-      return value
-    }
-    return `${variant}(${value})`
-  },
 })
 
 const trackList = optionsSchema({
   variants: {
     ...trackSizeVariants,
-    repeat: objectSchema({
+    repeat: functionSchema('repeat', {
       fields: {
         count: integer({ defaultValue: { value: 1, unit: 'number' } }),
         trackList: listSchema({ itemSchema: trackSize, separator: ' ' }),
       },
       separator: ', ',
     }),
-  },
-  stringify(variant, value) {
-    if (variant === 'breadth') {
-      return value
-    }
-    return `${variant}(${value})`
   },
 })
 
