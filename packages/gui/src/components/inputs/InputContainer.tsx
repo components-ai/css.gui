@@ -42,6 +42,7 @@ export function InputContainer<T, K extends string = never>(
             <IconButton
               sx={{
                 transform: 'rotate(0deg)',
+                transition: 'transform 250ms',
                 '&[data-state=closed]': {
                   transform: 'rotate(-90deg)',
                 },
