@@ -41,8 +41,8 @@ const initialValue: any = {
           },
         ],
         fontWeight: 900,
-        fontFamily: 'Inter',
-        letterSpacing: { value: -8, unit: 'px' },
+        fontFamily: 'Inter, system-ui, sans-serif',
+        //letterSpacing: { value: -8, unit: 'px' },
         marginTop: {
           value: 0,
           unit: 'px',
@@ -67,7 +67,8 @@ const initialValue: any = {
           unit: 'px',
         },
         fontSize: {
-          value: 48,
+
+          value: 24,
           unit: 'px',
         },
         maxWidth: {
@@ -267,7 +268,7 @@ const initialValue: any = {
         },
         {
           tagName: 'img',
-          style: { display: 'block', width: '100%',  },
+          style: { display: 'block', width: { value: 100, unit: '%',  }},
           attributes: { src: 'https://source.unsplash.com/1920x1080' },
         },
         {
