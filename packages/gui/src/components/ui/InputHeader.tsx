@@ -11,7 +11,7 @@ interface Props
 
 export function InputHeader({ children, label, onRemove }: Props) {
   return (
-    <div sx={{ display: 'flex', gap: 1 }}>
+    <div sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
       <Label>{label}</Label>
       {children}
       <div sx={{ ml: 'auto' }}>

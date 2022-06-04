@@ -20,6 +20,7 @@ import { X } from 'react-feather'
 import { isCSSUnitValue } from '../../../lib/codegen/to-css-object'
 import { KeywordSelect } from '../../primitives/KeywordSelect'
 import { ResponsiveInput } from '../../Responsive'
+import { InputHeader } from '../../ui/InputHeader'
 
 // Mapping of units to [min, max] tuple
 type UnitRanges = Record<string, [min: number, max: number]>
@@ -89,19 +90,22 @@ export function DimensionInput<K extends string = never>(
   return <BaseDimensionInput {...props} />
 }
 
-function BaseDimensionInput<K extends string = never>({
-  value,
-  onChange,
-  onRemove,
-  label,
-  range: providedRange,
-  units = [],
-  keywords = [],
-  themeValues = [],
-  steps,
-  conversions = {},
-  topLevel,
-}: DimensionInputProps<K>) {
+function BaseDimensionInput<K extends string = never>(
+  props: DimensionInputProps<K>
+) {
+  const {
+    value,
+    onChange,
+    label,
+    range: providedRange,
+    units = [],
+    keywords = [],
+    themeValues = [],
+    steps,
+    conversions = {},
+    topLevel,
+  } = props
+
   const id = `${React.useId()}-${kebabCase(label)}`
   const range =
     providedRange === 'nonnegative' ? nonnegativeRange(units) : providedRange
@@ -139,19 +143,7 @@ function BaseDimensionInput<K extends string = never>({
   ])
 
   return (
-    <div
-      sx={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: 1,
-        width: 'min-content',
-      }}
-    >
-      {label && (
-        <Label htmlFor={id} sx={{ display: 'block', width: 'max-content' }}>
-          {label}
-        </Label>
-      )}
+    <InputHeader {...props}>
       <div
         sx={{
           display: 'flex',
@@ -271,8 +263,7 @@ function BaseDimensionInput<K extends string = never>({
           }}
         />
       </div>
-      {onRemove && <DeletePropButton onRemove={onRemove} />}
-    </div>
+    </InputHeader>
   )
 }
 
