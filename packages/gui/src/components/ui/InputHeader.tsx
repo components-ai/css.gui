@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import { X } from 'react-feather'
+import { ChevronDown, ChevronUp, X } from 'react-feather'
 import { EditorPropsWithLabel } from '../../types/editor'
 import { Label } from '../primitives'
 import IconButton from './IconButton'
@@ -9,7 +9,7 @@ interface Props
   children?: ReactNode
 }
 
-export function InputHeader({ children, label, onRemove }: Props) {
+export function InputHeader({ children, label, onRemove, reorder }: Props) {
   return (
     <div sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
       {label && <Label>{label}</Label>}
@@ -17,6 +17,27 @@ export function InputHeader({ children, label, onRemove }: Props) {
       <div sx={{ ml: 'auto' }}>
         {onRemove && <DeleteButton onRemove={onRemove} />}
       </div>
+      {reorder && (
+        <div
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifySelf: 'right',
+            alignSelf: 'center',
+            gap: '-0.5rem',
+          }}
+        >
+          <IconButton disabled={!!reorder.onMoveUp} onClick={reorder.onMoveUp}>
+            <ChevronUp size={16} />
+          </IconButton>
+          <IconButton
+            disabled={!!reorder.onMoveDown}
+            onClick={reorder.onMoveDown}
+          >
+            <ChevronDown size={16} />
+          </IconButton>
+        </div>
+      )}
     </div>
   )
 }

@@ -11,6 +11,10 @@ export interface EditorProps<T, K = never> {
    */
   topLevel?: boolean
   onRemove?(): void
+  reorder?: {
+    onMoveUp?(): void
+    onMoveDown?(): void
+  }
 }
 
 export type EditorPropsWithLabel<T, K = never> = EditorProps<T, K> & {

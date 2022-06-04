@@ -1,6 +1,5 @@
 import { ComponentType } from 'react'
 import FieldArray from '../FieldArray'
-import Layers from '../Layers'
 import { DataTypeSchema } from './types'
 interface CreateList<T> {
   itemSchema: DataTypeSchema<T>
@@ -12,8 +11,6 @@ interface CreateList<T> {
 export function listSchema<T>({
   itemSchema,
   separator = ', ',
-  variant = 'layers',
-  thumbnail,
 }: CreateList<T>): DataTypeSchema<T[]> {
   const stringify = (value: T[]) => {
     if (typeof value === 'string') {
@@ -26,27 +23,14 @@ export function listSchema<T>({
 
   return {
     input(props) {
-      switch (variant) {
-        case 'layers':
-          return (
-            <Layers
-              {...props}
-              newItem={() => itemSchema.defaultValue}
-              stringify={stringify}
-              content={itemSchema.input as any}
-              thumbnail={thumbnail}
-            />
-          )
-        case 'list':
-          return (
-            <FieldArray
-              {...props}
-              newItem={() => itemSchema.defaultValue}
-              stringify={stringify}
-              content={itemSchema.input as any}
-            />
-          )
-      }
+      return (
+        <FieldArray
+          {...props}
+          newItem={() => itemSchema.defaultValue}
+          stringify={stringify}
+          content={itemSchema.input}
+        />
+      )
     },
     stringify,
     defaultValue: [itemSchema.defaultValue],
