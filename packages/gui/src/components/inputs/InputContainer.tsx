@@ -3,11 +3,15 @@ import { EditorPropsWithLabel } from '../../types/editor'
 import { KeywordSelect } from '../primitives/KeywordSelect'
 import { InputHeader } from '../ui/InputHeader'
 import * as Select from '../ui/Select'
+import * as Collapsible from '@radix-ui/react-collapsible'
+import { ChevronDown } from 'react-feather'
+import IconButton from '../ui/IconButton'
 
 interface Props<T, K> extends EditorPropsWithLabel<T, K> {
   stringify(value: T): string
   children: ReactNode
   defaultValue: T
+  hideValue?: boolean
 }
 
 /**
@@ -31,8 +35,22 @@ export function InputContainer<T, K extends string = never>(
   const showTypeSelect = topLevel || keywords.length > 0
 
   return (
-    <div>
+    <Collapsible.Root defaultOpen>
       <InputHeader {...props}>
+        {!isKeyword && (
+          <Collapsible.Trigger asChild>
+            <IconButton
+              sx={{
+                transform: 'rotate(0deg)',
+                '&[data-state=closed]': {
+                  transform: 'rotate(-90deg)',
+                },
+              }}
+            >
+              <ChevronDown size={14} />
+            </IconButton>
+          </Collapsible.Trigger>
+        )}
         <div
           sx={{
             display: 'flex',
@@ -97,7 +115,7 @@ export function InputContainer<T, K extends string = never>(
           )}
         </div>
       </InputHeader>
-      {!isKeyword && children}
-    </div>
+      <Collapsible.Content>{!isKeyword && children}</Collapsible.Content>
+    </Collapsible.Root>
   )
 }
