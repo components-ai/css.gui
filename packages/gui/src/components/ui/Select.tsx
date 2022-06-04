@@ -18,6 +18,7 @@ export const Trigger = (props: PropsType<typeof Select.Trigger>) => {
         alignItems: 'center',
         appearance: 'none',
         border: 'none',
+        p: 0,
         background: 'none',
         color: 'text',
         width: 'max-content',

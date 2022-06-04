@@ -39,7 +39,7 @@ export function optionsSchema<T extends Record<string, any>>({
               })
             }}
           />
-          <Component {...props} label={''} />
+          <Component value={props.value} onChange={props.onChange} label={''} />
         </div>
       )
     },

@@ -57,7 +57,7 @@ export function InputContainer<T, K extends string = never>(
             border: '1px solid',
             borderColor: 'border',
             borderRadius: '0.25rem',
-            pl: 2,
+            px: 2,
           }}
         >
           {isKeyword ? (

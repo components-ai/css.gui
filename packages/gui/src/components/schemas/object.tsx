@@ -10,6 +10,8 @@ interface CreateObject<T extends object, K> {
   }
   keyOrder?: (keyof T)[]
   stringify?(values: Record<keyof T, string>): string
+  // wrap the stringify function and return it
+  wrapStringify?(value: string): string
   /**
    * Designates keys that should be preceded by a slash when stringified.
    */
@@ -25,6 +27,7 @@ export function objectSchema<T extends object, K extends string = never>({
   separator = ' ',
   slash = [],
   stringify: providedStringify,
+  wrapStringify = (value) => value,
   defaultValue: providedDefaultValue,
   keywords = [],
 }: CreateObject<T, K>): DataTypeSchema<T | K> {
@@ -36,20 +39,22 @@ export function objectSchema<T extends object, K extends string = never>({
       const stringifiedFields = mapValues(fields, (schema, key: keyof T) => {
         return schema.stringify(value[key])
       }) as any
-      return providedStringify(stringifiedFields)
+      return wrapStringify(providedStringify(stringifiedFields))
     }
     // By default, join the stringified values with spaces in key order
-    return keyOrder
-      .map((key) => {
-        const schema = fields[key]
-        let stringified = schema.stringify(value[key])
-        // prefix with a slash if necessary
-        if (slash.includes(key)) {
-          stringified = `/ ${stringified}`
-        }
-        return stringified
-      })
-      .join(separator)
+    return wrapStringify(
+      keyOrder
+        .map((key) => {
+          const schema = fields[key]
+          let stringified = schema.stringify(value[key])
+          // prefix with a slash if necessary
+          if (slash.includes(key)) {
+            stringified = `/ ${stringified}`
+          }
+          return stringified
+        })
+        .join(separator)
+    )
   }
   const defaultValue = {
     ...mapValues(fields, (schema) => schema.defaultValue),
