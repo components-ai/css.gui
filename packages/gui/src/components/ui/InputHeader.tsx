@@ -12,7 +12,7 @@ interface Props
 export function InputHeader({ children, label, onRemove }: Props) {
   return (
     <div sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
-      <Label>{label}</Label>
+      {label && <Label>{label}</Label>}
       {children}
       <div sx={{ ml: 'auto' }}>
         {onRemove && <DeleteButton onRemove={onRemove} />}
@@ -31,6 +31,7 @@ export const DeleteButton = ({ onRemove }: DeleteButtonProps) => {
         cursor: 'pointer',
         color: 'muted',
         transition: '.2s color ease-in-out',
+        mb: 1,
         ':hover': {
           color: 'text',
         },

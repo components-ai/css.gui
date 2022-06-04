@@ -1,13 +1,13 @@
 import { mapValues } from 'lodash-es'
 import { getInputProps } from '../../lib/util'
+import { InputContainer } from '../inputs/InputContainer'
 import { InputHeader } from '../ui/InputHeader'
 import { DataTypeSchema } from './types'
 
-interface CreateObject<T extends object> {
+interface CreateObject<T extends object, K> {
   fields: {
     [Property in keyof T]: DataTypeSchema<T[Property]>
   }
-  // component?: ComponentType
   keyOrder?: (keyof T)[]
   stringify?(values: Record<keyof T, string>): string
   /**
@@ -16,60 +16,76 @@ interface CreateObject<T extends object> {
   slash?: (keyof T)[]
   separator?: string
   defaultValue?: Partial<T>
+  keywords: K[]
 }
 
-export function objectSchema<T extends object>({
+export function objectSchema<T extends object, K extends string = never>({
   fields,
-  stringify,
   keyOrder = Object.keys(fields) as (keyof T)[],
   separator = ' ',
   slash = [],
-  defaultValue,
-}: CreateObject<T>): DataTypeSchema<T> {
+  stringify: providedStringify,
+  defaultValue: providedDefaultValue,
+  keywords = [],
+}: CreateObject<T, K>): DataTypeSchema<T | K> {
+  function stringify(value: T | K) {
+    if (typeof value === 'string') {
+      return value
+    }
+    if (providedStringify) {
+      const stringifiedFields = mapValues(fields, (schema, key: keyof T) => {
+        return schema.stringify(value[key])
+      }) as any
+      return providedStringify(stringifiedFields)
+    }
+    // By default, join the stringified values with spaces in key order
+    return keyOrder
+      .map((key) => {
+        const schema = fields[key]
+        let stringified = schema.stringify(value[key])
+        // prefix with a slash if necessary
+        if (slash.includes(key)) {
+          stringified = `/ ${stringified}`
+        }
+        return stringified
+      })
+      .join(separator)
+  }
+  const defaultValue = {
+    ...mapValues(fields, (schema) => schema.defaultValue),
+    ...providedDefaultValue,
+  } as any // IDK why the typing doesn't work
   return {
+    defaultValue,
+    stringify,
     input(props) {
       return (
-        <div>
-          <InputHeader {...props} />
-          <div
-            sx={{
-              display: 'grid',
-              gap: 2,
-            }}
-          >
-            {keyOrder.map((key) => {
-              const schema = fields[key]
-              const Component = schema.input
-              return <Component {...getInputProps(props, key)} />
-            })}
-          </div>
-        </div>
+        <InputContainer
+          {...props}
+          keywords={keywords}
+          defaultValue={defaultValue}
+          stringify={stringify}
+        >
+          {typeof props.value !== 'string' && (
+            <div
+              sx={{
+                borderLeft: '4px solid',
+                borderColor: 'border',
+                pl: 3,
+                display: 'grid',
+                gap: 2,
+              }}
+            >
+              {keyOrder.map((key) => {
+                const schema = fields[key]
+                const Component = schema.input
+                return <Component {...getInputProps(props as any, key)} />
+              })}
+            </div>
+          )}
+        </InputContainer>
       )
     },
-    stringify(value) {
-      if (stringify) {
-        const stringifiedFields = mapValues(fields, (schema, key: keyof T) => {
-          return schema.stringify(value[key])
-        }) as any
-        return stringify(stringifiedFields)
-      }
-      // By default, join the stringified values with spaces in key order
-      return keyOrder
-        .map((key) => {
-          const schema = fields[key]
-          let stringified = schema.stringify(value[key])
-          // prefix with a slash if necessary
-          if (slash.includes(key)) {
-            stringified = `/ ${stringified}`
-          }
-          return stringified
-        })
-        .join(separator)
-    },
     // TODO override defaults
-    defaultValue: {
-      ...mapValues(fields, (schema) => schema.defaultValue),
-      ...defaultValue,
-    } as any, // IDK why the typing doesn't work,
   }
 }
