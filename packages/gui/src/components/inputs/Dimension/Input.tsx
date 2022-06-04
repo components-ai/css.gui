@@ -9,17 +9,16 @@ import {
   ThemeUnits,
   UnitlessUnits,
 } from '../../../types/css'
-import { Label, Number, ThemeValue, UnitSelect } from '../../primitives'
+import { Number, ThemeValue, UnitSelect } from '../../primitives'
 import { reducer } from './reducer'
 import { State } from './types'
 import { EditorPropsWithLabel } from '../../../types/editor'
 import { UnitConversions } from '../../../lib/convert'
-import { compact, kebabCase, omit } from 'lodash-es'
+import { compact, kebabCase } from 'lodash-es'
 import { CalcInput } from '../../primitives/CalcInput'
 import { X } from 'react-feather'
 import { isCSSUnitValue } from '../../../lib/codegen/to-css-object'
 import { KeywordSelect } from '../../primitives/KeywordSelect'
-import { ResponsiveInput } from '../../Responsive'
 import { InputHeader } from '../../ui/InputHeader'
 
 // Mapping of units to [min, max] tuple
@@ -75,22 +74,6 @@ export interface DimensionInputProps<K>
 }
 
 export function DimensionInput<K extends string = never>(
-  props: DimensionInputProps<K>
-) {
-  if (props.topLevel) {
-    return (
-      <ResponsiveInput
-        {...(props as any)}
-        Component={BaseDimensionInput}
-        componentProps={omit(props, 'label', 'value', 'onChange', 'onRemove')}
-      />
-    )
-  }
-
-  return <BaseDimensionInput {...props} />
-}
-
-function BaseDimensionInput<K extends string = never>(
   props: DimensionInputProps<K>
 ) {
   const {

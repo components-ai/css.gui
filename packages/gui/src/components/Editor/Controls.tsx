@@ -27,6 +27,7 @@ import { isFieldsetGroup, partitionProperties, sortProperties } from './util'
 import { stylesToEditorSchema } from '../../lib/transformers/styles-to-editor-schema'
 import { removeInternalCSSClassSyntax } from '../../lib/classes'
 import { AddFieldsetControl } from '../AddFieldset'
+import { ResponsiveInput } from '../Responsive'
 
 export const getPropertyFromField = (field: KeyArg) => {
   if (Array.isArray(field)) {
@@ -58,7 +59,6 @@ const Control = ({ field, showRemove = false, ...props }: ControlProps) => {
   const fieldsetName = fieldset?.name ?? null
   const fullField = fieldsetName ? joinPath(fieldsetName, field) : field
   const componentProps = {
-    label: sentenceCase(property),
     themeValues,
     topLevel: true,
     ...props,
@@ -84,14 +84,17 @@ const Control = ({ field, showRemove = false, ...props }: ControlProps) => {
   }
 
   return (
-    <Component
+    <ResponsiveInput
+      label={sentenceCase(property)}
       value={getField(fullField)}
       onChange={(newValue: any) => {
         setField(fullField, newValue)
       }}
-      onRemove={showRemove ? handleRemoveProperty : null}
+      onRemove={showRemove ? handleRemoveProperty : undefined}
       property={property}
-      {...componentProps}
+      Component={Component}
+      componentProps={componentProps}
+      // {...componentProps}
     />
   )
 }

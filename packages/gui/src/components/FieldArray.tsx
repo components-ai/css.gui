@@ -32,7 +32,7 @@ export interface LayerProps<T> {
  * An alternative field array that is collapsible.
  */
 export default function FieldArray<T>({
-  label,
+  label = '',
   value = [],
   onChange,
   content: Content,
