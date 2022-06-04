@@ -45,7 +45,7 @@ const trackList = optionsSchema({
     repeat: objectSchema({
       fields: {
         count: integer({ defaultValue: { value: 1, unit: 'number' } }),
-        trackList: trackSize,
+        trackList: listSchema({ itemSchema: trackSize, separator: ' ' }),
       },
       separator: ', ',
     }),
@@ -58,8 +58,11 @@ const trackList = optionsSchema({
   },
 })
 
-export const gridAutoRow = listSchema({ itemSchema: trackSize })
-export const gridAutoColumns = listSchema({ itemSchema: trackSize })
+export const gridAutoRow = listSchema({ itemSchema: trackSize, separator: ' ' })
+export const gridAutoColumns = listSchema({
+  itemSchema: trackSize,
+  separator: ' ',
+})
 export const gridAutoFlow = keyword([
   'row',
   'column',
@@ -68,7 +71,13 @@ export const gridAutoFlow = keyword([
   'column dense',
 ])
 
-export const gridTemplateRows = listSchema({ itemSchema: trackList })
-export const gridTemplateColumns = listSchema({ itemSchema: trackList })
+export const gridTemplateRows = listSchema({
+  itemSchema: trackList,
+  separator: ' ',
+})
+export const gridTemplateColumns = listSchema({
+  itemSchema: trackList,
+  separator: ' ',
+})
 
 // TODO grid-template, grid-template-areas, grid
