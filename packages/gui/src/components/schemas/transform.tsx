@@ -1,81 +1,78 @@
 import { listSchema } from './list'
-import { objectSchema } from './object'
+import { functionSchema } from './function'
 import { optionsSchema } from './options'
 import { angle, length, lengthPercentage, number } from './primitives'
 import { tupleSchema } from './tuple'
+import { objectSchema } from './object'
 
-const translate = objectSchema({
+const translate = functionSchema('translate', {
   fields: {
     value: tupleSchema({
       itemSchema: lengthPercentage(),
       labels: ['x', 'y'],
-      separator: ', ',
     }),
   },
 })
-const translateX = objectSchema({
+const translateX = functionSchema('translateX', {
   fields: { value: lengthPercentage() },
 })
-const translateY = objectSchema({
+const translateY = functionSchema('translateY', {
   fields: { value: lengthPercentage() },
 })
-const translateZ = objectSchema({
+const translateZ = functionSchema('translateZ', {
   fields: { value: length() },
 })
-const translate3d = objectSchema({
+const translate3d = functionSchema('trnaslate3d', {
   fields: {
     value: tupleSchema({
       // TODO 'z' axis should be  `length` only
       itemSchema: lengthPercentage(),
       labels: ['x', 'y', 'z'],
       linkable: false,
-      separator: ', ',
     }),
   },
 })
 
-const scale = objectSchema({
+const scale = functionSchema('scale', {
   fields: {
     value: tupleSchema({
       itemSchema: number(),
       labels: ['x', 'y'],
-      separator: ', ',
     }),
   },
 })
-const scaleX = objectSchema({
+const scaleX = functionSchema('scaleX', {
   fields: { value: number() },
 })
-const scaleY = objectSchema({
+const scaleY = functionSchema('scaleY', {
   fields: { value: number() },
 })
-const scaleZ = objectSchema({
+const scaleZ = functionSchema('scaleZ', {
   fields: { value: number() },
 })
-const scale3d = objectSchema({
+const scale3d = functionSchema('scale3d', {
   fields: {
     value: tupleSchema({
       itemSchema: number(),
       labels: ['x', 'y', 'z'],
       linkable: false,
-      separator: ', ',
     }),
   },
 })
 
-const rotate = objectSchema({
+const rotate = functionSchema('rotate', {
   fields: { value: angle() },
 })
-const rotateX = objectSchema({
+const rotateX = functionSchema('rotateX', {
   fields: { value: angle() },
 })
-const rotateY = objectSchema({
+const rotateY = functionSchema('rotateY', {
   fields: { value: angle() },
 })
-const rotateZ = objectSchema({
+const rotateZ = functionSchema('rotateZ', {
   fields: { value: angle() },
 })
-const rotate3d = objectSchema({
+const rotate3d = functionSchema('rotate3d', {
   fields: {
     value: tupleSchema({
       itemSchema: number(),
@@ -85,42 +82,39 @@ const rotate3d = objectSchema({
     }),
     angle: angle(),
   },
-  separator: ', ',
 })
 
-const skew = objectSchema({
+const skew = functionSchema('skew', {
   fields: {
     value: tupleSchema({
       itemSchema: angle(),
       labels: ['x', 'y'],
-      separator: ', ',
     }),
   },
 })
-const skewX = objectSchema({
+const skewX = functionSchema('skewX', {
   fields: { value: angle() },
 })
-const skewY = objectSchema({
+const skewY = functionSchema('skewY', {
   fields: { value: angle() },
 })
 
-const perspective = objectSchema({
+const perspective = functionSchema('perspective', {
   fields: { value: length() },
 })
 
-const matrix = objectSchema({
+const matrix = functionSchema('matrix', {
   fields: {
     // TODO custom input
     value: tupleSchema({
       itemSchema: number(),
       labels: ['a', 'b', 'c', 'd', 'tx', 'ty'],
       linkable: false,
-      separator: ', ',
     }),
   },
 })
 
-const matrix3d = objectSchema({
+const matrix3d = functionSchema('matrix3d', {
   fields: {
     // TODO custom input
     value: tupleSchema({
@@ -144,7 +138,6 @@ const matrix3d = objectSchema({
         'd4',
       ],
       linkable: false,
-      separator: ', ',
     }),
   },
 })
@@ -173,12 +166,11 @@ const singleTransform = optionsSchema({
     matrix,
     matrix3d,
   },
-  stringify: (variant, value) => `${variant}(${value})`,
 })
 
 export const transform = listSchema({
   itemSchema: singleTransform,
-  separator: '',
+  separator: ' ',
 })
 
 export const transformOrigin = objectSchema({

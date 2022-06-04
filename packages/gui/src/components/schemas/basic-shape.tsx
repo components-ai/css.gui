@@ -5,7 +5,7 @@ import { EditorPropsWithLabel } from '../../types/editor'
 import { LengthInput } from '../inputs/LengthInput'
 import { boxSideSchema } from './box-side'
 import { listSchema } from './list'
-import { objectSchema } from './object'
+import { functionSchema } from './function'
 import { optionsSchema } from './options'
 import { position } from './position'
 import { keyword, lengthPercentage, string } from './primitives'
@@ -14,7 +14,7 @@ const shapeRadius = lengthPercentage({
   keywords: ['closest-side', 'farthest-side'],
 })
 
-const inset = objectSchema({
+const inset = functionSchema('inset', {
   fields: {
     offset: boxSideSchema({
       itemSchema: lengthPercentage(),
@@ -25,7 +25,7 @@ const inset = objectSchema({
   separator: ' round ',
 })
 
-const circle = objectSchema({
+const circle = functionSchema('circle', {
   fields: {
     radius: shapeRadius,
     position: position,
@@ -33,7 +33,7 @@ const circle = objectSchema({
   separator: ' at ',
 })
 
-const ellipse = objectSchema({
+const ellipse = functionSchema('ellipse', {
   fields: {
     rx: shapeRadius,
     ry: shapeRadius,
@@ -52,7 +52,7 @@ function PointInput(props: EditorPropsWithLabel<Point>) {
   )
 }
 
-const polygon = objectSchema({
+const polygon = functionSchema('polygon', {
   fields: {
     fillRule: keyword(['nonzero', 'evenodd']),
     points: listSchema({
@@ -65,17 +65,14 @@ const polygon = objectSchema({
           y: { value: 0, unit: 'px' },
         },
       },
-      separator: ', ',
     }),
   },
-  separator: ', ',
 })
 
-const path = objectSchema({
+const path = functionSchema('path', {
   fields: { path: string() },
 })
 
 export const basicShape = optionsSchema({
   variants: { inset, circle, ellipse, polygon, path },
-  stringify: (variant, value) => `${variant}(${value})`,
 })

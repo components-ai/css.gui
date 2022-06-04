@@ -1,50 +1,49 @@
 import { listSchema } from './list'
-import { objectSchema } from './object'
+import { functionSchema } from './function'
 import { optionsSchema } from './options'
 import { angle, color, length, numberPercentage } from './primitives'
 
-const blur = objectSchema({
+const blur = functionSchema('blur', {
   fields: {
     radius: length(),
   },
 })
 
-const dropShadow = objectSchema({
+const dropShadow = functionSchema('drop-shadow', {
   fields: {
     color: color(),
     offsetX: length(),
     offsetY: length(),
     blurRadius: length(),
   },
+  separator: ' ',
 })
 
-const hueRotate = objectSchema({
+const hueRotate = functionSchema('hue-rotate', {
   fields: {
     angle: angle(),
   },
 })
 
-const amountFilter = objectSchema({
-  fields: {
-    amount: numberPercentage(),
-  },
-})
+const amountFilter = (name: string) =>
+  functionSchema(name, {
+    fields: {
+      amount: numberPercentage(),
+    },
+  })
 
 const singleFilter = optionsSchema({
   variants: {
     blur,
     'drop-shadow': dropShadow,
     'hue-rotate': hueRotate,
-    brightness: amountFilter,
-    contrast: amountFilter,
-    grayscale: amountFilter,
-    invert: amountFilter,
-    opacity: amountFilter,
-    saturate: amountFilter,
-    sepia: amountFilter,
-  },
-  stringify(type, value) {
-    return `${type}(${value})`
+    brightness: amountFilter('brightness'),
+    contrast: amountFilter('contrast'),
+    grayscale: amountFilter('grayscale'),
+    invert: amountFilter('invert'),
+    opacity: amountFilter('opacity'),
+    saturate: amountFilter('saturate'),
+    sepia: amountFilter('sepia'),
   },
 })
 

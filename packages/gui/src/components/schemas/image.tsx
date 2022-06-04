@@ -1,3 +1,4 @@
+import { functionSchema } from './function'
 import { gradient } from './gradient'
 import { objectSchema } from './object'
 import { optionsSchema } from './options'
@@ -5,7 +6,7 @@ import { string } from './primitives'
 
 export const image = optionsSchema({
   variants: {
-    url: objectSchema({
+    url: functionSchema('url', {
       fields: {
         value: string({ defaultValue: 'https://source.unsplash.com/random' }),
       },
@@ -13,11 +14,5 @@ export const image = optionsSchema({
     gradient: objectSchema({
       fields: { value: gradient },
     }),
-  },
-  stringify(type, value) {
-    if (type === 'url') {
-      return `url(${value})`
-    }
-    return value
   },
 })
