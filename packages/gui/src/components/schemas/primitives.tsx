@@ -10,6 +10,7 @@ import {
 } from '../../types/css'
 import { AngleInput } from '../inputs/AngleInput'
 import { ColorInput } from '../inputs/ColorInput'
+import { Range } from '../inputs/Dimension/Input'
 import { KeywordInput } from '../inputs/KeywordInput'
 import { LengthInput } from '../inputs/LengthInput'
 import { NumberInput } from '../inputs/NumberInput'
@@ -101,6 +102,7 @@ interface LengthProps {
   percentage?: boolean
   flex?: boolean
   themeValues?: (CSSUnitValue & { id: string })[]
+  range?: Range
 }
 export function length({
   defaultValue = { value: 0, unit: 'px' },

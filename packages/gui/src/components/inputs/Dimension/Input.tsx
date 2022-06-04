@@ -23,6 +23,7 @@ import { ResponsiveInput } from '../../Responsive'
 
 // Mapping of units to [min, max] tuple
 type UnitRanges = Record<string, [min: number, max: number]>
+export type Range = UnitRanges | 'nonnegative'
 // Mapping of units to steps
 type UnitSteps = Record<string, number>
 
@@ -61,7 +62,7 @@ const getInitialState = (
 
 export interface DimensionInputProps<K>
   extends EditorPropsWithLabel<Dimension, K> {
-  range?: UnitRanges
+  range?: Range
   steps?: UnitSteps
   units?: readonly string[]
   /** The available keyword values for the property. If provided, 'keyword' will be appended as a unit */
@@ -93,7 +94,7 @@ function BaseDimensionInput<K extends string = never>({
   onChange,
   onRemove,
   label,
-  range,
+  range: providedRange,
   units = [],
   keywords = [],
   themeValues = [],
@@ -102,6 +103,8 @@ function BaseDimensionInput<K extends string = never>({
   topLevel,
 }: DimensionInputProps<K>) {
   const id = `${React.useId()}-${kebabCase(label)}`
+  const range =
+    providedRange === 'nonnegative' ? nonnegativeRange(units) : providedRange
 
   const [state, dispatch] = React.useReducer(
     reducer,
@@ -299,4 +302,8 @@ export const DeletePropButton = ({ onRemove }: DeleteProps) => {
       <X size={14} strokeWidth={3} color="currentColor" />
     </button>
   )
+}
+
+function nonnegativeRange(units: readonly string[]): UnitRanges {
+  return Object.fromEntries(units.map((unit) => [unit, [0, Infinity]]))
 }
