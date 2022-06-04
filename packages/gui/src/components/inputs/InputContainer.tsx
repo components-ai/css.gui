@@ -1,9 +1,7 @@
 import { ReactNode } from 'react'
-import { X } from 'react-feather'
 import { EditorPropsWithLabel } from '../../types/editor'
-import { Label } from '../primitives'
 import { KeywordSelect } from '../primitives/KeywordSelect'
-import IconButton from '../ui/IconButton'
+import { InputHeader } from '../ui/InputHeader'
 import * as Select from '../ui/Select'
 
 interface Props<T, K> extends EditorPropsWithLabel<T, K> {
@@ -22,8 +20,6 @@ export function InputContainer<T, K extends string = never>(
   const {
     value,
     onChange,
-    onRemove,
-    label,
     children,
     keywords = [],
     defaultValue,
@@ -36,8 +32,7 @@ export function InputContainer<T, K extends string = never>(
 
   return (
     <div>
-      <div sx={{ display: 'flex', gap: 2, alignItems: 'center', mb: 1 }}>
-        <Label>{label}</Label>
+      <InputHeader {...props}>
         <div
           sx={{
             display: 'flex',
@@ -88,32 +83,8 @@ export function InputContainer<T, K extends string = never>(
             </Select.Root>
           )}
         </div>
-        <div sx={{ ml: 'auto' }}>
-          {onRemove && <DeleteButton onRemove={onRemove} />}
-        </div>
-      </div>
+      </InputHeader>
       {!isKeyword && children}
     </div>
-  )
-}
-
-interface DeleteButtonProps {
-  onRemove(): void
-}
-export const DeleteButton = ({ onRemove }: DeleteButtonProps) => {
-  return (
-    <IconButton
-      sx={{
-        cursor: 'pointer',
-        color: 'muted',
-        transition: '.2s color ease-in-out',
-        ':hover': {
-          color: 'text',
-        },
-      }}
-      onClick={() => onRemove()}
-    >
-      <X size={14} strokeWidth={3} color="currentColor" />
-    </IconButton>
   )
 }

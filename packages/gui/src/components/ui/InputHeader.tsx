@@ -1,14 +1,19 @@
+import { ReactNode } from 'react'
 import { X } from 'react-feather'
 import { EditorPropsWithLabel } from '../../types/editor'
 import { Label } from '../primitives'
 import IconButton from './IconButton'
 
-type Props = Omit<EditorPropsWithLabel<any>, 'value' | 'onChange'>
+interface Props
+  extends Omit<EditorPropsWithLabel<any>, 'value' | 'onChange' | 'keywords'> {
+  children?: ReactNode
+}
 
-export function InputHeader({ label, onRemove }: Props) {
+export function InputHeader({ children, label, onRemove }: Props) {
   return (
-    <div sx={{ display: 'flex' }}>
+    <div sx={{ display: 'flex', gap: 1 }}>
       <Label>{label}</Label>
+      {children}
       <div sx={{ ml: 'auto' }}>
         {onRemove && <DeleteButton onRemove={onRemove} />}
       </div>
