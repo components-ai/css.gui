@@ -132,10 +132,10 @@ export function HtmlEditor({ onChange }: HtmlEditorProps) {
           //outline: '1px solid rgba(125,125,180,.5)',
         },
         '*:before': {
-          boxSizing: 'border-box'
+          boxSizing: 'border-box',
         },
         '*:after': {
-          boxSizing: 'border-box'
+          boxSizing: 'border-box',
         },
       }}
     >
@@ -234,6 +234,8 @@ function NodeEditor({ value, onChange, onRemove }: TagEditorProps) {
 }
 
 function NodeSwitch({ value, onChange }: EditorProps) {
+  const { selected } = useHtmlEditor()
+
   if (value.type === 'text') {
     return (
       <div sx={{ px: 3 }}>
@@ -270,6 +272,7 @@ function NodeSwitch({ value, onChange }: EditorProps) {
         <div sx={{ mb: 2, px: 3 }}>
           <Label>Tag name</Label>{' '}
           <Combobox
+            key={selected.join('-')}
             onFilterItems={(filterValue) => {
               return HTML_TAGS.filter((el) => el.startsWith(filterValue))
             }}
@@ -433,33 +436,42 @@ function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
             }}
           />
         </div>
-        <div sx={{ display: 'flex', alignItems: 'center', }}>
+        <div sx={{ display: 'flex', alignItems: 'center' }}>
           <div
-          sx={{
-            border: '0',
-            backgroundColor: 'background',
-            color: 'text',
-            cursor: 'pointer',
-            width: '16px',
-            height: '16px',
-            display: 'flex',
-            alignItems: 'center',
-            fontFamily: 'monospace',
-            fontSize: 1,
-            p: 0,
-            mr: '1px',
-            ':before': {
-              boxSizing: 'border-box',
-              cursor: 'default',
-              content: '" "',
-              whiteSpace: 'pre',
-              height: '100%',
-              width: '100%',
-            },
-          }}>
+            sx={{
+              border: '0',
+              backgroundColor: 'background',
+              color: 'text',
+              cursor: 'pointer',
+              width: '16px',
+              height: '16px',
+              display: 'flex',
+              alignItems: 'center',
+              fontFamily: 'monospace',
+              fontSize: 1,
+              p: 0,
+              mr: '1px',
+              ':before': {
+                boxSizing: 'border-box',
+                cursor: 'default',
+                content: '" "',
+                whiteSpace: 'pre',
+                height: '100%',
+                width: '100%',
+              },
+            }}
+          ></div>
+          <div
+            sx={{
+              fontWeight: isSelected ? 600 : 400,
+              lineHeight: 1,
+              p: 0,
+              fontSize: 1,
+              fontFamily: 'monospace',
+            }}
+          >
+            &lt;/{value.tagName}&gt;
           </div>
-          <div sx={{ 
-            fontWeight: isSelected ? 600 : 400, lineHeight: 1, p: 0, fontSize: 1, fontFamily: 'monospace' }}>&lt;/{value.tagName}&gt;</div>
         </div>
       </Collapsible.Content>
     </Collapsible.Root>
