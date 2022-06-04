@@ -8,7 +8,7 @@ import {
   useEffect,
 } from 'react'
 import { camelCase, uniq } from 'lodash-es'
-import { isPrimitive, Styles } from '../../types/css'
+import { Styles } from '../../types/css'
 import { Theme } from '../../types/theme'
 import { EditorProvider, useEditor } from '../providers/EditorContext'
 import { useDynamicControls } from '../providers/DynamicPropertiesContext'
@@ -26,7 +26,6 @@ import { AddPropertyControl } from '../AddProperty'
 import { isFieldsetGroup, partitionProperties, sortProperties } from './util'
 import { stylesToEditorSchema } from '../../lib/transformers/styles-to-editor-schema'
 import { removeInternalCSSClassSyntax } from '../../lib/classes'
-import { PrimitiveInput } from '../inputs/PrimitiveInput'
 import { AddFieldsetControl } from '../AddFieldset'
 
 export const getPropertyFromField = (field: KeyArg) => {
@@ -48,8 +47,8 @@ const Control = ({ field, showRemove = false, ...props }: ControlProps) => {
   const property = getPropertyFromField(field)
   const Component: ComponentType<any> | null = getInputComponent(property)
   const themeValues = useThemeProperty(property)
-  const keywords = properties[property].keywords
-  const dependantProperties = properties[property].dependantProperties ?? []
+  const dependantProperties =
+    (properties[property] as any).dependantProperties ?? []
 
   if (!Component) {
     console.error(`Unknown field: ${field}, ignoring`)
@@ -62,9 +61,7 @@ const Control = ({ field, showRemove = false, ...props }: ControlProps) => {
     label: sentenceCase(property),
     themeValues,
     topLevel: true,
-    ...properties[property],
     ...props,
-    keywords,
   }
 
   if (dependantProperties.length) {
@@ -285,14 +282,7 @@ const FieldsetControl = ({ field, property }: FieldsetControlProps) => {
 
 function getInputComponent(property: string) {
   const propertyData = properties[property]
-  const input = propertyData.input
-  if (typeof input === 'function') {
-    return input
-  }
-  if (isPrimitive(input)) {
-    return PrimitiveInput
-  }
-  return null
+  return propertyData.input
 }
 
 /**

@@ -84,7 +84,7 @@ export const IntegerInput = ({
   )
 }
 
-const PercentageInput = ({
+export const PercentageInput = ({
   value,
   onChange,
   onRemove,

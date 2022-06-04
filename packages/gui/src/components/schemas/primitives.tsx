@@ -14,7 +14,7 @@ import { KeywordInput } from '../inputs/KeywordInput'
 import { LengthInput } from '../inputs/LengthInput'
 import { NumberInput } from '../inputs/NumberInput'
 import { NumberPercentageInput } from '../inputs/NumberPercentageInput'
-import { IntegerInput } from '../inputs/PrimitiveInput'
+import { IntegerInput, PercentageInput } from '../inputs/PrimitiveInput'
 import { TextInput } from '../inputs/TextInput'
 import { TimeInput } from '../inputs/TimeInput'
 import { DataTypeSchema } from './types'
@@ -53,6 +53,18 @@ export function time({
 } = {}) {
   return {
     input: TimeInput,
+    stringify: stringifyUnit as any,
+    defaultValue,
+  }
+}
+
+export function percentage({
+  defaultValue = { value: 0, unit: '%' },
+}: {
+  defaultValue?: CSSUnitValue
+} = {}) {
+  return {
+    input: PercentageInput,
     stringify: stringifyUnit as any,
     defaultValue,
   }
