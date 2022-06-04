@@ -36,7 +36,7 @@ export function Combobox({
     getItemProps,
   } = useCombobox({
     id,
-    initialInputValue: value,
+    inputValue: value,
     items: inputItems,
     selectedItem: filterValue,
     onInputValueChange: ({ inputValue }) => {
