@@ -35,7 +35,7 @@ export default function FieldArray<T, K extends string = never>(
   return (
     <InputContainer {...props}>
       {typeof value !== 'string' && (
-        <div>
+        <div sx={{ display: 'grid', gap: 2 }}>
           {value.map((item, i) => {
             return (
               <div
@@ -80,7 +80,9 @@ export default function FieldArray<T, K extends string = never>(
               px: 0,
               py: 2,
               m: 0,
-              border: 'none',
+              border: '1px solid',
+              borderColor: 'border',
+              borderRadius: '0.5rem',
               background: 'none',
               cursor: 'pointer',
               color: 'text',

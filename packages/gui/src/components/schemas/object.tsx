@@ -74,6 +74,10 @@ export function objectSchema<T extends object, K extends string = never>({
                 pl: 3,
                 display: 'grid',
                 gap: 2,
+                ':hover': {
+                  borderColor: 'primary',
+                },
+                transition: 'border-color 250ms',
               }}
             >
               {keyOrder.map((key) => {
