@@ -153,9 +153,6 @@ export function string({
   defaultValue?: string
 } = {}): DataTypeSchema<string> {
   return {
-    // Right now, just use a text input.
-    // In the future we may want to do smart-identification of identifiers
-    // the user has used in other places
     input: TextInput,
     stringify: (value) => `"${value}"`,
     defaultValue,
