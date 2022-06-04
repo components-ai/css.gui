@@ -26,19 +26,21 @@ export function optionsSchema<T extends Record<string, any>>({
       const Component = variants[type].input
       return (
         <div>
-          <InputHeader {...props} />
-          <SelectInput
-            {...getInputProps(props, 'type')}
-            options={order as string[]}
-            onChange={(newType) => {
-              // if the type changes, reset the value to the default value of that type
-              props.onChange({
-                ...variants[newType].defaultValue,
-                ...convert(props.value, newType),
-                type: newType,
-              })
-            }}
-          />
+          <InputHeader {...props}>
+            <SelectInput
+              {...getInputProps(props, 'type')}
+              label=""
+              options={order as string[]}
+              onChange={(newType) => {
+                // if the type changes, reset the value to the default value of that type
+                props.onChange({
+                  ...variants[newType].defaultValue,
+                  ...convert(props.value, newType),
+                  type: newType,
+                })
+              }}
+            />
+          </InputHeader>
           <Component value={props.value} onChange={props.onChange} label={''} />
         </div>
       )

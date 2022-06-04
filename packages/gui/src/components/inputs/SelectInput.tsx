@@ -20,6 +20,7 @@ export function SelectInput<T extends string>(props: Props<T>) {
             border: '1px solid',
             borderColor: 'border',
             borderRadius: '0.25rem',
+            height: '1.25rem',
             px: 2,
           }}
         >
