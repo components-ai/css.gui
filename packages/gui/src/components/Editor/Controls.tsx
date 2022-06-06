@@ -21,7 +21,6 @@ import { useThemeProperty } from '../providers/ThemeContext'
 import { UnitSteps } from '../../lib'
 import { pascalCase } from '../../lib/util'
 import { UnitRanges } from '../../data/ranges'
-import { getDefaultValue } from '../../lib/defaults'
 import { AddPropertyControl } from '../AddProperty'
 import { isFieldsetGroup, partitionProperties, sortProperties } from './util'
 import { stylesToEditorSchema } from '../../lib/transformers/styles-to-editor-schema'
@@ -317,4 +316,10 @@ function getDefaultsFromChildren(children: ReactNode): Record<string, any> {
     }
   })
   return defaults
+}
+
+function getDefaultValue(property: string) {
+  const propertyDefinition = properties[property] ?? {}
+  // If a default value is defined, return it
+  return propertyDefinition.defaultValue
 }
