@@ -1,4 +1,5 @@
 import { bindProps } from '../../lib/components'
+import { randomStep } from '../../lib/random'
 import { stringifyUnit } from '../../lib/stringify'
 import {
   Angle,
@@ -8,7 +9,7 @@ import {
   NumberPercentage,
   Time,
 } from '../../types/css'
-import { AngleInput } from '../inputs/AngleInput'
+import { AngleInput, angleSteps } from '../inputs/AngleInput'
 import { ColorInput } from '../inputs/ColorInput'
 import { Range } from '../inputs/Dimension/Input'
 import { KeywordInput } from '../inputs/KeywordInput'
@@ -18,7 +19,7 @@ import { NumberPercentageInput } from '../inputs/NumberPercentageInput'
 import { IntegerInput, PercentageInput } from '../inputs/PrimitiveInput'
 import { TextInput } from '../inputs/TextInput'
 import { TimeInput } from '../inputs/TimeInput'
-import { DataTypeSchema } from './types'
+import { DataTypeSchema, RegenOptions } from './types'
 
 export function color({
   defaultValue = 'transparent',
@@ -32,6 +33,13 @@ export function color({
   }
 }
 
+const angleRanges = {
+  deg: [0, 360],
+  turn: [0, 1],
+  rad: [0, 2 * Math.PI],
+  grad: [0, 400],
+}
+
 export function angle({
   defaultValue = { value: 0, unit: 'deg' },
   keywords = [],
@@ -39,11 +47,26 @@ export function angle({
   defaultValue?: Angle
   keywords?: readonly string[]
 } = {}) {
+  function regen({ previousValue }: RegenOptions<Angle>) {
+    const unit = previousValue.unit
+    const [min, max] = angleRanges[unit]
+    return {
+      unit,
+      value: randomStep(min, max, angleSteps[unit]),
+    }
+  }
   return {
-    input: AngleInput,
+    input: bindProps(AngleInput, ({ value }) => {
+      return {
+        onRegenerate: () => {
+          return regen({ previousValue: value! })
+        },
+      }
+    }),
     stringify: stringifyUnit as any,
     defaultValue,
     keywords,
+    regen,
   }
 }
 
