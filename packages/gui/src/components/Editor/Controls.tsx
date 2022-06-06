@@ -5,7 +5,6 @@ import {
   Fragment,
   isValidElement,
   ReactNode,
-  useEffect,
   useMemo,
 } from 'react'
 import { camelCase, uniq } from 'lodash-es'
@@ -94,7 +93,6 @@ const Control = ({ field, showRemove = false, ...props }: ControlProps) => {
       onRemove={showRemove ? handleRemoveProperty : undefined}
       Component={Component}
       componentProps={componentProps}
-      // {...componentProps}
     />
   )
 }
