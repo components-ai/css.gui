@@ -67,11 +67,10 @@ export const AddPropertyControl = ({
     }
 
     const styleItems = Object.keys(styles).map(kebabCase)
-    const filteredItems = fuzzysort.go(
-      input, allProperties
-    )
-    .map((res) => res.target)
-    .filter((item) => !styleItems.includes(item))
+    const filteredItems = fuzzysort
+      .go(input, allProperties)
+      .map((res) => res.target)
+      .filter((item) => !styleItems.includes(item))
     setInputItems(filteredItems)
   }
 
