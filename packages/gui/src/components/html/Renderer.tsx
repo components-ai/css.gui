@@ -20,6 +20,10 @@ export function HtmlRenderer({ value, canvas = true }: HtmlRendererProps) {
   )
 }
 
+const DEFAULT_ELEMENT_STYLES_IN_CANVAS = {
+  cursor: 'default',
+}
+
 interface ElementRendererProps {
   value: ElementData
   path: ElementPath
@@ -32,9 +36,7 @@ function ElementRenderer({ value, canvas, path }: ElementRendererProps) {
 
   const sx = toCSSObject({
     ...style,
-    cursor: 'default',
-    // @ts-ignore
-    a: { cursor: 'default' },
+    ...DEFAULT_ELEMENT_STYLES_IN_CANVAS,
   })
 
   if (isSamePath(path, selected)) {
