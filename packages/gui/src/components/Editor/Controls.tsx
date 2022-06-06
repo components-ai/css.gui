@@ -91,7 +91,6 @@ const Control = ({ field, showRemove = false, ...props }: ControlProps) => {
         setField(fullField, newValue)
       }}
       onRemove={showRemove ? handleRemoveProperty : undefined}
-      property={property}
       Component={Component}
       componentProps={componentProps}
       // {...componentProps}

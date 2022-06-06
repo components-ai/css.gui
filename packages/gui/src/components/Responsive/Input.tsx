@@ -18,7 +18,6 @@ type ResponsiveInputProps<T> = {
   onChange: (newValue: Responsive<T>) => void
   onRemove?: () => void
   label: string
-  property?: string
   defaultValue?: T
   Component: React.ComponentType<EditorProps<T>>
   componentProps?: any
@@ -30,7 +29,6 @@ export function ResponsiveInput<T>({
   label,
   Component,
   componentProps = {},
-  property,
 }: ResponsiveInputProps<T>) {
   const { breakpoints } = useTheme()
   const breakpointCount = breakpoints?.length || DEFAULT_BREAKPOINT_COUNT
@@ -66,7 +64,6 @@ export function ResponsiveInput<T>({
               value={value.values[i] ?? null}
               onChange={handleResponsiveChange(i)}
               label={i.toString()}
-              property={property}
               {...componentProps}
             />
           </div>
