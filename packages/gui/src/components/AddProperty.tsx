@@ -1,5 +1,5 @@
 import { useCombobox } from 'downshift'
-import { kebabCase } from 'lodash-es'
+import { camelCase, kebabCase } from 'lodash-es'
 import { useEffect, useId, useRef, useState } from 'react'
 import { properties as propertyList } from '../data/properties'
 import { getDefaultValue } from '../lib/defaults'
@@ -25,7 +25,8 @@ export const AddPropertyControl = ({
   const id = useId()
   const inputRef = useRef(null)
 
-  const allProperties: (string | null)[] = Object.entries(propertyList)
+  //@ts-ignore
+  const allProperties: string[] = Object.entries(propertyList)
     .map(([name, data]) => {
       return data.input !== 'none' ? kebabCase(name) : null
     })
@@ -70,7 +71,8 @@ export const AddPropertyControl = ({
     setInputItems(filteredItems)
   }
 
-  const handleAddProperty = (propertyName: string) => {
+  const handleAddProperty = (displayName: string) => {
+    const propertyName = camelCase(displayName)
     const fullField = field ? joinPath(field, propertyName) : propertyName
 
     setField(fullField, getDefaultValue(propertyName))
