@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.99
+
+### Patch Changes
+
+- c96be76: Fix bug with default values
+
 ## 0.0.98
 
 ### Patch Changes
