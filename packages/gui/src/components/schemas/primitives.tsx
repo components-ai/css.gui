@@ -56,10 +56,10 @@ export function angle({
     }
   }
   return {
-    input: bindProps(AngleInput, ({ value }) => {
+    input: bindProps(AngleInput, ({ value, onChange }: any) => {
       return {
         onRegenerate: () => {
-          return regen({ previousValue: value! })
+          onChange(regen({ previousValue: value! }))
         },
       }
     }),
