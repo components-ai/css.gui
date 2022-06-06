@@ -170,7 +170,7 @@ export default function Docs() {
           </a>
         </Link>
       </section>
-      <section sx={{ display: 'none', pb: 6, px: [4, 5, 5] }}>
+      {/* <section sx={{ display: 'none', pb: 6, px: [4, 5, 5] }}>
         <header sx={{ mb: 5 }}>
           <h2 sx={{ textAlign: 'center' }}>Composable</h2>
           <p sx={{ fontSize: 3, textAlign: 'center' }}>
@@ -188,7 +188,7 @@ export default function Docs() {
           <ColorsPreview />
         </div>
         <LinkPreview />
-      </section>
+      </section> */}
     </div>
   )
 }
