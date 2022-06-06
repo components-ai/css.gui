@@ -27,7 +27,6 @@ export const AddPropertyControl = ({
 
   const allProperties: (string | null)[] = Object.entries(propertyList)
     .map(([name, data]) => {
-      // console.log(data.input, "nd")
       return data.input !== 'none' ? kebabCase(name) : null
     })
     .filter(Boolean)
