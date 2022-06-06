@@ -32,6 +32,10 @@ export function objectSchema<T extends object, K extends string = never>({
   keywords = [],
 }: CreateObject<T, K>): DataTypeSchema<T | K> {
   function stringify(value: T | K) {
+    if (!value) {
+      return null
+    }
+
     if (typeof value === 'string') {
       return value
     }

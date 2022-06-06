@@ -12,7 +12,7 @@ interface DraggableLabelProps {
 }
 
 export const DraggableInput = ({
-  value,
+  value = 0,
   onUpdate,
   step = 1,
   min,
@@ -83,7 +83,7 @@ export const DraggableInput = ({
       sx={{
         cursor: dragging ? 'ew-resize' : 'default',
         minHeight: '1.6em',
-        width: `${value.toString().length + 1}ch`,
+        width: `${value?.toString().length + 1}ch`,
         // Use fractional steps to approximate the minimum width
         // so we don't get "jitters" moving between fractional and integer values
         minWidth: `${step.toString().length + 1}ch`,
