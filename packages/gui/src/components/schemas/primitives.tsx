@@ -13,12 +13,12 @@ import { AngleInput, angleSteps } from '../inputs/AngleInput'
 import { ColorInput } from '../inputs/ColorInput'
 import { Range } from '../inputs/Dimension/Input'
 import { KeywordInput } from '../inputs/KeywordInput'
-import { LengthInput } from '../inputs/LengthInput'
+import { LengthInput, lengthSteps } from '../inputs/LengthInput'
 import { NumberInput } from '../inputs/NumberInput'
 import { NumberPercentageInput } from '../inputs/NumberPercentageInput'
 import { IntegerInput, PercentageInput } from '../inputs/PrimitiveInput'
 import { TextInput } from '../inputs/TextInput'
-import { TimeInput } from '../inputs/TimeInput'
+import { TimeInput, timeSteps } from '../inputs/TimeInput'
 import { DataTypeSchema, RegenOptions } from './types'
 
 export function color({
@@ -70,13 +70,32 @@ export function angle({
   }
 }
 
+const timeRanges = {
+  s: [0, 2],
+  ms: [0, 2000],
+}
+
 export function time({
   defaultValue = { value: 0, unit: 's' },
 }: {
   defaultValue?: Time
 } = {}) {
+  function regen({ previousValue }: RegenOptions<Time>) {
+    const unit = previousValue.unit
+    const [min, max] = timeRanges[unit]
+    return {
+      unit,
+      value: randomStep(min, max, timeSteps[unit]),
+    }
+  }
   return {
-    input: TimeInput,
+    input: bindProps(TimeInput, ({ value, onChange }: any) => {
+      return {
+        onRegenerate: () => {
+          onChange(regen({ previousValue: value! }))
+        },
+      }
+    }),
     stringify: stringifyUnit as any,
     defaultValue,
   }
@@ -87,8 +106,21 @@ export function percentage({
 }: {
   defaultValue?: CSSUnitValue
 } = {}) {
+  function regen({ previousValue }: RegenOptions<CSSUnitValue>) {
+    const unit = previousValue.unit
+    return {
+      unit,
+      value: randomStep(0, 100, 0.1),
+    }
+  }
   return {
-    input: PercentageInput,
+    input: bindProps(PercentageInput, ({ value, onChange }: any) => {
+      return {
+        onRegenerate: () => {
+          onChange(regen({ previousValue: value! }))
+        },
+      }
+    }),
     stringify: stringifyUnit as any,
     defaultValue,
   }
@@ -118,6 +150,16 @@ export function numberPercentage({
   }
 }
 
+const lengthRanges = {
+  px: [0, 256],
+  rem: [0, 16],
+  em: [0, 16],
+  '%': [0, 100],
+  number: [0, 2],
+  fr: [0, 5],
+  // TODO remaining ranges
+}
+
 interface LengthProps {
   defaultValue?: Length
   keywords?: string[]
@@ -131,8 +173,25 @@ export function length({
   defaultValue = { value: 0, unit: 'px' },
   ...props
 }: LengthProps = {}) {
+  function regen({ previousValue }: RegenOptions<Length>) {
+    const unit = previousValue === '0' ? 'px' : previousValue.unit
+    // @ts-ignore
+    const [min, max] = lengthRanges[unit]
+    return {
+      unit,
+      // @ts-ignore
+      value: randomStep(min, max, lengthSteps[unit]),
+    }
+  }
   return {
-    input: bindProps(LengthInput, props),
+    input: bindProps(PercentageInput, ({ value, onChange }: any) => {
+      return {
+        ...props,
+        onRegenerate: () => {
+          onChange(regen({ previousValue: value! }))
+        },
+      }
+    }),
     stringify: stringifyUnit as any,
     defaultValue,
   }
