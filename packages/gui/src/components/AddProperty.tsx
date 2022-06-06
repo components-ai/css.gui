@@ -1,4 +1,5 @@
 import { useCombobox } from 'downshift'
+import { kebabCase } from 'lodash-es'
 import { useEffect, useId, useRef, useState } from 'react'
 import { properties as propertyList } from '../data/properties'
 import { getDefaultValue } from '../lib/defaults'
@@ -8,6 +9,7 @@ import { useDynamicControls } from './providers/DynamicPropertiesContext'
 import { useEditor } from './providers/EditorContext'
 import { KeyArg } from './providers/types'
 import { joinPath } from './providers/util'
+import fuzzysort from 'fuzzysort'
 
 interface Props {
   field?: KeyArg
@@ -24,10 +26,10 @@ export const AddPropertyControl = ({
   const id = useId()
   const inputRef = useRef(null)
 
-  // @ts-ignore
+  //@ts-ignore
   const allProperties: string[] = Object.entries(propertyList)
     .map(([name, data]) => {
-      return data.input !== 'none' ? name : null
+      return data.input ? name : null
     })
     .filter(Boolean)
 
@@ -59,14 +61,16 @@ export const AddPropertyControl = ({
   })
 
   const handleFilterItems = (input: string) => {
+    if (input === '') {
+      setInputItems(allProperties)
+      return
+    }
+
     const styleItems = Object.keys(styles)
-    const filteredItems = allProperties
-      .filter((item) => {
-        if (item.toLowerCase().startsWith(input.toLowerCase() || '')) {
-          return !styleItems.includes(item)
-        }
-      })
-      .sort()
+    const filteredItems = fuzzysort
+      .go(input, allProperties)
+      .map((res) => res.target)
+      .filter((item) => !styleItems.includes(item))
     setInputItems(filteredItems)
   }
 
@@ -197,7 +201,7 @@ export const AddPropertyControl = ({
                     toggleMenu()
                   }}
                 >
-                  {item}
+                  {kebabCase(item)}
                 </li>
               )
             })}

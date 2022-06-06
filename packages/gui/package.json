@@ -1,6 +1,6 @@
 {
   "name": "@compai/css-gui",
-  "version": "0.0.97",
+  "version": "0.0.98",
   "type": "module",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -51,6 +51,7 @@
     "csstype": "^3.0.11",
     "culori": "^2.0.3",
     "downshift": "^6.1.7",
+    "fuzzysort": "^2.0.1",
     "get-contrast": "^3.0.0",
     "immer": "^9.0.12",
     "lodash-es": "^4.17.21",
