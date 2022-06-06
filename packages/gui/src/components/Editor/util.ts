@@ -1,4 +1,5 @@
 import { partition, sortBy } from 'lodash-es'
+import { properties } from '../../data/properties'
 import {
   addInternalCSSClassSyntax,
   isInternalCSSClass,
@@ -57,4 +58,11 @@ export const partitionProperties = (properties: string[]) => {
 export const sortProperties = (properties: string[]) => {
   const [fieldsets, props] = partitionProperties(properties)
   return [...sortBy(props), ...sortBy(fieldsets).reverse()]
+}
+
+export function getDefaultValue(property: string) {
+  const propertyDefinition = properties[property] ?? {}
+  // If a default value is defined, return it
+  // @ts-ignore
+  return propertyDefinition.defaultValue
 }
