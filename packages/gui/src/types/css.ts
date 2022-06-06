@@ -141,7 +141,11 @@ export interface Position {
   y: Length
 }
 
-export const BOX_KEYWORDS = ['box', 'padding-box', 'content-box'] as const
+export const BOX_KEYWORDS = [
+  'border-box',
+  'padding-box',
+  'content-box',
+] as const
 export type Box = typeof BOX_KEYWORDS[number]
 
 export const SHAPE_BOX_KEYWORDS = [...BOX_KEYWORDS, 'margin-box'] as const

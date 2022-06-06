@@ -75,10 +75,17 @@ export const importRawLengths = (fontSizes: RawLength[]): FullLength[] => {
   if (Array.isArray(fontSizes)) {
     return fontSizes?.map((value: number | string) => {
       // TODO: If a string we should parse for other units and/or keywords
+      const unit = typeof value === 'string'
+        ? `${value.match(/-?[a-zA-Z]+/)}`
+        : 'px'
+      const parsedValue = typeof value === 'string'
+        ? Number(value.match(/-?[\d.]+/))
+        : value
+
       return {
         id: uuid(),
-        value,
-        unit: 'px',
+        value: parsedValue,
+        unit,
       }
     })
   }

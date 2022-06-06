@@ -33,27 +33,24 @@ export const initialStyles: any = {
   },
   borderColor: 'transparent',
   boxSizing: 'border-box',
-//  borderRadius: {
-//    value: 9999,
-//    unit: 'px',
-//  },
-  borderImageSlice: {
-    value: 1,
-    unit: 'number',
-  },
-  borderImageWidth: {
-    value: 64,
+  borderRadius: {
+    value: 9999,
     unit: 'px',
   },
+  // borderImageSlice: { top: { value: 1, unit: 'number' } },
+  // borderImageWidth: {
+  //   value: 64,
+  //   unit: 'px',
+  // },
   overflow: 'hidden',
-  borderImageSource: [
-    {
-      type: 'url',
-      arguments: ['https://source.unsplash.com/random'],
-    },
-  ],
+  borderImageSource: {
+    type: 'url',
+    value: 'https://source.unsplash.com/random',
+  },
   padding: {
-    value: '128',
-    unit: 'px',
+    top: {
+      value: '128',
+      unit: 'px',
+    },
   },
 }

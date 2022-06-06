@@ -18,6 +18,7 @@ export const Trigger = (props: PropsType<typeof Select.Trigger>) => {
         alignItems: 'center',
         appearance: 'none',
         border: 'none',
+        p: 0,
         background: 'none',
         color: 'text',
         width: 'max-content',
@@ -91,3 +92,19 @@ export const ItemIndicator = (
 }
 
 export const ItemText = Select.ItemText
+export const Separator = Select.Separator
+export const Label = (props: PropsType<typeof Select.Label>) => {
+  return (
+    <Select.Label
+      {...props}
+      sx={{
+        px: 2,
+        fontStyle: 'italic',
+        color: 'muted',
+        fontSize: '0.75rem',
+      }}
+    />
+  )
+}
+// export const Label = Select.Label
+export const Group = Select.Group

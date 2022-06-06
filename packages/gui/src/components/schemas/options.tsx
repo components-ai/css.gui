@@ -7,6 +7,7 @@ interface CreateOptions<T extends Record<string, any>> {
   variants: { [V in keyof T]: DataTypeSchema<T[V]> }
   order?: (keyof T)[]
   stringify?(variant: keyof T, value: string): string
+  convert?(oldValue: Unionize<T>[any], newType: keyof T): Partial<T[any]>
 }
 
 /**
@@ -17,6 +18,7 @@ export function optionsSchema<T extends Record<string, any>>({
   variants,
   order = Object.keys(variants),
   stringify = (variant, value) => value,
+  convert = () => ({}),
 }: CreateOptions<T>): DataTypeSchema<Unionize<T>> {
   return {
     input(props) {
@@ -24,19 +26,22 @@ export function optionsSchema<T extends Record<string, any>>({
       const Component = variants[type].input
       return (
         <div>
-          <InputHeader {...props} />
-          <SelectInput
-            {...getInputProps(props, 'type')}
-            options={order as string[]}
-            onChange={(newType) => {
-              // if the type changes, reset the value to the default value of that type
-              props.onChange({
-                ...variants[newType].defaultValue,
-                type: newType,
-              })
-            }}
-          />
-          <Component {...props} label={''} />
+          <InputHeader {...props}>
+            <SelectInput
+              {...getInputProps(props, 'type')}
+              label=""
+              options={order as string[]}
+              onChange={(newType) => {
+                // if the type changes, reset the value to the default value of that type
+                props.onChange({
+                  ...variants[newType].defaultValue,
+                  ...convert(props.value, newType),
+                  type: newType,
+                })
+              }}
+            />
+          </InputHeader>
+          <Component value={props.value} onChange={props.onChange} label={''} />
         </div>
       )
     },

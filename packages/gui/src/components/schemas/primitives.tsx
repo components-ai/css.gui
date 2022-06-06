@@ -10,9 +10,13 @@ import {
 } from '../../types/css'
 import { AngleInput } from '../inputs/AngleInput'
 import { ColorInput } from '../inputs/ColorInput'
+import { Range } from '../inputs/Dimension/Input'
 import { KeywordInput } from '../inputs/KeywordInput'
 import { LengthInput } from '../inputs/LengthInput'
+import { NumberInput } from '../inputs/NumberInput'
 import { NumberPercentageInput } from '../inputs/NumberPercentageInput'
+import { IntegerInput, PercentageInput } from '../inputs/PrimitiveInput'
+import { TextInput } from '../inputs/TextInput'
 import { TimeInput } from '../inputs/TimeInput'
 import { DataTypeSchema } from './types'
 
@@ -30,13 +34,16 @@ export function color({
 
 export function angle({
   defaultValue = { value: 0, unit: 'deg' },
+  keywords = [],
 }: {
   defaultValue?: Angle
+  keywords?: readonly string[]
 } = {}) {
   return {
     input: AngleInput,
     stringify: stringifyUnit as any,
     defaultValue,
+    keywords,
   }
 }
 
@@ -48,6 +55,30 @@ export function time({
   return {
     input: TimeInput,
     stringify: stringifyUnit as any,
+    defaultValue,
+  }
+}
+
+export function percentage({
+  defaultValue = { value: 0, unit: '%' },
+}: {
+  defaultValue?: CSSUnitValue
+} = {}) {
+  return {
+    input: PercentageInput,
+    stringify: stringifyUnit as any,
+    defaultValue,
+  }
+}
+
+export function number({
+  defaultValue = 0,
+}: {
+  defaultValue?: number
+} = {}) {
+  return {
+    input: NumberInput,
+    stringify: (x: number) => x.toString(),
     defaultValue,
   }
 }
@@ -71,6 +102,7 @@ interface LengthProps {
   percentage?: boolean
   flex?: boolean
   themeValues?: (CSSUnitValue & { id: string })[]
+  range?: Range
 }
 export function length({
   defaultValue = { value: 0, unit: 'px' },
@@ -85,6 +117,48 @@ export function length({
 
 export function lengthPercentage(props: Omit<LengthProps, 'percentage'> = {}) {
   return length({ ...props, percentage: true })
+}
+
+export function integer({
+  defaultValue = { value: 0, unit: 'number' },
+  keywords,
+}: {
+  defaultValue?: CSSUnitValue
+  keywords?: string[]
+} = {}) {
+  return {
+    input: IntegerInput,
+    stringify: stringifyUnit as any,
+    defaultValue,
+    keywords,
+  }
+}
+
+export function ident({
+  defaultValue = '',
+}: {
+  defaultValue?: string
+} = {}): DataTypeSchema<string> {
+  return {
+    // Right now, just use a text input.
+    // In the future we may want to do smart-identification of identifiers
+    // the user has used in other places
+    input: TextInput,
+    stringify: (value) => value,
+    defaultValue,
+  }
+}
+
+export function string({
+  defaultValue = '',
+}: {
+  defaultValue?: string
+} = {}): DataTypeSchema<string> {
+  return {
+    input: TextInput,
+    stringify: (value) => `"${value}"`,
+    defaultValue,
+  }
 }
 
 export function keyword<T extends string>(

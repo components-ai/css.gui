@@ -28,20 +28,23 @@ const initialValue: any = {
       attributes: {},
       style: {
         color: 'primary',
-        fontSize: [
-          {
-            value: 4,
-            unit: 'rem',
-          },
-          {
-            value: 6,
-            unit: 'rem',
-          },
-          {
-            value: 10,
-            unit: 'rem',
-          },
-        ],
+        fontSize: {
+          type: 'responsive',
+          values: [
+            {
+              value: 4,
+              unit: 'rem',
+            },
+            {
+              value: 6,
+              unit: 'rem',
+            },
+            {
+              value: 10,
+              unit: 'rem',
+            },
+          ],
+        },
         fontWeight: 900,
         fontFamily: 'Inter',
         letterSpacing: { value: -8, unit: 'px' },

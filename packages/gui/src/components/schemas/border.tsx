@@ -1,4 +1,4 @@
-import { boxSideSchema } from './boxSide'
+import { boxSideSchema } from './box-side'
 import { objectSchema } from './object'
 import { color, keyword, length } from './primitives'
 import { tupleSchema } from './tuple'
@@ -6,6 +6,7 @@ import { tupleSchema } from './tuple'
 /* Border width */
 
 const borderWidthItem = length({
+  range: 'nonnegative',
   keywords: ['thin', 'medium', 'thick'],
 })
 

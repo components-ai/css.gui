@@ -1,20 +1,16 @@
-import { kebabCase } from 'lodash-es'
-import { useId } from 'react'
-import { Number, Label } from '../primitives'
-import { EditorProps } from '../../types/editor'
+import { Number } from '../primitives'
+import { EditorPropsWithLabel } from '../../types/editor'
+import { InputHeader } from '../ui/InputHeader'
 
-interface Props extends EditorProps<number> {
-  label: string
+interface Props extends EditorPropsWithLabel<number> {
   min?: number
   max?: number
   step?: number
 }
 /** A labelled number field */
-export function NumberInput({ label, value, ...props }: Props) {
-  const id = `${useId()}-${kebabCase(label)}`
+export function NumberInput({ value, ...props }: Props) {
   return (
-    <div>
-      <Label htmlFor={id}>{label}</Label>
+    <InputHeader {...props}>
       <div
         sx={{
           px: 1,
@@ -24,8 +20,8 @@ export function NumberInput({ label, value, ...props }: Props) {
           width: 'min-content',
         }}
       >
-        <Number id={id} value={value} {...props} />
+        <Number value={value} {...props} />
       </div>
-    </div>
+    </InputHeader>
   )
 }

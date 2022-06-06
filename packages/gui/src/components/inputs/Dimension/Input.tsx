@@ -9,20 +9,21 @@ import {
   ThemeUnits,
   UnitlessUnits,
 } from '../../../types/css'
-import { Label, Number, ThemeValue, UnitSelect } from '../../primitives'
+import { Number, ThemeValue, UnitSelect } from '../../primitives'
 import { reducer } from './reducer'
 import { State } from './types'
 import { EditorPropsWithLabel } from '../../../types/editor'
 import { UnitConversions } from '../../../lib/convert'
-import { compact, kebabCase, omit } from 'lodash-es'
+import { compact, kebabCase } from 'lodash-es'
 import { CalcInput } from '../../primitives/CalcInput'
 import { X } from 'react-feather'
 import { isCSSUnitValue } from '../../../lib/codegen/to-css-object'
 import { KeywordSelect } from '../../primitives/KeywordSelect'
-import { ResponsiveInput } from '../../Responsive'
+import { InputHeader } from '../../ui/InputHeader'
 
 // Mapping of units to [min, max] tuple
 type UnitRanges = Record<string, [min: number, max: number]>
+export type Range = UnitRanges | 'nonnegative'
 // Mapping of units to steps
 type UnitSteps = Record<string, number>
 
@@ -59,50 +60,42 @@ const getInitialState = (
   return defaultState
 }
 
-export interface DimensionInputProps extends EditorPropsWithLabel<Dimension> {
-  range?: UnitRanges
+export interface DimensionInputProps<K>
+  extends EditorPropsWithLabel<Dimension, K> {
+  range?: Range
   steps?: UnitSteps
   units?: readonly string[]
   /** The available keyword values for the property. If provided, 'keyword' will be appended as a unit */
-  keywords?: string[]
+  keywords?: K[]
   /** The available theme values for the property. If provided, 'theme' will be appended as a unit */
   themeValues?: (CSSUnitValue & { id: string })[]
   conversions?: UnitConversions
   property?: string
 }
 
-export function DimensionInput(props: DimensionInputProps) {
-  if (props.topLevel) {
-    return (
-      <ResponsiveInput
-        {...(props as any)}
-        Component={BaseDimensionInput}
-        componentProps={omit(props, 'label', 'value', 'onChange', 'onRemove')}
-      />
-    )
-  }
+export function DimensionInput<K extends string = never>(
+  props: DimensionInputProps<K>
+) {
+  const {
+    value,
+    onChange,
+    label,
+    range: providedRange,
+    units = [],
+    keywords = [],
+    themeValues = [],
+    steps,
+    conversions = {},
+    topLevel,
+  } = props
 
-  return <BaseDimensionInput {...props} />
-}
-
-const BaseDimensionInput = ({
-  value,
-  onChange,
-  onRemove,
-  label,
-  range,
-  units = [],
-  keywords = [],
-  themeValues = [],
-  steps,
-  conversions = {},
-  topLevel,
-}: DimensionInputProps) => {
   const id = `${React.useId()}-${kebabCase(label)}`
+  const range =
+    providedRange === 'nonnegative' ? nonnegativeRange(units) : providedRange
 
   const [state, dispatch] = React.useReducer(
     reducer,
-    getInitialState(value, themeValues, units)
+    getInitialState(value as any, themeValues, units)
   )
 
   React.useEffect(() => {
@@ -133,19 +126,7 @@ const BaseDimensionInput = ({
   ])
 
   return (
-    <div
-      sx={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: 1,
-        width: 'min-content',
-      }}
-    >
-      {label && (
-        <Label htmlFor={id} sx={{ display: 'block', width: 'max-content' }}>
-          {label}
-        </Label>
-      )}
+    <InputHeader {...props}>
       <div
         sx={{
           display: 'flex',
@@ -265,8 +246,7 @@ const BaseDimensionInput = ({
           }}
         />
       </div>
-      {onRemove && <DeletePropButton onRemove={onRemove} />}
-    </div>
+    </InputHeader>
   )
 }
 
@@ -296,4 +276,8 @@ export const DeletePropButton = ({ onRemove }: DeleteProps) => {
       <X size={14} strokeWidth={3} color="currentColor" />
     </button>
   )
+}
+
+function nonnegativeRange(units: readonly string[]): UnitRanges {
+  return Object.fromEntries(units.map((unit) => [unit, [0, Infinity]]))
 }

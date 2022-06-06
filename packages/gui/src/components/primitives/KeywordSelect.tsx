@@ -14,7 +14,6 @@ export const KeywordSelect = <T extends string>({
   topLevel,
   hideIcon,
 }: Props<T>) => {
-  const allOptions = topLevel ? [...options, ...GLOBAL_KEYWORDS] : options
   return (
     <Select.Root value={value} onValueChange={onChange}>
       <Select.Trigger>
@@ -22,14 +21,29 @@ export const KeywordSelect = <T extends string>({
         {!hideIcon && <Select.Icon />}
       </Select.Trigger>
       <Select.Content>
-        {allOptions.map((option) => {
+        {options.map((option) => {
           return (
-            <Select.Item value={option as any}>
+            <Select.Item value={option}>
               <Select.ItemIndicator />
               <Select.ItemText>{option}</Select.ItemText>
             </Select.Item>
           )
         })}
+        {topLevel && (
+          <>
+            <Select.Group>
+              <Select.Label>Global Keywords</Select.Label>
+              {GLOBAL_KEYWORDS.map((option) => {
+                return (
+                  <Select.Item value={option as any}>
+                    <Select.ItemIndicator />
+                    <Select.ItemText>{option}</Select.ItemText>
+                  </Select.Item>
+                )
+              })}
+            </Select.Group>
+          </>
+        )}
       </Select.Content>
     </Select.Root>
   )

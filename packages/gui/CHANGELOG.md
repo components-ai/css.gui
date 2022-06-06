@@ -1,5 +1,36 @@
 # @compai/css-gui
 
+## 0.0.96
+
+### Patch Changes
+
+- a679ce7: Implement dynamic fieldsets for pseudos
+
+## 0.0.95
+
+### Patch Changes
+
+- 28f0e9d: Fix combobox init
+
+## 0.0.94
+
+### Patch Changes
+
+- 0b91ab3: Begin generating controls from schema
+
+## 0.0.93
+
+### Patch Changes
+
+- 665fe5e: Fixes importing theme and theme value ranges
+
+## 0.0.92
+
+### Patch Changes
+
+- 159bfb1: Bump react and @types/react
+- 167af9a: Bump react-feather from 2.0.9 to 2.0.10
+
 ## 0.0.91
 
 ### Patch Changes

@@ -24,9 +24,13 @@ export const DraggableInput = ({
   )
   const initialValue = React.useRef<number>(value)
 
-  const updateValue = (newValue: number | string) => {
-      setInternalValue(newValue)
-      onUpdate(newValue)
+  const updateValue = (newValue: number) => {
+    let inRangeValue = newValue
+    if (min || min === 0) inRangeValue = Math.max(newValue, min)
+    if (max || max === 0) inRangeValue = Math.min(inRangeValue, max)
+
+    setInternalValue(inRangeValue)
+    onUpdate(inRangeValue)
   }
 
   const bind = useDrag(
@@ -72,9 +76,7 @@ export const DraggableInput = ({
         if (max || max === 0) newValue = Math.min(newValue, max)
 
         setInternalValue(
-          newValue || newValue === 0
-            ? newValue
-            : inputValue === '-' ? '-' : ''
+          newValue || newValue === 0 ? newValue : inputValue === '-' ? '-' : ''
         )
         onUpdate(newValue || 0)
       }}
@@ -89,6 +91,7 @@ export const DraggableInput = ({
         background: 'none',
         color: 'text',
         border: 'none',
+        transition: 'width 150ms',
       }}
       {...bind()}
     />

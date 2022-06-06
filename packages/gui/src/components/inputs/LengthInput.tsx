@@ -34,7 +34,7 @@ export function LengthInput({
     number && UnitlessUnits.Number,
     ...LENGTH_UNITS,
     percentage && PercentageLengthUnits.Pct,
-    flex && 'fr', // TODO flex should be non-negative
+    flex && 'fr',
   ])
   const value =
     providedValue === '0' ? { value: 0, unit: 'number' } : providedValue

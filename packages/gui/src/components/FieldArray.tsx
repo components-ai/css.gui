@@ -1,173 +1,100 @@
-import { Trash, ChevronUp, ChevronDown } from 'react-feather'
-import { useState, ComponentType, useId } from 'react'
-import * as Collapsible from '@radix-ui/react-collapsible'
-import IconButton from './ui/IconButton'
-import { kebabCase } from 'lodash-es'
-import { Label } from './primitives'
-import { ExpandMarker } from './ui/ExpandMarker'
+import { ComponentType } from 'react'
 import { flip, replace, remove } from '../lib/array'
+import { EditorPropsWithLabel } from '../types/editor'
+import { InputContainer } from './inputs/InputContainer'
 
-interface FieldArrayProps<T> {
+interface FieldArrayProps<T, K> {
   label: string
-  value: T[]
-  onChange(newValue: T[]): void
+  value: T[] | K
+  onChange(newValue: T[] | K): void
   /**
    * The component to render each of the individual input values.
    * (See `LayerProps` for what props this takes)
    */
-  content: ComponentType<LayerProps<T>>
+  content: ComponentType<EditorPropsWithLabel<T>>
   /** The values that should be populated when a new item is added. */
   newItem(): T
   /** How to stringify the contents of the layer */
   stringify(value: T[]): string
-}
-
-export interface LayerProps<T> {
-  value: T
-  onChange(newValue: T): void
-  label: string
+  keywords?: K[]
+  defaultValue: T[]
 }
 
 /**
  * An alternative field array that is collapsible.
  */
-export default function FieldArray<T>({
-  label,
-  value = [],
-  onChange,
-  content: Content,
-  newItem,
-  stringify,
-}: FieldArrayProps<T>) {
-  const id = `${useId()}-${kebabCase(label)}`
-  const [open, setOpen] = useState(true)
+export default function FieldArray<T, K extends string = never>(
+  props: FieldArrayProps<T, K>
+) {
+  const { label = '', value = [], onChange, content: Content, newItem } = props
 
   const handleReorder = (i1: number, i2: number) => {
+    if (typeof value === 'string') {
+      return
+    }
     onChange(flip(value, i1, i2))
   }
 
   return (
-    <div>
-      <Collapsible.Root id={id} open={open} onOpenChange={setOpen}>
-        <div
-          sx={{
-            display: 'grid',
-            gridTemplateColumns: 'max-content 1fr',
-            gap: 2,
-          }}
-        >
-          <Label htmlFor={id}>{label}</Label>
-          <Collapsible.Trigger
+    <InputContainer {...props}>
+      {typeof value !== 'string' && (
+        <div sx={{ display: 'grid', gap: 2 }}>
+          {value.map((item, i) => {
+            return (
+              <div
+                sx={{
+                  display: 'grid',
+                  gridTemplateColumns: '1fr max-content',
+                  gap: 1,
+                }}
+              >
+                <Content
+                  value={item}
+                  onChange={(newValue) => {
+                    onChange(replace(value, i, newValue))
+                  }}
+                  onRemove={() => onChange(remove(value, i))}
+                  reorder={{
+                    onMoveUp:
+                      i === 0
+                        ? undefined
+                        : () => {
+                            handleReorder(i, i - 1)
+                          },
+                    onMoveDown:
+                      i === value.length - 1
+                        ? undefined
+                        : () => {
+                            handleReorder(i, i + 1)
+                          },
+                  }}
+                  label={'' + i}
+                />
+              </div>
+            )
+          })}
+          <button
+            onClick={() => {
+              onChange(value.concat([newItem()]))
+            }}
             sx={{
-              display: 'flex',
-              alignItems: 'center',
-              textAlign: 'left',
-              cursor: 'pointer',
               width: '100%',
+              appearance: 'none',
+              px: 0,
+              py: 2,
+              m: 0,
+              border: '1px solid',
+              borderColor: 'border',
+              borderRadius: '0.5rem',
               background: 'none',
+              cursor: 'pointer',
               color: 'text',
-              border: 'none',
-              p: 0,
             }}
           >
-            <ExpandMarker open={open} />
-            {stringify(value)}
-          </Collapsible.Trigger>
+            + Add {label.toLowerCase()}
+          </button>
         </div>
-        <Collapsible.Content
-          sx={{
-            my: 2,
-            maxWidth: '32rem',
-          }}
-        >
-          <div>
-            {value.map((item, i) => {
-              return (
-                <div
-                  sx={{
-                    display: 'grid',
-                    gridTemplateColumns: '1fr max-content',
-                    gap: 1,
-                  }}
-                >
-                  <Content
-                    value={item}
-                    onChange={(newValue) => {
-                      onChange(replace(value, i, newValue))
-                    }}
-                    label={'' + i}
-                  />
-                  <div
-                    sx={{
-                      height: '100%',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 1,
-                    }}
-                  >
-                    <IconButton
-                      title="Delete"
-                      onClick={() => {
-                        onChange(remove(value, i))
-                      }}
-                    >
-                      <Trash size={16} />
-                    </IconButton>
-                    <div
-                      sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifySelf: 'right',
-                        alignSelf: 'center',
-                        gap: '-0.5rem',
-                      }}
-                    >
-                      <IconButton
-                        disabled={i === 0}
-                        onClick={() => {
-                          if (i > 0) {
-                            handleReorder(i, i - 1)
-                          }
-                        }}
-                      >
-                        <ChevronUp size={16} />
-                      </IconButton>
-                      <IconButton
-                        disabled={i === value.length - 1}
-                        onClick={() => {
-                          if (i < value.length - 1) {
-                            handleReorder(i, i + 1)
-                          }
-                        }}
-                      >
-                        <ChevronDown size={16} />
-                      </IconButton>
-                    </div>
-                  </div>
-                </div>
-              )
-            })}
-            <button
-              onClick={() => {
-                onChange(value.concat([newItem()]))
-              }}
-              sx={{
-                width: '100%',
-                appearance: 'none',
-                px: 0,
-                py: 2,
-                m: 0,
-                border: 'none',
-                background: 'none',
-                cursor: 'pointer',
-                color: 'text',
-              }}
-            >
-              + Add {label.toLowerCase()}
-            </button>
-          </div>
-        </Collapsible.Content>
-      </Collapsible.Root>
-    </div>
+      )}
+    </InputContainer>
   )
 }

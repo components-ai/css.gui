@@ -1,50 +1,44 @@
 import { ComponentType } from 'react'
 import FieldArray from '../FieldArray'
-import Layers from '../Layers'
 import { DataTypeSchema } from './types'
-interface CreateList<T> {
+
+interface CreateList<T, K> {
   itemSchema: DataTypeSchema<T>
   separator?: string
   variant?: 'layers' | 'list'
   thumbnail?: ComponentType<{ value: string }>
+  keywords?: K[]
 }
 
-export function listSchema<T>({
+export function listSchema<T, K extends string = never>({
   itemSchema,
+  keywords,
   separator = ', ',
-  variant = 'layers',
-  thumbnail,
-}: CreateList<T>): DataTypeSchema<T[]> {
-  const stringify = (value: T[]) => {
+}: CreateList<T, K>): DataTypeSchema<T[] | K> {
+  const stringify = (value: T[] | K) => {
+    if (typeof value === 'string') {
+      return value
+    }
+
     const stringified = value.map((item) => itemSchema.stringify(item))
     return stringified.join(separator)
   }
+  const defaultValue = [itemSchema.defaultValue]
 
   return {
-    input(props) {
-      switch (variant) {
-        case 'layers':
-          return (
-            <Layers
-              {...props}
-              newItem={() => itemSchema.defaultValue}
-              stringify={stringify}
-              content={itemSchema.input as any}
-              thumbnail={thumbnail}
-            />
-          )
-        case 'list':
-          return (
-            <FieldArray
-              {...props}
-              newItem={() => itemSchema.defaultValue}
-              stringify={stringify}
-              content={itemSchema.input as any}
-            />
-          )
-      }
-    },
     stringify,
-    defaultValue: [itemSchema.defaultValue],
+    defaultValue,
+    input(props) {
+      return (
+        <FieldArray
+          {...props}
+          keywords={keywords}
+          defaultValue={defaultValue}
+          newItem={() => itemSchema.defaultValue}
+          stringify={stringify}
+          content={itemSchema.input}
+        />
+      )
+    },
   }
 }

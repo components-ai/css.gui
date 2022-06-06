@@ -1,22 +1,30 @@
-import { Styles, Length, CSSUnitValue, CSSFunctionCalc, UnitlessUnits } from '../../types/css'
-import { stringifySelector, stringifyUnit, stringifyCalcFunction } from '../stringify'
+import {
+  Styles,
+  Length,
+  CSSUnitValue,
+  CSSFunctionCalc,
+  UnitlessUnits,
+} from '../../types/css'
+import {
+  stringifySelector,
+  stringifyUnit,
+  stringifyCalcFunction,
+} from '../stringify'
 import { has } from 'lodash-es'
-import { isMultidimensionalLength, isNestedSelector } from '../util'
+import { isNestedSelector } from '../util'
 import { properties } from '../../data/properties'
+import { isResponsive } from '../../components/Responsive/Input'
 
 export const stringifyProperty = (
   property: string = '', // In the future the property might determine how we stringify
   value?: unknown
 ): Array<string | null> | string | number | null => {
   const stringify = properties[property]?.stringify
+  if (isResponsive(value as any)) {
+    return (value as any).values.map((v: any) => stringify(v))
+  }
   if (stringify) {
     return stringify(value)
-  }
-  if (Array.isArray(value)) {
-    // @ts-ignore
-    return value.map((v: Length | string | null) =>
-      stringifyProperty(property, v)
-    )
   }
 
   if (isCSSFunctionCalc(value)) {
@@ -24,10 +32,7 @@ export const stringifyProperty = (
     return stringifyCalcFunction(value)
   }
 
-  if (isMultidimensionalLength(value)) {
-    return stringifyUnit(value)
-  }
-
+  // font-family?
   if (!isCSSUnitValue(value)) {
     return String(value) ?? null
   }

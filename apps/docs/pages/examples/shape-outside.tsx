@@ -11,6 +11,7 @@ const initialStyles = {
       bottom: { value: 2, unit: 'px' },
       left: { value: 2, unit: 'px' },
       borderRadius: { value: 16, unit: 'px' },
+      offset: { top: { value: 0, unit: 'px' } },
     },
     box: 'margin-box',
   },
@@ -29,7 +30,7 @@ export default function ShapeOutsideExample() {
 
   return (
     <div>
-      <div sx={{ p: [ 3,4,5 ] }}>
+      <div sx={{ p: [3, 4, 5] }}>
         <div
           sx={{
             ...toCSSObject(styles),
@@ -38,11 +39,13 @@ export default function ShapeOutsideExample() {
         ></div>
         {text}
       </div>
-      <div sx={{ 
-        px: [ 3,4,5 ], 
-      }}>
-       <Editor styles={styles} onChange={setStyles} />
-     </div>
+      <div
+        sx={{
+          px: [3, 4, 5],
+        }}
+      >
+        <Editor styles={styles} onChange={setStyles} />
+      </div>
     </div>
   )
 }
