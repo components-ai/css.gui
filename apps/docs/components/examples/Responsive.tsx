@@ -17,8 +17,10 @@ export const ResponsiveExample = () => {
         <ResponsiveInput
           label="Font size"
           value={value}
+          // @ts-ignore
           onChange={setValue}
           defaultValue={{ value: 16, unit: 'px' }}
+          // @ts-ignore
           Component={LengthInput}
         />
       </div>
