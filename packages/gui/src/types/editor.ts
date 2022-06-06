@@ -15,7 +15,7 @@ export interface EditorProps<T, K = never> {
     onMoveUp?(): void
     onMoveDown?(): void
   }
-  onRegenerate?(): T
+  onRegenerate?(): void
 }
 
 export type EditorPropsWithLabel<T, K = never> = EditorProps<T, K> & {

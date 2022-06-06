@@ -3,10 +3,7 @@ import { flip, replace, remove } from '../lib/array'
 import { EditorPropsWithLabel } from '../types/editor'
 import { InputContainer } from './inputs/InputContainer'
 
-interface FieldArrayProps<T, K> {
-  label: string
-  value: T[] | K
-  onChange(newValue: T[] | K): void
+interface FieldArrayProps<T, K> extends EditorPropsWithLabel<T[], K> {
   /**
    * The component to render each of the individual input values.
    * (See `LayerProps` for what props this takes)
@@ -16,7 +13,6 @@ interface FieldArrayProps<T, K> {
   newItem(): T
   /** How to stringify the contents of the layer */
   stringify(value: T[]): string
-  keywords?: K[]
   defaultValue: T[]
 }
 

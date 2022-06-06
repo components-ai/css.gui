@@ -1,6 +1,7 @@
 import { ComponentType } from 'react'
+import { choose } from '../../lib/random'
 import FieldArray from '../FieldArray'
-import { DataTypeSchema } from './types'
+import { DataTypeSchema, RegenOptions } from './types'
 
 interface CreateList<T, K> {
   itemSchema: DataTypeSchema<T>
@@ -12,7 +13,7 @@ interface CreateList<T, K> {
 
 export function listSchema<T, K extends string = never>({
   itemSchema,
-  keywords,
+  keywords = [],
   separator = ', ',
 }: CreateList<T, K>): DataTypeSchema<T[] | K> {
   const stringify = (value: T[] | K) => {
@@ -29,6 +30,15 @@ export function listSchema<T, K extends string = never>({
   }
   const defaultValue = [itemSchema.defaultValue]
 
+  function regen({ previousValue }: RegenOptions<T[] | K>) {
+    if (typeof previousValue === 'string') {
+      return choose(keywords)
+    }
+    return previousValue.map((value) => {
+      return itemSchema.regen?.({ previousValue: value }) ?? value
+    })
+  }
+
   return {
     stringify,
     defaultValue,
@@ -41,8 +51,12 @@ export function listSchema<T, K extends string = never>({
           newItem={() => itemSchema.defaultValue}
           stringify={stringify}
           content={itemSchema.input}
+          onRegenerate={() => {
+            props.onChange(regen({ previousValue: props.value }))
+          }}
         />
       )
     },
+    regen,
   }
 }
