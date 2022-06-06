@@ -23,17 +23,14 @@ const initialStyles = {
     {
       image: {
         type: 'url',
-        arguments: ['https://source.unsplash.com/random'],
+        value: 'https://source.unsplash.com/random',
       },
       position: {
         x: { value: 'center', unit: 'keyword' },
         y: { value: 'center', unit: 'keyword' },
       },
-      repeat: ['no-repeat', 'no-repeat'],
-      size: [
-        { value: 100, unit: '%' },
-        { value: 100, unit: '%' },
-      ],
+      repeat: ['no-repeat'],
+      size: [{ value: 100, unit: '%' }],
       attachment: 'fixed',
       origin: 'border-box',
       clip: 'border-box',
