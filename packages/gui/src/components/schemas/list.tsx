@@ -16,6 +16,10 @@ export function listSchema<T, K extends string = never>({
   separator = ', ',
 }: CreateList<T, K>): DataTypeSchema<T[] | K> {
   const stringify = (value: T[] | K) => {
+    if (!value) {
+      return null
+    }
+
     if (typeof value === 'string') {
       return value
     }

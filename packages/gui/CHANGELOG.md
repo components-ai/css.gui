@@ -1,5 +1,13 @@
 # @compai/css-gui
 
+## 0.0.97
+
+### Patch Changes
+
+- c8f38a8: Tweak styles
+- 60189e3: Fix combobox, convert all inputs to new schema
+- ce61c0c: Clean up visuals
+
 ## 0.0.96
 
 ### Patch Changes
