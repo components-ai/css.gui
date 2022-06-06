@@ -6,6 +6,7 @@ import {
   isValidElement,
   ReactNode,
   useEffect,
+  useMemo,
 } from 'react'
 import { camelCase, uniq } from 'lodash-es'
 import { Styles } from '../../types/css'
@@ -170,18 +171,14 @@ export const Editor = ({
     onChange(newData)
   }
 
-  useEffect(() => {
-    if (children) {
-      const defaultStyles = getDefaultsFromChildren(children)
-      // TODO this should be a deep merge when we support defaults for nested
-      onChange({ ...defaultStyles, ...styles })
-    }
-  }, [])
+  const defaultStyles = useMemo(() => {
+    return getDefaultsFromChildren(children)
+  }, [children])
 
   return (
     <EditorProvider
       theme={theme}
-      value={styles}
+      value={{ ...defaultStyles, ...styles }}
       onChange={handleStylesChange}
       hideResponsiveControls={hideResponsiveControls}
     >
