@@ -1,5 +1,5 @@
 import { bindProps } from '../../lib/components'
-import { randomStep } from '../../lib/random'
+import { choose, randomStep } from '../../lib/random'
 import { stringifyUnit } from '../../lib/stringify'
 import {
   Angle,
@@ -98,6 +98,7 @@ export function time({
     }),
     stringify: stringifyUnit as any,
     defaultValue,
+    regen,
   }
 }
 
@@ -123,6 +124,7 @@ export function percentage({
     }),
     stringify: stringifyUnit as any,
     defaultValue,
+    regen,
   }
 }
 
@@ -194,6 +196,7 @@ export function length({
     }),
     stringify: stringifyUnit as any,
     defaultValue,
+    regen,
   }
 }
 
@@ -251,9 +254,20 @@ export function keyword<T extends string>(
     defaultValue?: T
   } = {}
 ): DataTypeSchema<T> {
+  function regen() {
+    return choose(options)
+  }
   return {
-    input: bindProps(KeywordInput, { options }),
+    input: bindProps(KeywordInput, ({ onChange }: any) => {
+      return {
+        options,
+        onRegenerate: () => {
+          onChange(regen())
+        },
+      }
+    }),
     stringify: (value) => value,
     defaultValue,
+    regen,
   }
 }
