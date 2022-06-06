@@ -272,7 +272,7 @@ function NodeSwitch({ value, onChange }: EditorProps) {
         <div sx={{ mb: 2, px: 3 }}>
           <Label>Tag name</Label>{' '}
           <Combobox
-            key={selected.join('-')}
+            key={selected?.join('-')}
             onFilterItems={(filterValue) => {
               return HTML_TAGS.filter((el) => el.startsWith(filterValue))
             }}
