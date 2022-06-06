@@ -52,43 +52,43 @@ export function InputContainer<T, K extends string = never>(
             </IconButton>
           </Collapsible.Trigger>
         )}
-        <div
-          sx={{
-            display: 'flex',
-            border: '1px solid',
-            borderColor: 'border',
-            borderRadius: '0.25rem',
-            px: 2,
-          }}
-        >
-          {isKeyword ? (
-            <KeywordSelect<K>
-              hideIcon
-              value={value as any}
-              onChange={onChange}
-              options={keywords}
-              topLevel={topLevel}
-            />
-          ) : (
-            <output
-              sx={{
-                cursor: 'default',
-                fontSize: 1,
-                color: 'muted',
-                textOverflow: 'ellipsis',
-                whiteSpace: 'nowrap',
-                overflow: 'hidden',
-                width: 'max-content',
-                maxWidth: '12rem',
-                // maxWidth: '100%',
-                maxHeight: '1.25rem',
-              }}
-              title={stringify(value)}
-            >
-              {stringify(value)}
-            </output>
-          )}
-          {showTypeSelect && (
+        {showTypeSelect && (
+          <div
+            sx={{
+              display: 'flex',
+              border: '1px solid',
+              borderColor: 'border',
+              borderRadius: '0.25rem',
+              px: 2,
+            }}
+          >
+            {isKeyword ? (
+              <KeywordSelect<K>
+                hideIcon
+                value={value as any}
+                onChange={onChange}
+                options={keywords}
+                topLevel={topLevel}
+              />
+            ) : (
+              <output
+                sx={{
+                  cursor: 'default',
+                  fontSize: 1,
+                  color: 'muted',
+                  textOverflow: 'ellipsis',
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  width: 'max-content',
+                  maxWidth: '12rem',
+                  // maxWidth: '100%',
+                  maxHeight: '1.25rem',
+                }}
+                title={stringify(value)}
+              >
+                {stringify(value)}
+              </output>
+            )}
             <Select.Root
               value={inputType}
               onValueChange={(newInputType) => {
@@ -114,8 +114,8 @@ export function InputContainer<T, K extends string = never>(
                 })}
               </Select.Content>
             </Select.Root>
-          )}
-        </div>
+          </div>
+        )}
       </InputHeader>
       <Collapsible.Content>{!isKeyword && children}</Collapsible.Content>
     </Collapsible.Root>
