@@ -1,5 +1,13 @@
 # @compai/css-gui
 
+## 0.0.98
+
+### Patch Changes
+
+- 21ec5af: Remove unneeded canvas wrap
+- b943e01: kebab property names
+- b0847c4: Fix href handling in canvas
+
 ## 0.0.97
 
 ### Patch Changes
