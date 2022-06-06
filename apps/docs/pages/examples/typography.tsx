@@ -2,7 +2,6 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { Editor, Inputs, styled, codegen } from '@compai/css-gui'
 import { defaultTheme } from '../../data/default-theme'
-import { Container } from '../../components/Container'
 
 const initialStyles = {
   color: 'text',
@@ -29,12 +28,12 @@ const initialStyles = {
   textDecorationStyle: 'none',
   width: {
     value: 100,
-    unit: '%'
+    unit: '%',
   },
   maxWidth: {
     value: 42,
-    unit: 'em'
-  }
+    unit: 'em',
+  },
 }
 
 export default function Typography() {
@@ -47,8 +46,15 @@ export default function Typography() {
           display: 'flex',
         }}
       >
-        
-        <div sx={{ flexGrow: 1, padding: 5,  minHeight: '40vh', maxHeight: '40vh', overflowY: 'scroll' }}>
+        <div
+          sx={{
+            flexGrow: 1,
+            padding: 5,
+            minHeight: '40vh',
+            maxHeight: '40vh',
+            overflowY: 'scroll',
+          }}
+        >
           <styled.p styles={styles}>
             “The parameters comprise sequences which are theoretically infinite
             but limits are, of course, set to them in practice. There is an
@@ -69,66 +75,76 @@ export default function Typography() {
           </styled.p>
         </div>
       </div>
-          <Editor styles={styles} onChange={setStyles} theme={defaultTheme}>
-          <>
-            <h3 sx={{ mt: 3, mb: 4, px: 4  }}>Typography</h3>
-            <div sx={{px: 4, pb: 5, display: 'grid' , gridTemplateColumns: '1fr 1fr 1fr 1fr', alignItems: 'start', gap: '2rem', justifyContent: 'space-evenly'}}>
-              <section sx={{ display: 'grid', gap: '1rem', }}>
-                <div sx={{display: 'flex', gap: '2rem'}}>
-                  <Inputs.Color />
-                  <Inputs.BackgroundColor />
-                </div>
-                <Inputs.FontFamily />
-              </section>
-              <section sx={{  display: 'grid', gap: '1rem',  }}>
-                <Inputs.FontSize />
-                <Inputs.FontWeight />
-                <Inputs.LineHeight />
-                <Inputs.TextAlign />
-                <Inputs.LetterSpacing />
-                <Inputs.TextIndent />
-                <Inputs.TextTransform />
-                <Inputs.FontStyle />
-                <Inputs.VerticalAlign />
-                <Inputs.WhiteSpace />
-              </section>
-              <section sx={{ display: 'grid', gap: '1rem',  }}>
-                <Inputs.TextDecorationColor />
-                <Inputs.TextDecorationLine />
-                <Inputs.TextDecorationThickness />
-                <Inputs.TextDecorationSkipInk />
-                <Inputs.TextDecorationSkip />
-                <Inputs.TextDecorationStyle />
-                <Inputs.TextShadow />
-                <Inputs.FontSynthesis />
-                <Inputs.FontVariantCaps />
-                <Inputs.FontVariantEastAsian />
-                <Inputs.FontVariantLigatures />
-                <Inputs.FontVariantNumeric />
-                <Inputs.FontVariantPosition />
-                <Inputs.FontStretch />
-              </section>
-              <section sx={{ display: 'grid', gap: '1rem',  }}>
-                <Inputs.TextOrientation />
-                <Inputs.TextOverflow />
-                <Inputs.TextAlignAll />
-                <Inputs.TextAlignLast />
-                <Inputs.TextEmphasisColor />
-                <Inputs.TextEmphasisPosition />
-                <Inputs.TextEmphasisStyle />
-                <Inputs.TextRendering />
-                <Inputs.TextUnderlinePosition />
-                <Inputs.TextWrap />
-                <Inputs.WordSpacing />
-                <Inputs.WordWrap />
-                <Inputs.Widows />
-                <Inputs.Width />
-                <Inputs.MaxWidth />
-                <Inputs.MinWidth />
-              </section>
-            </div>
-            </>
-          </Editor>
+      <Editor styles={styles} onChange={setStyles} theme={defaultTheme}>
+        <>
+          <h3 sx={{ mt: 3, mb: 4, px: 4 }}>Typography</h3>
+          <div
+            sx={{
+              px: 4,
+              pb: 5,
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr 1fr 1fr',
+              alignItems: 'start',
+              gap: '2rem',
+              justifyContent: 'space-evenly',
+            }}
+          >
+            <section sx={{ display: 'grid', gap: '1rem' }}>
+              <div sx={{ display: 'flex', gap: '2rem' }}>
+                <Inputs.Color />
+                <Inputs.BackgroundColor />
+              </div>
+              <Inputs.FontFamily />
+            </section>
+            <section sx={{ display: 'grid', gap: '1rem' }}>
+              <Inputs.FontSize />
+              <Inputs.FontWeight />
+              <Inputs.LineHeight />
+              <Inputs.TextAlign />
+              <Inputs.LetterSpacing />
+              <Inputs.TextIndent />
+              <Inputs.TextTransform />
+              <Inputs.FontStyle />
+              <Inputs.VerticalAlign />
+              <Inputs.WhiteSpace />
+            </section>
+            <section sx={{ display: 'grid', gap: '1rem' }}>
+              <Inputs.TextDecorationColor />
+              <Inputs.TextDecorationLine />
+              <Inputs.TextDecorationThickness />
+              <Inputs.TextDecorationSkipInk />
+              <Inputs.TextDecorationSkip />
+              <Inputs.TextDecorationStyle />
+              <Inputs.TextShadow />
+              <Inputs.FontSynthesis />
+              <Inputs.FontVariantCaps />
+              <Inputs.FontVariantEastAsian />
+              <Inputs.FontVariantLigatures />
+              <Inputs.FontVariantNumeric />
+              <Inputs.FontVariantPosition />
+              <Inputs.FontStretch />
+            </section>
+            <section sx={{ display: 'grid', gap: '1rem' }}>
+              <Inputs.TextOrientation />
+              <Inputs.TextOverflow />
+              <Inputs.TextAlignAll />
+              <Inputs.TextAlignLast />
+              <Inputs.TextEmphasisColor />
+              <Inputs.TextEmphasisPosition />
+              <Inputs.TextEmphasisStyle />
+              <Inputs.TextRendering />
+              <Inputs.TextUnderlinePosition />
+              <Inputs.TextWrap />
+              <Inputs.WordSpacing />
+              <Inputs.WordWrap />
+              <Inputs.Widows />
+              <Inputs.Width />
+              <Inputs.MaxWidth />
+              <Inputs.MinWidth />
+            </section>
+          </div>
+        </>
+      </Editor>
       <div>
         <pre
           sx={{
