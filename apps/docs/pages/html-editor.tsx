@@ -337,12 +337,6 @@ const initialValue: any = {
           ]
         },
         { 
-          tagName: 'button',
-          children: [
-            { type: 'text', value: 'Button' }
-          ]
-        },
-        { 
           tagName: 'b',
           children: [
             { type: 'text', value: 'Bold text' }
