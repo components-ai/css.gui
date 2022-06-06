@@ -22,7 +22,12 @@ import { UnitSteps } from '../../lib'
 import { pascalCase } from '../../lib/util'
 import { UnitRanges } from '../../data/ranges'
 import { AddPropertyControl } from '../AddProperty'
-import { isFieldsetGroup, partitionProperties, sortProperties } from './util'
+import {
+  getDefaultValue,
+  isFieldsetGroup,
+  partitionProperties,
+  sortProperties,
+} from './util'
 import { stylesToEditorSchema } from '../../lib/transformers/styles-to-editor-schema'
 import { removeInternalCSSClassSyntax } from '../../lib/classes'
 import { AddFieldsetControl } from '../AddFieldset'
