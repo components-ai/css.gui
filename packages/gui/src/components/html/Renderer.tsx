@@ -43,6 +43,7 @@ function ElementRenderer({ value, canvas, path }: ElementRendererProps) {
     sx.outlineWidth = 'thin'
     sx.outlineStyle = 'solid'
     sx.outlineColor = 'primary'
+    sx.outlineOffset = '4px'
     sx.userSelect = 'none'
   }
 

@@ -116,110 +116,6 @@ const initialValue: any = {
             },
           ],
         },
-        {
-          tagName: 'a',
-          attributes: {
-            href: '#0',
-          },
-          style: {
-            display: 'inline-block',
-            paddingTop: {
-              value: 16,
-              unit: 'px',
-            },
-            paddingBottom: {
-              value: 16,
-              unit: 'px',
-            },
-            paddingLeft: {
-              value: 32,
-              unit: 'px',
-            },
-            paddingRight: {
-              value: 32,
-              unit: 'px',
-            },
-            textDecorationColor: 'transparent',
-            textDecorationThickness: { value: 0, unit: 'px' },
-            textDecorationStyle: 'none',
-            textDecorationLine: 'none',
-            color: 'background',
-            backgroundColor: 'text',
-            borderWidth: {
-              value: 2,
-              unit: 'px',
-            },
-            borderStyle: 'solid',
-            borderColor: 'text',
-            marginRight: {
-              value: 8,
-              unit: 'px',
-            },
-            borderRadius: {
-              value: 6,
-              unit: 'px',
-            },
-            whiteSpace: 'nowrap',
-            ':hover': {
-              backgroundColor: 'primary',
-              borderColor: 'primary',
-            },
-          },
-          children: [
-            {
-              type: 'text',
-              value: 'Primary CTA',
-            },
-          ],
-        },
-        {
-          tagName: 'a',
-          attributes: { href: 'https://components.ai' },
-          style: {
-            display: 'inline-block',
-            paddingTop: {
-              value: 16,
-              unit: 'px',
-            },
-            paddingBottom: {
-              value: 16,
-              unit: 'px',
-            },
-            paddingLeft: {
-              value: 32,
-              unit: 'px',
-            },
-            paddingRight: {
-              value: 32,
-              unit: 'px',
-            },
-            textDecorationColor: 'transparent',
-            textDecorationThickness: { value: 0, unit: 'px' },
-            textDecorationStyle: 'none',
-            textDecorationLine: 'none',
-            color: 'text',
-            whiteSpace: 'nowrap',
-            borderWidth: {
-              value: 2,
-              unit: 'px',
-            },
-            borderStyle: 'solid',
-            borderColor: 'currentColor',
-            borderRadius: {
-              value: 6,
-              unit: 'px',
-            },
-            ':hover': {
-              color: 'primary',
-            },
-          },
-          children: [
-            {
-              type: 'text',
-              value: 'Secondary link',
-            },
-          ],
-        },
       ],
     },
     {
@@ -240,22 +136,6 @@ const initialValue: any = {
         boxSizing: 'border-box',
       },
       children: [
-        { tagName: 'div',
-          children: [
-            {
-              tagName: 'h2',
-              children: [
-              { type: 'text', value: 'Click on elements to edit and customize styles' }
-              ]
-            },
-            {
-              tagName: 'h2',
-              children: [
-              { type: 'text', value: 'Click on elements to edit and customize styles' }
-              ]
-            },
-          ]
-        },
         { 
           tagName: 'img',
           attributes: {
@@ -507,6 +387,13 @@ const initialValue: any = {
         },
         { 
           tagName: 'p',
+          style: {
+            color: 'text',
+            backgroundColor: 'background',
+            fontSize: { value: 1.25, unit: 'em', },
+            marginTop: { value: 0, unit: 'px' },
+            marginBottom: { value: 0, unit: 'px' },
+          },
           children: [
             { type: 'text', value: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.' }
           ]
