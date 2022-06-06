@@ -27,6 +27,7 @@ import { stylesToEditorSchema } from '../../lib/transformers/styles-to-editor-sc
 import { removeInternalCSSClassSyntax } from '../../lib/classes'
 import { AddFieldsetControl } from '../AddFieldset'
 import { ResponsiveInput } from '../Responsive'
+import { getDefaultValue } from '../../lib/defaults'
 
 export const getPropertyFromField = (field: KeyArg) => {
   if (Array.isArray(field)) {
@@ -316,10 +317,4 @@ function getDefaultsFromChildren(children: ReactNode): Record<string, any> {
     }
   })
   return defaults
-}
-
-function getDefaultValue(property: string) {
-  const propertyDefinition = properties[property] ?? {}
-  // If a default value is defined, return it
-  return propertyDefinition.defaultValue
 }
