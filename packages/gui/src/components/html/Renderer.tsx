@@ -30,8 +30,12 @@ function ElementRenderer({ value, canvas, path }: ElementRendererProps) {
   const { attributes = {}, style = {}, children = [] } = value
   const Tag: any = value.tagName || 'div'
 
-  const Wrap = canvas ? ElementWrap : Fragment
-  const sx = toCSSObject(style)
+  const sx = toCSSObject({
+    ...style,
+    cursor: 'default',
+    // @ts-ignore
+    a: { cursor: 'default' },
+  })
 
   if (isSamePath(path, selected)) {
     sx.outlineWidth = 'thin'
@@ -50,37 +54,25 @@ function ElementRenderer({ value, canvas, path }: ElementRendererProps) {
   }
 
   if (isVoidElement(Tag)) {
-    return (
-      <Wrap>
-        <Tag {...props} />
-      </Wrap>
-    )
+    return <Tag {...props} />
   }
 
   return (
-    <Wrap>
-      <Tag {...props}>
-        {children.map((child, i) => {
-          if (child.type === 'text') {
-            return child.value
-          }
-          return (
-            <ElementRenderer
-              key={i}
-              value={child}
-              canvas={canvas}
-              path={[...path, i]}
-            />
-          )
-        })}
-      </Tag>
-    </Wrap>
-  )
-}
-
-function ElementWrap(props: HTMLAttributes<HTMLSpanElement>) {
-  return (
-    <span sx={{ cursor: 'default', a: { cursor: 'default' } }} {...props} />
+    <Tag {...props}>
+      {children.map((child, i) => {
+        if (child.type === 'text') {
+          return child.value
+        }
+        return (
+          <ElementRenderer
+            key={i}
+            value={child}
+            canvas={canvas}
+            path={[...path, i]}
+          />
+        )
+      })}
+    </Tag>
   )
 }
 
