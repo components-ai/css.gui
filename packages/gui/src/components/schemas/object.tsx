@@ -1,8 +1,8 @@
 import { mapValues } from 'lodash-es'
+import { choose } from '../../lib/random'
 import { getInputProps } from '../../lib/util'
 import { InputContainer } from '../inputs/InputContainer'
-import { InputHeader } from '../ui/InputHeader'
-import { DataTypeSchema } from './types'
+import { DataTypeSchema, RegenOptions } from './types'
 
 interface CreateObject<T extends object, K> {
   fields: {
@@ -64,6 +64,15 @@ export function objectSchema<T extends object, K extends string = never>({
     ...mapValues(fields, (schema) => schema.defaultValue),
     ...providedDefaultValue,
   } as any // IDK why the typing doesn't work
+
+  function regen({ previousValue }: RegenOptions<T | K>): T | K {
+    if (typeof previousValue === 'string') {
+      return choose(keywords)
+    }
+    return mapValues(previousValue, (value, key: keyof T) => {
+      return fields[key].regen?.({ previousValue: value }) ?? value
+    }) as T
+  }
   return {
     defaultValue,
     stringify,
@@ -74,6 +83,9 @@ export function objectSchema<T extends object, K extends string = never>({
           keywords={keywords}
           defaultValue={defaultValue}
           stringify={stringify}
+          onRegenerate={() => {
+            props.onChange(regen({ previousValue: props.value }))
+          }}
         >
           {typeof props.value !== 'string' && (
             <div
@@ -99,6 +111,7 @@ export function objectSchema<T extends object, K extends string = never>({
         </InputContainer>
       )
     },
+    regen,
     // TODO override defaults
   }
 }

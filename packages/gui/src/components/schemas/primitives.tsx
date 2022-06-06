@@ -1,3 +1,4 @@
+import { randomColor } from '../../lib/color'
 import { bindProps } from '../../lib/components'
 import { choose, randomStep } from '../../lib/random'
 import { stringifyUnit } from '../../lib/stringify'
@@ -13,7 +14,7 @@ import { AngleInput, angleSteps } from '../inputs/AngleInput'
 import { ColorInput } from '../inputs/ColorInput'
 import { Range } from '../inputs/Dimension/Input'
 import { KeywordInput } from '../inputs/KeywordInput'
-import { LengthInput, lengthSteps } from '../inputs/LengthInput'
+import { lengthSteps } from '../inputs/LengthInput'
 import { NumberInput } from '../inputs/NumberInput'
 import { NumberPercentageInput } from '../inputs/NumberPercentageInput'
 import { IntegerInput, PercentageInput } from '../inputs/PrimitiveInput'
@@ -30,6 +31,7 @@ export function color({
     input: ColorInput,
     stringify: (value) => value,
     defaultValue,
+    regen: () => randomColor(),
   }
 }
 
