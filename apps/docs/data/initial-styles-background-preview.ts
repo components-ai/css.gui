@@ -3,7 +3,7 @@ export const initialStyles: any = {
     {
       image: {
         type: 'url',
-        value: ['https://source.unsplash.com/random'],
+        value: 'https://source.unsplash.com/random',
       },
       position: {
         x: { value: 'center', unit: 'keyword' },
