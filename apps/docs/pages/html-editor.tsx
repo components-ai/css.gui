@@ -133,6 +133,7 @@ const initialValue: any = {
         gap: '2em',
         justifyItems: 'space-between',
         gridTemplateColumns: 'repeat(4, 1fr)',
+        gridTemplateRows: 'auto',
         boxSizing: 'border-box',
       },
       children: [
@@ -159,11 +160,31 @@ const initialValue: any = {
             width: { value: 100, unit: '%' }
           }
         },
+        // TODO
+        //{ 
+        //  tagName: 'audio',
+        //  attributes: {
+        //    src: 'https
+        //  }
+        //},
         { 
           tagName: 'a',
           attributes: { href: '#0' },
           children: [
             { type: 'text', value: 'A text link' }
+          ]
+        },
+        { 
+          tagName: 'p',
+          style: {
+            color: 'text',
+            backgroundColor: 'background',
+            fontSize: { value: 1, unit: 'em', },
+            marginTop: { value: 0, unit: 'px' },
+            marginBottom: { value: 0, unit: 'px' },
+          },
+          children: [
+            { type: 'text', value: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.' }
           ]
         },
         { 
@@ -316,6 +337,12 @@ const initialValue: any = {
           ]
         },
         { 
+          tagName: 'button',
+          children: [
+            { type: 'text', value: 'Button' }
+          ]
+        },
+        { 
           tagName: 'b',
           children: [
             { type: 'text', value: 'Bold text' }
@@ -386,20 +413,13 @@ const initialValue: any = {
           ]
         },
         { 
-          tagName: 'p',
-          style: {
-            color: 'text',
-            backgroundColor: 'background',
-            fontSize: { value: 1.25, unit: 'em', },
-            marginTop: { value: 0, unit: 'px' },
-            marginBottom: { value: 0, unit: 'px' },
-          },
-          children: [
-            { type: 'text', value: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.' }
-          ]
-        },
-        { 
           tagName: 'h1',
+          style: {
+            fontFamily: 'heading',
+            fontSize: { value: 3, unit: 'rem', },
+            fontWeight: 800,
+            lineHeight: { value: 1.25, unit: 'number', },
+          },
           children: [
             { type: 'text', value: 'Heading 1' }
           ]
@@ -532,21 +552,16 @@ const initialValue: any = {
           ]
         },
         { 
-          tagName: 'audio',
-          children: [
-            { type: 'text', value: 'hello' }
-          ]
-        },
-        { 
           tagName: 'blockquote',
+          style: {
+            borderLeftWidth: { value: 4, unit: 'px', },
+            borderLeftColor: 'primary',
+            borderLeftStyle: 'solid',
+            marginLeft: { value: 0, unit: 'px', },
+            paddingLeft: { value: 32, unit: 'px', },
+          },
           children: [
             { type: 'text', value: '"The aim of every typographic work - the delivery of a message in the shortest, most efficient manner." - Jan Tschichold' }
-          ]
-        },
-        { 
-          tagName: 'button',
-          children: [
-            { type: 'text', value: 'Button' }
           ]
         },
         { 
