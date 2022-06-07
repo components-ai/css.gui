@@ -56,7 +56,7 @@ export default function ColorArea({ value, onChange, track, thumb }: Props) {
       sx={{
         position: 'relative',
         width: '100%',
-        aspectRatio: '1 / 1',
+        height: '14rem',
       }}
       onMouseDown={(e) => {
         dragging.current = true
