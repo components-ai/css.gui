@@ -24,11 +24,9 @@ export function optionsSchema<T extends Record<string, any>>({
 }: CreateOptions<T>): DataTypeSchema<Unionize<T>> {
   function regen({ previousValue }: RegenOptions<Unionize<T>>): Unionize<T> {
     const type = previousValue.type
-    console.log(type, previousValue)
     const newValue = variants[type].regen?.({
       previousValue: omit(previousValue, 'type'),
     } as any)
-    console.log(newValue)
     return ({
       ...newValue,
       type,
