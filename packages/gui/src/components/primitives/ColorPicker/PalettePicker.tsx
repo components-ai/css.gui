@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { Theme } from '../../../types/theme'
 import ColorValueDisplay from './ValueDisplay'
 
@@ -12,6 +13,14 @@ interface Props {
  * A color picker that allows selecting colors from a provided user theme
  */
 export default function PalettePicker({ value, onChange, theme }: Props) {
+  useEffect(() => {
+    console.log(theme, 'theme')
+    // const out = theme.colors?.filter((val) => {
+    //   console.log(val, 'val')
+    //   return !!val
+    // })
+    //   console.log(out, 'out')
+  }, [])
   return (
     <div>
       <ColorValueDisplay value={value} onChange={onChange} />

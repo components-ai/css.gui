@@ -12,32 +12,22 @@ export const importColors = (colors?: ColorModesScale): ColorGroup[] => {
   }
 
   return Object.entries(colors)
-    .filter(([name, group]) => name !== 'modes' && !!group)
+    .filter(([name, group]) => {
+      return name !== 'modes' && !!group && Array.isArray(group)
+    })
     .map(([name, group]) => {
-      if (!Array.isArray(group)) {
-        return {
-          id: uuid(),
-          name,
-          colors: [
-            {
-              id: uuid(),
-              value: String(group),
-            },
-          ],
-        }
-      }
-
       return {
         id: uuid(),
         name,
-        colors: group.map((value: string) => {
+        //@ts-ignore
+        colors: group?.map((value: string) => {
           return {
             id: uuid(),
             value: value,
           }
         }),
       }
-    })
+    }).filter(Boolean)
 }
 
 type FontsObject = Record<string, string>
