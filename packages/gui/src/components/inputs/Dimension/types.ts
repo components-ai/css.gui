@@ -5,7 +5,7 @@ export type State = {
   key: number
   value: number | string
   unit: string
-  themeId?: string
+  themePath?: string
   min?: number
   max?: number
 }
@@ -14,7 +14,7 @@ export type Action =
   | {
       type: 'CHANGED_INPUT_VALUE'
       value: number | string
-      themeId?: string
+      themePath?: string
     }
   | {
       type: 'CHANGED_UNIT_VALUE'
@@ -26,5 +26,5 @@ export type Action =
       type: 'CHANGED_INPUT_TO_THEME_VALUE'
       value: number | string
       unit: string
-      themeId?: string
+      themePath?: string
     }

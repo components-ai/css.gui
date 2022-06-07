@@ -20,6 +20,7 @@ import { X } from 'react-feather'
 import { isCSSUnitValue } from '../../../lib/codegen/to-css-object'
 import { KeywordSelect } from '../../primitives/KeywordSelect'
 import { InputHeader } from '../../ui/InputHeader'
+import { useThemeProperty } from '../../providers/ThemeContext'
 
 // Mapping of units to [min, max] tuple
 type UnitRanges = Record<string, [min: number, max: number]>
@@ -30,6 +31,7 @@ type UnitSteps = Record<string, number>
 const getInitialState = (
   value: Dimension,
   themeValues?: (CSSUnitValue & { id: string })[],
+  themeProp?: string,
   units?: readonly string[]
 ): State => {
   const defaultState = {
@@ -38,11 +40,13 @@ const getInitialState = (
       (value as CSSUnitValue)?.unit ||
       (units && units[0]) ||
       AbsoluteLengthUnits.Px,
-    themeId: (value as CSSUnitValue)?.themeId,
+    themePath: (value as CSSUnitValue)?.themePath,
     key: 0,
   }
 
-  for (const { unit, value: themeValue, id } of themeValues || []) {
+  for (var i = 0; i < (themeValues?.length || []); i++) {
+    //@ts-ignore
+    const { unit, value: themeValue, id } = themeValues[i]
     if (
       isCSSUnitValue(value) &&
       unit === value.unit &&
@@ -51,11 +55,25 @@ const getInitialState = (
       return {
         value: themeValue,
         unit,
-        themeId: id,
+        themePath: `${themeProp}.${i}`,
         key: 0,
       }
     }
   }
+  // for (const { unit, value: themeValue, id } of themeValues || []) {
+  //   if (
+  //     isCSSUnitValue(value) &&
+  //     unit === value.unit &&
+  //     themeValue === value.value
+  //   ) {
+  //     return {
+  //       value: themeValue,
+  //       unit,
+  //       themePath: id,
+  //       key: 0,
+  //     }
+  //   }
+  // }
 
   return defaultState
 }
@@ -71,6 +89,7 @@ export interface DimensionInputProps<K>
   themeValues?: (CSSUnitValue & { id: string })[]
   conversions?: UnitConversions
   property?: string
+  themeProp?: string
 }
 
 export function DimensionInput<K extends string = never>(
@@ -83,19 +102,21 @@ export function DimensionInput<K extends string = never>(
     range: providedRange,
     units = [],
     keywords = [],
-    themeValues = [],
+    themeValues: providedThemeValues = [],
     steps,
     conversions = {},
     topLevel,
+    themeProp,
   } = props
 
+  const themeValues = useThemeProperty(themeProp) || providedThemeValues
   const id = `${React.useId()}-${kebabCase(label)}`
   const range =
     providedRange === 'nonnegative' ? nonnegativeRange(units) : providedRange
 
   const [state, dispatch] = React.useReducer(
     reducer,
-    getInitialState(value as any, themeValues, units)
+    getInitialState(value as any, themeValues, themeProp, units)
   )
 
   React.useEffect(() => {
@@ -105,14 +126,14 @@ export function DimensionInput<K extends string = never>(
       // Only want to call on change when the value differs
       state.value !== unitValue?.value ||
       state.unit !== unitValue?.unit ||
-      state.themeId !== unitValue?.themeId
+      state.themePath !== unitValue?.themePath
     ) {
       const newValue: CSSUnitValue = {
         value: state.value,
         unit: state.unit,
       }
-      if (state.themeId) {
-        newValue.themeId = state.themeId
+      if (state.themePath) {
+        newValue.themePath = state.themePath
       }
       onChange(newValue)
     }
@@ -150,16 +171,16 @@ export function DimensionInput<K extends string = never>(
               })
             }}
           />
-        ) : state.themeId ? (
+        ) : state.themePath ? (
           <ThemeValue
-            value={themeValues.findIndex((tv) => tv.id === state.themeId) + 1}
+            value={themeValues.findIndex((tv) => tv.id === state.themePath) + 1}
             onChange={(newValue: number) => {
               const themeValue = themeValues[Math.max(0, newValue - 1)]
               dispatch({
                 type: 'CHANGED_INPUT_TO_THEME_VALUE',
                 value: themeValue?.value ?? 0,
                 unit: (themeValue?.unit as any) ?? 'px',
-                themeId: themeValue.id,
+                themePath: themeValue.id,
               })
             }}
             themeValues={themeValues}
@@ -194,7 +215,7 @@ export function DimensionInput<K extends string = never>(
         )}
         <UnitSelect
           units={allUnits}
-          value={state.themeId ? ThemeUnits.Theme : state.unit}
+          value={state.themePath ? ThemeUnits.Theme : state.unit}
           onChange={(newUnit) => {
             if (newUnit === KeywordUnits.Keyword) {
               dispatch({
@@ -233,7 +254,7 @@ export function DimensionInput<K extends string = never>(
                 type: 'CHANGED_INPUT_TO_THEME_VALUE',
                 value: themeValue?.value ?? 0,
                 unit: (themeValue?.unit as any) ?? 'px',
-                themeId: themeValue?.id,
+                themePath: `${themeProp}.${0}`,
               })
             }
 

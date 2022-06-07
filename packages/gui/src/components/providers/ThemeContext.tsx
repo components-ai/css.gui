@@ -13,6 +13,8 @@ export const useThemeProperty = (property?: string): any[] => {
       return context.fontSizes || []
     case 'lineHeight':
       return context.lineHeights || []
+    case 'space':
+      return context.space || []
     default:
       return []
   }

@@ -2,7 +2,7 @@ import { boxSideSchema } from './box-side'
 import { lengthPercentage } from './primitives'
 import { tupleSchema } from './tuple'
 
-const paddingItem = lengthPercentage({ range: 'nonnegative' })
+const paddingItem = lengthPercentage({ range: 'nonnegative', themeProp: 'space' })
 
 export const paddingBottom = paddingItem
 export const paddingTop = paddingItem

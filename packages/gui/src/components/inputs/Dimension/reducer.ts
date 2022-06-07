@@ -7,7 +7,7 @@ export const reducer = (state: State, action: Action): State => {
       return {
         ...state,
         value: action.value,
-        themeId: action.themeId,
+        themePath: action.themePath,
       }
     }
     case 'CHANGED_UNIT_VALUE': {
@@ -21,7 +21,7 @@ export const reducer = (state: State, action: Action): State => {
         ),
         unit: action.unit,
         key: state.key + 1, // Force number scrubber re-render
-        themeId: undefined,
+        themePath: undefined,
       }
     }
     case 'CHANGED_INPUT_TO_THEME_VALUE': {
@@ -29,7 +29,7 @@ export const reducer = (state: State, action: Action): State => {
         ...state,
         value: action.value,
         unit: action.unit,
-        themeId: action.themeId,
+        themePath: action.themePath,
       }
     }
     default: {

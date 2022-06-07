@@ -109,7 +109,7 @@ export type CalcFunction = {
 export type CSSUnitValue = {
   value: number | string
   unit: string
-  themeId?: string
+  themePath?: string
 }
 export type Dimension = Length | CSSFunctionCalc
 export type GenericLength = '0'
