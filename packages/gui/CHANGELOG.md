@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.102
+
+### Patch Changes
+
+- 760266c: Removes modes from color groups
+
 ## 0.0.101
 
 ### Patch Changes
