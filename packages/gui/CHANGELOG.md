@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.100
+
+### Patch Changes
+
+- 77a9d7c: Fixes colorpicker for safari
+
 ## 0.0.99
 
 ### Patch Changes
