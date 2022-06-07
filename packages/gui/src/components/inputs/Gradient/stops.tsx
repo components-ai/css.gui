@@ -65,7 +65,7 @@ export default function GradientStopsField({
 
   return (
     <div>
-      <label>Stops</label>
+      <label sx={{ fontSize: 0, fontWeight: 600 }}>Stops</label>
       <Toolbar
         onAdd={() => {
           setSelected(value.length)
