@@ -149,7 +149,8 @@ const initialValue: any = {
             width: { value: 100, unit: '%' },
             maxWidth: { value: 100, unit: '%' },
             height: { value: 'auto', unit: 'keyword' },
-            borderRadius: { value: 0, unit: 'px' }
+            borderRadius: { value: 0, unit: 'px' },
+            mixBlendMode: 'normal',
           }
         },
         { 
@@ -162,7 +163,8 @@ const initialValue: any = {
             playsinline: 'true',
           },
           style: {
-            width: { value: 100, unit: '%' }
+            width: { value: 100, unit: '%' },
+            borderRadius: { value: 0, unit: 'px', },
           }
         },
         // TODO
@@ -172,23 +174,49 @@ const initialValue: any = {
         //    src: 'https
         //  }
         //},
-        { 
-          tagName: 'a',
-          attributes: { href: '#0', title: 'Anchor link: <a>' },
+        {
+          tagName: 'div',
           style: {
-            color: 'text',
-            backgroundColor: 'background',
-            fontWeight: 'inherit',
-            textDecoration: {
-              color: 'currentColor',
-              line: 'underline',
-              style: 'solid',
-              thickness: { value: 1, unit: 'px' }
+            color: '#000000',
+            //backgroundColor: '#ffffff',
+            backgroundImage: [
+              {
+                type: 'gradient',
+                value: {
+                  type: 'linear',
+                  angle: { value: 45, unit: 'deg' },
+                  stops: [
+                    { color: '#ff33cc', hinting: 0, },
+                    { color: '#ffcc33', hinting: 100, },
+                  ]
+
+                }
+              },
+            ],
+            borderRadius: {
+              value: 16,
+              unit: 'px'
+            },
+            mixBlendMode: 'normal',
+            backgroundBlendMode: 'overlay',
+            transition: [
+              {
+                timingFunction: {
+                  type: 'cubic-bezier',
+                  p1: 0,
+                  p2: 0,
+                  p3: 1,
+                  p4: 1,
+                },
+                property: 'all',
+                duration: { value: 250, unit: 'ms' },
+                delay: { value: 0, unit: 'ms' },
+              },
+            ],
+            ':hover': {
+              borderRadius: { value: 4, unit: 'px'}
             }
           },
-          children: [
-            { type: 'text', value: 'A text link' }
-          ]
         },
         { 
           tagName: 'p',
@@ -197,6 +225,7 @@ const initialValue: any = {
             color: 'text',
             backgroundColor: 'background',
             fontSize: { value: 1, unit: 'em', },
+            fontFamily: 'Inter',
             marginTop: { value: 0, unit: 'px' },
             marginBottom: { value: 0, unit: 'px' },
             lineHeight: {
@@ -209,6 +238,13 @@ const initialValue: any = {
           },
           children: [
             { type: 'text', value: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.' }
+          ]
+        },
+        {
+          tagName: 'label',
+          attributes: {  title: 'Label: <label>' },
+          children: [
+            { type: 'text', value: 'Form label'}
           ]
         },
         { 
@@ -242,7 +278,8 @@ const initialValue: any = {
               left: { value: .5, unit: 'rem' },
               right: { value: .5, unit: 'rem' },
             },
-            borderRadius: { value: 0, unit: 'px' }
+            borderRadius: { value: 0, unit: 'px' },
+            height: { value: 'auto', unit: 'keyword' },
           },
           attributes: {
             type: 'text',
@@ -568,46 +605,6 @@ const initialValue: any = {
         { 
           tagName: 'input',
           style: {
-            cursor: 'pointer',
-            color: 'text',
-            backgroundColor: 'transparent',
-            fontSize: { value: 1, unit: 'rem' },
-            fontWeight: 600,
-            borderRadius: { value: 6, unit: 'px' },
-            paddingTop: { value: 16, unit: 'px' },
-            paddingBottom: { value: 16, unit: 'px' },
-            paddingLeft: { value: 64, unit: 'px' },
-            paddingRight: { value: 64, unit: 'px'},
-            appearance: 'none',
-            boxShadow: [{
-              inset: true,
-              spread: { value: 2, unit: 'px' },
-              blur: { value: 0, unit: 'px' },
-              offsetX: { value: 0, unit: 'px' },
-              offsetY: { value: 0, unit: 'px' },
-              color: 'currentColor',
-            }],
-            borderStyle: {
-              top: 'none',
-              bottom: 'none',
-              left: 'none',
-              right: 'none',
-            },
-            borderWidth: { value: 0, unit: 'px' },
-            borderColor: 'transparent',
-            transition: 'all .2s ease-in-out',
-            ':hover': {
-              color: 'primary',
-            }
-          },
-          attributes: {
-            type: 'button',
-            value: 'Button input',
-          },
-        },
-        { 
-          tagName: 'input',
-          style: {
             color: 'text',
             backgroundColor: 'transparent',
             borderWidth: { 
@@ -678,45 +675,6 @@ const initialValue: any = {
             value: 'https://components.ai'
           },
         },
-        { 
-          tagName: 'input',
-          style: {
-            cursor: 'pointer',
-            color: 'primary',
-            backgroundColor: 'text',
-            fontSize: { value: 1, unit: 'rem' },
-            fontWeight: 600,
-            borderRadius: { value: 6, unit: 'px' },
-            paddingTop: { value: 16, unit: 'px' },
-            paddingBottom: { value: 16, unit: 'px' },
-            paddingLeft: { value: 64, unit: 'px' },
-            paddingRight: { value: 64, unit: 'px'},
-            appearance: 'none',
-            boxShadow: [{
-              inset: false,
-              spread: { value: 0, unit: 'px' },
-              blur: { value: 0, unit: 'px' },
-              offsetX: { value: 0, unit: 'px' },
-              offsetY: { value: 0, unit: 'px' },
-              color: 'transparent',
-            }],
-            borderStyle: {
-              top: 'none',
-              bottom: 'none',
-              left: 'none',
-              right: 'none',
-            },
-            borderWidth: { value: 0, unit: 'px' },
-            borderColor: 'transparent',
-            transition: 'all .2s ease-in-out',
-            ':hover': {
-              color: 'primaryHover',
-            }
-          },
-          attributes: {
-            type: 'submit',
-          },
-        },
         {
           tagName: 'div',
           children: [
@@ -764,6 +722,45 @@ const initialValue: any = {
               checked: false,
             },
           }]
+        },
+        { 
+          tagName: 'input',
+          style: {
+            cursor: 'pointer',
+            color: 'primary',
+            backgroundColor: 'text',
+            fontSize: { value: 1, unit: 'rem' },
+            fontWeight: 600,
+            borderRadius: { value: 6, unit: 'px' },
+            paddingTop: { value: 16, unit: 'px' },
+            paddingBottom: { value: 16, unit: 'px' },
+            paddingLeft: { value: 64, unit: 'px' },
+            paddingRight: { value: 64, unit: 'px'},
+            appearance: 'none',
+            boxShadow: [{
+              inset: false,
+              spread: { value: 0, unit: 'px' },
+              blur: { value: 0, unit: 'px' },
+              offsetX: { value: 0, unit: 'px' },
+              offsetY: { value: 0, unit: 'px' },
+              color: 'transparent',
+            }],
+            borderStyle: {
+              top: 'none',
+              bottom: 'none',
+              left: 'none',
+              right: 'none',
+            },
+            borderWidth: { value: 0, unit: 'px' },
+            borderColor: 'transparent',
+            transition: 'all .2s ease-in-out',
+            ':hover': {
+              color: 'primaryHover',
+            }
+          },
+          attributes: {
+            type: 'submit',
+          },
         },
         { 
           tagName: 'button',
@@ -836,9 +833,50 @@ const initialValue: any = {
           ]
         },
         { 
+          tagName: 'input',
+          style: {
+            cursor: 'pointer',
+            color: 'text',
+            backgroundColor: 'transparent',
+            fontSize: { value: 1, unit: 'rem' },
+            fontWeight: 600,
+            borderRadius: { value: 6, unit: 'px' },
+            paddingTop: { value: 16, unit: 'px' },
+            paddingBottom: { value: 16, unit: 'px' },
+            paddingLeft: { value: 64, unit: 'px' },
+            paddingRight: { value: 64, unit: 'px'},
+            appearance: 'none',
+            boxShadow: [{
+              inset: true,
+              spread: { value: 2, unit: 'px' },
+              blur: { value: 0, unit: 'px' },
+              offsetX: { value: 0, unit: 'px' },
+              offsetY: { value: 0, unit: 'px' },
+              color: 'currentColor',
+            }],
+            borderStyle: {
+              top: 'none',
+              bottom: 'none',
+              left: 'none',
+              right: 'none',
+            },
+            borderWidth: { value: 0, unit: 'px' },
+            borderColor: 'transparent',
+            transition: 'all .2s ease-in-out',
+            ':hover': {
+              color: 'primary',
+            }
+          },
+          attributes: {
+            type: 'button',
+            value: 'Button input',
+          },
+        },
+        { 
           tagName: 'progress',
           style: { 
             accentColor: '#6465ff', 
+            height: { value: 48, unit: 'px' },
           },
           attributes: { max: 100, value: 61.8 }
         },
@@ -881,57 +919,88 @@ const initialValue: any = {
           ]
         },
         { 
-          tagName: 'b',
+          tagName: 'a',
+          attributes: { href: '#0', title: 'Anchor link: <a>' },
+          style: {
+            color: 'text',
+            backgroundColor: 'background',
+            fontWeight: 'inherit',
+            textDecoration: {
+              color: 'currentColor',
+              line: 'underline',
+              style: 'solid',
+              thickness: { value: 1, unit: 'px' }
+            }
+          },
           children: [
-            { type: 'text', value: 'Bold text' }
+            { type: 'text', value: 'A text link' }
           ]
         },
         { 
-          tagName: 'strong',
+          tagName: 'div',
           children: [
-            { type: 'text', value: 'Strong text' }
-          ]
-        },
+            { 
+              tagName: 'b',
+              children: [
+                { type: 'text', value: 'Bold text' }
+              ]
+            },
+            { tagName: 'br', },
+            { 
+              tagName: 'strong',
+              children: [
+                { type: 'text', value: 'Strong text' }
+              ]
+            },
+            { tagName: 'br', },
         { 
           tagName: 'i',
           children: [
             { type: 'text', value: 'Italic text' }
           ]
         },
+            { tagName: 'br', },
         { 
           tagName: 'em',
           children: [
             { type: 'text', value: 'Emphasized text' }
           ]
         },
+            { tagName: 'br', },
         { 
           tagName: 'u',
           children: [
             { type: 'text', value: 'Underlined text' }
           ]
         },
+            { tagName: 'br', },
         { 
           tagName: 's',
           children: [
             { type: 'text', value: 'Strikethrough text' }
           ]
         },
+            { tagName: 'br', },
         { 
           tagName: 'small',
           children: [
             { type: 'text', value: 'Small text' }
           ]
         },
+            { tagName: 'br', },
         { 
           tagName: 'sub',
           children: [
             { type: 'text', value: 'Subscript text' }
           ]
         },
+            { tagName: 'br', },
         { 
           tagName: 'sup',
           children: [
             { type: 'text', value: 'Superscript text' }
+          ]
+        },
           ]
         },
         { 
@@ -973,30 +1042,90 @@ const initialValue: any = {
         },
         { 
           tagName: 'h2',
+          style: {
+            color: 'text',
+            backgroundColor: 'background',
+            marginBottom: { value: 1, unit: 'em' },
+            fontFamily: 'heading',
+            fontSize: { value: 2, unit: 'rem', },
+            fontWeight: 800,
+            lineHeight: { value: 1.25, unit: 'number', },
+            marginTop: { value: 0, unit: 'px' },
+            textTransform: 'normal',
+            letterSpacing: { value: 'normal', unit: 'keyword' },
+          },
           children: [
             { type: 'text', value: 'Heading 2' }
           ]
         },
         { 
           tagName: 'h3',
+          style: {
+            color: 'text',
+            backgroundColor: 'background',
+            marginBottom: { value: 1, unit: 'em' },
+            fontFamily: 'heading',
+            fontSize: { value: 1.5, unit: 'rem', },
+            fontWeight: 800,
+            lineHeight: { value: 1.25, unit: 'number', },
+            marginTop: { value: 0, unit: 'px' },
+            textTransform: 'normal',
+            letterSpacing: { value: 'normal', unit: 'keyword' },
+          },
           children: [
             { type: 'text', value: 'Heading 3' }
           ]
         },
         { 
           tagName: 'h4',
+          style: {
+            color: 'text',
+            backgroundColor: 'background',
+            marginBottom: { value: 1, unit: 'em' },
+            fontFamily: 'heading',
+            fontSize: { value: 1.25, unit: 'rem', },
+            fontWeight: 800,
+            lineHeight: { value: 1.25, unit: 'number', },
+            marginTop: { value: 0, unit: 'px' },
+            textTransform: 'normal',
+            letterSpacing: { value: 'normal', unit: 'keyword' },
+          },
           children: [
             { type: 'text', value: 'Heading 4' }
           ]
         },
         { 
           tagName: 'h5',
+          style: {
+            color: 'text',
+            backgroundColor: 'background',
+            marginBottom: { value: 1, unit: 'em' },
+            fontFamily: 'heading',
+            fontSize: { value: 1, unit: 'rem', },
+            fontWeight: 800,
+            lineHeight: { value: 1.25, unit: 'number', },
+            marginTop: { value: 1, unit: 'px' },
+            textTransform: 'normal',
+            letterSpacing: { value: 'normal', unit: 'keyword' },
+          },
           children: [
             { type: 'text', value: 'Heading 5' }
           ]
         },
         { 
           tagName: 'h6',
+          style: {
+            color: 'text',
+            backgroundColor: 'background',
+            marginBottom: { value: 1, unit: 'em' },
+            fontFamily: 'heading',
+            fontSize: { value: .75, unit: 'rem', },
+            fontWeight: 800,
+            lineHeight: { value: 1.25, unit: 'number', },
+            marginTop: { value: 0, unit: 'px' },
+            textTransform: 'normal',
+            letterSpacing: { value: 'normal', unit: 'keyword' },
+          },
           children: [
             { type: 'text', value: 'Heading 6' }
           ]
@@ -1004,6 +1133,9 @@ const initialValue: any = {
         ]},
         {
           tagName: 'ul',
+          attributes: { 
+            title: 'Unordered list: <ul>' 
+          }, 
           children: [{ 
             tagName: 'li',
             children: [
@@ -1038,8 +1170,14 @@ const initialValue: any = {
         },
         {
           tagName: 'ol',
+          attributes: { 
+            title: 'Ordered list: <ol>' 
+          }, 
           children: [{ 
             tagName: 'li',
+            attributes: { 
+              title: 'List item: <li>' 
+            }, 
             children: [
               { type: 'text', value: 'Item 1', }
             ],
@@ -1072,7 +1210,13 @@ const initialValue: any = {
         },
         {
           tagName: 'dl',
+          attributes: { 
+            title: 'Definition List: <dl>' 
+          }, 
           children: [{ 
+            attributes: { 
+              title: 'Definition term: <dt>' 
+            }, 
             tagName: 'dt',
             style: {
               color: 'inherit',
@@ -1086,6 +1230,9 @@ const initialValue: any = {
           },
           { 
             tagName: 'dd',
+            attributes: { 
+              title: 'Definition description: <dd>' 
+            }, 
             style: { 
               color: 'inherit',
               backgroundColor: 'inherit',
@@ -1108,30 +1255,45 @@ const initialValue: any = {
             marginLeft: { value: 0, unit: 'px', },
             paddingLeft: { value: 32, unit: 'px', },
           },
+          attributes: { 
+            title: 'Blockquote: <blockquote>' 
+          }, 
           children: [
             { type: 'text', value: '"The aim of every typographic work - the delivery of a message in the shortest, most efficient manner." - Jan Tschichold' }
           ]
         },
         { 
           tagName: 'caption',
+          attributes: { 
+            title: 'Caption: <caption>' 
+          }, 
           children: [
             { type: 'text', value: 'Caption text' }
           ]
         },
         { 
           tagName: 'abbr',
-          attributes: { title: 'Cascading Style Sheets' }, children: [
-            { type: 'text', value: 'CSS' }
+          attributes: { 
+            title: 'Abbreviation: <abbr>' 
+          }, 
+          children: [
+            { type: 'text', value: 'Abbr' }
           ]
         },
         { 
           tagName: 'cite',
+          attributes: {
+            title: 'Cited text: cite'
+          },
           children: [
             { type: 'text', value: 'Cite element' }
           ]
         },
         { 
           tagName: 'mark',
+          attributes: {
+            title: 'Marked text: <mark>'
+          },
           style: {
             color: 'inherit',
             backgroundColor: '#6465ff',
