@@ -12,9 +12,9 @@ export const importColors = (colors?: ColorModesScale): ColorGroup[] => {
   }
 
   return Object.entries(colors)
-    .filter(([name, group]) => {
-      return name !== 'modes' && !!group && Array.isArray(group)
-    })
+    .filter(
+      ([name, group]) => name !== 'modes' && !!group && Array.isArray(group)
+    )
     .map(([name, group]) => {
       return {
         id: uuid(),
@@ -27,7 +27,7 @@ export const importColors = (colors?: ColorModesScale): ColorGroup[] => {
           }
         }),
       }
-    }).filter(Boolean)
+    })
 }
 
 type FontsObject = Record<string, string>
@@ -65,12 +65,10 @@ export const importRawLengths = (fontSizes: RawLength[]): FullLength[] => {
   if (Array.isArray(fontSizes)) {
     return fontSizes?.map((value: number | string) => {
       // TODO: If a string we should parse for other units and/or keywords
-      const unit = typeof value === 'string'
-        ? `${value.match(/-?[a-zA-Z]+/)}`
-        : 'px'
-      const parsedValue = typeof value === 'string'
-        ? Number(value.match(/-?[\d.]+/))
-        : value
+      const unit =
+        typeof value === 'string' ? `${value.match(/-?[a-zA-Z]+/)}` : 'px'
+      const parsedValue =
+        typeof value === 'string' ? Number(value.match(/-?[\d.]+/)) : value
 
       return {
         id: uuid(),
