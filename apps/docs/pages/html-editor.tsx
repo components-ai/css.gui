@@ -964,7 +964,6 @@ const initialValue: any = {
             fontWeight: 800,
             lineHeight: { value: 1.25, unit: 'number', },
             marginTop: { value: 0, unit: 'px' },
-            marginBottom: { value: 1, unit: 'em' },
             textTransform: 'normal',
             letterSpacing: { value: 'normal', unit: 'keyword' },
           },
