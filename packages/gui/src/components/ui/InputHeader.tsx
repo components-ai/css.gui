@@ -20,10 +20,10 @@ export function InputHeader({
     <div sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
       {label && <Label>{label}</Label>}
       {children}
-      <div sx={{ ml: 'auto' }}>
+      <div sx={{ ml: 'auto', display: 'flex', gap: 1, alignItems: 'center' }}>
         {onRegenerate && (
           <IconButton onClick={onRegenerate}>
-            <RefreshCw size={14} />
+            <RefreshCw size={12} />
           </IconButton>
         )}
         {onRemove && <DeleteButton onRemove={onRemove} />}
@@ -58,7 +58,7 @@ interface DeleteButtonProps {
 }
 export const DeleteButton = ({ onRemove }: DeleteButtonProps) => {
   return (
-    <IconButton sx={{ mb: 1 }} onClick={() => onRemove()}>
+    <IconButton onClick={() => onRemove()}>
       <X size={14} strokeWidth={3} color="currentColor" />
     </IconButton>
   )

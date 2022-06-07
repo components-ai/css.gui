@@ -1,7 +1,9 @@
+import { omit } from 'lodash-es'
 import { getInputProps } from '../../lib/util'
 import { SelectInput } from '../inputs/SelectInput'
 import { InputHeader } from '../ui/InputHeader'
-import { DataTypeSchema } from './types'
+import { rowGap } from './gap'
+import { DataTypeSchema, RegenOptions } from './types'
 
 interface CreateOptions<T extends Record<string, any>> {
   variants: { [V in keyof T]: DataTypeSchema<T[V]> }
@@ -20,13 +22,31 @@ export function optionsSchema<T extends Record<string, any>>({
   stringify = (variant, value) => value,
   convert = () => ({}),
 }: CreateOptions<T>): DataTypeSchema<Unionize<T>> {
+  function regen({ previousValue }: RegenOptions<Unionize<T>>): Unionize<T> {
+    const type = previousValue.type
+    console.log(type, previousValue)
+    const newValue = variants[type].regen?.({
+      previousValue: omit(previousValue, 'type'),
+    } as any)
+    console.log(newValue)
+    return ({
+      ...newValue,
+      type,
+    } ?? previousValue) as any
+  }
+
   return {
     input(props) {
       const type = props.value.type as keyof T
       const Component = variants[type].input
       return (
         <div>
-          <InputHeader {...props}>
+          <InputHeader
+            {...props}
+            onRegenerate={() => {
+              props.onChange(regen({ previousValue: props.value }))
+            }}
+          >
             <SelectInput
               {...getInputProps(props, 'type')}
               label=""
@@ -53,6 +73,7 @@ export function optionsSchema<T extends Record<string, any>>({
       ...variants[order[0]].defaultValue,
       type: order[0],
     },
+    regen,
   }
 }
 
