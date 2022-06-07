@@ -13,6 +13,17 @@ import { useHtmlEditor } from './Provider'
 import { isVoidElement } from '../../lib/elements'
 import { isSamePath } from './util'
 
+const HTML_GROUPS = [
+  {
+    title: 'Content Sectioning',
+    items: [HTMLTag.Article, HTMLTag.Aside, HTMLTag.Footer, HTMLTag.Header]
+  },
+  {
+    title: 'Text Content',
+    items: [HTMLTag.Blockquote, HTMLTag.Dd, HTMLTag.Div, HTMLTag.Dl, HTMLTag.Dt]
+  },
+]
+
 const HTML_TAGS = [
   HTMLTag.A,
   HTMLTag.Abbr,
@@ -274,7 +285,12 @@ function NodeSwitch({ value, onChange }: EditorProps) {
           <Combobox
             key={selected?.join('-')}
             onFilterItems={(filterValue) => {
-              return HTML_TAGS.filter((el) => el.startsWith(filterValue))
+              // has to return an array of items
+              const sections = HTML_GROUPS
+              const flatItems = sections.map((item: any) => item.items).flat()
+
+              return flatItems.filter((el) => el.toLowerCase().startsWith(filterValue))
+              // return HTML_TAGS.filter((el) => el.startsWith(filterValue))
             }}
             onItemSelected={(selectedItem) => {
               const defaultStyles = DEFAULT_STYLES[selectedItem] || {}
@@ -285,7 +301,9 @@ function NodeSwitch({ value, onChange }: EditorProps) {
                 style: mergedStyles,
               })
             }}
-            items={HTML_TAGS}
+            // items={HTML_TAGS}
+            items={HTML_GROUPS}
+            group
             value={value.tagName}
           />
         </div>

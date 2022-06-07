@@ -1,10 +1,11 @@
 import { useCombobox } from 'downshift'
-import { useEffect, useId, useRef, useState } from 'react'
+import { Component, ComponentType, useEffect, useId, useRef, useState } from 'react'
 
 interface ComboboxInterface {
   onFilterItems: (filterValue: string) => string[]
   onItemSelected: (selectedItem: string) => void
-  items: string[]
+  items: string[] | any[], // todo: type groups correctly
+  group?: boolean,
   value?: string
   clearOnSelect?: boolean
 }
@@ -13,17 +14,25 @@ export function Combobox({
   onFilterItems,
   onItemSelected,
   items,
+  group = true,
   value,
   clearOnSelect = false,
 }: ComboboxInterface) {
   const id = useId()
   const inputRef = useRef(null)
 
-  const [inputItems, setInputItems] = useState<string[]>(items)
+  const [inputItems, setInputItems] = useState<string[] | any[]>([])
   const [filterValue, setFilterValue] = useState<string>(value || '')
 
   useEffect(() => {
     handleFilterItems(filterValue)
+    if (group) {
+      // @ts-ignore
+      const flatItems = items.map((item: any) => item.items).flat()
+      setInputItems(flatItems)
+    } else {
+      setInputItems(items)
+    }
   }, [])
 
   const {
@@ -49,10 +58,12 @@ export function Combobox({
 
   const handleFilterItems = (newValue: string) => {
     const filteredItems = onFilterItems(newValue)
+    console.log(filteredItems, 'items filtered')
     setInputItems(filteredItems)
   }
 
   const handleItemSelected = (selectedItem: string) => {
+    console.log(selectedItem, 'selected')
     onItemSelected(selectedItem)
     setFilterValue(clearOnSelect ? '' : selectedItem)
   }
@@ -142,7 +153,7 @@ export function Combobox({
               </button>
             </div>
           )}
-          {isOpen &&
+          {isOpen && !group &&
             inputItems.map((item, index) => {
               return (
                 <li
@@ -172,7 +183,51 @@ export function Combobox({
                   {item}
                 </li>
               )
-            })}
+          })}
+          {isOpen &&
+          group &&
+          //@ts-ignore
+          items.reduce((acc, curr, sectionIdx) => {
+
+            // todo: dont push section if items length is 0 after filter
+            acc.sections.push(
+              <div>
+                <div>{curr.title}</div>
+                {curr.items.map((item, itemIdx) => {
+                  if (!item.toLowerCase().startsWith(filterValue)) return null
+                  const index = acc.itemIndex++
+                  return <li
+                    {...getItemProps({ item, index })}
+                    sx={{
+                      margin: 0,
+                      pl: 3,
+                      py: 1,
+                      cursor: 'auto',
+                      userSelect: 'none',
+                      backgroundColor:
+                        highlightedIndex === index
+                          ? 'backgroundOffset'
+                          : 'inherit',
+                      ':last-of-type': {  // todo: not right result with sectioning
+                        borderBottomRightRadius: 7,
+                        overflow: 'hidden',
+                        pb: 1,
+                      },
+                    }}
+                    key={`${item}${index}`}
+                    onClick={() => {
+                      console.log(inputItems, highlightedIndex, '???')
+                      handleItemSelected(inputItems[highlightedIndex])
+                      toggleMenu()
+                    }}
+                  >
+                    {item}
+                  </li>
+                })}
+              </div>
+            )
+            return acc
+          }, { sections: [] as any[], itemIndex: 0 }).sections}
         </ul>
       </div>
     </div>
