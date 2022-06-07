@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.101
+
+### Patch Changes
+
+- eb84f84: Allow manually typed decimals in number input
+
 ## 0.0.100
 
 ### Patch Changes
