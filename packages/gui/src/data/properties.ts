@@ -259,6 +259,7 @@ export const properties: Record<string, DataTypeSchema<any>> = mapValues(
       percentage: true,
       keywords: ['max-content', 'min-content', 'auto'],
       defaultValue: { value: 'auto', unit: 'keyword' },
+      themeProperty: 'sizes',
     },
     borderCollapse: {
       input: 'keyword',
@@ -569,6 +570,7 @@ export const properties: Record<string, DataTypeSchema<any>> = mapValues(
         'content',
       ],
       defaultValue: { value: 'auto', unit: 'keyword' },
+      themeProperty: 'sizes',
     },
     flexDirection: {
       input: 'keyword',
@@ -659,6 +661,7 @@ export const properties: Record<string, DataTypeSchema<any>> = mapValues(
       input: FontFamily,
       dependantProperties: ['fontStyle', 'fontVariationSettings'],
       defaultValue: 'Inter',
+      themeProperty: 'fonts',
     },
     fontKerning: {
       input: 'keyword',
@@ -699,7 +702,7 @@ export const properties: Record<string, DataTypeSchema<any>> = mapValues(
         value: 24,
         unit: 'px',
       },
-      themeProperty: 'fontSize'
+      themeProperty: 'fontSizes'
     },
     fontStretch: {
       input: 'percentage',
@@ -824,6 +827,7 @@ export const properties: Record<string, DataTypeSchema<any>> = mapValues(
         'bolder',
       ],
       defaultValue: '400',
+      themeProperty: 'fontWeights',
     },
     forceColorAdjust: {
       input: 'keyword',
@@ -865,6 +869,7 @@ export const properties: Record<string, DataTypeSchema<any>> = mapValues(
         [ViewportPercentageLengthUnits.VMax]: [0, 100],
       },
       defaultValue: 'auto',
+      themeProperty: 'sizes',
     },
     hyphenateCharacter: {
       input: 'string',
@@ -972,6 +977,7 @@ export const properties: Record<string, DataTypeSchema<any>> = mapValues(
       percentage: true,
       keywords: ['normal'],
       defaultValue: 'normal',
+      themeProperty: 'letterSpacings'
     },
     lightingColor: {
       input: 'color',
@@ -998,6 +1004,7 @@ export const properties: Record<string, DataTypeSchema<any>> = mapValues(
         value: 1.5,
         unit: 'number',
       },
+      themeProperty: 'lineHeights'
     },
     lineHeightStep: {
       input: 'length',
@@ -1041,6 +1048,7 @@ export const properties: Record<string, DataTypeSchema<any>> = mapValues(
       input: 'length',
       percentage: true,
       keywords: ['none', 'max-content', 'min-content'],
+      themeProperty: 'sizes',
     },
     maxHeight: {
       input: 'length',
@@ -1050,11 +1058,13 @@ export const properties: Record<string, DataTypeSchema<any>> = mapValues(
         value: 100,
         unit: '%',
       },
+      themeProperty: 'sizes',
     },
     maxInlineSize: {
       input: 'length',
       percentage: true,
       keywords: ['none', 'max-content', 'min-content'],
+      themeProperty: 'sizes',
     },
     maxLines: {
       input: 'number',
@@ -1070,6 +1080,7 @@ export const properties: Record<string, DataTypeSchema<any>> = mapValues(
         value: 100,
         unit: '%',
       },
+      themeProperty: 'sizes',
     },
     minHeight: {
       input: 'length',
@@ -1079,6 +1090,7 @@ export const properties: Record<string, DataTypeSchema<any>> = mapValues(
         value: 48,
         unit: 'px',
       },
+      themeProperty: 'sizes',
     },
     minBlockSize: {
       input: 'length',
@@ -1088,6 +1100,7 @@ export const properties: Record<string, DataTypeSchema<any>> = mapValues(
         value: 0,
         unit: 'px',
       },
+      themeProperty: 'sizes',
     },
     minInlineSize: {
       input: 'length',
@@ -1097,6 +1110,7 @@ export const properties: Record<string, DataTypeSchema<any>> = mapValues(
         value: 0,
         unit: 'px',
       },
+      themeProperty: 'sizes',
     },
     // TODO: add fit-content function
     minWidth: {
@@ -1104,6 +1118,7 @@ export const properties: Record<string, DataTypeSchema<any>> = mapValues(
       percentage: true,
       keywords: ['max-content', 'min-content', 'auto'],
       defaultValue: 'auto',
+      themeProperty: 'sizes',
     },
     mixBlendMode: {
       input: 'keyword',
@@ -1635,6 +1650,7 @@ export const properties: Record<string, DataTypeSchema<any>> = mapValues(
         [ViewportPercentageLengthUnits.VMax]: [0, 100],
       },
       defaultValue: { value: 100, unit: '%' },
+      themeProperty: 'sizes',
     },
     wordBreak: {
       input: 'keyword',

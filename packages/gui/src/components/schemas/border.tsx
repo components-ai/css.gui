@@ -8,6 +8,7 @@ import { tupleSchema } from './tuple'
 const borderWidthItem = length({
   range: 'nonnegative',
   keywords: ['thin', 'medium', 'thick'],
+  themeProperty: 'borderWidths',
 })
 
 export const borderTopWidth = borderWidthItem
@@ -44,7 +45,7 @@ const borderStyleItem = keyword([
   'ridge',
   'inset',
   'outset',
-])
+], { themeProperty: 'borderStyles'})
 export const borderTopStyle = borderStyleItem
 export const borderRightStyle = borderStyleItem
 export const borderBottomStyle = borderStyleItem

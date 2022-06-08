@@ -14,10 +14,10 @@ const singleBoxShadow = objectSchema({
   fields: {
     inset,
     color: color(),
-    offsetX: length(),
-    offsetY: length(),
-    blur: length({ range: 'nonnegative' }),
-    spread: length(),
+    offsetX: length({ themeProperty: 'space'}),
+    offsetY: length({ themeProperty: 'space'}),
+    blur: length({ range: 'nonnegative', themeProperty: 'space' }),
+    spread: length({ themeProperty: 'space'}),
   },
 })
 

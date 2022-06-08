@@ -4,6 +4,7 @@ import { tupleSchema } from './tuple'
 
 const scrollPaddingItem = lengthPercentage({
   keywords: ['auto'],
+  themeProperty: 'space',
 })
 
 export const scrollPaddingBottom = scrollPaddingItem

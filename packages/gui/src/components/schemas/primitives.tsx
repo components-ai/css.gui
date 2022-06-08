@@ -8,6 +8,7 @@ import {
   NumberPercentage,
   Time,
 } from '../../types/css'
+import { Theme } from '../../types/theme'
 import { AngleInput } from '../inputs/AngleInput'
 import { ColorInput } from '../inputs/ColorInput'
 import { Range } from '../inputs/Dimension/Input'
@@ -49,11 +50,13 @@ export function angle({
 
 export function time({
   defaultValue = { value: 0, unit: 's' },
+  themeProperty,
 }: {
-  defaultValue?: Time
+  defaultValue?: Time,
+  themeProperty?: Theme
 } = {}) {
   return {
-    input: TimeInput,
+    input: bindProps(TimeInput, { themeProperty }),
     stringify: stringifyUnit as any,
     defaultValue,
   }
@@ -166,12 +169,14 @@ export function keyword<T extends string>(
   options: readonly T[],
   {
     defaultValue = options[0],
+    themeProperty,
   }: {
     defaultValue?: T
+    themeProperty?: string
   } = {}
 ): DataTypeSchema<T> {
   return {
-    input: bindProps(KeywordInput, { options }),
+    input: bindProps(KeywordInput, { options, themeProperty }),
     stringify: (value) => value,
     defaultValue,
   }

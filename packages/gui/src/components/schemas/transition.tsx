@@ -4,7 +4,7 @@ import { listSchema } from './list'
 import { objectSchema } from './object'
 import { keyword, time } from './primitives'
 
-const singleProperty = keyword(ANIMATABLE_PROPERTIES, { defaultValue: 'all' })
+const singleProperty = keyword(ANIMATABLE_PROPERTIES, { defaultValue: 'all', themeProperty: 'transitions' })
 const singleDuration = time({
   defaultValue: { value: 350, unit: 'ms' },
 })

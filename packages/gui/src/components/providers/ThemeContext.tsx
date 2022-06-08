@@ -19,6 +19,8 @@ export const useThemeProperty = (property?: string): any[] => {
       return context.borderRadius || []
     case 'borderWidths':
       return context.borderWidths || []
+    case 'borderStyles':
+      return context.borderStyles || []
     case 'colors':
       return context.colors || []
     case 'fonts':
@@ -33,6 +35,8 @@ export const useThemeProperty = (property?: string): any[] => {
       return context.textShadows || []
     case 'gradients':
       return context.gradients || []
+    case 'transitions':
+      return context.transitions || []
     default:
       return []
   }

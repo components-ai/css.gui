@@ -3,6 +3,7 @@ import { lengthPercentage } from './primitives'
 
 const insetItem = lengthPercentage({
   keywords: ['auto'],
+  themeProperty: 'space',
 })
 
 export const top = insetItem

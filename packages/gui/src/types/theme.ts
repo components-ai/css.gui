@@ -17,6 +17,7 @@ export type Theme = {
   space?: Spacing[]
   text?: TextStyle[]
   textShadows?: TextShadowEntry[]
+  transitions?: Transition[]
 }
 
 export type BorderRadius = {
@@ -164,4 +165,10 @@ export type TextStyleProperty = {
   name: string
   value: any
   unit?: string
+}
+
+// TODO: fill out type
+export type Transition = {
+  id: string,
+  name: string
 }
