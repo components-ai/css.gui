@@ -235,7 +235,7 @@ export function keyword<T extends string>(
     return choose(options)
   }
   return {
-    input: bindProps(KeywordInput, { regenerate }),
+    input: bindProps(KeywordInput, { options, regenerate }),
     stringify: (value) => value,
     defaultValue,
     regenerate: regenerate,

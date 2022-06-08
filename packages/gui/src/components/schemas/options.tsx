@@ -42,9 +42,9 @@ export function optionsSchema<T extends Record<string, any>>({
         <div>
           <InputHeader {...props} regenerate={regenerate}>
             <SelectInput
-              {...getInputProps(props, 'type')}
               label=""
               options={order as string[]}
+              value={props.value.type}
               onChange={(newType) => {
                 // if the type changes, reset the value to the default value of that type
                 props.onChange({
