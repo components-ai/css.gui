@@ -7,7 +7,7 @@ import {
   ReactNode,
   useMemo,
 } from 'react'
-import { camelCase, uniq } from 'lodash-es'
+import { camelCase, mapValues, uniq } from 'lodash-es'
 import { Styles } from '../../types/css'
 import { Theme } from '../../types/theme'
 import { EditorProvider, useEditor } from '../providers/EditorContext'
@@ -32,6 +32,8 @@ import { stylesToEditorSchema } from '../../lib/transformers/styles-to-editor-sc
 import { removeInternalCSSClassSyntax } from '../../lib/classes'
 import { AddFieldsetControl } from '../AddFieldset'
 import { ResponsiveInput } from '../Responsive'
+import IconButton from '../ui/IconButton'
+import { RefreshCw } from 'react-feather'
 
 export const getPropertyFromField = (field: KeyArg) => {
   if (Array.isArray(field)) {
@@ -187,13 +189,26 @@ export const Editor = ({
     )
   }, [propertyList])
 
+  const allStyles = { ...defaultStyles, ...styles }
+
+  function regenerateAll(): any {
+    return mapValues(allStyles, (value, property) => {
+      return (
+        properties[property].regenerate?.({ previousValue: value }) ?? value
+      )
+    })
+  }
+
   return (
     <EditorProvider
       theme={theme}
-      value={{ ...defaultStyles, ...styles }}
+      value={allStyles}
       onChange={handleStylesChange}
       hideResponsiveControls={hideResponsiveControls}
     >
+      <IconButton onClick={() => handleStylesChange(regenerateAll())}>
+        <RefreshCw />
+      </IconButton>
       <EditorControls showAddProperties={showAddProperties}>
         {children}
       </EditorControls>
