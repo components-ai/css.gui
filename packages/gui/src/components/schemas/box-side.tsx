@@ -1,6 +1,6 @@
-import { isNil } from 'lodash-es'
+import { isNil, mapValues } from 'lodash-es'
 import { getInputProps } from '../../lib/util'
-import { DataTypeSchema } from './types'
+import { DataTypeSchema, RegenOptions } from './types'
 import * as Toggle from '@radix-ui/react-toggle'
 import { Link } from 'react-feather'
 import { InputContainer } from '../inputs/InputContainer'
@@ -38,6 +38,16 @@ export function boxSideSchema<T>({
   }
   const defaultValue = {
     top: itemSchema.defaultValue,
+  }
+
+  function regenerate({ previousValue }: RegenOptions<BoxSide<T>>) {
+    return mapValues(previousValue, (value) => {
+      if (value) {
+        return (
+          itemSchema.regenerate?.({ previousValue: value }) ?? previousValue
+        )
+      }
+    }) as BoxSide<T>
   }
   return {
     input(props) {
@@ -78,6 +88,7 @@ export function boxSideSchema<T>({
           {...props}
           defaultValue={defaultValue}
           stringify={stringify}
+          regenerate={regenerate}
         >
           {linked ? (
             <div sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
