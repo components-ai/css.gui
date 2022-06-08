@@ -75,9 +75,15 @@ export const DraggableInput = ({
         if (min || min === 0) newValue = Math.max(newValue, min)
         if (max || max === 0) newValue = Math.min(newValue, max)
 
-        setInternalValue(
-          newValue || newValue === 0 ? newValue : inputValue === '-' ? '-' : ''
-        )
+        // A user is currently typing a negative number or a decimal which results
+        // in the number being temporarily invalid. When this happens, update the
+        // internal value and wait for the value to become valid again.
+        const valueIsInFlight = inputValue === '-' || inputValue.endsWith('.')
+        if (valueIsInFlight) {
+          return setInternalValue(inputValue)
+        }
+
+        setInternalValue(newValue ?? '')
         onUpdate(newValue || 0)
       }}
       sx={{
