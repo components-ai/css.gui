@@ -1,6 +1,5 @@
 import { isNil } from 'lodash-es'
 import { getInputProps } from '../../lib/util'
-import { Label } from '../primitives'
 import { DataTypeSchema } from './types'
 import * as Toggle from '@radix-ui/react-toggle'
 import { Link } from 'react-feather'
@@ -71,7 +70,7 @@ export function boxSideSchema<T>({
       }
       return (
         <div>
-          <Label>{props.label}</Label>
+          <InputHeader {...props} />
           <div
             sx={{
               display: 'grid',
