@@ -51,9 +51,7 @@ export function listSchema<T, K extends string = never>({
           newItem={() => itemSchema.defaultValue}
           stringify={stringify}
           content={itemSchema.input}
-          onRegenerate={() => {
-            props.onChange(regenerate({ previousValue: props.value }))
-          }}
+          regenerate={regenerate}
         />
       )
     },

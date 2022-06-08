@@ -83,9 +83,7 @@ export function objectSchema<T extends object, K extends string = never>({
           keywords={keywords}
           defaultValue={defaultValue}
           stringify={stringify}
-          onRegenerate={() => {
-            props.onChange(regenerate({ previousValue: props.value }))
-          }}
+          regenerate={regenerate}
         >
           {typeof props.value !== 'string' && (
             <div

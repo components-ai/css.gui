@@ -30,16 +30,16 @@ export interface LayerProps<T> {
 /**
  * An alternative field array that is collapsible.
  */
-export default function Layers<T>({
-  label = '',
-  value = [],
-  onChange,
-  content: Content,
-  stringify,
-  newItem,
-  thumbnail,
-  ...props
-}: LayersProps<T>) {
+export default function Layers<T>(props: LayersProps<T>) {
+  const {
+    label = '',
+    value = [],
+    onChange,
+    content: Content,
+    stringify,
+    newItem,
+    thumbnail,
+  } = props
   const id = `${useId()}-${kebabCase(label)}`
   const [expandedLayer, setExpandedLayer] = useState(-1)
 
@@ -49,7 +49,7 @@ export default function Layers<T>({
 
   return (
     <div>
-      <InputHeader label={label} {...props} />
+      <InputHeader {...props} />
       <div
         sx={{
           border: '1px solid',

@@ -4,16 +4,17 @@ import { EditorPropsWithLabel } from '../../types/editor'
 import { Label } from '../primitives'
 import IconButton from './IconButton'
 
-interface Props
-  extends Omit<EditorPropsWithLabel<any>, 'value' | 'onChange' | 'keywords'> {
+interface Props extends Omit<EditorPropsWithLabel<any>, 'keywords'> {
   children?: ReactNode
 }
 
 export function InputHeader({
   children,
   label,
+  value,
+  onChange,
   onRemove,
-  onRegenerate,
+  regenerate,
   reorder,
 }: Props) {
   return (
@@ -21,8 +22,12 @@ export function InputHeader({
       {label && <Label>{label}</Label>}
       {children}
       <div sx={{ ml: 'auto', display: 'flex', gap: 1, alignItems: 'center' }}>
-        {onRegenerate && (
-          <IconButton onClick={onRegenerate}>
+        {regenerate && (
+          <IconButton
+            onClick={() => {
+              onChange(regenerate({ previousValue: value }))
+            }}
+          >
             <RefreshCw size={12} />
           </IconButton>
         )}

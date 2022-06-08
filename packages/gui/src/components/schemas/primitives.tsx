@@ -58,13 +58,7 @@ export function angle({
     }
   }
   return {
-    input: bindProps(AngleInput, ({ value, onChange }: any) => {
-      return {
-        onRegenerate: () => {
-          onChange(regenerate({ previousValue: value! }))
-        },
-      }
-    }),
+    input: bindProps(AngleInput, { regenerate }),
     stringify: stringifyUnit as any,
     defaultValue,
     keywords,
@@ -91,13 +85,7 @@ export function time({
     }
   }
   return {
-    input: bindProps(TimeInput, ({ value, onChange }: any) => {
-      return {
-        onRegenerate: () => {
-          onChange(regenerate({ previousValue: value! }))
-        },
-      }
-    }),
+    input: bindProps(TimeInput, { regenerate }),
     stringify: stringifyUnit as any,
     defaultValue,
     regenerate,
@@ -117,13 +105,7 @@ export function percentage({
     }
   }
   return {
-    input: bindProps(PercentageInput, ({ value, onChange }: any) => {
-      return {
-        onRegenerate: () => {
-          onChange(regenerate({ previousValue: value! }))
-        },
-      }
-    }),
+    input: bindProps(PercentageInput, { regenerate }),
     stringify: stringifyUnit as any,
     defaultValue,
     regenerate,
@@ -188,14 +170,7 @@ export function length({
     }
   }
   return {
-    input: bindProps(PercentageInput, ({ value, onChange }: any) => {
-      return {
-        ...props,
-        onRegenerate: () => {
-          onChange(regenerate({ previousValue: value! }))
-        },
-      }
-    }),
+    input: bindProps(PercentageInput, { ...props, regenerate }),
     stringify: stringifyUnit as any,
     defaultValue,
     regenerate,
@@ -260,14 +235,7 @@ export function keyword<T extends string>(
     return choose(options)
   }
   return {
-    input: bindProps(KeywordInput, ({ onChange }: any) => {
-      return {
-        options,
-        onRegenerate: () => {
-          onChange(regenerate())
-        },
-      }
-    }),
+    input: bindProps(KeywordInput, { regenerate }),
     stringify: (value) => value,
     defaultValue,
     regenerate: regenerate,
