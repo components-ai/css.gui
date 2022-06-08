@@ -1,4 +1,4 @@
-import { isElement, isNil } from 'lodash-es'
+import { get, isElement, isNil } from 'lodash-es'
 import {
   Color,
   Length,
@@ -6,6 +6,7 @@ import {
   Position,
   CSSFunctionCalc,
 } from '../types/css'
+import { Theme } from '../types/theme'
 import {
   addCSSClassSyntax,
   isInternalCSSClass,
@@ -32,11 +33,12 @@ export const stringifyCalcFunction = ({ arguments: args }: CSSFunctionCalc) => {
 }
 
 export function stringifyUnit(
-  providedValue: Length | MultidimensionalLength
+  providedValue: Length | MultidimensionalLength,
+  theme?: Theme
 ): string | number | null {
   if (isMultidimensionalLength(providedValue)) {
     return (providedValue as MultidimensionalLength).values
-      .map(stringifyUnit)
+      .map((v) => stringifyUnit(v, theme))
       .join(' ')
   }
 
@@ -51,6 +53,16 @@ export function stringifyUnit(
 
   if (['theme', 'raw', 'keyword', 'calc'].includes(value.unit)) {
     return value.value
+  }
+
+  if (value.unit === 'theme') {
+    // resolve path from theme
+    const resolvedValue = theme && value.themePath && get(theme, value.themePath)
+    if (resolvedValue) {
+      return `${resolvedValue.value}${resolvedValue.unit}`
+    }
+    // if no path then use rawValue
+    return `${value.value}${value.unit}`
   }
 
   if (value.unit === 'string') {

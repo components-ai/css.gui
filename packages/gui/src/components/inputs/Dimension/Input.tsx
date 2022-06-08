@@ -46,7 +46,7 @@ const getInitialState = (
 
   for (var i = 0; i < (themeValues?.length || []); i++) {
     //@ts-ignore
-    const { unit, value: themeValue, id } = themeValues[i]
+    const { unit, value: themeValue } = themeValues[i]
     if (
       isCSSUnitValue(value) &&
       unit === value.unit &&
@@ -55,25 +55,11 @@ const getInitialState = (
       return {
         value: themeValue,
         unit,
-        themePath: `${themeProp}.${i}`,
+        themePath: `${themeProp}[${i}]`,
         key: 0,
       }
     }
   }
-  // for (const { unit, value: themeValue, id } of themeValues || []) {
-  //   if (
-  //     isCSSUnitValue(value) &&
-  //     unit === value.unit &&
-  //     themeValue === value.value
-  //   ) {
-  //     return {
-  //       value: themeValue,
-  //       unit,
-  //       themePath: id,
-  //       key: 0,
-  //     }
-  //   }
-  // }
 
   return defaultState
 }
@@ -175,12 +161,13 @@ export function DimensionInput<K extends string = never>(
           <ThemeValue
             value={themeValues.findIndex((tv) => tv.id === state.themePath) + 1}
             onChange={(newValue: number) => {
-              const themeValue = themeValues[Math.max(0, newValue - 1)]
+              const idx = Math.max(0, newValue - 1)
+              const themeValue = themeValues[idx]
               dispatch({
                 type: 'CHANGED_INPUT_TO_THEME_VALUE',
                 value: themeValue?.value ?? 0,
                 unit: (themeValue?.unit as any) ?? 'px',
-                themePath: themeValue.id,
+                themePath: `${themeProp}[${idx}]`,
               })
             }}
             themeValues={themeValues}
