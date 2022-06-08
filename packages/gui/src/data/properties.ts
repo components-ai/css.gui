@@ -699,6 +699,7 @@ export const properties: Record<string, DataTypeSchema<any>> = mapValues(
         value: 24,
         unit: 'px',
       },
+      themeProperty: 'fontSize'
     },
     fontStretch: {
       input: 'percentage',

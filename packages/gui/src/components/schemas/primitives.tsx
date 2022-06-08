@@ -102,7 +102,7 @@ interface LengthProps {
   percentage?: boolean
   flex?: boolean
   themeValues?: (CSSUnitValue & { id: string })[]
-  themeProp?: string
+  themeProperty?: string
   range?: Range
 }
 export function length({

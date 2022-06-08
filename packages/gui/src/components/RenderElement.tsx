@@ -18,7 +18,6 @@ export const RenderElement = ({
   const Component = tagName
   const styleObject = toCSSObject(styles, theme)
 
-  // console.log(Component, 'component')
   return (
     // @ts-ignore
     <>

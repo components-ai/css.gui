@@ -31,7 +31,7 @@ type UnitSteps = Record<string, number>
 const getInitialState = (
   value: Dimension,
   themeValues?: (CSSUnitValue & { id: string })[],
-  themeProp?: string,
+  themeProperty?: string,
   units?: readonly string[]
 ): State => {
   const defaultState = {
@@ -53,14 +53,12 @@ const getInitialState = (
       unit === value.unit &&
       themeValue === value.value
     ) {
-      const out = {
+      return {
         value: themeValue,
         unit,
-        themePath: `${themeProp}[${i}]`,
+        themePath: `${themeProperty}[${i}]`,
         key: 0,
       }
-      // console.log(out, 'out')
-      return out
     }
   }
 
@@ -78,7 +76,7 @@ export interface DimensionInputProps<K>
   themeValues?: (CSSUnitValue & { id: string })[]
   conversions?: UnitConversions
   property?: string
-  themeProp?: string
+  themeProperty?: string
 }
 
 export function DimensionInput<K extends string = never>(
@@ -95,11 +93,11 @@ export function DimensionInput<K extends string = never>(
     steps,
     conversions = {},
     topLevel,
-    themeProp,
+    themeProperty,
   } = props
 
   const theme = useTheme()
-  const themeValues = useThemeProperty(themeProp) || providedThemeValues
+  const themeValues = useThemeProperty(themeProperty) || providedThemeValues
 
   const id = `${React.useId()}-${kebabCase(label)}`
   const range =
@@ -107,7 +105,7 @@ export function DimensionInput<K extends string = never>(
 
   const [state, dispatch] = React.useReducer(
     reducer,
-    getInitialState(value as any, themeValues, themeProp, units)
+    getInitialState(value as any, themeValues, themeProperty, units)
   )
 
   React.useEffect(() => {
@@ -173,7 +171,7 @@ export function DimensionInput<K extends string = never>(
                 type: 'CHANGED_INPUT_TO_THEME_VALUE',
                 value: themeValue?.value ?? 0,
                 unit: (themeValue?.unit as any) ?? 'px',
-                themePath: `${themeProp}[${idx}]`,
+                themePath: `${themeProperty}[${idx}]`,
               })
             }}
             themeValues={themeValues}
@@ -247,7 +245,7 @@ export function DimensionInput<K extends string = never>(
                 type: 'CHANGED_INPUT_TO_THEME_VALUE',
                 value: themeValue?.value ?? 0,
                 unit: (themeValue?.unit as any) ?? 'px',
-                themePath: `${themeProp}.${0}`,
+                themePath: `${themeProperty}.${0}`,
               })
             }
 
