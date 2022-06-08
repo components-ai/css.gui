@@ -14,13 +14,13 @@ import { reducer } from './reducer'
 import { State } from './types'
 import { EditorPropsWithLabel } from '../../../types/editor'
 import { UnitConversions } from '../../../lib/convert'
-import { compact, kebabCase } from 'lodash-es'
+import { compact, get, kebabCase } from 'lodash-es'
 import { CalcInput } from '../../primitives/CalcInput'
 import { X } from 'react-feather'
 import { isCSSUnitValue } from '../../../lib/codegen/to-css-object'
 import { KeywordSelect } from '../../primitives/KeywordSelect'
 import { InputHeader } from '../../ui/InputHeader'
-import { useThemeProperty } from '../../providers/ThemeContext'
+import { useTheme, useThemeProperty } from '../../providers/ThemeContext'
 
 // Mapping of units to [min, max] tuple
 type UnitRanges = Record<string, [min: number, max: number]>
@@ -47,17 +47,20 @@ const getInitialState = (
   for (var i = 0; i < (themeValues?.length || []); i++) {
     //@ts-ignore
     const { unit, value: themeValue } = themeValues[i]
+    
     if (
       isCSSUnitValue(value) &&
       unit === value.unit &&
       themeValue === value.value
     ) {
-      return {
+      const out = {
         value: themeValue,
         unit,
         themePath: `${themeProp}[${i}]`,
         key: 0,
       }
+      // console.log(out, 'out')
+      return out
     }
   }
 
@@ -95,7 +98,9 @@ export function DimensionInput<K extends string = never>(
     themeProp,
   } = props
 
+  const theme = useTheme()
   const themeValues = useThemeProperty(themeProp) || providedThemeValues
+
   const id = `${React.useId()}-${kebabCase(label)}`
   const range =
     providedRange === 'nonnegative' ? nonnegativeRange(units) : providedRange
@@ -160,6 +165,7 @@ export function DimensionInput<K extends string = never>(
         ) : state.themePath ? (
           <ThemeValue
             value={themeValues.findIndex((tv) => tv.id === state.themePath) + 1}
+            // value={get(theme, state.themePath)}
             onChange={(newValue: number) => {
               const idx = Math.max(0, newValue - 1)
               const themeValue = themeValues[idx]

@@ -51,7 +51,7 @@ export function stringifyUnit(
     return null
   }
 
-  if (['theme', 'raw', 'keyword', 'calc'].includes(value.unit)) {
+  if (['raw', 'keyword', 'calc'].includes(value.unit)) {
     return value.value
   }
 
@@ -86,7 +86,7 @@ export function stringifyFunction(
 ) {
   return `${name}(${properties
     .filter((x) => !isNil(x))
-    .map(stringifyPrimitive)
+    .map((x) => stringifyPrimitive(x))
     .join(separator)})`
 }
 
@@ -104,14 +104,15 @@ export function stringifyPosition(position: Position) {
   return `${stringifyUnit(position.x)} ${stringifyUnit(position.y)}`
 }
 
-export function stringifyPrimitive(value: Primitive) {
+// accept theme here
+export function stringifyPrimitive(value: Primitive, theme?: Theme) {
   if (typeof value === 'number') {
     return '' + value
   }
   if (typeof value === 'string') {
     return value
   }
-  return stringifyUnit(value)
+  return stringifyUnit(value, theme)
 }
 
 type Primitive = Length | number | Color | MultidimensionalLength

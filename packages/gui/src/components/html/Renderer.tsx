@@ -5,6 +5,7 @@ import { HTMLFontTags } from './FontTags'
 import { useHtmlEditor } from './Provider'
 import { isVoidElement } from '../../lib/elements'
 import { isSamePath } from './util'
+import { useTheme } from '../providers/ThemeContext'
 
 interface HtmlRendererProps {
   value: ElementData
@@ -31,13 +32,17 @@ interface ElementRendererProps {
 }
 function ElementRenderer({ value, canvas, path }: ElementRendererProps) {
   const { selected, setSelected } = useHtmlEditor()
+  const theme = useTheme()
   const { attributes = {}, style = {}, children = [] } = value
   const Tag: any = value.tagName || 'div'
 
-  const sx = toCSSObject({
+  const sx = toCSSObject(
+    {
     ...style,
     ...DEFAULT_ELEMENT_STYLES_IN_CANVAS,
-  })
+    },
+    theme
+  )
 
   if (isSamePath(path, selected)) {
     sx.outlineWidth = 'thin'
