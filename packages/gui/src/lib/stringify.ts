@@ -56,13 +56,10 @@ export function stringifyUnit(
   }
 
   if (value.unit === 'theme') {
-    // resolve path from theme
     const resolvedValue = theme && value.themePath && get(theme, value.themePath)
     if (resolvedValue) {
       return `${resolvedValue.value}${resolvedValue.unit}`
     }
-    // if no path then use rawValue
-    return `${value.value}${value.unit}`
   }
 
   if (value.unit === 'string') {

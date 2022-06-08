@@ -10,6 +10,7 @@ export type Theme = {
   durations?: Duration[]
   fonts?: FontFamily[]
   fontSizes?: FontSize[]
+  fontWeights?: FontWeight[]
   gradients?: Gradient[]
   letterSpacings?: LetterSpacing[]
   lineHeights?: LineHeight[]

@@ -12,7 +12,6 @@ export const ThemeValue = ({
   value,
   themeValues
 }: ThemeValueProps) => {
-  console.log(value, 'val')
   return (
     <Number
       value={value}
