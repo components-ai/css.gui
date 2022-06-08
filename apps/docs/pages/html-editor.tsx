@@ -727,8 +727,8 @@ const initialValue: any = {
           tagName: 'input',
           style: {
             cursor: 'pointer',
-            color: 'primary',
-            backgroundColor: 'text',
+            color: '#6465ff',
+            backgroundColor: '#f7f1ff',
             fontSize: { value: 1, unit: 'rem' },
             fontWeight: 600,
             borderRadius: { value: 6, unit: 'px' },
@@ -766,8 +766,8 @@ const initialValue: any = {
           tagName: 'button',
           style: {
             cursor: 'pointer',
-            color: 'text',
-            backgroundColor: 'primary',
+            color: '#fff',
+            backgroundColor: '#6465ff',
             fontSize: { value: 1, unit: 'rem' },
             fontWeight: 600,
             borderRadius: { value: 6, unit: 'px' },
@@ -797,7 +797,7 @@ const initialValue: any = {
           tagName: 'button',
           style: {
             cursor: 'pointer',
-            color: 'primary',
+            color: '#6465ff',
             backgroundColor: 'transparent',
             fontSize: { value: 1, unit: 'rem' },
             fontWeight: 600,
