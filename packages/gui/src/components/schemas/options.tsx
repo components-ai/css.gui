@@ -1,5 +1,4 @@
 import { omit } from 'lodash-es'
-import { getInputProps } from '../../lib/util'
 import { SelectInput } from '../inputs/SelectInput'
 import { InputHeader } from '../ui/InputHeader'
 import { DataTypeSchema, RegenOptions } from './types'
