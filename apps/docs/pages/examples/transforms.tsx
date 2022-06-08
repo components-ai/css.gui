@@ -1,9 +1,8 @@
 import { Editor, styled } from '@compai/css-gui'
 import { useState } from 'react'
-import { Container } from '../../components/Container'
 
 const initialStyles = {
-  transform: [{ type: 'rotate', amount: { value: 45, unit: 'deg' } }],
+  transform: [{ type: 'rotate', value: { value: 45, unit: 'deg' } }],
   perspective: { unit: 'keyword', value: 'none' },
   perspectiveOrigin: {
     x: { unit: 'keyword', value: 'center' },
