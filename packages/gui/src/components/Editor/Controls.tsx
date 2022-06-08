@@ -182,7 +182,7 @@ export const Editor = ({
       propertyList
         .filter((property) => !(styles as any)[property])
         .map((property) => {
-          return [property, properties[property].defaultValue]
+          return [property, getDefaultValue(property)]
         })
     )
   }, [propertyList])
