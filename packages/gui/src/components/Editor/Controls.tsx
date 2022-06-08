@@ -206,7 +206,7 @@ export const Editor = ({
       onChange={handleStylesChange}
       hideResponsiveControls={hideResponsiveControls}
     >
-      <IconButton onClick={() => handleStylesChange(regenerateAll())}>
+      <IconButton onClick={() => onChange(regenerateAll())}>
         <RefreshCw />
       </IconButton>
       <EditorControls showAddProperties={showAddProperties}>
