@@ -2,6 +2,7 @@ import { randomColor } from '../../lib/color'
 import { bindProps } from '../../lib/components'
 import { choose, randomStep } from '../../lib/random'
 import { stringifyUnit } from '../../lib/stringify'
+import { randomInt } from '../../lib/util'
 import {
   Angle,
   Color,
@@ -117,10 +118,14 @@ export function number({
 }: {
   defaultValue?: number
 } = {}) {
+  function regenerate() {
+    return randomStep(0, 2, 0.1)
+  }
   return {
-    input: NumberInput,
+    input: bindProps(NumberInput, regenerate),
     stringify: (x: number) => x.toString(),
     defaultValue,
+    regenerate,
   }
 }
 
@@ -188,8 +193,11 @@ export function integer({
   defaultValue?: CSSUnitValue
   keywords?: string[]
 } = {}) {
+  function regenerate() {
+    return randomInt(0, 11)
+  }
   return {
-    input: IntegerInput,
+    input: bindProps(IntegerInput, { regenerate }),
     stringify: stringifyUnit as any,
     defaultValue,
     keywords,
