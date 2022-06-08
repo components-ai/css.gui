@@ -32,7 +32,6 @@ import { stylesToEditorSchema } from '../../lib/transformers/styles-to-editor-sc
 import { removeInternalCSSClassSyntax } from '../../lib/classes'
 import { AddFieldsetControl } from '../AddFieldset'
 import { ResponsiveInput } from '../Responsive'
-import { getDefaultValue } from '../../lib/defaults'
 
 export const getPropertyFromField = (field: KeyArg) => {
   if (Array.isArray(field)) {
@@ -174,9 +173,19 @@ export const Editor = ({
     onChange(newData)
   }
 
-  const defaultStyles = useMemo(() => {
-    return getDefaultsFromChildren(children)
+  const propertyList = useMemo(() => {
+    return getPropertiesFromChildren(children)
   }, [children])
+
+  const defaultStyles = useMemo(() => {
+    return Object.fromEntries(
+      propertyList
+        .filter((property) => !(styles as any)[property])
+        .map((property) => {
+          return [property, properties[property].defaultValue]
+        })
+    )
+  }, [propertyList])
 
   return (
     <EditorProvider
@@ -288,20 +297,20 @@ function getInputComponent(property: string) {
 }
 
 /**
- * Extract the defaults from the editor's children
+ * Extract the properties from the editor's children
  */
-function getDefaultsFromChildren(children: ReactNode): Record<string, any> {
+function getPropertiesFromChildren(children: ReactNode): string[] {
   // Based on: https://github.com/remix-run/react-router/blob/main/packages/react-router/lib/components.tsx#L270
-  let defaults: Record<string, any> = {}
+  let properties: string[] = []
   Children.forEach(children, (element) => {
     if (!isValidElement(element)) {
       return
     }
     if (element.type === Fragment) {
-      defaults = {
-        ...defaults,
-        ...getDefaultsFromChildren(element.props.children),
-      }
+      properties = [
+        ...properties,
+        ...getPropertiesFromChildren(element.props.children),
+      ]
     }
     // TODO defaults on nested fields
     if (
@@ -309,17 +318,14 @@ function getDefaultsFromChildren(children: ReactNode): Record<string, any> {
       (element.type as any).displayName
     ) {
       const property = camelCase((element.type as any).displayName)
-      defaults = {
-        ...defaults,
-        [property]: getDefaultValue(property),
-      }
+      properties = [...properties, property]
     }
     if (element.props.children) {
-      defaults = {
-        ...defaults,
-        ...getDefaultsFromChildren(element.props.children),
-      }
+      properties = [
+        ...properties,
+        ...getPropertiesFromChildren(element.props.children),
+      ]
     }
   })
-  return defaults
+  return properties
 }
