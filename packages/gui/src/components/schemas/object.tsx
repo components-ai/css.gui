@@ -65,12 +65,12 @@ export function objectSchema<T extends object, K extends string = never>({
     ...providedDefaultValue,
   } as any // IDK why the typing doesn't work
 
-  function regen({ previousValue }: RegenOptions<T | K>): T | K {
+  function regenerate({ previousValue }: RegenOptions<T | K>): T | K {
     if (typeof previousValue === 'string') {
       return choose(keywords)
     }
     return mapValues(previousValue, (value, key: keyof T) => {
-      return fields[key].regen?.({ previousValue: value }) ?? value
+      return fields[key].regenerate?.({ previousValue: value }) ?? value
     }) as T
   }
   return {
@@ -84,7 +84,7 @@ export function objectSchema<T extends object, K extends string = never>({
           defaultValue={defaultValue}
           stringify={stringify}
           onRegenerate={() => {
-            props.onChange(regen({ previousValue: props.value }))
+            props.onChange(regenerate({ previousValue: props.value }))
           }}
         >
           {typeof props.value !== 'string' && (
@@ -111,7 +111,7 @@ export function objectSchema<T extends object, K extends string = never>({
         </InputContainer>
       )
     },
-    regen,
+    regenerate,
     // TODO override defaults
   }
 }

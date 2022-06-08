@@ -30,12 +30,12 @@ export function listSchema<T, K extends string = never>({
   }
   const defaultValue = [itemSchema.defaultValue]
 
-  function regen({ previousValue }: RegenOptions<T[] | K>) {
+  function regenerate({ previousValue }: RegenOptions<T[] | K>) {
     if (typeof previousValue === 'string') {
       return choose(keywords)
     }
     return previousValue.map((value) => {
-      return itemSchema.regen?.({ previousValue: value }) ?? value
+      return itemSchema.regenerate?.({ previousValue: value }) ?? value
     })
   }
 
@@ -52,11 +52,11 @@ export function listSchema<T, K extends string = never>({
           stringify={stringify}
           content={itemSchema.input}
           onRegenerate={() => {
-            props.onChange(regen({ previousValue: props.value }))
+            props.onChange(regenerate({ previousValue: props.value }))
           }}
         />
       )
     },
-    regen,
+    regenerate,
   }
 }

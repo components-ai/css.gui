@@ -31,7 +31,7 @@ export function color({
     input: ColorInput,
     stringify: (value) => value,
     defaultValue,
-    regen: () => randomColor(),
+    regenerate: () => randomColor(),
   }
 }
 
@@ -49,7 +49,7 @@ export function angle({
   defaultValue?: Angle
   keywords?: readonly string[]
 } = {}) {
-  function regen({ previousValue }: RegenOptions<Angle>) {
+  function regenerate({ previousValue }: RegenOptions<Angle>) {
     const unit = previousValue.unit
     const [min, max] = angleRanges[unit]
     return {
@@ -61,14 +61,14 @@ export function angle({
     input: bindProps(AngleInput, ({ value, onChange }: any) => {
       return {
         onRegenerate: () => {
-          onChange(regen({ previousValue: value! }))
+          onChange(regenerate({ previousValue: value! }))
         },
       }
     }),
     stringify: stringifyUnit as any,
     defaultValue,
     keywords,
-    regen,
+    regenerate,
   }
 }
 
@@ -82,7 +82,7 @@ export function time({
 }: {
   defaultValue?: Time
 } = {}) {
-  function regen({ previousValue }: RegenOptions<Time>) {
+  function regenerate({ previousValue }: RegenOptions<Time>) {
     const unit = previousValue.unit
     const [min, max] = timeRanges[unit]
     return {
@@ -94,13 +94,13 @@ export function time({
     input: bindProps(TimeInput, ({ value, onChange }: any) => {
       return {
         onRegenerate: () => {
-          onChange(regen({ previousValue: value! }))
+          onChange(regenerate({ previousValue: value! }))
         },
       }
     }),
     stringify: stringifyUnit as any,
     defaultValue,
-    regen,
+    regenerate,
   }
 }
 
@@ -109,7 +109,7 @@ export function percentage({
 }: {
   defaultValue?: CSSUnitValue
 } = {}) {
-  function regen({ previousValue }: RegenOptions<CSSUnitValue>) {
+  function regenerate({ previousValue }: RegenOptions<CSSUnitValue>) {
     const unit = previousValue.unit
     return {
       unit,
@@ -120,13 +120,13 @@ export function percentage({
     input: bindProps(PercentageInput, ({ value, onChange }: any) => {
       return {
         onRegenerate: () => {
-          onChange(regen({ previousValue: value! }))
+          onChange(regenerate({ previousValue: value! }))
         },
       }
     }),
     stringify: stringifyUnit as any,
     defaultValue,
-    regen,
+    regenerate,
   }
 }
 
@@ -177,7 +177,7 @@ export function length({
   defaultValue = { value: 0, unit: 'px' },
   ...props
 }: LengthProps = {}) {
-  function regen({ previousValue }: RegenOptions<Length>) {
+  function regenerate({ previousValue }: RegenOptions<Length>) {
     const unit = previousValue === '0' ? 'px' : previousValue.unit
     // @ts-ignore
     const [min, max] = lengthRanges[unit]
@@ -192,13 +192,13 @@ export function length({
       return {
         ...props,
         onRegenerate: () => {
-          onChange(regen({ previousValue: value! }))
+          onChange(regenerate({ previousValue: value! }))
         },
       }
     }),
     stringify: stringifyUnit as any,
     defaultValue,
-    regen,
+    regenerate,
   }
 }
 
@@ -256,7 +256,7 @@ export function keyword<T extends string>(
     defaultValue?: T
   } = {}
 ): DataTypeSchema<T> {
-  function regen() {
+  function regenerate() {
     return choose(options)
   }
   return {
@@ -264,12 +264,12 @@ export function keyword<T extends string>(
       return {
         options,
         onRegenerate: () => {
-          onChange(regen())
+          onChange(regenerate())
         },
       }
     }),
     stringify: (value) => value,
     defaultValue,
-    regen,
+    regenerate: regenerate,
   }
 }
