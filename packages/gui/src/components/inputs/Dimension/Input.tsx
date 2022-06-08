@@ -164,8 +164,8 @@ export function DimensionInput<K extends string = never>(
           />
         ) : state.themePath ? (
           <ThemeValue
-            value={themeValues.findIndex((tv) => tv.id === state.themePath) + 1}
-            // value={get(theme, state.themePath)}
+            //@ts-ignore
+            value={state.themePath!.match(/[0-9+]/)[0]}
             onChange={(newValue: number) => {
               const idx = Math.max(0, newValue - 1)
               const themeValue = themeValues[idx]
