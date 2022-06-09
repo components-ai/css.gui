@@ -56,7 +56,7 @@ const getInitialState = (
       return {
         value: themeValue,
         unit,
-        themePath: `${themeProperty}[${i + 1}]`,
+        themePath: `${themeProperty}[${i}]`,
         key: 0,
       }
     }
@@ -162,7 +162,7 @@ export function DimensionInput<K extends string = never>(
         ) : state.themePath ? (
           <ThemeValue
             //@ts-ignore
-            value={state.themePath!.match(/[0-9+]/)[0]}
+            value={parseInt(state.themePath!.match(/[0-9+]/)[0]) + 1}
             onChange={(newValue: number) => {
               const idx = Math.max(0, newValue - 1)
               const themeValue = themeValues[idx]
@@ -244,7 +244,7 @@ export function DimensionInput<K extends string = never>(
                 type: 'CHANGED_INPUT_TO_THEME_VALUE',
                 value: themeValue?.value ?? 0,
                 unit: (themeValue?.unit as any) ?? 'px',
-                themePath: `${themeProperty}.${0}`,
+                themePath: `${themeProperty}.[${0}]`,
               })
             }
 
