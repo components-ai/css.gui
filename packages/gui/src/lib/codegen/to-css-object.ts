@@ -23,11 +23,10 @@ export const stringifyProperty = (
 ): Array<string | null> | string | number | null => {
   const stringify = properties[property]?.stringify
   if (isResponsive(value as any)) {
-    return (value as any).values.map((v: any) => stringify(v))
+    return (value as any).values.map((v: any) => stringify(v, theme))
   }
   if (stringify) {
-    // update all stringyfy to accept optional theme value
-    return stringify(value)
+    return stringify(value, theme)
   }
 
   if (isCSSFunctionCalc(value)) {
