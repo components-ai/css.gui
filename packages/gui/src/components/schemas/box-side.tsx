@@ -1,10 +1,9 @@
 import { isNil } from 'lodash-es'
 import { getInputProps } from '../../lib/util'
-import { Label } from '../primitives'
 import { DataTypeSchema } from './types'
 import * as Toggle from '@radix-ui/react-toggle'
 import { Link } from 'react-feather'
-import { InputHeader } from '../ui/InputHeader'
+import { InputContainer } from '../inputs/InputContainer'
 
 interface CreateBoxSideSchema<T> {
   itemSchema: DataTypeSchema<T>
@@ -24,6 +23,22 @@ export interface BoxSide<T> {
 export function boxSideSchema<T>({
   itemSchema,
 }: CreateBoxSideSchema<T>): DataTypeSchema<BoxSide<T>> {
+  function stringify(value: BoxSide<T>) {
+    const { stringify, defaultValue } = itemSchema
+    if (isLinked(value)) {
+      return stringify(value.top)
+    }
+    const {
+      top,
+      right = defaultValue,
+      bottom = defaultValue,
+      left = defaultValue,
+    } = value
+    return [top, right, bottom, left].map(stringify).join(' ')
+  }
+  const defaultValue = {
+    top: itemSchema.defaultValue,
+  }
   return {
     input(props) {
       const ItemInput = itemSchema.input
@@ -58,60 +73,45 @@ export function boxSideSchema<T>({
           <Link size={14} />
         </Toggle.Root>
       )
-      if (linked) {
-        return (
-          <div>
-            <InputHeader {...props} />
+      return (
+        <InputContainer
+          {...props}
+          defaultValue={defaultValue}
+          stringify={stringify}
+        >
+          {linked ? (
             <div sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
               {linkToggle}
               <ItemInput {...getInputProps(props, 'top')} label="" />
             </div>
-          </div>
-        )
-      }
-      return (
-        <div>
-          <Label>{props.label}</Label>
-          <div
-            sx={{
-              display: 'grid',
-              justifyItems: 'center',
-              gridTemplateRows: '1fr max-content 1fr',
-              gridTemplateAreas: `
+          ) : (
+            <div
+              sx={{
+                display: 'grid',
+                justifyItems: 'center',
+                gridTemplateRows: '1fr max-content 1fr',
+                gridTemplateAreas: `
                 "top top top"
                 "left link right"
                 "bottom bottom bottom"
             `,
-            }}
-          >
-            <div sx={{ gridArea: 'link' }}>{linkToggle}</div>
-            {['top', 'left', 'right', 'bottom'].map((side) => {
-              return (
-                <div sx={{ gridArea: side }}>
-                  <ItemInput {...getInputProps(props, side as any)} />
-                </div>
-              )
-            })}
-          </div>
-        </div>
+              }}
+            >
+              <div sx={{ gridArea: 'link' }}>{linkToggle}</div>
+              {['top', 'left', 'right', 'bottom'].map((side) => {
+                return (
+                  <div sx={{ gridArea: side }}>
+                    <ItemInput {...getInputProps(props, side as any)} />
+                  </div>
+                )
+              })}
+            </div>
+          )}
+        </InputContainer>
       )
     },
-    stringify(value) {
-      const { stringify, defaultValue } = itemSchema
-      if (isLinked(value)) {
-        return stringify(value.top)
-      }
-      const {
-        top,
-        right = defaultValue,
-        bottom = defaultValue,
-        left = defaultValue,
-      } = value
-      return [top, right, bottom, left].map(stringify).join(' ')
-    },
-    defaultValue: {
-      top: itemSchema.defaultValue,
-    },
+    stringify,
+    defaultValue,
   }
 }
 

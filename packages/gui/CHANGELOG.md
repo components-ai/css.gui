@@ -1,5 +1,29 @@
 # @compai/css-gui
 
+## 0.0.103
+
+### Patch Changes
+
+- 12d442b: Minor internal improvements to inputs
+
+## 0.0.102
+
+### Patch Changes
+
+- 760266c: Removes modes from color groups
+
+## 0.0.101
+
+### Patch Changes
+
+- eb84f84: Allow manually typed decimals in number input
+
+## 0.0.100
+
+### Patch Changes
+
+- 77a9d7c: Fixes colorpicker for safari
+
 ## 0.0.99
 
 ### Patch Changes
