@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.105
+
+### Patch Changes
+
+- e1b17b3: Improve fuzzy sort by ignoring hypen in property names
+
 ## 0.0.104
 
 ### Patch Changes
