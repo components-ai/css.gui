@@ -1,5 +1,12 @@
 # @compai/css-gui
 
+## 0.0.106
+
+### Patch Changes
+
+- f9d81c3: Changes label copy
+- 91a1e64: Design tweaks to editor
+
 ## 0.0.105
 
 ### Patch Changes
