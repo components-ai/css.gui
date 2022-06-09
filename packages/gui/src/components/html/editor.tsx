@@ -175,6 +175,10 @@ export function HtmlEditor({ onChange }: HtmlEditorProps) {
             borderRight: 'thin solid',
             borderBottom: 'thin solid',
             borderColor: 'border',
+            display: 'flex',
+            alignItems: 'center',
+            flexWrap: 'nowrap',
+            overflowX: 'auto',
           }}
         >
           <Tabs.Trigger sx={TABS_TRIGGER_STYLES} value="node">
