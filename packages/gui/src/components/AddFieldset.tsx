@@ -16,7 +16,7 @@ interface Props {
 export const AddFieldsetControl = ({
   field,
   styles,
-  label = 'Add fieldset',
+  label = 'Add pseudo element or class',
 }: Props) => {
   const { setField } = useEditor()
   const id = useId()
