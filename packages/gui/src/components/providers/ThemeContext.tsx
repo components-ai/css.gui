@@ -37,6 +37,8 @@ export const useThemeProperty = (property?: string): any[] => {
       return context.gradients || []
     case 'transitions':
       return context.transitions || []
+    case 'sizes':
+      return context.sizes || []
     default:
       return []
   }

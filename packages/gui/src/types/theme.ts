@@ -18,6 +18,7 @@ export type Theme = {
   text?: TextStyle[]
   textShadows?: TextShadowEntry[]
   transitions?: Transition[]
+  sizes?: Size[]
 }
 
 export type BorderRadius = {
@@ -138,6 +139,12 @@ export type Spacing = {
   value: number | string
   unit: string
   name?: string
+}
+
+export type Size = {
+  id: string
+  value: number | string
+  unit: string
 }
 
 export type TextShadow = {
