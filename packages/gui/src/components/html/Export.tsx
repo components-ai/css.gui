@@ -59,8 +59,8 @@ export const Export = ({ value }: ExportProps) => {
           boxSizing: 'border-box',
           border: '0',
           borderRadius: '6px',
-          color: 'text',
-          bg: 'primary',
+          color: '#fff',
+          bg: '#6465ff',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -71,7 +71,7 @@ export const Export = ({ value }: ExportProps) => {
           py: 2,
           cursor: 'pointer',
           '&:hover': {
-            bg: 'primaryHover',
+            bg: '#4e4fec',
           },
         }}
         onClick={handleCopyToClipboard}
