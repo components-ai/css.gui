@@ -1,6 +1,7 @@
 import { Editor } from '../Editor'
 import { HtmlNode, HTMLTag, ElementPath } from './types'
 import * as Collapsible from '@radix-ui/react-collapsible'
+import * as Tabs from '@radix-ui/react-tabs'
 import { Fragment, useState } from 'react'
 import { isNil } from 'lodash-es'
 import IconButton from '../ui/IconButton'
@@ -12,6 +13,7 @@ import { DEFAULT_STYLES } from './default-styles'
 import { useHtmlEditor } from './Provider'
 import { isVoidElement } from '../../lib/elements'
 import { isSamePath } from './util'
+import { Export } from './Export'
 
 const HTML_TAGS = [
   HTMLTag.A,
@@ -115,11 +117,33 @@ interface HtmlEditorProps {
   onChange(value: HtmlNode): void
 }
 
+const TABS_TRIGGER_STYLES = {
+  all: 'unset',
+  fontSize: 0,
+  fontWeight: 500,
+  px: 2,
+  py: 1,
+  color: 'muted',
+  '&[data-state="active"]': {
+    color: 'text',
+  },
+}
+const TABS_CONTENT_STYLES = {
+  width: 400,
+  height: 'calc(100vh - 64px)',
+  overflow: 'auto',
+  resize: 'horizontal',
+  borderRightWidth: '1px',
+  borderRightStyle: 'solid',
+  borderColor: 'border',
+}
+
 /**
  * An HTML tree-based editor that lets you add HTML nodes and mess around with their styles
  */
 export function HtmlEditor({ onChange }: HtmlEditorProps) {
-  const { value, selected, setSelected } = useHtmlEditor()
+  const { value, selected: providedSelected, setSelected } = useHtmlEditor()
+  const selected = providedSelected || []
 
   return (
     <div
@@ -139,42 +163,52 @@ export function HtmlEditor({ onChange }: HtmlEditorProps) {
         },
       }}
     >
-      <div
-        sx={{
-          pt: 3,
-          pb: 3,
-          borderColor: 'border',
-          borderRightWidth: '1px',
-          borderRightStyle: 'solid',
-          borderBottomWidth: '1px',
-          borderBottomStyle: 'solid',
-          width: '320px',
-          overflowX: 'auto',
-          resize: 'horizontal',
-          minHeight: '100svh',
-        }}
-      >
-        <TreeNode
-          value={value}
-          onSelect={setSelected}
-          path={[]}
-          onChange={onChange}
-        />
-      </div>
-      {selected && (
-        <NodeEditor
-          value={getChildAtPath(value, selected)}
-          onChange={(newItem) =>
-            onChange(setChildAtPath(value, selected, newItem))
-          }
-          onRemove={() => {
-            onChange(removeChildAtPath(value, selected))
-            const newPath = [...selected]
-            newPath.pop()
-            setSelected(newPath)
+      <Tabs.Root defaultValue="node">
+        <Tabs.List
+          sx={{
+            px: 2,
+            width: '100%',
+            borderRight: 'thin solid',
+            borderBottom: 'thin solid',
+            borderColor: 'border',
           }}
-        />
-      )}
+        >
+          <Tabs.Trigger sx={TABS_TRIGGER_STYLES} value="node">
+            Node
+          </Tabs.Trigger>
+          <Tabs.Trigger sx={TABS_TRIGGER_STYLES} value="tree">
+            Layers
+          </Tabs.Trigger>
+          <Tabs.Trigger sx={TABS_TRIGGER_STYLES} value="export">
+            Export
+          </Tabs.Trigger>
+        </Tabs.List>
+        <Tabs.Content sx={TABS_CONTENT_STYLES} value="node">
+          <NodeEditor
+            value={getChildAtPath(value, selected)}
+            onChange={(newItem) =>
+              onChange(setChildAtPath(value, selected, newItem))
+            }
+            onRemove={() => {
+              onChange(removeChildAtPath(value, selected))
+              const newPath = [...selected]
+              newPath.pop()
+              setSelected(newPath)
+            }}
+          />
+        </Tabs.Content>
+        <Tabs.Content sx={TABS_CONTENT_STYLES} value="tree">
+          <TreeNode
+            value={value}
+            onSelect={setSelected}
+            path={[]}
+            onChange={onChange}
+          />
+        </Tabs.Content>
+        <Tabs.Content sx={TABS_CONTENT_STYLES} value="export">
+          <Export value={value} />
+        </Tabs.Content>
+      </Tabs.Root>
     </div>
   )
 }
@@ -190,19 +224,7 @@ interface TagEditorProps extends EditorProps {
 function NodeEditor({ value, onChange, onRemove }: TagEditorProps) {
   const nodeType = value.type === 'text' ? 'text' : 'tag'
   return (
-    <div
-      sx={{
-        resize: 'horizontal',
-        overflowX: 'auto',
-        width: '320px',
-        borderRightWidth: '1px',
-        borderRightStyle: 'solid',
-        borderBottomWidth: '1px',
-        borderBottomStyle: 'solid',
-        borderColor: 'border',
-        minHeight: '100%',
-      }}
-    >
+    <div>
       <div
         sx={{ mb: 2, display: 'flex', alignItems: 'flex-end', px: 3, pt: 3 }}
       >
