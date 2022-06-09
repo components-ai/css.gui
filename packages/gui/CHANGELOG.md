@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.104
+
+### Patch Changes
+
+- 0b70d4a: Don't set outline or user select when not in canvas mode
+
 ## 0.0.103
 
 ### Patch Changes
