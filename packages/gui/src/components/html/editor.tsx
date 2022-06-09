@@ -178,7 +178,7 @@ export function HtmlEditor({ onChange }: HtmlEditorProps) {
           }}
         >
           <Tabs.Trigger sx={TABS_TRIGGER_STYLES} value="node">
-            Styles
+            🎨 Styles
           </Tabs.Trigger>
           <Tabs.Trigger sx={TABS_TRIGGER_STYLES} value="tree">
             <Layers size={12} /> Layers
@@ -188,6 +188,19 @@ export function HtmlEditor({ onChange }: HtmlEditorProps) {
           </Tabs.Trigger>
         </Tabs.List>
         <Tabs.Content sx={TABS_CONTENT_STYLES} value="node">
+
+          <div sx={{ pt: 3, px: 3 }}>
+              <Editor
+                styles={value.style ?? {}}
+                onChange={(newStyles) => onChange({ ...value, style: newStyles })}
+                showAddProperties
+              />
+          </div>
+        </Tabs.Content>
+        <Tabs.Content sx={TABS_CONTENT_STYLES} value="tree">
+          <div sx={{ 
+
+          }}>
           <NodeEditor
             value={getChildAtPath(value, selected)}
             onChange={(newItem) =>
@@ -200,14 +213,13 @@ export function HtmlEditor({ onChange }: HtmlEditorProps) {
               setSelected(newPath)
             }}
           />
-        </Tabs.Content>
-        <Tabs.Content sx={TABS_CONTENT_STYLES} value="tree">
           <TreeNode
             value={value}
             onSelect={setSelected}
             path={[]}
             onChange={onChange}
           />
+        </div>
         </Tabs.Content>
         <Tabs.Content sx={TABS_CONTENT_STYLES} value="export">
           <Export value={value} />
@@ -228,7 +240,7 @@ interface TagEditorProps extends EditorProps {
 function NodeEditor({ value, onChange, onRemove }: TagEditorProps) {
   const nodeType = value.type === 'text' ? 'text' : 'tag'
   return (
-    <div>
+    <div sx={{ pb: 3, overflowY: 'auto', overflowX: 'hidden' }}>
       <div
         sx={{ mb: 2, display: 'flex', alignItems: 'flex-end', px: 3, pt: 3 }}
       >
@@ -325,16 +337,6 @@ function NodeSwitch({ value, onChange }: EditorProps) {
           />
         </div>
       </article>
-      <div sx={{ pt: 3, px: 3 }}>
-        <Label> 🎨 Styles</Label>
-        <div sx={{ mt: 2 }}>
-          <Editor
-            styles={value.style ?? {}}
-            onChange={(newStyles) => onChange({ ...value, style: newStyles })}
-            showAddProperties
-          />
-        </div>
-      </div>
     </div>
   )
 }
