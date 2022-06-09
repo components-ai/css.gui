@@ -28,16 +28,16 @@ interface InternalProps {
  * A 'standard' color picker based on the HSV color space.
  */
 export default function HsvColorPicker({ value, onChange, mode }: Props) {
-  const [hsvValue, setHsvValue] = useState<HsvValue>(culori.hsv(value))
+  const [hsvValue, setHsvValue] = useState<HsvValue>(culori.hsv(value.value))
 
   const handleChange = (value: HsvValue) => {
     setHsvValue(value)
-    onChange({ value: format(value, mode)})
+    onChange({ value: format(value, mode) })
   }
 
   useEffect(() => {
     if (isValidColor(value.value) && value !== format(hsvValue, mode)) {
-      setHsvValue(culori.hsv(value))
+      setHsvValue(culori.hsv(value.value))
     }
   }, [value])
 
