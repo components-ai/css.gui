@@ -39,7 +39,7 @@ function ElementRenderer({ value, canvas, path }: ElementRendererProps) {
     ...DEFAULT_ELEMENT_STYLES_IN_CANVAS,
   })
 
-  if (isSamePath(path, selected)) {
+  if (isSamePath(path, selected) && canvas) {
     sx.outlineWidth = 'thin'
     sx.outlineStyle = 'solid'
     sx.outlineColor = 'primary'
