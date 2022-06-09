@@ -59,7 +59,7 @@ function getDerivedStyles(shapeOutside: any) {
     })
   }
   return toCSSObject({
-    backgroundColor: '#6465ff',
+    backgroundColor:  { value: '#6465ff' },
     clipPath: shapeOutside,
   })
 }

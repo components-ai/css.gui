@@ -4,6 +4,7 @@ import ColorSlider from './ColorSlider'
 import { useEffect, useState } from 'react'
 import { isValidColor, format, withFallback } from './util'
 import { range } from 'lodash-es'
+import { Color } from '../../../types/css'
 
 interface LchValue {
   l: number
@@ -13,8 +14,8 @@ interface LchValue {
 }
 
 interface Props {
-  value: string
-  onChange(value: string): void
+  value: Color
+  onChange(value: Color): void
   mode: string
 }
 
@@ -31,11 +32,11 @@ export default function LchColorPicker({ value, onChange, mode }: Props) {
 
   const handleChange = (value: LchValue) => {
     setLchValue(value)
-    onChange(format(value, mode))
+    onChange({ value: format(value, mode) })
   }
 
   useEffect(() => {
-    if (isValidColor(value) && value !== format(lchValue, mode)) {
+    if (isValidColor(value.value) && value !== format(lchValue, mode)) {
       setLchValue(culori.lch(value))
     }
   }, [value])

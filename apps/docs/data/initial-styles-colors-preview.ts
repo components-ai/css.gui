@@ -1,7 +1,7 @@
 export const initialStyles: any = {
-  color: '#ff00ff',
-  backgroundColor: '#000000',
-  borderColor: 'goldenrod',
+  color: { value: '#ff00ff' },
+  backgroundColor: { value: '#000000' },
+  borderColor: { value: 'goldenrod' },
   borderWidth: {
     value: '24',
     unit: 'px',
@@ -12,19 +12,19 @@ export const initialStyles: any = {
     unit: 'rem',
   },
   'hover': {
-    color: '#333333',
-    backgroundColor: '#ff00ff',
-    borderColor: '#ffffff',
+    color: { value: '#333333' },
+    backgroundColor: { value: '#ff00ff' },
+    borderColor: { value: '#ffffff'},
   },
   'focus': {
-    color: '#333333',
-    backgroundColor: '#ff00ff',
-    borderColor: '#ffffff',
+    color: { value: '#333333' },
+    backgroundColor: { value: '#ff00ff' },
+    borderColor: { value: '#ffffff'},
   },
   'visited': {
-    color: '#333333',
-    backgroundColor: '#ff00ff',
-    borderColor: '#ffffff',
+    color: { value: '#333333' },
+    backgroundColor: { value: '#ff00ff' },
+    borderColor: { value: '#ffffff'},
   },
   transition: [
     {

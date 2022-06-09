@@ -7,7 +7,8 @@ export type ColorObject = {
   themePath?: string
 }
 
-export type Color = string
+export type Color = ColorObject
+
 export type FontFamilyType = { [k: string]: any }
 
 export const enum FontRelativeLengthUnits {

@@ -1,6 +1,5 @@
+import { Color } from '../../../types/css'
 import ColorValueDisplay from './ValueDisplay'
-
-type Color = string
 
 interface Props {
   value: Color
@@ -17,9 +16,9 @@ export default function SystemPicker({ value, onChange }: Props) {
             <input
               type="radio"
               name="system"
-              value={value}
+              value={value.value}
               id={keyword}
-              onChange={() => onChange(keyword)}
+              onChange={() => onChange({ value: keyword})}
             />
             {keyword}
           </label>

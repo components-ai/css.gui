@@ -22,13 +22,15 @@ import { TimeInput } from '../inputs/TimeInput'
 import { DataTypeSchema } from './types'
 
 export function color({
-  defaultValue = 'transparent',
+  defaultValue = { value: 'transparent'},
+  themeProperty = 'color',
 }: {
   defaultValue?: Color
+  themeProperty?: string
 } = {}): DataTypeSchema<Color> {
   return {
-    input: ColorInput,
-    stringify: (value) => value,
+    input: bindProps(ColorInput, { themeProperty }),
+    stringify: stringifyUnit as any,
     defaultValue,
   }
 }

@@ -107,7 +107,7 @@ export const properties: Record<string, DataTypeSchema<any>> = mapValues(
   {
     accentColor: {
       input: 'color',
-      defaultValue: 'tomato',
+      defaultValue: { value: 'tomato' },
       keywords: ['auto', 'currentcolor', 'transparent'],
     },
     alignContent: {
@@ -236,7 +236,7 @@ export const properties: Record<string, DataTypeSchema<any>> = mapValues(
     backgroundColor: {
       input: 'color',
       keywords: ['currentcolor', 'transparent'],
-      defaultValue: 'tomato',
+      defaultValue: { value: 'tomato' },
     },
     backgroundPositionX: {
       // TODO: Add side relative values option and multiple values option
@@ -352,7 +352,7 @@ export const properties: Record<string, DataTypeSchema<any>> = mapValues(
     caretColor: {
       input: 'color',
       keywords: ['currentcolor', 'transparent'],
-      defaultValue: '#6465ff',
+      defaultValue: { value: '#6465ff'},
     },
     clear: {
       input: 'keyword',
@@ -369,7 +369,7 @@ export const properties: Record<string, DataTypeSchema<any>> = mapValues(
     color: {
       input: 'color',
       keywords: ['currentcolor', 'transparent'],
-      defaultValue: '#6465ff',
+      defaultValue: { value: '#6465ff'},
     },
     colorAdjust: {
       input: 'keyword',
@@ -390,7 +390,7 @@ export const properties: Record<string, DataTypeSchema<any>> = mapValues(
     columnRuleColor: {
       input: 'color',
       keywords: ['currentcolor', 'transparent'],
-      defaultValue: '#6465ff',
+      defaultValue: { value: '#6465ff' },
     },
     columnRuleStyle: {
       input: 'keyword',
@@ -549,7 +549,7 @@ export const properties: Record<string, DataTypeSchema<any>> = mapValues(
     fill: {
       input: 'color',
       keywords: ['none', 'context-fill', 'context-stroke'],
-      defaultValue: '#6465ff',
+      defaultValue: { value: '#6465ff' },
     },
     filter,
     flexBasis: {
@@ -648,7 +648,7 @@ export const properties: Record<string, DataTypeSchema<any>> = mapValues(
     floodColor: {
       input: 'color',
       keywords: ['currentcolor', 'transparent'],
-      defaultValue: '#6465ff',
+      defaultValue: { value: '#6465ff' },
     },
     floodOpacity: {
       input: 'percentage',
@@ -1166,7 +1166,7 @@ export const properties: Record<string, DataTypeSchema<any>> = mapValues(
     outlineColor: {
       input: 'color',
       keywords: ['invert'],
-      defaultValue: '#6465ff',
+      defaultValue: { value: '#6465ff' },
     },
     outlineOffset: {
       input: 'length',
@@ -1316,7 +1316,7 @@ export const properties: Record<string, DataTypeSchema<any>> = mapValues(
     scrollbarColor: {
       input: 'color',
       keywords: ['auto', 'currentcolor', 'transparent'],
-      defaultValue: '#ff33cc',
+      defaultValue: { value: '#ff33cc' },
     },
     scrollbarGutter: {
       input: 'keyword',
@@ -1436,7 +1436,7 @@ export const properties: Record<string, DataTypeSchema<any>> = mapValues(
     textEmphasisColor: {
       input: 'color',
       keywords: ['currentcolor', 'transparent'],
-      defaultValue: '#6465ff',
+      defaultValue: { value: '#6465ff' },
     },
     textEmphasisPosition: {
       input: 'keyword',

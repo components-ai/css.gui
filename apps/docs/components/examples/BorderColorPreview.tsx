@@ -11,7 +11,7 @@ export function BorderColorPreview() {
     <>
       <article id='border-color'
       sx={{ 
-        color: 'muted',
+        color: { value: 'muted' },
         width: '100%', 
         boxShadow: 'inset 0 0 0px 1px currentColor', 
         borderRadius: '6px',
@@ -21,7 +21,7 @@ export function BorderColorPreview() {
           &lt;Inputs.BorderColor /&gt;
         </code>
         <section sx={{
-          color: 'text',
+          color: { value: 'text' },
           fontWeight: 900,
           height: '192px',
           maxWidth: '100%',
@@ -32,7 +32,7 @@ export function BorderColorPreview() {
           textAlign: 'center',
           overflow: 'hidden',
           borderbottom: '1px solid',
-          borderBottomColor: 'muted',
+          borderBottomColor: { value: 'muted' },
           }}>
           <styled.p styles={styles} 
             style={{ 

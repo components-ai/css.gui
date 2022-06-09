@@ -5,6 +5,7 @@ import ColorSlider from './ColorSlider'
 import ColorArea from './ColorArea'
 import { range } from 'lodash-es'
 import { isValidColor, format, withFallback } from './util'
+import { Color } from '../../../types/css'
 
 interface HsvValue {
   mode: 'hsv'
@@ -15,8 +16,8 @@ interface HsvValue {
 }
 
 interface Props {
-  value: string
-  onChange(value: string): void
+  value: Color
+  onChange(value: Color): void
   mode: string
 }
 
@@ -29,16 +30,16 @@ interface InternalProps {
  * A 'standard' color picker based on the HSV color space.
  */
 export default function P3HsvColorPicker({ value, onChange, mode }: Props) {
-  const [hsvValue, setHsvValue] = useState<HsvValue>(getP3Hsv(value))
+  const [hsvValue, setHsvValue] = useState<HsvValue>(getP3Hsv(value.value))
 
   const handleChange = (value: HsvValue) => {
     setHsvValue(value)
-    onChange(formatP3Picker(value, mode))
+    onChange({ value: formatP3Picker(value, mode)})
   }
 
   useEffect(() => {
-    if (isValidColor(value) && value !== format(hsvValue, mode)) {
-      setHsvValue(getP3Hsv(value))
+    if (isValidColor(value.value) && value !== format(hsvValue, mode)) {
+      setHsvValue(getP3Hsv(value.value))
     }
   }, [value])
   return (

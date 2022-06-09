@@ -3,8 +3,8 @@ export const initialStyles: any = {
   fontSize: { value: 32, unit: 'px' },
   lineHeight: { value: 1.5, unit: 'number' },
   textAlign: 'start',
-  color: '#000',
-  backgroundColor: '#fff',
+  color: { value: '#000' },
+  backgroundColor: { value: '#fff' },
   margin: {
     value: 0,
     unit: 'px',
@@ -31,7 +31,7 @@ export const initialStyles: any = {
     value: 0,
     unit: 'px',
   },
-  borderColor: 'transparent',
+  borderColor: { value: 'transparent' },
   boxSizing: 'border-box',
   borderRadius: {
     value: 9999,

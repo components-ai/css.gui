@@ -4,6 +4,7 @@ import ColorSlider from './ColorSlider'
 import ColorArea from './ColorArea'
 import { useEffect, useState } from 'react'
 import { isValidColor, format } from './util'
+import { Color } from '../../../types/css'
 
 interface HsvValue {
   h: number
@@ -13,8 +14,8 @@ interface HsvValue {
 }
 
 interface Props {
-  value: string
-  onChange(value: string): void
+  value: Color
+  onChange(value: Color): void
   mode: string
 }
 
@@ -31,11 +32,11 @@ export default function HsvColorPicker({ value, onChange, mode }: Props) {
 
   const handleChange = (value: HsvValue) => {
     setHsvValue(value)
-    onChange(format(value, mode))
+    onChange({ value: format(value, mode)})
   }
 
   useEffect(() => {
-    if (isValidColor(value) && value !== format(hsvValue, mode)) {
+    if (isValidColor(value.value) && value !== format(hsvValue, mode)) {
       setHsvValue(culori.hsv(value))
     }
   }, [value])

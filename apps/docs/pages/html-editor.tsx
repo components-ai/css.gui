@@ -31,7 +31,7 @@ const initialValue: any = {
           tagName: 'h1',
           attributes: {},
           style: {
-            color: 'primary',
+            color: { value: 'primary' },
             fontSize: {
               type: 'responsive',
               values: [
@@ -126,7 +126,7 @@ const initialValue: any = {
       style: {
         borderTopWidth: { value: 1, unit: 'px' },
         borderTopStyle: 'solid',
-        borderTopColor: 'border',
+        borderTopColor: { value: 'border' },
         marginTop: { value: 128, unit: 'px' },
         paddingTop: { value: 128, unit: 'px' },
         paddingBottom: { value: 128, unit: 'px' },
@@ -176,11 +176,11 @@ const initialValue: any = {
           tagName: 'a',
           attributes: { href: '#0', title: 'Anchor link: <a>' },
           style: {
-            color: 'text',
-            backgroundColor: 'background',
+            color: { value: 'text' },
+            backgroundColor: { value: 'background' },
             fontWeight: 'inherit',
             textDecoration: {
-              color: 'currentColor',
+              color: { value: 'currentColor' },
               line: 'underline',
               style: 'solid',
               thickness: { value: 1, unit: 'px' }
@@ -194,8 +194,8 @@ const initialValue: any = {
           tagName: 'p',
           attributes: {  title: 'Paragraph: <p>' },
           style: {
-            color: 'text',
-            backgroundColor: 'background',
+            color: { value: 'text' },
+            backgroundColor: { value: 'background' },
             fontSize: { value: 1, unit: 'em', },
             marginTop: { value: 0, unit: 'px' },
             marginBottom: { value: 0, unit: 'px' },
@@ -215,8 +215,8 @@ const initialValue: any = {
           tagName: 'input',
           style: {
             appearance: 'none',
-            color: 'text',
-            backgroundColor: 'transparent',
+            color: { value: 'text' },
+            backgroundColor: { value: 'transparent' },
             borderWidth: { 
               top: { value: 1, unit: 'px' },
               bottom: { value: 1, unit: 'px' },
@@ -224,10 +224,10 @@ const initialValue: any = {
               right: { value: 1, unit: 'px' },
             },
             borderColor: {
-              top: 'currentColor',
-              bottom: 'currentColor',
-              left: 'currentColor',
-              right: 'currentColor',
+              top: { value: 'currentColor' },
+              bottom: { value: 'currentColor' },
+              left: { value: 'currentColor' },
+              right: { value: 'currentColor' },
             },
             borderStyle: {
               top: 'solid',
@@ -254,8 +254,8 @@ const initialValue: any = {
           tagName: 'input',
           style: {
             appearance: 'none',
-            color: 'text',
-            backgroundColor: 'transparent',
+            color: { value: 'text' },
+            backgroundColor: { value: 'transparent' },
             borderWidth: { 
               top: { value: 1, unit: 'px' },
               bottom: { value: 1, unit: 'px' },
@@ -263,10 +263,10 @@ const initialValue: any = {
               right: { value: 1, unit: 'px' },
             },
             borderColor: {
-              top: 'currentColor',
-              bottom: 'currentColor',
-              left: 'currentColor',
-              right: 'currentColor',
+              top: { value: 'currentColor' },
+              bottom: { value: 'currentColor' },
+              left: { value: 'currentColor' },
+              right: { value: 'currentColor' },
             },
             borderStyle: {
               top: 'solid',
@@ -293,8 +293,8 @@ const initialValue: any = {
           tagName: 'input',
           style: {
             appearance: 'none',
-            color: 'text',
-            backgroundColor: 'transparent',
+            color: { value: 'text' },
+            backgroundColor: { value: 'transparent' },
             borderWidth: { 
               top: { value: 1, unit: 'px' },
               bottom: { value: 1, unit: 'px' },
@@ -302,10 +302,10 @@ const initialValue: any = {
               right: { value: 1, unit: 'px' },
             },
             borderColor: {
-              top: 'currentColor',
-              bottom: 'currentColor',
-              left: 'currentColor',
-              right: 'currentColor',
+              top: { value: 'currentColor' },
+              bottom: { value: 'currentColor' },
+              left: { value: 'currentColor' },
+              right: { value: 'currentColor' },
             },
             borderStyle: {
               top: 'solid',
@@ -338,8 +338,8 @@ const initialValue: any = {
           tagName: 'input',
           style: {
             appearance: 'none',
-            color: 'text',
-            backgroundColor: 'transparent',
+            color: { value: 'text' },
+            backgroundColor: { value: 'transparent' },
             borderWidth: { 
               top: { value: 1, unit: 'px' },
               bottom: { value: 1, unit: 'px' },
@@ -347,10 +347,10 @@ const initialValue: any = {
               right: { value: 1, unit: 'px' },
             },
             borderColor: {
-              top: 'currentColor',
-              bottom: 'currentColor',
-              left: 'currentColor',
-              right: 'currentColor',
+              top: { value: 'currentColor' },
+              bottom: { value: 'currentColor' },
+              left: { value: 'currentColor' },
+              right: { value: 'currentColor' },
             },
             borderStyle: {
               top: 'solid',
@@ -374,8 +374,8 @@ const initialValue: any = {
         { 
           tagName: 'input',
           style: {
-            color: 'text',
-            backgroundColor: 'transparent',
+            color: { value: 'text' },
+            backgroundColor: { value: 'transparent' },
             borderWidth: { 
               top: { value: 1, unit: 'px' },
               bottom: { value: 1, unit: 'px' },
@@ -383,10 +383,10 @@ const initialValue: any = {
               right: { value: 1, unit: 'px' },
             },
             borderColor: {
-              top: 'currentColor',
-              bottom: 'currentColor',
-              left: 'currentColor',
-              right: 'currentColor',
+              top: { value: 'currentColor' },
+              bottom: { value: 'currentColor' },
+              left: { value: 'currentColor' },
+              right: { value: 'currentColor' },
             },
             borderStyle: {
               top: 'solid',
@@ -410,8 +410,8 @@ const initialValue: any = {
         { 
           tagName: 'input',
           style: {
-            color: 'text',
-            backgroundColor: 'transparent',
+            color: { value: 'text' },
+            backgroundColor: { value: 'transparent' },
             borderWidth: { 
               top: { value: 1, unit: 'px' },
               bottom: { value: 1, unit: 'px' },
@@ -419,10 +419,10 @@ const initialValue: any = {
               right: { value: 1, unit: 'px' },
             },
             borderColor: {
-              top: 'currentColor',
-              bottom: 'currentColor',
-              left: 'currentColor',
-              right: 'currentColor',
+              top: { value: 'currentColor' },
+              bottom: { value: 'currentColor' },
+              left: { value: 'currentColor' },
+              right: { value: 'currentColor' },
             },
             borderStyle: {
               top: 'solid',
@@ -449,8 +449,8 @@ const initialValue: any = {
         { 
           tagName: 'input',
           style: {
-            color: 'text',
-            backgroundColor: 'transparent',
+            color: { value: 'text' },
+            backgroundColor: { value: 'transparent' },
             borderWidth: { 
               top: { value: 1, unit: 'px' },
               bottom: { value: 1, unit: 'px' },
@@ -458,10 +458,10 @@ const initialValue: any = {
               right: { value: 1, unit: 'px' },
             },
             borderColor: {
-              top: 'currentColor',
-              bottom: 'currentColor',
-              left: 'currentColor',
-              right: 'currentColor',
+              top: { value: 'currentColor' },
+              bottom: { value: 'currentColor' },
+              left: { value: 'currentColor' },
+              right: { value: 'currentColor' },
             },
             borderStyle: {
               top: 'solid',
@@ -486,8 +486,8 @@ const initialValue: any = {
         { 
           tagName: 'input',
           style: {
-            color: 'text',
-            backgroundColor: 'transparent',
+            color: { value: 'text' },
+            backgroundColor: { value: 'transparent'},
             borderWidth: { 
               top: { value: 1, unit: 'px' },
               bottom: { value: 1, unit: 'px' },
@@ -495,10 +495,10 @@ const initialValue: any = {
               right: { value: 1, unit: 'px' },
             },
             borderColor: {
-              top: 'currentColor',
-              bottom: 'currentColor',
-              left: 'currentColor',
-              right: 'currentColor',
+              top: { value: 'currentColor' },
+              bottom: { value: 'currentColor' },
+              left: { value: 'currentColor' },
+              right: { value: 'currentColor' },
             },
             borderStyle: {
               top: 'solid',
@@ -523,7 +523,7 @@ const initialValue: any = {
         { 
           tagName: 'input',
           style: {
-            accentColor: '#6465ff', 
+            accentColor: { value: '#6465ff' }, 
           },
           attributes: {
             type: 'range',
@@ -532,8 +532,8 @@ const initialValue: any = {
         { 
           tagName: 'input',
           style: {
-            color: 'text',
-            backgroundColor: 'transparent',
+            color: { value: 'text' },
+            backgroundColor: { value: 'transparent' },
             borderWidth: { 
               top: { value: 1, unit: 'px' },
               bottom: { value: 1, unit: 'px' },
@@ -541,10 +541,10 @@ const initialValue: any = {
               right: { value: 1, unit: 'px' },
             },
             borderColor: {
-              top: 'currentColor',
-              bottom: 'currentColor',
-              left: 'currentColor',
-              right: 'currentColor',
+              top: { value: 'currentColor' },
+              bottom: { value: 'currentColor' },
+              left: { value: 'currentColor' },
+              right: { value: 'currentColor' },
             },
             borderStyle: {
               top: 'solid',
@@ -569,8 +569,8 @@ const initialValue: any = {
           tagName: 'input',
           style: {
             cursor: 'pointer',
-            color: 'text',
-            backgroundColor: 'transparent',
+            color: { value: 'text' },
+            backgroundColor: { value: 'transparent' },
             fontSize: { value: 1, unit: 'rem' },
             fontWeight: 600,
             borderRadius: { value: 6, unit: 'px' },
@@ -585,7 +585,7 @@ const initialValue: any = {
               blur: { value: 0, unit: 'px' },
               offsetX: { value: 0, unit: 'px' },
               offsetY: { value: 0, unit: 'px' },
-              color: 'currentColor',
+              color: { value: 'currentColor' },
             }],
             borderStyle: {
               top: 'none',
@@ -594,10 +594,10 @@ const initialValue: any = {
               right: 'none',
             },
             borderWidth: { value: 0, unit: 'px' },
-            borderColor: 'transparent',
+            borderColor: { value: 'transparent' },
             transition: 'all .2s ease-in-out',
             ':hover': {
-              color: 'primary',
+              color: { value: 'primary' },
             }
           },
           attributes: {
@@ -608,8 +608,8 @@ const initialValue: any = {
         { 
           tagName: 'input',
           style: {
-            color: 'text',
-            backgroundColor: 'transparent',
+            color: { value: 'text' },
+            backgroundColor: { value: 'transparent' },
             borderWidth: { 
               top: { value: 1, unit: 'px' },
               bottom: { value: 1, unit: 'px' },
@@ -617,10 +617,10 @@ const initialValue: any = {
               right: { value: 1, unit: 'px' },
             },
             borderColor: {
-              top: 'currentColor',
-              bottom: 'currentColor',
-              left: 'currentColor',
-              right: 'currentColor',
+              top: { value: 'currentColor' },,
+              bottom: { value: 'currentColor' },
+              left: { value: 'currentColor' },
+              right: { value: 'currentColor' },
             },
             borderStyle: {
               top: 'solid',
@@ -644,8 +644,8 @@ const initialValue: any = {
         { 
           tagName: 'input',
           style: {
-            color: 'text',
-            backgroundColor: 'transparent',
+            color: { value: 'text' },
+            backgroundColor: { value: 'transparent' },
             borderWidth: { 
               top: { value: 1, unit: 'px' },
               bottom: { value: 1, unit: 'px' },
@@ -653,10 +653,10 @@ const initialValue: any = {
               right: { value: 1, unit: 'px' },
             },
             borderColor: {
-              top: 'currentColor',
-              bottom: 'currentColor',
-              left: 'currentColor',
-              right: 'currentColor',
+              top: { value: 'currentColor' },
+              bottom: { value: 'currentColor' },
+              left: { value: 'currentColor' },
+              right: { value: 'currentColor' },
             },
             borderStyle: {
               top: 'solid',
@@ -682,8 +682,8 @@ const initialValue: any = {
           tagName: 'input',
           style: {
             cursor: 'pointer',
-            color: 'primary',
-            backgroundColor: 'text',
+            color: { value: 'primary' },
+            backgroundColor: { value: 'text'},
             fontSize: { value: 1, unit: 'rem' },
             fontWeight: 600,
             borderRadius: { value: 6, unit: 'px' },
@@ -698,7 +698,7 @@ const initialValue: any = {
               blur: { value: 0, unit: 'px' },
               offsetX: { value: 0, unit: 'px' },
               offsetY: { value: 0, unit: 'px' },
-              color: 'transparent',
+              color: { value: 'transparent' },
             }],
             borderStyle: {
               top: 'none',
@@ -707,10 +707,10 @@ const initialValue: any = {
               right: 'none',
             },
             borderWidth: { value: 0, unit: 'px' },
-            borderColor: 'transparent',
+            borderColor: { value: 'transparent' },
             transition: 'all .2s ease-in-out',
             ':hover': {
-              color: 'primaryHover',
+              color: { value: 'primaryHover' },
             }
           },
           attributes: {
@@ -723,7 +723,7 @@ const initialValue: any = {
             { 
                 tagName: 'input',
                 style: {
-                  accentColor: '#6465ff', 
+                  accentColor: { value: '#6465ff' }, 
                 },
                 attributes: {
                   type: 'checkbox',
@@ -733,7 +733,7 @@ const initialValue: any = {
             { 
               tagName: 'input',
               style: {
-                accentColor: '#6465ff', 
+                accentColor: { value: '#6465ff' }, 
               },
               attributes: {
                 type: 'checkbox',
@@ -747,7 +747,7 @@ const initialValue: any = {
           children: [{ 
             tagName: 'input',
             style: {
-              accentColor: '#6465ff', 
+              accentColor: { value: '#6465ff' }, 
             },
             attributes: {
               type: 'radio',
@@ -757,7 +757,7 @@ const initialValue: any = {
           { 
             tagName: 'input',
             style: {
-              accentColor: '#6465ff', 
+              accentColor: { value: '#6465ff' }, 
             },
             attributes: {
               type: 'radio',
@@ -769,8 +769,8 @@ const initialValue: any = {
           tagName: 'button',
           style: {
             cursor: 'pointer',
-            color: 'text',
-            backgroundColor: 'primary',
+            color: { value: 'text' },
+            backgroundColor: { value: 'primary' },
             fontSize: { value: 1, unit: 'rem' },
             fontWeight: 600,
             borderRadius: { value: 6, unit: 'px' },
@@ -780,7 +780,7 @@ const initialValue: any = {
             paddingRight: { value: 64, unit: 'px'},
             appearance: 'none',
             borderWidth: { value: 0, unit: 'px' },
-            borderColor: 'transparent',
+            borderColor: { value: 'transparent' },
             borderStyle: {
               top: 'none',
               bottom: 'none',
@@ -789,7 +789,7 @@ const initialValue: any = {
             },
             transition: 'all .2s ease-in-out',
             ':hover': {
-              backgroundColor: 'primaryHover',
+              backgroundColor: { value: 'primaryHover' },
             }
           },
           children: [
@@ -800,8 +800,8 @@ const initialValue: any = {
           tagName: 'button',
           style: {
             cursor: 'pointer',
-            color: 'primary',
-            backgroundColor: 'transparent',
+            color: { value: 'primary' },
+            backgroundColor: { value: 'transparent' },
             fontSize: { value: 1, unit: 'rem' },
             fontWeight: 600,
             borderRadius: { value: 6, unit: 'px' },
@@ -816,7 +816,7 @@ const initialValue: any = {
               blur: { value: 0, unit: 'px' },
               offsetX: { value: 0, unit: 'px' },
               offsetY: { value: 0, unit: 'px' },
-              color: 'currentColor',
+              color: { value: 'currentColor' },
             }],
             borderStyle: {
               top: 'none',
@@ -825,10 +825,10 @@ const initialValue: any = {
               right: 'none',
             },
             borderWidth: { value: 0, unit: 'px' },
-            borderColor: 'transparent',
+            borderColor: { value: 'transparent' },
             transition: 'all .2s ease-in-out',
             ':hover': {
-              color: 'text',
+              color: { value: 'text' },
             }
           },
           children: [
@@ -838,7 +838,7 @@ const initialValue: any = {
         { 
           tagName: 'progress',
           style: { 
-            accentColor: '#6465ff', 
+            accentColor: { value: '#6465ff' }, 
           },
           attributes: { max: 100, value: 61.8 }
         },
@@ -847,8 +847,8 @@ const initialValue: any = {
           attributes: { rows: 8 },
           style: {
             appearance: 'none',
-            color: 'text',
-            backgroundColor: 'transparent',
+            color: { value: 'text' },
+            backgroundColor: { value: 'transparent' },
             borderWidth: { 
               top: { value: 1, unit: 'px' },
               bottom: { value: 1, unit: 'px' },
@@ -856,10 +856,10 @@ const initialValue: any = {
               right: { value: 1, unit: 'px' },
             },
             borderColor: {
-              top: 'currentColor',
-              bottom: 'currentColor',
-              left: 'currentColor',
-              right: 'currentColor',
+              top: { value: 'currentColor' },
+              bottom: { value: 'currentColor' },
+              left: { value: 'currentColor' },
+              right: { value: 'currentColor' },
             },
             borderStyle: {
               top: 'solid',
@@ -956,8 +956,8 @@ const initialValue: any = {
         { 
           tagName: 'h1',
           style: {
-            color: 'text',
-            backgroundColor: 'background',
+            color: { value: 'text' },
+            backgroundColor:{ value: 'background' },
             marginBottom: { value: 1, unit: 'em' },
             fontFamily: 'heading',
             fontSize: { value: 3, unit: 'rem', },
@@ -1075,8 +1075,8 @@ const initialValue: any = {
           children: [{ 
             tagName: 'dt',
             style: {
-              color: 'inherit',
-              backgroundColor: 'inherit',
+              color: { value: 'inherit' },
+              backgroundColor: { value: 'inherit' },
               fontSize: { value: 1, unit: 'rem' },
               fontWeight: 400,
             },
@@ -1087,8 +1087,8 @@ const initialValue: any = {
           { 
             tagName: 'dd',
             style: { 
-              color: 'inherit',
-              backgroundColor: 'inherit',
+              color: { value: 'inherit' },
+              backgroundColor: { value: 'inherit' },
               fontSize: { value: 2, unit: 'rem' },
               fontWeight: 600,
               marginLeft: { value: 0, unit: 'px', }
@@ -1103,7 +1103,7 @@ const initialValue: any = {
           tagName: 'blockquote',
           style: {
             borderLeftWidth: { value: 4, unit: 'px', },
-            borderLeftColor: 'primary',
+            borderLeftColor: { value: 'primary' },
             borderLeftStyle: 'solid',
             marginLeft: { value: 0, unit: 'px', },
             paddingLeft: { value: 32, unit: 'px', },
@@ -1133,8 +1133,8 @@ const initialValue: any = {
         { 
           tagName: 'mark',
           style: {
-            color: 'inherit',
-            backgroundColor: '#6465ff',
+            color: { value: 'inherit' },
+            backgroundColor: { value: '#6465ff' },
             fontStyle: 'normal',
             fontWeight: 'inherit',
           },

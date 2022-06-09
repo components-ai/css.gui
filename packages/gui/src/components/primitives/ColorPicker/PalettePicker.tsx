@@ -1,7 +1,7 @@
+import { Color } from '../../../types/css'
 import { Theme } from '../../../types/theme'
 import ColorValueDisplay from './ValueDisplay'
 
-type Color = string
 interface Props {
   value: Color
   onChange(value: Color): void
@@ -38,7 +38,7 @@ export default function PalettePicker({ value, onChange, theme }: Props) {
                       aspectRatio: '1 / 1',
                       backgroundColor: color.value,
                     }}
-                    onClick={() => onChange(color.value)}
+                    onClick={() => onChange({ value: color.value })} // theme path
                   />
                 )
               })}

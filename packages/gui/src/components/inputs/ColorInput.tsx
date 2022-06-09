@@ -1,6 +1,6 @@
 import { Color } from '../../types/css'
 import { EditorProps } from '../../types/editor'
-import { ColorPopover, Label } from '../primitives'
+import { ColorPopover } from '../primitives'
 import { useTheme } from '../providers/ThemeContext'
 import { InputHeader } from '../ui/InputHeader'
 

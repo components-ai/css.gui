@@ -5,6 +5,7 @@ import {
   MultidimensionalLength,
   Position,
   CSSFunctionCalc,
+  ColorObject,
 } from '../types/css'
 import { Theme } from '../types/theme'
 import {
@@ -33,7 +34,7 @@ export const stringifyCalcFunction = ({ arguments: args }: CSSFunctionCalc) => {
 }
 
 export function stringifyUnit(
-  providedValue: Length | MultidimensionalLength,
+  providedValue: Length | MultidimensionalLength | Color,
   theme?: Theme
 ): string | number | null {
   if (isMultidimensionalLength(providedValue)) {
@@ -55,10 +56,10 @@ export function stringifyUnit(
     return value.value
   }
 
-  if (value.unit === 'theme') {
+  if (value.themePath) {
     const resolvedValue = theme && value.themePath && get(theme, value.themePath)
     if (resolvedValue) {
-      return `${resolvedValue.value}${resolvedValue.unit}`
+      return `${resolvedValue.value}${resolvedValue.unit || ''}`
     }
   }
 
@@ -71,10 +72,8 @@ export function stringifyUnit(
     return String(value.value)
   }
 
-  return `${value.value}${value.unit || DEFAULT_LENGTH_UNIT}`
+  return `${value.value}${value.unit || ''}`
 }
-
-const DEFAULT_LENGTH_UNIT = 'px'
 
 export function stringifyFunction(
   name: string,
@@ -101,7 +100,6 @@ export function stringifyPosition(position: Position) {
   return `${stringifyUnit(position.x)} ${stringifyUnit(position.y)}`
 }
 
-// accept theme here
 export function stringifyPrimitive(value: Primitive, theme?: Theme) {
   if (typeof value === 'number') {
     return '' + value
