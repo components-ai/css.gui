@@ -221,21 +221,21 @@ export const EditorControls = ({
   )
 
   return (
-    <>
+    <section sx={{ pb: 5 }}>
       {showAddProperties ? (
-        <div sx={{ my: 3 }}>
+        <div sx={{ pb: 4 }}>
           <AddPropertyControl styles={styles} />
         </div>
       ) : null}
       {controls}
       {showAddProperties ? (
-        <div sx={{ my: 3 }}>
+        <div sx={{ py: 4 }}>
           <AddFieldsetControl styles={styles} />
         </div>
       ) : null}
       {fieldsetControls}
       {children ? <DynamicControls /> : null}
-    </>
+    </section>
   )
 }
 
@@ -277,15 +277,20 @@ const FieldsetControl = ({ field, property }: FieldsetControlProps) => {
   const properties = Object.keys(styles)
 
   return (
-    <section>
-      <h3>{removeInternalCSSClassSyntax(property)}</h3>
+    <section sx={{ borderTopWidth: '1px', borderTopColor: 'border', borderTopStyle: 'solid' }}>
+      <h3 sx={{ 
+        fontSize: 2,
+        mb: 2,
+        }}>{removeInternalCSSClassSyntax(property)}</h3>
       <GenericFieldset property={property}>
+          <div sx={{ pb: 3 }}>
+            <AddPropertyControl
+              field={field || property}
+              styles={styles}
+              label={`Add property to ${property}`}
+            />
+          </div>
         <ControlSet field={field} properties={properties} />
-        <AddPropertyControl
-          field={field || property}
-          styles={styles}
-          label={`Add property to ${property}`}
-        />
       </GenericFieldset>
     </section>
   )

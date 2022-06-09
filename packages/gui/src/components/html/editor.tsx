@@ -421,20 +421,20 @@ function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
                     })
                   }}
                 />
+                <AddChildButton
+                  onClick={() => {
+                    onChange(
+                      addChildAtPath(value, [value.children?.length ?? 0], {
+                        type: 'text',
+                        value: '',
+                      })
+                    )
+                    onSelect(null)
+                  }}
+                />
               </Fragment>
             )
           })}
-          <AddChildButton
-            onClick={() => {
-              onChange(
-                addChildAtPath(value, [value.children?.length ?? 0], {
-                  type: 'text',
-                  value: '',
-                })
-              )
-              onSelect(null)
-            }}
-          />
         </div>
         <div sx={{ display: 'flex', alignItems: 'center' }}>
           <div
