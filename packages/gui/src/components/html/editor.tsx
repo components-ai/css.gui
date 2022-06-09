@@ -5,7 +5,7 @@ import * as Tabs from '@radix-ui/react-tabs'
 import { Fragment, useState } from 'react'
 import { isNil } from 'lodash-es'
 import IconButton from '../ui/IconButton'
-import { Code, Layers, X } from 'react-feather'
+import { Code, Layers, Export, X } from 'react-feather'
 import { Label, Combobox } from '../primitives'
 import { SelectInput } from '../inputs/SelectInput'
 import { AttributeEditor } from './AttributeEditor'
@@ -125,6 +125,9 @@ const TABS_TRIGGER_STYLES: any = {
   px: 2,
   py: 1,
   color: 'muted',
+  display: 'inline-flex',
+  gap: '.5em',
+  alignItems: 'center',
   '&[data-state="active"]': {
     color: 'text',
   },
@@ -178,10 +181,10 @@ export function HtmlEditor({ onChange }: HtmlEditorProps) {
             Node
           </Tabs.Trigger>
           <Tabs.Trigger sx={TABS_TRIGGER_STYLES} value="tree">
-            Layers
+            <Layers size={12} /> Layers
           </Tabs.Trigger>
           <Tabs.Trigger sx={TABS_TRIGGER_STYLES} value="export">
-            Export
+            <Code size={12} /> Export
           </Tabs.Trigger>
         </Tabs.List>
         <Tabs.Content sx={TABS_CONTENT_STYLES} value="node">
