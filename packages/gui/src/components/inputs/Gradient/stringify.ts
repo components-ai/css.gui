@@ -10,10 +10,12 @@ export function stringifyGradient(gradient: Gradient): string {
   switch (gradient.type) {
     case 'linear':
     case 'repeating-linear': {
-      return stringifyFunction(gradient.type + '-gradient', [
-        gradient.angle,
-        stringifyStops(gradient, '%'),
-      ])
+      return stringifyFunction(
+        gradient.type + '-gradient', [
+          gradient.angle,
+          stringifyStops(gradient, '%'),
+        ]
+      )
     }
     case 'radial':
     case 'repeating-radial': {
@@ -39,6 +41,6 @@ export function stringifyGradient(gradient: Gradient): string {
 export const stringifyStops = (gradient: Gradient, unit: string) => {
   return sortBy(gradient?.stops, (stop) => stop.hinting)
     ?.filter(Boolean)
-    ?.map(({ color, hinting }) => `${color} ${hinting}${unit}`)
+    ?.map(({ color, hinting }) => `${color.value} ${hinting}${unit}`)
     ?.join(', ')
 }

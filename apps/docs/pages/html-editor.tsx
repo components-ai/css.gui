@@ -805,8 +805,8 @@ const initialValue: any = {
           tagName: 'input',
           style: {
             cursor: 'pointer',
-            color: '#6465ff',
-            backgroundColor: '#f7f1ff',
+            color: { value: '#6465ff' },
+            backgroundColor: { value: '#f7f1ff' },
             fontSize: { value: 1, unit: 'rem' },
             fontWeight: 600,
             borderRadius: { value: 6, unit: 'px' },
@@ -821,7 +821,7 @@ const initialValue: any = {
               blur: { value: 0, unit: 'px' },
               offsetX: { value: 0, unit: 'px' },
               offsetY: { value: 0, unit: 'px' },
-              color: 'transparent',
+              color: { value: 'transparent' },
             }],
             borderStyle: {
               top: 'none',
@@ -830,10 +830,10 @@ const initialValue: any = {
               right: 'none',
             },
             borderWidth: { value: 0, unit: 'px' },
-            borderColor: 'transparent',
+            borderColor: { value: 'transparent' },
             transition: 'all .2s ease-in-out',
             ':hover': {
-              color: 'primaryHover',
+              color: { value: 'primaryHover' },
             }
           },
           attributes: {
@@ -914,8 +914,8 @@ const initialValue: any = {
           tagName: 'input',
           style: {
             cursor: 'pointer',
-            color: 'text',
-            backgroundColor: 'transparent',
+            color: { value: 'text' },
+            backgroundColor: { value: 'transparent' },
             fontSize: { value: 1, unit: 'rem' },
             fontWeight: 600,
             borderRadius: { value: 6, unit: 'px' },
@@ -930,7 +930,7 @@ const initialValue: any = {
               blur: { value: 0, unit: 'px' },
               offsetX: { value: 0, unit: 'px' },
               offsetY: { value: 0, unit: 'px' },
-              color: 'currentColor',
+              color: { value: 'currentColor' },
             }],
             borderStyle: {
               top: 'none',
@@ -939,10 +939,10 @@ const initialValue: any = {
               right: 'none',
             },
             borderWidth: { value: 0, unit: 'px' },
-            borderColor: 'transparent',
+            borderColor: { value: 'transparent' },
             transition: 'all .2s ease-in-out',
             ':hover': {
-              color: 'primary',
+              color: { value: 'primary' },
             }
           },
           attributes: {
@@ -1000,11 +1000,11 @@ const initialValue: any = {
           tagName: 'a',
           attributes: { href: '#0', title: 'Anchor link: <a>' },
           style: {
-            color: 'text',
-            backgroundColor: 'background',
+            color: { value: 'text' },
+            backgroundColor: { value: 'background' },
             fontWeight: 'inherit',
             textDecoration: {
-              color: 'currentColor',
+              color: { value: 'currentColor' },
               line: 'underline',
               style: 'solid',
               thickness: { value: 1, unit: 'px' }
@@ -1121,8 +1121,8 @@ const initialValue: any = {
         { 
           tagName: 'h2',
           style: {
-            color: 'text',
-            backgroundColor: 'background',
+            color: { value: 'text' },
+            backgroundColor: { value: 'background' },
             marginBottom: { value: 1, unit: 'em' },
             fontFamily: 'heading',
             fontSize: { value: 2, unit: 'rem', },
@@ -1139,8 +1139,8 @@ const initialValue: any = {
         { 
           tagName: 'h3',
           style: {
-            color: 'text',
-            backgroundColor: 'background',
+            color: { value: 'text' },
+            backgroundColor: { value: 'background' },
             marginBottom: { value: 1, unit: 'em' },
             fontFamily: 'heading',
             fontSize: { value: 1.5, unit: 'rem', },
@@ -1157,8 +1157,8 @@ const initialValue: any = {
         { 
           tagName: 'h4',
           style: {
-            color: 'text',
-            backgroundColor: 'background',
+            color: { value: 'text' },
+            backgroundColor: { value: 'background' },
             marginBottom: { value: 1, unit: 'em' },
             fontFamily: 'heading',
             fontSize: { value: 1.25, unit: 'rem', },
@@ -1175,8 +1175,8 @@ const initialValue: any = {
         { 
           tagName: 'h5',
           style: {
-            color: 'text',
-            backgroundColor: 'background',
+            color: { value: 'text' },
+            backgroundColor: { value: 'background' },
             marginBottom: { value: 1, unit: 'em' },
             fontFamily: 'heading',
             fontSize: { value: 1, unit: 'rem', },
@@ -1193,8 +1193,8 @@ const initialValue: any = {
         { 
           tagName: 'h6',
           style: {
-            color: 'text',
-            backgroundColor: 'background',
+            color: { value: 'text' },
+            backgroundColor: { value: 'background' },
             marginBottom: { value: 1, unit: 'em' },
             fontFamily: 'heading',
             fontSize: { value: .75, unit: 'rem', },

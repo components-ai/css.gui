@@ -110,4 +110,4 @@ export function stringifyPrimitive(value: Primitive, theme?: Theme) {
   return stringifyUnit(value, theme)
 }
 
-type Primitive = Length | number | Color | MultidimensionalLength
+type Primitive = Length | number | Color | MultidimensionalLength | string

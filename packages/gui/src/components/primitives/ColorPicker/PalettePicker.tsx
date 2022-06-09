@@ -20,7 +20,7 @@ export default function PalettePicker({ value, onChange, theme }: Props) {
           return (
             <div key={i} sx={{ display: 'flex', gap: '.125rem' }}>
               {colorGroup.colors.map((color: any, i: number) => {
-                const selected = value === color.value
+                const selected = value.value === color.value
 
                 return (
                   <button
@@ -38,7 +38,10 @@ export default function PalettePicker({ value, onChange, theme }: Props) {
                       aspectRatio: '1 / 1',
                       backgroundColor: color.value,
                     }}
-                    onClick={() => onChange({ value: color.value })} // theme path
+                    onClick={() => onChange({
+                      value: color.value,
+                      themePath: `colors.${colorGroup.name}.[${i}]`
+                    })}
                   />
                 )
               })}
