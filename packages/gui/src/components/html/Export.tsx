@@ -51,22 +51,27 @@ export const Export = ({ value }: ExportProps) => {
   return (
     <>
       <pre sx={PRE_STYLES}>{html}</pre>
+      <div sx={{px: 3, pb: 4 }}>
       <button
         sx={{
-          all: 'unset',
-          m: 3,
-          border: 'thin solid',
-          borderRadius: 4,
-          borderColor: 'border',
+          appearance: 'none',
+          WebkitAppearance: 'none',
+          boxSizing: 'border-box',
+          border: '0',
+          borderRadius: '6px',
+          color: 'text',
+          bg: 'primary',
           display: 'flex',
           alignItems: 'center',
+          justifyContent: 'center',
           fontSize: 1,
           fontWeight: 500,
+          width: '100%',
           px: 3,
-          py: 1,
+          py: 2,
+          cursor: 'pointer',
           '&:hover': {
-            color: 'primary',
-            borderColor: 'primary',
+            bg: 'primaryHover',
           },
         }}
         onClick={handleCopyToClipboard}
@@ -74,6 +79,7 @@ export const Export = ({ value }: ExportProps) => {
         <Copy size={14} sx={{ mr: 2 }} />
         {copied ? 'Copied to clipboard!' : 'Copy to clipboard'}
       </button>
+      </div>
     </>
   )
 }

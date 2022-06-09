@@ -5,7 +5,7 @@ import * as Tabs from '@radix-ui/react-tabs'
 import { Fragment, useState } from 'react'
 import { isNil } from 'lodash-es'
 import IconButton from '../ui/IconButton'
-import { X } from 'react-feather'
+import { Code, Layers, X } from 'react-feather'
 import { Label, Combobox } from '../primitives'
 import { SelectInput } from '../inputs/SelectInput'
 import { AttributeEditor } from './AttributeEditor'
@@ -119,6 +119,7 @@ interface HtmlEditorProps {
 
 const TABS_TRIGGER_STYLES = {
   all: 'unset',
+  cursor: 'pointer',
   fontSize: 0,
   fontWeight: 500,
   px: 2,
