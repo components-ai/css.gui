@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.103
+
+### Patch Changes
+
+- 12d442b: Minor internal improvements to inputs
+
 ## 0.0.102
 
 ### Patch Changes
