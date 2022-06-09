@@ -56,7 +56,7 @@ const getInitialState = (
       return {
         value: themeValue,
         unit,
-        themePath: `${themeProperty}[${i}]`,
+        themePath: `${themeProperty}[${i + 1}]`,
         key: 0,
       }
     }
@@ -96,7 +96,6 @@ export function DimensionInput<K extends string = never>(
     themeProperty,
   } = props
 
-  const theme = useTheme()
   const themeValues = useThemeProperty(themeProperty) || providedThemeValues
 
   const id = `${React.useId()}-${kebabCase(label)}`
