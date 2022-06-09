@@ -117,7 +117,7 @@ interface HtmlEditorProps {
   onChange(value: HtmlNode): void
 }
 
-const TABS_TRIGGER_STYLES = {
+const TABS_TRIGGER_STYLES: any = {
   all: 'unset',
   fontSize: 0,
   fontWeight: 500,
@@ -128,7 +128,7 @@ const TABS_TRIGGER_STYLES = {
     color: 'text',
   },
 }
-const TABS_CONTENT_STYLES = {
+const TABS_CONTENT_STYLES: any = {
   width: 400,
   height: 'calc(100vh - 64px)',
   overflow: 'auto',
