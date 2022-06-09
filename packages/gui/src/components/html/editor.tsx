@@ -178,7 +178,7 @@ export function HtmlEditor({ onChange }: HtmlEditorProps) {
           }}
         >
           <Tabs.Trigger sx={TABS_TRIGGER_STYLES} value="node">
-            Node
+            Styles
           </Tabs.Trigger>
           <Tabs.Trigger sx={TABS_TRIGGER_STYLES} value="tree">
             <Layers size={12} /> Layers
