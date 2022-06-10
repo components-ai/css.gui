@@ -18,12 +18,24 @@ export function InputHeader({
   reorder,
 }: Props) {
   return (
-    <div sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
+    <div
+      sx={{
+        display: 'flex',
+        gap: 1,
+        alignItems: 'center',
+        ':not(:hover) [data-type="regen-button"]': {
+          opacity: 0,
+        },
+      }}
+    >
       {label && <Label>{label}</Label>}
       {children}
       <div sx={{ ml: 'auto', display: 'flex', gap: 1, alignItems: 'center' }}>
         {regenerate && (
           <IconButton
+            data-type="regen-button"
+            title="regenerate"
+            sx={{ transition: 'opacity 150ms' }}
             onClick={() => {
               onChange(regenerate({ previousValue: value }))
             }}
