@@ -1,4 +1,6 @@
+import { property } from 'lodash-es'
 import { Children, cloneElement, createContext, isValidElement, ReactElement, ReactNode, useContext, useEffect, useState } from 'react'
+import { rawProperties } from '../../data/properties'
 import { htmlToEditorSchema } from '../../lib'
 import { stylesToEditorSchema } from '../../lib/transformers/styles-to-editor-schema'
 import { HtmlNode, ElementPath, ElementData } from './types'
@@ -29,13 +31,20 @@ export function useHtmlEditor() {
 
 const HtmlEditorContext = createContext<HtmlEditor>(DEFAULT_HTML_EDITOR_VALUE)
 
+const transformFunction = (property: string, value: any) => {
+  if (rawProperties[property]?.input === 'color' && typeof value === 'string') {
+    return { value }
+  }
+
+  return value
+}
 export const transformValueToSchema = (value: any): ElementData => {
   const transformed = Object.entries(value).reduce((acc, [key, val]) => {
     let updatedValue = val
     if (key === 'children' && Array.isArray(val)) {
       updatedValue = val.map((child) => transformValueToSchema(child))
     } else if (key === 'style') {
-      updatedValue = stylesToEditorSchema(val)
+      updatedValue = stylesToEditorSchema(val, transformFunction)
     }
     return {
       [key]: updatedValue,

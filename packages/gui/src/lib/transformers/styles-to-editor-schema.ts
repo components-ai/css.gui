@@ -5,9 +5,10 @@ import {
   isInternalCSSClass,
 } from '../classes'
 import { hasPseudoSyntax, removePseudoSyntax } from '../pseudos'
-import { isNestedSelectorWithSyntax } from '../util'
 
-export const stylesToEditorSchema = (styles: any) => {
+type TransforFunc = (property: string, value: any) => any
+
+export const stylesToEditorSchema = (styles: any, transformFn?: TransforFunc) => {
   if (!styles) {
     console.error(
       'A styles object is required. For more information please read https://components.ai/open-source/css-gui/components/editor'
@@ -28,11 +29,7 @@ export const stylesToEditorSchema = (styles: any) => {
     }
     
     if (Array.isArray(rawValue)) {
-      value = rawValue.map((v) => {
-        // transform me
-        v = transformNonPimitive(v)
-        return v
-      })
+      value = rawValue.map((v) => transformNonPimitive(v, transformFn))
     }
     //@ts-ignore  
     if (rawProperties[property]?.input === 'color' && typeof value === 'string') {
@@ -47,18 +44,18 @@ export const stylesToEditorSchema = (styles: any) => {
   return stylesSchema
 }
 
-const transformNonPimitive = (value: any) => {
+const transformNonPimitive = (value: any, transformFn?: TransforFunc) => {
   const transformed = Object.entries(value).reduce((acc, [k, val]) => {
-    let newValue = val
+    let newValue = transformFn ? transformFn(k, val) : val
     if (Array.isArray(val)) {
-      newValue = val.map((v) => transformNonPimitive(v))
+      newValue = val.map((v) => transformNonPimitive(v, transformFn))
     } else if (typeof val === 'object') {
-      newValue = transformNonPimitive(val)
+      newValue = transformNonPimitive(val, transformFn)
     }
 
-    if (rawProperties[k]?.input === 'color' && typeof val === 'string') {
-      newValue = { value: val }
-    }
+    // if (rawProperties[k]?.input === 'color' && typeof val === 'string') {
+    //   newValue = { value: val }
+    // }
     
     return {
       ...acc,
