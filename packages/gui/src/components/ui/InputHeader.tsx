@@ -23,9 +23,9 @@ export function InputHeader({
         display: 'flex',
         gap: 1,
         alignItems: 'center',
-        ':not(:hover) [data-type="regen-button"]': {
-          opacity: 0,
-        },
+        // ':not(:hover) [data-type="regen-button"]': {
+        //   opacity: 0,
+        // },
       }}
     >
       {label && <Label>{label}</Label>}
