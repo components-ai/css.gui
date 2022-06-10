@@ -206,9 +206,14 @@ export const Editor = ({
       onChange={handleStylesChange}
       hideResponsiveControls={hideResponsiveControls}
     >
-      <IconButton onClick={() => onChange(regenerateAll())}>
-        <RefreshCw />
-      </IconButton>
+      <div sx={{ display: 'flex' }}>
+        <IconButton
+          onClick={() => onChange(regenerateAll())}
+          sx={{ ml: 'auto', display: 'flex', gap: 2 }}
+        >
+          Regenerate <RefreshCw size={14} />
+        </IconButton>
+      </div>
       <EditorControls showAddProperties={showAddProperties}>
         {children}
       </EditorControls>
@@ -292,19 +297,29 @@ const FieldsetControl = ({ field, property }: FieldsetControlProps) => {
   const properties = Object.keys(styles)
 
   return (
-    <section sx={{ borderTopWidth: '1px', borderTopColor: 'border', borderTopStyle: 'solid' }}>
-      <h3 sx={{ 
-        fontSize: 2,
-        mb: 2,
-        }}>{removeInternalCSSClassSyntax(property)}</h3>
+    <section
+      sx={{
+        borderTopWidth: '1px',
+        borderTopColor: 'border',
+        borderTopStyle: 'solid',
+      }}
+    >
+      <h3
+        sx={{
+          fontSize: 2,
+          mb: 2,
+        }}
+      >
+        {removeInternalCSSClassSyntax(property)}
+      </h3>
       <GenericFieldset property={property}>
-          <div sx={{ pb: 3 }}>
-            <AddPropertyControl
-              field={field || property}
-              styles={styles}
-              label={`Add property to ${property}`}
-            />
-          </div>
+        <div sx={{ pb: 3 }}>
+          <AddPropertyControl
+            field={field || property}
+            styles={styles}
+            label={`Add property to ${property}`}
+          />
+        </div>
         <ControlSet field={field} properties={properties} />
       </GenericFieldset>
     </section>
