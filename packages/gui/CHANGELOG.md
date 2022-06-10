@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.108
+
+### Patch Changes
+
+- 89a9014: Handle undefined values in dimension input
+
 ## 0.0.107
 
 ### Patch Changes
