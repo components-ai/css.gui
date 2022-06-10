@@ -98,6 +98,7 @@ export interface NumberPercentage {
 }
 
 export type CSSFunctionCalc = {
+  unit: 'calc'
   type: 'calc'
   arguments: CalcFunction
 }
@@ -111,7 +112,7 @@ export type CSSUnitValue = {
   unit: string
   themeId?: string
 }
-export type Dimension = Length | CSSFunctionCalc
+export type Dimension = CSSUnitValue | CSSFunctionCalc
 export type GenericLength = '0'
 export type Length = CSSUnitValue | GenericLength
 // This isn't differentiated type-wise but it's good to keep track of

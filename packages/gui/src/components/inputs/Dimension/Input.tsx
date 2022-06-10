@@ -1,64 +1,25 @@
 import * as React from 'react'
 import {
-  AbsoluteLengthUnits,
   CalcOperand,
   CSSFunctionCalc,
   CSSUnitValue,
   Dimension,
-  KeywordUnits,
-  ThemeUnits,
-  UnitlessUnits,
 } from '../../../types/css'
 import { Number, ThemeValue, UnitSelect } from '../../primitives'
-import { reducer } from './reducer'
-import { State } from './types'
 import { EditorPropsWithLabel } from '../../../types/editor'
 import { UnitConversions } from '../../../lib/convert'
 import { compact, kebabCase } from 'lodash-es'
 import { CalcInput } from '../../primitives/CalcInput'
-import { X } from 'react-feather'
-import { isCSSUnitValue } from '../../../lib/codegen/to-css-object'
 import { KeywordSelect } from '../../primitives/KeywordSelect'
 import { InputHeader } from '../../ui/InputHeader'
+import { convertUnits } from '../../../lib/convert'
+import { X } from 'react-feather'
 
 // Mapping of units to [min, max] tuple
 type UnitRanges = Record<string, [min: number, max: number]>
 export type Range = UnitRanges | 'nonnegative'
 // Mapping of units to steps
 type UnitSteps = Record<string, number>
-
-const getInitialState = (
-  value: Dimension,
-  themeValues?: (CSSUnitValue & { id: string })[],
-  units?: readonly string[]
-): State => {
-  const defaultState = {
-    value: (value as CSSUnitValue)?.value || 0,
-    unit:
-      (value as CSSUnitValue)?.unit ||
-      (units && units[0]) ||
-      AbsoluteLengthUnits.Px,
-    themeId: (value as CSSUnitValue)?.themeId,
-    key: 0,
-  }
-
-  for (const { unit, value: themeValue, id } of themeValues || []) {
-    if (
-      isCSSUnitValue(value) &&
-      unit === value.unit &&
-      themeValue === value.value
-    ) {
-      return {
-        value: themeValue,
-        unit,
-        themeId: id,
-        key: 0,
-      }
-    }
-  }
-
-  return defaultState
-}
 
 export interface DimensionInputProps<K>
   extends EditorPropsWithLabel<Dimension, K> {
@@ -92,37 +53,13 @@ export function DimensionInput<K extends string = never>(
   const id = `${React.useId()}-${kebabCase(label)}`
   const range =
     providedRange === 'nonnegative' ? nonnegativeRange(units) : providedRange
-
-  const [state, dispatch] = React.useReducer(
-    reducer,
-    getInitialState(value as any, themeValues, units)
-  )
-
-  React.useEffect(() => {
-    if ((value as CSSFunctionCalc)?.type === 'calc') return
-    const unitValue = value as CSSUnitValue
-    if (
-      // Only want to call on change when the value differs
-      state.value !== unitValue?.value ||
-      state.unit !== unitValue?.unit ||
-      state.themeId !== unitValue?.themeId
-    ) {
-      const newValue: CSSUnitValue = {
-        value: state.value,
-        unit: state.unit,
-      }
-      if (state.themeId) {
-        newValue.themeId = state.themeId
-      }
-      onChange(newValue)
-    }
-  }, [state])
+  const normedValue = value as CSSUnitValue
 
   const allUnits = compact([
     themeValues.length > 0 && 'theme',
     ...units,
     keywords.length > 0 && 'keyword',
-    UnitlessUnits.Calc,
+    'calc',
   ])
 
   return (
@@ -137,34 +74,31 @@ export function DimensionInput<K extends string = never>(
           px: 1,
         }}
       >
-        {state.unit === KeywordUnits.Keyword ? (
+        {normedValue.unit === 'keyword' ? (
           <KeywordSelect
             hideIcon
-            value={`${state.value}`}
+            value={`${normedValue.value}`}
             options={keywords}
             topLevel={topLevel}
             onChange={(value) => {
-              dispatch({
-                type: 'CHANGED_INPUT_VALUE',
+              onChange({
+                ...normedValue,
                 value,
               })
             }}
           />
-        ) : state.themeId ? (
+        ) : normedValue.themeId ? (
           <ThemeValue
-            value={themeValues.findIndex((tv) => tv.id === state.themeId) + 1}
+            value={
+              themeValues.findIndex((tv) => tv.id === normedValue.themeId) + 1
+            }
             onChange={(newValue: number) => {
               const themeValue = themeValues[Math.max(0, newValue - 1)]
-              dispatch({
-                type: 'CHANGED_INPUT_TO_THEME_VALUE',
-                value: themeValue?.value ?? 0,
-                unit: (themeValue?.unit as any) ?? 'px',
-                themeId: themeValue.id,
-              })
+              onChange(themeValue)
             }}
             themeValues={themeValues}
           />
-        ) : state.unit === UnitlessUnits.Calc ? (
+        ) : normedValue.unit === 'calc' ? (
           <CalcInput
             units={allUnits}
             onChange={onChange}
@@ -179,14 +113,13 @@ export function DimensionInput<K extends string = never>(
         ) : (
           <Number
             id={id}
-            key={state.key}
-            value={state.value}
-            step={steps?.[state.unit]}
-            min={range?.[state.unit]?.[0]}
-            max={range?.[state.unit]?.[1]}
+            value={normedValue.value}
+            step={steps?.[normedValue.unit]}
+            min={range?.[normedValue.unit]?.[0]}
+            max={range?.[normedValue.unit]?.[1]}
             onChange={(newValue: number) => {
-              dispatch({
-                type: 'CHANGED_INPUT_VALUE',
+              onChange({
+                ...normedValue,
                 value: newValue,
               })
             }}
@@ -194,16 +127,14 @@ export function DimensionInput<K extends string = never>(
         )}
         <UnitSelect
           units={allUnits}
-          value={state.themeId ? ThemeUnits.Theme : state.unit}
+          value={normedValue.themeId ? 'theme' : normedValue.unit}
           onChange={(newUnit) => {
-            if (newUnit === KeywordUnits.Keyword) {
-              dispatch({
-                type: 'CHANGED_INPUT_VALUE',
-                value: keywords[0],
+            if (newUnit === 'keyword') {
+              onChange({
+                value: keywords[0] || 'inherit',
+                unit: newUnit,
               })
-            }
-
-            if (newUnit === UnitlessUnits.Calc) {
+            } else if (newUnit === 'calc') {
               onChange({
                 arguments: {
                   valueX: value as CSSUnitValue,
@@ -211,38 +142,22 @@ export function DimensionInput<K extends string = never>(
                   operand: CalcOperand.Plus,
                 },
                 type: 'calc',
+                unit: 'calc',
               })
-            }
-            if (
-              state.unit === UnitlessUnits.Calc &&
-              newUnit !== UnitlessUnits.Calc
-            ) {
+            } else if (normedValue.unit === 'calc' && newUnit !== 'calc') {
               const unitValue = (value as CSSFunctionCalc).arguments.valueX
                 .value
 
               onChange({ value: unitValue, unit: newUnit })
-              dispatch({
-                value: unitValue,
-                type: 'CHANGED_INPUT_VALUE',
-              })
-            }
-
-            if (newUnit === ThemeUnits.Theme) {
+            } else if (newUnit === 'theme') {
               const themeValue = themeValues?.[0]
-              return dispatch({
-                type: 'CHANGED_INPUT_TO_THEME_VALUE',
-                value: themeValue?.value ?? 0,
-                unit: (themeValue?.unit as any) ?? 'px',
-                themeId: themeValue?.id,
+              onChange(themeValue)
+            } else {
+              onChange({
+                unit: newUnit,
+                value: convertUnits(newUnit, normedValue, conversions, steps),
               })
             }
-
-            dispatch({
-              type: 'CHANGED_UNIT_VALUE',
-              unit: newUnit,
-              steps: steps,
-              conversions,
-            })
           }}
         />
       </div>
@@ -250,6 +165,9 @@ export function DimensionInput<K extends string = never>(
   )
 }
 
+function nonnegativeRange(units: readonly string[]): UnitRanges {
+  return Object.fromEntries(units.map((unit) => [unit, [0, Infinity]]))
+}
 interface DeleteProps {
   onRemove(): void
 }
@@ -276,8 +194,4 @@ export const DeletePropButton = ({ onRemove }: DeleteProps) => {
       <X size={14} strokeWidth={3} color="currentColor" />
     </button>
   )
-}
-
-function nonnegativeRange(units: readonly string[]): UnitRanges {
-  return Object.fromEntries(units.map((unit) => [unit, [0, Infinity]]))
 }
