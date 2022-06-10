@@ -34,6 +34,7 @@ import { AddFieldsetControl } from '../AddFieldset'
 import { ResponsiveInput } from '../Responsive'
 import IconButton from '../ui/IconButton'
 import { RefreshCw } from 'react-feather'
+import { isResponsive } from '../Responsive/Input'
 
 export const getPropertyFromField = (field: KeyArg) => {
   if (Array.isArray(field)) {
@@ -193,6 +194,16 @@ export const Editor = ({
 
   function regenerateAll(): any {
     return mapValues(allStyles, (value, property) => {
+      if (isResponsive(value)) {
+        return {
+          type: 'responsive',
+          values: value.values.map((item) => {
+            return (
+              properties[property].regenerate?.({ previousValue: item }) ?? item
+            )
+          }),
+        }
+      }
       return (
         properties[property].regenerate?.({ previousValue: value }) ?? value
       )
