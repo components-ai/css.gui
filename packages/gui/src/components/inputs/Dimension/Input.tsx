@@ -8,7 +8,7 @@ import {
 import { Number, ThemeValue, UnitSelect } from '../../primitives'
 import { EditorPropsWithLabel } from '../../../types/editor'
 import { UnitConversions } from '../../../lib/convert'
-import { compact, get, kebabCase, property } from 'lodash-es'
+import { compact, kebabCase } from 'lodash-es'
 import { CalcInput } from '../../primitives/CalcInput'
 import { KeywordSelect } from '../../primitives/KeywordSelect'
 import { InputHeader } from '../../ui/InputHeader'
