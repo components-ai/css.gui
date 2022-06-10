@@ -38,7 +38,7 @@ export function DimensionInput<K extends string = never>(
   props: DimensionInputProps<K>
 ) {
   const {
-    value,
+    value = {},
     onChange,
     label,
     range: providedRange,
