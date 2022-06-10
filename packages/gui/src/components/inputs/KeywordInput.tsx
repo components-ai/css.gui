@@ -1,14 +1,13 @@
 import { EditorPropsWithLabel } from '../../types/editor'
-import { Label } from '../primitives'
 import { KeywordSelect } from '../primitives/KeywordSelect'
+import { InputHeader } from '../ui/InputHeader'
 
 interface Props<T extends string> extends EditorPropsWithLabel<T> {
   options: T[]
 }
 export function KeywordInput<T extends string>(props: Props<T>) {
   return (
-    <div sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-      <Label>{props.label}</Label>
+    <InputHeader {...props}>
       <div
         sx={{
           border: '1px solid',
@@ -20,6 +19,6 @@ export function KeywordInput<T extends string>(props: Props<T>) {
       >
         <KeywordSelect {...props} />
       </div>
-    </div>
+    </InputHeader>
   )
 }

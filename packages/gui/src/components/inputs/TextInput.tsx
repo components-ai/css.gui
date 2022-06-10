@@ -3,11 +3,8 @@ import { InputHeader } from '../ui/InputHeader'
 
 type Props = EditorPropsWithLabel<string>
 
-export function TextInput<T extends string>({
-  value,
-  onChange,
-  ...props
-}: Props) {
+export function TextInput<T extends string>(props: Props) {
+  const { value, onChange } = props
   return (
     <InputHeader {...props}>
       <div sx={{ display: 'flex', flexDirection: 'row' }}>

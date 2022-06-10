@@ -1,5 +1,8 @@
+import { randomColor } from '../../lib/color'
 import { bindProps } from '../../lib/components'
+import { choose, randomStep } from '../../lib/random'
 import { stringifyUnit } from '../../lib/stringify'
+import { randomInt } from '../../lib/util'
 import {
   Angle,
   Color,
@@ -8,17 +11,17 @@ import {
   NumberPercentage,
   Time,
 } from '../../types/css'
-import { AngleInput } from '../inputs/AngleInput'
+import { AngleInput, angleSteps } from '../inputs/AngleInput'
 import { ColorInput } from '../inputs/ColorInput'
 import { Range } from '../inputs/Dimension/Input'
 import { KeywordInput } from '../inputs/KeywordInput'
-import { LengthInput } from '../inputs/LengthInput'
+import { lengthSteps } from '../inputs/LengthInput'
 import { NumberInput } from '../inputs/NumberInput'
 import { NumberPercentageInput } from '../inputs/NumberPercentageInput'
 import { IntegerInput, PercentageInput } from '../inputs/PrimitiveInput'
 import { TextInput } from '../inputs/TextInput'
-import { TimeInput } from '../inputs/TimeInput'
-import { DataTypeSchema } from './types'
+import { TimeInput, timeSteps } from '../inputs/TimeInput'
+import { DataTypeSchema, RegenOptions } from './types'
 
 export function color({
   defaultValue = 'transparent',
@@ -29,7 +32,15 @@ export function color({
     input: ColorInput,
     stringify: (value) => value,
     defaultValue,
+    regenerate: () => randomColor(),
   }
+}
+
+const angleRanges = {
+  deg: [0, 360],
+  turn: [0, 1],
+  rad: [0, 2 * Math.PI],
+  grad: [0, 400],
 }
 
 export function angle({
@@ -39,12 +50,26 @@ export function angle({
   defaultValue?: Angle
   keywords?: readonly string[]
 } = {}) {
+  function regenerate({ previousValue }: RegenOptions<Angle>) {
+    const unit = previousValue.unit
+    const [min, max] = angleRanges[unit]
+    return {
+      unit,
+      value: randomStep(min, max, angleSteps[unit]),
+    }
+  }
   return {
-    input: AngleInput,
+    input: bindProps(AngleInput, { regenerate }),
     stringify: stringifyUnit as any,
     defaultValue,
     keywords,
+    regenerate,
   }
+}
+
+const timeRanges = {
+  s: [0, 2],
+  ms: [0, 2000],
 }
 
 export function time({
@@ -52,10 +77,19 @@ export function time({
 }: {
   defaultValue?: Time
 } = {}) {
+  function regenerate({ previousValue }: RegenOptions<Time>) {
+    const unit = previousValue.unit
+    const [min, max] = timeRanges[unit]
+    return {
+      unit,
+      value: randomStep(min, max, timeSteps[unit]),
+    }
+  }
   return {
-    input: TimeInput,
+    input: bindProps(TimeInput, { regenerate }),
     stringify: stringifyUnit as any,
     defaultValue,
+    regenerate,
   }
 }
 
@@ -64,10 +98,18 @@ export function percentage({
 }: {
   defaultValue?: CSSUnitValue
 } = {}) {
+  function regenerate({ previousValue }: RegenOptions<CSSUnitValue>) {
+    const unit = previousValue.unit
+    return {
+      unit,
+      value: randomStep(0, 100, 0.1),
+    }
+  }
   return {
-    input: PercentageInput,
+    input: bindProps(PercentageInput, { regenerate }),
     stringify: stringifyUnit as any,
     defaultValue,
+    regenerate,
   }
 }
 
@@ -76,10 +118,14 @@ export function number({
 }: {
   defaultValue?: number
 } = {}) {
+  function regenerate() {
+    return randomStep(0, 2, 0.1)
+  }
   return {
-    input: NumberInput,
+    input: bindProps(NumberInput, regenerate),
     stringify: (x: number) => x.toString(),
     defaultValue,
+    regenerate,
   }
 }
 
@@ -95,6 +141,16 @@ export function numberPercentage({
   }
 }
 
+const lengthRanges = {
+  px: [0, 256],
+  rem: [0, 16],
+  em: [0, 16],
+  '%': [0, 100],
+  number: [0, 2],
+  fr: [0, 5],
+  // TODO remaining ranges
+}
+
 interface LengthProps {
   defaultValue?: Length
   keywords?: string[]
@@ -108,10 +164,21 @@ export function length({
   defaultValue = { value: 0, unit: 'px' },
   ...props
 }: LengthProps = {}) {
+  function regenerate({ previousValue }: RegenOptions<Length>) {
+    const unit = previousValue === '0' ? 'px' : previousValue.unit
+    // @ts-ignore
+    const [min, max] = lengthRanges[unit]
+    return {
+      unit,
+      // @ts-ignore
+      value: randomStep(min, max, lengthSteps[unit]),
+    }
+  }
   return {
-    input: bindProps(LengthInput, props),
+    input: bindProps(PercentageInput, { ...props, regenerate }),
     stringify: stringifyUnit as any,
     defaultValue,
+    regenerate,
   }
 }
 
@@ -126,8 +193,11 @@ export function integer({
   defaultValue?: CSSUnitValue
   keywords?: string[]
 } = {}) {
+  function regenerate() {
+    return randomInt(0, 11)
+  }
   return {
-    input: IntegerInput,
+    input: bindProps(IntegerInput, { regenerate }),
     stringify: stringifyUnit as any,
     defaultValue,
     keywords,
@@ -169,9 +239,13 @@ export function keyword<T extends string>(
     defaultValue?: T
   } = {}
 ): DataTypeSchema<T> {
+  function regenerate() {
+    return choose(options)
+  }
   return {
-    input: bindProps(KeywordInput, { options }),
+    input: bindProps(KeywordInput, { options, regenerate }),
     stringify: (value) => value,
     defaultValue,
+    regenerate: regenerate,
   }
 }

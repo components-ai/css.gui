@@ -1,9 +1,10 @@
 import { getInputProps } from '../../lib/util'
-import { DataTypeSchema } from './types'
+import { DataTypeSchema, RegenOptions } from './types'
 import * as Toggle from '@radix-ui/react-toggle'
 import { Link } from 'react-feather'
 import { replace } from '../../lib/array'
 import { InputContainer } from '../inputs/InputContainer'
+import { choose } from '../../lib/random'
 
 interface CreateTupleSchema<T, K> {
   itemSchema: DataTypeSchema<T>
@@ -21,7 +22,7 @@ interface CreateTupleSchema<T, K> {
 export function tupleSchema<T, K extends string = never>({
   itemSchema,
   labels,
-  keywords,
+  keywords = [],
   linkable = true,
   separator = ' ',
 }: CreateTupleSchema<T, K>): DataTypeSchema<T[] | K> {
@@ -43,6 +44,15 @@ export function tupleSchema<T, K extends string = never>({
     )
   }
 
+  function regenerate({ previousValue }: RegenOptions<T[] | K>) {
+    if (typeof previousValue === 'string') {
+      return choose(keywords)
+    }
+    return previousValue.map(
+      (item) => itemSchema.regenerate?.({ previousValue: item }) ?? item
+    )
+  }
+
   return {
     input(props) {
       const { value, onChange } = props
@@ -52,6 +62,7 @@ export function tupleSchema<T, K extends string = never>({
         <InputContainer
           {...props}
           stringify={stringify}
+          regenerate={regenerate}
           defaultValue={defaultValue}
           keywords={keywords}
         >
@@ -100,5 +111,6 @@ export function tupleSchema<T, K extends string = never>({
     },
     stringify,
     defaultValue,
+    regenerate,
   }
 }

@@ -10,7 +10,7 @@ interface Props<T extends string> {
 }
 // A select input with a label
 export function SelectInput<T extends string>(props: Props<T>) {
-  const { value, onChange, options } = props
+  const { value, onChange, options = [] } = props
 
   return (
     <InputHeader {...props}>

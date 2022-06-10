@@ -1,20 +1,12 @@
 import { Angle, ANGLE_UNITS } from '../../types/css'
 import { DimensionInput } from './Dimension'
-import { EditorProps } from '../../types/editor'
+import { EditorPropsWithLabel } from '../../types/editor'
 
 // TODO allow optional percentage for conic gradients
-export function AngleInput({
-  value,
-  onChange,
-  label,
-  keywords = [],
-}: EditorProps<Angle> & { label: string; keywords?: string[] }) {
+export function AngleInput(props: EditorPropsWithLabel<Angle>) {
   return (
     <DimensionInput
-      value={value}
-      onChange={onChange}
-      label={label}
-      keywords={keywords}
+      {...props}
       units={ANGLE_UNITS}
       steps={angleSteps}
       conversions={angleConversions}
@@ -29,7 +21,7 @@ const angleConversions = {
   grad: 400,
 }
 
-const angleSteps = {
+export const angleSteps = {
   deg: 1,
   turn: 0.01,
   rad: 0.01,
