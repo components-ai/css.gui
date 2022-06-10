@@ -2,6 +2,8 @@
 
 **_Visual development environment for CSS._**
 
+![image](https://user-images.githubusercontent.com/1748143/173137122-53686102-fda8-4da8-b75f-dd78187b8666.png)
+
 CSS GUI is a visual toolkit for editing element styles on the web.
 It's theme-aware, performant, and can be composed into any React app.
 
