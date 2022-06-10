@@ -29,7 +29,7 @@ export function useHtmlEditor() {
 
 const HtmlEditorContext = createContext<HtmlEditor>(DEFAULT_HTML_EDITOR_VALUE)
 
-const transformValueToSchema = (value: any): ElementData => {
+export const transformValueToSchema = (value: any): ElementData => {
   const transformed = Object.entries(value).reduce((acc, [key, val]) => {
     let updatedValue = val
     if (key === 'children' && Array.isArray(val)) {
