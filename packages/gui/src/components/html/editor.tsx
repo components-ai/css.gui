@@ -147,7 +147,9 @@ const TABS_CONTENT_STYLES: any = {
  */
 export function HtmlEditor({ onChange }: HtmlEditorProps) {
   const { value, selected: providedSelected, setSelected } = useHtmlEditor()
+
   const selected = providedSelected || []
+  const nodeValue = getChildAtPath(value, selected)
 
   return (
     <div
@@ -192,38 +194,38 @@ export function HtmlEditor({ onChange }: HtmlEditorProps) {
           </Tabs.Trigger>
         </Tabs.List>
         <Tabs.Content sx={TABS_CONTENT_STYLES} value="node">
-
           <div sx={{ pt: 3, px: 3 }}>
-              <Editor
-                styles={value.style ?? {}}
-                onChange={(newStyles) => onChange({ ...value, style: newStyles })}
-                showAddProperties
-              />
+            <Editor
+              styles={nodeValue.style ?? {}}
+              onChange={(newStyles) => {
+                const newItem = { ...nodeValue, style: newStyles }
+                onChange(setChildAtPath(value, selected, newItem))
+              }}
+              showAddProperties
+            />
           </div>
         </Tabs.Content>
         <Tabs.Content sx={TABS_CONTENT_STYLES} value="tree">
-          <div sx={{ 
-
-          }}>
-          <NodeEditor
-            value={getChildAtPath(value, selected)}
-            onChange={(newItem) =>
-              onChange(setChildAtPath(value, selected, newItem))
-            }
-            onRemove={() => {
-              onChange(removeChildAtPath(value, selected))
-              const newPath = [...selected]
-              newPath.pop()
-              setSelected(newPath)
-            }}
-          />
-          <TreeNode
-            value={value}
-            onSelect={setSelected}
-            path={[]}
-            onChange={onChange}
-          />
-        </div>
+          <div sx={{}}>
+            <NodeEditor
+              value={nodeValue}
+              onChange={(newItem) =>
+                onChange(setChildAtPath(value, selected, newItem))
+              }
+              onRemove={() => {
+                onChange(removeChildAtPath(value, selected))
+                const newPath = [...selected]
+                newPath.pop()
+                setSelected(newPath)
+              }}
+            />
+            <TreeNode
+              value={value}
+              onSelect={setSelected}
+              path={[]}
+              onChange={onChange}
+            />
+          </div>
         </Tabs.Content>
         <Tabs.Content sx={TABS_CONTENT_STYLES} value="export">
           <Export value={value} />
