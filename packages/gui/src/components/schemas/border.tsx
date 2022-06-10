@@ -45,7 +45,7 @@ const borderStyleItem = keyword([
   'ridge',
   'inset',
   'outset',
-], { themeProperty: 'borderStyles'})
+], { themeProperty: 'borderStyles' })
 export const borderTopStyle = borderStyleItem
 export const borderRightStyle = borderStyleItem
 export const borderBottomStyle = borderStyleItem

@@ -18,7 +18,7 @@ export default function SystemPicker({ value, onChange }: Props) {
               name="system"
               value={value.value}
               id={keyword}
-              onChange={() => onChange({ value: keyword})}
+              onChange={() => onChange({ value: keyword })}
             />
             {keyword}
           </label>

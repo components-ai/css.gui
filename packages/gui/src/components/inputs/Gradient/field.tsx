@@ -39,7 +39,7 @@ export const GradientField = (props: GradientFieldProps) => {
           }}
         />
       </div>
-      {/* <GradientEditor {...props} /> */}
+      <GradientEditor {...props} />
       <div sx={{ mt: 3 }}>
         <GradientStopsField
           {...getInputProps(props, 'stops')}
