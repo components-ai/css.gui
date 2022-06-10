@@ -5,6 +5,7 @@ import {
   isInternalCSSClass,
 } from '../classes'
 import { hasPseudoSyntax, removePseudoSyntax } from '../pseudos'
+import { isNestedSelectorWithSyntax } from '../util'
 
 export const stylesToEditorSchema = (styles: any) => {
   if (!styles) {
@@ -26,6 +27,13 @@ export const stylesToEditorSchema = (styles: any) => {
       value = stylesToEditorSchema(rawValue)
     }
     
+    if (Array.isArray(rawValue)) {
+      value = rawValue.map((v) => {
+        // transform me
+        v = transformNonPimitive(v)
+        return v
+      })
+    }
     //@ts-ignore  
     if (rawProperties[property]?.input === 'color' && typeof value === 'string') {
       value = { value }
@@ -37,4 +45,26 @@ export const stylesToEditorSchema = (styles: any) => {
   }, {})
 
   return stylesSchema
+}
+
+const transformNonPimitive = (value: any) => {
+  const transformed = Object.entries(value).reduce((acc, [k, val]) => {
+    let newValue = val
+    if (Array.isArray(val)) {
+      newValue = val.map((v) => transformNonPimitive(v))
+    } else if (typeof val === 'object') {
+      newValue = transformNonPimitive(val)
+    }
+
+    if (rawProperties[k]?.input === 'color' && typeof val === 'string') {
+      newValue = { value: val }
+    }
+    
+    return {
+      ...acc,
+      [k]: newValue
+    }
+  }, {})
+
+  return transformed
 }
