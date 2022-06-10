@@ -19,6 +19,8 @@ export const DraggableInput = ({
   max,
 }: DraggableLabelProps) => {
   const [dragging, setDragging] = React.useState<boolean>(false)
+  // Keep track of an internal value so that when the user types in an invalid number,
+  // we just wait until the value is valid again to update
   const [internalValue, setInternalValue] = React.useState<number | string>(
     value
   )
@@ -32,6 +34,12 @@ export const DraggableInput = ({
     setInternalValue(inRangeValue)
     onUpdate(inRangeValue)
   }
+
+  React.useEffect(() => {
+    if (value !== internalValue) {
+      setInternalValue(value)
+    }
+  }, [value])
 
   const bind = useDrag(
     ({ dragging, first, last, tap, movement: [dx] }) => {

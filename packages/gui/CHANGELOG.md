@@ -1,5 +1,34 @@
 # @compai/css-gui
 
+## 0.0.107
+
+### Patch Changes
+
+- 0fa831b: Add tabs for node/tree/export, add copy to clipboarfor exported HTML + CSS
+- 00e15a3: Fix node editing in tabs
+- 1042ffc: Design tweaks to editor
+- 438ad58: Fix navigation alignment
+- 2474219: Force styles editor re-render when selection changes in html editor
+
+## 0.0.106
+
+### Patch Changes
+
+- f9d81c3: Changes label copy
+- 91a1e64: Design tweaks to editor
+
+## 0.0.105
+
+### Patch Changes
+
+- e1b17b3: Improve fuzzy sort by ignoring hypen in property names
+
+## 0.0.104
+
+### Patch Changes
+
+- 0b70d4a: Don't set outline or user select when not in canvas mode
+
 ## 0.0.103
 
 ### Patch Changes
