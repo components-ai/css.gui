@@ -41,19 +41,19 @@ const initialStyles = {
       unit: 'px',
     },
   ],
-  borderLeftColor:  '#6465ff',
+  borderLeftColor: '#6465ff',
   borderLeftStyle: 'double',
   borderLeftWidth: {
     value: 16,
     unit: 'px',
   },
-  borderRightColor:  '#6465ff',
+  borderRightColor: '#6465ff',
   borderRightStyle: 'groove',
   borderRightWidth: {
     value: 16,
     unit: 'px',
   },
-  borderTopColor: '#6465ff' ,
+  borderTopColor: '#6465ff',
   borderTopStyle: 'dotted',
   borderTopWidth: {
     value: 16,

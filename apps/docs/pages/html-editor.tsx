@@ -251,7 +251,7 @@ const initialValue: any = {
           style: {
             appearance: 'none',
             color: 'text',
-            backgroundColor:'transparent',
+            backgroundColor: 'transparent',
             borderWidth: { 
               top: { value: 1, unit: 'px' },
               bottom: { value: 1, unit: 'px' },
@@ -604,46 +604,6 @@ const initialValue: any = {
         { 
           tagName: 'input',
           style: {
-            cursor: 'pointer',
-            color: 'text',
-            backgroundColor: 'transparent',
-            fontSize: { value: 1, unit: 'rem' },
-            fontWeight: 600,
-            borderRadius: { value: 6, unit: 'px' },
-            paddingTop: { value: 16, unit: 'px' },
-            paddingBottom: { value: 16, unit: 'px' },
-            paddingLeft: { value: 64, unit: 'px' },
-            paddingRight: { value: 64, unit: 'px'},
-            appearance: 'none',
-            boxShadow: [{
-              inset: true,
-              spread: { value: 2, unit: 'px' },
-              blur: { value: 0, unit: 'px' },
-              offsetX: { value: 0, unit: 'px' },
-              offsetY: { value: 0, unit: 'px' },
-              color: 'currentColor',
-            }],
-            borderStyle: {
-              top: 'none',
-              bottom: 'none',
-              left: 'none',
-              right: 'none',
-            },
-            borderWidth: { value: 0, unit: 'px' },
-            borderColor: 'transparent',
-            transition: 'all .2s ease-in-out',
-            ':hover': {
-              color: 'primary',
-            }
-          },
-          attributes: {
-            type: 'button',
-            value: 'Button input',
-          },
-        },
-        { 
-          tagName: 'input',
-          style: {
             color: 'text',
             backgroundColor: 'transparent',
             borderWidth: { 
@@ -714,45 +674,6 @@ const initialValue: any = {
             value: 'https://components.ai'
           },
         },
-        { 
-          tagName: 'input',
-          style: {
-            cursor: 'pointer',
-            color: 'primary',
-            backgroundColor: 'text',
-            fontSize: { value: 1, unit: 'rem' },
-            fontWeight: 600,
-            borderRadius: { value: 6, unit: 'px' },
-            paddingTop: { value: 16, unit: 'px' },
-            paddingBottom: { value: 16, unit: 'px' },
-            paddingLeft: { value: 64, unit: 'px' },
-            paddingRight: { value: 64, unit: 'px'},
-            appearance: 'none',
-            boxShadow: [{
-              inset: false,
-              spread: { value: 0, unit: 'px' },
-              blur: { value: 0, unit: 'px' },
-              offsetX: { value: 0, unit: 'px' },
-              offsetY: { value: 0, unit: 'px' },
-              color: 'transparent',
-            }],
-            borderStyle: {
-              top: 'none',
-              bottom: 'none',
-              left: 'none',
-              right: 'none',
-            },
-            borderWidth: { value: 0, unit: 'px' },
-            borderColor: 'transparent',
-            transition: 'all .2s ease-in-out',
-            ':hover': {
-              color: 'primaryHover',
-            }
-          },
-          attributes: {
-            type: 'submit',
-          },
-        },
         {
           tagName: 'div',
           children: [
@@ -769,7 +690,7 @@ const initialValue: any = {
             { 
               tagName: 'input',
               style: {
-                accentColor: '#6465ff',
+                accentColor: '#6465ff', 
               },
               attributes: {
                 type: 'checkbox',
@@ -783,7 +704,7 @@ const initialValue: any = {
           children: [{ 
             tagName: 'input',
             style: {
-              accentColor: '#6465ff',
+              accentColor: '#6465ff', 
             },
             attributes: {
               type: 'radio',
@@ -793,7 +714,7 @@ const initialValue: any = {
           { 
             tagName: 'input',
             style: {
-              accentColor: '#6465ff',
+              accentColor: '#6465ff', 
             },
             attributes: {
               type: 'radio',
@@ -805,7 +726,7 @@ const initialValue: any = {
           tagName: 'input',
           style: {
             cursor: 'pointer',
-            color: '#6465ff',
+            color: '#6465ff', 
             backgroundColor: '#f7f1ff',
             fontSize: { value: 1, unit: 'rem' },
             fontWeight: 600,
