@@ -1,5 +1,15 @@
 # @compai/css-gui
 
+## 0.0.107
+
+### Patch Changes
+
+- 0fa831b: Add tabs for node/tree/export, add copy to clipboarfor exported HTML + CSS
+- 00e15a3: Fix node editing in tabs
+- 1042ffc: Design tweaks to editor
+- 438ad58: Fix navigation alignment
+- 2474219: Force styles editor re-render when selection changes in html editor
+
 ## 0.0.106
 
 ### Patch Changes
