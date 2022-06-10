@@ -5,8 +5,10 @@ import { defaultTheme } from '../../data/default-theme'
 
 const initialStyles = {
   padding: {
-    value: 64,
-    unit: 'px',
+    top: {
+      value: 64,
+      unit: 'px',
+    },
   },
   borderStyle: {
     top: 'solid',
