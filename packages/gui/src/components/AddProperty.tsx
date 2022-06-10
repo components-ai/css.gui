@@ -68,7 +68,7 @@ export const AddPropertyControl = ({
 
     const styleItems = Object.keys(styles)
     const filteredItems = fuzzysort
-      .go(input, allProperties)
+      .go(input.replace(/-/g, ''), allProperties)
       .map((res) => res.target)
       .filter((item) => !styleItems.includes(item))
     setInputItems(filteredItems)

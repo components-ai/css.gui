@@ -1,5 +1,30 @@
 # @compai/css-gui
 
+## 0.0.106
+
+### Patch Changes
+
+- f9d81c3: Changes label copy
+- 91a1e64: Design tweaks to editor
+
+## 0.0.105
+
+### Patch Changes
+
+- e1b17b3: Improve fuzzy sort by ignoring hypen in property names
+
+## 0.0.104
+
+### Patch Changes
+
+- 0b70d4a: Don't set outline or user select when not in canvas mode
+
+## 0.0.103
+
+### Patch Changes
+
+- 12d442b: Minor internal improvements to inputs
+
 ## 0.0.102
 
 ### Patch Changes
