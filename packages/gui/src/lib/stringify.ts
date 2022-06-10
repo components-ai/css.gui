@@ -1,4 +1,5 @@
-import { get, isElement, isNil } from 'lodash-es'
+import { isElement, isNil } from 'lodash-es'
+import { get } from 'theme-ui'
 import {
   Color,
   Length,

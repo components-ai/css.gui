@@ -8,7 +8,7 @@ import {
 import { Number, ThemeValue, UnitSelect } from '../../primitives'
 import { EditorPropsWithLabel } from '../../../types/editor'
 import { UnitConversions } from '../../../lib/convert'
-import { compact, get, kebabCase } from 'lodash-es'
+import { compact, get, kebabCase, property } from 'lodash-es'
 import { CalcInput } from '../../primitives/CalcInput'
 import { KeywordSelect } from '../../primitives/KeywordSelect'
 import { InputHeader } from '../../ui/InputHeader'
@@ -96,10 +96,11 @@ export function DimensionInput<K extends string = never>(
         ) : normedValue.themePath ? (
           <ThemeValue
           // @ts-ignore
-            value={parseInt(normedValue.themePath!.match(/[0-9+]/)[0]) + 1}
+            value={parseInt(normedValue.themePath!.match(/0-9+/)[0]) + 1}
             onChange={(newValue: number) => {
-              const themeValue = themeValues[Math.max(0, newValue - 1)]
-              onChange(themeValue)
+              const idx = Math.max(0, newValue - 1)
+              const themeValue = themeValues[idx]
+              onChange({ ...themeValue, themePath: `${property}.${idx}`})
             }}
             themeValues={themeValues}
           />
@@ -156,7 +157,7 @@ export function DimensionInput<K extends string = never>(
               onChange({ value: unitValue, unit: newUnit })
             } else if (newUnit === 'theme') {
               const themeValue = themeValues?.[0]
-              onChange({ ...themeValue, themePath: `${themeProperty}.[${0}]` })
+              onChange({ ...themeValue, themePath: `${themeProperty}.${0}` })
             } else {
               onChange({
                 unit: newUnit,

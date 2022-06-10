@@ -46,7 +46,10 @@ export function PreviewPalettePicker({
                       aspectRatio: '1 / 1',
                       backgroundColor: color.value,
                     }}
-                    onClick={() => onChange({ value: color.value })} // add themePath
+                    onClick={() => onChange({
+                      value: color.value,
+                      themePath: `colors.${colorGroup.name}.${i}`
+                    })}
                   />
                 )
               })}

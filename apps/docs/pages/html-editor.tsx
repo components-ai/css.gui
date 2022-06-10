@@ -185,8 +185,8 @@ const initialValue: any = {
                   type: 'linear',
                   angle: { value: 45, unit: 'deg' },
                   stops: [
-                    { color: '#ff33cc', hinting: 0, },
-                    { color: '#ffcc33', hinting: 100, },
+                    { color: { value: '#ff33cc' }, hinting: 0, },
+                    { color: { value: '#ffcc33' }, hinting: 100, },
                   ]
 
                 }

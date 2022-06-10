@@ -40,7 +40,7 @@ export default function PalettePicker({ value, onChange, theme }: Props) {
                     }}
                     onClick={() => onChange({
                       value: color.value,
-                      themePath: `colors.${colorGroup.name}.[${i}]`
+                      themePath: `colors.${colorGroup.name}.${i}`
                     })}
                   />
                 )
