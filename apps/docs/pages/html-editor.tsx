@@ -12,6 +12,7 @@ const initialValue: any = {
       value: 128,
       unit: 'px',
     },
+    backgroundColor: 'tomato',
   },
   children: [
     { 
@@ -31,7 +32,7 @@ const initialValue: any = {
           tagName: 'h1',
           attributes: {},
           style: {
-            color: { value: 'primary' },
+            color: 'primary',
             fontSize: {
               type: 'responsive',
               values: [

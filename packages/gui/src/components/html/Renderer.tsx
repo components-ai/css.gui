@@ -36,13 +36,10 @@ function ElementRenderer({ value, canvas, path }: ElementRendererProps) {
   const { attributes = {}, style = {}, children = [] } = value
   const Tag: any = value.tagName || 'div'
 
-  const sx = toCSSObject(
-    {
+  const sx = toCSSObject({
     ...style,
     ...DEFAULT_ELEMENT_STYLES_IN_CANVAS,
-    },
-    theme
-  )
+  }, theme)
 
   if (isSamePath(path, selected)) {
     sx.outlineWidth = 'thin'

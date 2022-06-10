@@ -1,3 +1,4 @@
+import { rawProperties } from '../../data/properties'
 import {
   addInternalCSSClassSyntax,
   isCSSClass,
@@ -24,7 +25,11 @@ export const stylesToEditorSchema = (styles: any) => {
       property = addInternalCSSClassSyntax(rawProperty)
       value = stylesToEditorSchema(rawValue)
     }
-
+    
+    //@ts-ignore  
+    if (rawProperties[property]?.input === 'color' && typeof value === 'string') {
+      value = { value }
+    }
     return {
       [property]: value,
       ...acc,
