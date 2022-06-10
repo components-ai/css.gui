@@ -3,8 +3,8 @@ import { useState } from 'react'
 import { defaultTheme } from '../../data/default-theme'
 
 const initialStyles = {
-  color: { value: '#fff' },
-  backgroundColor:  { value: '#6465ff' },
+  color: '#fff',
+  backgroundColor: '#6465ff',
   borderRadius: {
     value: 6,
     unit: 'px',
@@ -20,24 +20,24 @@ const initialStyles = {
     value: 0,
     unit: 'px',
   },
-  outlineColor: {value: 'rgba(255,255,255,0)'},
+  outlineColor: 'rgba(255,255,255,0)',
   outlineOffset: {
     value: 0,
     unit: 'px',
   },
   'hover': {
-    color: { value: '#ffffff' },
-    backgroundColor: { value: '#3e38b0' },
-    outlineColor: { value: '#3e38b0' },
+    color: '#ffffff',
+    backgroundColor: '#3e38b0',
+    outlineColor: '#3e38b0',
   },
   'focus': {
-    color: { value: '#ffffff' },
-    backgroundColor: { value: '#3e38b0'},
+    color: '#ffffff',
+    backgroundColor: '#3e38b0',
     outlineWidth: {
       value: 4,
       unit: 'px',
     },
-    outlineColor: { value: '#3e38b0'},
+    outlineColor: '#3e38b0',
     outlineStyle: 'solid',
     outlineOffset: {
       value: 4,
@@ -45,9 +45,9 @@ const initialStyles = {
     }
   },
   'active': {
-    color: { value: '#ffffff' },
-    backgroundColor: { value: '#8170ff' },
-    outlineColor: { value: '#8170ff' },
+    color: '#ffffff',
+    backgroundColor: '#8170ff',
+    outlineColor: '#8170ff',
   },
 }
 

@@ -6,7 +6,7 @@ export const initialStyles: any = {
       blur: { value: 0, unit: 'px' },
       offsetX: { value: 0, unit: 'px' },
       offsetY: { value: 0, unit: 'px' },
-      color: { value: '#6465ff' },
+      color: '#6465ff',
     },
   ],
   'hover': {
@@ -17,7 +17,7 @@ export const initialStyles: any = {
         blur: { value: 0, unit: 'px' },
         offsetX: { value: 8, unit: 'px' },
         offsetY: { value: 8, unit: 'px' },
-        color: { value: '#f6e857'},
+        color: '#f6e857',
       },
       {
         inset: false,
@@ -25,7 +25,7 @@ export const initialStyles: any = {
         blur: { value: 0, unit: 'px' },
         offsetX: { value: -8, unit: 'px' },
         offsetY: { value: -8, unit: 'px' },
-        color: { value: '#6016ee' },
+        color: '#6016ee',
       },
     ],
   }

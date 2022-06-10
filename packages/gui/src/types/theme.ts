@@ -174,7 +174,6 @@ export type TextStyleProperty = {
   unit?: string
 }
 
-// TODO: fill out type
 export type Transition = {
   id: string,
   name: string
