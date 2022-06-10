@@ -196,6 +196,7 @@ export function HtmlEditor({ onChange }: HtmlEditorProps) {
         <Tabs.Content sx={TABS_CONTENT_STYLES} value="node">
           <div sx={{ pt: 3, px: 3 }}>
             <Editor
+              key={selected.join('-')}
               styles={nodeValue.style ?? {}}
               onChange={(newStyles) => {
                 const newItem = { ...nodeValue, style: newStyles }
