@@ -15,7 +15,7 @@ import { AngleInput, angleSteps } from '../inputs/AngleInput'
 import { ColorInput } from '../inputs/ColorInput'
 import { Range } from '../inputs/Dimension/Input'
 import { KeywordInput } from '../inputs/KeywordInput'
-import { lengthSteps } from '../inputs/LengthInput'
+import { LengthInput, lengthSteps } from '../inputs/LengthInput'
 import { NumberInput } from '../inputs/NumberInput'
 import { NumberPercentageInput } from '../inputs/NumberPercentageInput'
 import { IntegerInput, PercentageInput } from '../inputs/PrimitiveInput'
@@ -175,7 +175,7 @@ export function length({
     }
   }
   return {
-    input: bindProps(PercentageInput, { ...props, regenerate }),
+    input: bindProps(LengthInput, { ...props, regenerate }),
     stringify: stringifyUnit as any,
     defaultValue,
     regenerate,
