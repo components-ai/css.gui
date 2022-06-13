@@ -18,7 +18,7 @@ const timeConversions = {
   s: 1,
 }
 
-const timeSteps = {
+export const timeSteps = {
   ms: 25,
   s: 0.025,
 }

@@ -1,20 +1,48 @@
 import { ReactNode } from 'react'
-import { ChevronDown, ChevronUp, X } from 'react-feather'
+import { ChevronDown, ChevronUp, RefreshCw, X } from 'react-feather'
 import { EditorPropsWithLabel } from '../../types/editor'
 import { Label } from '../primitives'
 import IconButton from './IconButton'
 
-interface Props
-  extends Omit<EditorPropsWithLabel<any>, 'value' | 'onChange' | 'keywords'> {
+interface Props extends Omit<EditorPropsWithLabel<any>, 'keywords'> {
   children?: ReactNode
 }
 
-export function InputHeader({ children, label, onRemove, reorder }: Props) {
+export function InputHeader({
+  children,
+  label,
+  value,
+  onChange,
+  onRemove,
+  regenerate,
+  reorder,
+}: Props) {
   return (
-    <div sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
+    <div
+      sx={{
+        display: 'flex',
+        gap: 1,
+        alignItems: 'center',
+        // ':not(:hover) [data-type="regen-button"]': {
+        //   opacity: 0,
+        // },
+      }}
+    >
       {label && <Label>{label}</Label>}
       {children}
-      <div sx={{ ml: 'auto' }}>
+      <div sx={{ ml: 'auto', display: 'flex', gap: 1, alignItems: 'center' }}>
+        {regenerate && (
+          <IconButton
+            data-type="regen-button"
+            title="regenerate"
+            sx={{ transition: 'opacity 150ms' }}
+            onClick={() => {
+              onChange(regenerate({ previousValue: value }))
+            }}
+          >
+            <RefreshCw size={12} />
+          </IconButton>
+        )}
         {onRemove && <DeleteButton onRemove={onRemove} />}
       </div>
       {reorder && (
@@ -47,18 +75,7 @@ interface DeleteButtonProps {
 }
 export const DeleteButton = ({ onRemove }: DeleteButtonProps) => {
   return (
-    <IconButton
-      sx={{
-        cursor: 'pointer',
-        color: 'muted',
-        transition: '.2s color ease-in-out',
-        mb: 1,
-        ':hover': {
-          color: 'text',
-        },
-      }}
-      onClick={() => onRemove()}
-    >
+    <IconButton onClick={() => onRemove()}>
       <X size={14} strokeWidth={3} color="currentColor" />
     </IconButton>
   )

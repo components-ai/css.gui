@@ -8,7 +8,7 @@ interface Props extends EditorPropsWithLabel<number> {
   step?: number
 }
 /** A labelled number field */
-export function NumberInput({ value, ...props }: Props) {
+export function NumberInput(props: Props) {
   return (
     <InputHeader {...props}>
       <div
@@ -20,7 +20,7 @@ export function NumberInput({ value, ...props }: Props) {
           width: 'min-content',
         }}
       >
-        <Number value={value} {...props} />
+        <Number {...props} />
       </div>
     </InputHeader>
   )

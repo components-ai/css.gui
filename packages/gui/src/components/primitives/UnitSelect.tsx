@@ -6,7 +6,7 @@ interface Props extends EditorProps<string> {
 }
 export const UnitSelect = ({ units, value, onChange }: Props) => {
   return (
-    <Select.Root value={value} onValueChange={onChange}>
+    <Select.Root value={value ?? units[0]} onValueChange={onChange}>
       <Select.Trigger>
         <Select.Value>
           {!['number', 'keyword'].includes(value) && value}

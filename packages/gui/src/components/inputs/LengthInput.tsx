@@ -54,7 +54,7 @@ const lengthConversions = {
   em: 1,
 }
 
-const lengthSteps = {
+export const lengthSteps = {
   number: 0.1,
   theme: 1,
   px: 1,
