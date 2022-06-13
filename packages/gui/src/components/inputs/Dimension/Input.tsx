@@ -95,12 +95,11 @@ export function DimensionInput<K extends string = never>(
           />
         ) : normedValue.themePath ? (
           <ThemeValue
-          // @ts-ignore
-            value={parseInt(normedValue.themePath!.match(/0-9+/)[0]) + 1}
+            value={parseInt(normedValue.themePath!.match(/[0-9]+/)![0]) + 1}  
             onChange={(newValue: number) => {
               const idx = Math.max(0, newValue - 1)
               const themeValue = themeValues[idx]
-              onChange({ ...themeValue, themePath: `${property}.${idx}`})
+              onChange({ ...themeValue, themePath: `${themeProperty}.${idx}`})
             }}
             themeValues={themeValues}
           />
