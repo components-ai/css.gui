@@ -15,7 +15,7 @@ export const stringifyStops = (stops: GradientStop[], unit: string = '%', theme?
   return sortBy(stops, (stop) => stop.hinting)
     ?.filter(Boolean)
     ?.map(({ color, hinting }) => {
-      let resolved = theme && get(theme, color.themePath, color)
+      let resolved = get((theme || {}), color.themePath, color)
       return `${resolved.value} ${hinting}${unit}`
     })
     ?.join(', ')
