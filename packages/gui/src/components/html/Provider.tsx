@@ -1,6 +1,9 @@
-import { createContext, ReactNode, useContext, useState } from 'react'
+import { property } from 'lodash-es'
+import { Children, cloneElement, createContext, isValidElement, ReactElement, ReactNode, useContext, useEffect, useState } from 'react'
+import { rawProperties } from '../../data/properties'
 import { htmlToEditorSchema } from '../../lib'
-import { HtmlNode, ElementPath } from './types'
+import { stylesToEditorSchema } from '../../lib/transformers/styles-to-editor-schema'
+import { HtmlNode, ElementPath, ElementData } from './types'
 
 const DEFAULT_HTML_EDITOR_VALUE = {
   selected: [],
@@ -28,6 +31,23 @@ export function useHtmlEditor() {
 
 const HtmlEditorContext = createContext<HtmlEditor>(DEFAULT_HTML_EDITOR_VALUE)
 
+export const transformValueToSchema = (value: any): ElementData => {
+  const transformed = Object.entries(value).reduce((acc, [key, val]) => {
+    let updatedValue = val
+    if (key === 'children' && Array.isArray(val)) {
+      updatedValue = val.map((child) => transformValueToSchema(child))
+    } else if (key === 'style') {
+      updatedValue = stylesToEditorSchema(val)
+    }
+    return {
+      [key]: updatedValue,
+      ...acc,
+    }
+  }, {})
+
+  return transformed as ElementData
+}
+
 type HtmlEditorProviderProps = {
   value: HtmlNode
   children: ReactNode
@@ -37,9 +57,10 @@ export function HtmlEditorProvider({
   value,
 }: HtmlEditorProviderProps) {
   const [selected, setSelected] = useState<ElementPath | null>([])
+  const transformedValue = transformValueToSchema(value)
 
   const fullContext = {
-    value,
+    value: transformedValue,
     selected,
     setSelected: (newSelection: ElementPath | null) =>
       setSelected(newSelection),

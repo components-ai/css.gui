@@ -1,5 +1,7 @@
 import { sortBy } from 'lodash-es'
+import { get } from 'theme-ui'
 import { bindProps } from '../../lib/components'
+import { Theme } from '../../types/theme'
 import { randomInt } from '../../lib/util'
 import GradientStopsField from '../inputs/Gradient/stops'
 import { GradientStop } from '../inputs/Gradient/types'
@@ -9,20 +11,23 @@ import { position } from './position'
 import { angle, color, keyword } from './primitives'
 import { DataTypeSchema } from './types'
 
-export const stringifyStops = (stops: GradientStop[], unit: string = '%') => {
+export const stringifyStops = (stops: GradientStop[], unit: string = '%', theme?: Theme) => {
   return sortBy(stops, (stop) => stop.hinting)
     ?.filter(Boolean)
-    ?.map(({ color, hinting }) => `${color} ${hinting}${unit}`)
+    ?.map(({ color, hinting }) => {
+      let resolved = get((theme || {}), color.themePath, color)
+      return `${resolved.value} ${hinting}${unit}`
+    })
     ?.join(', ')
 }
 
 function stops(repeating: boolean = false): DataTypeSchema<GradientStop[]> {
   return {
     input: bindProps(GradientStopsField, { repeating }),
-    stringify: stringifyStops,
+    stringify: (value, theme) => stringifyStops(value, '%', theme),
     defaultValue: [
-      { color: 'black', hinting: 0 },
-      { color: 'transparent', hinting: 100 },
+      { color: { value: 'black' }, hinting: 0 },
+      { color: { value: 'transparent' }, hinting: 100 },
     ],
     regenerate({ previousValue }) {
       const newStops = previousValue.map(() => randomInt(0, 101))

@@ -7,7 +7,8 @@ export type ColorObject = {
   themePath?: string
 }
 
-export type Color = string
+export type Color = ColorObject
+
 export type FontFamilyType = { [k: string]: any }
 
 export const enum FontRelativeLengthUnits {
@@ -110,7 +111,7 @@ export type CalcFunction = {
 export type CSSUnitValue = {
   value: number | string
   unit: string
-  themeId?: string
+  themePath?: string
 }
 export type Dimension = CSSUnitValue | CSSFunctionCalc
 export type GenericLength = '0'

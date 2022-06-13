@@ -1,11 +1,14 @@
 import { isElement, isNil } from 'lodash-es'
+import { get } from 'theme-ui'
 import {
   Color,
   Length,
   MultidimensionalLength,
   Position,
   CSSFunctionCalc,
+  ColorObject,
 } from '../types/css'
+import { Theme } from '../types/theme'
 import {
   addCSSClassSyntax,
   isInternalCSSClass,
@@ -32,11 +35,12 @@ export const stringifyCalcFunction = ({ arguments: args }: CSSFunctionCalc) => {
 }
 
 export function stringifyUnit(
-  providedValue: Length | MultidimensionalLength
+  providedValue: Length | MultidimensionalLength | Color,
+  theme?: Theme
 ): string | number | null {
   if (isMultidimensionalLength(providedValue)) {
     return (providedValue as MultidimensionalLength).values
-      .map(stringifyUnit)
+      .map((v) => stringifyUnit(v, theme))
       .join(' ')
   }
 
@@ -49,8 +53,15 @@ export function stringifyUnit(
     return null
   }
 
-  if (['theme', 'raw', 'keyword', 'calc'].includes(value.unit)) {
+  if (['raw', 'keyword', 'calc'].includes(value.unit)) {
     return value.value
+  }
+
+  if (value.themePath) {
+    const resolvedValue = theme && value.themePath && get(theme, value.themePath)
+    if (resolvedValue) {
+      return `${resolvedValue.value}${resolvedValue.unit || ''}`
+    }
   }
 
   if (value.unit === 'string') {
@@ -62,10 +73,8 @@ export function stringifyUnit(
     return String(value.value)
   }
 
-  return `${value.value}${value.unit || DEFAULT_LENGTH_UNIT}`
+  return `${value.value}${value.unit || ''}`
 }
-
-const DEFAULT_LENGTH_UNIT = 'px'
 
 export function stringifyFunction(
   name: string,
@@ -74,7 +83,7 @@ export function stringifyFunction(
 ) {
   return `${name}(${properties
     .filter((x) => !isNil(x))
-    .map(stringifyPrimitive)
+    .map((x) => stringifyPrimitive(x))
     .join(separator)})`
 }
 
@@ -92,14 +101,14 @@ export function stringifyPosition(position: Position) {
   return `${stringifyUnit(position.x)} ${stringifyUnit(position.y)}`
 }
 
-export function stringifyPrimitive(value: Primitive) {
+export function stringifyPrimitive(value: Primitive, theme?: Theme) {
   if (typeof value === 'number') {
     return '' + value
   }
   if (typeof value === 'string') {
     return value
   }
-  return stringifyUnit(value)
+  return stringifyUnit(value, theme)
 }
 
-type Primitive = Length | number | Color | MultidimensionalLength
+type Primitive = Length | number | Color | MultidimensionalLength | string

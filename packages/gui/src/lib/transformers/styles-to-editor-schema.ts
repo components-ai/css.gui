@@ -1,9 +1,18 @@
+import { rawProperties } from '../../data/properties'
 import {
   addInternalCSSClassSyntax,
   isCSSClass,
   isInternalCSSClass,
 } from '../classes'
 import { hasPseudoSyntax, removePseudoSyntax } from '../pseudos'
+
+const transformProperty = (property: string, value: any) => {
+  if (rawProperties[property]?.input === 'color' && typeof value === 'string') {
+    return { value }
+  }
+
+  return value
+}
 
 export const stylesToEditorSchema = (styles: any) => {
   if (!styles) {
@@ -24,7 +33,11 @@ export const stylesToEditorSchema = (styles: any) => {
       property = addInternalCSSClassSyntax(rawProperty)
       value = stylesToEditorSchema(rawValue)
     }
-
+    
+    if (Array.isArray(value)) {
+      value = value.map((v) => transformComplexObject(v))
+    }
+    value = transformProperty(rawProperty, value)
     return {
       [property]: value,
       ...acc,
@@ -32,4 +45,22 @@ export const stylesToEditorSchema = (styles: any) => {
   }, {})
 
   return stylesSchema
+}
+
+const transformComplexObject = (value: any) => {
+  const transformed = Object.entries(value).reduce((acc, [k, val]) => {
+    let newValue = transformProperty(k, val)
+    if (Array.isArray(val)) {
+      newValue = val.map((v) => transformComplexObject(v))
+    } else if (typeof val === 'object') {
+      newValue = transformComplexObject(val)
+    }
+    
+    return {
+      ...acc,
+      [k]: newValue
+    }
+  }, {})
+
+  return transformed
 }

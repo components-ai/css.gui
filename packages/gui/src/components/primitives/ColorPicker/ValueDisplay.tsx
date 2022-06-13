@@ -3,14 +3,15 @@ import Checkerboard from './Checkerboard'
 import { AlertTriangle } from 'react-feather'
 import * as Popover from '@radix-ui/react-popover'
 import { useState } from 'react'
+import { Color } from '../../../types/css'
 
 interface Props {
-  value: string
-  onChange(value: string): void
+  value: Color
+  onChange(value: Color): void
 }
 /** Displays a swatch of the color and its current value */
 export default function ColorValueDisplay({ value, onChange }: Props) {
-  const colorMode = getColorMode(value)
+  const colorMode = getColorMode(value.value)
   return (
     <div
       sx={{
@@ -34,7 +35,7 @@ export default function ColorValueDisplay({ value, onChange }: Props) {
           sx={{
             position: 'absolute',
             inset: 0,
-            ...withFallback(value, (color) => ({ backgroundColor: color })),
+            ...withFallback(value.value, (color) => ({ backgroundColor: color })),
           }}
         />
       </div>
@@ -43,8 +44,8 @@ export default function ColorValueDisplay({ value, onChange }: Props) {
       )}
       <input
         type="text"
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
+        value={value.value}
+        onChange={(e) => onChange({ value: e.target.value })}
         sx={{
           py: 1,
           width: '100%',

@@ -11,6 +11,7 @@ import {
   NumberPercentage,
   Time,
 } from '../../types/css'
+import { Theme } from '../../types/theme'
 import { AngleInput, angleSteps } from '../inputs/AngleInput'
 import { ColorInput } from '../inputs/ColorInput'
 import { Range } from '../inputs/Dimension/Input'
@@ -24,13 +25,15 @@ import { TimeInput, timeSteps } from '../inputs/TimeInput'
 import { DataTypeSchema, RegenOptions } from './types'
 
 export function color({
-  defaultValue = 'transparent',
+  defaultValue = { value: 'transparent'},
+  themeProperty = 'color',
 }: {
   defaultValue?: Color
+  themeProperty?: string
 } = {}): DataTypeSchema<Color> {
   return {
-    input: ColorInput,
-    stringify: (value) => value,
+    input: bindProps(ColorInput, { themeProperty }),
+    stringify: stringifyUnit as any,
     defaultValue,
     regenerate: () => randomColor(),
   }
@@ -74,8 +77,10 @@ const timeRanges = {
 
 export function time({
   defaultValue = { value: 0, unit: 's' },
+  themeProperty,
 }: {
-  defaultValue?: Time
+  defaultValue?: Time,
+  themeProperty?: Theme
 } = {}) {
   function regenerate({ previousValue }: RegenOptions<Time>) {
     const unit = previousValue.unit
@@ -86,7 +91,7 @@ export function time({
     }
   }
   return {
-    input: bindProps(TimeInput, { regenerate }),
+    input: bindProps(TimeInput, { regenerate, themeProperty }),
     stringify: stringifyUnit as any,
     defaultValue,
     regenerate,
@@ -158,6 +163,7 @@ interface LengthProps {
   percentage?: boolean
   flex?: boolean
   themeValues?: (CSSUnitValue & { id: string })[]
+  themeProperty?: string
   range?: Range
 }
 export function length({
@@ -235,15 +241,17 @@ export function keyword<T extends string>(
   options: readonly T[],
   {
     defaultValue = options[0],
+    themeProperty,
   }: {
     defaultValue?: T
+    themeProperty?: string
   } = {}
 ): DataTypeSchema<T> {
   function regenerate() {
     return choose(options)
   }
   return {
-    input: bindProps(KeywordInput, { options, regenerate }),
+    input: bindProps(KeywordInput, { options, regenerate, themeProperty }),
     stringify: (value) => value,
     defaultValue,
     regenerate: regenerate,

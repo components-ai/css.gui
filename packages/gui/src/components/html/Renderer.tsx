@@ -5,6 +5,8 @@ import { HTMLFontTags } from './FontTags'
 import { useHtmlEditor } from './Provider'
 import { isVoidElement } from '../../lib/elements'
 import { isSamePath } from './util'
+import { useTheme } from '../providers/ThemeContext'
+import { transformValueToSchema } from '../../components/html/Provider'
 
 interface HtmlRendererProps {
   value: ElementData
@@ -12,10 +14,11 @@ interface HtmlRendererProps {
   canvas?: boolean
 }
 export function HtmlRenderer({ value, canvas = true }: HtmlRendererProps) {
+  const transformedVal = transformValueToSchema(value)
   return (
     <>
-      <HTMLFontTags htmlTree={value} />
-      <ElementRenderer value={value} canvas={canvas} path={[] as ElementPath} />
+      <HTMLFontTags htmlTree={transformedVal} />
+      <ElementRenderer value={transformedVal} canvas={canvas} path={[] as ElementPath} />
     </>
   )
 }
@@ -31,13 +34,14 @@ interface ElementRendererProps {
 }
 function ElementRenderer({ value, canvas, path }: ElementRendererProps) {
   const { selected, setSelected } = useHtmlEditor()
+  const theme = useTheme()
   const { attributes = {}, style = {}, children = [] } = value
   const Tag: any = value.tagName || 'div'
 
   const sx = toCSSObject({
     ...style,
     ...DEFAULT_ELEMENT_STYLES_IN_CANVAS,
-  })
+  }, theme)
 
   if (isSamePath(path, selected) && canvas) {
     sx.outlineWidth = 'thin'

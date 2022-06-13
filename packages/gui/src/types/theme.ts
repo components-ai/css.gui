@@ -10,12 +10,15 @@ export type Theme = {
   durations?: Duration[]
   fonts?: FontFamily[]
   fontSizes?: FontSize[]
+  fontWeights?: FontWeight[]
   gradients?: Gradient[]
   letterSpacings?: LetterSpacing[]
   lineHeights?: LineHeight[]
   space?: Spacing[]
   text?: TextStyle[]
   textShadows?: TextShadowEntry[]
+  transitions?: Transition[]
+  sizes?: Size[]
 }
 
 export type BorderRadius = {
@@ -138,6 +141,12 @@ export type Spacing = {
   name?: string
 }
 
+export type Size = {
+  id: string
+  value: number | string
+  unit: string
+}
+
 export type TextShadow = {
   offsetX: Length
   offsetY: Length
@@ -163,4 +172,9 @@ export type TextStyleProperty = {
   name: string
   value: any
   unit?: string
+}
+
+export type Transition = {
+  id: string,
+  name: string
 }

@@ -4,6 +4,7 @@ import { tupleSchema } from './tuple'
 const gapItem = lengthPercentage({
   range: 'nonnegative',
   keywords: ['normal'],
+  themeProperty: 'space',
 })
 
 export const rowGap = gapItem

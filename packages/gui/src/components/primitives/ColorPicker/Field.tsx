@@ -7,9 +7,9 @@ import PalettePicker from './PalettePicker'
 import IconButton from '../../ui/IconButton'
 import { RefreshCw, Trash } from 'react-feather'
 import { Theme } from '../../../types/theme'
-import { randomHexColor, randomColor } from '../../../lib/color'
+import {  randomColor } from '../../../lib/color'
+import { Color } from '../../../types/css'
 
-type Color = string
 
 export interface Props {
   value: Color

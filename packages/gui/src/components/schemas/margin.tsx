@@ -4,6 +4,7 @@ import { tupleSchema } from './tuple'
 
 const marginItem = lengthPercentage({
   keywords: ['auto'],
+  themeProperty: 'space',
 })
 
 export const marginBottom = marginItem

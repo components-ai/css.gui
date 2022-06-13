@@ -72,7 +72,7 @@ export default function GradientStopsField({
           onChange([
             ...value,
             {
-              color: randomColor(),
+              color: { value: randomColor() },
               hinting: randomInt(0, 100),
             },
           ])
@@ -258,7 +258,7 @@ function Marker({ value, isSelected, ...props }: MarkerProps) {
           content: "''",
           position: 'absolute',
           inset: 0,
-          backgroundColor: value.color,
+          backgroundColor: value.color.value,
         },
       }}
     />

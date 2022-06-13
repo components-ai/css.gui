@@ -66,7 +66,7 @@ export const css = (
 ) => {
   const breakpointsCount =
     theme?.breakpoints?.length || DEFAULT_BREAKPOINTS_COUNT
-  const obj: any = toCSSObject(styles)
+  const obj: any = toCSSObject(styles, theme)
   const byBreakpoints = partitionStylesByBreakpoints(obj, breakpointsCount)
 
   const cssStrings = byBreakpoints

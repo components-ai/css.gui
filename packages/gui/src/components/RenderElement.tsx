@@ -2,6 +2,7 @@ import { HTMLAttributes } from 'react'
 import { toCSSObject } from '../lib'
 import { Styles } from '../types/css'
 import { FontTags } from './inputs/FontFamily/FontTags'
+import { useTheme } from './providers/ThemeContext'
 
 type RenderElementProps = HTMLAttributes<HTMLBaseElement> & {
   tagName: string
@@ -13,8 +14,9 @@ export const RenderElement = ({
   styles,
   ...props
 }: RenderElementProps) => {
+  const theme = useTheme()
   const Component = tagName
-  const styleObject = toCSSObject(styles)
+  const styleObject = toCSSObject(styles, theme)
 
   return (
     // @ts-ignore

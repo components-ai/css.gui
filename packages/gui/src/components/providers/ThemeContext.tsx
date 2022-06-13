@@ -9,10 +9,36 @@ export const useTheme = (): Theme => React.useContext(ThemeContext)
 export const useThemeProperty = (property?: string): any[] => {
   const context = React.useContext(ThemeContext)
   switch (property) {
-    case 'fontSize':
+    case 'fontSizes':
       return context.fontSizes || []
-    case 'lineHeight':
+    case 'lineHeights':
       return context.lineHeights || []
+    case 'space':
+      return context.space || []
+    case 'borderRadius':
+      return context.borderRadius || []
+    case 'borderWidths':
+      return context.borderWidths || []
+    case 'borderStyles':
+      return context.borderStyles || []
+    case 'colors':
+      return context.colors || []
+    case 'fonts':
+      return context.fonts || []
+    case 'fontWeights':
+      return context.fontWeights || []
+    case 'letterSpacings':
+      return context.letterSpacings || []
+    case 'text':
+      return context.text || []
+    case 'textShadows':
+      return context.textShadows || []
+    case 'gradients':
+      return context.gradients || []
+    case 'transitions':
+      return context.transitions || []
+    case 'sizes':
+      return context.sizes || []
     default:
       return []
   }

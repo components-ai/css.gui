@@ -12,8 +12,10 @@ import { compact, kebabCase } from 'lodash-es'
 import { CalcInput } from '../../primitives/CalcInput'
 import { KeywordSelect } from '../../primitives/KeywordSelect'
 import { InputHeader } from '../../ui/InputHeader'
+import { useTheme, useThemeProperty } from '../../providers/ThemeContext'
 import { convertUnits } from '../../../lib/convert'
 import { X } from 'react-feather'
+import { isCSSUnitValue } from '../../../lib'
 
 // Mapping of units to [min, max] tuple
 type UnitRanges = Record<string, [min: number, max: number]>
@@ -32,6 +34,26 @@ export interface DimensionInputProps<K>
   themeValues?: (CSSUnitValue & { id: string })[]
   conversions?: UnitConversions
   property?: string
+  themeProperty?: string
+}
+
+const getInitialValue = (value: CSSUnitValue, themeProperty: string = '', themeValues: any[]): CSSUnitValue => {
+  for(var i = 0; i < (themeValues.length || []); i++) {
+    const themeValue = themeValues[i]
+    if (
+      isCSSUnitValue(value) &&
+      themeValue.unit === value.unit &&
+      themeValue.value === value.value &&
+      themeProperty
+    ) {
+      return {
+        value: themeValue.value,
+        unit: themeValue.unit,
+        themePath: `${themeProperty}.${i}`
+      }
+    }
+  }
+  return value
 }
 
 export function DimensionInput<K extends string = never>(
@@ -44,16 +66,24 @@ export function DimensionInput<K extends string = never>(
     range: providedRange,
     units = [],
     keywords = [],
-    themeValues = [],
+    themeValues: providedThemeValues = [],
     steps,
     conversions = {},
     topLevel,
+    themeProperty,
   } = props
+
+  const themeValues = useThemeProperty(themeProperty) || providedThemeValues
 
   const id = `${React.useId()}-${kebabCase(label)}`
   const range =
     providedRange === 'nonnegative' ? nonnegativeRange(units) : providedRange
-  const normedValue = value as CSSUnitValue
+
+  const normedValue = getInitialValue(
+    value as CSSUnitValue,
+    themeProperty,
+    themeValues
+  )
 
   const allUnits = compact([
     themeValues.length > 0 && 'theme',
@@ -87,14 +117,13 @@ export function DimensionInput<K extends string = never>(
               })
             }}
           />
-        ) : normedValue.themeId ? (
+        ) : normedValue.themePath ? (
           <ThemeValue
-            value={
-              themeValues.findIndex((tv) => tv.id === normedValue.themeId) + 1
-            }
+            value={parseInt(normedValue.themePath!.match(/[0-9]+/)![0]) + 1}  
             onChange={(newValue: number) => {
-              const themeValue = themeValues[Math.max(0, newValue - 1)]
-              onChange(themeValue)
+              const idx = Math.max(0, newValue - 1)
+              const themeValue = themeValues[idx]
+              onChange({ ...themeValue, themePath: `${themeProperty}.${idx}`})
             }}
             themeValues={themeValues}
           />
@@ -127,7 +156,7 @@ export function DimensionInput<K extends string = never>(
         )}
         <UnitSelect
           units={allUnits}
-          value={normedValue.themeId ? 'theme' : normedValue.unit}
+          value={normedValue.themePath ? 'theme' : normedValue.unit}
           onChange={(newUnit) => {
             if (newUnit === 'keyword') {
               onChange({
@@ -151,7 +180,7 @@ export function DimensionInput<K extends string = never>(
               onChange({ value: unitValue, unit: newUnit })
             } else if (newUnit === 'theme') {
               const themeValue = themeValues?.[0]
-              onChange(themeValue)
+              onChange({ ...themeValue, themePath: `${themeProperty}.${0}` })
             } else {
               onChange({
                 unit: newUnit,

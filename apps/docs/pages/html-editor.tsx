@@ -178,7 +178,6 @@ const initialValue: any = {
           tagName: 'div',
           style: {
             color: '#000000',
-            //backgroundColor: '#ffffff',
             backgroundImage: [
               {
                 type: 'gradient',
@@ -727,7 +726,7 @@ const initialValue: any = {
           tagName: 'input',
           style: {
             cursor: 'pointer',
-            color: '#6465ff',
+            color: '#6465ff', 
             backgroundColor: '#f7f1ff',
             fontSize: { value: 1, unit: 'rem' },
             fontWeight: 600,
@@ -875,7 +874,7 @@ const initialValue: any = {
         { 
           tagName: 'progress',
           style: { 
-            accentColor: '#6465ff', 
+            accentColor: '#6465ff',
             height: { value: 48, unit: 'px' },
           },
           attributes: { max: 100, value: 61.8 }

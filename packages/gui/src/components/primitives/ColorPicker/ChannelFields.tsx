@@ -1,8 +1,7 @@
 import * as culori from 'culori'
 import { InputHTMLAttributes } from 'react'
+import { Color } from '../../../types/css'
 import { round } from './util'
-
-type Color = string
 
 interface Props {
   value: Color
@@ -41,7 +40,7 @@ export function PropertyFields({
 }
 
 function HexInput({ value, onChange }: Props) {
-  const hex = culori.formatHex8(value).slice(1)
+  const hex = culori.formatHex8(value.value).slice(1)
   const vals = {
     r: hex.slice(0, 2),
     g: hex.slice(2, 4),
@@ -58,7 +57,7 @@ function HexInput({ value, onChange }: Props) {
             type="text"
             maxLength={2}
             value={vals[field]}
-            onChange={(e) => onChange(`${vals.r}${vals.g}${vals.b}${vals.a}`)}
+            onChange={(e) => onChange({ value: `${vals.r}${vals.g}${vals.b}${vals.a}`})}
           />
         )
       })}
@@ -67,7 +66,7 @@ function HexInput({ value, onChange }: Props) {
 }
 
 function RgbInput({ value, onChange }: Props) {
-  const rgba = culori.rgb(value)
+  const rgba = culori.rgb(value.value)
   return (
     <>
       {['r', 'g', 'b'].map((field) => {
@@ -78,9 +77,9 @@ function RgbInput({ value, onChange }: Props) {
             type="number"
             value={Math.round(rgba[field] * 255)}
             onChange={(e) =>
-              onChange(
-                culori.formatRgb({ ...rgba, [field]: +e.target.value / 255 })
-              )
+              onChange({ 
+                value: culori.formatRgb({ ...rgba, [field]: +e.target.value / 255 })
+              })
             }
           />
         )
@@ -91,7 +90,7 @@ function RgbInput({ value, onChange }: Props) {
         value={rgba.alpha ?? 1}
         step={0.01}
         onChange={(e) =>
-          onChange(culori.formatRgb({ ...rgba, alpha: +e.target.value }))
+          onChange({ value: culori.formatRgb({ ...rgba, alpha: +e.target.value })})
         }
       />
     </>
@@ -99,7 +98,7 @@ function RgbInput({ value, onChange }: Props) {
 }
 
 function LabInput({ value, onChange }: Props) {
-  const lab = culori.lab(value)
+  const lab = culori.lab(value.value)
   return (
     <>
       <ChannelField
@@ -107,7 +106,7 @@ function LabInput({ value, onChange }: Props) {
         type="number"
         value={round(lab.l ?? 1, 2)}
         onChange={(e) =>
-          onChange(culori.formatCss({ ...lab, alpha: +e.target.value }))
+          onChange({ value: culori.formatCss({ ...lab, alpha: +e.target.value })})
         }
       />
       {['a', 'b', 'alpha'].map((field) => {
@@ -119,7 +118,7 @@ function LabInput({ value, onChange }: Props) {
             value={round(lab[field], 2)}
             step={0.01}
             onChange={(e) =>
-              onChange(culori.formatCss({ ...lab, [field]: +e.target.value }))
+              onChange({ value: culori.formatCss({ ...lab, [field]: +e.target.value })})
             }
           />
         )
@@ -129,7 +128,7 @@ function LabInput({ value, onChange }: Props) {
 }
 
 function LchInput({ value, onChange }: Props) {
-  const lch = culori.lch(value)
+  const lch = culori.lch(value.value)
   return (
     <>
       {['l', 'c', 'h'].map((field) => {
@@ -140,7 +139,7 @@ function LchInput({ value, onChange }: Props) {
             type="number"
             value={Math.round(lch[field])}
             onChange={(e) =>
-              onChange(culori.formatCss({ ...lch, [field]: +e.target.value }))
+              onChange({ value: culori.formatCss({ ...lch, [field]: +e.target.value })})
             }
           />
         )
@@ -151,7 +150,7 @@ function LchInput({ value, onChange }: Props) {
         value={round(lch.alpha ?? 1, 4)}
         step={0.01}
         onChange={(e) =>
-          onChange(culori.formatCss({ ...lch, alpha: +e.target.value }))
+          onChange({ value: culori.formatCss({ ...lch, alpha: +e.target.value })})
         }
       />
     </>
@@ -159,7 +158,7 @@ function LchInput({ value, onChange }: Props) {
 }
 
 function HslInput({ value, onChange }: Props) {
-  const hsla = culori.hsl(value)
+  const hsla = culori.hsl(value.value)
   return (
     <>
       <ChannelField
@@ -167,7 +166,7 @@ function HslInput({ value, onChange }: Props) {
         type="number"
         value={round(hsla.h, 2)}
         onChange={(e) =>
-          onChange(culori.formatHsl({ ...hsla, h: +e.target.value }))
+          onChange({ value: culori.formatHsl({ ...hsla, h: +e.target.value })})
         }
       />
       {['s', 'l'].map((field) => {
@@ -180,7 +179,7 @@ function HslInput({ value, onChange }: Props) {
             step={0.01}
             onChange={(e) =>
               onChange(
-                culori.formatHsl({ ...hsla, [field]: +e.target.value / 100 })
+                { value: culori.formatHsl({ ...hsla, [field]: +e.target.value / 100 })}
               )
             }
           />
@@ -192,7 +191,7 @@ function HslInput({ value, onChange }: Props) {
         value={round(hsla.alpha ?? 1, 4)}
         step={0.01}
         onChange={(e) =>
-          onChange(culori.formatHsl({ ...hsla, alpha: +e.target.value }))
+          onChange({ value: culori.formatHsl({ ...hsla, alpha: +e.target.value })})
         }
       />
     </>
@@ -200,7 +199,7 @@ function HslInput({ value, onChange }: Props) {
 }
 
 function P3Input({ value, onChange }: Props) {
-  const p3 = culori.p3(value)
+  const p3 = culori.p3(value.value)
   return (
     <>
       {['r', 'g', 'b'].map((field) => {
@@ -212,7 +211,7 @@ function P3Input({ value, onChange }: Props) {
             value={p3[field]}
             step={0.01}
             onChange={(e) =>
-              onChange(culori.formatCss({ ...p3, [field]: +e.target.value }))
+              onChange({ value: culori.formatCss({ ...p3, [field]: +e.target.value })})
             }
           />
         )
@@ -223,7 +222,7 @@ function P3Input({ value, onChange }: Props) {
         value={p3.alpha ?? 1}
         step={0.01}
         onChange={(e) =>
-          onChange(culori.formatCss({ ...p3, alpha: +e.target.value }))
+          onChange({ value: culori.formatCss({ ...p3, alpha: +e.target.value })})
         }
       />
     </>

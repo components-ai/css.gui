@@ -4,6 +4,7 @@ import { integer, length } from './primitives'
 const columnWidth = length({
   keywords: ['auto'],
   range: 'nonnegative',
+  themeProperty: 'sizes',
 })
 
 const columnCount = integer({
