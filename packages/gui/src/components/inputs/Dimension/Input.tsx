@@ -15,6 +15,7 @@ import { InputHeader } from '../../ui/InputHeader'
 import { useTheme, useThemeProperty } from '../../providers/ThemeContext'
 import { convertUnits } from '../../../lib/convert'
 import { X } from 'react-feather'
+import { isCSSUnitValue } from '../../../lib'
 
 // Mapping of units to [min, max] tuple
 type UnitRanges = Record<string, [min: number, max: number]>
@@ -34,6 +35,25 @@ export interface DimensionInputProps<K>
   conversions?: UnitConversions
   property?: string
   themeProperty?: string
+}
+
+const getInitialValue = (value: CSSUnitValue, themeProperty: string = '', themeValues: any[]): CSSUnitValue => {
+  for(var i = 0; i < (themeValues.length || []); i++) {
+    const themeValue = themeValues[i]
+    if (
+      isCSSUnitValue(value) &&
+      themeValue.unit === value.unit &&
+      themeValue.value === value.value &&
+      themeProperty
+    ) {
+      return {
+        value: themeValue.value,
+        unit: themeValue.unit,
+        themePath: `${themeProperty}.${i}`
+      }
+    }
+  }
+  return value
 }
 
 export function DimensionInput<K extends string = never>(
@@ -59,7 +79,11 @@ export function DimensionInput<K extends string = never>(
   const range =
     providedRange === 'nonnegative' ? nonnegativeRange(units) : providedRange
 
-  const normedValue = value as CSSUnitValue
+  const normedValue = getInitialValue(
+    value as CSSUnitValue,
+    themeProperty,
+    themeValues
+  )
 
   const allUnits = compact([
     themeValues.length > 0 && 'theme',
