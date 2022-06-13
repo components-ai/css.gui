@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.110
+
+### Patch Changes
+
+- 6df9f13: Make theme more of a first class citizen
+
 ## 0.0.109
 
 ### Patch Changes
