@@ -202,6 +202,7 @@ export function HtmlEditor({ onChange }: HtmlEditorProps) {
                 const newItem = { ...nodeValue, style: newStyles }
                 onChange(setChildAtPath(value, selected, newItem))
               }}
+              showRegenerate
               showAddProperties
             />
           </div>

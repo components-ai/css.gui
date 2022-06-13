@@ -152,6 +152,7 @@ interface ControlsProps {
   onChange: (newStyles: any) => void
   children?: ReactNode
   hideResponsiveControls?: boolean
+  showRegenerate?: boolean
   showAddProperties?: boolean
 }
 export const Editor = ({
@@ -159,6 +160,7 @@ export const Editor = ({
   styles,
   onChange,
   children,
+  showRegenerate,
   hideResponsiveControls,
   showAddProperties,
 }: ControlsProps) => {
@@ -217,14 +219,16 @@ export const Editor = ({
       onChange={handleStylesChange}
       hideResponsiveControls={hideResponsiveControls}
     >
-      <div sx={{ display: 'flex' }}>
-        <IconButton
-          onClick={() => onChange(regenerateAll())}
-          sx={{ ml: 'auto', display: 'flex', gap: 2 }}
-        >
-          Regenerate <RefreshCw size={14} />
-        </IconButton>
-      </div>
+      {showRegenerate && (
+        <div sx={{ display: 'flex' }}>
+          <IconButton
+            onClick={() => onChange(regenerateAll())}
+            sx={{ ml: 'auto', display: 'flex', gap: 2 }}
+          >
+            Regenerate <RefreshCw size={14} />
+          </IconButton>
+        </div>
+      )}
       <EditorControls showAddProperties={showAddProperties}>
         {children}
       </EditorControls>
