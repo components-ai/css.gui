@@ -68,6 +68,8 @@ const Control = ({ field, showRemove = false, ...props }: ControlProps) => {
     ...props,
   }
 
+  // console.log(field, fullField, 'field')
+
   if (dependantProperties.length) {
     return (
       <ComponentWithPropertyGroup
@@ -211,6 +213,7 @@ export const EditorControls = ({
 }: EditorControlsProps) => {
   const { value: styles } = useEditor()
   const [fieldsets, properties] = partitionProperties(uniq(Object.keys(styles)))
+  // console.log(styles, 'properties')
   const controls = children ? (
     children
   ) : (

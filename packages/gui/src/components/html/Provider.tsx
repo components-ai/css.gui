@@ -31,20 +31,13 @@ export function useHtmlEditor() {
 
 const HtmlEditorContext = createContext<HtmlEditor>(DEFAULT_HTML_EDITOR_VALUE)
 
-const transformFunction = (property: string, value: any) => {
-  if (rawProperties[property]?.input === 'color' && typeof value === 'string') {
-    return { value }
-  }
-
-  return value
-}
 export const transformValueToSchema = (value: any): ElementData => {
   const transformed = Object.entries(value).reduce((acc, [key, val]) => {
     let updatedValue = val
     if (key === 'children' && Array.isArray(val)) {
       updatedValue = val.map((child) => transformValueToSchema(child))
     } else if (key === 'style') {
-      updatedValue = stylesToEditorSchema(val, transformFunction)
+      updatedValue = stylesToEditorSchema(val)
     }
     return {
       [key]: updatedValue,

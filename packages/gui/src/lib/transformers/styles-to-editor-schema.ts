@@ -6,9 +6,15 @@ import {
 } from '../classes'
 import { hasPseudoSyntax, removePseudoSyntax } from '../pseudos'
 
-type TransforFunc = (property: string, value: any) => any
+const transformProperty = (property: string, value: any) => {
+  if (rawProperties[property]?.input === 'color' && typeof value === 'string') {
+    return { value }
+  }
 
-export const stylesToEditorSchema = (styles: any, transformFn?: TransforFunc) => {
+  return value
+}
+
+export const stylesToEditorSchema = (styles: any) => {
   if (!styles) {
     console.error(
       'A styles object is required. For more information please read https://components.ai/open-source/css-gui/components/editor'
@@ -28,13 +34,10 @@ export const stylesToEditorSchema = (styles: any, transformFn?: TransforFunc) =>
       value = stylesToEditorSchema(rawValue)
     }
     
-    if (Array.isArray(rawValue)) {
-      value = rawValue.map((v) => transformNonPimitive(v, transformFn))
+    if (Array.isArray(value)) {
+      value = value.map((v) => transformComplexObject(v))
     }
-    //@ts-ignore  
-    if (rawProperties[property]?.input === 'color' && typeof value === 'string') {
-      value = { value }
-    }
+    value = transformProperty(rawProperty, value)
     return {
       [property]: value,
       ...acc,
@@ -44,18 +47,14 @@ export const stylesToEditorSchema = (styles: any, transformFn?: TransforFunc) =>
   return stylesSchema
 }
 
-const transformNonPimitive = (value: any, transformFn?: TransforFunc) => {
+const transformComplexObject = (value: any) => {
   const transformed = Object.entries(value).reduce((acc, [k, val]) => {
-    let newValue = transformFn ? transformFn(k, val) : val
+    let newValue = transformProperty(k, val)
     if (Array.isArray(val)) {
-      newValue = val.map((v) => transformNonPimitive(v, transformFn))
+      newValue = val.map((v) => transformComplexObject(v))
     } else if (typeof val === 'object') {
-      newValue = transformNonPimitive(val, transformFn)
+      newValue = transformComplexObject(val)
     }
-
-    // if (rawProperties[k]?.input === 'color' && typeof val === 'string') {
-    //   newValue = { value: val }
-    // }
     
     return {
       ...acc,
