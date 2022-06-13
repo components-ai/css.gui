@@ -1,3 +1,5 @@
 export const initialStyles: any = {
-  textDecorationColor: '#6465ff',
+  textDecorationColor: {
+    value: '#6465ff',
+  }
 }

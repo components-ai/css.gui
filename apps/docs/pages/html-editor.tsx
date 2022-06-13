@@ -259,10 +259,10 @@ const initialValue: any = {
               right: { value: 1, unit: 'px' },
             },
             borderColor: {
-              top: 'currentColor',
-              bottom: 'currentColor',
-              left: 'currentColor',
-              right: 'currentColor',
+              top: { value: 'currentColor',},
+              bottom: { value: 'currentColor',},
+              left: { value: 'currentColor',},
+              right: { value: 'currentColor',},
             },
             borderStyle: {
               top: 'solid',

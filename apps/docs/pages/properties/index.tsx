@@ -71,7 +71,7 @@ export default function Docs() {
           <section
             sx={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(16rem, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(18rem, 1fr))',
               gap: '2rem',
             }}
           >

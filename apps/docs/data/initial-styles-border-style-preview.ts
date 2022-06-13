@@ -1,3 +1,8 @@
 export const initialStyles: any = {
-  borderStyle: 'double',
+  borderStyle: { 
+    top: 'double', 
+    bottom: 'double', 
+    left: 'double', 
+    right: 'double', 
+  }
 }

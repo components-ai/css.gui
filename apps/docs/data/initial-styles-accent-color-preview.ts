@@ -1,3 +1,3 @@
 export const initialStyles: any = {
-  accentColor: '#6465ff',
+  accentColor: { value: '#6465ff', }
 }
