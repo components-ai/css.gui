@@ -36,7 +36,7 @@ export default function HsvColorPicker({ value, onChange, mode }: Props) {
   }
 
   useEffect(() => {
-    if (isValidColor(value.value) && value !== format(hsvValue, mode)) {
+    if (isValidColor(value.value) && value.value !== format(hsvValue, mode)) {
       setHsvValue(culori.hsv(value.value))
     }
   }, [value])
