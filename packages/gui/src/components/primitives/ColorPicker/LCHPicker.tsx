@@ -28,7 +28,7 @@ interface InternalProps {
  * A 'standard' color picker based on the HSV color space.
  */
 export default function LchColorPicker({ value, onChange, mode }: Props) {
-  const [lchValue, setLchValue] = useState<LchValue>(culori.lch(value))
+  const [lchValue, setLchValue] = useState<LchValue>(culori.lch(value.value))
 
   const handleChange = (value: LchValue) => {
     setLchValue(value)
@@ -36,10 +36,10 @@ export default function LchColorPicker({ value, onChange, mode }: Props) {
   }
 
   useEffect(() => {
-    if (isValidColor(value.value) && value !== format(lchValue, mode)) {
-      setLchValue(culori.lch(value))
+    if (isValidColor(value.value) && value.value !== format(lchValue, mode)) {
+      setLchValue(culori.lch(value.value))
     }
-  }, [value])
+  }, [value.value])
 
   return (
     <div sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
