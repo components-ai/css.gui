@@ -15,7 +15,7 @@ const initialValue: any = {
   },
   children: [
     { 
-      tagName: 'section',
+      tagName: 'header',
       style: {
         paddingLeft: {
           value: 64,
@@ -143,14 +143,16 @@ const initialValue: any = {
           tagName: 'img',
           attributes: {
             src: 'https://source.unsplash.com/random/1920x1280',
-            title: 'Image - <img />'
+            title: 'Image - <img />',
           },
           style: {
+            display: 'block',
             width: { value: 100, unit: '%' },
             maxWidth: { value: 100, unit: '%' },
             height: { value: 'auto', unit: 'keyword' },
             borderRadius: { value: 0, unit: 'px' },
             mixBlendMode: 'normal',
+            gridColumn: 'span 2',
           }
         },
         { 
@@ -165,6 +167,7 @@ const initialValue: any = {
           style: {
             width: { value: 100, unit: '%' },
             borderRadius: { value: 0, unit: 'px', },
+            gridColumn: 'span 2',
           }
         },
         // TODO
@@ -217,26 +220,56 @@ const initialValue: any = {
             }
           },
         },
-        { 
-          tagName: 'p',
-          attributes: {  title: 'Paragraph: <p>' },
-          style: {
-            color: 'text',
-            backgroundColor: 'background',
-            fontSize: { value: 1, unit: 'em', },
-            fontFamily: 'Inter',
-            marginTop: { value: 0, unit: 'px' },
-            marginBottom: { value: 0, unit: 'px' },
-            lineHeight: {
-              value: 1.25, unit: 'number',
-            },
-            maxWidth: {
-              value: 40,
-              unit: 'em',
-            }
+        {
+          tagName: 'div',
+          style: { 
+            gridColumn: 'span 2',
           },
           children: [
-            { type: 'text', value: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.' }
+            { 
+              tagName: 'p',
+              attributes: {  title: 'Paragraph: <p>' },
+              style: {
+                color: 'text',
+                backgroundColor: 'background',
+                fontSize: { value: 1, unit: 'em', },
+                fontFamily: 'Inter',
+                marginTop: { value: 0, unit: 'px' },
+                marginBottom: { value: 1.5, unit: 'em' },
+                lineHeight: {
+                  value: 1.5, unit: 'number',
+                },
+                maxWidth: {
+                  value: 40,
+                  unit: 'em',
+                },
+              },
+              children: [
+                { type: 'text', value: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.' }
+              ]
+            },
+            { 
+              tagName: 'p',
+              attributes: {  title: 'Paragraph: <p>' },
+              style: {
+                color: 'text',
+                backgroundColor: 'background',
+                fontSize: { value: 1, unit: 'em', },
+                fontFamily: 'Inter',
+                marginTop: { value: 0, unit: 'px' },
+                marginBottom: { value: 0, unit: 'px' },
+                lineHeight: {
+                  value: 1.5, unit: 'number',
+                },
+                maxWidth: {
+                  value: 40,
+                  unit: 'em',
+                },
+              },
+              children: [
+                { type: 'text', value: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.'  }
+              ]
+            },
           ]
         },
         {
@@ -936,107 +969,6 @@ const initialValue: any = {
           ]
         },
         { 
-          tagName: 'a',
-          attributes: { href: '#0', title: 'Anchor link: <a>' },
-          style: {
-            color: 'text',
-            backgroundColor: 'background',
-            fontWeight: 'inherit',
-            textDecoration: {
-              color: 'currentColor',
-              line: 'underline',
-              style: 'solid',
-              thickness: { value: 1, unit: 'px' }
-            }
-          },
-          children: [
-            { type: 'text', value: 'A text link' }
-          ]
-        },
-        { 
-          tagName: 'div',
-          children: [
-            { 
-              tagName: 'b',
-              children: [
-                { type: 'text', value: 'Bold text' }
-              ]
-            },
-            { tagName: 'br', },
-            { 
-              tagName: 'strong',
-              children: [
-                { type: 'text', value: 'Strong text' }
-              ]
-            },
-            { tagName: 'br', },
-        { 
-          tagName: 'i',
-          children: [
-            { type: 'text', value: 'Italic text' }
-          ]
-        },
-            { tagName: 'br', },
-        { 
-          tagName: 'em',
-          children: [
-            { type: 'text', value: 'Emphasized text' }
-          ]
-        },
-            { tagName: 'br', },
-        { 
-          tagName: 'u',
-          children: [
-            { type: 'text', value: 'Underlined text' }
-          ]
-        },
-            { tagName: 'br', },
-        { 
-          tagName: 's',
-          children: [
-            { type: 'text', value: 'Strikethrough text' }
-          ]
-        },
-            { tagName: 'br', },
-        { 
-          tagName: 'small',
-          children: [
-            { type: 'text', value: 'Small text' }
-          ]
-        },
-            { tagName: 'br', },
-        { 
-          tagName: 'sub',
-          children: [
-            { type: 'text', value: 'Subscript text' }
-          ]
-        },
-            { tagName: 'br', },
-        { 
-          tagName: 'sup',
-          children: [
-            { type: 'text', value: 'Superscript text' }
-          ]
-        },
-          ]
-        },
-        { 
-          tagName: 'time',
-          children: [
-            { type: 'text', value: '5 OCT 2048' }
-          ]
-        },
-        { 
-          tagName: 'code',
-          children: [
-            { type: 'text', value: 'const x = 1024;' },
-            { tagName: 'br', },
-            { type: 'text', value: 'const y = 512;' },
-            { tagName: 'br', },
-            { type: 'text', value: 'const coordinate = [x,y];' },
-          ]
-        },
-        { 
           tagName: 'header',
           children: [
         { 
@@ -1148,6 +1080,107 @@ const initialValue: any = {
           ]
         },
         ]},
+        { 
+          tagName: 'div',
+          children: [
+            { 
+              tagName: 'b',
+              children: [
+                { type: 'text', value: 'Bold text' }
+              ]
+            },
+            { tagName: 'br', },
+            { 
+              tagName: 'strong',
+              children: [
+                { type: 'text', value: 'Strong text' }
+              ]
+            },
+            { tagName: 'br', },
+        { 
+          tagName: 'i',
+          children: [
+            { type: 'text', value: 'Italic text' }
+          ]
+        },
+            { tagName: 'br', },
+        { 
+          tagName: 'em',
+          children: [
+            { type: 'text', value: 'Emphasized text' }
+          ]
+        },
+            { tagName: 'br', },
+        { 
+          tagName: 'u',
+          children: [
+            { type: 'text', value: 'Underlined text' }
+          ]
+        },
+            { tagName: 'br', },
+        { 
+          tagName: 's',
+          children: [
+            { type: 'text', value: 'Strikethrough text' }
+          ]
+        },
+            { tagName: 'br', },
+        { 
+          tagName: 'small',
+          children: [
+            { type: 'text', value: 'Small text' }
+          ]
+        },
+            { tagName: 'br', },
+        { 
+          tagName: 'sub',
+          children: [
+            { type: 'text', value: 'Subscript text' }
+          ]
+        },
+            { tagName: 'br', },
+        { 
+          tagName: 'sup',
+          children: [
+            { type: 'text', value: 'Superscript text' }
+          ]
+        },
+          ]
+        },
+        { 
+          tagName: 'a',
+          attributes: { href: '#0', title: 'Anchor link: <a>' },
+          style: {
+            color: 'text',
+            backgroundColor: 'background',
+            fontWeight: 'inherit',
+            textDecoration: {
+              color: 'currentColor',
+              line: 'underline',
+              style: 'solid',
+              thickness: { value: 1, unit: 'px' }
+            }
+          },
+          children: [
+            { type: 'text', value: 'A text link' }
+          ]
+        },
+        { 
+          tagName: 'time',
+          children: [
+            { type: 'text', value: '5 OCT 2048' }
+          ]
+        },
+        { 
+          tagName: 'code',
+          children: [
+            { type: 'text', value: 'const x = 1024;' },
+            { tagName: 'br', },
+            { type: 'text', value: 'const y = 512;' },
+            { tagName: 'br', },
+            { type: 'text', value: 'const coordinate = [x,y];' },
+          ]
+        },
         {
           tagName: 'ul',
           attributes: { 
@@ -1311,7 +1344,14 @@ const initialValue: any = {
           children: [
             { type: 'text', value: 'This text is marked' }
           ],
-        
+        },
+      ]
+    },
+    {
+      tagName: 'section',
+      children: [
+        {
+          
         },
       ]
     }
