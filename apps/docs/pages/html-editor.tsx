@@ -126,7 +126,7 @@ const initialValue: any = {
       style: {
         borderTopWidth: { value: 1, unit: 'px' },
         borderTopStyle: 'solid',
-        borderTopColor: 'border',
+        borderTopColor: { value: 'border' },
         marginTop: { value: 128, unit: 'px' },
         paddingTop: { value: 128, unit: 'px' },
         paddingBottom: { value: 128, unit: 'px' },
@@ -360,7 +360,7 @@ const initialValue: any = {
           },
           attributes: {
             type: 'email',
-            defaultValue: 'email@email.com',
+            value: 'email@email.com',
           },
         },
         { 
@@ -893,7 +893,7 @@ const initialValue: any = {
             accentColor: '#6465ff',
             height: { value: 48, unit: 'px' },
           },
-          attributes: { max: 100, defaultValue: 61.8 }
+          attributes: { max: 100, value: 61.8 }
         },
         { 
           tagName: 'textarea',
@@ -1267,7 +1267,7 @@ const initialValue: any = {
           tagName: 'blockquote',
           style: {
             borderLeftWidth: { value: 4, unit: 'px', },
-            borderLeftColor: 'primary',
+            borderLeftColor: { value: 'primary' },
             borderLeftStyle: 'solid',
             marginLeft: { value: 0, unit: 'px', },
             paddingLeft: { value: 32, unit: 'px', },
