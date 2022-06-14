@@ -158,9 +158,9 @@ const initialValue: any = {
           attributes: {
             title: 'Video - <video>',
             src: 'http://dc28c2r6oodom.cloudfront.net/vid/cube-loop.mp4',
-            loop: 'true',
-            autoplay: 'true',
-            playsinline: 'true',
+            loop: true,
+            autoPlay: true,
+            playsInline: true,
           },
           style: {
             width: { value: 100, unit: '%' },
@@ -360,14 +360,14 @@ const initialValue: any = {
           },
           attributes: {
             type: 'email',
-            value: 'email@email.com',
+            defaultValue: 'email@email.com',
           },
         },
         { 
           tagName: 'input',
           attributes: {
             type: 'color',
-            value: '#ff33cc',
+            defaultValue: '#ff33cc',
           },
         },
         { 
@@ -477,7 +477,7 @@ const initialValue: any = {
           },
           attributes: {
             type: 'number',
-            value: 32,
+            defaultValue: 32,
             min: -100,
             max: 100,
           },
@@ -516,7 +516,7 @@ const initialValue: any = {
           },
           attributes: {
             type: 'month',
-            value: '2048-02',
+            defaultValue: '2048-02',
           },
         },
         { 
@@ -553,7 +553,7 @@ const initialValue: any = {
           },
           attributes: {
             type: 'week',
-            value: '2048-W32',
+            defaultValue: '2048-W32',
           },
         },
         { 
@@ -671,7 +671,7 @@ const initialValue: any = {
           },
           attributes: {
             type: 'url',
-            value: 'https://components.ai'
+            defaultValue: 'https://components.ai'
           },
         },
         {
@@ -684,7 +684,7 @@ const initialValue: any = {
                 },
                 attributes: {
                   type: 'checkbox',
-                  checked: true,
+                  defaultChecked: true,
                 },
             },
             { 
@@ -694,7 +694,7 @@ const initialValue: any = {
               },
               attributes: {
                 type: 'checkbox',
-                checked: false,
+                defaultChecked: false,
               },
             },
           ]
@@ -708,7 +708,8 @@ const initialValue: any = {
             },
             attributes: {
               type: 'radio',
-              checked: true,
+              defaultChecked: true,
+              name: 'boolean',
             },
           },
           { 
@@ -718,7 +719,7 @@ const initialValue: any = {
             },
             attributes: {
               type: 'radio',
-              checked: false,
+              name: 'boolean',
             },
           }]
         },
@@ -751,7 +752,12 @@ const initialValue: any = {
               right: 'none',
             },
             borderWidth: { value: 0, unit: 'px' },
-            borderColor: { value: 'transparent' },
+            borderColor: { 
+              top: { value: 'transparent' },
+              bottom: { value: 'transparent' },
+              left: { value: 'transparent' },
+              right: { value: 'transparent' },
+            },
             transition: 'all .2s ease-in-out',
             ':hover': {
               color: 'primaryHover',
@@ -878,7 +884,7 @@ const initialValue: any = {
           },
           attributes: {
             type: 'button',
-            value: 'Button input',
+            defaultValue: 'Button input',
           },
         },
         { 
@@ -887,11 +893,13 @@ const initialValue: any = {
             accentColor: '#6465ff',
             height: { value: 48, unit: 'px' },
           },
-          attributes: { max: 100, value: 61.8 }
+          attributes: { max: 100, defaultValue: 61.8 }
         },
         { 
           tagName: 'textarea',
-          attributes: { rows: 8 },
+          attributes: { 
+            rows: 8,
+          },
           style: {
             appearance: 'none',
             color: 'text',
@@ -1269,15 +1277,6 @@ const initialValue: any = {
           }, 
           children: [
             { type: 'text', value: '"The aim of every typographic work - the delivery of a message in the shortest, most efficient manner." - Jan Tschichold' }
-          ]
-        },
-        { 
-          tagName: 'caption',
-          attributes: { 
-            title: 'Caption: <caption>' 
-          }, 
-          children: [
-            { type: 'text', value: 'Caption text' }
           ]
         },
         { 
