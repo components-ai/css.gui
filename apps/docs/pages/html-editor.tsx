@@ -133,7 +133,7 @@ const initialValue: any = {
         paddingLeft: { value: 64, unit: 'px' },
         paddingRight: { value: 64, unit: 'px' },
         display: 'grid',
-        gap: '2em',
+        gap: [{ value: 2, unit: 'em' }],
         justifyItems: 'space-between',
         gridTemplateColumns: 'repeat(4, 1fr)',
         boxSizing: 'border-box',
