@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.112
+
+### Patch Changes
+
+- 67f54e3: fixes selecting values in picker
+
 ## 0.0.111
 
 ### Patch Changes
