@@ -135,8 +135,25 @@ const initialValue: any = {
         display: 'grid',
         gap: [{ value: 2, unit: 'em' }],
         justifyItems: 'space-between',
-        gridTemplateColumns: 'repeat(4, 1fr)',
-        boxSizing: 'border-box',
+        gridTemplateColumns: [
+        {
+          count: {
+            value: 4,
+            unit: 'number',
+          },
+          trackList: [
+          {
+            'value': {
+              value: 1,
+              unit: 'fr',
+             },
+             type: 'breadth'
+           }
+         ],
+         type: 'repeat'
+        }
+      ],
+      boxSizing: 'border-box',
       },
       children: [
         { 
@@ -393,7 +410,7 @@ const initialValue: any = {
           },
           attributes: {
             type: 'email',
-            value: 'email@email.com',
+            value: 'email@example.com',
           },
         },
         { 
@@ -1345,6 +1362,158 @@ const initialValue: any = {
             { type: 'text', value: 'This text is marked' }
           ],
         },
+        {
+          tagName: 'table',
+          style: {
+            gridColumn: 'span 3',
+          },
+          children: [
+            {
+              tagName: 'thead',
+              children: [
+                {
+                  tagName: 'tr',
+                  children: [
+                    {
+                      tagName: 'th',
+                      style: {
+                        textAlign: 'left',
+                      },
+                      children: [
+                        { type: 'text', value: 'Name' }
+                      ],
+                    },
+                    {
+                      tagName: 'th',
+                      style: {
+                        textAlign: 'left',
+                      },
+                      children: [
+                        { type: 'text', value: 'Email' }
+                      ],
+                    },
+                    {
+                      tagName: 'th',
+                      style: {
+                        textAlign: 'left',
+                      },
+                      children: [
+                        { type: 'text', value: 'Favorite typeface' }
+                      ],
+                    },
+                  ]
+                }
+              ],
+            },
+            {
+              tagName: 'tfoot',
+              children: [
+
+              ],
+            },
+            {
+              tagName: 'tbody',
+              children: [
+                {
+                  tagName: 'tr',
+                  children: [
+                    {
+                      tagName: 'td',
+                      style: {
+                        textAlign: 'left',
+                      },
+                      children: [
+                        { type: 'text', value: 'Tanner' }
+                      ],
+                    },
+                    {
+                      tagName: 'td',
+                      style: {
+                        textAlign: 'left',
+                      },
+                      children: [
+                        { type: 'text', value: 'tanner@example.com' }
+                      ],
+                    },
+                    {
+                      tagName: 'td',
+                      style: {
+                        textAlign: 'left',
+                      },
+                      children: [
+                        { type: 'text', value: 'Garamond' }
+                      ],
+                    },
+                  ]
+                },
+                {
+                  tagName: 'tr',
+                  children: [
+                    {
+                      tagName: 'td',
+                      style: {
+                        textAlign: 'left',
+                      },
+                      children: [
+                        { type: 'text', value: 'Finley' }
+                      ],
+                    },
+                    {
+                      tagName: 'td',
+                      style: {
+                        textAlign: 'left',
+                      },
+                      children: [
+                        { type: 'text', value: 'finley@example.com' }
+                      ],
+                    },
+                    {
+                      tagName: 'td',
+                      style: {
+                        textAlign: 'left',
+                      },
+                      children: [
+                        { type: 'text', value: 'Space Mono' }
+                      ],
+                    },
+                  ]
+                },
+                {
+                  tagName: 'tr',
+                  children: [
+                    {
+                      tagName: 'td',
+                      style: {
+                        textAlign: 'left',
+                      },
+                      children: [
+                        { type: 'text', value: 'Payton' }
+                      ],
+                    },
+                    {
+                      tagName: 'td',
+                      style: {
+                        textAlign: 'left',
+                      },
+                      children: [
+                        { type: 'text', value: 'payton@example.com' }
+                      ],
+                    },
+                    {
+                      tagName: 'td',
+                      style: {
+                        textAlign: 'left',
+                      },
+                      children: [
+                        { type: 'text', value: 'Bodini' }
+                      ],
+                    },
+                  ]
+                }
+              ],
+            },
+          ]
+        }
       ]
     },
     {
