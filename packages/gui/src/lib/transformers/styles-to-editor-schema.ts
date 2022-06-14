@@ -21,6 +21,7 @@ export const stylesToEditorSchema = (styles: any) => {
     )
     return {}
   }
+  console.log(styles)
   const stylesSchema = Object.entries(styles).reduce((acc, curr) => {
     const [rawProperty, rawValue] = curr
 
@@ -33,7 +34,7 @@ export const stylesToEditorSchema = (styles: any) => {
       property = addInternalCSSClassSyntax(rawProperty)
       value = stylesToEditorSchema(rawValue)
     }
-    
+
     if (Array.isArray(value)) {
       value = value.map((v) => transformComplexObject(v))
     }
@@ -48,6 +49,9 @@ export const stylesToEditorSchema = (styles: any) => {
 }
 
 const transformComplexObject = (value: any) => {
+  if (typeof value === 'string') {
+    return value
+  }
   const transformed = Object.entries(value).reduce((acc, [k, val]) => {
     let newValue = transformProperty(k, val)
     if (Array.isArray(val)) {
@@ -55,10 +59,10 @@ const transformComplexObject = (value: any) => {
     } else if (typeof val === 'object') {
       newValue = transformComplexObject(val)
     }
-    
+
     return {
       ...acc,
-      [k]: newValue
+      [k]: newValue,
     }
   }, {})
 
