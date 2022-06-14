@@ -169,7 +169,6 @@ const initialValue: any = {
             height: { value: 'auto', unit: 'keyword' },
             borderRadius: { value: 0, unit: 'px' },
             mixBlendMode: 'normal',
-            gridColumn: 'span 2',
           }
         },
         { 
@@ -184,7 +183,6 @@ const initialValue: any = {
           style: {
             width: { value: 100, unit: '%' },
             borderRadius: { value: 0, unit: 'px', },
-            gridColumn: 'span 2',
           }
         },
         // TODO
@@ -239,9 +237,6 @@ const initialValue: any = {
         },
         {
           tagName: 'div',
-          style: { 
-            gridColumn: 'span 2',
-          },
           children: [
             { 
               tagName: 'p',
@@ -265,28 +260,28 @@ const initialValue: any = {
                 { type: 'text', value: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.' }
               ]
             },
-            { 
-              tagName: 'p',
-              attributes: {  title: 'Paragraph: <p>' },
-              style: {
-                color: 'text',
-                backgroundColor: 'background',
-                fontSize: { value: 1, unit: 'em', },
-                fontFamily: 'Inter',
-                marginTop: { value: 0, unit: 'px' },
-                marginBottom: { value: 0, unit: 'px' },
-                lineHeight: {
-                  value: 1.5, unit: 'number',
-                },
-                maxWidth: {
-                  value: 40,
-                  unit: 'em',
-                },
-              },
-              children: [
-                { type: 'text', value: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.'  }
-              ]
-            },
+          //  { 
+          //    tagName: 'p',
+          //    attributes: {  title: 'Paragraph: <p>' },
+          //    style: {
+          //      color: 'text',
+          //      backgroundColor: 'background',
+          //      fontSize: { value: 1, unit: 'em', },
+          //      fontFamily: 'Inter',
+          //      marginTop: { value: 0, unit: 'px' },
+          //      marginBottom: { value: 0, unit: 'px' },
+          //      lineHeight: {
+          //        value: 1.5, unit: 'number',
+          //      },
+          //      maxWidth: {
+          //        value: 40,
+          //        unit: 'em',
+          //      },
+          //    },
+          //    children: [
+          //      { type: 'text', value: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.'  }
+          //    ]
+          //  },
           ]
         },
         {
