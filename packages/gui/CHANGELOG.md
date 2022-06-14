@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.111
+
+### Patch Changes
+
+- d2b4e14: Fixes color picker mode switching
+
 ## 0.0.110
 
 ### Patch Changes
