@@ -38,6 +38,7 @@ export default function FieldArray<T, K extends string = never>(
           {value.map((item, i) => {
             return (
               <div
+                key={i}
                 sx={{
                   display: 'grid',
                   gridTemplateColumns: '1fr max-content',

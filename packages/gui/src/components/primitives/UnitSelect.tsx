@@ -16,7 +16,7 @@ export const UnitSelect = ({ units, value, onChange }: Props) => {
       <Select.Content>
         {units.map((unit: string) => {
           return (
-            <Select.Item value={unit}>
+            <Select.Item key={unit} value={unit}>
               <Select.ItemIndicator />
               <Select.ItemText>{unit}</Select.ItemText>
             </Select.Item>

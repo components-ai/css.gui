@@ -106,7 +106,7 @@ export function InputContainer<T, K extends string = never>(
               <Select.Content>
                 {['value', 'keyword'].map((typeOption) => {
                   return (
-                    <Select.Item value={typeOption}>
+                    <Select.Item key={typeOption} value={typeOption}>
                       <Select.ItemText>{typeOption}</Select.ItemText>
                       <Select.ItemIndicator />
                     </Select.Item>

@@ -30,7 +30,7 @@ export function SelectInput<T extends string>(props: Props<T>) {
         <Select.Content>
           {options.map((v) => {
             return (
-              <Select.Item value={v}>
+              <Select.Item key={v} value={v}>
                 <Select.ItemIndicator />
                 <Select.ItemText>{v}</Select.ItemText>
               </Select.Item>
