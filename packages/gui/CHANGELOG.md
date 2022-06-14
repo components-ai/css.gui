@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.113
+
+### Patch Changes
+
+- 2dbba5d: fixes lab and lch color picker
+
 ## 0.0.112
 
 ### Patch Changes
