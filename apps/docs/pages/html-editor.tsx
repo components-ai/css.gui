@@ -299,10 +299,10 @@ const initialValue: any = {
               right: { value: 1, unit: 'px' },
             },
             borderColor: {
-              top: 'currentColor',
-              bottom: 'currentColor',
-              left: 'currentColor',
-              right: 'currentColor',
+              top: { value: 'currentColor', },
+              bottom: { value: 'currentColor',},
+              left: { value: 'currentColor', },
+              right: { value: 'currentColor', },
             },
             borderStyle: {
               top: 'solid',
@@ -338,10 +338,10 @@ const initialValue: any = {
               right: { value: 1, unit: 'px' },
             },
             borderColor: {
-              top: 'currentColor',
-              bottom: 'currentColor',
-              left: 'currentColor',
-              right: 'currentColor',
+              top: { value: 'currentColor' },
+              bottom: { value: 'currentColor' },
+              left: { value: 'currentColor' },
+              right: { value: 'currentColor' },
             },
             borderStyle: {
               top: 'solid',
@@ -383,10 +383,10 @@ const initialValue: any = {
               right: { value: 1, unit: 'px' },
             },
             borderColor: {
-              top: 'currentColor',
-              bottom: 'currentColor',
-              left: 'currentColor',
-              right: 'currentColor',
+              top: { value: 'currentColor' }, 
+              bottom: { value: 'currentColor' },
+              left: { value: 'currentColor' },
+              right: { value: 'currentColor' },
             },
             borderStyle: {
               top: 'solid',
@@ -419,10 +419,10 @@ const initialValue: any = {
               right: { value: 1, unit: 'px' },
             },
             borderColor: {
-              top: 'currentColor',
-              bottom: 'currentColor',
-              left: 'currentColor',
-              right: 'currentColor',
+              top: { value: 'currentColor' },
+              bottom: { value: 'currentColor' },
+              left: { value: 'currentColor' },
+              right: { value: 'currentColor' },
             },
             borderStyle: {
               top: 'solid',
@@ -455,10 +455,10 @@ const initialValue: any = {
               right: { value: 1, unit: 'px' },
             },
             borderColor: {
-              top: 'currentColor',
-              bottom: 'currentColor',
-              left: 'currentColor',
-              right: 'currentColor',
+              top: { value:  'currentColor' },
+              bottom: { value: 'currentColor' },
+              left: { value: 'currentColor' },
+              right: { value: 'currentColor' },
             },
             borderStyle: {
               top: 'solid',
@@ -494,10 +494,10 @@ const initialValue: any = {
               right: { value: 1, unit: 'px' },
             },
             borderColor: {
-              top: 'currentColor',
-              bottom: 'currentColor',
-              left: 'currentColor',
-              right: 'currentColor',
+              top: { value: 'currentColor' },
+              bottom: { value: 'currentColor' },
+              left: { value: 'currentColor' },
+              right: { value: 'currentColor' },
             },
             borderStyle: {
               top: 'solid',
@@ -531,10 +531,10 @@ const initialValue: any = {
               right: { value: 1, unit: 'px' },
             },
             borderColor: {
-              top: 'currentColor',
-              bottom: 'currentColor',
-              left: 'currentColor',
-              right: 'currentColor',
+              top: { value: 'currentColor' },
+              bottom: { value:  'currentColor' },
+              left: { value: 'currentColor' },
+              right: { value: 'currentColor' },
             },
             borderStyle: {
               top: 'solid',
@@ -577,10 +577,10 @@ const initialValue: any = {
               right: { value: 1, unit: 'px' },
             },
             borderColor: {
-              top: 'currentColor',
-              bottom: 'currentColor',
-              left: 'currentColor',
-              right: 'currentColor',
+              top: { value: 'currentColor' },
+              bottom: { value: 'currentColor' },
+              left: { value: 'currentColor' },
+              right: { value: 'currentColor' },
             },
             borderStyle: {
               top: 'solid',
@@ -613,10 +613,10 @@ const initialValue: any = {
               right: { value: 1, unit: 'px' },
             },
             borderColor: {
-              top: 'currentColor',
-              bottom: 'currentColor',
-              left: 'currentColor',
-              right: 'currentColor',
+              top: { value: 'currentColor' },
+              bottom: { value: 'currentColor' },
+              left: { value: 'currentColor' },
+              right: { value: 'currentColor' },
             },
             borderStyle: {
               top: 'solid',
@@ -649,10 +649,10 @@ const initialValue: any = {
               right: { value: 1, unit: 'px' },
             },
             borderColor: {
-              top: 'currentColor',
-              bottom: 'currentColor',
-              left: 'currentColor',
-              right: 'currentColor',
+              top: { value: 'currentColor' },
+              bottom: { value: 'currentColor' },
+              left: { value: 'currentColor' },
+              right: { value: 'currentColor' },
             },
             borderStyle: {
               top: 'solid',
@@ -751,7 +751,7 @@ const initialValue: any = {
               right: 'none',
             },
             borderWidth: { value: 0, unit: 'px' },
-            borderColor: 'transparent',
+            borderColor: { value: 'transparent' },
             transition: 'all .2s ease-in-out',
             ':hover': {
               color: 'primaryHover',
@@ -776,7 +776,7 @@ const initialValue: any = {
             paddingRight: { value: 64, unit: 'px'},
             appearance: 'none',
             borderWidth: { value: 0, unit: 'px' },
-            borderColor: 'transparent',
+            borderColor: { value: 'transparent' },
             borderStyle: {
               top: 'none',
               bottom: 'none',
@@ -821,7 +821,12 @@ const initialValue: any = {
               right: 'none',
             },
             borderWidth: { value: 0, unit: 'px' },
-            borderColor: 'transparent',
+            borderColor: { 
+              top: { value: 'transparent' },
+              bottom: { value: 'transparent' },
+              left: { value: 'transparent' },
+              right: { value: 'transparent' },
+            },
             transition: 'all .2s ease-in-out',
             ':hover': {
               color: 'text',
@@ -860,7 +865,12 @@ const initialValue: any = {
               right: 'none',
             },
             borderWidth: { value: 0, unit: 'px' },
-            borderColor: 'transparent',
+            borderColor: {
+             top: { value: 'transparent' },
+             bottom: { value: 'transparent' },
+             left: { value: 'transparent' },
+             right: { value: 'transparent' },
+            },
             transition: 'all .2s ease-in-out',
             ':hover': {
               color: 'primary',
@@ -893,10 +903,10 @@ const initialValue: any = {
               right: { value: 1, unit: 'px' },
             },
             borderColor: {
-              top: 'currentColor',
-              bottom: 'currentColor',
-              left: 'currentColor',
-              right: 'currentColor',
+              top: { value: 'currentColor' },
+              bottom: { value: 'currentColor' },
+              left: { value: 'currentColor' },
+              right: { value: 'currentColor' },
             },
             borderStyle: {
               top: 'solid',
