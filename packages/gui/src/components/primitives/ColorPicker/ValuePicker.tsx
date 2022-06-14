@@ -38,7 +38,7 @@ export default function ColorPicker(props: Props) {
         <select
           value={mode}
           onChange={(e) => {
-            onChange(format(value, e.target.value))
+            onChange(format(normedValue, e.target.value))
           }}
           sx={{
             marginLeft: 'auto',
