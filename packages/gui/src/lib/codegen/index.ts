@@ -3,13 +3,14 @@ import { isEmpty } from 'lodash-es'
 import { Styles } from '../../types/css'
 import { Theme } from '../../types/theme'
 import { stringifyUnit } from '../stringify'
-import { isNestedSelector, isNestedSelectorWithSyntax } from '../util'
+import { isNestedSelectorWithSyntax } from '../util'
 import { stringifyCSSObject } from './stringify-css-object'
 import { toCSSObject } from './to-css-object'
 
-export { html } from './html'
+export { html, compiledHtml } from './html'
+export { themeUI } from './theme-ui'
 
-const DEFAULT_BREAKPOINTS_COUNT = 3
+const DEFAULT_BREAKPOINTS_COUNT = defaultBreakpoints.length
 
 const getStylesByBreakpoint = (obj: any, breakpoint: number): any => {
   return Object.entries(obj).reduce((acc: any, curr: [string, any]) => {

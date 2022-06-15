@@ -24,7 +24,7 @@ export const Export = ({ value }: ExportProps) => {
   const copyToClipboard = useCopyToClipboard()
 
   useEffect(() => {
-    codegen.html(value).then((v: string) => {
+    codegen.compiledHtml(value).then((v: string) => {
       setHtml(v)
       setLoading(false)
     })
@@ -51,34 +51,34 @@ export const Export = ({ value }: ExportProps) => {
   return (
     <>
       <pre sx={PRE_STYLES}>{html}</pre>
-      <div sx={{px: 3, pb: 4 }}>
-      <button
-        sx={{
-          appearance: 'none',
-          WebkitAppearance: 'none',
-          boxSizing: 'border-box',
-          border: '0',
-          borderRadius: '6px',
-          color: '#fff',
-          bg: '#6465ff',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontSize: 1,
-          fontWeight: 500,
-          width: '100%',
-          px: 3,
-          py: 2,
-          cursor: 'pointer',
-          '&:hover': {
-            bg: '#4e4fec',
-          },
-        }}
-        onClick={handleCopyToClipboard}
-      >
-        <Copy size={14} sx={{ mr: 2 }} />
-        {copied ? 'Copied to clipboard!' : 'Copy to clipboard'}
-      </button>
+      <div sx={{ px: 3, pb: 4 }}>
+        <button
+          sx={{
+            appearance: 'none',
+            WebkitAppearance: 'none',
+            boxSizing: 'border-box',
+            border: '0',
+            borderRadius: '6px',
+            color: '#fff',
+            bg: '#6465ff',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: 1,
+            fontWeight: 500,
+            width: '100%',
+            px: 3,
+            py: 2,
+            cursor: 'pointer',
+            '&:hover': {
+              bg: '#4e4fec',
+            },
+          }}
+          onClick={handleCopyToClipboard}
+        >
+          <Copy size={14} sx={{ mr: 2 }} />
+          {copied ? 'Copied to clipboard!' : 'Copy to clipboard'}
+        </button>
       </div>
     </>
   )

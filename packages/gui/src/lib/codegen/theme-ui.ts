@@ -1,0 +1,45 @@
+import { toH } from 'hast-to-hyperscript'
+import { HtmlNode } from '../../components/html/types'
+import { editorSchemaToHast } from '../transformers/editor-schema-to-hast'
+import { toCSSObject } from './to-css-object'
+import { stringifyHastNode } from './stringify-hast-node'
+
+const h = (tagName: string, props: any, children?: any[]) => {
+  const newProps = { ...props }
+
+  if (newProps.style) {
+    const style = newProps.style
+    delete newProps.style
+    newProps.sx = toCSSObject(style)
+  }
+
+  return { tagName, props: newProps, children }
+}
+
+export const themeUI = async (node: HtmlNode) => {
+  const root = editorSchemaToHast(node)
+  const functionBody = stringifyHastNode(toH(h, root))
+
+  const output = `
+  export default function Component() {
+    return (
+      ${functionBody}
+    )
+  }
+  `
+
+  try {
+    const res = await fetch('https://components.ai/api/format', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ format: 'js', src: output }),
+    })
+
+    const { src } = await res.json()
+    return src
+  } catch (e) {
+    return output
+  }
+}
