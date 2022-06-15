@@ -83,6 +83,7 @@ export function tupleSchema<T>({
                 key={i}
                 schema={itemSchema}
                 {...getInputProps(props, i)}
+                label=""
               />
             )
             // return (

@@ -37,19 +37,21 @@ export function SchemaInput<T>({
         onChange={onChange}
         {...props}
       >
-        <Collapsible.Trigger asChild>
-          <IconButton
-            sx={{
-              transform: 'rotate(0deg)',
-              transition: 'transform 250ms',
-              '&[data-state=closed]': {
-                transform: 'rotate(-90deg)',
-              },
-            }}
-          >
-            <ChevronDown size={14} />
-          </IconButton>
-        </Collapsible.Trigger>
+        {Input && (
+          <Collapsible.Trigger asChild>
+            <IconButton
+              sx={{
+                transform: 'rotate(0deg)',
+                transition: 'transform 250ms',
+                '&[data-state=closed]': {
+                  transform: 'rotate(-90deg)',
+                },
+              }}
+            >
+              <ChevronDown size={14} />
+            </IconButton>
+          </Collapsible.Trigger>
+        )}
         {InlineInput && (
           <InlineInput label="" value={value} onChange={onChange} />
         )}
