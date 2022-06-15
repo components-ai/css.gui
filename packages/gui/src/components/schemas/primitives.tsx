@@ -193,11 +193,9 @@ export function lengthPercentage(props: Omit<LengthProps, 'percentage'> = {}) {
 }
 
 export function integer({
-  defaultValue = { value: 0, unit: 'number' },
-  keywords,
+  defaultValue = 0,
 }: {
-  defaultValue?: CSSUnitValue
-  keywords?: string[]
+  defaultValue?: number
 } = {}) {
   function regenerate() {
     return randomInt(0, 11)
@@ -206,7 +204,6 @@ export function integer({
     inlineInput: bindProps(IntegerInput, { regenerate }),
     stringify: stringifyUnit as any,
     defaultValue,
-    keywords,
   }
 }
 
