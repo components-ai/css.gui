@@ -35,6 +35,7 @@ import { ResponsiveInput } from '../Responsive'
 import IconButton from '../ui/IconButton'
 import { RefreshCw } from 'react-feather'
 import { isResponsive } from '../Responsive/Input'
+import { SchemaInput } from '../inputs/SchemaInput'
 
 export const getPropertyFromField = (field: KeyArg) => {
   if (Array.isArray(field)) {
@@ -53,15 +54,15 @@ const Control = ({ field, showRemove = false, ...props }: ControlProps) => {
   const { removeDynamicProperty } = useDynamicControls()
   const fieldset = useFieldset()
   const property = getPropertyFromField(field)
-  const Component: ComponentType<any> | null = getInputComponent(property)
+  // const Component: ComponentType<any> | null = getInputComponent(property)
   const themeValues = useThemeProperty(property)
   const dependantProperties =
     (properties[property] as any).dependantProperties ?? []
 
-  if (!Component) {
-    console.error(`Unknown field: ${field}, ignoring`)
-    return null
-  }
+  // if (!Component) {
+  //   console.error(`Unknown field: ${field}, ignoring`)
+  //   return null
+  // }
 
   const fieldsetName = fieldset?.name ?? null
   const fullField = fieldsetName ? joinPath(fieldsetName, field) : field
@@ -90,18 +91,32 @@ const Control = ({ field, showRemove = false, ...props }: ControlProps) => {
     removeField(fullField)
   }
 
+  const schema = properties[property]
+
   return (
-    <ResponsiveInput
+    <SchemaInput
       label={sentenceCase(property)}
+      schema={schema}
+      {...props}
       value={getField(fullField)}
       onChange={(newValue: any) => {
         setField(fullField, newValue)
       }}
       onRemove={showRemove ? handleRemoveProperty : undefined}
-      Component={Component}
-      componentProps={componentProps}
     />
   )
+  // return (
+  //   <ResponsiveInput
+  //     label={sentenceCase(property)}
+  //     value={getField(fullField)}
+  //     onChange={(newValue: any) => {
+  //       setField(fullField, newValue)
+  //     }}
+  //     onRemove={showRemove ? handleRemoveProperty : undefined}
+  //     Component={Component}
+  //     componentProps={componentProps}
+  //   />
+  // )
 }
 
 interface ComponentGroupProps {
@@ -117,7 +132,7 @@ const ComponentWithPropertyGroup = ({
   showRemove = false,
   ...props
 }: ComponentGroupProps) => {
-  const Component: ComponentType<any> | null = getInputComponent(property)
+  const Component: ComponentType<any> | undefined = getInputComponent(property)
   const { getFields, setFields, removeField } = useEditor()
   if (!Component) {
     console.error(`Unknown field: ${property}, ignoring`)
