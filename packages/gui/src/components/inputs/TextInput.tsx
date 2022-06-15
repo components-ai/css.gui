@@ -6,15 +6,13 @@ type Props = EditorPropsWithLabel<string>
 export function TextInput<T extends string>(props: Props) {
   const { value, onChange } = props
   return (
-    <InputHeader {...props}>
-      <div sx={{ display: 'flex', flexDirection: 'row' }}>
-        <input
-          type="text"
-          value={value}
-          onChange={(e) => onChange(e.target.value as T)}
-          sx={{ width: '100%', minHeight: '1.6em', mr: 1 }}
-        />
-      </div>
-    </InputHeader>
+    <div sx={{ display: 'flex', flexDirection: 'row' }}>
+      <input
+        type="text"
+        value={value}
+        onChange={(e) => onChange(e.target.value as T)}
+        sx={{ width: '100%', minHeight: '1.6em', mr: 1 }}
+      />
+    </div>
   )
 }

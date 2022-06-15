@@ -12,7 +12,7 @@ import { compact, kebabCase } from 'lodash-es'
 import { CalcInput } from '../../primitives/CalcInput'
 import { KeywordSelect } from '../../primitives/KeywordSelect'
 import { InputHeader } from '../../ui/InputHeader'
-import { useTheme, useThemeProperty } from '../../providers/ThemeContext'
+import { useThemeProperty } from '../../providers/ThemeContext'
 import { convertUnits } from '../../../lib/convert'
 import { X } from 'react-feather'
 import { isCSSUnitValue } from '../../../lib'
@@ -23,88 +23,84 @@ export type Range = UnitRanges | 'nonnegative'
 // Mapping of units to steps
 type UnitSteps = Record<string, number>
 
-export interface DimensionInputProps<K>
-  extends EditorPropsWithLabel<Dimension, K> {
+export interface DimensionInputProps extends EditorPropsWithLabel<Dimension> {
   range?: Range
   steps?: UnitSteps
   units?: readonly string[]
-  /** The available keyword values for the property. If provided, 'keyword' will be appended as a unit */
-  keywords?: K[]
-  /** The available theme values for the property. If provided, 'theme' will be appended as a unit */
-  themeValues?: (CSSUnitValue & { id: string })[]
   conversions?: UnitConversions
-  property?: string
-  themeProperty?: string
 }
 
-const getInitialValue = (value: CSSUnitValue, themeProperty: string = '', themeValues: any[]): CSSUnitValue => {
-  for(var i = 0; i < (themeValues.length || []); i++) {
-    const themeValue = themeValues[i]
-    if (
-      isCSSUnitValue(value) &&
-      themeValue.unit === value.unit &&
-      themeValue.value === value.value &&
-      themeProperty
-    ) {
-      return {
-        value: themeValue.value,
-        unit: themeValue.unit,
-        themePath: `${themeProperty}.${i}`
-      }
-    }
-  }
-  return value
-}
+// const getInitialValue = (
+//   value: CSSUnitValue
+//   themeProperty: string = '',
+//   themeValues: any[]
+// ): CSSUnitValue => {
+//   for (var i = 0; i < (themeValues.length || []); i++) {
+//     const themeValue = themeValues[i]
+//     if (
+//       isCSSUnitValue(value) &&
+//       themeValue.unit === value.unit &&
+//       themeValue.value === value.value &&
+//       themeProperty
+//     ) {
+//       return {
+//         value: themeValue.value,
+//         unit: themeValue.unit,
+//         themePath: `${themeProperty}.${i}`,
+//       }
+//     }
+//   }
+//   return value
+// }
 
-export function DimensionInput<K extends string = never>(
-  props: DimensionInputProps<K>
-) {
+export function DimensionInput(props: DimensionInputProps) {
   const {
     value = {},
     onChange,
-    label,
+    // label,
     range: providedRange,
     units = [],
-    keywords = [],
-    themeValues: providedThemeValues = [],
+    // keywords = [],
     steps,
     conversions = {},
-    topLevel,
-    themeProperty,
+    // topLevel,
   } = props
 
-  const themeValues = useThemeProperty(themeProperty) || providedThemeValues
+  // const themeValues = useThemeProperty(themeProperty) || providedThemeValues
 
-  const id = `${React.useId()}-${kebabCase(label)}`
+  // const id = `${React.useId()}-${kebabCase(label)}`
   const range =
     providedRange === 'nonnegative' ? nonnegativeRange(units) : providedRange
 
-  const normedValue = getInitialValue(
-    value as CSSUnitValue,
-    themeProperty,
-    themeValues
-  )
+  const normedValue = value as CSSUnitValue
+  // const normedValue = getInitialValue(
+  //   value as CSSUnitValue,
+  //   // themeProperty,
+  //   // themeValues
+  // )
 
-  const allUnits = compact([
-    themeValues.length > 0 && 'theme',
-    ...units,
-    keywords.length > 0 && 'keyword',
-    'calc',
-  ])
+  const allUnits = units
+
+  // const allUnits = compact([
+  //   themeValues.length > 0 && 'theme',
+  //   ...units,
+  //   keywords.length > 0 && 'keyword',
+  //   'calc',
+  // ])
 
   return (
-    <InputHeader {...props}>
-      <div
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          borderRadius: '0.25rem',
-          border: '1px solid',
-          borderColor: 'border',
-          px: 1,
-        }}
-      >
-        {normedValue.unit === 'keyword' ? (
+    // <InputHeader {...props}>
+    <div
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        borderRadius: '0.25rem',
+        border: '1px solid',
+        borderColor: 'border',
+        px: 1,
+      }}
+    >
+      {/* {normedValue.unit === 'keyword' ? (
           <KeywordSelect
             hideIcon
             value={`${normedValue.value}`}
@@ -116,81 +112,55 @@ export function DimensionInput<K extends string = never>(
                 value,
               })
             }}
-          />
-        ) : normedValue.themePath ? (
-          <ThemeValue
-            value={parseInt(normedValue.themePath!.match(/[0-9]+/)![0]) + 1}  
-            onChange={(newValue: number) => {
-              const idx = Math.max(0, newValue - 1)
-              const themeValue = themeValues[idx]
-              onChange({ ...themeValue, themePath: `${themeProperty}.${idx}`})
-            }}
-            themeValues={themeValues}
-          />
-        ) : normedValue.unit === 'calc' ? (
-          <CalcInput
-            units={allUnits}
-            onChange={onChange}
-            //@ts-ignore
-            value={value}
-            label={label}
-            steps={steps}
-            range={range}
-            conversions={conversions}
-            themeValues={themeValues}
-          />
-        ) : (
-          <Number
-            id={id}
-            value={normedValue.value}
-            step={steps?.[normedValue.unit]}
-            min={range?.[normedValue.unit]?.[0]}
-            max={range?.[normedValue.unit]?.[1]}
-            onChange={(newValue: number) => {
-              onChange({
-                ...normedValue,
-                value: newValue,
-              })
-            }}
-          />
-        )}
-        <UnitSelect
-          units={allUnits}
-          value={normedValue.themePath ? 'theme' : normedValue.unit}
-          onChange={(newUnit) => {
-            if (newUnit === 'keyword') {
-              onChange({
-                value: keywords[0] || 'inherit',
-                unit: newUnit,
-              })
-            } else if (newUnit === 'calc') {
-              onChange({
-                arguments: {
-                  valueX: value as CSSUnitValue,
-                  valueY: { value: 1, unit: 'px' },
-                  operand: CalcOperand.Plus,
-                },
-                type: 'calc',
-                unit: 'calc',
-              })
-            } else if (normedValue.unit === 'calc' && newUnit !== 'calc') {
-              const unitValue = (value as CSSFunctionCalc).arguments.valueX
-                .value
+          /> */}
 
-              onChange({ value: unitValue, unit: newUnit })
-            } else if (newUnit === 'theme') {
-              const themeValue = themeValues?.[0]
-              onChange({ ...themeValue, themePath: `${themeProperty}.${0}` })
-            } else {
-              onChange({
-                unit: newUnit,
-                value: convertUnits(newUnit, normedValue, conversions, steps),
-              })
-            }
-          }}
-        />
-      </div>
-    </InputHeader>
+      {/* // ) : normedValue.themePath ? (
+        //   <ThemeValue
+        //     value={parseInt(normedValue.themePath!.match(/[0-9]+/)![0]) + 1}
+        //     onChange={(newValue: number) => {
+        //       const idx = Math.max(0, newValue - 1)
+        //       const themeValue = themeValues[idx]
+        //       onChange({ ...themeValue, themePath: `${themeProperty}.${idx}` })
+        //     }}
+        //     themeValues={themeValues}
+        //   />
+        // ) : normedValue.unit === 'calc' ? (
+        //   <CalcInput
+        //     units={allUnits}
+        //     onChange={onChange}
+        //     //@ts-ignore
+        //     value={value}
+        //     label={label}
+        //     steps={steps}
+        //     range={range}
+        //     conversions={conversions}
+        //     themeValues={themeValues}
+        //   />
+        ) : ( */}
+      <Number
+        value={normedValue.value}
+        step={steps?.[normedValue.unit]}
+        min={range?.[normedValue.unit]?.[0]}
+        max={range?.[normedValue.unit]?.[1]}
+        onChange={(newValue: number) => {
+          onChange({
+            ...normedValue,
+            value: newValue,
+          })
+        }}
+      />
+      <UnitSelect
+        units={allUnits}
+        value={normedValue.unit}
+        onChange={(newUnit) => {
+          onChange({
+            unit: newUnit,
+            value: convertUnits(newUnit, normedValue, conversions, steps),
+          })
+        }}
+      />
+    </div>
+    // </InputHeader>
   )
 }
 

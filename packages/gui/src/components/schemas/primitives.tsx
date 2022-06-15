@@ -25,14 +25,14 @@ import { TimeInput, timeSteps } from '../inputs/TimeInput'
 import { DataTypeSchema, RegenOptions } from './types'
 
 export function color({
-  defaultValue = { value: 'transparent'},
+  defaultValue = { value: 'transparent' },
   themeProperty = 'color',
 }: {
   defaultValue?: Color
   themeProperty?: string
 } = {}): DataTypeSchema<Color> {
   return {
-    input: bindProps(ColorInput, { themeProperty }),
+    inlineInput: bindProps(ColorInput, { themeProperty }),
     stringify: stringifyUnit as any,
     defaultValue,
     regenerate: () => randomColor(),
@@ -62,7 +62,7 @@ export function angle({
     }
   }
   return {
-    input: bindProps(AngleInput, { regenerate }),
+    inlineInput: bindProps(AngleInput, { regenerate }),
     stringify: stringifyUnit as any,
     defaultValue,
     keywords,
@@ -79,7 +79,7 @@ export function time({
   defaultValue = { value: 0, unit: 's' },
   themeProperty,
 }: {
-  defaultValue?: Time,
+  defaultValue?: Time
   themeProperty?: Theme
 } = {}) {
   function regenerate({ previousValue }: RegenOptions<Time>) {
@@ -91,7 +91,7 @@ export function time({
     }
   }
   return {
-    input: bindProps(TimeInput, { regenerate, themeProperty }),
+    inlineinlineInput: bindProps(TimeInput, { regenerate, themeProperty }),
     stringify: stringifyUnit as any,
     defaultValue,
     regenerate,
@@ -111,7 +111,7 @@ export function percentage({
     }
   }
   return {
-    input: bindProps(PercentageInput, { regenerate }),
+    inlineInput: bindProps(PercentageInput, { regenerate }),
     stringify: stringifyUnit as any,
     defaultValue,
     regenerate,
@@ -127,7 +127,7 @@ export function number({
     return randomStep(0, 2, 0.1)
   }
   return {
-    input: bindProps(NumberInput, regenerate),
+    inlineInput: bindProps(NumberInput, regenerate),
     stringify: (x: number) => x.toString(),
     defaultValue,
     regenerate,
@@ -140,7 +140,7 @@ export function numberPercentage({
   defaultValue?: NumberPercentage
 } = {}) {
   return {
-    input: NumberPercentageInput,
+    inlineInput: NumberPercentageInput,
     stringify: stringifyUnit as any,
     defaultValue,
   }
@@ -181,7 +181,7 @@ export function length({
     }
   }
   return {
-    input: bindProps(LengthInput, { ...props, regenerate }),
+    inlineInput: bindProps(LengthInput, { ...props, regenerate }),
     stringify: stringifyUnit as any,
     defaultValue,
     regenerate,
@@ -203,7 +203,7 @@ export function integer({
     return randomInt(0, 11)
   }
   return {
-    input: bindProps(IntegerInput, { regenerate }),
+    inlineInput: bindProps(IntegerInput, { regenerate }),
     stringify: stringifyUnit as any,
     defaultValue,
     keywords,
@@ -219,7 +219,7 @@ export function ident({
     // Right now, just use a text input.
     // In the future we may want to do smart-identification of identifiers
     // the user has used in other places
-    input: TextInput,
+    inlineInput: TextInput,
     stringify: (value) => value,
     defaultValue,
   }
@@ -231,7 +231,7 @@ export function string({
   defaultValue?: string
 } = {}): DataTypeSchema<string> {
   return {
-    input: TextInput,
+    inlineInput: TextInput,
     stringify: (value) => `"${value}"`,
     defaultValue,
   }
@@ -251,7 +251,11 @@ export function keyword<T extends string>(
     return choose(options)
   }
   return {
-    input: bindProps(KeywordInput, { options, regenerate, themeProperty }),
+    inlineInput: bindProps(KeywordInput, {
+      options,
+      regenerate,
+      themeProperty,
+    }),
     stringify: (value) => value,
     defaultValue,
     regenerate: regenerate,

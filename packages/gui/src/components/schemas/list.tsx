@@ -1,39 +1,24 @@
 import { ComponentType } from 'react'
-import { choose } from '../../lib/random'
 import FieldArray from '../FieldArray'
 import { DataTypeSchema, RegenOptions } from './types'
 
-interface CreateList<T, K> {
+interface CreateList<T> {
   itemSchema: DataTypeSchema<T>
   separator?: string
-  variant?: 'layers' | 'list'
   thumbnail?: ComponentType<{ value: string }>
-  keywords?: K[]
 }
 
-export function listSchema<T, K extends string = never>({
+export function listSchema<T>({
   itemSchema,
-  keywords = [],
   separator = ', ',
-}: CreateList<T, K>): DataTypeSchema<T[] | K> {
-  const stringify = (value: T[] | K) => {
-    if (!value) {
-      return ''
-    }
-
-    if (typeof value === 'string') {
-      return value
-    }
-
+}: CreateList<T>): DataTypeSchema<T[]> {
+  const stringify = (value: T[]) => {
     const stringified = value.map((item) => itemSchema.stringify(item))
     return stringified.join(separator)
   }
   const defaultValue = [itemSchema.defaultValue]
 
-  function regenerate({ previousValue }: RegenOptions<T[] | K>) {
-    if (typeof previousValue === 'string') {
-      return choose(keywords)
-    }
+  function regenerate({ previousValue }: RegenOptions<T[]>) {
     return previousValue.map((value) => {
       return itemSchema.regenerate?.({ previousValue: value }) ?? value
     })
@@ -46,11 +31,10 @@ export function listSchema<T, K extends string = never>({
       return (
         <FieldArray
           {...props}
-          keywords={keywords}
           defaultValue={defaultValue}
           newItem={() => itemSchema.defaultValue}
           stringify={stringify}
-          content={itemSchema.input}
+          itemSchema={itemSchema}
           regenerate={regenerate}
         />
       )
