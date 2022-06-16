@@ -48,7 +48,9 @@ export const Export = ({ value }: ExportProps) => {
       setLoading(false)
 
       if (format === 'css') {
-        return extractStyles(v).then((res) => setSrc(res.styles))
+        return extractStyles(v).then((res) => {
+          setSrc(res.styles)
+        })
       }
 
       setSrc(v)

@@ -1,6 +1,7 @@
 import { toH } from 'hast-to-hyperscript'
 import { HtmlNode } from '../../components/html/types'
 import { extractStyles } from './extract-styles'
+import { format } from './format'
 import { html as toHtml } from './html'
 import { stringifyHastNode } from './stringify-hast-node'
 import { toReactProps } from './to-react-props'
@@ -16,7 +17,7 @@ export const styledJsx = async (node: HtmlNode): Promise<string> => {
   const { styles } = await extractStyles(html)
   const jsx = stringifyHastNode(toH(h, node as any))
 
-  return `
+  const output = `
     import * as React from 'react'
 
     export default function Component() {
@@ -28,4 +29,6 @@ export const styledJsx = async (node: HtmlNode): Promise<string> => {
       )
     }
 `
+
+  return format('js', output)
 }

@@ -4,6 +4,7 @@ import { editorSchemaToHast } from '../transformers/editor-schema-to-hast'
 import { toCSSObject } from './to-css-object'
 import { stringifyHastNode } from './stringify-hast-node'
 import { toReactProps } from './to-react-props'
+import { format } from './format'
 
 const h = (tagName: string, props: any, children?: any[]) => {
   const newProps = toReactProps(props)
@@ -30,18 +31,5 @@ export const themeUI = async (node: HtmlNode) => {
   }
   `
 
-  try {
-    const res = await fetch('https://components.ai/api/format', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ format: 'js', src: output }),
-    })
-
-    const { src } = await res.json()
-    return src
-  } catch (e) {
-    return output
-  }
+  return format('js', output)
 }
