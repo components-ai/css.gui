@@ -1,9 +1,8 @@
 import { getInputProps } from '../../lib/util'
 import { SchemaInput } from '../inputs/SchemaInput'
-import { objectSchema } from './object'
 import { DataTypeSchema } from './types'
 
-export interface FunctionSchema<N extends string, T> {
+export interface FunctionData<N extends string, T> {
   name: N
   arguments: T
 }
@@ -14,9 +13,9 @@ export interface FunctionSchema<N extends string, T> {
 export function functionSchema<N extends string, T>(
   name: N,
   argsSchema: DataTypeSchema<T>
-): DataTypeSchema<FunctionSchema<N, T>> {
+): DataTypeSchema<FunctionData<N, T>> {
   return {
-    stringify(value: FunctionSchema<N, T>) {
+    stringify(value: FunctionData<N, T>) {
       return `${value.name}(${argsSchema.stringify(value.arguments)})`
     },
     defaultValue: {

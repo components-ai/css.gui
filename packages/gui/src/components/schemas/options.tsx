@@ -5,7 +5,7 @@ interface CreateOptions<T extends Record<string, any>> {
   variants: { [V in keyof T]: DataTypeSchema<T[V]> }
   order?: (keyof T)[]
   getType<K extends keyof T>(value: T[K]): K
-  convert?(oldValue: Unionize<T>[any], newType: keyof T): Partial<T[any]>
+  convert?(oldValue: Unionize<T>[any], newType: keyof T): T | undefined
 }
 
 /**
