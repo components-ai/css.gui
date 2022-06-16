@@ -15,32 +15,43 @@ const trackBreadth = lengthPercentage({
 })
 
 const trackSizeVariants = {
-  breadth: objectSchema({
-    fields: { value: trackBreadth },
-  }),
-  minmax: functionSchema('minmax', {
-    fields: { min: inflexibleBreadth, max: trackBreadth },
-  }),
-  'fit-content': functionSchema('fit-content', {
-    fields: { value: lengthPercentage() },
-  }),
+  breadth: trackBreadth,
+  minmax: functionSchema(
+    'minmax',
+    objectSchema({
+      fields: { min: inflexibleBreadth, max: trackBreadth },
+    })
+  ),
+  'fit-content': functionSchema('fit-content', lengthPercentage()),
+}
+
+function getType(value: any) {
+  if (value.unit) {
+    return 'breadth'
+  }
+  return value.name
 }
 
 const trackSize = optionsSchema({
   variants: trackSizeVariants,
+  getType,
 })
 
 const trackList = optionsSchema({
   variants: {
     ...trackSizeVariants,
-    repeat: functionSchema('repeat', {
-      fields: {
-        count: integer({ defaultValue: { value: 1, unit: 'number' } }),
-        trackList: listSchema({ itemSchema: trackSize, separator: ' ' }),
-      },
-      separator: ', ',
-    }),
+    repeat: functionSchema(
+      'repeat',
+      objectSchema({
+        fields: {
+          count: integer({ defaultValue: 1 }),
+          trackList: listSchema({ itemSchema: trackSize, separator: ' ' }),
+        },
+        separator: ', ',
+      })
+    ),
   },
+  getType,
 })
 
 export const gridAutoRow = listSchema({ itemSchema: trackSize, separator: ' ' })
