@@ -13,7 +13,6 @@ export function listSchema<T>({
   separator = ', ',
 }: CreateList<T>): DataTypeSchema<T[]> {
   const stringify = (value: T[]) => {
-    console.log(value)
     const stringified = value.map((item) => itemSchema.stringify(item))
     return stringified.join(separator)
   }

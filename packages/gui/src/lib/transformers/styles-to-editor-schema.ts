@@ -21,7 +21,6 @@ export const stylesToEditorSchema = (styles: any) => {
     )
     return {}
   }
-  console.log(styles)
   const stylesSchema = Object.entries(styles).reduce((acc, curr) => {
     const [rawProperty, rawValue] = curr
 

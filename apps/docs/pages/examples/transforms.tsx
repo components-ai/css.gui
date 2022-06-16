@@ -2,7 +2,7 @@ import { Editor, styled } from '@compai/css-gui'
 import { useState } from 'react'
 
 const initialStyles = {
-  transform: [{ type: 'rotate', value: { value: 45, unit: 'deg' } }],
+  transform: [{ name: 'rotate', arguments: { value: 45, unit: 'deg' } }],
   perspective: { unit: 'keyword', value: 'none' },
   perspectiveOrigin: {
     x: { unit: 'keyword', value: 'center' },
