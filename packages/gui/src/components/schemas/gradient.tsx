@@ -7,9 +7,10 @@ import GradientStopsField from '../inputs/Gradient/stops'
 import { GradientStop } from '../inputs/Gradient/types'
 import { functionSchema } from './function'
 import { position } from './position'
-import { angle, color, keyword } from './primitives'
+import { angle, color, keyword, number } from './primitives'
 import { DataTypeSchema } from './types'
 import { objectSchema } from './object'
+import { withKeywords } from './withKeywords'
 
 export const stringifyStops = (
   stops: GradientStop[],
@@ -43,6 +44,12 @@ function stops(repeating: boolean = false): DataTypeSchema<GradientStop[]> {
         }
       })
     },
+    validate: ((value: any) => {
+      if (!(value instanceof Array)) return false
+      return value.every((item) => {
+        return color().validate(item.color) && number().validate(item.hinting)
+      })
+    }) as any,
   }
 }
 
@@ -61,7 +68,7 @@ const linear = functionSchema(
   'linear-gradient',
   objectSchema({
     fields: {
-      angle: angle({ keywords: directions }),
+      angle: withKeywords(directions, angle()),
       stops: stops(),
     },
   })
@@ -70,7 +77,7 @@ const repeatingLinear = functionSchema(
   'repeating-linear-gradient',
   objectSchema({
     fields: {
-      angle: angle({ keywords: directions }),
+      angle: withKeywords(directions, angle()),
       stops: stops(true),
     },
   })

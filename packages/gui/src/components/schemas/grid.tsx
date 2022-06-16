@@ -25,17 +25,7 @@ const trackSizeVariants = {
   'fit-content': functionSchema('fit-content', lengthPercentage()),
 }
 
-function getType(value: any) {
-  if (value.unit) {
-    return 'breadth'
-  }
-  return value.name
-}
-
-const trackSize = optionsSchema({
-  variants: trackSizeVariants,
-  getType,
-})
+const trackSize = optionsSchema({ variants: trackSizeVariants })
 
 const trackList = optionsSchema({
   variants: {
@@ -51,7 +41,6 @@ const trackList = optionsSchema({
       })
     ),
   },
-  getType,
 })
 
 export const gridAutoRow = listSchema({ itemSchema: trackSize, separator: ' ' })

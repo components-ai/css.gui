@@ -4,7 +4,6 @@ import * as Select from '../ui/Select'
 interface CreateOptions<T extends Record<string, any>> {
   variants: { [V in keyof T]: DataTypeSchema<T[V]> }
   order?: (keyof T)[]
-  getType<K extends keyof T>(value: T[K]): K
   convert?(oldValue: Unionize<T>[any], newType: keyof T): T | undefined
 }
 
@@ -16,8 +15,17 @@ export function optionsSchema<T extends Record<string, any>>({
   variants,
   order = Object.keys(variants),
   convert,
-  getType,
 }: CreateOptions<T>): DataTypeSchema<Unionize<T>> {
+  function getType(value: T): keyof T {
+    for (const [type, schema] of Object.entries(variants)) {
+      if (schema.validate(value)) return type
+    }
+    throw new Error(
+      `Invalid variant value is not one of the options ${Object.keys(
+        variants
+      )}. passed: ${value}`
+    )
+  }
   function regenerate({
     previousValue,
   }: RegenOptions<Unionize<T>>): Unionize<T> {

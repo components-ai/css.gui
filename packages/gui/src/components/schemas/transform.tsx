@@ -136,9 +136,6 @@ const singleTransform = optionsSchema({
     matrix,
     matrix3d,
   },
-  getType(value) {
-    return value.name as any
-  },
 })
 
 export const transform = withKeywords(

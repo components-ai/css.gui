@@ -15,12 +15,6 @@ export const shapeOutside = optionsSchema({
       },
     }),
   },
-  getType(value) {
-    if ((value as any).shape) {
-      return 'shape' as any
-    }
-    return 'image'
-  },
 })
 
 export const shapeImageThreshold = numberPercentage()

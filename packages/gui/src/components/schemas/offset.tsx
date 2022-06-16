@@ -20,12 +20,6 @@ export const offsetPath = optionsSchema({
       },
     }),
   },
-  getType(value) {
-    if ((value as any).shape) {
-      return 'shape' as any
-    }
-    return 'image'
-  },
 })
 // TODO 'auto <angle>'
 export const offsetRotate = angle()

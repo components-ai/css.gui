@@ -61,11 +61,9 @@ const angleRanges = {
 
 export function angle({
   defaultValue = { value: 0, unit: 'deg' },
-  keywords = [],
 }: {
   defaultValue?: Angle
-  keywords?: readonly string[]
-} = {}) {
+} = {}): DataTypeSchema<Angle> {
   function regenerate({ previousValue }: RegenOptions<Angle>) {
     const unit = previousValue.unit
     const [min, max] = angleRanges[unit]
@@ -78,9 +76,8 @@ export function angle({
     inlineInput: bindProps(AngleInput, { regenerate }),
     stringify: stringifyUnit as any,
     defaultValue,
-    keywords,
     regenerate,
-    validate: (value: any) => validateDimension(value, ANGLE_UNITS),
+    validate: ((value: any) => validateDimension(value, ANGLE_UNITS)) as any,
   }
 }
 
@@ -138,7 +135,7 @@ export function number({
   defaultValue = 0,
 }: {
   defaultValue?: number
-} = {}) {
+} = {}): DataTypeSchema<number> {
   function regenerate() {
     return randomStep(0, 2, 0.1)
   }
@@ -147,7 +144,7 @@ export function number({
     stringify: (x: number) => x.toString(),
     defaultValue,
     regenerate,
-    validate: (value: any) => typeof value === 'number',
+    validate: ((value: any) => typeof value === 'number') as any,
   }
 }
 

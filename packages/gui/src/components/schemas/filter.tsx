@@ -37,7 +37,6 @@ const singleFilter = optionsSchema({
     saturate: amountFilter('saturate'),
     sepia: amountFilter('sepia'),
   },
-  getType: (value) => value.name as any,
 })
 
 export const filter = withKeywords(

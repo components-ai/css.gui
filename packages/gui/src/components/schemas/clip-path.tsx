@@ -15,10 +15,4 @@ export const clipPath = optionsSchema({
       },
     }),
   },
-  getType(value) {
-    if ((value as any).shape) {
-      return 'shape' as any
-    }
-    return 'image'
-  },
 })

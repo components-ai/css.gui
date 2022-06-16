@@ -1,4 +1,3 @@
-import { stringifyUnit } from '../../lib/stringify'
 import { getInputProps } from '../../lib/util'
 import { LengthPercentage } from '../../types/css'
 import { EditorPropsWithLabel } from '../../types/editor'
@@ -8,7 +7,7 @@ import { listSchema } from './list'
 import { functionSchema } from './function'
 import { optionsSchema } from './options'
 import { position } from './position'
-import { keyword, lengthPercentage, string } from './primitives'
+import { keyword, length, lengthPercentage, string } from './primitives'
 import { objectSchema } from './object'
 
 const shapeRadius = lengthPercentage({
@@ -68,15 +67,9 @@ const polygon = functionSchema(
     fields: {
       fillRule: keyword(['nonzero', 'evenodd']),
       points: listSchema({
-        itemSchema: {
-          input: PointInput,
-          stringify: (point) =>
-            `${stringifyUnit(point.x)} ${stringifyUnit(point.y)}`,
-          defaultValue: {
-            x: { value: 0, unit: 'px' },
-            y: { value: 0, unit: 'px' },
-          },
-        },
+        itemSchema: objectSchema({
+          fields: { x: length(), y: length() },
+        }),
       }),
     },
   })
@@ -86,5 +79,4 @@ const path = functionSchema('path', string())
 
 export const basicShape = optionsSchema({
   variants: { inset, circle, ellipse, polygon, path },
-  getType: (value) => value.name as any,
 })
