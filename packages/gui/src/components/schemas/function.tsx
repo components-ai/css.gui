@@ -30,6 +30,10 @@ export function functionSchema<N extends string, T>(
           argsSchema.defaultValue,
       }
     },
+    validate: ((value: any) => {
+      if (typeof value !== 'object') return false
+      return value.name === name && argsSchema.validate(value.arguments)
+    }) as any,
     input(props) {
       return (
         <div>
