@@ -11,18 +11,18 @@ const h = (tagName: string, props: any, children?: any[]) => {
   if (newProps.style) {
     const style = newProps.style
     delete newProps.style
-    newProps.sx = toCSSObject(style)
+    newProps.css = toCSSObject(style)
   }
 
   return { tagName, props: newProps, children }
 }
 
-export const themeUI = async (node: HtmlNode) => {
+export const emotion = async (node: HtmlNode) => {
   const root = editorSchemaToHast(node)
   const functionBody = stringifyHastNode(toH(h, root))
 
   const output = `
-  /** @jsxImportSource theme-ui */
+  /** @jsxImportSource @emotion/react */
   export default function Component() {
     return (
       ${functionBody}

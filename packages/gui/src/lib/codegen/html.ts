@@ -3,7 +3,7 @@ import rehypeStringify from 'rehype-stringify'
 import { HtmlNode } from '../../components/html/types'
 import { editorSchemaToHast } from '../transformers/editor-schema-to-hast'
 
-export const html = async (node: HtmlNode) => {
+export const unstyledHtml = async (node: HtmlNode) => {
   const root = editorSchemaToHast(node)
   const output = unified().use(rehypeStringify).stringify(root)
 
@@ -23,7 +23,7 @@ export const html = async (node: HtmlNode) => {
   }
 }
 
-export const compiledHtml = async (node: HtmlNode) => {
+export const html = async (node: HtmlNode) => {
   const res = await fetch('https://components.ai/api/v1/gui/export/html', {
     method: 'POST',
     headers: {

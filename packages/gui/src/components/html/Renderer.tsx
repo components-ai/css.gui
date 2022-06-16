@@ -7,6 +7,7 @@ import { isVoidElement } from '../../lib/elements'
 import { isSamePath } from './util'
 import { useTheme } from '../providers/ThemeContext'
 import { transformValueToSchema } from '../../components/html/Provider'
+import { toReactProps } from '../../lib/codegen/to-react-props'
 
 interface HtmlRendererProps {
   value: ElementData
@@ -18,7 +19,11 @@ export function HtmlRenderer({ value, canvas = true }: HtmlRendererProps) {
   return (
     <>
       <HTMLFontTags htmlTree={transformedVal} />
-      <ElementRenderer value={transformedVal} canvas={canvas} path={[] as ElementPath} />
+      <ElementRenderer
+        value={transformedVal}
+        canvas={canvas}
+        path={[] as ElementPath}
+      />
     </>
   )
 }
@@ -38,10 +43,13 @@ function ElementRenderer({ value, canvas, path }: ElementRendererProps) {
   const { attributes = {}, style = {}, children = [] } = value
   const Tag: any = value.tagName || 'div'
 
-  const sx = toCSSObject({
-    ...style,
-    ...DEFAULT_ELEMENT_STYLES_IN_CANVAS,
-  }, theme)
+  const sx = toCSSObject(
+    {
+      ...style,
+      ...DEFAULT_ELEMENT_STYLES_IN_CANVAS,
+    },
+    theme
+  )
 
   if (isSamePath(path, selected) && canvas) {
     sx.outlineWidth = 'thin'
@@ -51,14 +59,14 @@ function ElementRenderer({ value, canvas, path }: ElementRendererProps) {
     sx.userSelect = 'none'
   }
 
-  const props = {
+  const props = toReactProps({
     ...(canvas ? cleanAttributes(attributes) : attributes),
     sx,
     onClick: (e: MouseEvent) => {
       e.stopPropagation()
       setSelected(path)
     },
-  }
+  })
 
   if (isVoidElement(Tag)) {
     return <Tag {...props} />
@@ -88,11 +96,6 @@ const cleanAttributes = (attributes: Record<string, string>) => {
 
   if (newAttributes.href) {
     newAttributes.href = '#!'
-  }
-
-  if (newAttributes.class) {
-    newAttributes.className = newAttributes.class
-    delete newAttributes.class
   }
 
   return newAttributes

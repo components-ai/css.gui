@@ -58,6 +58,7 @@
     "hast-to-hyperscript": "^10.0.1",
     "immer": "^9.0.12",
     "lodash-es": "^4.17.21",
+    "property-information": "^6.1.1",
     "react-feather": "^2.0.10",
     "react-use-gesture": "^9.1.3",
     "rehype-parse": "^8.0.4",
