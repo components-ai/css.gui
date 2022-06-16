@@ -1,13 +1,13 @@
 import { SHAPE_BOX_KEYWORDS } from '../../types/css'
 import { basicShape } from './basic-shape'
-import { image } from './image'
 import { objectSchema } from './object'
 import { optionsSchema } from './options'
 import { keyword } from './primitives'
+import { url } from './url'
 
 export const clipPath = optionsSchema({
   variants: {
-    image,
+    url,
     shape: objectSchema({
       fields: {
         shape: basicShape,
