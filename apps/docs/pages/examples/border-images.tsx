@@ -19,8 +19,8 @@ const initialStyles = {
   },
   borderImage: {
     source: {
-      value: 'https://source.unsplash.com/random',
-      type: 'url',
+      name: 'url',
+      arguments: 'https://source.unsplash.com/random',
     },
     slice: {
       value: {

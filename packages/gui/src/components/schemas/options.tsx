@@ -23,7 +23,7 @@ export function optionsSchema<T extends Record<string, any>>({
     throw new Error(
       `Invalid variant value is not one of the options ${Object.keys(
         variants
-      )}. passed: ${value}`
+      )}. passed: ${JSON.stringify(value)}`
     )
   }
   function regenerate({

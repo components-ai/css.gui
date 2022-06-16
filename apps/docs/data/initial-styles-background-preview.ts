@@ -2,8 +2,8 @@ export const initialStyles: any = {
   background: [
     {
       image: {
-        type: 'url',
-        value: 'https://source.unsplash.com/random',
+        name: 'url',
+        arguments: 'https://source.unsplash.com/random',
       },
       position: {
         x: { value: 'center', unit: 'keyword' },

@@ -14,7 +14,7 @@ const initialValue: any = {
     },
   },
   children: [
-    { 
+    {
       tagName: 'header',
       style: {
         paddingLeft: {
@@ -110,12 +110,13 @@ const initialValue: any = {
             maxWidth: {
               value: 40,
               unit: 'em',
-            }
+            },
           },
           children: [
             {
               type: 'text',
-              value: 'Click anywhere on the canvas to start. Go ahead. Click away.',
+              value:
+                'Click anywhere on the canvas to start. Go ahead. Click away.',
             },
           ],
         },
@@ -136,27 +137,27 @@ const initialValue: any = {
         gap: [{ value: 2, unit: 'em' }],
         justifyItems: 'space-between',
         gridTemplateColumns: [
-        {
-          count: {
-            value: 4,
-            unit: 'number',
-          },
-          trackList: [
           {
-            'value': {
-              value: 1,
-              unit: 'fr',
-             },
-             type: 'breadth'
-           }
-         ],
-         type: 'repeat'
-        }
-      ],
-      boxSizing: 'border-box',
+            count: {
+              value: 4,
+              unit: 'number',
+            },
+            trackList: [
+              {
+                value: {
+                  value: 1,
+                  unit: 'fr',
+                },
+                type: 'breadth',
+              },
+            ],
+            type: 'repeat',
+          },
+        ],
+        boxSizing: 'border-box',
       },
       children: [
-        { 
+        {
           tagName: 'img',
           attributes: {
             src: 'https://source.unsplash.com/random/1920x1280',
@@ -169,9 +170,9 @@ const initialValue: any = {
             height: { value: 'auto', unit: 'keyword' },
             borderRadius: { value: 0, unit: 'px' },
             mixBlendMode: 'normal',
-          }
+          },
         },
-        { 
+        {
           tagName: 'video',
           attributes: {
             title: 'Video - <video>',
@@ -182,11 +183,11 @@ const initialValue: any = {
           },
           style: {
             width: { value: 100, unit: '%' },
-            borderRadius: { value: 0, unit: 'px', },
-          }
+            borderRadius: { value: 0, unit: 'px' },
+          },
         },
         // TODO
-        //{ 
+        //{
         //  tagName: 'audio',
         //  attributes: {
         //    src: 'https
@@ -203,16 +204,15 @@ const initialValue: any = {
                   type: 'linear',
                   angle: { value: 45, unit: 'deg' },
                   stops: [
-                    { color: '#ff33cc', hinting: 0, },
-                    { color: '#ffcc33', hinting: 100, },
-                  ]
-
-                }
+                    { color: '#ff33cc', hinting: 0 },
+                    { color: '#ffcc33', hinting: 100 },
+                  ],
+                },
               },
             ],
             borderRadius: {
               value: 16,
-              unit: 'px'
+              unit: 'px',
             },
             mixBlendMode: 'normal',
             backgroundBlendMode: 'overlay',
@@ -231,25 +231,26 @@ const initialValue: any = {
               },
             ],
             ':hover': {
-              borderRadius: { value: 4, unit: 'px'}
-            }
+              borderRadius: { value: 4, unit: 'px' },
+            },
           },
         },
         {
           tagName: 'div',
           children: [
-            { 
+            {
               tagName: 'p',
-              attributes: {  title: 'Paragraph: <p>' },
+              attributes: { title: 'Paragraph: <p>' },
               style: {
                 color: 'text',
                 backgroundColor: 'background',
-                fontSize: { value: 1, unit: 'em', },
+                fontSize: { value: 1, unit: 'em' },
                 fontFamily: 'Inter',
                 marginTop: { value: 0, unit: 'px' },
                 marginBottom: { value: 1.5, unit: 'em' },
                 lineHeight: {
-                  value: 1.5, unit: 'number',
+                  value: 1.5,
+                  unit: 'number',
                 },
                 maxWidth: {
                   value: 40,
@@ -257,57 +258,59 @@ const initialValue: any = {
                 },
               },
               children: [
-                { type: 'text', value: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.' }
-              ]
+                {
+                  type: 'text',
+                  value:
+                    'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
+                },
+              ],
             },
-          //  { 
-          //    tagName: 'p',
-          //    attributes: {  title: 'Paragraph: <p>' },
-          //    style: {
-          //      color: 'text',
-          //      backgroundColor: 'background',
-          //      fontSize: { value: 1, unit: 'em', },
-          //      fontFamily: 'Inter',
-          //      marginTop: { value: 0, unit: 'px' },
-          //      marginBottom: { value: 0, unit: 'px' },
-          //      lineHeight: {
-          //        value: 1.5, unit: 'number',
-          //      },
-          //      maxWidth: {
-          //        value: 40,
-          //        unit: 'em',
-          //      },
-          //    },
-          //    children: [
-          //      { type: 'text', value: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.'  }
-          //    ]
-          //  },
-          ]
+            //  {
+            //    tagName: 'p',
+            //    attributes: {  title: 'Paragraph: <p>' },
+            //    style: {
+            //      color: 'text',
+            //      backgroundColor: 'background',
+            //      fontSize: { value: 1, unit: 'em', },
+            //      fontFamily: 'Inter',
+            //      marginTop: { value: 0, unit: 'px' },
+            //      marginBottom: { value: 0, unit: 'px' },
+            //      lineHeight: {
+            //        value: 1.5, unit: 'number',
+            //      },
+            //      maxWidth: {
+            //        value: 40,
+            //        unit: 'em',
+            //      },
+            //    },
+            //    children: [
+            //      { type: 'text', value: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.'  }
+            //    ]
+            //  },
+          ],
         },
         {
           tagName: 'label',
-          attributes: {  title: 'Label: <label>' },
-          children: [
-            { type: 'text', value: 'Form label'}
-          ]
+          attributes: { title: 'Label: <label>' },
+          children: [{ type: 'text', value: 'Form label' }],
         },
-        { 
+        {
           tagName: 'input',
           style: {
             appearance: 'none',
             color: 'text',
             backgroundColor: 'transparent',
-            borderWidth: { 
+            borderWidth: {
               top: { value: 1, unit: 'px' },
               bottom: { value: 1, unit: 'px' },
               left: { value: 1, unit: 'px' },
               right: { value: 1, unit: 'px' },
             },
             borderColor: {
-              top: { value: 'currentColor',},
-              bottom: { value: 'currentColor',},
-              left: { value: 'currentColor',},
-              right: { value: 'currentColor',},
+              top: { value: 'currentColor' },
+              bottom: { value: 'currentColor' },
+              left: { value: 'currentColor' },
+              right: { value: 'currentColor' },
             },
             borderStyle: {
               top: 'solid',
@@ -317,10 +320,10 @@ const initialValue: any = {
             },
             fontSize: { value: 1, unit: 'rem' },
             padding: {
-              top: { value: .5, unit: 'rem' },
-              bottom: { value: .5, unit: 'rem' },
-              left: { value: .5, unit: 'rem' },
-              right: { value: .5, unit: 'rem' },
+              top: { value: 0.5, unit: 'rem' },
+              bottom: { value: 0.5, unit: 'rem' },
+              left: { value: 0.5, unit: 'rem' },
+              right: { value: 0.5, unit: 'rem' },
             },
             borderRadius: { value: 0, unit: 'px' },
             height: { value: 'auto', unit: 'keyword' },
@@ -328,55 +331,16 @@ const initialValue: any = {
           attributes: {
             type: 'text',
             placeholder: 'Placeholder text',
-            title: 'Text input: <input type="text" />'
+            title: 'Text input: <input type="text" />',
           },
         },
-        { 
+        {
           tagName: 'input',
           style: {
             appearance: 'none',
             color: 'text',
             backgroundColor: 'transparent',
-            borderWidth: { 
-              top: { value: 1, unit: 'px' },
-              bottom: { value: 1, unit: 'px' },
-              left: { value: 1, unit: 'px' },
-              right: { value: 1, unit: 'px' },
-            },
-            borderColor: {
-              top: { value: 'currentColor', },
-              bottom: { value: 'currentColor',},
-              left: { value: 'currentColor', },
-              right: { value: 'currentColor', },
-            },
-            borderStyle: {
-              top: 'solid',
-              bottom: 'solid',
-              left: 'solid',
-              right: 'solid',
-            },
-            fontSize: { value: 1, unit: 'rem' },
-            padding: {
-              top: { value: .5, unit: 'rem' },
-              bottom: { value: .5, unit: 'rem' },
-              left: { value: .5, unit: 'rem' },
-              right: { value: .5, unit: 'rem' },
-            },
-            borderRadius: { value: 0, unit: 'px' }
-          },
-          attributes: {
-            type: 'password',
-            placeholder: 'Password',
-            title: 'Password input: <input type="password" />'
-          },
-        },
-        { 
-          tagName: 'input',
-          style: {
-            appearance: 'none',
-            color: 'text',
-            backgroundColor: 'transparent',
-            borderWidth: { 
+            borderWidth: {
               top: { value: 1, unit: 'px' },
               bottom: { value: 1, unit: 'px' },
               left: { value: 1, unit: 'px' },
@@ -396,68 +360,71 @@ const initialValue: any = {
             },
             fontSize: { value: 1, unit: 'rem' },
             padding: {
-              top: { value: .5, unit: 'rem' },
-              bottom: { value: .5, unit: 'rem' },
-              left: { value: .5, unit: 'rem' },
-              right: { value: .5, unit: 'rem' },
+              top: { value: 0.5, unit: 'rem' },
+              bottom: { value: 0.5, unit: 'rem' },
+              left: { value: 0.5, unit: 'rem' },
+              right: { value: 0.5, unit: 'rem' },
             },
-            borderRadius: { value: 0, unit: 'px' }
+            borderRadius: { value: 0, unit: 'px' },
+          },
+          attributes: {
+            type: 'password',
+            placeholder: 'Password',
+            title: 'Password input: <input type="password" />',
+          },
+        },
+        {
+          tagName: 'input',
+          style: {
+            appearance: 'none',
+            color: 'text',
+            backgroundColor: 'transparent',
+            borderWidth: {
+              top: { value: 1, unit: 'px' },
+              bottom: { value: 1, unit: 'px' },
+              left: { value: 1, unit: 'px' },
+              right: { value: 1, unit: 'px' },
+            },
+            borderColor: {
+              top: { value: 'currentColor' },
+              bottom: { value: 'currentColor' },
+              left: { value: 'currentColor' },
+              right: { value: 'currentColor' },
+            },
+            borderStyle: {
+              top: 'solid',
+              bottom: 'solid',
+              left: 'solid',
+              right: 'solid',
+            },
+            fontSize: { value: 1, unit: 'rem' },
+            padding: {
+              top: { value: 0.5, unit: 'rem' },
+              bottom: { value: 0.5, unit: 'rem' },
+              left: { value: 0.5, unit: 'rem' },
+              right: { value: 0.5, unit: 'rem' },
+            },
+            borderRadius: { value: 0, unit: 'px' },
           },
           attributes: {
             type: 'email',
             value: 'email@example.com',
           },
         },
-        { 
+        {
           tagName: 'input',
           attributes: {
             type: 'color',
             defaultValue: '#ff33cc',
           },
         },
-        { 
+        {
           tagName: 'input',
           style: {
             appearance: 'none',
             color: 'text',
             backgroundColor: 'transparent',
-            borderWidth: { 
-              top: { value: 1, unit: 'px' },
-              bottom: { value: 1, unit: 'px' },
-              left: { value: 1, unit: 'px' },
-              right: { value: 1, unit: 'px' },
-            },
-            borderColor: {
-              top: { value: 'currentColor' }, 
-              bottom: { value: 'currentColor' },
-              left: { value: 'currentColor' },
-              right: { value: 'currentColor' },
-            },
-            borderStyle: {
-              top: 'solid',
-              bottom: 'solid',
-              left: 'solid',
-              right: 'solid',
-            },
-            fontSize: { value: 1, unit: 'rem' },
-            padding: {
-              top: { value: .5, unit: 'rem' },
-              bottom: { value: .5, unit: 'rem' },
-              left: { value: .5, unit: 'rem' },
-              right: { value: .5, unit: 'rem' },
-            },
-            borderRadius: { value: 0, unit: 'px' }
-          },
-          attributes: {
-            type: 'date',
-          },
-        },
-        { 
-          tagName: 'input',
-          style: {
-            color: 'text',
-            backgroundColor: 'transparent',
-            borderWidth: { 
+            borderWidth: {
               top: { value: 1, unit: 'px' },
               bottom: { value: 1, unit: 'px' },
               left: { value: 1, unit: 'px' },
@@ -475,32 +442,68 @@ const initialValue: any = {
               left: 'solid',
               right: 'solid',
             },
-            fontSize: { value: .75, unit: 'rem' },
+            fontSize: { value: 1, unit: 'rem' },
             padding: {
-              top: { value: .5, unit: 'rem' },
-              bottom: { value: .5, unit: 'rem' },
-              left: { value: .5, unit: 'rem' },
-              right: { value: .5, unit: 'rem' },
+              top: { value: 0.5, unit: 'rem' },
+              bottom: { value: 0.5, unit: 'rem' },
+              left: { value: 0.5, unit: 'rem' },
+              right: { value: 0.5, unit: 'rem' },
             },
-            borderRadius: { value: 0, unit: 'px' }
+            borderRadius: { value: 0, unit: 'px' },
           },
           attributes: {
-            type: 'file',
+            type: 'date',
           },
         },
-        { 
+        {
           tagName: 'input',
           style: {
             color: 'text',
             backgroundColor: 'transparent',
-            borderWidth: { 
+            borderWidth: {
               top: { value: 1, unit: 'px' },
               bottom: { value: 1, unit: 'px' },
               left: { value: 1, unit: 'px' },
               right: { value: 1, unit: 'px' },
             },
             borderColor: {
-              top: { value:  'currentColor' },
+              top: { value: 'currentColor' },
+              bottom: { value: 'currentColor' },
+              left: { value: 'currentColor' },
+              right: { value: 'currentColor' },
+            },
+            borderStyle: {
+              top: 'solid',
+              bottom: 'solid',
+              left: 'solid',
+              right: 'solid',
+            },
+            fontSize: { value: 0.75, unit: 'rem' },
+            padding: {
+              top: { value: 0.5, unit: 'rem' },
+              bottom: { value: 0.5, unit: 'rem' },
+              left: { value: 0.5, unit: 'rem' },
+              right: { value: 0.5, unit: 'rem' },
+            },
+            borderRadius: { value: 0, unit: 'px' },
+          },
+          attributes: {
+            type: 'file',
+          },
+        },
+        {
+          tagName: 'input',
+          style: {
+            color: 'text',
+            backgroundColor: 'transparent',
+            borderWidth: {
+              top: { value: 1, unit: 'px' },
+              bottom: { value: 1, unit: 'px' },
+              left: { value: 1, unit: 'px' },
+              right: { value: 1, unit: 'px' },
+            },
+            borderColor: {
+              top: { value: 'currentColor' },
               bottom: { value: 'currentColor' },
               left: { value: 'currentColor' },
               right: { value: 'currentColor' },
@@ -513,12 +516,12 @@ const initialValue: any = {
             },
             fontSize: { value: 1, unit: 'rem' },
             padding: {
-              top: { value: .5, unit: 'rem' },
-              bottom: { value: .5, unit: 'rem' },
-              left: { value: .5, unit: 'rem' },
-              right: { value: .5, unit: 'rem' },
+              top: { value: 0.5, unit: 'rem' },
+              bottom: { value: 0.5, unit: 'rem' },
+              left: { value: 0.5, unit: 'rem' },
+              right: { value: 0.5, unit: 'rem' },
             },
-            borderRadius: { value: 0, unit: 'px' }
+            borderRadius: { value: 0, unit: 'px' },
           },
           attributes: {
             type: 'number',
@@ -527,12 +530,12 @@ const initialValue: any = {
             max: 100,
           },
         },
-        { 
+        {
           tagName: 'input',
           style: {
             color: 'text',
             backgroundColor: 'transparent',
-            borderWidth: { 
+            borderWidth: {
               top: { value: 1, unit: 'px' },
               bottom: { value: 1, unit: 'px' },
               left: { value: 1, unit: 'px' },
@@ -552,24 +555,24 @@ const initialValue: any = {
             },
             fontSize: { value: 1, unit: 'rem' },
             padding: {
-              top: { value: .5, unit: 'rem' },
-              bottom: { value: .5, unit: 'rem' },
-              left: { value: .5, unit: 'rem' },
-              right: { value: .5, unit: 'rem' },
+              top: { value: 0.5, unit: 'rem' },
+              bottom: { value: 0.5, unit: 'rem' },
+              left: { value: 0.5, unit: 'rem' },
+              right: { value: 0.5, unit: 'rem' },
             },
-            borderRadius: { value: 0, unit: 'px' }
+            borderRadius: { value: 0, unit: 'px' },
           },
           attributes: {
             type: 'month',
             defaultValue: '2048-02',
           },
         },
-        { 
+        {
           tagName: 'input',
           style: {
             color: 'text',
             backgroundColor: 'transparent',
-            borderWidth: { 
+            borderWidth: {
               top: { value: 1, unit: 'px' },
               bottom: { value: 1, unit: 'px' },
               left: { value: 1, unit: 'px' },
@@ -577,7 +580,7 @@ const initialValue: any = {
             },
             borderColor: {
               top: { value: 'currentColor' },
-              bottom: { value:  'currentColor' },
+              bottom: { value: 'currentColor' },
               left: { value: 'currentColor' },
               right: { value: 'currentColor' },
             },
@@ -589,33 +592,33 @@ const initialValue: any = {
             },
             fontSize: { value: 1, unit: 'rem' },
             padding: {
-              top: { value: .5, unit: 'rem' },
-              bottom: { value: .5, unit: 'rem' },
-              left: { value: .5, unit: 'rem' },
-              right: { value: .5, unit: 'rem' },
+              top: { value: 0.5, unit: 'rem' },
+              bottom: { value: 0.5, unit: 'rem' },
+              left: { value: 0.5, unit: 'rem' },
+              right: { value: 0.5, unit: 'rem' },
             },
-            borderRadius: { value: 0, unit: 'px' }
+            borderRadius: { value: 0, unit: 'px' },
           },
           attributes: {
             type: 'week',
             defaultValue: '2048-W32',
           },
         },
-        { 
+        {
           tagName: 'input',
           style: {
-            accentColor: '#6465ff', 
+            accentColor: '#6465ff',
           },
           attributes: {
             type: 'range',
           },
         },
-        { 
+        {
           tagName: 'input',
           style: {
             color: 'text',
             backgroundColor: 'transparent',
-            borderWidth: { 
+            borderWidth: {
               top: { value: 1, unit: 'px' },
               bottom: { value: 1, unit: 'px' },
               left: { value: 1, unit: 'px' },
@@ -635,23 +638,23 @@ const initialValue: any = {
             },
             fontSize: { value: 1, unit: 'rem' },
             padding: {
-              top: { value: .5, unit: 'rem' },
-              bottom: { value: .5, unit: 'rem' },
-              left: { value: .5, unit: 'rem' },
-              right: { value: .5, unit: 'rem' },
+              top: { value: 0.5, unit: 'rem' },
+              bottom: { value: 0.5, unit: 'rem' },
+              left: { value: 0.5, unit: 'rem' },
+              right: { value: 0.5, unit: 'rem' },
             },
-            borderRadius: { value: 0, unit: 'px' }
+            borderRadius: { value: 0, unit: 'px' },
           },
           attributes: {
             type: 'search',
           },
         },
-        { 
+        {
           tagName: 'input',
           style: {
             color: 'text',
             backgroundColor: 'transparent',
-            borderWidth: { 
+            borderWidth: {
               top: { value: 1, unit: 'px' },
               bottom: { value: 1, unit: 'px' },
               left: { value: 1, unit: 'px' },
@@ -671,23 +674,23 @@ const initialValue: any = {
             },
             fontSize: { value: 1, unit: 'rem' },
             padding: {
-              top: { value: .5, unit: 'rem' },
-              bottom: { value: .5, unit: 'rem' },
-              left: { value: .5, unit: 'rem' },
-              right: { value: .5, unit: 'rem' },
+              top: { value: 0.5, unit: 'rem' },
+              bottom: { value: 0.5, unit: 'rem' },
+              left: { value: 0.5, unit: 'rem' },
+              right: { value: 0.5, unit: 'rem' },
             },
-            borderRadius: { value: 0, unit: 'px' }
+            borderRadius: { value: 0, unit: 'px' },
           },
           attributes: {
             type: 'tel',
           },
         },
-        { 
+        {
           tagName: 'input',
           style: {
             color: 'text',
             backgroundColor: 'transparent',
-            borderWidth: { 
+            borderWidth: {
               top: { value: 1, unit: 'px' },
               bottom: { value: 1, unit: 'px' },
               left: { value: 1, unit: 'px' },
@@ -707,72 +710,74 @@ const initialValue: any = {
             },
             fontSize: { value: 1, unit: 'rem' },
             padding: {
-              top: { value: .5, unit: 'rem' },
-              bottom: { value: .5, unit: 'rem' },
-              left: { value: .5, unit: 'rem' },
-              right: { value: .5, unit: 'rem' },
+              top: { value: 0.5, unit: 'rem' },
+              bottom: { value: 0.5, unit: 'rem' },
+              left: { value: 0.5, unit: 'rem' },
+              right: { value: 0.5, unit: 'rem' },
             },
-            borderRadius: { value: 0, unit: 'px' }
+            borderRadius: { value: 0, unit: 'px' },
           },
           attributes: {
             type: 'url',
-            defaultValue: 'https://components.ai'
+            defaultValue: 'https://components.ai',
           },
         },
         {
           tagName: 'div',
           children: [
-            { 
-                tagName: 'input',
-                style: {
-                  accentColor: '#6465ff', 
-                },
-                attributes: {
-                  type: 'checkbox',
-                  defaultChecked: true,
-                },
-            },
-            { 
+            {
               tagName: 'input',
               style: {
-                accentColor: '#6465ff', 
+                accentColor: '#6465ff',
+              },
+              attributes: {
+                type: 'checkbox',
+                defaultChecked: true,
+              },
+            },
+            {
+              tagName: 'input',
+              style: {
+                accentColor: '#6465ff',
               },
               attributes: {
                 type: 'checkbox',
                 defaultChecked: false,
               },
             },
-          ]
+          ],
         },
         {
           tagName: 'div',
-          children: [{ 
-            tagName: 'input',
-            style: {
-              accentColor: '#6465ff', 
+          children: [
+            {
+              tagName: 'input',
+              style: {
+                accentColor: '#6465ff',
+              },
+              attributes: {
+                type: 'radio',
+                defaultChecked: true,
+                name: 'boolean',
+              },
             },
-            attributes: {
-              type: 'radio',
-              defaultChecked: true,
-              name: 'boolean',
+            {
+              tagName: 'input',
+              style: {
+                accentColor: '#6465ff',
+              },
+              attributes: {
+                type: 'radio',
+                name: 'boolean',
+              },
             },
-          },
-          { 
-            tagName: 'input',
-            style: {
-              accentColor: '#6465ff', 
-            },
-            attributes: {
-              type: 'radio',
-              name: 'boolean',
-            },
-          }]
+          ],
         },
-        { 
+        {
           tagName: 'input',
           style: {
             cursor: 'pointer',
-            color: '#6465ff', 
+            color: '#6465ff',
             backgroundColor: '#f7f1ff',
             fontSize: { value: 1, unit: 'rem' },
             fontWeight: 600,
@@ -780,16 +785,18 @@ const initialValue: any = {
             paddingTop: { value: 16, unit: 'px' },
             paddingBottom: { value: 16, unit: 'px' },
             paddingLeft: { value: 64, unit: 'px' },
-            paddingRight: { value: 64, unit: 'px'},
+            paddingRight: { value: 64, unit: 'px' },
             appearance: 'none',
-            boxShadow: [{
-              inset: false,
-              spread: { value: 0, unit: 'px' },
-              blur: { value: 0, unit: 'px' },
-              offsetX: { value: 0, unit: 'px' },
-              offsetY: { value: 0, unit: 'px' },
-              color: 'transparent',
-            }],
+            boxShadow: [
+              {
+                inset: false,
+                spread: { value: 0, unit: 'px' },
+                blur: { value: 0, unit: 'px' },
+                offsetX: { value: 0, unit: 'px' },
+                offsetY: { value: 0, unit: 'px' },
+                color: 'transparent',
+              },
+            ],
             borderStyle: {
               top: 'none',
               bottom: 'none',
@@ -797,7 +804,7 @@ const initialValue: any = {
               right: 'none',
             },
             borderWidth: { value: 0, unit: 'px' },
-            borderColor: { 
+            borderColor: {
               top: { value: 'transparent' },
               bottom: { value: 'transparent' },
               left: { value: 'transparent' },
@@ -806,13 +813,13 @@ const initialValue: any = {
             transition: 'all .2s ease-in-out',
             ':hover': {
               color: 'primaryHover',
-            }
+            },
           },
           attributes: {
             type: 'submit',
           },
         },
-        { 
+        {
           tagName: 'button',
           style: {
             cursor: 'pointer',
@@ -824,7 +831,7 @@ const initialValue: any = {
             paddingTop: { value: 16, unit: 'px' },
             paddingBottom: { value: 16, unit: 'px' },
             paddingLeft: { value: 64, unit: 'px' },
-            paddingRight: { value: 64, unit: 'px'},
+            paddingRight: { value: 64, unit: 'px' },
             appearance: 'none',
             borderWidth: { value: 0, unit: 'px' },
             borderColor: { value: 'transparent' },
@@ -837,13 +844,11 @@ const initialValue: any = {
             transition: 'all .2s ease-in-out',
             ':hover': {
               backgroundColor: 'primaryHover',
-            }
+            },
           },
-          children: [
-            { type: 'text', value: 'Primary Button' }
-          ]
+          children: [{ type: 'text', value: 'Primary Button' }],
         },
-        { 
+        {
           tagName: 'button',
           style: {
             cursor: 'pointer',
@@ -855,16 +860,18 @@ const initialValue: any = {
             paddingTop: { value: 16, unit: 'px' },
             paddingBottom: { value: 16, unit: 'px' },
             paddingLeft: { value: 64, unit: 'px' },
-            paddingRight: { value: 64, unit: 'px'},
+            paddingRight: { value: 64, unit: 'px' },
             appearance: 'none',
-            boxShadow: [{
-              inset: true,
-              spread: { value: 2, unit: 'px' },
-              blur: { value: 0, unit: 'px' },
-              offsetX: { value: 0, unit: 'px' },
-              offsetY: { value: 0, unit: 'px' },
-              color: 'currentColor',
-            }],
+            boxShadow: [
+              {
+                inset: true,
+                spread: { value: 2, unit: 'px' },
+                blur: { value: 0, unit: 'px' },
+                offsetX: { value: 0, unit: 'px' },
+                offsetY: { value: 0, unit: 'px' },
+                color: 'currentColor',
+              },
+            ],
             borderStyle: {
               top: 'none',
               bottom: 'none',
@@ -872,7 +879,7 @@ const initialValue: any = {
               right: 'none',
             },
             borderWidth: { value: 0, unit: 'px' },
-            borderColor: { 
+            borderColor: {
               top: { value: 'transparent' },
               bottom: { value: 'transparent' },
               left: { value: 'transparent' },
@@ -881,13 +888,11 @@ const initialValue: any = {
             transition: 'all .2s ease-in-out',
             ':hover': {
               color: 'text',
-            }
+            },
           },
-          children: [
-            { type: 'text', value: 'Button Outline' }
-          ]
+          children: [{ type: 'text', value: 'Button Outline' }],
         },
-        { 
+        {
           tagName: 'input',
           style: {
             cursor: 'pointer',
@@ -899,16 +904,18 @@ const initialValue: any = {
             paddingTop: { value: 16, unit: 'px' },
             paddingBottom: { value: 16, unit: 'px' },
             paddingLeft: { value: 64, unit: 'px' },
-            paddingRight: { value: 64, unit: 'px'},
+            paddingRight: { value: 64, unit: 'px' },
             appearance: 'none',
-            boxShadow: [{
-              inset: true,
-              spread: { value: 2, unit: 'px' },
-              blur: { value: 0, unit: 'px' },
-              offsetX: { value: 0, unit: 'px' },
-              offsetY: { value: 0, unit: 'px' },
-              color: 'currentColor',
-            }],
+            boxShadow: [
+              {
+                inset: true,
+                spread: { value: 2, unit: 'px' },
+                blur: { value: 0, unit: 'px' },
+                offsetX: { value: 0, unit: 'px' },
+                offsetY: { value: 0, unit: 'px' },
+                color: 'currentColor',
+              },
+            ],
             borderStyle: {
               top: 'none',
               bottom: 'none',
@@ -917,39 +924,39 @@ const initialValue: any = {
             },
             borderWidth: { value: 0, unit: 'px' },
             borderColor: {
-             top: { value: 'transparent' },
-             bottom: { value: 'transparent' },
-             left: { value: 'transparent' },
-             right: { value: 'transparent' },
+              top: { value: 'transparent' },
+              bottom: { value: 'transparent' },
+              left: { value: 'transparent' },
+              right: { value: 'transparent' },
             },
             transition: 'all .2s ease-in-out',
             ':hover': {
               color: 'primary',
-            }
+            },
           },
           attributes: {
             type: 'button',
             defaultValue: 'Button input',
           },
         },
-        { 
+        {
           tagName: 'progress',
-          style: { 
+          style: {
             accentColor: '#6465ff',
             height: { value: 48, unit: 'px' },
           },
-          attributes: { max: 100, value: 61.8 }
+          attributes: { max: 100, value: 61.8 },
         },
-        { 
+        {
           tagName: 'textarea',
-          attributes: { 
+          attributes: {
             rows: 8,
           },
           style: {
             appearance: 'none',
             color: 'text',
             backgroundColor: 'transparent',
-            borderWidth: { 
+            borderWidth: {
               top: { value: 1, unit: 'px' },
               bottom: { value: 1, unit: 'px' },
               left: { value: 1, unit: 'px' },
@@ -974,192 +981,167 @@ const initialValue: any = {
               left: { value: 1, unit: 'rem' },
               right: { value: 1, unit: 'rem' },
             },
-            borderRadius: { value: 0, unit: 'px' }
+            borderRadius: { value: 0, unit: 'px' },
           },
           children: [
-            { type: 'text', value: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.' }
-          ]
+            {
+              type: 'text',
+              value:
+                'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
+            },
+          ],
         },
-        { 
+        {
           tagName: 'header',
           children: [
-        { 
-          tagName: 'h1',
-          style: {
-            color: 'text',
-            backgroundColor: 'background',
-            marginBottom: { value: 1, unit: 'em' },
-            fontFamily: 'heading',
-            fontSize: { value: 3, unit: 'rem', },
-            fontWeight: 800,
-            lineHeight: { value: 1.25, unit: 'number', },
-            marginTop: { value: 0, unit: 'px' },
-            textTransform: 'normal',
-            letterSpacing: { value: 'normal', unit: 'keyword' },
-          },
-          children: [
-            { type: 'text', value: 'Heading 1' }
-          ]
+            {
+              tagName: 'h1',
+              style: {
+                color: 'text',
+                backgroundColor: 'background',
+                marginBottom: { value: 1, unit: 'em' },
+                fontFamily: 'heading',
+                fontSize: { value: 3, unit: 'rem' },
+                fontWeight: 800,
+                lineHeight: { value: 1.25, unit: 'number' },
+                marginTop: { value: 0, unit: 'px' },
+                textTransform: 'normal',
+                letterSpacing: { value: 'normal', unit: 'keyword' },
+              },
+              children: [{ type: 'text', value: 'Heading 1' }],
+            },
+            {
+              tagName: 'h2',
+              style: {
+                color: 'text',
+                backgroundColor: 'background',
+                marginBottom: { value: 1, unit: 'em' },
+                fontFamily: 'heading',
+                fontSize: { value: 2, unit: 'rem' },
+                fontWeight: 800,
+                lineHeight: { value: 1.25, unit: 'number' },
+                marginTop: { value: 0, unit: 'px' },
+                textTransform: 'normal',
+                letterSpacing: { value: 'normal', unit: 'keyword' },
+              },
+              children: [{ type: 'text', value: 'Heading 2' }],
+            },
+            {
+              tagName: 'h3',
+              style: {
+                color: 'text',
+                backgroundColor: 'background',
+                marginBottom: { value: 1, unit: 'em' },
+                fontFamily: 'heading',
+                fontSize: { value: 1.5, unit: 'rem' },
+                fontWeight: 800,
+                lineHeight: { value: 1.25, unit: 'number' },
+                marginTop: { value: 0, unit: 'px' },
+                textTransform: 'normal',
+                letterSpacing: { value: 'normal', unit: 'keyword' },
+              },
+              children: [{ type: 'text', value: 'Heading 3' }],
+            },
+            {
+              tagName: 'h4',
+              style: {
+                color: 'text',
+                backgroundColor: 'background',
+                marginBottom: { value: 1, unit: 'em' },
+                fontFamily: 'heading',
+                fontSize: { value: 1.25, unit: 'rem' },
+                fontWeight: 800,
+                lineHeight: { value: 1.25, unit: 'number' },
+                marginTop: { value: 0, unit: 'px' },
+                textTransform: 'normal',
+                letterSpacing: { value: 'normal', unit: 'keyword' },
+              },
+              children: [{ type: 'text', value: 'Heading 4' }],
+            },
+            {
+              tagName: 'h5',
+              style: {
+                color: 'text',
+                backgroundColor: 'background',
+                marginBottom: { value: 1, unit: 'em' },
+                fontFamily: 'heading',
+                fontSize: { value: 1, unit: 'rem' },
+                fontWeight: 800,
+                lineHeight: { value: 1.25, unit: 'number' },
+                marginTop: { value: 1, unit: 'px' },
+                textTransform: 'normal',
+                letterSpacing: { value: 'normal', unit: 'keyword' },
+              },
+              children: [{ type: 'text', value: 'Heading 5' }],
+            },
+            {
+              tagName: 'h6',
+              style: {
+                color: 'text',
+                backgroundColor: 'background',
+                marginBottom: { value: 1, unit: 'em' },
+                fontFamily: 'heading',
+                fontSize: { value: 0.75, unit: 'rem' },
+                fontWeight: 800,
+                lineHeight: { value: 1.25, unit: 'number' },
+                marginTop: { value: 0, unit: 'px' },
+                textTransform: 'normal',
+                letterSpacing: { value: 'normal', unit: 'keyword' },
+              },
+              children: [{ type: 'text', value: 'Heading 6' }],
+            },
+          ],
         },
-        { 
-          tagName: 'h2',
-          style: {
-            color: 'text',
-            backgroundColor: 'background',
-            marginBottom: { value: 1, unit: 'em' },
-            fontFamily: 'heading',
-            fontSize: { value: 2, unit: 'rem', },
-            fontWeight: 800,
-            lineHeight: { value: 1.25, unit: 'number', },
-            marginTop: { value: 0, unit: 'px' },
-            textTransform: 'normal',
-            letterSpacing: { value: 'normal', unit: 'keyword' },
-          },
-          children: [
-            { type: 'text', value: 'Heading 2' }
-          ]
-        },
-        { 
-          tagName: 'h3',
-          style: {
-            color: 'text',
-            backgroundColor: 'background',
-            marginBottom: { value: 1, unit: 'em' },
-            fontFamily: 'heading',
-            fontSize: { value: 1.5, unit: 'rem', },
-            fontWeight: 800,
-            lineHeight: { value: 1.25, unit: 'number', },
-            marginTop: { value: 0, unit: 'px' },
-            textTransform: 'normal',
-            letterSpacing: { value: 'normal', unit: 'keyword' },
-          },
-          children: [
-            { type: 'text', value: 'Heading 3' }
-          ]
-        },
-        { 
-          tagName: 'h4',
-          style: {
-            color: 'text',
-            backgroundColor: 'background',
-            marginBottom: { value: 1, unit: 'em' },
-            fontFamily: 'heading',
-            fontSize: { value: 1.25, unit: 'rem', },
-            fontWeight: 800,
-            lineHeight: { value: 1.25, unit: 'number', },
-            marginTop: { value: 0, unit: 'px' },
-            textTransform: 'normal',
-            letterSpacing: { value: 'normal', unit: 'keyword' },
-          },
-          children: [
-            { type: 'text', value: 'Heading 4' }
-          ]
-        },
-        { 
-          tagName: 'h5',
-          style: {
-            color: 'text',
-            backgroundColor: 'background',
-            marginBottom: { value: 1, unit: 'em' },
-            fontFamily: 'heading',
-            fontSize: { value: 1, unit: 'rem', },
-            fontWeight: 800,
-            lineHeight: { value: 1.25, unit: 'number', },
-            marginTop: { value: 1, unit: 'px' },
-            textTransform: 'normal',
-            letterSpacing: { value: 'normal', unit: 'keyword' },
-          },
-          children: [
-            { type: 'text', value: 'Heading 5' }
-          ]
-        },
-        { 
-          tagName: 'h6',
-          style: {
-            color: 'text',
-            backgroundColor: 'background',
-            marginBottom: { value: 1, unit: 'em' },
-            fontFamily: 'heading',
-            fontSize: { value: .75, unit: 'rem', },
-            fontWeight: 800,
-            lineHeight: { value: 1.25, unit: 'number', },
-            marginTop: { value: 0, unit: 'px' },
-            textTransform: 'normal',
-            letterSpacing: { value: 'normal', unit: 'keyword' },
-          },
-          children: [
-            { type: 'text', value: 'Heading 6' }
-          ]
-        },
-        ]},
-        { 
+        {
           tagName: 'div',
           children: [
-            { 
+            {
               tagName: 'b',
-              children: [
-                { type: 'text', value: 'Bold text' }
-              ]
+              children: [{ type: 'text', value: 'Bold text' }],
             },
-            { tagName: 'br', },
-            { 
+            { tagName: 'br' },
+            {
               tagName: 'strong',
-              children: [
-                { type: 'text', value: 'Strong text' }
-              ]
+              children: [{ type: 'text', value: 'Strong text' }],
             },
-            { tagName: 'br', },
-        { 
-          tagName: 'i',
-          children: [
-            { type: 'text', value: 'Italic text' }
-          ]
+            { tagName: 'br' },
+            {
+              tagName: 'i',
+              children: [{ type: 'text', value: 'Italic text' }],
+            },
+            { tagName: 'br' },
+            {
+              tagName: 'em',
+              children: [{ type: 'text', value: 'Emphasized text' }],
+            },
+            { tagName: 'br' },
+            {
+              tagName: 'u',
+              children: [{ type: 'text', value: 'Underlined text' }],
+            },
+            { tagName: 'br' },
+            {
+              tagName: 's',
+              children: [{ type: 'text', value: 'Strikethrough text' }],
+            },
+            { tagName: 'br' },
+            {
+              tagName: 'small',
+              children: [{ type: 'text', value: 'Small text' }],
+            },
+            { tagName: 'br' },
+            {
+              tagName: 'sub',
+              children: [{ type: 'text', value: 'Subscript text' }],
+            },
+            { tagName: 'br' },
+            {
+              tagName: 'sup',
+              children: [{ type: 'text', value: 'Superscript text' }],
+            },
+          ],
         },
-            { tagName: 'br', },
-        { 
-          tagName: 'em',
-          children: [
-            { type: 'text', value: 'Emphasized text' }
-          ]
-        },
-            { tagName: 'br', },
-        { 
-          tagName: 'u',
-          children: [
-            { type: 'text', value: 'Underlined text' }
-          ]
-        },
-            { tagName: 'br', },
-        { 
-          tagName: 's',
-          children: [
-            { type: 'text', value: 'Strikethrough text' }
-          ]
-        },
-            { tagName: 'br', },
-        { 
-          tagName: 'small',
-          children: [
-            { type: 'text', value: 'Small text' }
-          ]
-        },
-            { tagName: 'br', },
-        { 
-          tagName: 'sub',
-          children: [
-            { type: 'text', value: 'Subscript text' }
-          ]
-        },
-            { tagName: 'br', },
-        { 
-          tagName: 'sup',
-          children: [
-            { type: 'text', value: 'Superscript text' }
-          ]
-        },
-          ]
-        },
-        { 
+        {
           tagName: 'a',
           attributes: { href: '#0', title: 'Anchor link: <a>' },
           style: {
@@ -1170,182 +1152,157 @@ const initialValue: any = {
               color: 'currentColor',
               line: 'underline',
               style: 'solid',
-              thickness: { value: 1, unit: 'px' }
-            }
+              thickness: { value: 1, unit: 'px' },
+            },
           },
-          children: [
-            { type: 'text', value: 'A text link' }
-          ]
+          children: [{ type: 'text', value: 'A text link' }],
         },
-        { 
+        {
           tagName: 'time',
-          children: [
-            { type: 'text', value: '5 OCT 2048' }
-          ]
+          children: [{ type: 'text', value: '5 OCT 2048' }],
         },
-        { 
+        {
           tagName: 'code',
           children: [
             { type: 'text', value: 'const x = 1024;' },
-            { tagName: 'br', },
+            { tagName: 'br' },
             { type: 'text', value: 'const y = 512;' },
-            { tagName: 'br', },
+            { tagName: 'br' },
             { type: 'text', value: 'const coordinate = [x,y];' },
-          ]
+          ],
         },
         {
           tagName: 'ul',
-          attributes: { 
-            title: 'Unordered list: <ul>' 
-          }, 
-          children: [{ 
-            tagName: 'li',
-            children: [
-              { type: 'text', value: 'Oranges', }
-            ],
+          attributes: {
+            title: 'Unordered list: <ul>',
           },
-          { 
-            tagName: 'li',
-            children: [
-              { type: 'text', value: 'Apples', }
-            ],
-          },
-          { 
-            tagName: 'li',
-            children: [
-              { type: 'text', value: 'Peaches', }
-            ],
-          },
-          { 
-            tagName: 'li',
-            children: [
-              { type: 'text', value: 'Plums', }
-            ],
-          },
-          { 
-            tagName: 'li',
-            children: [
-              { type: 'text', value: 'Mangos', }
-            ],
-          }
-          ]
+          children: [
+            {
+              tagName: 'li',
+              children: [{ type: 'text', value: 'Oranges' }],
+            },
+            {
+              tagName: 'li',
+              children: [{ type: 'text', value: 'Apples' }],
+            },
+            {
+              tagName: 'li',
+              children: [{ type: 'text', value: 'Peaches' }],
+            },
+            {
+              tagName: 'li',
+              children: [{ type: 'text', value: 'Plums' }],
+            },
+            {
+              tagName: 'li',
+              children: [{ type: 'text', value: 'Mangos' }],
+            },
+          ],
         },
         {
           tagName: 'ol',
-          attributes: { 
-            title: 'Ordered list: <ol>' 
-          }, 
-          children: [{ 
-            tagName: 'li',
-            attributes: { 
-              title: 'List item: <li>' 
-            }, 
-            children: [
-              { type: 'text', value: 'Item 1', }
-            ],
+          attributes: {
+            title: 'Ordered list: <ol>',
           },
-          { 
-            tagName: 'li',
-            children: [
-              { type: 'text', value: 'Item 2', }
-            ],
-          },
-          { 
-            tagName: 'li',
-            children: [
-              { type: 'text', value: 'Item 3', }
-            ],
-          },
-          { 
-            tagName: 'li',
-            children: [
-              { type: 'text', value: 'Item 4', }
-            ],
-          },
-          { 
-            tagName: 'li',
-            children: [
-              { type: 'text', value: 'Item 5', }
-            ],
-          }
-          ]
+          children: [
+            {
+              tagName: 'li',
+              attributes: {
+                title: 'List item: <li>',
+              },
+              children: [{ type: 'text', value: 'Item 1' }],
+            },
+            {
+              tagName: 'li',
+              children: [{ type: 'text', value: 'Item 2' }],
+            },
+            {
+              tagName: 'li',
+              children: [{ type: 'text', value: 'Item 3' }],
+            },
+            {
+              tagName: 'li',
+              children: [{ type: 'text', value: 'Item 4' }],
+            },
+            {
+              tagName: 'li',
+              children: [{ type: 'text', value: 'Item 5' }],
+            },
+          ],
         },
         {
           tagName: 'dl',
-          attributes: { 
-            title: 'Definition List: <dl>' 
-          }, 
-          children: [{ 
-            attributes: { 
-              title: 'Definition term: <dt>' 
-            }, 
-            tagName: 'dt',
-            style: {
-              color: 'inherit',
-              backgroundColor: 'inherit',
-              fontSize: { value: 1, unit: 'rem' },
-              fontWeight: 400,
-            },
-            children: [
-              { type: 'text', value: 'Generated designs', }
-            ],
+          attributes: {
+            title: 'Definition List: <dl>',
           },
-          { 
-            tagName: 'dd',
-            attributes: { 
-              title: 'Definition description: <dd>' 
-            }, 
-            style: { 
-              color: 'inherit',
-              backgroundColor: 'inherit',
-              fontSize: { value: 2, unit: 'rem' },
-              fontWeight: 600,
-              marginLeft: { value: 0, unit: 'px', }
+          children: [
+            {
+              attributes: {
+                title: 'Definition term: <dt>',
+              },
+              tagName: 'dt',
+              style: {
+                color: 'inherit',
+                backgroundColor: 'inherit',
+                fontSize: { value: 1, unit: 'rem' },
+                fontWeight: 400,
+              },
+              children: [{ type: 'text', value: 'Generated designs' }],
             },
-            children: [
-              { type: 'text', value: '3.4 Million', }
-            ],
-          },
-          ]
+            {
+              tagName: 'dd',
+              attributes: {
+                title: 'Definition description: <dd>',
+              },
+              style: {
+                color: 'inherit',
+                backgroundColor: 'inherit',
+                fontSize: { value: 2, unit: 'rem' },
+                fontWeight: 600,
+                marginLeft: { value: 0, unit: 'px' },
+              },
+              children: [{ type: 'text', value: '3.4 Million' }],
+            },
+          ],
         },
-        { 
+        {
           tagName: 'blockquote',
           style: {
-            borderLeftWidth: { value: 4, unit: 'px', },
+            borderLeftWidth: { value: 4, unit: 'px' },
             borderLeftColor: { value: 'primary' },
             borderLeftStyle: 'solid',
-            marginLeft: { value: 0, unit: 'px', },
-            paddingLeft: { value: 32, unit: 'px', },
+            marginLeft: { value: 0, unit: 'px' },
+            paddingLeft: { value: 32, unit: 'px' },
           },
-          attributes: { 
-            title: 'Blockquote: <blockquote>' 
-          }, 
+          attributes: {
+            title: 'Blockquote: <blockquote>',
+          },
           children: [
-            { type: 'text', value: '"The aim of every typographic work - the delivery of a message in the shortest, most efficient manner." - Jan Tschichold' }
-          ]
+            {
+              type: 'text',
+              value:
+                '"The aim of every typographic work - the delivery of a message in the shortest, most efficient manner." - Jan Tschichold',
+            },
+          ],
         },
-        { 
+        {
           tagName: 'abbr',
-          attributes: { 
-            title: 'Abbreviation: <abbr>' 
-          }, 
-          children: [
-            { type: 'text', value: 'Abbr' }
-          ]
+          attributes: {
+            title: 'Abbreviation: <abbr>',
+          },
+          children: [{ type: 'text', value: 'Abbr' }],
         },
-        { 
+        {
           tagName: 'cite',
           attributes: {
-            title: 'Cited text: cite'
+            title: 'Cited text: cite',
           },
-          children: [
-            { type: 'text', value: 'Cite element' }
-          ]
+          children: [{ type: 'text', value: 'Cite element' }],
         },
-        { 
+        {
           tagName: 'mark',
           attributes: {
-            title: 'Marked text: <mark>'
+            title: 'Marked text: <mark>',
           },
           style: {
             color: 'inherit',
@@ -1353,9 +1310,7 @@ const initialValue: any = {
             fontStyle: 'normal',
             fontWeight: 'inherit',
           },
-          children: [
-            { type: 'text', value: 'This text is marked' }
-          ],
+          children: [{ type: 'text', value: 'This text is marked' }],
         },
         {
           tagName: 'table',
@@ -1374,37 +1329,29 @@ const initialValue: any = {
                       style: {
                         textAlign: 'left',
                       },
-                      children: [
-                        { type: 'text', value: 'Name' }
-                      ],
+                      children: [{ type: 'text', value: 'Name' }],
                     },
                     {
                       tagName: 'th',
                       style: {
                         textAlign: 'left',
                       },
-                      children: [
-                        { type: 'text', value: 'Email' }
-                      ],
+                      children: [{ type: 'text', value: 'Email' }],
                     },
                     {
                       tagName: 'th',
                       style: {
                         textAlign: 'left',
                       },
-                      children: [
-                        { type: 'text', value: 'Favorite typeface' }
-                      ],
+                      children: [{ type: 'text', value: 'Favorite typeface' }],
                     },
-                  ]
-                }
+                  ],
+                },
               ],
             },
             {
               tagName: 'tfoot',
-              children: [
-
-              ],
+              children: [],
             },
             {
               tagName: 'tbody',
@@ -1417,29 +1364,23 @@ const initialValue: any = {
                       style: {
                         textAlign: 'left',
                       },
-                      children: [
-                        { type: 'text', value: 'Tanner' }
-                      ],
+                      children: [{ type: 'text', value: 'Tanner' }],
                     },
                     {
                       tagName: 'td',
                       style: {
                         textAlign: 'left',
                       },
-                      children: [
-                        { type: 'text', value: 'tanner@example.com' }
-                      ],
+                      children: [{ type: 'text', value: 'tanner@example.com' }],
                     },
                     {
                       tagName: 'td',
                       style: {
                         textAlign: 'left',
                       },
-                      children: [
-                        { type: 'text', value: 'Garamond' }
-                      ],
+                      children: [{ type: 'text', value: 'Garamond' }],
                     },
-                  ]
+                  ],
                 },
                 {
                   tagName: 'tr',
@@ -1449,29 +1390,23 @@ const initialValue: any = {
                       style: {
                         textAlign: 'left',
                       },
-                      children: [
-                        { type: 'text', value: 'Finley' }
-                      ],
+                      children: [{ type: 'text', value: 'Finley' }],
                     },
                     {
                       tagName: 'td',
                       style: {
                         textAlign: 'left',
                       },
-                      children: [
-                        { type: 'text', value: 'finley@example.com' }
-                      ],
+                      children: [{ type: 'text', value: 'finley@example.com' }],
                     },
                     {
                       tagName: 'td',
                       style: {
                         textAlign: 'left',
                       },
-                      children: [
-                        { type: 'text', value: 'Space Mono' }
-                      ],
+                      children: [{ type: 'text', value: 'Space Mono' }],
                     },
-                  ]
+                  ],
                 },
                 {
                   tagName: 'tr',
@@ -1481,44 +1416,34 @@ const initialValue: any = {
                       style: {
                         textAlign: 'left',
                       },
-                      children: [
-                        { type: 'text', value: 'Payton' }
-                      ],
+                      children: [{ type: 'text', value: 'Payton' }],
                     },
                     {
                       tagName: 'td',
                       style: {
                         textAlign: 'left',
                       },
-                      children: [
-                        { type: 'text', value: 'payton@example.com' }
-                      ],
+                      children: [{ type: 'text', value: 'payton@example.com' }],
                     },
                     {
                       tagName: 'td',
                       style: {
                         textAlign: 'left',
                       },
-                      children: [
-                        { type: 'text', value: 'Bodini' }
-                      ],
+                      children: [{ type: 'text', value: 'Bodini' }],
                     },
-                  ]
-                }
+                  ],
+                },
               ],
             },
-          ]
-        }
-      ]
+          ],
+        },
+      ],
     },
     {
       tagName: 'section',
-      children: [
-        {
-          
-        },
-      ]
-    }
+      children: [{}],
+    },
   ],
 }
 
