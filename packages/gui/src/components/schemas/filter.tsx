@@ -2,35 +2,27 @@ import { listSchema } from './list'
 import { functionSchema } from './function'
 import { optionsSchema } from './options'
 import { angle, color, length, numberPercentage } from './primitives'
+import { objectSchema } from './object'
+import { withKeywords } from './withKeywords'
 
-const blur = functionSchema('blur', {
-  fields: {
-    radius: length(),
-  },
-})
+const blur = functionSchema('blur', length())
 
-const dropShadow = functionSchema('drop-shadow', {
-  fields: {
-    color: color(),
-    offsetX: length(),
-    offsetY: length(),
-    blurRadius: length(),
-  },
-  separator: ' ',
-})
-
-const hueRotate = functionSchema('hue-rotate', {
-  fields: {
-    angle: angle(),
-  },
-})
-
-const amountFilter = (name: string) =>
-  functionSchema(name, {
+const dropShadow = functionSchema(
+  'drop-shadow',
+  objectSchema({
     fields: {
-      amount: numberPercentage(),
+      color: color(),
+      offsetX: length(),
+      offsetY: length(),
+      blurRadius: length(),
     },
+    separator: ' ',
   })
+)
+
+const hueRotate = functionSchema('hue-rotate', angle())
+
+const amountFilter = (name: string) => functionSchema(name, numberPercentage())
 
 const singleFilter = optionsSchema({
   variants: {
@@ -45,10 +37,13 @@ const singleFilter = optionsSchema({
     saturate: amountFilter('saturate'),
     sepia: amountFilter('sepia'),
   },
+  getType: (value) => value.name as any,
 })
 
-export const filter = listSchema({
-  itemSchema: singleFilter,
-  separator: ' ',
-  keywords: ['none'],
-})
+export const filter = withKeywords(
+  ['none'],
+  listSchema({
+    itemSchema: singleFilter,
+    separator: ' ',
+  })
+)

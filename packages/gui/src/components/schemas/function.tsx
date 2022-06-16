@@ -1,26 +1,46 @@
+import { getInputProps } from '../../lib/util'
+import { SchemaInput } from '../inputs/SchemaInput'
 import { objectSchema } from './object'
 import { DataTypeSchema } from './types'
 
-interface CreateFunction<T extends object> {
-  fields: {
-    [Property in keyof T]: DataTypeSchema<T[Property]>
-  }
-  keyOrder?: (keyof T)[]
-  stringify?(values: Record<keyof T, string>): string
-  separator?: string
-  defaultValue?: Partial<T>
+export interface FunctionSchema<N extends string, T> {
+  name: N
+  arguments: T
 }
 
 /**
  * Wrapper on an object schema representing a CSS function
  */
-export function functionSchema<T extends object>(
-  name: string,
-  { separator = ', ', ...props }: CreateFunction<T>
-): DataTypeSchema<T> {
-  return objectSchema({
-    ...props,
-    separator,
-    wrapStringify: (value) => `${name}(${value})`,
-  })
+export function functionSchema<N extends string, T>(
+  name: N,
+  argsSchema: DataTypeSchema<T>
+): DataTypeSchema<FunctionSchema<N, T>> {
+  return {
+    stringify(value: FunctionSchema<N, T>) {
+      return `${value.name}(${argsSchema.stringify(value.arguments)})`
+    },
+    defaultValue: {
+      name,
+      arguments: argsSchema.defaultValue,
+    },
+    regenerate({ previousValue }) {
+      return {
+        name,
+        arguments:
+          argsSchema.regenerate?.({ previousValue: previousValue.arguments }) ??
+          argsSchema.defaultValue,
+      }
+    },
+    input(props) {
+      return (
+        <div>
+          <SchemaInput
+            schema={argsSchema}
+            {...getInputProps(props, 'arguments')}
+            label=""
+          />
+        </div>
+      )
+    },
+  }
 }

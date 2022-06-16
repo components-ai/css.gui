@@ -28,6 +28,8 @@ export function SchemaInput<T>({
 }: Props<T>) {
   const Input = schema.input
   const InlineInput = schema.inlineInput
+
+  const content = Input && <Input label="" value={value} onChange={onChange} />
   return (
     <Collapsible.Root defaultOpen>
       <InputHeader
@@ -37,7 +39,7 @@ export function SchemaInput<T>({
         onChange={onChange}
         {...props}
       >
-        {Input && (
+        {content && (
           <Collapsible.Trigger asChild>
             <IconButton
               sx={{
@@ -56,11 +58,7 @@ export function SchemaInput<T>({
           <InlineInput label="" value={value} onChange={onChange} />
         )}
       </InputHeader>
-      {Input && (
-        <Collapsible.Content>
-          <Input label="" value={value} onChange={onChange} />
-        </Collapsible.Content>
-      )}
+      {content && <Collapsible.Content>{content}</Collapsible.Content>}
     </Collapsible.Root>
   )
 }

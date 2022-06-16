@@ -1,12 +1,10 @@
-import { omit } from 'lodash-es'
-import { SelectInput } from '../inputs/SelectInput'
-import { InputHeader } from '../ui/InputHeader'
 import { DataTypeSchema, RegenOptions } from './types'
+import * as Select from '../ui/Select'
 
 interface CreateOptions<T extends Record<string, any>> {
   variants: { [V in keyof T]: DataTypeSchema<T[V]> }
   order?: (keyof T)[]
-  stringify?(variant: keyof T, value: string): string
+  getType<K extends keyof T>(value: T[K]): K
   convert?(oldValue: Unionize<T>[any], newType: keyof T): Partial<T[any]>
 }
 
@@ -17,50 +15,62 @@ interface CreateOptions<T extends Record<string, any>> {
 export function optionsSchema<T extends Record<string, any>>({
   variants,
   order = Object.keys(variants),
-  stringify = (variant, value) => value,
-  convert = () => ({}),
+  convert,
+  getType,
 }: CreateOptions<T>): DataTypeSchema<Unionize<T>> {
   function regenerate({
     previousValue,
   }: RegenOptions<Unionize<T>>): Unionize<T> {
-    const type = previousValue.type
+    const type = getType(previousValue)
     const newValue = variants[type].regenerate?.({
-      previousValue: omit(previousValue, 'type'),
-    } as any)
-    return ({
-      ...newValue,
-      type,
-    } ?? previousValue) as any
+      previousValue: previousValue,
+    })
+    return newValue ?? previousValue
   }
 
   return {
-    input(props) {
-      const type = props.value.type as keyof T
-      const Component = variants[type].input
+    inlineInput(props) {
+      const type = getType(props.value)
+      const InlineInput = variants[type].inlineInput
+      // Render the select
       return (
-        <div>
-          <InputHeader {...props} regenerate={regenerate}>
-            <SelectInput
-              label=""
-              options={order as string[]}
-              value={props.value.type}
-              onChange={(newType) => {
-                // if the type changes, reset the value to the default value of that type
-                props.onChange({
-                  ...variants[newType].defaultValue,
-                  ...convert(props.value, newType),
-                  type: newType,
-                })
-              }}
-            />
-          </InputHeader>
-          <Component value={props.value} onChange={props.onChange} label={''} />
+        <div sx={{ display: 'flex' }}>
+          {InlineInput ? <InlineInput {...props} /> : type.toString()}
+          <Select.Root
+            value={type.toString()}
+            onValueChange={(newType) => {
+              props.onChange(
+                convert?.(props.value, newType) ??
+                  (variants[newType].defaultValue as any)
+              )
+            }}
+          >
+            <Select.Trigger>
+              <Select.Value>{''}</Select.Value>
+              <Select.Icon />
+            </Select.Trigger>
+            <Select.Content>
+              {order.map((typeOption: any) => {
+                return (
+                  <Select.Item key={typeOption} value={typeOption}>
+                    <Select.ItemText>{typeOption}</Select.ItemText>
+                    <Select.ItemIndicator />
+                  </Select.Item>
+                )
+              })}
+            </Select.Content>
+          </Select.Root>
         </div>
       )
     },
+    input(props) {
+      const type = getType(props.value)
+      const Component = variants[type].input
+      return Component ? <Component {...props} /> : null
+    },
     stringify(value) {
-      const type = value.type as keyof T
-      return stringify(type, variants[type].stringify(value))
+      const type = getType(value)
+      return variants[type].stringify(value)
     },
     defaultValue: {
       ...variants[order[0]].defaultValue,
@@ -72,4 +82,4 @@ export function optionsSchema<T extends Record<string, any>>({
 
 // Utility types to help typecheck these options correctly,
 // based on: https://stackoverflow.com/questions/62591230/typescript-convert-a-tagged-union-into-an-union-type
-type Unionize<T> = { [K in keyof T]: { type: K } & T[K] }[keyof T]
+type Unionize<T> = { [K in keyof T]: T[K] }[keyof T]

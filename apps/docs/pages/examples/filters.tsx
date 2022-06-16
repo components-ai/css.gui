@@ -6,8 +6,8 @@ export default function Filters() {
   const [styles, setStyles] = useState<any>({
     filter: [
       {
-        type: 'blur',
-        radius: { value: 8, unit: 'px' },
+        name: 'blur',
+        arguments: { value: 8, unit: 'px' },
       },
     ],
   })
