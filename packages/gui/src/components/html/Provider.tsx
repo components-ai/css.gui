@@ -1,5 +1,15 @@
 import { property } from 'lodash-es'
-import { Children, cloneElement, createContext, isValidElement, ReactElement, ReactNode, useContext, useEffect, useState } from 'react'
+import {
+  Children,
+  cloneElement,
+  createContext,
+  isValidElement,
+  ReactElement,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
 import { rawProperties } from '../../data/properties'
 import { htmlToEditorSchema } from '../../lib'
 import { stylesToEditorSchema } from '../../lib/transformers/styles-to-editor-schema'
@@ -39,6 +49,16 @@ export const transformValueToSchema = (value: any): ElementData => {
     } else if (key === 'style') {
       updatedValue = stylesToEditorSchema(val)
     }
+
+    if (value.tagName && !value.type) {
+      return {
+        type: 'element',
+        [key]: updatedValue,
+        attributes: {},
+        ...acc,
+      }
+    }
+
     return {
       [key]: updatedValue,
       ...acc,
