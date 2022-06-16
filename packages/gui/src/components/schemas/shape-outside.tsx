@@ -7,15 +7,19 @@ import { keyword, lengthPercentage, numberPercentage } from './primitives'
 
 export const shapeOutside = optionsSchema({
   variants: {
-    image: objectSchema({
-      fields: { value: image },
-    }),
+    image,
     shape: objectSchema({
       fields: {
         shape: basicShape,
         box: keyword(SHAPE_BOX_KEYWORDS),
       },
     }),
+  },
+  getType(value) {
+    if ((value as any).shape) {
+      return 'shape' as any
+    }
+    return 'image'
   },
 })
 

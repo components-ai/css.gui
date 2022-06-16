@@ -6,7 +6,6 @@ import { randomInt } from '../../lib/util'
 import GradientStopsField from '../inputs/Gradient/stops'
 import { GradientStop } from '../inputs/Gradient/types'
 import { functionSchema } from './function'
-import { optionsSchema } from './options'
 import { position } from './position'
 import { angle, color, keyword } from './primitives'
 import { DataTypeSchema } from './types'
@@ -168,26 +167,3 @@ export function convertGradient(
     stops: oldValue.arguments.stops,
   }
 }
-
-// export const gradient = optionsSchema({
-//   variants: {
-//     linear,
-//     'repeating-linear': repeatingLinear,
-//     radial,
-//     'repeating-radial': repeatingRadial,
-//     conic,
-//     'repeating-conic': repeatingConic,
-//   },
-//   // TODO keep values when switching between repeating and non-
-//   convert: (oldValue, newType) => {
-//     if (
-//       oldValue.type === `repeating-${newType}` ||
-//       newType === `repeating-${oldValue.type}`
-//     ) {
-//       return oldValue
-//     }
-//     return {
-//       stops: oldValue.stops,
-//     }
-//   },
-// })

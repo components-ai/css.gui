@@ -12,15 +12,19 @@ export const offsetPosition = position
 export const offsetDistance = lengthPercentage()
 export const offsetPath = optionsSchema({
   variants: {
-    image: objectSchema({
-      fields: { value: image },
-    }),
+    image,
     shape: objectSchema({
       fields: {
         shape: basicShape,
         box: keyword(SHAPE_BOX_KEYWORDS),
       },
     }),
+  },
+  getType(value) {
+    if ((value as any).shape) {
+      return 'shape' as any
+    }
+    return 'image'
   },
 })
 // TODO 'auto <angle>'
