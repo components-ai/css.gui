@@ -5,7 +5,9 @@ import { editorSchemaToHast } from '../transformers/editor-schema-to-hast'
 import { format } from './format'
 
 export const unstyledHtml = async (node: HtmlNode) => {
-  const root = editorSchemaToHast(node)
+  const root = editorSchemaToHast(node, {
+    removeStyleProperty: true,
+  })
   const output = unified().use(rehypeStringify).stringify(root)
   return format('html', output)
 }
