@@ -29,8 +29,18 @@ export function useHtmlEditor() {
 
 const HtmlEditorContext = createContext<HtmlEditor>(DEFAULT_HTML_EDITOR_VALUE)
 
+const coerceNodeIntoUnist = (node: any) => {
+  if (node.tagName) {
+    return { type: 'element', attributes: {}, ...node }
+  }
+
+  return node
+}
+
 export const transformValueToSchema = (value: any): ElementData => {
-  const transformed = Object.entries(value).reduce((acc, [key, val]) => {
+  const fullValue = coerceNodeIntoUnist(value)
+
+  const transformed = Object.entries(fullValue).reduce((acc, [key, val]) => {
     let updatedValue = val
     if (key === 'children' && Array.isArray(val)) {
       updatedValue = val.map((child) => transformValueToSchema(child))
