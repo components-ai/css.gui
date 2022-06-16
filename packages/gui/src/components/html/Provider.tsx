@@ -1,16 +1,4 @@
-import { property } from 'lodash-es'
-import {
-  Children,
-  cloneElement,
-  createContext,
-  isValidElement,
-  ReactElement,
-  ReactNode,
-  useContext,
-  useEffect,
-  useState,
-} from 'react'
-import { rawProperties } from '../../data/properties'
+import { createContext, ReactNode, useContext, useState } from 'react'
 import { htmlToEditorSchema } from '../../lib'
 import { stylesToEditorSchema } from '../../lib/transformers/styles-to-editor-schema'
 import { HtmlNode, ElementPath, ElementData } from './types'
@@ -54,7 +42,6 @@ export const transformValueToSchema = (value: any): ElementData => {
       return {
         type: 'element',
         [key]: updatedValue,
-        attributes: {},
         ...acc,
       }
     }

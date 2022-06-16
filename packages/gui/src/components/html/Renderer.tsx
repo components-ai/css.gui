@@ -59,14 +59,14 @@ function ElementRenderer({ value, canvas, path }: ElementRendererProps) {
     sx.userSelect = 'none'
   }
 
-  const props = {
+  const props = toReactProps({
     ...(canvas ? cleanAttributes(attributes) : attributes),
     sx,
     onClick: (e: MouseEvent) => {
       e.stopPropagation()
       setSelected(path)
     },
-  }
+  })
 
   if (isVoidElement(Tag)) {
     return <Tag {...props} />
