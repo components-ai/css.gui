@@ -1,7 +1,5 @@
 import { mapValues } from 'lodash-es'
-import { choose } from '../../lib/random'
 import { getInputProps } from '../../lib/util'
-import { InputContainer } from '../inputs/InputContainer'
 import { SchemaInput } from '../inputs/SchemaInput'
 import { DataTypeSchema, RegenOptions } from './types'
 
@@ -78,5 +76,13 @@ export function objectSchema<T extends object>({
       )
     },
     regenerate,
+    validate: ((value: any) => {
+      if (typeof value !== 'object') {
+        return false
+      }
+      return Object.entries(fields).every(([key, schema]: any) => {
+        return schema.validate(value[key])
+      })
+    }) as any,
   }
 }

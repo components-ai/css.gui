@@ -46,6 +46,15 @@ export function tupleSchema<T>({
   }
 
   return {
+    stringify,
+    defaultValue,
+    regenerate,
+    validate: ((value: any) => {
+      if (!(value instanceof Array)) {
+        return false
+      }
+      return value.every((item) => itemSchema.validate(item))
+    }) as any,
     input(props) {
       const { value, onChange } = props
       const linked = isLinked(value)
@@ -86,21 +95,9 @@ export function tupleSchema<T>({
                 label=""
               />
             )
-            // return (
-            //   <ItemInput
-            //     key={i}
-            //     // @ts-ignore
-            //     {...getInputProps(props, i)}
-            //     onChange={(newItem) => onChange(replace(value, i, newItem))}
-            //     label={linked ? '' : labels[i]}
-            //   />
-            // )
           })}
         </div>
       )
     },
-    stringify,
-    defaultValue,
-    regenerate,
   }
 }

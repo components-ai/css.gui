@@ -1,4 +1,4 @@
-import { isNil, mapValues } from 'lodash-es'
+import { compact, isNil, mapValues } from 'lodash-es'
 import { getInputProps } from '../../lib/util'
 import { DataTypeSchema, RegenOptions } from './types'
 import * as Toggle from '@radix-ui/react-toggle'
@@ -34,7 +34,7 @@ export function boxSideSchema<T>({
       bottom = defaultValue,
       left = defaultValue,
     } = value
-    return [top, right, bottom, left].map(stringify).join(' ')
+    return [top, right, bottom, left].map(stringify as any).join(' ')
   }
   const defaultValue = {
     top: itemSchema.defaultValue,
@@ -50,6 +50,17 @@ export function boxSideSchema<T>({
     }) as BoxSide<T>
   }
   return {
+    stringify,
+    defaultValue,
+    validate: ((value: any) => {
+      if (typeof value !== 'object') {
+        return false
+      }
+      const { top, left, right, bottom } = value
+      return compact([top, left, right, bottom]).every((item) =>
+        itemSchema.validate(value)
+      )
+    }) as any,
     input(props) {
       const ItemInput = itemSchema.input
       const linked = isLinked(props.value)
@@ -121,8 +132,6 @@ export function boxSideSchema<T>({
         </InputContainer>
       )
     },
-    stringify,
-    defaultValue,
   }
 }
 

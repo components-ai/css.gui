@@ -13,6 +13,7 @@ export function listSchema<T>({
   separator = ', ',
 }: CreateList<T>): DataTypeSchema<T[]> {
   const stringify = (value: T[]) => {
+    console.log(value)
     const stringified = value.map((item) => itemSchema.stringify(item))
     return stringified.join(separator)
   }
@@ -40,5 +41,11 @@ export function listSchema<T>({
       )
     },
     regenerate,
+    validate: ((value: any) => {
+      if (!(value instanceof Array)) {
+        return false
+      }
+      return value.every((item) => itemSchema.validate(item))
+    }) as any,
   }
 }

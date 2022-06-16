@@ -8,6 +8,7 @@ export interface DataTypeSchema<T> {
   stringify(value: T, theme?: Theme): string
   defaultValue: T
   regenerate?(options: RegenOptions<T>): T
+  validate(value: unknown): value is T
 }
 
 export interface RegenOptions<T> {

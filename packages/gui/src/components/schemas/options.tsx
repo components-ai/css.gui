@@ -35,7 +35,13 @@ export function optionsSchema<T extends Record<string, any>>({
       // Render the select
       return (
         <div sx={{ display: 'flex' }}>
-          {InlineInput ? <InlineInput {...props} /> : type.toString()}
+          {InlineInput ? (
+            <InlineInput {...props} />
+          ) : (
+            <span sx={{ fontSize: 1 }}>
+              {variants[type].stringify(props.value)}
+            </span>
+          )}
           <Select.Root
             value={type.toString()}
             onValueChange={(newType) => {
@@ -77,6 +83,11 @@ export function optionsSchema<T extends Record<string, any>>({
       type: order[0],
     },
     regenerate,
+    validate: ((value: any) => {
+      return Object.values(variants).some((variantSchema) =>
+        variantSchema.validate(value)
+      )
+    }) as any,
   }
 }
 

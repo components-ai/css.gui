@@ -5,11 +5,14 @@ import { stringifyUnit } from '../../lib/stringify'
 import { randomInt } from '../../lib/util'
 import {
   Angle,
+  ANGLE_UNITS,
   Color,
   CSSUnitValue,
   Length,
+  LENGTH_UNITS,
   NumberPercentage,
   Time,
+  TIME_UNITS,
 } from '../../types/css'
 import { Theme } from '../../types/theme'
 import { AngleInput, angleSteps } from '../inputs/AngleInput'
@@ -22,6 +25,8 @@ import { NumberPercentageInput } from '../inputs/NumberPercentageInput'
 import { IntegerInput, PercentageInput } from '../inputs/PrimitiveInput'
 import { TextInput } from '../inputs/TextInput'
 import { TimeInput, timeSteps } from '../inputs/TimeInput'
+import { isValidColor } from '../primitives/ColorPicker/util'
+import { KeywordSelect } from '../primitives/KeywordSelect'
 import { DataTypeSchema, RegenOptions } from './types'
 
 export function color({
@@ -36,7 +41,15 @@ export function color({
     stringify: stringifyUnit as any,
     defaultValue,
     regenerate: () => randomColor(),
+    validate: ((value: unknown) => {
+      return typeof value === 'object' && isValidColor((value as any).value)
+    }) as any,
   }
+}
+
+function validateDimension(value: any, units: readonly string[]) {
+  if (typeof value !== 'object') return false
+  return units.includes(value.unit) && typeof value.value === 'number'
 }
 
 const angleRanges = {
@@ -67,6 +80,7 @@ export function angle({
     defaultValue,
     keywords,
     regenerate,
+    validate: (value: any) => validateDimension(value, ANGLE_UNITS),
   }
 }
 
@@ -95,6 +109,7 @@ export function time({
     stringify: stringifyUnit as any,
     defaultValue,
     regenerate,
+    validate: (value: any) => validateDimension(value, TIME_UNITS),
   }
 }
 
@@ -115,6 +130,7 @@ export function percentage({
     stringify: stringifyUnit as any,
     defaultValue,
     regenerate,
+    validate: (value: any) => validateDimension(value, ['%']),
   }
 }
 
@@ -131,6 +147,7 @@ export function number({
     stringify: (x: number) => x.toString(),
     defaultValue,
     regenerate,
+    validate: (value: any) => typeof value === 'number',
   }
 }
 
@@ -138,11 +155,13 @@ export function numberPercentage({
   defaultValue = { value: 0, unit: '%' },
 }: {
   defaultValue?: NumberPercentage
-} = {}) {
+} = {}): DataTypeSchema<NumberPercentage> {
   return {
     inlineInput: NumberPercentageInput,
     stringify: stringifyUnit as any,
     defaultValue,
+    validate: ((value: any) =>
+      validateDimension(value, ['%', 'number'])) as any,
   }
 }
 
@@ -169,7 +188,7 @@ interface LengthProps {
 export function length({
   defaultValue = { value: 0, unit: 'px' },
   ...props
-}: LengthProps = {}) {
+}: LengthProps = {}): DataTypeSchema<Length> {
   function regenerate({ previousValue }: RegenOptions<Length>) {
     const unit = previousValue === '0' ? 'px' : previousValue.unit
     // @ts-ignore
@@ -185,6 +204,7 @@ export function length({
     stringify: stringifyUnit as any,
     defaultValue,
     regenerate,
+    validate: ((value: any) => validateDimension(value, LENGTH_UNITS)) as any,
   }
 }
 
@@ -196,7 +216,7 @@ export function integer({
   defaultValue = 0,
 }: {
   defaultValue?: number
-} = {}) {
+} = {}): DataTypeSchema<number> {
   function regenerate() {
     return randomInt(0, 11)
   }
@@ -204,6 +224,7 @@ export function integer({
     inlineInput: bindProps(IntegerInput, { regenerate }),
     stringify: stringifyUnit as any,
     defaultValue,
+    validate: ((value: any) => typeof value === 'number') as any,
   }
 }
 
@@ -219,6 +240,7 @@ export function ident({
     inlineInput: TextInput,
     stringify: (value) => value,
     defaultValue,
+    validate: ((value: any) => typeof value === 'string') as any,
   }
 }
 
@@ -231,6 +253,7 @@ export function string({
     inlineInput: TextInput,
     stringify: (value) => `"${value}"`,
     defaultValue,
+    validate: ((value: any) => typeof value === 'string') as any,
   }
 }
 
@@ -256,5 +279,6 @@ export function keyword<T extends string>(
     stringify: (value) => value,
     defaultValue,
     regenerate: regenerate,
+    validate: ((value: any) => options.includes(value)) as any,
   }
 }
