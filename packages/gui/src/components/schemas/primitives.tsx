@@ -1,3 +1,4 @@
+import { compact } from 'lodash-es'
 import { randomColor } from '../../lib/color'
 import { bindProps } from '../../lib/components'
 import { choose, randomStep } from '../../lib/random'
@@ -201,13 +202,18 @@ export function length({
       value: randomStep(min, max, lengthSteps[unit]),
     }
   }
+  const units = compact([
+    ...LENGTH_UNITS,
+    percentage ?? '%',
+    number ?? 'number',
+  ]) as any[]
   return {
     type: 'length',
     inlineInput: bindProps(LengthInput, { ...props, regenerate }),
     stringify: stringifyUnit as any,
     defaultValue,
     regenerate,
-    validate: ((value: any) => validateDimension(value, LENGTH_UNITS)) as any,
+    validate: ((value: any) => validateDimension(value, units)) as any,
   }
 }
 

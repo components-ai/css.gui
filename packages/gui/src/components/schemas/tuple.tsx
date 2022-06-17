@@ -46,6 +46,7 @@ export function tupleSchema<T>({
   }
 
   return {
+    type: `${itemSchema.type} list`,
     stringify,
     defaultValue,
     regenerate,
