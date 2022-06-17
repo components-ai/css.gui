@@ -19,6 +19,8 @@ export interface DataTypeSchema<T> {
   regenerate?(options: RegenOptions<T>): T
   /** Variants of the schema for use in joining multiple types of schema together */
   variants?: SchemaVariants<T>
+  /** Whether the input has a block input */
+  hasBlockInput?(value: T): boolean
 }
 
 export interface RegenOptions<T> {

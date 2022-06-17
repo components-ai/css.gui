@@ -30,6 +30,7 @@ export function SchemaInput<T>({
   const InlineInput = schema.inlineInput
 
   const content = Input && <Input label="" value={value} onChange={onChange} />
+  const { hasBlockInput = () => !!content } = schema
   return (
     <Collapsible.Root defaultOpen>
       <InputHeader
@@ -39,7 +40,7 @@ export function SchemaInput<T>({
         onChange={onChange}
         {...props}
       >
-        {content && (
+        {hasBlockInput(value) && (
           <Collapsible.Trigger asChild>
             <IconButton
               sx={{

@@ -86,6 +86,10 @@ export function optionsSchema<T extends Record<string, any>>({
       const Component = variants[type].input
       return Component ? <Component {...props} /> : null
     },
+    hasBlockInput(value) {
+      const type = getType(value)
+      return !!variants[type].input
+    },
     stringify(value) {
       const type = getType(value)
       return variants[type].stringify(value)
