@@ -40,6 +40,7 @@ export function optionsSchema<T extends Record<string, any>>({
 
   return {
     type,
+    variants: variants as any,
     inlineInput(props) {
       const type = getType(props.value)
       const InlineInput = variants[type].inlineInput

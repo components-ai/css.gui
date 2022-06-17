@@ -56,7 +56,7 @@ function basicDimension<U extends string>({
 
 export function dimension<U extends string>(options: DimensionProps<U>) {
   const base = basicDimension(options)
-  return joinSchemas([base, calc(base)])
+  return joinSchemas([base, calc(base)], base.type)
 }
 
 function validateDimension(value: any, units: readonly string[]) {
