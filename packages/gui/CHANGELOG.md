@@ -1,5 +1,14 @@
 # @compai/css-gui
 
+## 0.0.115
+
+### Patch Changes
+
+- e0ef441: Make nodes in html editor unist friendly
+- 5fe33db: Remove props transform temporarily
+- ad2ed3e: Remove attr default temporarily
+- b894bd0: Improve unstyled html export
+
 ## 0.0.114
 
 ### Patch Changes
