@@ -432,45 +432,59 @@ function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
       <span sx={{ lineHeight: 1, fontFamily: 'monospace' }}>{tagButton}</span>
       <Collapsible.Content>
         <div sx={{ ml: 4 }}>
-          {value.children?.map((child, i) => {
-            return (
-              <Fragment key={i}>
-                <AddChildButton
-                  onClick={() => {
-                    onChange(
-                      addChildAtPath(value, [i], {
-                        type: 'text',
-                        value: '',
+          {value.children?.length ? (
+            value.children?.map((child, i) => {
+              return (
+                <Fragment key={i}>
+                  <AddChildButton
+                    onClick={() => {
+                      onChange(
+                        addChildAtPath(value, [i], {
+                          type: 'text',
+                          value: '',
+                        })
+                      )
+                      onSelect([i])
+                    }}
+                  />
+                  <TreeNode
+                    value={child}
+                    onSelect={onSelect}
+                    path={[...path, i]}
+                    onChange={(newChild) => {
+                      onChange({
+                        ...value,
+                        children: replaceAt(value.children ?? [], i, newChild),
                       })
-                    )
-                    onSelect([i])
-                  }}
-                />
-                <TreeNode
-                  value={child}
-                  onSelect={onSelect}
-                  path={[...path, i]}
-                  onChange={(newChild) => {
-                    onChange({
-                      ...value,
-                      children: replaceAt(value.children ?? [], i, newChild),
-                    })
-                  }}
-                />
-                <AddChildButton
-                  onClick={() => {
-                    onChange(
-                      addChildAtPath(value, [value.children?.length ?? 0], {
-                        type: 'text',
-                        value: '',
-                      })
-                    )
-                    onSelect(null)
-                  }}
-                />
-              </Fragment>
-            )
-          })}
+                    }}
+                  />
+                  <AddChildButton
+                    onClick={() => {
+                      onChange(
+                        addChildAtPath(value, [value.children?.length ?? 0], {
+                          type: 'text',
+                          value: '',
+                        })
+                      )
+                      onSelect(null)
+                    }}
+                  />
+                </Fragment>
+              )
+            })
+          ) : (
+            <AddChildButton
+              onClick={() => {
+                onChange(
+                  addChildAtPath(value, [0], {
+                    type: 'text',
+                    value: '',
+                  })
+                )
+                onSelect([0])
+              }}
+            />
+          )}
         </div>
         <div sx={{ display: 'flex', alignItems: 'center' }}>
           <div
