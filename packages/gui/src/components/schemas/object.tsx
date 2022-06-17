@@ -68,7 +68,15 @@ export function objectSchema<T extends object>({
     stringify,
     input(props) {
       return (
-        <div sx={{ display: 'grid', gap: 2 }}>
+        <div
+          sx={{
+            display: 'grid',
+            gap: 2,
+            borderLeft: '4px solid',
+            borderColor: 'border',
+            pl: 2,
+          }}
+        >
           {keyOrder.map((key) => {
             const schema = fields[key]
             return (

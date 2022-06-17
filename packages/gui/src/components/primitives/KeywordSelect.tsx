@@ -18,7 +18,7 @@ export const KeywordSelect = <T extends string>({
     <Select.Root value={value} onValueChange={onChange}>
       <Select.Trigger>
         <Select.Value />
-        {!hideIcon && <Select.Icon />}
+        {/* {!hideIcon && <Select.Icon />} */}
       </Select.Trigger>
       <Select.Content>
         {options.map((option) => {
