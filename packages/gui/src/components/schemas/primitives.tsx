@@ -145,10 +145,7 @@ interface LengthProps {
   themeProperty?: string
   range?: Range
 }
-export function length({
-  defaultValue,
-  ...props
-}: LengthProps = {}): DataTypeSchema<Length> {
+export function length({ defaultValue, ...props }: LengthProps = {}) {
   const units = compact([
     ...LENGTH_UNITS,
     percentage ?? '%',
