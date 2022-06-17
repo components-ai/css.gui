@@ -109,13 +109,13 @@ export type CalcFunction = {
   operand: CalcOperand
 }
 export type CSSUnitValue = {
-  value: number | string
+  value: number
   unit: string
   themePath?: string
 }
 export type Dimension = CSSUnitValue | CSSFunctionCalc
 export type GenericLength = '0'
-export type Length = CSSUnitValue | GenericLength
+export type Length = CSSUnitValue
 // This isn't differentiated type-wise but it's good to keep track of
 // what actually accepts % values
 export type LengthPercentage = Length

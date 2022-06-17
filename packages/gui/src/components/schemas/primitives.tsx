@@ -16,18 +16,18 @@ import {
   TIME_UNITS,
 } from '../../types/css'
 import { Theme } from '../../types/theme'
-import { AngleInput, angleSteps } from '../inputs/AngleInput'
+import { angleSteps } from '../inputs/AngleInput'
 import { ColorInput } from '../inputs/ColorInput'
 import { Range } from '../inputs/Dimension/Input'
 import { KeywordInput } from '../inputs/KeywordInput'
-import { LengthInput, lengthSteps } from '../inputs/LengthInput'
+import { lengthSteps } from '../inputs/LengthInput'
 import { NumberInput } from '../inputs/NumberInput'
-import { NumberPercentageInput } from '../inputs/NumberPercentageInput'
-import { IntegerInput, PercentageInput } from '../inputs/PrimitiveInput'
+import { IntegerInput } from '../inputs/PrimitiveInput'
 import { TextInput } from '../inputs/TextInput'
-import { TimeInput, timeSteps } from '../inputs/TimeInput'
+import { timeSteps } from '../inputs/TimeInput'
 import { isValidColor } from '../primitives/ColorPicker/util'
-import { DataTypeSchema, RegenOptions } from './types'
+import { dimension } from './dimension'
+import { DataTypeSchema } from './types'
 
 export function color({
   defaultValue = { value: 'transparent' },
@@ -58,88 +58,48 @@ const angleRanges = {
   turn: [0, 1],
   rad: [0, 2 * Math.PI],
   grad: [0, 400],
-}
+} as const
 
-export function angle({
-  defaultValue = { value: 0, unit: 'deg' },
-}: {
-  defaultValue?: Angle
-} = {}): DataTypeSchema<Angle> {
-  function regenerate({ previousValue }: RegenOptions<Angle>) {
-    const unit = previousValue.unit
-    const [min, max] = angleRanges[unit]
-    return {
-      unit,
-      value: randomStep(min, max, angleSteps[unit]),
-    }
-  }
-  return {
+export function angle({ defaultValue }: { defaultValue?: Angle } = {}) {
+  return dimension({
     type: 'angle',
-    inlineInput: bindProps(AngleInput, { regenerate }),
-    stringify: stringifyUnit as any,
     defaultValue,
-    regenerate,
-    validate: ((value: any) => validateDimension(value, ANGLE_UNITS)) as any,
-  }
+    steps: angleSteps,
+    regenRanges: angleRanges,
+    units: ANGLE_UNITS,
+  })
 }
 
 const timeRanges = {
   s: [0, 2],
   ms: [0, 2000],
-}
+} as const
 
-export function time({
-  defaultValue = { value: 0, unit: 's' },
-  themeProperty,
-}: {
-  defaultValue?: Time
-  themeProperty?: Theme
-} = {}): DataTypeSchema<Time> {
-  function regenerate({ previousValue }: RegenOptions<Time>) {
-    const unit = previousValue.unit
-    const [min, max] = timeRanges[unit]
-    return {
-      unit,
-      value: randomStep(min, max, timeSteps[unit]),
-    }
-  }
-  return {
+export function time({ defaultValue }: { defaultValue?: Time } = {}) {
+  return dimension({
     type: 'time',
-    inlineInput: bindProps(TimeInput, { regenerate, themeProperty }),
-    stringify: stringifyUnit as any,
     defaultValue,
-    regenerate,
-    validate: ((value: any) => validateDimension(value, TIME_UNITS)) as any,
-  }
+    steps: timeSteps,
+    regenRanges: timeRanges,
+    units: TIME_UNITS,
+  })
 }
 
 export function percentage({
-  defaultValue = { value: 0, unit: '%' },
-}: {
-  defaultValue?: CSSUnitValue
-} = {}): DataTypeSchema<CSSUnitValue> {
-  function regenerate({ previousValue }: RegenOptions<CSSUnitValue>) {
-    const unit = previousValue.unit
-    return {
-      unit,
-      value: randomStep(0, 100, 0.1),
-    }
-  }
-  return {
+  defaultValue,
+}: { defaultValue?: CSSUnitValue } = {}) {
+  return dimension({
     type: '%',
-    inlineInput: bindProps(PercentageInput, { regenerate }),
-    stringify: stringifyUnit as any,
     defaultValue,
-    regenerate,
-    validate: ((value: any) => validateDimension(value, ['%'])) as any,
-  }
+    steps: { '%': 0.1 },
+    regenRanges: { '%': [0, 100] },
+    units: ['%'],
+  })
 }
 
 export function number({
   defaultValue = 0,
-}: {
-  defaultValue?: number
-} = {}): DataTypeSchema<number> {
+}: { defaultValue?: number } = {}): DataTypeSchema<number> {
   function regenerate() {
     return randomStep(0, 2, 0.1)
   }
@@ -154,18 +114,15 @@ export function number({
 }
 
 export function numberPercentage({
-  defaultValue = { value: 0, unit: '%' },
-}: {
-  defaultValue?: NumberPercentage
-} = {}): DataTypeSchema<NumberPercentage> {
-  return {
+  defaultValue,
+}: { defaultValue?: NumberPercentage } = {}) {
+  return dimension({
     type: 'number/%',
-    inlineInput: NumberPercentageInput,
-    stringify: stringifyUnit as any,
     defaultValue,
-    validate: ((value: any) =>
-      validateDimension(value, ['%', 'number'])) as any,
-  }
+    steps: { '%': 0.1, number: 0.001 },
+    regenRanges: { '%': [0, 100], number: [0, 1] },
+    units: ['%', 'number'],
+  })
 }
 
 const lengthRanges = {
@@ -176,7 +133,7 @@ const lengthRanges = {
   number: [0, 2],
   fr: [0, 5],
   // TODO remaining ranges
-}
+} as const
 
 interface LengthProps {
   defaultValue?: Length
@@ -184,37 +141,26 @@ interface LengthProps {
   number?: boolean
   percentage?: boolean
   flex?: boolean
-  themeValues?: (CSSUnitValue & { id: string })[]
+  // themeValues?: (CSSUnitValue & { id: string })[]
   themeProperty?: string
   range?: Range
 }
 export function length({
-  defaultValue = { value: 0, unit: 'px' },
+  defaultValue,
   ...props
 }: LengthProps = {}): DataTypeSchema<Length> {
-  function regenerate({ previousValue }: RegenOptions<Length>) {
-    const unit = previousValue === '0' ? 'px' : previousValue.unit
-    // @ts-ignore
-    const [min, max] = lengthRanges[unit]
-    return {
-      unit,
-      // @ts-ignore
-      value: randomStep(min, max, lengthSteps[unit]),
-    }
-  }
   const units = compact([
     ...LENGTH_UNITS,
     percentage ?? '%',
     number ?? 'number',
   ]) as any[]
-  return {
+  return dimension({
     type: 'length',
-    inlineInput: bindProps(LengthInput, { ...props, regenerate }),
-    stringify: stringifyUnit as any,
     defaultValue,
-    regenerate,
-    validate: ((value: any) => validateDimension(value, units)) as any,
-  }
+    steps: lengthSteps,
+    regenRanges: lengthRanges,
+    units,
+  })
 }
 
 export function lengthPercentage(props: Omit<LengthProps, 'percentage'> = {}) {

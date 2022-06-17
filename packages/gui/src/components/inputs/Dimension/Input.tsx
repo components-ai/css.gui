@@ -15,7 +15,6 @@ import { InputHeader } from '../../ui/InputHeader'
 import { useThemeProperty } from '../../providers/ThemeContext'
 import { convertUnits } from '../../../lib/convert'
 import { X } from 'react-feather'
-import { isCSSUnitValue } from '../../../lib'
 
 // Mapping of units to [min, max] tuple
 type UnitRanges = Record<string, [min: number, max: number]>
@@ -164,7 +163,7 @@ export function DimensionInput(props: DimensionInputProps) {
   )
 }
 
-function nonnegativeRange(units: readonly string[]): UnitRanges {
+export function nonnegativeRange(units: readonly string[]): UnitRanges {
   return Object.fromEntries(units.map((unit) => [unit, [0, Infinity]]))
 }
 interface DeleteProps {
