@@ -41,7 +41,12 @@ function basicDimension<U extends string>({
   }
   return {
     type,
-    inlineInput: bindProps(DimensionInput, { conversions, range, steps }),
+    inlineInput: bindProps(DimensionInput, {
+      conversions,
+      range,
+      steps,
+      units,
+    }),
     stringify: stringifyUnit as any,
     defaultValue,
     regenerate,

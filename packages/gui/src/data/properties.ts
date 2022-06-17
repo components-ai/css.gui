@@ -57,6 +57,7 @@ import {
   time,
 } from '../components/schemas/primitives'
 import { DataTypeSchema } from '../components/schemas/types'
+import { joinSchemas } from '../components/schemas/joinSchemas'
 
 type PropertyData = {
   input: PrimitiveType | ComponentType<EditorPropsWithLabel<any>>
@@ -97,7 +98,11 @@ function normalizeSchema(propertyData: PropertyData): DataTypeSchema<any> {
       const { keywords = [], ...rest } = propertyData
       return keyword(keywords, rest)
     } else {
-      return primitiveMap[input](propertyData) as any
+      let schema = primitiveMap[input](propertyData) as any
+      if (propertyData.keywords) {
+        return joinSchemas([keyword(propertyData.keywords), schema])
+      }
+      return schema
     }
   }
   return propertyData as any
@@ -351,7 +356,7 @@ export const rawProperties: Record<string, any> = {
   caretColor: {
     input: 'color',
     keywords: ['currentcolor', 'transparent'],
-    defaultValue: { value: '#6465ff'},
+    defaultValue: { value: '#6465ff' },
   },
   clear: {
     input: 'keyword',
@@ -368,7 +373,7 @@ export const rawProperties: Record<string, any> = {
   color: {
     input: 'color',
     keywords: ['currentcolor', 'transparent'],
-    defaultValue: { value: '#6465ff'},
+    defaultValue: { value: '#6465ff' },
   },
   colorAdjust: {
     input: 'keyword',
@@ -701,7 +706,7 @@ export const rawProperties: Record<string, any> = {
       value: 24,
       unit: 'px',
     },
-    themeProperty: 'fontSizes'
+    themeProperty: 'fontSizes',
   },
   fontStretch: {
     input: 'percentage',
@@ -976,7 +981,7 @@ export const rawProperties: Record<string, any> = {
     percentage: true,
     keywords: ['normal'],
     defaultValue: 'normal',
-    themeProperty: 'letterSpacings'
+    themeProperty: 'letterSpacings',
   },
   lightingColor: {
     input: 'color',
@@ -1003,7 +1008,7 @@ export const rawProperties: Record<string, any> = {
       value: 1.5,
       unit: 'number',
     },
-    themeProperty: 'lineHeights'
+    themeProperty: 'lineHeights',
   },
   lineHeightStep: {
     input: 'length',

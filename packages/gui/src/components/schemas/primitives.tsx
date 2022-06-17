@@ -154,9 +154,9 @@ export function length({
 }: LengthProps = {}) {
   const units = compact([
     ...LENGTH_UNITS,
-    percentage ?? '%',
-    number ?? 'number',
-    flex ?? 'fr',
+    percentage && '%',
+    number && 'number',
+    flex && 'fr',
   ]) as any[]
   return dimension({
     type: 'length',

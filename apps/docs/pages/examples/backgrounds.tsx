@@ -9,12 +9,9 @@ const initialStyles = {
     value: 2,
     unit: 'rem',
   },
-  letterSpacing: {
-    value: 'initial',
-    unit: 'keyword',
-  },
+  letterSpacing: 'normal',
   lineHeight: {
-    value: '1.5',
+    value: 1.5,
     unit: 'number',
   },
   fontFamily: 'Space Mono',
@@ -25,8 +22,8 @@ const initialStyles = {
         arguments: 'https://source.unsplash.com/random',
       },
       position: {
-        x: { value: 'center', unit: 'keyword' },
-        y: { value: 'center', unit: 'keyword' },
+        x: 'center',
+        y: 'center',
       },
       repeat: ['no-repeat'],
       size: [{ value: 100, unit: '%' }],
