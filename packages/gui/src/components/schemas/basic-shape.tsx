@@ -5,10 +5,10 @@ import { LengthInput } from '../inputs/LengthInput'
 import { boxSideSchema } from './box-side'
 import { listSchema } from './list'
 import { functionSchema } from './function'
-import { optionsSchema } from './options'
 import { position } from './position'
 import { keyword, length, lengthPercentage, string } from './primitives'
 import { objectSchema } from './object'
+import { joinSchemas } from './joinSchemas'
 
 const shapeRadius = lengthPercentage({
   keywords: ['closest-side', 'farthest-side'],
@@ -77,6 +77,4 @@ const polygon = functionSchema(
 
 const path = functionSchema('path', string())
 
-export const basicShape = optionsSchema({
-  variants: { inset, circle, ellipse, polygon, path },
-})
+export const basicShape = joinSchemas([inset, circle, ellipse, polygon, path])

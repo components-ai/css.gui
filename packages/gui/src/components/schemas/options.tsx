@@ -3,6 +3,7 @@ import * as Select from '../ui/Select'
 
 interface CreateOptions<T extends Record<string, any>> {
   variants: { [V in keyof T]: DataTypeSchema<T[V]> }
+  type?: string
   order?: (keyof T)[]
   convert?(oldValue: Unionize<T>[any], newType: keyof T): T | undefined
 }
@@ -13,6 +14,7 @@ interface CreateOptions<T extends Record<string, any>> {
  */
 export function optionsSchema<T extends Record<string, any>>({
   variants,
+  type = 'options',
   order = Object.keys(variants),
   convert,
 }: CreateOptions<T>): DataTypeSchema<Unionize<T>> {
@@ -37,6 +39,7 @@ export function optionsSchema<T extends Record<string, any>>({
   }
 
   return {
+    type,
     inlineInput(props) {
       const type = getType(props.value)
       const InlineInput = variants[type].inlineInput

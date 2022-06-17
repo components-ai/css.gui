@@ -11,6 +11,7 @@ import { angle, color, keyword, number } from './primitives'
 import { DataTypeSchema } from './types'
 import { objectSchema } from './object'
 import { withKeywords } from './withKeywords'
+import { joinSchemas } from './joinSchemas'
 
 export const stringifyStops = (
   stops: GradientStop[],
@@ -28,6 +29,7 @@ export const stringifyStops = (
 
 function stops(repeating: boolean = false): DataTypeSchema<GradientStop[]> {
   return {
+    type: 'gradient stops',
     input: bindProps(GradientStopsField, { repeating }),
     stringify: (value, theme) => stringifyStops(value, '%', theme),
     defaultValue: [
@@ -147,18 +149,14 @@ const repeatingConic = functionSchema(
   })
 )
 
-export const gradientVariants = {
-  'linear-gradient': linear,
-  'repeating-linear-gradient': repeatingLinear,
-  'radial-gradient': radial,
-  'repeating-radial-gradient': repeatingRadial,
-  'conic-gradient': conic,
-  'repeating-conic-gradient': repeatingConic,
-}
+export const gradient = joinSchemas(
+  [linear, repeatingLinear, radial, repeatingRadial, conic, repeatingConic],
+  'gradient'
+)
 
 type DataTypeOfSchema<S> = S extends DataTypeSchema<infer T> ? T : never
-type GradientVariants = typeof gradientVariants
-type Gradient = DataTypeOfSchema<GradientVariants[keyof GradientVariants]>
+type GradientVariants = typeof gradient
+type Gradient = DataTypeOfSchema<GradientVariants>
 
 export function convertGradient(
   oldValue: Gradient,

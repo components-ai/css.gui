@@ -4,6 +4,7 @@ import { SchemaInput } from '../inputs/SchemaInput'
 import { DataTypeSchema, RegenOptions } from './types'
 
 interface CreateObject<T extends object> {
+  type?: string
   fields: {
     [Property in keyof T]: DataTypeSchema<T[Property]>
   }
@@ -20,6 +21,7 @@ interface CreateObject<T extends object> {
 }
 
 export function objectSchema<T extends object>({
+  type = 'object',
   fields,
   keyOrder = Object.keys(fields) as (keyof T)[],
   separator = ' ',
@@ -61,6 +63,7 @@ export function objectSchema<T extends object>({
     }) as T
   }
   return {
+    type,
     defaultValue,
     stringify,
     input(props) {

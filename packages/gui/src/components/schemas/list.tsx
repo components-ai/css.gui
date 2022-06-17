@@ -25,6 +25,7 @@ export function listSchema<T>({
   }
 
   return {
+    type: `${itemSchema.type} list`,
     stringify,
     defaultValue,
     input(props) {

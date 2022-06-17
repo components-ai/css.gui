@@ -15,6 +15,8 @@ export function functionSchema<N extends string, T>(
   argsSchema: DataTypeSchema<T>
 ): DataTypeSchema<FunctionData<N, T>> {
   return {
+    // a function's display type is its name
+    type: name,
     stringify(value: FunctionData<N, T>) {
       return `${value.name}(${argsSchema.stringify(value.arguments)})`
     },

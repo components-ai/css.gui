@@ -1,5 +1,6 @@
 import { BOX_KEYWORDS } from '../../types/css'
 import { image } from './image'
+import { joinSchemas } from './joinSchemas'
 import { listSchema } from './list'
 import { objectSchema } from './object'
 import { position } from './position'
@@ -9,19 +10,23 @@ import { tupleSchema } from './tuple'
 const attachment = keyword(['scroll', 'fixed', 'local'])
 const clip = keyword([...BOX_KEYWORDS, 'text'])
 const origin = keyword(BOX_KEYWORDS)
-const repeat = tupleSchema({
-  itemSchema: keyword(['repeat', 'space', 'round', 'no-repeat']),
-  labels: ['x', 'y'],
-  keywords: ['repeat-x', 'repeat-y'],
-})
-const size = tupleSchema({
-  itemSchema: lengthPercentage({
-    keywords: ['auto'],
-    defaultValue: { value: 100, unit: '%' },
+const repeat = joinSchemas([
+  keyword(['repeat-x', 'repeat-y']),
+  tupleSchema({
+    itemSchema: keyword(['repeat', 'space', 'round', 'no-repeat']),
+    labels: ['x', 'y'],
   }),
-  labels: ['x', 'y'],
-  keywords: ['cover', 'contain'],
-})
+])
+const size = joinSchemas([
+  keyword(['cover', 'contain']),
+  tupleSchema({
+    itemSchema: lengthPercentage({
+      keywords: ['auto'],
+      defaultValue: { value: 100, unit: '%' },
+    }),
+    labels: ['x', 'y'],
+  }),
+])
 
 export const backgroundAttachment = listSchema({ itemSchema: attachment })
 export const backgroundClip = listSchema({ itemSchema: clip })
@@ -63,7 +68,4 @@ const blendMode = keyword([
   'color',
   'luminosity',
 ])
-export const backgroundBlendMode = listSchema({
-  itemSchema: blendMode,
-  variant: 'list',
-})
+export const backgroundBlendMode = listSchema({ itemSchema: blendMode })

@@ -26,7 +26,6 @@ import { IntegerInput, PercentageInput } from '../inputs/PrimitiveInput'
 import { TextInput } from '../inputs/TextInput'
 import { TimeInput, timeSteps } from '../inputs/TimeInput'
 import { isValidColor } from '../primitives/ColorPicker/util'
-import { KeywordSelect } from '../primitives/KeywordSelect'
 import { DataTypeSchema, RegenOptions } from './types'
 
 export function color({
@@ -37,6 +36,7 @@ export function color({
   themeProperty?: string
 } = {}): DataTypeSchema<Color> {
   return {
+    type: 'color',
     inlineInput: bindProps(ColorInput, { themeProperty }),
     stringify: stringifyUnit as any,
     defaultValue,
@@ -73,6 +73,7 @@ export function angle({
     }
   }
   return {
+    type: 'angle',
     inlineInput: bindProps(AngleInput, { regenerate }),
     stringify: stringifyUnit as any,
     defaultValue,
@@ -92,7 +93,7 @@ export function time({
 }: {
   defaultValue?: Time
   themeProperty?: Theme
-} = {}) {
+} = {}): DataTypeSchema<Time> {
   function regenerate({ previousValue }: RegenOptions<Time>) {
     const unit = previousValue.unit
     const [min, max] = timeRanges[unit]
@@ -102,11 +103,12 @@ export function time({
     }
   }
   return {
-    inlineinlineInput: bindProps(TimeInput, { regenerate, themeProperty }),
+    type: 'time',
+    inlineInput: bindProps(TimeInput, { regenerate, themeProperty }),
     stringify: stringifyUnit as any,
     defaultValue,
     regenerate,
-    validate: (value: any) => validateDimension(value, TIME_UNITS),
+    validate: ((value: any) => validateDimension(value, TIME_UNITS)) as any,
   }
 }
 
@@ -114,7 +116,7 @@ export function percentage({
   defaultValue = { value: 0, unit: '%' },
 }: {
   defaultValue?: CSSUnitValue
-} = {}) {
+} = {}): DataTypeSchema<CSSUnitValue> {
   function regenerate({ previousValue }: RegenOptions<CSSUnitValue>) {
     const unit = previousValue.unit
     return {
@@ -123,11 +125,12 @@ export function percentage({
     }
   }
   return {
+    type: '%',
     inlineInput: bindProps(PercentageInput, { regenerate }),
     stringify: stringifyUnit as any,
     defaultValue,
     regenerate,
-    validate: (value: any) => validateDimension(value, ['%']),
+    validate: ((value: any) => validateDimension(value, ['%'])) as any,
   }
 }
 
@@ -140,6 +143,7 @@ export function number({
     return randomStep(0, 2, 0.1)
   }
   return {
+    type: 'number',
     inlineInput: bindProps(NumberInput, regenerate),
     stringify: (x: number) => x.toString(),
     defaultValue,
@@ -154,6 +158,7 @@ export function numberPercentage({
   defaultValue?: NumberPercentage
 } = {}): DataTypeSchema<NumberPercentage> {
   return {
+    type: 'number/%',
     inlineInput: NumberPercentageInput,
     stringify: stringifyUnit as any,
     defaultValue,
@@ -197,6 +202,7 @@ export function length({
     }
   }
   return {
+    type: 'length',
     inlineInput: bindProps(LengthInput, { ...props, regenerate }),
     stringify: stringifyUnit as any,
     defaultValue,
@@ -218,6 +224,7 @@ export function integer({
     return randomInt(0, 11)
   }
   return {
+    type: 'integer',
     inlineInput: bindProps(IntegerInput, { regenerate }),
     stringify: stringifyUnit as any,
     defaultValue,
@@ -231,6 +238,7 @@ export function ident({
   defaultValue?: string
 } = {}): DataTypeSchema<string> {
   return {
+    type: 'identifier',
     // Right now, just use a text input.
     // In the future we may want to do smart-identification of identifiers
     // the user has used in other places
@@ -247,6 +255,7 @@ export function string({
   defaultValue?: string
 } = {}): DataTypeSchema<string> {
   return {
+    type: 'string',
     inlineInput: TextInput,
     stringify: (value) => `"${value}"`,
     defaultValue,
@@ -268,6 +277,7 @@ export function keyword<T extends string>(
     return choose(options)
   }
   return {
+    type: 'keyword',
     inlineInput: bindProps(KeywordInput, {
       options,
       regenerate,

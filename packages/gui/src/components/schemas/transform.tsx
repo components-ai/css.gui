@@ -1,10 +1,9 @@
 import { listSchema } from './list'
 import { functionSchema } from './function'
-import { optionsSchema } from './options'
-import { angle, length, lengthPercentage, number } from './primitives'
+import { angle, keyword, length, lengthPercentage, number } from './primitives'
 import { tupleSchema } from './tuple'
 import { objectSchema } from './object'
-import { withKeywords } from './withKeywords'
+import { joinSchemas } from './joinSchemas'
 
 const translate = functionSchema(
   'translate',
@@ -112,8 +111,8 @@ const matrix3d = functionSchema(
   })
 )
 
-const singleTransform = optionsSchema({
-  variants: {
+const singleTransform = joinSchemas(
+  [
     translate,
     translateX,
     translateY,
@@ -135,16 +134,17 @@ const singleTransform = optionsSchema({
     perspective,
     matrix,
     matrix3d,
-  },
-})
+  ],
+  'transform'
+)
 
-export const transform = withKeywords(
-  ['none'],
+export const transform = joinSchemas([
+  keyword(['none']),
   listSchema({
     itemSchema: singleTransform,
     separator: ' ',
-  })
-)
+  }),
+])
 
 export const transformOrigin = objectSchema({
   fields: {
