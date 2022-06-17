@@ -4,6 +4,7 @@ import { DataTypeSchema, RegenOptions } from './types'
 import * as Toggle from '@radix-ui/react-toggle'
 import { Link } from 'react-feather'
 import { InputContainer } from '../inputs/InputContainer'
+import { SchemaInput } from '../inputs/SchemaInput'
 
 interface CreateBoxSideSchema<T> {
   itemSchema: DataTypeSchema<T>
@@ -50,6 +51,7 @@ export function boxSideSchema<T>({
     }) as BoxSide<T>
   }
   return {
+    type: `${itemSchema.type} list`,
     stringify,
     defaultValue,
     validate: ((value: any) => {
@@ -95,16 +97,15 @@ export function boxSideSchema<T>({
         </Toggle.Root>
       )
       return (
-        <InputContainer
-          {...props}
-          defaultValue={defaultValue}
-          stringify={stringify}
-          regenerate={regenerate}
-        >
+        <div>
           {linked ? (
             <div sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
               {linkToggle}
-              <ItemInput {...getInputProps(props, 'top')} label="" />
+              <SchemaInput
+                schema={itemSchema}
+                {...getInputProps(props, 'top')}
+                label=""
+              />
             </div>
           ) : (
             <div
@@ -123,13 +124,17 @@ export function boxSideSchema<T>({
               {['top', 'left', 'right', 'bottom'].map((side) => {
                 return (
                   <div sx={{ gridArea: side }}>
-                    <ItemInput {...getInputProps(props, side as any)} />
+                    <SchemaInput
+                      schema={itemSchema}
+                      {...getInputProps(props, side as any)}
+                      label=""
+                    />
                   </div>
                 )
               })}
             </div>
           )}
-        </InputContainer>
+        </div>
       )
     },
   }
