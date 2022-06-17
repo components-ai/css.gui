@@ -137,7 +137,7 @@ const lengthRanges = {
 
 interface LengthProps {
   defaultValue?: Length
-  keywords?: string[]
+  // keywords?: string[]
   number?: boolean
   percentage?: boolean
   flex?: boolean
@@ -145,11 +145,18 @@ interface LengthProps {
   themeProperty?: string
   range?: Range
 }
-export function length({ defaultValue, ...props }: LengthProps = {}) {
+export function length({
+  defaultValue,
+  percentage,
+  number,
+  flex,
+  ...props
+}: LengthProps = {}) {
   const units = compact([
     ...LENGTH_UNITS,
     percentage ?? '%',
     number ?? 'number',
+    flex ?? 'fr',
   ]) as any[]
   return dimension({
     type: 'length',
@@ -157,6 +164,7 @@ export function length({ defaultValue, ...props }: LengthProps = {}) {
     steps: lengthSteps,
     regenRanges: lengthRanges,
     units,
+    ...props,
   })
 }
 
