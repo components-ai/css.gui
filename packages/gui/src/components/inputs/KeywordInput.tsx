@@ -13,7 +13,8 @@ export function KeywordInput<T extends string>(props: Props<T>) {
         borderColor: 'border',
         borderRadius: '0.25rem',
         width: 'max-content',
-        px: 1,
+        px: 2,
+        py: 1,
       }}
     >
       <KeywordSelect {...props} />
