@@ -4,6 +4,8 @@ import { randomStep } from '../../lib/random'
 import { stringifyUnit } from '../../lib/stringify'
 import { DimensionInput } from '../inputs/Dimension'
 import { Range } from '../inputs/Dimension/Input'
+import { calc } from './calc'
+import { joinSchemas } from './joinSchemas'
 import { DataTypeSchema, RegenOptions } from './types'
 
 type UnitRanges<U extends string> = Record<U, readonly [number, number]>
@@ -20,7 +22,7 @@ interface DimensionProps<U extends string> {
 
 type UnitValue<U> = { value: number; unit: U }
 
-export function dimension<U extends string>({
+function basicDimension<U extends string>({
   type,
   range,
   steps,
@@ -45,6 +47,11 @@ export function dimension<U extends string>({
     regenerate,
     validate: ((value: any) => validateDimension(value, units)) as any,
   }
+}
+
+export function dimension<U extends string>(options: DimensionProps<U>) {
+  const base = basicDimension(options)
+  return joinSchemas([base, calc(base)])
 }
 
 function validateDimension(value: any, units: readonly string[]) {
