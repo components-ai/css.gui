@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.116
+
+### Patch Changes
+
+- 356d97e: Ensure "add child" is always shown
+
 ## 0.0.115
 
 ### Patch Changes
