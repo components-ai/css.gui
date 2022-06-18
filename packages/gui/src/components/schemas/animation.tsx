@@ -33,6 +33,7 @@ export const animationTimingFunction = listSchema({
 })
 
 const singleAnimation = objectSchema({
+  type: '<animation>',
   fields: {
     name,
     duration,
