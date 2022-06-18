@@ -7,9 +7,8 @@ import PalettePicker from './PalettePicker'
 import IconButton from '../../ui/IconButton'
 import { RefreshCw, Trash } from 'react-feather'
 import { Theme } from '../../../types/theme'
-import {  randomColor } from '../../../lib/color'
+import { randomColor } from '../../../lib/color'
 import { Color } from '../../../types/css'
-
 
 export interface Props {
   value: Color
@@ -69,7 +68,7 @@ export default function ColorPicker({
           </div>
         )}
         <div sx={{ display: 'flex', my: 1 }}>
-          <Tabs.List
+          {/* <Tabs.List
             sx={{
               display: 'flex',
               justifyContent: 'left',
@@ -99,7 +98,7 @@ export default function ColorPicker({
                 </Tabs.Trigger>
               )
             })}
-          </Tabs.List>
+          </Tabs.List> */}
           <div
             sx={{
               marginLeft: 'auto',
@@ -127,10 +126,10 @@ export default function ColorPicker({
             </ActionButton>
           </div>
         </div>
-        <Tabs.Content value="picker">
-          <ValuePicker value={value} onChange={onChange} theme={theme} />
-        </Tabs.Content>
-        {!hideSystemColors && (
+        {/* <Tabs.Content value="picker"> */}
+        <ValuePicker value={value} onChange={onChange} theme={theme} />
+        {/* </Tabs.Content> */}
+        {/* {!hideSystemColors && (
           <Tabs.Content value="system">
             <SystemPicker value={value} onChange={onChange} />
           </Tabs.Content>
@@ -138,8 +137,8 @@ export default function ColorPicker({
         {theme && (
           <Tabs.Content value="theme">
             <PalettePicker value={value} onChange={onChange} theme={theme} />
-          </Tabs.Content>
-        )}
+          </Tabs.Content> */}
+        {/* )} */}
       </Tabs.Root>
     </div>
   )
