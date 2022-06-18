@@ -35,20 +35,20 @@ export const stringifyCalcFunction = ({ arguments: args }: CSSFunctionCalc) => {
 }
 
 export function stringifyUnit(
-  providedValue: Length | MultidimensionalLength | Color,
-  theme?: Theme
+  providedValue: Length | MultidimensionalLength | Color
+  // theme?: Theme
 ): string | number | null {
-  if (isMultidimensionalLength(providedValue)) {
-    return (providedValue as MultidimensionalLength).values
-      .map((v) => stringifyUnit(v, theme))
-      .join(' ')
-  }
+  // if (isMultidimensionalLength(providedValue)) {
+  //   return (providedValue as MultidimensionalLength).values
+  //     .map((v) => stringifyUnit(v, theme))
+  //     .join(' ')
+  // }
 
   const value = providedValue as Length
 
-  if (value === '0') {
-    return value
-  }
+  // if (value === '0') {
+  //   return value
+  // }
   if (!value || value.value === undefined) {
     return null
   }
@@ -57,17 +57,18 @@ export function stringifyUnit(
     return value.value
   }
 
-  if (value.themePath) {
-    const resolvedValue = theme && value.themePath && get(theme, value.themePath)
-    if (resolvedValue) {
-      return `${resolvedValue.value}${resolvedValue.unit || ''}`
-    }
-  }
+  // if (value.themePath) {
+  //   const resolvedValue =
+  //     theme && value.themePath && get(theme, value.themePath)
+  //   if (resolvedValue) {
+  //     return `${resolvedValue.value}${resolvedValue.unit || ''}`
+  //   }
+  // }
 
-  if (value.unit === 'string') {
-    // TODO handle string escapes
-    return `'${value.value}'`
-  }
+  // if (value.unit === 'string') {
+  //   // TODO handle string escapes
+  //   return `'${value.value}'`
+  // }
 
   if (value.unit === 'number') {
     return String(value.value)
@@ -108,7 +109,7 @@ export function stringifyPrimitive(value: Primitive, theme?: Theme) {
   if (typeof value === 'string') {
     return value
   }
-  return stringifyUnit(value, theme)
+  return stringifyUnit(value)
 }
 
 type Primitive = Length | number | Color | MultidimensionalLength | string

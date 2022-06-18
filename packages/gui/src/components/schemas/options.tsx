@@ -19,9 +19,9 @@ export function optionsSchema<T extends Record<string, any>>({
   convert,
 }: CreateOptions<T>): DataTypeSchema<Unionize<T>> {
   function getType(value: T): keyof T {
-    console.log('testing', JSON.stringify(value))
+    // // console.log('testing', JSON.stringify(value))
     for (const [type, schema] of Object.entries(variants)) {
-      console.log('testing out', type)
+      //   console.log('testing out', type)
       if (schema.validate(value)) return type
     }
     throw new Error(

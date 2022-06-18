@@ -4,6 +4,7 @@ import {
   CSSUnitValue,
   CSSFunctionCalc,
   UnitlessUnits,
+  ThemeValue,
 } from '../../types/css'
 import {
   stringifySelector,
@@ -73,4 +74,9 @@ export const toCSSObject = (styles: Styles, theme?: Theme): any => {
 
 // export function isCSSFunctionCalc(value: unknown): value is CSSFunctionCalc {
 //   return (value as CSSFunctionCalc)?.type === UnitlessUnits.Calc
+// }
+
+// function isThemeValue(value: any): value is ThemeValue {
+//   if (typeof value !== 'object') return false
+//   return value.type === 'theme' && typeof value.path === 'string'
 // }

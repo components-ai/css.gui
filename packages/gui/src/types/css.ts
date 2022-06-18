@@ -175,3 +175,9 @@ export type Primitive = typeof primitives[number]
 export function isPrimitive(type: string): type is Primitive {
   return (primitives as readonly string[]).includes(type)
 }
+
+export interface ThemeValue {
+  type: 'theme'
+  path: string // theme path
+  index: number
+}
