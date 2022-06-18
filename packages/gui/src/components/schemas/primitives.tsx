@@ -225,16 +225,18 @@ export function keyword<T extends string>(
   {
     defaultValue = options[0],
     themeProperty,
+    type = 'keyword',
   }: {
     defaultValue?: T
     themeProperty?: string
+    type?: string
   } = {}
 ): DataTypeSchema<T> {
   function regenerate() {
     return choose(options)
   }
   return {
-    type: 'keyword',
+    type,
     inlineInput: bindProps(KeywordInput, {
       options,
       regenerate,

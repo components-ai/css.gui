@@ -29,7 +29,7 @@ export const KeywordSelect = <T extends string>({
             </Select.Item>
           )
         })}
-        {topLevel && (
+        {/* {topLevel && (
           <>
             <Select.Group>
               <Select.Label>Global Keywords</Select.Label>
@@ -42,8 +42,8 @@ export const KeywordSelect = <T extends string>({
                 )
               })}
             </Select.Group>
-          </>
-        )}
+          </> */}
+        {/* )} */}
       </Select.Content>
     </Select.Root>
   )
