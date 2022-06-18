@@ -8,7 +8,7 @@ import {
 } from '../types/css'
 import { UnitSteps } from '../lib'
 import { allProperties } from './css-properties'
-import { camelCase, mapValues, uniqBy } from 'lodash-es'
+import { camelCase, compact, mapValues, uniqBy } from 'lodash-es'
 import { UnitRanges } from './ranges'
 import { EditorPropsWithLabel } from '../types/editor'
 
@@ -58,6 +58,7 @@ import {
 } from '../components/schemas/primitives'
 import { DataTypeSchema } from '../components/schemas/types'
 import { joinSchemas } from '../components/schemas/joinSchemas'
+import { theme } from '../components/schemas/theme'
 
 type PropertyData = {
   input: PrimitiveType | ComponentType<EditorPropsWithLabel<any>>
@@ -72,6 +73,7 @@ type PropertyData = {
   label?: string
   responsive?: boolean
   dimensions?: number
+  themeProperty?: string
 }
 
 // Map of primitive schemas
@@ -92,16 +94,20 @@ const primitiveMap = {
 type PrimitiveType = keyof typeof primitiveMap
 
 function normalizeSchema(propertyData: PropertyData): DataTypeSchema<any> {
-  const { input } = propertyData
+  const { input, keywords, themeProperty } = propertyData
   if (typeof input === 'string') {
     if (input === 'keyword') {
-      const { keywords = [], ...rest } = propertyData
-      return keyword(keywords, rest)
+      // const { keywords = [], ...rest } = propertyData
+      return keyword(keywords!, propertyData)
     } else {
       let schema = primitiveMap[input](propertyData) as any
-      if (propertyData.keywords) {
-        return joinSchemas([keyword(propertyData.keywords), schema])
-      }
+      return joinSchemas(
+        compact([
+          keywords && keyword(keywords),
+          schema,
+          themeProperty && theme(themeProperty),
+        ])
+      )
       return schema
     }
   }
