@@ -7,7 +7,7 @@ export type ColorObject = {
   themePath?: string
 }
 
-export type Color = ColorObject
+export type Color = string
 
 export type FontFamilyType = { [k: string]: any }
 

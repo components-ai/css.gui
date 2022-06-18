@@ -30,27 +30,20 @@ import { dimension } from './dimension'
 import { DataTypeSchema } from './types'
 
 export function color({
-  defaultValue = { value: 'transparent' },
-  themeProperty = 'color',
+  defaultValue = '#000',
 }: {
   defaultValue?: Color
-  themeProperty?: string
 } = {}): DataTypeSchema<Color> {
   return {
     type: 'color',
-    inlineInput: bindProps(ColorInput, { themeProperty }),
+    inlineInput: ColorInput,
     stringify: stringifyUnit as any,
     defaultValue,
     regenerate: () => randomColor(),
-    validate: ((value: unknown) => {
-      return typeof value === 'object' && isValidColor((value as any).value)
+    validate: ((value: any) => {
+      return typeof value === 'string' && isValidColor(value)
     }) as any,
   }
-}
-
-function validateDimension(value: any, units: readonly string[]) {
-  if (typeof value !== 'object') return false
-  return units.includes(value.unit) && typeof value.value === 'number'
 }
 
 const angleRanges = {
