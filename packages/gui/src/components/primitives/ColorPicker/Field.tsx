@@ -53,22 +53,22 @@ export default function ColorPicker({
   const [tab, setTab] = useState(initialTab)
   return (
     <div>
-      <Tabs.Root value={tab} onValueChange={setTab}>
-        {title && (
-          <div
-            sx={{
-              textTransform: 'uppercase',
-              opacity: 0.7,
-              fontWeight: 800,
-              margin: 0,
-              width: '100%',
-            }}
-          >
-            {title}
-          </div>
-        )}
-        <div sx={{ display: 'flex', my: 1 }}>
-          {/* <Tabs.List
+      {/* <Tabs.Root value={tab} onValueChange={setTab}> */}
+      {title && (
+        <div
+          sx={{
+            textTransform: 'uppercase',
+            opacity: 0.7,
+            fontWeight: 800,
+            margin: 0,
+            width: '100%',
+          }}
+        >
+          {title}
+        </div>
+      )}
+      <div sx={{ display: 'flex', my: 1 }}>
+        {/* <Tabs.List
             sx={{
               display: 'flex',
               justifyContent: 'left',
@@ -99,37 +99,37 @@ export default function ColorPicker({
               )
             })}
           </Tabs.List> */}
-          <div
-            sx={{
-              marginLeft: 'auto',
-              display: 'flex',
+        <div
+          sx={{
+            marginLeft: 'auto',
+            display: 'flex',
+          }}
+        >
+          {onRemove && (
+            <ActionButton onClick={onRemove}>
+              <Trash size={14} />
+            </ActionButton>
+          )}
+          <ActionButton
+            onClick={() => {
+              // If a user-defined regenerator is given, use it
+              if (onRegenerate) {
+                onChange(onRegenerate())
+                return
+              } else {
+                // Otherwise, regenerate a random color based on theme
+                onChange(randomColor(theme))
+              }
             }}
           >
-            {onRemove && (
-              <ActionButton onClick={onRemove}>
-                <Trash size={14} />
-              </ActionButton>
-            )}
-            <ActionButton
-              onClick={() => {
-                // If a user-defined regenerator is given, use it
-                if (onRegenerate) {
-                  onChange(onRegenerate())
-                  return
-                } else {
-                  // Otherwise, regenerate a random color based on theme
-                  onChange(randomColor(theme))
-                }
-              }}
-            >
-              <RefreshCw size={14} />
-            </ActionButton>
-          </div>
+            <RefreshCw size={14} />
+          </ActionButton>
         </div>
-        {/* <Tabs.Content value="picker"> */}
-        <ValuePicker value={value} onChange={onChange} theme={theme} />
-        {/* </Tabs.Content> */}
-        {/* {!hideSystemColors && (
+      </div>
+      {/* <Tabs.Content value="picker"> */}
+      <ValuePicker value={value} onChange={onChange} theme={theme} />
+      {/* </Tabs.Content> */}
+      {/* {!hideSystemColors && (
           <Tabs.Content value="system">
             <SystemPicker value={value} onChange={onChange} />
           </Tabs.Content>
@@ -138,8 +138,8 @@ export default function ColorPicker({
           <Tabs.Content value="theme">
             <PalettePicker value={value} onChange={onChange} theme={theme} />
           </Tabs.Content> */}
-        {/* )} */}
-      </Tabs.Root>
+      {/* )} */}
+      {/* </Tabs.Root> */}
     </div>
   )
 }

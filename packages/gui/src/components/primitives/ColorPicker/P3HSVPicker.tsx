@@ -30,16 +30,16 @@ interface InternalProps {
  * A 'standard' color picker based on the HSV color space.
  */
 export default function P3HsvColorPicker({ value, onChange, mode }: Props) {
-  const [hsvValue, setHsvValue] = useState<HsvValue>(getP3Hsv(value.value))
+  const [hsvValue, setHsvValue] = useState<HsvValue>(getP3Hsv(value))
 
   const handleChange = (value: HsvValue) => {
     setHsvValue(value)
-    onChange({ value: formatP3Picker(value, mode)})
+    onChange(formatP3Picker(value, mode))
   }
 
   useEffect(() => {
-    if (isValidColor(value.value) && value !== format(hsvValue, mode)) {
-      setHsvValue(getP3Hsv(value.value))
+    if (isValidColor(value) && value !== format(hsvValue, mode)) {
+      setHsvValue(getP3Hsv(value))
     }
   }, [value])
   return (
