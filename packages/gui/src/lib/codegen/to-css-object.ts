@@ -19,26 +19,26 @@ import { Theme } from '../../types/theme'
 export const stringifyProperty = (
   property: string = '', // In the future the property might determine how we stringify
   value?: unknown,
-  theme?: Theme,
-): Array<string | null> | string | number | null => {
+  theme?: Theme
+): string | undefined => {
   const stringify = properties[property]?.stringify
   if (isResponsive(value as any)) {
-    return (value as any).values.map((v: any) => stringify(v, theme))
+    return (value as any).values.map((v: any) => stringify(v))
   }
   if (stringify) {
-    return stringify(value, theme)
+    return stringify(value)
   }
 
-  if (isCSSFunctionCalc(value)) {
-    // @ts-ignore
-    return stringifyCalcFunction(value)
-  }
+  // if (isCSSFunctionCalc(value)) {
+  //   // @ts-ignore
+  //   return stringifyCalcFunction(value)
+  // }
 
-  // font-family?
-  if (!isCSSUnitValue(value)) {
-    return String(value) ?? null
-  }
-  return stringifyUnit(value, theme)
+  // // font-family?
+  // if (!isCSSUnitValue(value)) {
+  //   return String(value) ?? null
+  // }
+  // return stringifyUnit(value, theme)
 }
 
 type StyleEntry = [string, Length | string | null | undefined]
@@ -59,18 +59,18 @@ export const toCSSObject = (styles: Styles, theme?: Theme): any => {
   }, {})
 }
 
-export function isCSSUnitValue(value: unknown): value is CSSUnitValue {
-  if (typeof value !== 'object') {
-    return false
-  }
+// export function isCSSUnitValue(value: unknown): value is CSSUnitValue {
+//   if (typeof value !== 'object') {
+//     return false
+//   }
 
-  if (!has(value, 'value') || !has(value, 'unit')) {
-    return false
-  }
+//   if (!has(value, 'value') || !has(value, 'unit')) {
+//     return false
+//   }
 
-  return true
-}
+//   return true
+// }
 
-export function isCSSFunctionCalc(value: unknown): value is CSSFunctionCalc {
-  return (value as CSSFunctionCalc)?.type === UnitlessUnits.Calc
-}
+// export function isCSSFunctionCalc(value: unknown): value is CSSFunctionCalc {
+//   return (value as CSSFunctionCalc)?.type === UnitlessUnits.Calc
+// }

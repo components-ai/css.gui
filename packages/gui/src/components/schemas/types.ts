@@ -14,7 +14,7 @@ export interface DataTypeSchema<T> {
   /** Validates whether a value adheres to the schema */
   validate(value: unknown): value is T
   /** How to stringify the values of the schema */
-  stringify(value: T, theme?: Theme): string
+  stringify(value: T): string
   /** Function to generate a new value in the schema, based on the provided options */
   regenerate?(options: RegenOptions<T>): T
   /** Variants of the schema for use in joining multiple types of schema together */
