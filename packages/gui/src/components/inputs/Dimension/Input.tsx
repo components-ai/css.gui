@@ -96,7 +96,7 @@ export function DimensionInput(props: DimensionInputProps) {
         borderRadius: '0.25rem',
         border: '1px solid',
         borderColor: 'border',
-        px: 1,
+        px: 2,
       }}
     >
       {/* {normedValue.unit === 'keyword' ? (

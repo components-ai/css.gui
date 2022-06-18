@@ -11,7 +11,7 @@ export const UnitSelect = ({ units, value, onChange }: Props) => {
         <Select.Value>
           {!['number', 'keyword'].includes(value) && value}
         </Select.Value>
-        <Select.Icon />
+        {/* <Select.Icon /> */}
       </Select.Trigger>
       <Select.Content>
         {units.map((unit: string) => {

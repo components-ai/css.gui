@@ -35,10 +35,10 @@ export function SchemaInput<T>({
     <Collapsible.Root defaultOpen>
       <InputHeader
         {...schema}
+        {...props}
         label={label}
         value={value}
         onChange={onChange}
-        {...props}
       >
         {hasBlockInput(value) && (
           <Collapsible.Trigger asChild>
