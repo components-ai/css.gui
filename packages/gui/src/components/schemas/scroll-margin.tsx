@@ -1,11 +1,14 @@
 import { boxSideSchema } from './box-side'
-import { lengthPercentage } from './primitives'
+import { joinSchemas } from './joinSchemas'
+import { keyword, lengthPercentage } from './primitives'
+import { theme } from './theme'
 import { tupleSchema } from './tuple'
 
-const scrollMarginItem = lengthPercentage({
-  keywords: ['auto'],
-  themeProperty: 'space',
-})
+const scrollMarginItem = joinSchemas([
+  lengthPercentage(),
+  keyword(['auto']),
+  theme('space'),
+])
 
 export const scrollMarginBottom = scrollMarginItem
 export const scrollMarginTop = scrollMarginItem

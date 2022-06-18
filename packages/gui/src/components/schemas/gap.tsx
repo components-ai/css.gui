@@ -1,11 +1,13 @@
-import { lengthPercentage } from './primitives'
+import { joinSchemas } from './joinSchemas'
+import { keyword, lengthPercentage } from './primitives'
+import { theme } from './theme'
 import { tupleSchema } from './tuple'
 
-const gapItem = lengthPercentage({
-  range: 'nonnegative',
-  keywords: ['normal'],
-  themeProperty: 'space',
-})
+const gapItem = joinSchemas([
+  keyword(['normal']),
+  lengthPercentage({ range: 'nonnegative' }),
+  theme('space'),
+])
 
 export const rowGap = gapItem
 export const columnGap = gapItem

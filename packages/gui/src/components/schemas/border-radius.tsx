@@ -1,8 +1,13 @@
+import { joinSchemas } from './joinSchemas'
 import { lengthPercentage } from './primitives'
+import { theme } from './theme'
 import { tupleSchema } from './tuple'
 
 const borderRadiusItem = tupleSchema({
-  itemSchema: lengthPercentage({ range: 'nonnegative', themeProperty: 'borderRadius' }),
+  itemSchema: joinSchemas([
+    lengthPercentage({ range: 'nonnegative' }),
+    theme('borderRadius'),
+  ]),
   labels: ['x', 'y'],
 })
 
