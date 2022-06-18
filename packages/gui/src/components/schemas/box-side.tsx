@@ -60,7 +60,7 @@ export function boxSideSchema<T>({
       }
       const { top, left, right, bottom } = value
       return compact([top, left, right, bottom]).every((item) =>
-        itemSchema.validate(value)
+        itemSchema.validate(item)
       )
     }) as any,
     input(props) {

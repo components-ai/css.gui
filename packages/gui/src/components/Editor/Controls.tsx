@@ -401,5 +401,6 @@ function getPropertiesFromChildren(children: ReactNode): string[] {
 
 const global = keyword(GLOBAL_KEYWORDS, { type: 'global' })
 function topLevel<T>(schema: DataTypeSchema<T>) {
-  return joinSchemas([schema, global])
+  // return schema
+  return joinSchemas([schema])
 }
