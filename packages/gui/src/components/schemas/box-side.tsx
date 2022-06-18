@@ -51,7 +51,7 @@ export function boxSideSchema<T>({
     }) as BoxSide<T>
   }
   return {
-    type: `${itemSchema.type} list`,
+    type: `${itemSchema.type} {1,4}`,
     stringify,
     defaultValue,
     validate: ((value: any) => {

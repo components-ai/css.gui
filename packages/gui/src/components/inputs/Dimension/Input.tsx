@@ -154,7 +154,12 @@ export function DimensionInput(props: DimensionInputProps) {
         onChange={(newUnit) => {
           onChange({
             unit: newUnit,
-            value: convertUnits(newUnit, normedValue, conversions, steps),
+            value: convertUnits(
+              newUnit,
+              normedValue,
+              conversions,
+              steps
+            ) as any,
           })
         }}
       />

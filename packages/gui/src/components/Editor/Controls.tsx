@@ -36,6 +36,10 @@ import IconButton from '../ui/IconButton'
 import { RefreshCw } from 'react-feather'
 import { isResponsive } from '../Responsive/Input'
 import { SchemaInput } from '../inputs/SchemaInput'
+import { keyword } from '../schemas/primitives'
+import { GLOBAL_KEYWORDS } from '../../data/global-keywords'
+import { DataTypeSchema } from '../schemas/types'
+import { joinSchemas } from '../schemas/joinSchemas'
 
 export const getPropertyFromField = (field: KeyArg) => {
   if (Array.isArray(field)) {
@@ -96,7 +100,7 @@ const Control = ({ field, showRemove = false, ...props }: ControlProps) => {
   return (
     <SchemaInput
       label={sentenceCase(property)}
-      schema={schema}
+      schema={topLevel(schema)}
       {...props}
       value={getField(fullField)}
       onChange={(newValue: any) => {
@@ -393,4 +397,9 @@ function getPropertiesFromChildren(children: ReactNode): string[] {
     }
   })
   return properties
+}
+
+const global = keyword(GLOBAL_KEYWORDS, { type: 'global' })
+function topLevel<T>(schema: DataTypeSchema<T>) {
+  return joinSchemas([schema, global])
 }
