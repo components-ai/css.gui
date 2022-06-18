@@ -27,9 +27,10 @@ import { TextInput } from '../inputs/TextInput'
 import { timeSteps } from '../inputs/TimeInput'
 import { isValidColor } from '../primitives/ColorPicker/util'
 import { dimension } from './dimension'
+import { joinSchemas } from './joinSchemas'
 import { DataTypeSchema } from './types'
 
-export function color({
+function colorObject({
   defaultValue = '#000',
 }: {
   defaultValue?: Color
@@ -44,6 +45,17 @@ export function color({
       return typeof value === 'string' && isValidColor(value)
     }) as any,
   }
+}
+
+export function color({
+  defaultValue = 'transparent',
+}: {
+  defaultValue?: any
+} = {}) {
+  return joinSchemas([
+    colorObject({ defaultValue }),
+    keyword(['transparent', 'currentColor']),
+  ])
 }
 
 const angleRanges = {
