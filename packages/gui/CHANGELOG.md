@@ -1,5 +1,12 @@
 # @compai/css-gui
 
+## 0.0.119
+
+### Patch Changes
+
+- c2a64fb: Fix selection bug on node adding
+- cc6d912: Improve comboboxes
+
 ## 0.0.118
 
 ### Patch Changes
