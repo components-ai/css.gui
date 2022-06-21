@@ -1,5 +1,12 @@
 # @compai/css-gui
 
+## 0.0.117
+
+### Patch Changes
+
+- e432f72: Changes layers editor
+- 6c83225: Remove fieldset
+
 ## 0.0.116
 
 ### Patch Changes
