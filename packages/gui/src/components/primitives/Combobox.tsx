@@ -7,6 +7,7 @@ interface ComboboxInterface {
   items: string[]
   value?: string
   clearOnSelect?: boolean
+  decorateItemText?: (text: string) => string
 }
 
 export function Combobox({
@@ -15,6 +16,7 @@ export function Combobox({
   items,
   value,
   clearOnSelect = false,
+  decorateItemText = (str) => str,
 }: ComboboxInterface) {
   const id = useId()
   const inputRef = useRef(null)
@@ -169,7 +171,7 @@ export function Combobox({
                     toggleMenu()
                   }}
                 >
-                  {item}
+                  {item || decorateItemText(item)}
                 </li>
               )
             })}
