@@ -444,7 +444,7 @@ function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
                           value: '',
                         })
                       )
-                      onSelect([i])
+                      onSelect([...path, i])
                     }}
                   />
                   <TreeNode
