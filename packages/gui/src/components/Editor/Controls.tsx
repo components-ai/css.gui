@@ -261,8 +261,17 @@ export const EditorControls = ({
     <section sx={{ pb: 5 }}>
       {showAddProperties ? (
         <div
-          sx={{ pb: 4, display: 'flex', alignItems: 'flex-end', width: '100%' }}
-        >
+          sx={{ 
+            display: 'flex', 
+            alignItems: 'flex-end', 
+            width: '100%', 
+            borderWidth: '1px',
+            borderStyle: 'solid',
+            borderColor: 'border',
+            borderRadius: '6px', 
+            p: 3, 
+            my: 3  
+          }}>
           <div sx={{ width: '100%' }}>
             <AddPropertyControl styles={styles} />
           </div>

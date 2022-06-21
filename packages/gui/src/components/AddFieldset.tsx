@@ -40,7 +40,13 @@ export const AddFieldsetControl = ({
   }
 
   return (
-    <div>
+    <div sx={{
+      borderRadius: '6px',
+      borderWidth: '1px',
+      borderStyle: 'solid',
+      borderColor: 'border',
+      p: 3,
+    }}>
       <Label>{label}</Label>
       <Combobox
         items={allItems}
