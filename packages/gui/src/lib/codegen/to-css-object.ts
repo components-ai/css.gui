@@ -16,6 +16,7 @@ import { isNestedSelector } from '../util'
 import { properties } from '../../data/properties'
 import { isResponsive } from '../../components/Responsive/Input'
 import { Theme } from '../../types/theme'
+import { GLOBAL_KEYWORDS } from '../../data/global-keywords'
 
 export const stringifyProperty = (
   property: string = '', // In the future the property might determine how we stringify
@@ -24,16 +25,15 @@ export const stringifyProperty = (
 ): string | undefined => {
   const stringify = properties[property]?.stringify
   if (isResponsive(value as any)) {
-    return (value as any).values.map((v: any) => stringify(v))
+    // todo recurse instead
+    return (value as any).values.map((v: any) => stringify(v, theme))
+  }
+  if (typeof value === 'string' && GLOBAL_KEYWORDS.includes(value)) {
+    return value
   }
   if (stringify) {
-    return stringify(value)
+    return stringify(value, theme)
   }
-
-  // if (isCSSFunctionCalc(value)) {
-  //   // @ts-ignore
-  //   return stringifyCalcFunction(value)
-  // }
 
   // // font-family?
   // if (!isCSSUnitValue(value)) {
