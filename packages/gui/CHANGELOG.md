@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.118
+
+### Patch Changes
+
+- 31bdf9b: Clear all styles dropdown
+
 ## 0.0.117
 
 ### Patch Changes
