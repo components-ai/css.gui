@@ -538,7 +538,6 @@ function AddChildButton({ onClick }: { onClick(): void }) {
         background: 'none',
         border: 'none',
         textAlign: 'left',
-        color: 'transparent',
         fontSize: 0,
         pt: 2,
         whiteSpace: 'nowrap',
