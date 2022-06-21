@@ -148,8 +148,8 @@ export const transform = joinSchemas([
 
 export const transformOrigin = objectSchema({
   fields: {
-    x: lengthPercentage({ keywords: ['left', 'center', 'right'] }),
-    y: lengthPercentage({ keywords: ['top', 'center', 'bottom'] }),
+    x: joinSchemas([keyword(['left', 'center', 'right']), lengthPercentage()]),
+    y: joinSchemas([keyword(['top', 'center', 'bottom']), lengthPercentage()]),
     z: length(),
   },
 })
