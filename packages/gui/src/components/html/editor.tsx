@@ -117,6 +117,17 @@ interface HtmlEditorProps {
   onChange(value: HtmlNode): void
 }
 
+const DEFAULT_CHILD_NODE: HtmlNode = {
+  type: 'element',
+  tagName: 'div',
+  children: [
+    {
+      type: 'text',
+      value: '',
+    },
+  ],
+}
+
 const TABS_TRIGGER_STYLES: any = {
   all: 'unset',
   cursor: 'pointer',
@@ -438,12 +449,7 @@ function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
                 <Fragment key={i}>
                   <AddChildButton
                     onClick={() => {
-                      onChange(
-                        addChildAtPath(value, [i], {
-                          type: 'text',
-                          value: '',
-                        })
-                      )
+                      onChange(addChildAtPath(value, [i], DEFAULT_CHILD_NODE))
                       onSelect([...path, i])
                     }}
                   />
@@ -461,10 +467,11 @@ function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
                   <AddChildButton
                     onClick={() => {
                       onChange(
-                        addChildAtPath(value, [value.children?.length ?? 0], {
-                          type: 'text',
-                          value: '',
-                        })
+                        addChildAtPath(
+                          value,
+                          [value.children?.length ?? 0],
+                          DEFAULT_CHILD_NODE
+                        )
                       )
                       onSelect(null)
                     }}
@@ -475,12 +482,7 @@ function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
           ) : (
             <AddChildButton
               onClick={() => {
-                onChange(
-                  addChildAtPath(value, [0], {
-                    type: 'text',
-                    value: '',
-                  })
-                )
+                onChange(addChildAtPath(value, [0], DEFAULT_CHILD_NODE))
                 onSelect([0])
               }}
             />
@@ -552,11 +554,6 @@ function AddChildButton({ onClick }: { onClick(): void }) {
       + Add child
     </button>
   )
-}
-
-interface AttributeEditorProps {
-  value: Record<string, string>
-  onChange(value: Record<string, string>): void
 }
 
 function getChildAtPath(element: HtmlNode, path: ElementPath): HtmlNode {
