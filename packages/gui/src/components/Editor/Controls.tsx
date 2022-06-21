@@ -8,6 +8,7 @@ import {
   useMemo,
 } from 'react'
 import { camelCase, mapValues, uniq } from 'lodash-es'
+import { RefreshCw } from 'react-feather'
 import { Styles } from '../../types/css'
 import { Theme } from '../../types/theme'
 import { EditorProvider, useEditor } from '../providers/EditorContext'
@@ -33,8 +34,8 @@ import { removeInternalCSSClassSyntax } from '../../lib/classes'
 import { AddFieldsetControl } from '../AddFieldset'
 import { ResponsiveInput } from '../Responsive'
 import IconButton from '../ui/IconButton'
-import { RefreshCw } from 'react-feather'
 import { isResponsive } from '../Responsive/Input'
+import { FieldsetDropdown } from '../ui/FieldsetDropdown'
 
 export const getPropertyFromField = (field: KeyArg) => {
   if (Array.isArray(field)) {
@@ -307,7 +308,7 @@ type FieldsetControlProps = {
   property: string
 }
 const FieldsetControl = ({ field, property }: FieldsetControlProps) => {
-  const { getField } = useEditor()
+  const { getField, removeField } = useEditor()
   const styles = getField(field || property)
   const properties = Object.keys(styles)
 
@@ -319,14 +320,24 @@ const FieldsetControl = ({ field, property }: FieldsetControlProps) => {
         borderTopStyle: 'solid',
       }}
     >
-      <h3
+      <div
         sx={{
-          fontSize: 2,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
           mb: 2,
         }}
       >
-        {removeInternalCSSClassSyntax(property)}
-      </h3>
+        <h3
+          sx={{
+            fontSize: 2,
+            lineHeight: 1,
+          }}
+        >
+          {removeInternalCSSClassSyntax(property)}
+        </h3>
+        <FieldsetDropdown onRemove={() => removeField(field || property)} />
+      </div>
       <GenericFieldset property={property}>
         <div sx={{ pb: 3 }}>
           <AddPropertyControl
