@@ -1,5 +1,12 @@
 # @compai/css-gui
 
+## 0.0.120
+
+### Patch Changes
+
+- 1588bfd: Make default node an empty div
+- 0273dee: Fix background-size
+
 ## 0.0.119
 
 ### Patch Changes
