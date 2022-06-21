@@ -7,6 +7,7 @@ import { useEditor } from './providers/EditorContext'
 import { KeyArg } from './providers/types'
 import { joinPath } from './providers/util'
 import fuzzysort from 'fuzzysort'
+import { kebabCase } from 'lodash-es'
 
 interface Props {
   field?: KeyArg
@@ -56,6 +57,7 @@ export const AddPropertyControl = ({
         onFilterItems={handleFilterItems}
         onItemSelected={handleAddProperty}
         items={allProperties}
+        decorateItemText={(str) => kebabCase(str)}
         clearOnSelect
       />
     </div>
