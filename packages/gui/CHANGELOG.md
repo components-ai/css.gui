@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.121
+
+### Patch Changes
+
+- 4632b1b: Make item display configurable
+
 ## 0.0.120
 
 ### Patch Changes
