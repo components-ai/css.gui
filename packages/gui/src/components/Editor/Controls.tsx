@@ -35,7 +35,8 @@ import { AddFieldsetControl } from '../AddFieldset'
 import { ResponsiveInput } from '../Responsive'
 import IconButton from '../ui/IconButton'
 import { isResponsive } from '../Responsive/Input'
-import { FieldsetDropdown } from '../ui/FieldsetDropdown'
+import { FieldsetDropdown } from '../ui/dropdowns/FieldsetDropdown'
+import { EditorDropdown } from '../ui/dropdowns/EditorDropdown'
 
 export const getPropertyFromField = (field: KeyArg) => {
   if (Array.isArray(field)) {
@@ -245,7 +246,7 @@ export const EditorControls = ({
   children,
   showAddProperties,
 }: EditorControlsProps) => {
-  const { value: styles } = useEditor()
+  const { value: styles, clearAll } = useEditor()
   const [fieldsets, properties] = partitionProperties(uniq(Object.keys(styles)))
   const controls = children ? (
     children
@@ -259,8 +260,15 @@ export const EditorControls = ({
   return (
     <section sx={{ pb: 5 }}>
       {showAddProperties ? (
-        <div sx={{ pb: 4 }}>
-          <AddPropertyControl styles={styles} />
+        <div
+          sx={{ pb: 4, display: 'flex', alignItems: 'flex-end', width: '100%' }}
+        >
+          <div sx={{ width: '100%' }}>
+            <AddPropertyControl styles={styles} />
+          </div>
+          <div sx={{ flexShrink: 1, width: 32 }}>
+            <EditorDropdown onClearStyles={clearAll} />
+          </div>
         </div>
       ) : null}
       {controls}

@@ -17,6 +17,7 @@ export interface EditorContextValue<V> extends EditorData<V> {
   setField<T>(key: KeyArg, value: Recipe<T>): void
   setFields<T>(fields: Record<string, Recipe<T>>, removeFields?: KeyArg[]): void
   removeField(key: KeyArg): void
+  clearAll(): void
 }
 
 export function useEditor() {
@@ -71,6 +72,14 @@ export function useEditor() {
     })
   }
 
+  const clearAll = () => {
+    editComponentData((draft) => {
+      Object.keys(draft.value).map((key: string) => {
+        unset(draft.value, key)
+      })
+    })
+  }
+
   return {
     ...context,
     getField,
@@ -79,6 +88,7 @@ export function useEditor() {
     setFields,
     onChange,
     removeField,
+    clearAll,
     theme,
   }
 }
