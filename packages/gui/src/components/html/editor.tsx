@@ -533,22 +533,20 @@ function AddChildButton({ onClick }: { onClick(): void }) {
     <button
       onClick={onClick}
       sx={{
-        cursor: 'default',
+        cursor: 'pointer',
         display: 'block',
         background: 'none',
         border: 'none',
         textAlign: 'left',
         color: 'transparent',
         fontSize: 0,
-        height: '0.25rem',
-        m: 0,
-        p: 0,
-        transition: 'height 250ms',
+        pt: 2,
         whiteSpace: 'nowrap',
+        color: 'muted',
         zIndex: '99',
+        transition: 'color .2s ease-in-out',
         ':hover': {
-          color: 'muted',
-          height: '1rem',
+          color: 'text',
         },
       }}
     >
