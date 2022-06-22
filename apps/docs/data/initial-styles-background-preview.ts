@@ -5,10 +5,7 @@ export const initialStyles: any = {
         name: 'url',
         arguments: 'https://source.unsplash.com/random',
       },
-      position: {
-        x: { value: 'center', unit: 'keyword' },
-        y: { value: 'center', unit: 'keyword' },
-      },
+      position: { x: 'center', y: 'center' },
       repeat: ['no-repeat'],
       size: [{ value: 100, unit: '%' }],
       attachment: 'fixed',

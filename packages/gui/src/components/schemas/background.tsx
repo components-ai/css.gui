@@ -39,6 +39,7 @@ export const backgroundImage = listSchema({ itemSchema: image })
 export const backgroundPosition = listSchema({ itemSchema: position })
 
 const singleBackground = objectSchema({
+  type: '<background>',
   fields: {
     image,
     position,
