@@ -6,6 +6,11 @@ import IconButton from './IconButton'
 
 interface Props extends Omit<EditorPropsWithLabel<any>, 'keywords'> {
   children?: ReactNode
+  regenerate?(options: any): any
+  reorder?: {
+    onMoveUp?(): void
+    onMoveDown?(): void
+  }
 }
 
 export function InputHeader({
@@ -23,9 +28,6 @@ export function InputHeader({
         display: 'flex',
         gap: 1,
         alignItems: 'center',
-        // ':not(:hover) [data-type="regen-button"]': {
-        //   opacity: 0,
-        // },
       }}
     >
       {label && <Label>{label}</Label>}
