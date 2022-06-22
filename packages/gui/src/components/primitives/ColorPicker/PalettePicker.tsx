@@ -70,7 +70,6 @@ function Swatch({ value }: { value: ThemeColor }) {
   const theme = useTheme()
   // FIXME extracting color value from path is annoying...
   const color = get(theme.colors, value.path)
-  // console.log(value, theme, color)
   const isTransparent = hasAlpha(color)
   return (
     <div
