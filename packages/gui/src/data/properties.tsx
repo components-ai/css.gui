@@ -113,7 +113,14 @@ function responsive<T>(
         />
       )
     },
-    defaultValue: { type: 'responsive', values: [itemSchema.defaultValue] },
+    defaultValue: {
+      type: 'responsive',
+      values: [
+        itemSchema.defaultValue,
+        itemSchema.defaultValue,
+        itemSchema.defaultValue,
+      ],
+    },
     validate: ((value: any) => {
       if (typeof value !== 'object') return false
       if (value.type !== 'responsive') return false
