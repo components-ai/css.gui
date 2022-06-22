@@ -1,5 +1,4 @@
 import { sortBy } from 'lodash-es'
-import { get } from 'theme-ui'
 import { bindProps } from '../../lib/components'
 import { Theme } from '../../types/theme'
 import { randomInt } from '../../lib/util'
@@ -11,7 +10,6 @@ import { keyword, number } from './primitives'
 import { angle } from './angle'
 import { DataTypeSchema } from './types'
 import { objectSchema } from './object'
-import { withKeywords } from './withKeywords'
 import { joinSchemas } from './joinSchemas'
 import { color } from './color'
 
@@ -72,7 +70,7 @@ const linear = functionSchema(
   'linear-gradient',
   objectSchema({
     fields: {
-      angle: withKeywords(directions, angle()),
+      angle: joinSchemas([keyword(directions), angle()]),
       stops: stops(),
     },
   })
@@ -81,7 +79,7 @@ const repeatingLinear = functionSchema(
   'repeating-linear-gradient',
   objectSchema({
     fields: {
-      angle: withKeywords(directions, angle()),
+      angle: joinSchemas([keyword(directions), angle()]),
       stops: stops(true),
     },
   })
