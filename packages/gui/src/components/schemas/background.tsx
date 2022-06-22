@@ -20,10 +20,12 @@ const repeat = joinSchemas([
 const size = joinSchemas([
   keyword(['cover', 'contain']),
   tupleSchema({
-    itemSchema: lengthPercentage({
-      keywords: ['auto'],
-      defaultValue: { value: 100, unit: '%' },
-    }),
+    itemSchema: joinSchemas([
+      keyword(['auto']),
+      lengthPercentage({
+        defaultValue: { value: 100, unit: '%' },
+      }),
+    ]),
     labels: ['x', 'y'],
   }),
 ])

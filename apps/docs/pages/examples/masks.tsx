@@ -13,8 +13,8 @@ const initialStyles = {
       },
       origin: 'border-box',
       position: {
-        x: { value: 0, type: '%' },
-        y: { value: 0, type: '%' },
+        x: { value: 0, unit: '%' },
+        y: { value: 0, unit: '%' },
       },
       repeat: ['no-repeat', 'no-repeat'],
       size: [
