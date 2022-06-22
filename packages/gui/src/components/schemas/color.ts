@@ -18,7 +18,7 @@ function rawColor({
   return {
     type: 'color',
     inlineInput: ColorInput,
-    stringify: stringifyUnit as any,
+    stringify: (value) => value,
     defaultValue,
     regenerate: () => randomColor(),
     validate: ((value: any) => {
