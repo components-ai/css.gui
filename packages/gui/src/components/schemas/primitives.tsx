@@ -14,7 +14,6 @@ import {
 import { ColorInput } from '../inputs/ColorInput'
 import { Range } from '../inputs/Dimension/Input'
 import { KeywordInput } from '../inputs/KeywordInput'
-import { lengthSteps } from '../inputs/LengthInput'
 import { NumberInput } from '../inputs/NumberInput'
 import { IntegerInput } from '../inputs/PrimitiveInput'
 import { TextInput } from '../inputs/TextInput'
@@ -107,6 +106,22 @@ export function numberPercentage({
   })
 }
 
+const lengthConversions = {
+  px: 16,
+  rem: 1,
+  em: 1,
+}
+
+export const lengthSteps = {
+  number: 0.1,
+  theme: 1,
+  px: 1,
+  em: 0.125,
+  rem: 0.125,
+  '%': 0.1,
+  fr: 0.1,
+}
+
 const lengthRanges = {
   px: [0, 256],
   rem: [0, 16],
@@ -145,6 +160,7 @@ export function length({
     defaultValue,
     steps: lengthSteps,
     regenRanges: lengthRanges,
+    conversions: lengthConversions,
     units,
     ...props,
   })
