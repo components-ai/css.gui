@@ -56,11 +56,10 @@ import {
 import { DataTypeSchema } from '../components/schemas/types'
 import { joinSchemas } from '../components/schemas/joinSchemas'
 import { theme } from '../components/schemas/theme'
-import { GLOBAL_KEYWORDS } from './global-keywords'
-import { responsive } from '../components/schemas/responsive'
 import { color } from '../components/schemas/color'
 import { angle } from '../components/schemas/angle'
 import { time } from '../components/schemas/time'
+import { topLevel } from '../components/schemas/topLevel'
 
 type PropertyData = {
   input: PrimitiveType | ComponentType<EditorPropsWithLabel<any>>
@@ -90,16 +89,6 @@ const primitiveMap = {
   },
 }
 type PrimitiveType = keyof typeof primitiveMap
-
-const global = keyword(GLOBAL_KEYWORDS, { type: 'global' })
-
-function makeTopLevel<T>(schema: DataTypeSchema<T>, property: string) {
-  if (property === 'fontFamily') {
-    return schema
-  }
-  const withGlobal = joinSchemas([schema, global])
-  return joinSchemas([withGlobal, responsive(withGlobal)])
-}
 
 function normalizeSchema(propertyData: PropertyData): DataTypeSchema<any> {
   const { input, keywords, themeProperty } = propertyData
@@ -1713,7 +1702,7 @@ export const rawProperties: Record<string, any> = {
 
 export const properties: Record<string, DataTypeSchema<any>> = mapValues(
   rawProperties,
-  (value, property) => makeTopLevel(normalizeSchema(value), property)
+  (value, property) => topLevel(normalizeSchema(value), property)
 ) as any
 
 export const supportedProperties = uniqBy(allProperties, 'property').filter(

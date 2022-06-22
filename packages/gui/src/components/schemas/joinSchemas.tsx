@@ -1,9 +1,14 @@
 import { optionsSchema } from './options'
 import { DataTypeSchema } from './types'
 
+interface JoinSchemaOptions<S> {
+  type?: string
+  convert?(oldValue: ExtractDataType<S>, newType: string): S | undefined
+}
+
 export function joinSchemas<S extends DataTypeSchema<any>>(
   schemas: S[],
-  type?: string
+  { type, convert }: JoinSchemaOptions<S> = {}
 ): DataTypeSchema<ExtractDataType<S>> {
   let variants = {}
 
@@ -15,7 +20,7 @@ export function joinSchemas<S extends DataTypeSchema<any>>(
     }
   }
   // TODO keep the conversion function
-  return optionsSchema({ variants, type })
+  return optionsSchema({ variants, type, convert: convert as any })
 }
 
 type ExtractDataType<S> = S extends DataTypeSchema<infer T> ? T : never
