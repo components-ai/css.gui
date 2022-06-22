@@ -1,18 +1,18 @@
 import { functionSchema } from './function'
+import { joinSchemas } from './joinSchemas'
 import { listSchema } from './list'
 import { objectSchema } from './object'
 import { optionsSchema } from './options'
 import { integer, keyword, lengthPercentage } from './primitives'
 
-const inflexibleBreadth = lengthPercentage({
-  range: 'nonnegative',
-  keywords: ['min-content', 'max-content', 'auto'],
-})
-const trackBreadth = lengthPercentage({
-  flex: true,
-  range: 'nonnegative',
-  keywords: ['min-content', 'max-content', 'auto'],
-})
+const inflexibleBreadth = joinSchemas([
+  keyword(['min-content', 'max-content', 'auto']),
+  lengthPercentage({ range: 'nonnegative' }),
+])
+const trackBreadth = joinSchemas([
+  keyword(['min-content', 'max-content', 'auto']),
+  lengthPercentage({ range: 'nonnegative', flex: true }),
+])
 
 const trackSizeVariants = {
   breadth: trackBreadth,

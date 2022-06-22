@@ -26,6 +26,7 @@ export function optionsSchema<T extends Record<string, any>>({
       }
       if (schema.validate(value)) return type
     }
+
     throw new Error(
       `Provided value ${JSON.stringify(
         value

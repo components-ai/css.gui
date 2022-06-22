@@ -70,7 +70,7 @@ export function color({
   return joinSchemas([
     colorObject({ defaultValue }),
     themeColor,
-    keyword(['transparent', 'currentColor']),
+    keyword(['transparent', 'currentcolor']),
   ])
 }
 
