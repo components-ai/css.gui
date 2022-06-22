@@ -132,7 +132,7 @@ export function integer({
   return {
     type: 'integer',
     inlineInput: bindProps(IntegerInput, { regenerate }),
-    stringify: stringifyUnit as any,
+    stringify: (value) => value.toString(),
     defaultValue,
     validate: ((value: any) => typeof value === 'number') as any,
   }
