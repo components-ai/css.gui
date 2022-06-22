@@ -1,9 +1,5 @@
-import * as Tabs from '@radix-ui/react-tabs'
-import { compact } from 'lodash-es'
 import { ButtonHTMLAttributes, useState } from 'react'
 import ValuePicker from './ValuePicker'
-import SystemPicker from './SystemPicker'
-import PalettePicker from './PalettePicker'
 import IconButton from '../../ui/IconButton'
 import { RefreshCw, Trash } from 'react-feather'
 import { Theme } from '../../../types/theme'
@@ -18,8 +14,6 @@ export interface Props {
   title?: string
   /** The initial tab to show on load */
   initialTab?: string
-  /** If true, will hide the "system" tab from the color picker */
-  hideSystemColors?: boolean
   /** If provided, will render a trash icon that calls `onRemove` when clicked */
   onRemove?(): void
   /**
@@ -45,7 +39,6 @@ export default function ColorPicker({
   onChange,
   theme,
   title,
-  hideSystemColors,
   initialTab = 'picker',
   onRemove,
   onRegenerate,
@@ -68,37 +61,6 @@ export default function ColorPicker({
         </div>
       )}
       <div sx={{ display: 'flex', my: 1 }}>
-        {/* <Tabs.List
-            sx={{
-              display: 'flex',
-              justifyContent: 'left',
-              gap: 2,
-              py: 1,
-            }}
-          >
-            {compact([
-              'Picker',
-              !hideSystemColors && 'System',
-              theme && 'Theme',
-            ]).map((tab: string) => {
-              return (
-                <Tabs.Trigger
-                  key={tab}
-                  value={tab}
-                  sx={{
-                    color: 'text',
-                    backgroundColor: 'transparent',
-                    padding: 0,
-                    border: 'none',
-                    fontSize: 1,
-                    '&[data-state="active"]': { fontWeight: 600 },
-                  }}
-                >
-                  {tab}
-                </Tabs.Trigger>
-              )
-            })}
-          </Tabs.List> */}
         <div
           sx={{
             marginLeft: 'auto',
@@ -126,20 +88,7 @@ export default function ColorPicker({
           </ActionButton>
         </div>
       </div>
-      {/* <Tabs.Content value="picker"> */}
       <ValuePicker value={value} onChange={onChange} theme={theme} />
-      {/* </Tabs.Content> */}
-      {/* {!hideSystemColors && (
-          <Tabs.Content value="system">
-            <SystemPicker value={value} onChange={onChange} />
-          </Tabs.Content>
-        )}
-        {theme && (
-          <Tabs.Content value="Theme">
-            <PalettePicker value={value} onChange={onChange} theme={theme} />
-          </Tabs.Content> */}
-      {/* )} */}
-      {/* </Tabs.Root> */}
     </div>
   )
 }
