@@ -1,12 +1,10 @@
 import { isElement, isNil } from 'lodash-es'
-import { get } from 'theme-ui'
 import {
   Color,
   Length,
   MultidimensionalLength,
   Position,
   CSSFunctionCalc,
-  ColorObject,
 } from '../types/css'
 import { Theme } from '../types/theme'
 import {
@@ -15,7 +13,6 @@ import {
   removeInternalCSSClassSyntax,
 } from './classes'
 import { addPseudoSyntax } from './pseudos'
-import { isMultidimensionalLength } from './util'
 
 export function stringifySelector(selector: string): string {
   if (isElement(selector)) {
@@ -38,17 +35,8 @@ export function stringifyUnit(
   providedValue: Length | MultidimensionalLength | Color
   // theme?: Theme
 ): string | number | null {
-  // if (isMultidimensionalLength(providedValue)) {
-  //   return (providedValue as MultidimensionalLength).values
-  //     .map((v) => stringifyUnit(v, theme))
-  //     .join(' ')
-  // }
-
   const value = providedValue as Length
 
-  // if (value === '0') {
-  //   return value
-  // }
   if (!value || value.value === undefined) {
     return null
   }
@@ -56,19 +44,6 @@ export function stringifyUnit(
   if (['raw', 'keyword', 'calc'].includes(value.unit)) {
     return value.value
   }
-
-  // if (value.themePath) {
-  //   const resolvedValue =
-  //     theme && value.themePath && get(theme, value.themePath)
-  //   if (resolvedValue) {
-  //     return `${resolvedValue.value}${resolvedValue.unit || ''}`
-  //   }
-  // }
-
-  // if (value.unit === 'string') {
-  //   // TODO handle string escapes
-  //   return `'${value.value}'`
-  // }
 
   if (value.unit === 'number') {
     return String(value.value)
