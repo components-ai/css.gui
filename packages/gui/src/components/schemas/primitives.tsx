@@ -25,7 +25,9 @@ import { NumberInput } from '../inputs/NumberInput'
 import { IntegerInput } from '../inputs/PrimitiveInput'
 import { TextInput } from '../inputs/TextInput'
 import { timeSteps } from '../inputs/TimeInput'
-import PalettePopover from '../primitives/ColorPicker/PalettePicker'
+import PalettePopover, {
+  ThemeColor,
+} from '../primitives/ColorPicker/PalettePicker'
 import { isValidColor } from '../primitives/ColorPicker/util'
 import { dimension } from './dimension'
 import { joinSchemas } from './joinSchemas'
@@ -46,11 +48,6 @@ function colorObject({
       return typeof value === 'string' && isValidColor(value)
     }) as any,
   }
-}
-
-interface ThemeColor {
-  type: 'theme'
-  path: string
 }
 
 const themeColor: DataTypeSchema<ThemeColor> = {

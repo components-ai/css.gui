@@ -1,3 +1,4 @@
+import { joinSchemas } from './joinSchemas'
 import { objectSchema } from './object'
 import { color, keyword, lengthPercentage } from './primitives'
 
@@ -24,15 +25,18 @@ const textDecorationStyleKeywords = [
   'wavy',
 ] as const
 export const textDecorationStyle = keyword(textDecorationStyleKeywords)
-export const textDecorationLength = lengthPercentage({
-  keywords: ['auto', 'from-font'],
-})
+export const textDecorationLength = joinSchemas([
+  keyword(['auto', 'from-font']),
+  lengthPercentage(),
+])
 
 export const textDecorationColor = color({ defaultValue: '#6465ff' })
-export const textDecorationThickness = lengthPercentage({
-  keywords: ['auto', 'from-font'],
-  defaultValue: { value: 4, unit: 'px' },
-})
+export const textDecorationThickness = joinSchemas([
+  keyword(['auto', 'from-font']),
+  lengthPercentage({
+    defaultValue: { value: 4, unit: 'px' },
+  }),
+])
 
 export const textDecoration = objectSchema({
   fields: {

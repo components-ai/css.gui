@@ -22,7 +22,7 @@ const initialStyles = {
     unit: 'px',
   },
   textDecorationLine: 'none',
-  textDecorationStyle: 'none',
+  textDecorationStyle: 'solid',
   width: {
     value: 100,
     unit: '%',

@@ -1510,7 +1510,7 @@ export const rawProperties: Record<string, any> = {
     keywords: [
       'auto',
       'optimizeSpeed',
-      'optimzeLegibility',
+      'optimizeLegibility',
       'geometricPrecision',
     ],
     defaultValue: 'optimizeLegibility',
