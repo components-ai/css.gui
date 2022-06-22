@@ -2,13 +2,15 @@ import { EasingFunctionEditor } from '../inputs/EasingFunction'
 import { keywordValues } from '../inputs/EasingFunction/keywords'
 import { stringifyEasingFunction } from '../inputs/EasingFunction/stringify'
 import { EasingFunction } from '../inputs/EasingFunction/types'
+import { joinSchemas } from './joinSchemas'
+import { keyword } from './primitives'
 import { DataTypeSchema } from './types'
 
-export const easingFunction: DataTypeSchema<EasingFunction> = {
-  type: '<easing function>',
+const rawEasingFunction: DataTypeSchema<EasingFunction> = {
+  type: '<easing-function>',
   input: EasingFunctionEditor,
   stringify: stringifyEasingFunction,
-  defaultValue: keywordValues.ease,
+  defaultValue: keywordValues.linear,
   validate: ((value: any) => {
     // I would LOVE to be able to generalize this using schemas
     if (typeof value !== 'object') return false
@@ -29,3 +31,16 @@ export const easingFunction: DataTypeSchema<EasingFunction> = {
     }
   }) as any,
 }
+
+export const easingFunction = joinSchemas([
+  keyword([
+    'linear',
+    'ease',
+    'ease-in',
+    'ease-out',
+    'ease-in-out',
+    'step-start',
+    'step-end',
+  ]),
+  rawEasingFunction,
+])
