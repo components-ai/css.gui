@@ -191,7 +191,6 @@ export const rawProperties: Record<string, any> = {
       'mathematical',
       'text-top',
     ],
-    defaultValue: 'auto',
   },
   alignSelf: {
     input: 'keyword',
@@ -214,7 +213,6 @@ export const rawProperties: Record<string, any> = {
       'safe center',
       'unsafe center',
     ],
-    defaultValue: 'auto',
   },
   all: {
     input: 'keyword',
@@ -327,7 +325,6 @@ export const rawProperties: Record<string, any> = {
       'avoid-region',
       'region',
     ],
-    defaultValue: 'auto',
   },
   breakBefore: {
     input: 'keyword',
@@ -347,12 +344,10 @@ export const rawProperties: Record<string, any> = {
       'avoid-region',
       'region',
     ],
-    defaultValue: 'auto',
   },
   breakInside: {
     input: 'keyword',
     keywords: ['auto', 'avoid', 'avoid-page', 'avoid-column', 'avoid-region'],
-    defaultValue: 'auto',
   },
   captionSide: {
     input: 'keyword',
@@ -396,13 +391,11 @@ export const rawProperties: Record<string, any> = {
   colorInterpolationFilters: {
     input: 'keyword',
     keywords: ['auto', 'sRGB', 'linearRGB'],
-    defaultValue: 'auto',
   },
   ...columnProperties,
   columnFill: {
     input: 'keyword',
     keywords: ['auto', 'balance', 'balance-all'],
-    defaultValue: 'auto',
   },
   columnRuleColor: {
     input: 'color',
@@ -556,7 +549,6 @@ export const rawProperties: Record<string, any> = {
       'hanging',
       'text-top',
     ],
-    defaultValue: 'auto',
   },
   emptyCells: {
     input: 'keyword',
@@ -683,12 +675,10 @@ export const rawProperties: Record<string, any> = {
   fontKerning: {
     input: 'keyword',
     keywords: ['auto', 'normal', 'none'],
-    defaultValue: 'auto',
   },
   fontOpticalSizing: {
     input: 'keyword',
     keywords: ['auto', 'none'],
-    defaultValue: 'auto',
   },
   fontSize: {
     input: 'length',
@@ -906,7 +896,6 @@ export const rawProperties: Record<string, any> = {
   initialLetterAlign: {
     input: 'keyword',
     keywords: ['auto', 'alphabetic', 'hanging', 'ideographic'],
-    defaultValue: 'auto',
   },
   initialLetterWrap: {
     input: 'length',
