@@ -17,7 +17,6 @@ const dropShadow = functionSchema(
       offsetY: length(),
       blurRadius: length(),
     },
-    separator: ' ',
   })
 )
 
@@ -38,7 +37,7 @@ const singleFilter = joinSchemas(
     amountFilter('saturate'),
     amountFilter('sepia'),
   ],
-  'filter'
+  { type: '<filter>' }
 )
 
 export const filter = joinSchemas([

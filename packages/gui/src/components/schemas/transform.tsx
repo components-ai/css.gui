@@ -136,7 +136,7 @@ const singleTransform = joinSchemas(
     matrix,
     matrix3d,
   ],
-  'transform'
+  { type: 'transform' }
 )
 
 export const transform = joinSchemas([

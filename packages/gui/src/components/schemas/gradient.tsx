@@ -67,6 +67,7 @@ function linearArgs(repeating?: boolean) {
       angle: joinSchemas([keyword(directions), angle()]),
       stops: stops(repeating),
     },
+    separator: ', ',
   })
 }
 
