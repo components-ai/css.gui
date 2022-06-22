@@ -2,7 +2,8 @@ import { ANIMATABLE_PROPERTIES } from '../../data/animatable'
 import { easingFunction } from './easing-function'
 import { listSchema } from './list'
 import { objectSchema } from './object'
-import { keyword, time } from './primitives'
+import { keyword } from './primitives'
+import { time } from './time'
 
 const singleProperty = keyword(ANIMATABLE_PROPERTIES, {
   defaultValue: 'all',

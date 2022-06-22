@@ -1,19 +1,15 @@
-import { compact, get } from 'lodash-es'
+import { compact } from 'lodash-es'
 import { randomColor } from '../../lib/color'
 import { bindProps } from '../../lib/components'
 import { choose, randomStep } from '../../lib/random'
 import { stringifyUnit } from '../../lib/stringify'
 import { randomInt } from '../../lib/util'
 import {
-  Angle,
-  ANGLE_UNITS,
   Color,
   CSSUnitValue,
   Length,
   LENGTH_UNITS,
   NumberPercentage,
-  Time,
-  TIME_UNITS,
 } from '../../types/css'
 import { ColorInput } from '../inputs/ColorInput'
 import { Range } from '../inputs/Dimension/Input'
@@ -22,7 +18,6 @@ import { lengthSteps } from '../inputs/LengthInput'
 import { NumberInput } from '../inputs/NumberInput'
 import { IntegerInput } from '../inputs/PrimitiveInput'
 import { TextInput } from '../inputs/TextInput'
-import { timeSteps } from '../inputs/TimeInput'
 import PalettePopover, {
   ThemeColor,
 } from '../primitives/ColorPicker/PalettePicker'
@@ -70,53 +65,6 @@ export function color({
     themeColor,
     keyword(['transparent', 'currentcolor']),
   ])
-}
-
-const angleRanges = {
-  deg: [0, 360],
-  turn: [0, 1],
-  rad: [0, 2 * Math.PI],
-  grad: [0, 400],
-} as const
-
-const angleConversions = {
-  deg: 360,
-  turn: 1,
-  rad: 2 * Math.PI,
-  grad: 400,
-}
-
-export const angleSteps = {
-  deg: 1,
-  turn: 0.01,
-  rad: 0.01,
-  grad: 1,
-}
-
-export function angle({ defaultValue }: { defaultValue?: Angle } = {}) {
-  return dimension({
-    type: 'angle',
-    defaultValue,
-    steps: angleSteps,
-    regenRanges: angleRanges,
-    conversions: angleConversions,
-    units: ANGLE_UNITS,
-  })
-}
-
-const timeRanges = {
-  s: [0, 2],
-  ms: [0, 2000],
-} as const
-
-export function time({ defaultValue }: { defaultValue?: Time } = {}) {
-  return dimension({
-    type: 'time',
-    defaultValue,
-    steps: timeSteps,
-    regenRanges: timeRanges,
-    units: TIME_UNITS,
-  })
 }
 
 export function percentage({

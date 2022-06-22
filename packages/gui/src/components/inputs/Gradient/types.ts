@@ -1,4 +1,5 @@
 import { Angle, Color, Position } from '../../../types/css'
+import { ThemeColor } from '../../primitives/ColorPicker/PalettePicker'
 
 interface BaseGradient {
   type: string
@@ -6,7 +7,7 @@ interface BaseGradient {
 }
 
 export interface GradientStop {
-  color: Color
+  color: Color | ThemeColor
   hinting: number // TODO units
 }
 

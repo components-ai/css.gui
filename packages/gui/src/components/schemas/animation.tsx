@@ -1,7 +1,8 @@
 import { easingFunction } from './easing-function'
 import { listSchema } from './list'
 import { objectSchema } from './object'
-import { ident, integer, keyword, time } from './primitives'
+import { ident, integer, keyword } from './primitives'
+import { time } from './time'
 
 const delay = time()
 const direction = keyword([

@@ -7,7 +7,8 @@ import GradientStopsField from '../inputs/Gradient/stops'
 import { GradientStop } from '../inputs/Gradient/types'
 import { functionSchema } from './function'
 import { position } from './position'
-import { angle, color, keyword, number } from './primitives'
+import { color, keyword, number } from './primitives'
+import { angle } from './angle'
 import { DataTypeSchema } from './types'
 import { objectSchema } from './object'
 import { withKeywords } from './withKeywords'
@@ -20,9 +21,9 @@ export const stringifyStops = (
 ) => {
   return sortBy(stops, (stop) => stop.hinting)
     ?.filter(Boolean)
-    ?.map(({ color, hinting }) => {
-      let resolved = get(theme || {}, color.themePath, color)
-      return `${resolved.value} ${hinting}${unit}`
+    ?.map(({ color: hintColor, hinting }) => {
+      const resolved = color().stringify(hintColor)
+      return `${resolved} ${hinting}${unit}`
     })
     ?.join(', ')
 }
@@ -33,8 +34,8 @@ function stops(repeating: boolean = false): DataTypeSchema<GradientStop[]> {
     input: bindProps(GradientStopsField, { repeating }),
     stringify: (value, theme) => stringifyStops(value, '%', theme),
     defaultValue: [
-      { color: { value: 'black' }, hinting: 0 },
-      { color: { value: 'transparent' }, hinting: 100 },
+      { color: 'black', hinting: 0 },
+      { color: 'transparent', hinting: 100 },
     ],
     regenerate({ previousValue }) {
       const newStops = previousValue.map(() => randomInt(0, 101))
@@ -42,7 +43,7 @@ function stops(repeating: boolean = false): DataTypeSchema<GradientStop[]> {
       return newStops.map((hinting) => {
         return {
           hinting,
-          color: color().regenerate!({ previousValue: { value: 'black' } }),
+          color: color().regenerate!({ previousValue: 'black' }),
         }
       })
     },

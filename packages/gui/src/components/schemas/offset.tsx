@@ -1,10 +1,11 @@
 import { SHAPE_BOX_KEYWORDS } from '../../types/css'
+import { angle } from './angle'
 import { basicShape } from './basic-shape'
 import { image } from './image'
 import { objectSchema } from './object'
 import { optionsSchema } from './options'
 import { position } from './position'
-import { angle, keyword, lengthPercentage } from './primitives'
+import { keyword, lengthPercentage } from './primitives'
 
 // TODO 'auto' keyword
 export const offsetAnchor = position

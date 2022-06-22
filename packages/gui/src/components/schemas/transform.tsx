@@ -1,9 +1,10 @@
 import { listSchema } from './list'
 import { functionSchema } from './function'
-import { angle, keyword, length, lengthPercentage, number } from './primitives'
+import { keyword, length, lengthPercentage, number } from './primitives'
 import { tupleSchema } from './tuple'
 import { objectSchema } from './object'
 import { joinSchemas } from './joinSchemas'
+import { angle } from './angle'
 
 const translate = functionSchema(
   'translate',
