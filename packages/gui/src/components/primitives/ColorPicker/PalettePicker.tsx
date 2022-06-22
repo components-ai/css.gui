@@ -111,15 +111,18 @@ export function PalettePicker({ value, onChange }: Props) {
       {/* <ColorValueDisplay value={color} onChange={onChange} /> */}
       <div sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
         {Object.entries(theme?.colors ?? {}).map(([name, colorGroup]) => {
+          if (!(colorGroup instanceof Array)) {
+            return null
+          }
           return (
             <div key={name} sx={{ display: 'flex', gap: '.125rem' }}>
-              {colorGroup.colors?.map((color, i) => {
+              {(colorGroup as any).map((color: any, i: number) => {
                 const selected = valueColor === color
 
                 return (
                   <button
                     key={color.id}
-                    title={`${colorGroup.name}.${i}`}
+                    title={`${name}.${i}`}
                     sx={{
                       cursor: 'pointer',
                       border: selected ? '2px solid' : '1px solid',
@@ -130,12 +133,12 @@ export function PalettePicker({ value, onChange }: Props) {
                       width: '1.5rem',
                       height: '1.5rem',
                       aspectRatio: '1 / 1',
-                      backgroundColor: color.value,
+                      backgroundColor: color,
                     }}
                     onClick={() =>
                       onChange({
                         type: 'theme',
-                        path: `${colorGroup.name}.${i}`,
+                        path: `${name}.${i}`,
                       })
                     }
                   />
