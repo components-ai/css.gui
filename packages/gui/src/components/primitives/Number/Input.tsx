@@ -96,8 +96,9 @@ export const DraggableInput = ({
       }}
       sx={{
         cursor: dragging ? 'ew-resize' : 'default',
-        minHeight: '1.6em',
-        width: `${value?.toString().length + 1}ch`,
+        lineHeight: 1.5,
+        p: 1,
+        width: '7ch',
         // Use fractional steps to approximate the minimum width
         // so we don't get "jitters" moving between fractional and integer values
         minWidth: `${step.toString().length + 1}ch`,
