@@ -1,5 +1,3 @@
 export const initialStyles: any = {
-  backgroundColor: { 
-    value: '#6465ff', 
-  }
+  backgroundColor: '#6465ff',
 }
