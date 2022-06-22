@@ -7,19 +7,22 @@ import {
 } from '@compai/css-gui'
 
 export const ResponsiveExample = () => {
-  const [value, setValue] = useState<Length | ResponsiveLength>({
-    value: 16,
-    unit: 'px',
+  const [value, setValue] = useState<any>({
+    type: 'responsive',
+    values: [
+      {
+        value: 16,
+        unit: 'px',
+      },
+    ],
   })
   return (
     <div sx={{ display: 'flex', width: '100%', flexWrap: 'wrap' }}>
       <div sx={{ flexGrow: 1 }}>
         <ResponsiveInput
-          label="Font size"
           value={value}
           // @ts-ignore
           onChange={setValue}
-          defaultValue={{ value: 16, unit: 'px' }}
           // @ts-ignore
           Component={LengthInput}
         />
