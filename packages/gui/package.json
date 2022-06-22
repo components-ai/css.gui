@@ -7,6 +7,7 @@
   "license": "MIT",
   "scripts": {
     "build": "tsup",
+    "typecheck": "tsc --noEmit",
     "dev": "tsup --watch",
     "clean": "rm -rf .turbo node_modules dist"
   },

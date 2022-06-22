@@ -2,10 +2,11 @@ import { useState } from 'react'
 import { Color } from '../../../types/css'
 import { Theme } from '../../../types/theme'
 import { Label } from '../Label'
+import { ThemeColor } from './PalettePicker'
 
 interface MiniPaletteProps {
   value: Color
-  onChange(value: Color): void
+  onChange(value: ThemeColor): void
   theme?: Theme
 }
 
@@ -19,17 +20,28 @@ export function PreviewPalettePicker({
   return (
     <>
       <Label sx={{ py: 2 }}>Theme Colors</Label>
-      <div sx={{ '& *': {
-        transition: 'all .2s ease-in-out', 
-      }
-      }}>
+      <div
+        sx={{
+          '& *': {
+            transition: 'all .2s ease-in-out',
+          },
+        }}
+      >
         {theme?.colors?.map((colorGroup: any, i: number) => {
           if (isCollapsed && i >= collapsedRows) {
             return null
           }
 
           return (
-            <div key={i} sx={{ display: 'grid', gridTemplateColumns: 'repeat(12,1fr)', gap: '.25rem', mb: 1 }}>
+            <div
+              key={i}
+              sx={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(12,1fr)',
+                gap: '.25rem',
+                mb: 1,
+              }}
+            >
               {colorGroup.colors.map((color: any, i: number) => {
                 const selected = value === color.value
 
@@ -51,10 +63,12 @@ export function PreviewPalettePicker({
                       aspectRatio: '1 / 1',
                       backgroundColor: color.value,
                     }}
-                    onClick={() => onChange({
-                      value: color.value,
-                      themePath: `colors.${colorGroup.name}.${i}`
-                    })}
+                    onClick={() =>
+                      onChange({
+                        type: 'theme',
+                        path: `${colorGroup.name}.${i}`,
+                      })
+                    }
                   />
                 )
               })}

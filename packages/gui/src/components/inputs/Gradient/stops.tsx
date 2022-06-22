@@ -218,7 +218,7 @@ interface StopFieldsProps {
 function StopFields(props: StopFieldsProps) {
   return (
     <div sx={{ display: 'grid', gridTemplateColumns: '2fr 1fr', mt: 2 }}>
-      <ColorInput {...getInputProps(props, 'color')} />
+      <ColorInput {...(getInputProps(props, 'color') as any)} />
       <NumberInput {...getInputProps(props, 'hinting')} />
     </div>
   )
@@ -258,7 +258,7 @@ function Marker({ value, isSelected, ...props }: MarkerProps) {
           content: "''",
           position: 'absolute',
           inset: 0,
-          backgroundColor: value.color.value,
+          backgroundColor: value.color as any,
         },
       }}
     />
