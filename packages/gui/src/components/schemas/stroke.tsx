@@ -1,19 +1,23 @@
+import { color } from './color'
+import { joinSchemas } from './joinSchemas'
 import { listSchema } from './list'
 import {
-  color,
   keyword,
   length,
   lengthPercentage,
   number,
   numberPercentage,
 } from './primitives'
+import { url } from './url'
 
-// TODO url() option
-export const stroke = color()
+export const stroke = joinSchemas([
+  url,
+  color(),
+  keyword(['none', 'context-fill', 'context-stroke']),
+])
 
 export const strokeDasharray = listSchema({
   itemSchema: length({ number: true }),
-  variant: 'list',
 })
 export const strokeDashoffset = lengthPercentage({ number: true })
 export const strokeLinejoin = keyword([
@@ -42,4 +46,4 @@ export const strokeDashadjust = keyword([
   'dashed',
   'gaps',
 ])
-export const strokeDashcorner = length({ keywords: ['auto'] })
+export const strokeDashcorner = joinSchemas([keyword(['auto']), length()])

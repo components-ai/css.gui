@@ -2,14 +2,11 @@ import { getInputProps } from '../../lib/util'
 import { DataTypeSchema, RegenOptions } from './types'
 import * as Toggle from '@radix-ui/react-toggle'
 import { Link } from 'react-feather'
-import { replace } from '../../lib/array'
-import { InputContainer } from '../inputs/InputContainer'
-import { choose } from '../../lib/random'
+import { SchemaInput } from '../inputs/SchemaInput'
 
-interface CreateTupleSchema<T, K> {
+interface CreateTupleSchema<T> {
   itemSchema: DataTypeSchema<T>
   labels: string[]
-  keywords?: K[]
   linkable?: boolean
   separator?: string
 }
@@ -19,14 +16,13 @@ interface CreateTupleSchema<T, K> {
  * in a defined order that may be linked together
  * (e.g. x/y, row/column, start/end)
  */
-export function tupleSchema<T, K extends string = never>({
+export function tupleSchema<T>({
   itemSchema,
   labels,
-  keywords = [],
   linkable = true,
   separator = ' ',
-}: CreateTupleSchema<T, K>): DataTypeSchema<T[] | K> {
-  function isLinked(value: T[] | K) {
+}: CreateTupleSchema<T>): DataTypeSchema<T[]> {
+  function isLinked(value: T[]) {
     return value.length <= 1
   }
 
@@ -34,83 +30,72 @@ export function tupleSchema<T, K extends string = never>({
     ? [itemSchema.defaultValue]
     : labels.map(() => itemSchema.defaultValue)
 
-  function stringify(value: T[] | K) {
-    if (typeof value === 'string') {
-      return value
-    }
-
+  function stringify(value: T[]) {
     return (
       value?.map((item) => itemSchema.stringify(item)).join(separator) ?? null
     )
   }
 
-  function regenerate({ previousValue }: RegenOptions<T[] | K>) {
-    if (typeof previousValue === 'string') {
-      return choose(keywords)
-    }
+  function regenerate({ previousValue }: RegenOptions<T[]>) {
     return previousValue.map(
       (item) => itemSchema.regenerate?.({ previousValue: item }) ?? item
     )
   }
 
   return {
-    input(props) {
-      const { value, onChange } = props
-      const linked = isLinked(value)
-      const ItemInput = itemSchema.input
-      return (
-        <InputContainer
-          {...props}
-          stringify={stringify}
-          regenerate={regenerate}
-          defaultValue={defaultValue}
-          keywords={keywords}
-        >
-          {!(typeof value === 'string') && (
-            <div sx={{ display: 'flex', gap: 2 }}>
-              {linkable && (
-                <Toggle.Root
-                  title="Link inputs"
-                  sx={{
-                    p: 0,
-                    background: 'none',
-                    border: 'none',
-                    color: 'muted',
-
-                    '&[data-state=on]': {
-                      color: 'text',
-                    },
-                  }}
-                  pressed={linked}
-                  onPressedChange={(pressed) => {
-                    if (pressed) {
-                      props.onChange([value[0]])
-                    } else {
-                      props.onChange(labels.map(() => value[0]))
-                    }
-                  }}
-                >
-                  <Link size={14} />
-                </Toggle.Root>
-              )}
-              {value.map((item, i) => {
-                return (
-                  <ItemInput
-                    key={i}
-                    // @ts-ignore
-                    {...getInputProps(props, i)}
-                    onChange={(newItem) => onChange(replace(value, i, newItem))}
-                    label={linked ? '' : labels[i]}
-                  />
-                )
-              })}
-            </div>
-          )}
-        </InputContainer>
-      )
-    },
+    type: `${itemSchema.type} list`,
     stringify,
     defaultValue,
     regenerate,
+    validate: ((value: any) => {
+      if (!(value instanceof Array)) {
+        return false
+      }
+      return value.every((item) => itemSchema.validate(item))
+    }) as any,
+    input(props) {
+      const { value, onChange } = props
+      const linked = isLinked(value)
+      // const ItemInput = itemSchema.input
+      return (
+        <div sx={{ display: 'flex', gap: 2 }}>
+          {linkable && (
+            <Toggle.Root
+              title="Link inputs"
+              sx={{
+                p: 0,
+                background: 'none',
+                border: 'none',
+                color: 'muted',
+
+                '&[data-state=on]': {
+                  color: 'text',
+                },
+              }}
+              pressed={linked}
+              onPressedChange={(pressed) => {
+                if (pressed) {
+                  props.onChange([value[0]])
+                } else {
+                  props.onChange(labels.map(() => value[0]))
+                }
+              }}
+            >
+              <Link size={14} />
+            </Toggle.Root>
+          )}
+          {value.map((item, i) => {
+            return (
+              <SchemaInput
+                key={i}
+                schema={itemSchema}
+                {...getInputProps(props, i)}
+                label=""
+              />
+            )
+          })}
+        </div>
+      )
+    },
   }
 }

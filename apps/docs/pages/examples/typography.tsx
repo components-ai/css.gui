@@ -4,28 +4,25 @@ import { Editor, Inputs, styled, codegen } from '@compai/css-gui'
 import { defaultTheme } from '../../data/default-theme'
 
 const initialStyles = {
-  color: 'text',
-  backgroundColor: 'background',
+  color: { type: 'theme', path: 'text' },
+  backgroundColor: { type: 'theme', path: 'background' },
   fontFamily: 'Recursive',
   fontSize: {
     value: 3,
     unit: 'rem',
   },
-  letterSpacing: {
-    value: 'initial',
-    unit: 'keyword',
-  },
+  letterSpacing: 'initial',
   lineHeight: {
-    value: '1.5',
+    value: 1.5,
     unit: 'number',
   },
-  textDecorationColor: 'primary',
+  textDecorationColor: { type: 'theme', path: 'primary' },
   textDecorationThickness: {
     value: 0,
     unit: 'px',
   },
   textDecorationLine: 'none',
-  textDecorationStyle: 'none',
+  textDecorationStyle: 'solid',
   width: {
     value: 100,
     unit: '%',

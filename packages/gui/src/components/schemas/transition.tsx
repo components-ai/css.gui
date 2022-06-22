@@ -2,9 +2,13 @@ import { ANIMATABLE_PROPERTIES } from '../../data/animatable'
 import { easingFunction } from './easing-function'
 import { listSchema } from './list'
 import { objectSchema } from './object'
-import { keyword, time } from './primitives'
+import { keyword } from './primitives'
+import { time } from './time'
 
-const singleProperty = keyword(ANIMATABLE_PROPERTIES, { defaultValue: 'all', themeProperty: 'transitions' })
+const singleProperty = keyword(ANIMATABLE_PROPERTIES, {
+  defaultValue: 'all',
+  themeProperty: 'transitions',
+})
 const singleDuration = time({
   defaultValue: { value: 350, unit: 'ms' },
 })
@@ -13,19 +17,15 @@ const singleTimingFunction = easingFunction
 
 export const transitionProperty = listSchema({
   itemSchema: singleProperty,
-  variant: 'list',
 })
 export const transitionDuration = listSchema({
   itemSchema: singleDuration,
-  variant: 'list',
 })
 export const transitionDelay = listSchema({
   itemSchema: singleDelay,
-  variant: 'list',
 })
 export const transitionTimingFunction = listSchema({
   itemSchema: singleTimingFunction,
-  variant: 'list',
 })
 
 const singleTransition = objectSchema({

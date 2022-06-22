@@ -18,9 +18,9 @@ interface Props {
 
 // The "normal" color picker that lets you set a color value directly
 export default function ColorPicker(props: Props) {
-  const { value, onChange, theme = {} } = props
-  
-  const normedValue = isValidColor(value.value) ? value.value : '#000000'
+  const { value, onChange } = props
+
+  const normedValue = isValidColor(value) ? value : '#000000'
   const mode = getColorMode(normedValue)
 
   return (
@@ -57,22 +57,15 @@ export default function ColorPicker(props: Props) {
           ))}
         </select>
       </div>
-      <ChannelFields mode={mode} value={{ ...value, value: normedValue}} onChange={onChange} />
+      <ChannelFields mode={mode} value={normedValue} onChange={onChange} />
       {mode === 'p3' ? (
-        <P3HsvColorPicker value={{ ...value, value: normedValue}} onChange={onChange} mode={mode} />
+        <P3HsvColorPicker value={normedValue} onChange={onChange} mode={mode} />
       ) : mode === 'lab' ? (
-        <LabColorPicker value={{ ...value, value: normedValue}} onChange={onChange} mode={mode} />
+        <LabColorPicker value={normedValue} onChange={onChange} mode={mode} />
       ) : mode === 'lch' ? (
-        <LchColorPicker value={{ ...value, value: normedValue}} onChange={onChange} mode={mode} />
+        <LchColorPicker value={normedValue} onChange={onChange} mode={mode} />
       ) : (
-        <HsvColorPicker value={{ ...value, value: normedValue}} onChange={onChange} mode={mode} />
-      )}
-      {theme && (
-        <PreviewPalettePicker
-          value={{ ...value, value: normedValue}}
-          onChange={onChange}
-          theme={theme}
-        />
+        <HsvColorPicker value={normedValue} onChange={onChange} mode={mode} />
       )}
     </div>
   )

@@ -1,4 +1,4 @@
-import { Editor, Inputs, styled } from '@compai/css-gui'
+import { Editor, Inputs, styled, toCSSObject } from '@compai/css-gui'
 import { useState } from 'react'
 import { Container } from '../../components/Container'
 
@@ -6,8 +6,8 @@ export default function Filters() {
   const [styles, setStyles] = useState<any>({
     filter: [
       {
-        type: 'blur',
-        radius: { value: 8, unit: 'px' },
+        name: 'blur',
+        arguments: { value: 8, unit: 'px' },
       },
     ],
   })
@@ -25,28 +25,23 @@ export default function Filters() {
             justifyContent: 'center',
           }}
         >
-          <styled.div
-            styles={{
+          <div
+            sx={{
               width: '100%',
               aspectRatio: '4 / 3',
-              backgroundImage: [
-                {
-                  type: 'url',
-                  value: 'https://source.unsplash.com/random',
-                },
-              ],
+              backgroundImage: 'url("https://source.unsplash.com/random")',
               backgroundSize: 'cover',
-              backgroundPosition: 'center center',
+              backgroundPosition: 'center',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               fontSize: 4,
               color: 'black',
-              ...styles,
+              ...toCSSObject(styles),
             }}
           >
             Fun with filters
-          </styled.div>
+          </div>
         </div>
       </Container>
     </div>

@@ -1,4 +1,4 @@
-import { Editor, styled } from '@compai/css-gui'
+import { Editor, styled, toCSSObject } from '@compai/css-gui'
 import { useState } from 'react'
 import { Container } from '../../components/Container'
 
@@ -45,8 +45,8 @@ export default function Shadows() {
           justifyContent: 'center',
         }}
       >
-        <styled.div
-          styles={{
+        <div
+          sx={{
             width: '32rem',
             height: '20rem',
             maxWidth: '100%',
@@ -54,13 +54,13 @@ export default function Shadows() {
             alignItems: 'center',
             justifyContent: 'center',
             fontSize: '128px',
-            ...styles,
+            ...toCSSObject(styles),
           }}
         >
           Fun with shadows
-        </styled.div>
+        </div>
       </div>
-      <div sx={{ display: 'flex', justifyContent: 'center',}}>
+      <div sx={{ display: 'flex', justifyContent: 'center' }}>
         <Editor styles={styles} onChange={setStyles} />
       </div>
     </div>

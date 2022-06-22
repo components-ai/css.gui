@@ -11,7 +11,7 @@ interface Props {
 }
 /** Displays a swatch of the color and its current value */
 export default function ColorValueDisplay({ value, onChange }: Props) {
-  const colorMode = getColorMode(value.value)
+  const colorMode = getColorMode(value)
   return (
     <div
       sx={{
@@ -35,7 +35,9 @@ export default function ColorValueDisplay({ value, onChange }: Props) {
           sx={{
             position: 'absolute',
             inset: 0,
-            ...withFallback(value.value, (color) => ({ backgroundColor: color })),
+            ...withFallback(value, (color) => ({
+              backgroundColor: color,
+            })),
           }}
         />
       </div>
@@ -44,8 +46,8 @@ export default function ColorValueDisplay({ value, onChange }: Props) {
       )}
       <input
         type="text"
-        value={value.value}
-        onChange={(e) => onChange({ value: e.target.value })}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
         sx={{
           py: 1,
           width: '100%',

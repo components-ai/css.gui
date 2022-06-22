@@ -1,13 +1,11 @@
-import { omit } from 'lodash-es'
-import { SelectInput } from '../inputs/SelectInput'
-import { InputHeader } from '../ui/InputHeader'
 import { DataTypeSchema, RegenOptions } from './types'
+import * as Select from '../ui/Select'
 
 interface CreateOptions<T extends Record<string, any>> {
   variants: { [V in keyof T]: DataTypeSchema<T[V]> }
+  type?: string
   order?: (keyof T)[]
-  stringify?(variant: keyof T, value: string): string
-  convert?(oldValue: Unionize<T>[any], newType: keyof T): Partial<T[any]>
+  convert?(oldValue: Unionize<T>[any], newType: keyof T): T | undefined
 }
 
 /**
@@ -16,60 +14,100 @@ interface CreateOptions<T extends Record<string, any>> {
  */
 export function optionsSchema<T extends Record<string, any>>({
   variants,
+  type = 'options',
   order = Object.keys(variants),
-  stringify = (variant, value) => value,
-  convert = () => ({}),
+  convert,
 }: CreateOptions<T>): DataTypeSchema<Unionize<T>> {
+  function getType(value: T): keyof T {
+    for (const [type, schema] of Object.entries(variants)) {
+      if (!schema.validate) {
+        console.log('invalid schema:', schema)
+      }
+      if (schema.validate(value)) return type
+    }
+
+    throw new Error(
+      `Provided value ${JSON.stringify(
+        value
+      )} is not one of the options [${Object.keys(variants).join(', ')}].`
+    )
+  }
   function regenerate({
     previousValue,
   }: RegenOptions<Unionize<T>>): Unionize<T> {
-    const type = previousValue.type
+    const type = getType(previousValue)
     const newValue = variants[type].regenerate?.({
-      previousValue: omit(previousValue, 'type'),
-    } as any)
-    return ({
-      ...newValue,
-      type,
-    } ?? previousValue) as any
+      previousValue: previousValue,
+    })
+    return newValue ?? previousValue
   }
 
   return {
-    input(props) {
-      const type = props.value.type as keyof T
-      const Component = variants[type].input
+    type,
+    variants: variants as any,
+    inlineInput(props) {
+      const type = getType(props.value)
+      const InlineInput = variants[type].inlineInput
+      // Render the select
       return (
-        <div>
-          <InputHeader {...props} regenerate={regenerate}>
-            <SelectInput
-              label=""
-              options={order as string[]}
-              value={props.value.type}
-              onChange={(newType) => {
-                // if the type changes, reset the value to the default value of that type
-                props.onChange({
-                  ...variants[newType].defaultValue,
-                  ...convert(props.value, newType),
-                  type: newType,
-                })
-              }}
-            />
-          </InputHeader>
-          <Component value={props.value} onChange={props.onChange} label={''} />
+        <div sx={{ display: 'flex' }}>
+          {InlineInput ? (
+            <InlineInput {...props} />
+          ) : (
+            <span sx={{ fontSize: 1 }}>
+              {variants[type].stringify(props.value)}
+            </span>
+          )}
+          <Select.Root
+            value={type.toString()}
+            onValueChange={(newType) => {
+              props.onChange(
+                convert?.(props.value, newType) ??
+                  (variants[newType].defaultValue as any)
+              )
+            }}
+          >
+            <Select.Trigger>
+              <Select.Value>{''}</Select.Value>
+              <Select.Icon />
+            </Select.Trigger>
+            <Select.Content>
+              {order.map((typeOption: any) => {
+                return (
+                  <Select.Item key={typeOption} value={typeOption}>
+                    <Select.ItemText>{typeOption}</Select.ItemText>
+                    <Select.ItemIndicator />
+                  </Select.Item>
+                )
+              })}
+            </Select.Content>
+          </Select.Root>
         </div>
       )
     },
+    input(props) {
+      const type = getType(props.value)
+      const Component = variants[type].input
+      return Component ? <Component {...props} /> : null
+    },
+    hasBlockInput(value) {
+      const type = getType(value)
+      return !!variants[type].input
+    },
     stringify(value) {
-      const type = value.type as keyof T
-      return stringify(type, variants[type].stringify(value))
+      const type = getType(value)
+      return variants[type].stringify(value)
     },
-    defaultValue: {
-      ...variants[order[0]].defaultValue,
-      type: order[0],
-    },
+    defaultValue: variants[order[0]].defaultValue,
     regenerate,
+    validate: ((value: any) => {
+      return Object.values(variants).some((variantSchema) =>
+        variantSchema.validate(value)
+      )
+    }) as any,
   }
 }
 
 // Utility types to help typecheck these options correctly,
 // based on: https://stackoverflow.com/questions/62591230/typescript-convert-a-tagged-union-into-an-union-type
-type Unionize<T> = { [K in keyof T]: { type: K } & T[K] }[keyof T]
+type Unionize<T> = { [K in keyof T]: T[K] }[keyof T]

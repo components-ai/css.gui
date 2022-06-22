@@ -1,47 +1,43 @@
 import { functionSchema } from './function'
+import { joinSchemas } from './joinSchemas'
 import { listSchema } from './list'
 import { objectSchema } from './object'
-import { optionsSchema } from './options'
 import { integer, keyword, lengthPercentage } from './primitives'
 
-const inflexibleBreadth = lengthPercentage({
-  range: 'nonnegative',
-  keywords: ['min-content', 'max-content', 'auto'],
-})
-const trackBreadth = lengthPercentage({
-  flex: true,
-  range: 'nonnegative',
-  keywords: ['min-content', 'max-content', 'auto'],
-})
+const inflexibleBreadth = joinSchemas([
+  keyword(['min-content', 'max-content', 'auto']),
+  lengthPercentage({ range: 'nonnegative' }),
+])
+const trackBreadth = joinSchemas([
+  keyword(['min-content', 'max-content', 'auto']),
+  lengthPercentage({ range: 'nonnegative', flex: true }),
+])
 
-const trackSizeVariants = {
-  breadth: objectSchema({
-    fields: { value: trackBreadth },
-  }),
-  minmax: functionSchema('minmax', {
-    fields: { min: inflexibleBreadth, max: trackBreadth },
-  }),
-  'fit-content': functionSchema('fit-content', {
-    fields: { value: lengthPercentage() },
-  }),
-}
+const trackSize = joinSchemas([
+  trackBreadth,
+  functionSchema(
+    'minmax',
+    objectSchema({
+      fields: { min: inflexibleBreadth, max: trackBreadth },
+      separator: ', ',
+    })
+  ),
+  functionSchema('fit-content', lengthPercentage()),
+])
 
-const trackSize = optionsSchema({
-  variants: trackSizeVariants,
-})
-
-const trackList = optionsSchema({
-  variants: {
-    ...trackSizeVariants,
-    repeat: functionSchema('repeat', {
+const trackList = joinSchemas([
+  trackSize,
+  functionSchema(
+    'repeat',
+    objectSchema({
       fields: {
-        count: integer({ defaultValue: { value: 1, unit: 'number' } }),
+        count: integer({ defaultValue: 1 }),
         trackList: listSchema({ itemSchema: trackSize, separator: ' ' }),
       },
       separator: ', ',
-    }),
-  },
-})
+    })
+  ),
+])
 
 export const gridAutoRow = listSchema({ itemSchema: trackSize, separator: ' ' })
 export const gridAutoColumns = listSchema({

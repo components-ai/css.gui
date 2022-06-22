@@ -43,8 +43,8 @@ export default function ColorPopover({
         }}
       >
         {/* swatch */}
-        <Popover.Anchor>{swatch || <Swatch value={value?.value} />}</Popover.Anchor>
-        {value?.value}
+        <Popover.Anchor>{swatch || <Swatch value={value} />}</Popover.Anchor>
+        {value}
       </Popover.Trigger>
       <Popover.Content
         sx={{

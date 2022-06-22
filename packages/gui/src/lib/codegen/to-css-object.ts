@@ -1,44 +1,28 @@
-import {
-  Styles,
-  Length,
-  CSSUnitValue,
-  CSSFunctionCalc,
-  UnitlessUnits,
-} from '../../types/css'
-import {
-  stringifySelector,
-  stringifyUnit,
-  stringifyCalcFunction,
-} from '../stringify'
-import { has } from 'lodash-es'
+import { Styles, Length } from '../../types/css'
+import { stringifySelector } from '../stringify'
 import { isNestedSelector } from '../util'
 import { properties } from '../../data/properties'
-import { isResponsive } from '../../components/Responsive/Input'
 import { Theme } from '../../types/theme'
 
 export const stringifyProperty = (
   property: string = '', // In the future the property might determine how we stringify
   value?: unknown,
-  theme?: Theme,
-): Array<string | null> | string | number | null => {
+  theme?: Theme
+): string | undefined => {
   const stringify = properties[property]?.stringify
-  if (isResponsive(value as any)) {
-    return (value as any).values.map((v: any) => stringify(v, theme))
-  }
   if (stringify) {
-    return stringify(value, theme)
+    try {
+      return stringify(value, theme)
+    } catch (e) {
+      throw new Error(`Error stringifying ${property}\n${e}`)
+    }
   }
 
-  if (isCSSFunctionCalc(value)) {
-    // @ts-ignore
-    return stringifyCalcFunction(value)
-  }
-
-  // font-family?
-  if (!isCSSUnitValue(value)) {
-    return String(value) ?? null
-  }
-  return stringifyUnit(value, theme)
+  // // font-family?
+  // if (!isCSSUnitValue(value)) {
+  //   return String(value) ?? null
+  // }
+  // return stringifyUnit(value, theme)
 }
 
 type StyleEntry = [string, Length | string | null | undefined]
@@ -57,20 +41,4 @@ export const toCSSObject = (styles: Styles, theme?: Theme): any => {
       [property]: stringifyProperty(property, value, theme),
     }
   }, {})
-}
-
-export function isCSSUnitValue(value: unknown): value is CSSUnitValue {
-  if (typeof value !== 'object') {
-    return false
-  }
-
-  if (!has(value, 'value') || !has(value, 'unit')) {
-    return false
-  }
-
-  return true
-}
-
-export function isCSSFunctionCalc(value: unknown): value is CSSFunctionCalc {
-  return (value as CSSFunctionCalc)?.type === UnitlessUnits.Calc
 }

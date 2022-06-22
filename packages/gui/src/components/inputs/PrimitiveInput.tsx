@@ -1,6 +1,7 @@
 import { CSSUnitValue } from '../../types/css'
 import { EditorPropsWithLabel } from '../../types/editor'
 import { DimensionInput } from './Dimension'
+import { NumberInput } from './NumberInput'
 
 export const IntegerInput = ({
   value,
@@ -8,15 +9,13 @@ export const IntegerInput = ({
   onRemove,
   label,
   ...props
-}: EditorPropsWithLabel<CSSUnitValue>) => {
+}: EditorPropsWithLabel<number>) => {
   return (
-    <DimensionInput
+    <NumberInput
       value={value}
       label={label}
       onChange={onChange}
       onRemove={onRemove}
-      units={['number']}
-      steps={{ number: 1 }}
       {...props}
     />
   )

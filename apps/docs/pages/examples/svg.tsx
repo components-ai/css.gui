@@ -6,26 +6,14 @@ import { Container } from '../../components/Container'
 const initialStyles = {
   stroke: '#fff',
   fill: 'none',
-  strokeAlignment: {
-    value: 'center',
-    unit: 'keyword',
-  },
+  strokeAlignment: 'center',
   strokeWidth: {
     value: 8,
     unit: 'px',
   },
-  strokeLinejoin: {
-    value: 'round',
-    unit: 'keyword',
-  },
-  strokeLinecap: {
-    value: 'square',
-    unit: 'keyword',
-  },
-  strokeDashadjust: {
-    value: 'dashed',
-    unit: 'keyword',
-  },
+  strokeLinejoin: 'round',
+  strokeLinecap: 'square',
+  strokeDashadjust: 'dashed',
   strokeDashcorner: {
     value: 0,
     unit: 'px',

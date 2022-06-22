@@ -1,15 +1,18 @@
 import { boxSideSchema } from './box-side'
+import { color } from './color'
+import { joinSchemas } from './joinSchemas'
 import { objectSchema } from './object'
-import { color, keyword, length } from './primitives'
+import { keyword, length } from './primitives'
+import { theme } from './theme'
 import { tupleSchema } from './tuple'
 
 /* Border width */
 
-const borderWidthItem = length({
-  range: 'nonnegative',
-  keywords: ['thin', 'medium', 'thick'],
-  themeProperty: 'borderWidths',
-})
+const borderWidthItem = joinSchemas([
+  keyword(['thin', 'medium', 'thick']),
+  length({ range: 'nonnegative' }),
+  theme('borderWidths'),
+])
 
 export const borderTopWidth = borderWidthItem
 export const borderRightWidth = borderWidthItem
@@ -45,7 +48,7 @@ const borderStyleItem = keyword([
   'ridge',
   'inset',
   'outset',
-], { themeProperty: 'borderStyles' })
+])
 export const borderTopStyle = borderStyleItem
 export const borderRightStyle = borderStyleItem
 export const borderBottomStyle = borderStyleItem

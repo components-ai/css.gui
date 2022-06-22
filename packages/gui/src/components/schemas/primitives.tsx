@@ -1,149 +1,76 @@
-import { randomColor } from '../../lib/color'
+import { compact } from 'lodash-es'
 import { bindProps } from '../../lib/components'
 import { choose, randomStep } from '../../lib/random'
 import { stringifyUnit } from '../../lib/stringify'
 import { randomInt } from '../../lib/util'
 import {
-  Angle,
-  Color,
   CSSUnitValue,
   Length,
+  LENGTH_UNITS,
   NumberPercentage,
-  Time,
 } from '../../types/css'
-import { Theme } from '../../types/theme'
-import { AngleInput, angleSteps } from '../inputs/AngleInput'
-import { ColorInput } from '../inputs/ColorInput'
 import { Range } from '../inputs/Dimension/Input'
 import { KeywordInput } from '../inputs/KeywordInput'
-import { LengthInput, lengthSteps } from '../inputs/LengthInput'
 import { NumberInput } from '../inputs/NumberInput'
-import { NumberPercentageInput } from '../inputs/NumberPercentageInput'
-import { IntegerInput, PercentageInput } from '../inputs/PrimitiveInput'
+import { IntegerInput } from '../inputs/PrimitiveInput'
 import { TextInput } from '../inputs/TextInput'
-import { TimeInput, timeSteps } from '../inputs/TimeInput'
-import { DataTypeSchema, RegenOptions } from './types'
-
-export function color({
-  defaultValue = { value: 'transparent'},
-  themeProperty = 'color',
-}: {
-  defaultValue?: Color
-  themeProperty?: string
-} = {}): DataTypeSchema<Color> {
-  return {
-    input: bindProps(ColorInput, { themeProperty }),
-    stringify: stringifyUnit as any,
-    defaultValue,
-    regenerate: () => randomColor(),
-  }
-}
-
-const angleRanges = {
-  deg: [0, 360],
-  turn: [0, 1],
-  rad: [0, 2 * Math.PI],
-  grad: [0, 400],
-}
-
-export function angle({
-  defaultValue = { value: 0, unit: 'deg' },
-  keywords = [],
-}: {
-  defaultValue?: Angle
-  keywords?: readonly string[]
-} = {}) {
-  function regenerate({ previousValue }: RegenOptions<Angle>) {
-    const unit = previousValue.unit
-    const [min, max] = angleRanges[unit]
-    return {
-      unit,
-      value: randomStep(min, max, angleSteps[unit]),
-    }
-  }
-  return {
-    input: bindProps(AngleInput, { regenerate }),
-    stringify: stringifyUnit as any,
-    defaultValue,
-    keywords,
-    regenerate,
-  }
-}
-
-const timeRanges = {
-  s: [0, 2],
-  ms: [0, 2000],
-}
-
-export function time({
-  defaultValue = { value: 0, unit: 's' },
-  themeProperty,
-}: {
-  defaultValue?: Time,
-  themeProperty?: Theme
-} = {}) {
-  function regenerate({ previousValue }: RegenOptions<Time>) {
-    const unit = previousValue.unit
-    const [min, max] = timeRanges[unit]
-    return {
-      unit,
-      value: randomStep(min, max, timeSteps[unit]),
-    }
-  }
-  return {
-    input: bindProps(TimeInput, { regenerate, themeProperty }),
-    stringify: stringifyUnit as any,
-    defaultValue,
-    regenerate,
-  }
-}
+import { dimension } from './dimension'
+import { DataTypeSchema } from './types'
 
 export function percentage({
-  defaultValue = { value: 0, unit: '%' },
-}: {
-  defaultValue?: CSSUnitValue
-} = {}) {
-  function regenerate({ previousValue }: RegenOptions<CSSUnitValue>) {
-    const unit = previousValue.unit
-    return {
-      unit,
-      value: randomStep(0, 100, 0.1),
-    }
-  }
-  return {
-    input: bindProps(PercentageInput, { regenerate }),
-    stringify: stringifyUnit as any,
+  defaultValue,
+}: { defaultValue?: CSSUnitValue } = {}) {
+  return dimension({
+    type: '%',
     defaultValue,
-    regenerate,
-  }
+    steps: { '%': 0.1 },
+    regenRanges: { '%': [0, 100] },
+    units: ['%'],
+  })
 }
 
 export function number({
   defaultValue = 0,
-}: {
-  defaultValue?: number
-} = {}) {
+}: { defaultValue?: number } = {}): DataTypeSchema<number> {
   function regenerate() {
     return randomStep(0, 2, 0.1)
   }
   return {
-    input: bindProps(NumberInput, regenerate),
+    type: 'number',
+    inlineInput: bindProps(NumberInput, regenerate),
     stringify: (x: number) => x.toString(),
     defaultValue,
     regenerate,
+    validate: ((value: any) => typeof value === 'number') as any,
   }
 }
 
 export function numberPercentage({
-  defaultValue = { value: 0, unit: '%' },
-}: {
-  defaultValue?: NumberPercentage
-} = {}) {
-  return {
-    input: NumberPercentageInput,
-    stringify: stringifyUnit as any,
+  defaultValue,
+}: { defaultValue?: NumberPercentage } = {}) {
+  return dimension({
+    type: 'number/%',
     defaultValue,
-  }
+    steps: { '%': 0.1, number: 0.001 },
+    regenRanges: { '%': [0, 100], number: [0, 1] },
+    units: ['%', 'number'],
+  })
+}
+
+const lengthConversions = {
+  px: 16,
+  rem: 1,
+  em: 1,
+}
+
+export const lengthSteps = {
+  number: 0.1,
+  theme: 1,
+  px: 1,
+  em: 0.125,
+  rem: 0.125,
+  '%': 0.1,
+  fr: 0.1,
 }
 
 const lengthRanges = {
@@ -154,38 +81,40 @@ const lengthRanges = {
   number: [0, 2],
   fr: [0, 5],
   // TODO remaining ranges
-}
+} as const
 
 interface LengthProps {
   defaultValue?: Length
-  keywords?: string[]
+  // keywords?: string[]
   number?: boolean
   percentage?: boolean
   flex?: boolean
-  themeValues?: (CSSUnitValue & { id: string })[]
+  // themeValues?: (CSSUnitValue & { id: string })[]
   themeProperty?: string
   range?: Range
 }
 export function length({
-  defaultValue = { value: 0, unit: 'px' },
+  defaultValue,
+  percentage,
+  number,
+  flex,
   ...props
 }: LengthProps = {}) {
-  function regenerate({ previousValue }: RegenOptions<Length>) {
-    const unit = previousValue === '0' ? 'px' : previousValue.unit
-    // @ts-ignore
-    const [min, max] = lengthRanges[unit]
-    return {
-      unit,
-      // @ts-ignore
-      value: randomStep(min, max, lengthSteps[unit]),
-    }
-  }
-  return {
-    input: bindProps(LengthInput, { ...props, regenerate }),
-    stringify: stringifyUnit as any,
+  const units = compact([
+    ...LENGTH_UNITS,
+    percentage && '%',
+    number && 'number',
+    flex && 'fr',
+  ]) as any[]
+  return dimension({
+    type: 'length',
     defaultValue,
-    regenerate,
-  }
+    steps: lengthSteps,
+    regenRanges: lengthRanges,
+    conversions: lengthConversions,
+    units,
+    ...props,
+  })
 }
 
 export function lengthPercentage(props: Omit<LengthProps, 'percentage'> = {}) {
@@ -193,20 +122,19 @@ export function lengthPercentage(props: Omit<LengthProps, 'percentage'> = {}) {
 }
 
 export function integer({
-  defaultValue = { value: 0, unit: 'number' },
-  keywords,
+  defaultValue = 0,
 }: {
-  defaultValue?: CSSUnitValue
-  keywords?: string[]
-} = {}) {
+  defaultValue?: number
+} = {}): DataTypeSchema<number> {
   function regenerate() {
     return randomInt(0, 11)
   }
   return {
-    input: bindProps(IntegerInput, { regenerate }),
-    stringify: stringifyUnit as any,
+    type: 'integer',
+    inlineInput: bindProps(IntegerInput, { regenerate }),
+    stringify: (value) => value.toString(),
     defaultValue,
-    keywords,
+    validate: ((value: any) => typeof value === 'number') as any,
   }
 }
 
@@ -216,12 +144,14 @@ export function ident({
   defaultValue?: string
 } = {}): DataTypeSchema<string> {
   return {
+    type: 'identifier',
     // Right now, just use a text input.
     // In the future we may want to do smart-identification of identifiers
     // the user has used in other places
-    input: TextInput,
+    inlineInput: TextInput,
     stringify: (value) => value,
     defaultValue,
+    validate: ((value: any) => typeof value === 'string') as any,
   }
 }
 
@@ -231,9 +161,11 @@ export function string({
   defaultValue?: string
 } = {}): DataTypeSchema<string> {
   return {
-    input: TextInput,
+    type: 'string',
+    inlineInput: TextInput,
     stringify: (value) => `"${value}"`,
     defaultValue,
+    validate: ((value: any) => typeof value === 'string') as any,
   }
 }
 
@@ -242,18 +174,40 @@ export function keyword<T extends string>(
   {
     defaultValue = options[0],
     themeProperty,
+    type = 'keyword',
   }: {
     defaultValue?: T
     themeProperty?: string
+    type?: string
   } = {}
 ): DataTypeSchema<T> {
+  if (options.length === 1) {
+    return literal(options[0])
+  }
   function regenerate() {
     return choose(options)
   }
   return {
-    input: bindProps(KeywordInput, { options, regenerate, themeProperty }),
+    type,
+    inlineInput: bindProps(KeywordInput, {
+      options,
+      regenerate,
+      themeProperty,
+    }),
     stringify: (value) => value,
     defaultValue,
     regenerate: regenerate,
+    validate: ((value: any) => options.includes(value)) as any,
+  }
+}
+
+function literal<T extends string>(value: T): DataTypeSchema<T> {
+  return {
+    type: value,
+    inlineInput: () => <div sx={{ fontSize: 1 }}>{value}</div>,
+    stringify: (value) => value,
+    defaultValue: value,
+    regenerate: () => value,
+    validate: ((testValue: any) => testValue === value) as any,
   }
 }

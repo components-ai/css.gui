@@ -1,54 +1,49 @@
 import { listSchema } from './list'
 import { functionSchema } from './function'
-import { optionsSchema } from './options'
-import { angle, color, length, numberPercentage } from './primitives'
+import { keyword, length, numberPercentage } from './primitives'
+import { objectSchema } from './object'
+import { joinSchemas } from './joinSchemas'
+import { angle } from './angle'
+import { color } from './color'
 
-const blur = functionSchema('blur', {
-  fields: {
-    radius: length(),
-  },
-})
+const blur = functionSchema('blur', length())
 
-const dropShadow = functionSchema('drop-shadow', {
-  fields: {
-    color: color(),
-    offsetX: length(),
-    offsetY: length(),
-    blurRadius: length(),
-  },
-  separator: ' ',
-})
-
-const hueRotate = functionSchema('hue-rotate', {
-  fields: {
-    angle: angle(),
-  },
-})
-
-const amountFilter = (name: string) =>
-  functionSchema(name, {
+const dropShadow = functionSchema(
+  'drop-shadow',
+  objectSchema({
     fields: {
-      amount: numberPercentage(),
+      color: color(),
+      offsetX: length(),
+      offsetY: length(),
+      blurRadius: length(),
     },
   })
+)
 
-const singleFilter = optionsSchema({
-  variants: {
+const hueRotate = functionSchema('hue-rotate', angle())
+
+const amountFilter = (name: string) => functionSchema(name, numberPercentage())
+
+const singleFilter = joinSchemas(
+  [
     blur,
-    'drop-shadow': dropShadow,
-    'hue-rotate': hueRotate,
-    brightness: amountFilter('brightness'),
-    contrast: amountFilter('contrast'),
-    grayscale: amountFilter('grayscale'),
-    invert: amountFilter('invert'),
-    opacity: amountFilter('opacity'),
-    saturate: amountFilter('saturate'),
-    sepia: amountFilter('sepia'),
-  },
-})
+    dropShadow,
+    hueRotate,
+    amountFilter('brightness'),
+    amountFilter('contrast'),
+    amountFilter('grayscale'),
+    amountFilter('invert'),
+    amountFilter('opacity'),
+    amountFilter('saturate'),
+    amountFilter('sepia'),
+  ],
+  { type: '<filter>' }
+)
 
-export const filter = listSchema({
-  itemSchema: singleFilter,
-  separator: ' ',
-  keywords: ['none'],
-})
+export const filter = joinSchemas([
+  listSchema({
+    itemSchema: singleFilter,
+    separator: ' ',
+  }),
+  keyword(['none']),
+])

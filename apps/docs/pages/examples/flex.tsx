@@ -1,8 +1,6 @@
 import { useState } from 'react'
-import Link from 'next/link'
 import { Editor, Inputs, styled, codegen } from '@compai/css-gui'
 import { defaultTheme } from '../../data/default-theme'
-import { Container } from '../../components/Container'
 
 const initialStyles = {
   display: 'flex',
@@ -35,7 +33,7 @@ export default function TextDecoration() {
       <div
         sx={{
           py: 5,
-          px: 4, 
+          px: 4,
           display: 'flex',
         }}
       >
@@ -72,19 +70,90 @@ export default function TextDecoration() {
         </div>
         <div sx={{ flexGrow: 1, padding: 5 }}>
           <styled.div styles={styles}>
-
-            <div sx={{outline: '1px solid' }}><img sx={{ display: 'block', maxWidth: '128px', }} src='https://source.unsplash.com/random' />One</div>
-            <div sx={{outline: '1px solid' }}><img sx={{ display: 'block', maxWidth: '128px', }} src='https://source.unsplash.com/random' />Two</div>
-            <div sx={{outline: '1px solid' }}><img sx={{ display: 'block', maxWidth: '128px', }} src='https://source.unsplash.com/random' />Three</div>
-            <div sx={{outline: '1px solid' }}><img sx={{ display: 'block', maxWidth: '128px', }} src='https://source.unsplash.com/random' />Four</div>
-            <div sx={{outline: '1px solid' }}><img sx={{ display: 'block', maxWidth: '128px', }} src='https://source.unsplash.com/random' />Five</div>
-            <div sx={{outline: '1px solid' }}><img sx={{ display: 'block', maxWidth: '128px', }} src='https://source.unsplash.com/random' />Six</div>
-            <div sx={{outline: '1px solid' }}><img sx={{ display: 'block', maxWidth: '128px', }} src='https://source.unsplash.com/random' />Seven</div>
-            <div sx={{outline: '1px solid' }}><img sx={{ display: 'block', maxWidth: '128px', }} src='https://source.unsplash.com/random' />Eight</div>
-            <div sx={{outline: '1px solid' }}><img sx={{ display: 'block', maxWidth: '128px', }} src='https://source.unsplash.com/random' />Nine</div>
-            <div sx={{outline: '1px solid' }}><img sx={{ display: 'block', maxWidth: '128px', }} src='https://source.unsplash.com/random' />Ten</div>
-            <div sx={{outline: '1px solid' }}><img sx={{ display: 'block', maxWidth: '128px', }} src='https://source.unsplash.com/random' />Eleven</div>
-            <div sx={{outline: '1px solid' }}><img sx={{ display: 'block', maxWidth: '128px', }} src='https://source.unsplash.com/random' />Twelve</div>
+            <div sx={{ outline: '1px solid' }}>
+              <img
+                sx={{ display: 'block', maxWidth: '128px' }}
+                src="https://source.unsplash.com/random"
+              />
+              One
+            </div>
+            <div sx={{ outline: '1px solid' }}>
+              <img
+                sx={{ display: 'block', maxWidth: '128px' }}
+                src="https://source.unsplash.com/random"
+              />
+              Two
+            </div>
+            <div sx={{ outline: '1px solid' }}>
+              <img
+                sx={{ display: 'block', maxWidth: '128px' }}
+                src="https://source.unsplash.com/random"
+              />
+              Three
+            </div>
+            <div sx={{ outline: '1px solid' }}>
+              <img
+                sx={{ display: 'block', maxWidth: '128px' }}
+                src="https://source.unsplash.com/random"
+              />
+              Four
+            </div>
+            <div sx={{ outline: '1px solid' }}>
+              <img
+                sx={{ display: 'block', maxWidth: '128px' }}
+                src="https://source.unsplash.com/random"
+              />
+              Five
+            </div>
+            <div sx={{ outline: '1px solid' }}>
+              <img
+                sx={{ display: 'block', maxWidth: '128px' }}
+                src="https://source.unsplash.com/random"
+              />
+              Six
+            </div>
+            <div sx={{ outline: '1px solid' }}>
+              <img
+                sx={{ display: 'block', maxWidth: '128px' }}
+                src="https://source.unsplash.com/random"
+              />
+              Seven
+            </div>
+            <div sx={{ outline: '1px solid' }}>
+              <img
+                sx={{ display: 'block', maxWidth: '128px' }}
+                src="https://source.unsplash.com/random"
+              />
+              Eight
+            </div>
+            <div sx={{ outline: '1px solid' }}>
+              <img
+                sx={{ display: 'block', maxWidth: '128px' }}
+                src="https://source.unsplash.com/random"
+              />
+              Nine
+            </div>
+            <div sx={{ outline: '1px solid' }}>
+              <img
+                sx={{ display: 'block', maxWidth: '128px' }}
+                src="https://source.unsplash.com/random"
+              />
+              Ten
+            </div>
+            <div sx={{ outline: '1px solid' }}>
+              <img
+                sx={{ display: 'block', maxWidth: '128px' }}
+                src="https://source.unsplash.com/random"
+              />
+              Eleven
+            </div>
+            <div sx={{ outline: '1px solid' }}>
+              <img
+                sx={{ display: 'block', maxWidth: '128px' }}
+                src="https://source.unsplash.com/random"
+              />
+              Twelve
+            </div>
           </styled.div>
         </div>
       </div>

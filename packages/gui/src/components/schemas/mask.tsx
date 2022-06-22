@@ -1,5 +1,6 @@
 import { GEOMETRY_BOX_KEYWORDS } from '../../types/css'
 import { image } from './image'
+import { joinSchemas } from './joinSchemas'
 import { listSchema } from './list'
 import { objectSchema } from './object'
 import { position } from './position'
@@ -10,19 +11,25 @@ const composite = keyword(['add', 'subtract', 'intersect', 'exclude'])
 const clip = keyword([...GEOMETRY_BOX_KEYWORDS, 'no-clip'])
 const mode = keyword(['alpha', 'luminance', 'match-source'])
 const origin = keyword(GEOMETRY_BOX_KEYWORDS)
-const repeat = tupleSchema({
-  itemSchema: keyword(['repeat', 'space', 'round', 'no-repeat']),
-  labels: ['x', 'y'],
-  keywords: ['repeat-x', 'repeat-y'],
-})
-const size = tupleSchema({
-  itemSchema: lengthPercentage({
-    keywords: ['auto'],
-    defaultValue: { value: 100, unit: '%' },
+const repeat = joinSchemas([
+  keyword(['repeat-x', 'repeat-y']),
+  tupleSchema({
+    itemSchema: keyword(['repeat', 'space', 'round', 'no-repeat']),
+    labels: ['x', 'y'],
   }),
-  labels: ['x', 'y'],
-  keywords: ['cover', 'contain'],
-})
+])
+const size = joinSchemas([
+  keyword(['cover', 'contain']),
+  tupleSchema({
+    itemSchema: joinSchemas([
+      keyword(['auto']),
+      lengthPercentage({
+        defaultValue: { value: 100, unit: '%' },
+      }),
+    ]),
+    labels: ['x', 'y'],
+  }),
+])
 
 export const maskComposite = listSchema({ itemSchema: composite })
 export const maskClip = listSchema({ itemSchema: clip })

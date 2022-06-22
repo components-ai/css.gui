@@ -1,27 +1,51 @@
-import { objectSchema } from './object'
+import { getInputProps } from '../../lib/util'
+import { SchemaInput } from '../inputs/SchemaInput'
 import { DataTypeSchema } from './types'
 
-interface CreateFunction<T extends object, K> {
-  fields: {
-    [Property in keyof T]: DataTypeSchema<T[Property]>
-  }
-  keyOrder?: (keyof T)[]
-  stringify?(values: Record<keyof T, string>): string
-  separator?: string
-  keywords?: K[]
-  defaultValue?: Partial<T>
+export interface FunctionData<N extends string, T> {
+  name: N
+  arguments: T
 }
 
 /**
  * Wrapper on an object schema representing a CSS function
  */
-export function functionSchema<T extends object, K extends string = never>(
-  name: string,
-  { separator = ', ', ...props }: CreateFunction<T, K>
-): DataTypeSchema<T | K> {
-  return objectSchema({
-    ...props,
-    separator,
-    wrapStringify: (value) => `${name}(${value})`,
-  })
+export function functionSchema<N extends string, T>(
+  name: N,
+  argsSchema: DataTypeSchema<T>
+): DataTypeSchema<FunctionData<N, T>> {
+  return {
+    // a function's display type is its name
+    type: name,
+    stringify(value: FunctionData<N, T>) {
+      return `${value.name}(${argsSchema.stringify(value.arguments)})`
+    },
+    defaultValue: {
+      name,
+      arguments: argsSchema.defaultValue,
+    },
+    regenerate({ previousValue }) {
+      return {
+        name,
+        arguments:
+          argsSchema.regenerate?.({ previousValue: previousValue.arguments }) ??
+          argsSchema.defaultValue,
+      }
+    },
+    validate: ((value: any) => {
+      if (typeof value !== 'object') return false
+      return value.name === name && argsSchema.validate(value.arguments)
+    }) as any,
+    input(props) {
+      return (
+        <div>
+          <SchemaInput
+            schema={argsSchema}
+            {...getInputProps(props, 'arguments')}
+            label=""
+          />
+        </div>
+      )
+    },
+  }
 }

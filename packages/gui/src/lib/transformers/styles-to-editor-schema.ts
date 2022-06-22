@@ -7,9 +7,9 @@ import {
 import { hasPseudoSyntax, removePseudoSyntax } from '../pseudos'
 
 const transformProperty = (property: string, value: any) => {
-  if (rawProperties[property]?.input === 'color' && typeof value === 'string') {
-    return { value }
-  }
+  // if (rawProperties[property]?.input === 'color' && typeof value === 'string') {
+  //   return { value }
+  // }
 
   return value
 }
@@ -21,7 +21,6 @@ export const stylesToEditorSchema = (styles: any) => {
     )
     return {}
   }
-
   const stylesSchema = Object.entries(styles).reduce((acc, curr) => {
     const [rawProperty, rawValue] = curr
 

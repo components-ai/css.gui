@@ -11,10 +11,8 @@ interface Props extends EditorPropsWithLabel<Color> {
 export function ColorInput(props: Props) {
   const theme = useTheme()
   return (
-    <InputHeader {...props}>
-      <div sx={{ display: 'flex', flexDirection: 'row' }}>
-        <ColorPopover {...props} theme={theme} />
-      </div>
-    </InputHeader>
+    <div sx={{ display: 'flex', flexDirection: 'row' }}>
+      <ColorPopover {...props} theme={theme} />
+    </div>
   )
 }

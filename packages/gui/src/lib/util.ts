@@ -21,7 +21,7 @@ export function getInputProps<T extends object, K extends keyof T>(
 ): EditorPropsWithLabel<T[typeof key]> {
   return {
     value: props.value && props.value[key],
-    label: sentenceCase('' + key),
+    label: sentenceCase('' + key.toString()),
     onChange: (newValue) => props.onChange({ ...props.value, [key]: newValue }),
   }
 }

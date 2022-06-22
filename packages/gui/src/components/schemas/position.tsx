@@ -1,17 +1,36 @@
+import { joinSchemas } from './joinSchemas'
 import { objectSchema } from './object'
-import { lengthPercentage } from './primitives'
+import { keyword, lengthPercentage } from './primitives'
+
+const positionX = joinSchemas([
+  keyword(['left', 'center', 'right']),
+  lengthPercentage({
+    defaultValue: { value: 50, unit: '%' },
+  }),
+  objectSchema({
+    type: 'offset',
+    fields: {
+      direction: keyword(['left', 'right']),
+      offset: lengthPercentage(),
+    },
+  }),
+])
+
+const positionY = joinSchemas([
+  keyword(['top', 'center', 'bottom']),
+  lengthPercentage({
+    defaultValue: { value: 50, unit: '%' },
+  }),
+  objectSchema({
+    type: 'offset',
+    fields: {
+      direction: keyword(['top', 'bottom']),
+      offset: lengthPercentage(),
+    },
+  }),
+])
 
 // TODO function so we can set default values
-// TODO offset values
 export const position = objectSchema({
-  fields: {
-    x: lengthPercentage({
-      defaultValue: { value: 50, unit: '%' },
-      keywords: ['left', 'center', 'right'],
-    }),
-    y: lengthPercentage({
-      defaultValue: { value: 50, unit: '%' },
-      keywords: ['top', 'center', 'bottom'],
-    }),
-  },
+  fields: { x: positionX, y: positionY },
 })

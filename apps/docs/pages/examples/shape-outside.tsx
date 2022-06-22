@@ -5,13 +5,11 @@ const initialStyles = {
   shapeOutside: {
     type: 'shape',
     shape: {
-      type: 'inset',
-      top: { value: 2, unit: 'px' },
-      right: { value: 2, unit: 'px' },
-      bottom: { value: 2, unit: 'px' },
-      left: { value: 2, unit: 'px' },
-      borderRadius: { value: 16, unit: 'px' },
-      offset: { top: { value: 0, unit: 'px' } },
+      name: 'inset',
+      arguments: {
+        offset: { top: { value: 2, unit: 'px' } },
+        borderRadius: { value: 16, unit: 'px' },
+      },
     },
     box: 'margin-box',
   },

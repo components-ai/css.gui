@@ -1,10 +1,13 @@
 import { boxSideSchema } from './box-side'
-import { lengthPercentage } from './primitives'
+import { joinSchemas } from './joinSchemas'
+import { keyword, lengthPercentage } from './primitives'
 
-const insetItem = lengthPercentage({
-  keywords: ['auto'],
-  themeProperty: 'space',
-})
+const insetItem = joinSchemas([
+  keyword(['auto']),
+  lengthPercentage({
+    themeProperty: 'space',
+  }),
+])
 
 export const top = insetItem
 export const bottom = insetItem

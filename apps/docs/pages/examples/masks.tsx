@@ -8,13 +8,13 @@ const initialStyles = {
     {
       clip: 'border-box',
       image: {
-        type: 'url',
-        value: 'https://source.unsplash.com/random',
+        name: 'url',
+        arguments: 'https://source.unsplash.com/random',
       },
       origin: 'border-box',
       position: {
-        x: { value: 0, type: '%' },
-        y: { value: 0, type: '%' },
+        x: { value: 0, unit: '%' },
+        y: { value: 0, unit: '%' },
       },
       repeat: ['no-repeat', 'no-repeat'],
       size: [

@@ -1,6 +1,7 @@
 import { CheckboxInput } from '../inputs/CheckboxInput'
 import { boxSideSchema } from './box-side'
 import { image } from './image'
+import { joinSchemas } from './joinSchemas'
 import { objectSchema } from './object'
 import {
   keyword,
@@ -22,9 +23,11 @@ export const maskBorderRepeat = tupleSchema({
 })
 
 const fill: DataTypeSchema<boolean> = {
+  type: 'fill',
   defaultValue: false,
   input: CheckboxInput,
   stringify: (value) => (value ? 'fill' : ''),
+  validate: ((value: any) => typeof value === 'boolean') as any,
 }
 export const maskBorderSlice = objectSchema({
   fields: {
@@ -36,9 +39,12 @@ export const maskBorderSlice = objectSchema({
 // TODO "none"
 export const maskBorderSource = image
 
-export const maskBorderWidth = boxSideSchema({
-  itemSchema: lengthPercentage({ number: true, keywords: ['auto'] }),
-})
+export const maskBorderWidth = joinSchemas([
+  keyword(['auto']),
+  boxSideSchema({
+    itemSchema: lengthPercentage({ number: true }),
+  }),
+])
 
 export const maskBorder = objectSchema({
   fields: {

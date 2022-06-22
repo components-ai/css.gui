@@ -11,9 +11,9 @@ const createElementStyles = () => ({
 
 const initialStyles = {
   transform: [
-    { type: 'perspective', amount: { value: 512, unit: 'px' } },
-    { type: 'rotateX', amount: { value: 15, unit: 'deg' } },
-    { type: 'rotateY', amount: { value: 15, unit: 'deg' } },
+    { name: 'perspective', arguments: { value: 512, unit: 'px' } },
+    { name: 'rotateX', arguments: { value: 15, unit: 'deg' } },
+    { name: 'rotateY', arguments: { value: 15, unit: 'deg' } },
   ],
 }
 

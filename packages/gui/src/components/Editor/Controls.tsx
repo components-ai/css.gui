@@ -32,11 +32,10 @@ import {
 import { stylesToEditorSchema } from '../../lib/transformers/styles-to-editor-schema'
 import { removeInternalCSSClassSyntax } from '../../lib/classes'
 import { AddFieldsetControl } from '../AddFieldset'
-import { ResponsiveInput } from '../Responsive'
 import IconButton from '../ui/IconButton'
-import { isResponsive } from '../Responsive/Input'
-import { FieldsetDropdown } from '../ui/dropdowns/FieldsetDropdown'
+import { SchemaInput } from '../inputs/SchemaInput'
 import { EditorDropdown } from '../ui/dropdowns/EditorDropdown'
+import { FieldsetDropdown } from '../ui/dropdowns/FieldsetDropdown'
 
 export const getPropertyFromField = (field: KeyArg) => {
   if (Array.isArray(field)) {
@@ -55,23 +54,13 @@ const Control = ({ field, showRemove = false, ...props }: ControlProps) => {
   const { removeDynamicProperty } = useDynamicControls()
   const fieldset = useFieldset()
   const property = getPropertyFromField(field)
-  const Component: ComponentType<any> | null = getInputComponent(property)
   const themeValues = useThemeProperty(property)
   const dependantProperties =
     (properties[property] as any).dependantProperties ?? []
 
-  if (!Component) {
-    console.error(`Unknown field: ${field}, ignoring`)
-    return null
-  }
-
   const fieldsetName = fieldset?.name ?? null
   const fullField = fieldsetName ? joinPath(fieldsetName, field) : field
-  const componentProps = {
-    themeValues,
-    topLevel: true,
-    ...props,
-  }
+  const componentProps = { themeValues, ...props }
 
   if (dependantProperties.length) {
     return (
@@ -92,16 +81,18 @@ const Control = ({ field, showRemove = false, ...props }: ControlProps) => {
     removeField(fullField)
   }
 
+  const schema = properties[property]
+
   return (
-    <ResponsiveInput
+    <SchemaInput
       label={sentenceCase(property)}
+      schema={schema}
+      {...props}
       value={getField(fullField)}
       onChange={(newValue: any) => {
         setField(fullField, newValue)
       }}
       onRemove={showRemove ? handleRemoveProperty : undefined}
-      Component={Component}
-      componentProps={componentProps}
     />
   )
 }
@@ -119,7 +110,7 @@ const ComponentWithPropertyGroup = ({
   showRemove = false,
   ...props
 }: ComponentGroupProps) => {
-  const Component: ComponentType<any> | null = getInputComponent(property)
+  const Component: ComponentType<any> | undefined = getInputComponent(property)
   const { getFields, setFields, removeField } = useEditor()
   if (!Component) {
     console.error(`Unknown field: ${property}, ignoring`)
@@ -198,16 +189,6 @@ export const Editor = ({
 
   function regenerateAll(): any {
     return mapValues(allStyles, (value, property) => {
-      if (isResponsive(value)) {
-        return {
-          type: 'responsive',
-          values: value.values.map((item) => {
-            return (
-              properties[property].regenerate?.({ previousValue: item }) ?? item
-            )
-          }),
-        }
-      }
       return (
         properties[property].regenerate?.({ previousValue: value }) ?? value
       )
@@ -261,17 +242,18 @@ export const EditorControls = ({
     <section sx={{ pb: 5 }}>
       {showAddProperties ? (
         <div
-          sx={{ 
-            display: 'flex', 
-            alignItems: 'flex-end', 
-            width: '100%', 
+          sx={{
+            display: 'flex',
+            alignItems: 'flex-end',
+            width: '100%',
             borderWidth: '1px',
             borderStyle: 'solid',
             borderColor: 'border',
-            borderRadius: '6px', 
-            p: 3, 
-            my: 3  
-          }}>
+            borderRadius: '6px',
+            p: 3,
+            my: 3,
+          }}
+        >
           <div sx={{ width: '100%' }}>
             <AddPropertyControl styles={styles} />
           </div>

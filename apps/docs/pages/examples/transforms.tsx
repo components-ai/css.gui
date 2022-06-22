@@ -1,16 +1,16 @@
-import { Editor, styled } from '@compai/css-gui'
+import { Editor, styled, toCSSObject } from '@compai/css-gui'
 import { useState } from 'react'
 
 const initialStyles = {
-  transform: [{ type: 'rotate', value: { value: 45, unit: 'deg' } }],
-  perspective: { unit: 'keyword', value: 'none' },
+  transform: [{ name: 'rotate', arguments: { value: 45, unit: 'deg' } }],
+  perspective: 'none',
   perspectiveOrigin: {
-    x: { unit: 'keyword', value: 'center' },
-    y: { unit: 'keyword', value: 'center' },
+    x: 'center',
+    y: 'center',
   },
   transformOrigin: {
-    x: { unit: 'keyword', value: 'center' },
-    y: { unit: 'keyword', value: 'center' },
+    x: 'center',
+    y: 'center',
     z: { unit: 'px', value: 0 },
   },
 }
@@ -20,8 +20,8 @@ export default function Transforms() {
   return (
     <div sx={{ pt: 5, display: 'flex', justifyContent: 'center' }}>
       <div>
-        <styled.div
-          styles={{
+        <div
+          sx={{
             width: '48rem',
             maxWidth: '100%',
             height: '240px',
@@ -31,11 +31,11 @@ export default function Transforms() {
             justifyContent: 'center',
             fontSize: 4,
             color: 'black',
-            ...styles,
+            ...toCSSObject(styles),
           }}
         >
           Fun with transforms
-        </styled.div>
+        </div>
         <div
           sx={{
             my: 5,

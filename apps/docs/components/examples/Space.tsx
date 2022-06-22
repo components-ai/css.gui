@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { codegen, Editor, styled } from '@compai/css-gui'
+import { codegen, Editor, styled, toCSSObject } from '@compai/css-gui'
 
 export const SpaceExample = () => {
   const [styles, setStyles] = useState({
@@ -27,9 +27,9 @@ export const SpaceExample = () => {
         <Editor styles={styles} onChange={setStyles} />
       </div>
       <div sx={{ border: 'thin solid', borderColor: 'border', mt: [3, 4, 5] }}>
-        <styled.p styles={{ ...styles, border: 'thin solid' }}>
+        <p sx={{ ...toCSSObject(styles as any), border: 'thin solid' }}>
           Fun with space!
-        </styled.p>
+        </p>
       </div>
       {/** @ts-ignore */}
       <pre>{codegen.css(styles)}</pre>

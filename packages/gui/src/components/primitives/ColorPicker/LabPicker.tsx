@@ -28,16 +28,16 @@ interface InternalProps {
  * A 'standard' color picker based on the HSV color space.
  */
 export default function LabColorPicker({ value, onChange, mode }: Props) {
-  const [labValue, setLabValue] = useState<LabValue>(culori.lab(value.value))
+  const [labValue, setLabValue] = useState<LabValue>(culori.lab(value))
 
   const handleChange = (value: LabValue) => {
     setLabValue(value)
-    onChange({ value: format(value, mode) })
+    onChange(format(value, mode))
   }
 
   useEffect(() => {
-    if (isValidColor(value.value) && value.value !== format(labValue, mode)) {
-      setLabValue(culori.lab(value.value))
+    if (isValidColor(value) && value !== format(labValue, mode)) {
+      setLabValue(culori.lab(value))
     }
   }, [value])
 

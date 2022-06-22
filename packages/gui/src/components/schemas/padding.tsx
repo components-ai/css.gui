@@ -1,8 +1,13 @@
 import { boxSideSchema } from './box-side'
+import { joinSchemas } from './joinSchemas'
 import { lengthPercentage } from './primitives'
+import { theme } from './theme'
 import { tupleSchema } from './tuple'
 
-const paddingItem = lengthPercentage({ range: 'nonnegative', themeProperty: 'space' })
+const paddingItem = joinSchemas([
+  lengthPercentage({ range: 'nonnegative' }),
+  theme('space'),
+])
 
 export const paddingBottom = paddingItem
 export const paddingTop = paddingItem

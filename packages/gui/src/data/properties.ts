@@ -8,7 +8,7 @@ import {
 } from '../types/css'
 import { UnitSteps } from '../lib'
 import { allProperties } from './css-properties'
-import { camelCase, mapValues, uniqBy } from 'lodash-es'
+import { camelCase, compact, mapValues, uniqBy } from 'lodash-es'
 import { UnitRanges } from './ranges'
 import { EditorPropsWithLabel } from '../types/editor'
 
@@ -46,17 +46,20 @@ import { textShadow } from '../components/schemas/text-shadow'
 import * as transformProperties from '../components/schemas/transform'
 import * as transitionProperties from '../components/schemas/transition'
 import {
-  angle,
-  color,
   integer,
   keyword,
   length,
   number,
   percentage,
   string,
-  time,
 } from '../components/schemas/primitives'
 import { DataTypeSchema } from '../components/schemas/types'
+import { joinSchemas } from '../components/schemas/joinSchemas'
+import { theme } from '../components/schemas/theme'
+import { color } from '../components/schemas/color'
+import { angle } from '../components/schemas/angle'
+import { time } from '../components/schemas/time'
+import { topLevel } from '../components/schemas/topLevel'
 
 type PropertyData = {
   input: PrimitiveType | ComponentType<EditorPropsWithLabel<any>>
@@ -65,12 +68,9 @@ type PropertyData = {
   keywords?: readonly string[]
   range?: UnitRanges
   defaultValue?: any
-  stringify?: (value: any) => string
   dependantProperties?: string[]
   steps?: UnitSteps
-  label?: string
-  responsive?: boolean
-  dimensions?: number
+  themeProperty?: string
 }
 
 // Map of primitive schemas
@@ -91,13 +91,20 @@ const primitiveMap = {
 type PrimitiveType = keyof typeof primitiveMap
 
 function normalizeSchema(propertyData: PropertyData): DataTypeSchema<any> {
-  const { input } = propertyData
+  const { input, keywords, themeProperty } = propertyData
   if (typeof input === 'string') {
     if (input === 'keyword') {
-      const { keywords = [], ...rest } = propertyData
-      return keyword(keywords, rest)
+      // const { keywords = [], ...rest } = propertyData
+      return keyword(keywords!, propertyData)
     } else {
-      return primitiveMap[input](propertyData) as any
+      let schema = primitiveMap[input](propertyData) as any
+      return joinSchemas(
+        compact([
+          keywords && keyword(keywords),
+          schema,
+          themeProperty && theme(themeProperty),
+        ])
+      )
     }
   }
   return propertyData as any
@@ -106,12 +113,12 @@ function normalizeSchema(propertyData: PropertyData): DataTypeSchema<any> {
 export const rawProperties: Record<string, any> = {
   accentColor: {
     input: 'color',
-    defaultValue: { value: 'tomato' },
+    defaultValue: 'tomato',
     keywords: ['auto', 'currentcolor', 'transparent'],
   },
   alignContent: {
     input: 'keyword',
-    responsive: true,
+
     keywords: [
       'center',
       'start',
@@ -133,7 +140,7 @@ export const rawProperties: Record<string, any> = {
   },
   alignItems: {
     input: 'keyword',
-    responsive: true,
+
     keywords: [
       'center',
       'start',
@@ -173,11 +180,10 @@ export const rawProperties: Record<string, any> = {
       'mathematical',
       'text-top',
     ],
-    defaultValue: 'auto',
   },
   alignSelf: {
     input: 'keyword',
-    responsive: true,
+
     keywords: [
       'auto',
       'center',
@@ -196,7 +202,6 @@ export const rawProperties: Record<string, any> = {
       'safe center',
       'unsafe center',
     ],
-    defaultValue: 'auto',
   },
   all: {
     input: 'keyword',
@@ -235,7 +240,7 @@ export const rawProperties: Record<string, any> = {
   backgroundColor: {
     input: 'color',
     keywords: ['currentcolor', 'transparent'],
-    defaultValue: { value: 'tomato' },
+    defaultValue: 'tomato',
   },
   backgroundPositionX: {
     // TODO: Add side relative values option and multiple values option
@@ -309,7 +314,6 @@ export const rawProperties: Record<string, any> = {
       'avoid-region',
       'region',
     ],
-    defaultValue: 'auto',
   },
   breakBefore: {
     input: 'keyword',
@@ -329,12 +333,10 @@ export const rawProperties: Record<string, any> = {
       'avoid-region',
       'region',
     ],
-    defaultValue: 'auto',
   },
   breakInside: {
     input: 'keyword',
     keywords: ['auto', 'avoid', 'avoid-page', 'avoid-column', 'avoid-region'],
-    defaultValue: 'auto',
   },
   captionSide: {
     input: 'keyword',
@@ -351,7 +353,7 @@ export const rawProperties: Record<string, any> = {
   caretColor: {
     input: 'color',
     keywords: ['currentcolor', 'transparent'],
-    defaultValue: { value: '#6465ff'},
+    defaultValue: '#6465ff',
   },
   clear: {
     input: 'keyword',
@@ -368,7 +370,7 @@ export const rawProperties: Record<string, any> = {
   color: {
     input: 'color',
     keywords: ['currentcolor', 'transparent'],
-    defaultValue: { value: '#6465ff'},
+    defaultValue: '#6465ff',
   },
   colorAdjust: {
     input: 'keyword',
@@ -378,18 +380,16 @@ export const rawProperties: Record<string, any> = {
   colorInterpolationFilters: {
     input: 'keyword',
     keywords: ['auto', 'sRGB', 'linearRGB'],
-    defaultValue: 'auto',
   },
   ...columnProperties,
   columnFill: {
     input: 'keyword',
     keywords: ['auto', 'balance', 'balance-all'],
-    defaultValue: 'auto',
   },
   columnRuleColor: {
     input: 'color',
     keywords: ['currentcolor', 'transparent'],
-    defaultValue: { value: '#6465ff' },
+    defaultValue: '#6465ff',
   },
   columnRuleStyle: {
     input: 'keyword',
@@ -499,7 +499,7 @@ export const rawProperties: Record<string, any> = {
   },
   display: {
     input: 'keyword',
-    responsive: true,
+
     keywords: [
       'block',
       'inline',
@@ -538,7 +538,6 @@ export const rawProperties: Record<string, any> = {
       'hanging',
       'text-top',
     ],
-    defaultValue: 'auto',
   },
   emptyCells: {
     input: 'keyword',
@@ -548,7 +547,7 @@ export const rawProperties: Record<string, any> = {
   fill: {
     input: 'color',
     keywords: ['none', 'context-fill', 'context-stroke'],
-    defaultValue: { value: '#6465ff' },
+    defaultValue: '#6465ff',
   },
   filter,
   flexBasis: {
@@ -573,13 +572,13 @@ export const rawProperties: Record<string, any> = {
   },
   flexDirection: {
     input: 'keyword',
-    responsive: true,
+
     keywords: ['row', 'row-reverse', 'column', 'column-reverse'],
     defaultValue: 'row',
   },
   flexFlow: {
     input: 'keyword',
-    responsive: true,
+
     keywords: [
       'row',
       'row-reverse',
@@ -611,7 +610,7 @@ export const rawProperties: Record<string, any> = {
   },
   flexWrap: {
     input: 'keyword',
-    responsive: true,
+
     keywords: ['nowrap', 'wrap', 'wrap-reverse'],
     defaultValue: 'wrap',
   },
@@ -647,7 +646,7 @@ export const rawProperties: Record<string, any> = {
   floodColor: {
     input: 'color',
     keywords: ['currentcolor', 'transparent'],
-    defaultValue: { value: '#6465ff' },
+    defaultValue: '#6465ff',
   },
   floodOpacity: {
     input: 'percentage',
@@ -665,12 +664,10 @@ export const rawProperties: Record<string, any> = {
   fontKerning: {
     input: 'keyword',
     keywords: ['auto', 'normal', 'none'],
-    defaultValue: 'auto',
   },
   fontOpticalSizing: {
     input: 'keyword',
     keywords: ['auto', 'none'],
-    defaultValue: 'auto',
   },
   fontSize: {
     input: 'length',
@@ -701,7 +698,7 @@ export const rawProperties: Record<string, any> = {
       value: 24,
       unit: 'px',
     },
-    themeProperty: 'fontSizes'
+    themeProperty: 'fontSizes',
   },
   fontStretch: {
     input: 'percentage',
@@ -888,7 +885,6 @@ export const rawProperties: Record<string, any> = {
   initialLetterAlign: {
     input: 'keyword',
     keywords: ['auto', 'alphabetic', 'hanging', 'ideographic'],
-    defaultValue: 'auto',
   },
   initialLetterWrap: {
     input: 'length',
@@ -908,7 +904,7 @@ export const rawProperties: Record<string, any> = {
   },
   justifyContent: {
     input: 'keyword',
-    responsive: true,
+
     keywords: [
       'start',
       'center',
@@ -976,7 +972,7 @@ export const rawProperties: Record<string, any> = {
     percentage: true,
     keywords: ['normal'],
     defaultValue: 'normal',
-    themeProperty: 'letterSpacings'
+    themeProperty: 'letterSpacings',
   },
   lightingColor: {
     input: 'color',
@@ -1003,7 +999,7 @@ export const rawProperties: Record<string, any> = {
       value: 1.5,
       unit: 'number',
     },
-    themeProperty: 'lineHeights'
+    themeProperty: 'lineHeights',
   },
   lineHeightStep: {
     input: 'length',
@@ -1165,7 +1161,7 @@ export const rawProperties: Record<string, any> = {
   outlineColor: {
     input: 'color',
     keywords: ['invert'],
-    defaultValue: { value: '#6465ff' },
+    defaultValue: '#6465ff',
   },
   outlineOffset: {
     input: 'length',
@@ -1315,7 +1311,7 @@ export const rawProperties: Record<string, any> = {
   scrollbarColor: {
     input: 'color',
     keywords: ['auto', 'currentcolor', 'transparent'],
-    defaultValue: { value: '#ff33cc' },
+    defaultValue: '#ff33cc',
   },
   scrollbarGutter: {
     input: 'keyword',
@@ -1365,7 +1361,7 @@ export const rawProperties: Record<string, any> = {
   },
   textAlign: {
     input: 'keyword',
-    responsive: true,
+
     keywords: [
       'start',
       'end',
@@ -1435,7 +1431,7 @@ export const rawProperties: Record<string, any> = {
   textEmphasisColor: {
     input: 'color',
     keywords: ['currentcolor', 'transparent'],
-    defaultValue: { value: '#6465ff' },
+    defaultValue: '#6465ff',
   },
   textEmphasisPosition: {
     input: 'keyword',
@@ -1500,7 +1496,7 @@ export const rawProperties: Record<string, any> = {
     keywords: [
       'auto',
       'optimizeSpeed',
-      'optimzeLegibility',
+      'optimizeLegibility',
       'geometricPrecision',
     ],
     defaultValue: 'optimizeLegibility',
@@ -1706,7 +1702,7 @@ export const rawProperties: Record<string, any> = {
 
 export const properties: Record<string, DataTypeSchema<any>> = mapValues(
   rawProperties,
-  normalizeSchema
+  (value, property) => topLevel(normalizeSchema(value), property)
 ) as any
 
 export const supportedProperties = uniqBy(allProperties, 'property').filter(

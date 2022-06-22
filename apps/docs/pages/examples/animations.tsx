@@ -7,16 +7,10 @@ const initialStyles = {
   animation: [
     {
       name: 'backOutRight',
-      timingFunction: {
-        type: 'cubic-bezier',
-        p1: 0.42,
-        p2: 0,
-        p3: .58,
-        p4: 1,
-      },
+      timingFunction: 'ease-in-out',
       duration: { value: 2000, unit: 'ms' },
       delay: { value: 0, unit: 'ms' },
-      iterationCount: { value: 'infinite', type: 'keyword' },
+      iterationCount: 'infinite',
       fillMode: 'none',
       direction: 'normal',
       playState: 'running',
@@ -38,7 +32,7 @@ export default function AnimationExample() {
         <div>
           <div
             sx={{
-              mb: 4, 
+              mb: 4,
               width: '100%',
               display: 'flex',
               alignItems: 'center',

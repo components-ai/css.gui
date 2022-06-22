@@ -82,7 +82,8 @@ export const importRawLengths = (fontSizes: RawLength[]): FullLength[] => {
 }
 
 export const importTheme = (theme: any): Theme => {
-  const colors = importColors(theme.colors)
+  // const colors = importColors(theme.colors)
+  const colors = theme.colors
   const fonts = importFonts(theme.fonts || [])
   const fontSizes = importRawLengths(theme.fontSizes || [])
   const lineHeights = importRawLengths(theme.lineHeights || [])

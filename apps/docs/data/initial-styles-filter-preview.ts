@@ -1,3 +1,3 @@
 export const initialStyles: any = {
-  filter: [{ type: 'blur', radius: { value: 4, unit: 'px' } }],
+  filter: [{ name: 'blur', arguments: { value: 4, unit: 'px' } }],
 }

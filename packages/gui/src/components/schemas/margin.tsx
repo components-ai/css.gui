@@ -1,11 +1,14 @@
 import { boxSideSchema } from './box-side'
-import { lengthPercentage } from './primitives'
+import { joinSchemas } from './joinSchemas'
+import { keyword, lengthPercentage } from './primitives'
+import { theme } from './theme'
 import { tupleSchema } from './tuple'
 
-const marginItem = lengthPercentage({
-  keywords: ['auto'],
-  themeProperty: 'space',
-})
+const marginItem = joinSchemas([
+  lengthPercentage({ themeProperty: 'space' }),
+  keyword(['auto']),
+  theme('space'),
+])
 
 export const marginBottom = marginItem
 export const marginTop = marginItem

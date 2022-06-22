@@ -1,9 +1,9 @@
 export const initialStyles: any = {
   color: 'tomato',
-  textDecoration: 'none',
+  textDecorationLine: 'none',
   ':hover': {
     color: 'rebeccapurple',
-    textDecoration: 'underline',
+    textDecorationLine: 'underline',
   },
   ':visited': {
     color: 'tomato',
