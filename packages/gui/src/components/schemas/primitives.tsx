@@ -1,4 +1,4 @@
-import { compact } from 'lodash-es'
+import { compact, get } from 'lodash-es'
 import { randomColor } from '../../lib/color'
 import { bindProps } from '../../lib/components'
 import { choose, randomStep } from '../../lib/random'
@@ -25,6 +25,7 @@ import { NumberInput } from '../inputs/NumberInput'
 import { IntegerInput } from '../inputs/PrimitiveInput'
 import { TextInput } from '../inputs/TextInput'
 import { timeSteps } from '../inputs/TimeInput'
+import PalettePopover from '../primitives/ColorPicker/PalettePicker'
 import { isValidColor } from '../primitives/ColorPicker/util'
 import { dimension } from './dimension'
 import { joinSchemas } from './joinSchemas'
@@ -47,6 +48,23 @@ function colorObject({
   }
 }
 
+interface ThemeColor {
+  type: 'theme'
+  path: string
+}
+
+const themeColor: DataTypeSchema<ThemeColor> = {
+  type: 'color',
+  inlineInput: PalettePopover,
+  stringify: (value, theme) => get(theme?.colors, value.path),
+  defaultValue: { type: 'theme', path: 'primary' },
+  regenerate: () => randomColor(),
+  validate: ((value: any) => {
+    if (typeof value !== 'object') return false
+    return value.type === 'theme' && typeof value.path === 'string'
+  }) as any,
+}
+
 export function color({
   defaultValue = 'transparent',
 }: {
@@ -54,6 +72,7 @@ export function color({
 } = {}) {
   return joinSchemas([
     colorObject({ defaultValue }),
+    themeColor,
     keyword(['transparent', 'currentColor']),
   ])
 }
