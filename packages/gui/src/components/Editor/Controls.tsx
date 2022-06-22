@@ -58,23 +58,13 @@ const Control = ({ field, showRemove = false, ...props }: ControlProps) => {
   const { removeDynamicProperty } = useDynamicControls()
   const fieldset = useFieldset()
   const property = getPropertyFromField(field)
-  // const Component: ComponentType<any> | null = getInputComponent(property)
   const themeValues = useThemeProperty(property)
   const dependantProperties =
     (properties[property] as any).dependantProperties ?? []
 
-  // if (!Component) {
-  //   console.error(`Unknown field: ${field}, ignoring`)
-  //   return null
-  // }
-
   const fieldsetName = fieldset?.name ?? null
   const fullField = fieldsetName ? joinPath(fieldsetName, field) : field
-  const componentProps = {
-    themeValues,
-    topLevel: true,
-    ...props,
-  }
+  const componentProps = { themeValues, ...props }
 
   if (dependantProperties.length) {
     return (

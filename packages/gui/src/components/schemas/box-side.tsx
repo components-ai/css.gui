@@ -3,7 +3,6 @@ import { getInputProps } from '../../lib/util'
 import { DataTypeSchema, RegenOptions } from './types'
 import * as Toggle from '@radix-ui/react-toggle'
 import { Link } from 'react-feather'
-import { InputContainer } from '../inputs/InputContainer'
 import { SchemaInput } from '../inputs/SchemaInput'
 
 interface CreateBoxSideSchema<T> {

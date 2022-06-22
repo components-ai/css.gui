@@ -2,9 +2,6 @@ import { getInputProps } from '../../lib/util'
 import { DataTypeSchema, RegenOptions } from './types'
 import * as Toggle from '@radix-ui/react-toggle'
 import { Link } from 'react-feather'
-import { replace } from '../../lib/array'
-import { InputContainer } from '../inputs/InputContainer'
-import { choose } from '../../lib/random'
 import { SchemaInput } from '../inputs/SchemaInput'
 
 interface CreateTupleSchema<T> {

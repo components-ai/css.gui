@@ -13,7 +13,6 @@ interface LengthInputProps {
   onChange: (value: Length) => void
   label: string
   property?: string
-  keywords?: string[]
   number?: boolean
   percentage?: boolean
   flex?: boolean
@@ -25,7 +24,7 @@ export function LengthInput({
   number,
   percentage,
   flex,
-  value: providedValue,
+  value,
   ...props
 }: LengthInputProps) {
   const units = compact([
@@ -34,15 +33,12 @@ export function LengthInput({
     percentage && PercentageLengthUnits.Pct,
     flex && 'fr',
   ])
-  const value =
-    providedValue === '0' ? { value: 0, unit: 'number' } : providedValue
   return (
     <DimensionInput
       value={value}
       units={units}
       conversions={lengthConversions}
       steps={lengthSteps}
-      property={property}
       {...props}
     />
   )
