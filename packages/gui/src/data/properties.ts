@@ -59,6 +59,7 @@ import {
 import { DataTypeSchema } from '../components/schemas/types'
 import { joinSchemas } from '../components/schemas/joinSchemas'
 import { theme } from '../components/schemas/theme'
+import { GLOBAL_KEYWORDS } from './global-keywords'
 
 type PropertyData = {
   input: PrimitiveType | ComponentType<EditorPropsWithLabel<any>>
@@ -92,6 +93,14 @@ const primitiveMap = {
   },
 }
 type PrimitiveType = keyof typeof primitiveMap
+
+const global = keyword(GLOBAL_KEYWORDS, { type: 'global' })
+function makeTopLevel<T>(schema: DataTypeSchema<T>, property: string) {
+  if (property === 'fontFamily') {
+    return schema
+  }
+  return joinSchemas([schema, global])
+}
 
 function normalizeSchema(propertyData: PropertyData): DataTypeSchema<any> {
   const { input, keywords, themeProperty } = propertyData
@@ -1716,7 +1725,7 @@ export const rawProperties: Record<string, any> = {
 
 export const properties: Record<string, DataTypeSchema<any>> = mapValues(
   rawProperties,
-  normalizeSchema
+  (value, property) => makeTopLevel(normalizeSchema(value), property)
 ) as any
 
 export const supportedProperties = uniqBy(allProperties, 'property').filter(

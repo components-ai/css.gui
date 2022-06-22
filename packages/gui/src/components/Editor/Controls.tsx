@@ -100,7 +100,7 @@ const Control = ({ field, showRemove = false, ...props }: ControlProps) => {
   return (
     <SchemaInput
       label={sentenceCase(property)}
-      schema={topLevel(schema)}
+      schema={schema}
       {...props}
       value={getField(fullField)}
       onChange={(newValue: any) => {
@@ -397,10 +397,4 @@ function getPropertiesFromChildren(children: ReactNode): string[] {
     }
   })
   return properties
-}
-
-const global = keyword(GLOBAL_KEYWORDS, { type: 'global' })
-function topLevel<T>(schema: DataTypeSchema<T>) {
-  // return schema
-  return joinSchemas([schema, global])
 }
