@@ -32,11 +32,8 @@ export function listSchema<T>({
       return (
         <FieldArray
           {...props}
-          defaultValue={defaultValue}
-          newItem={() => itemSchema.defaultValue}
-          stringify={stringify}
           itemSchema={itemSchema}
-          regenerate={regenerate}
+          // regenerate={regenerate}
         />
       )
     },

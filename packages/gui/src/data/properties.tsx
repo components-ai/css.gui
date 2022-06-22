@@ -60,6 +60,9 @@ import { DataTypeSchema } from '../components/schemas/types'
 import { joinSchemas } from '../components/schemas/joinSchemas'
 import { theme } from '../components/schemas/theme'
 import { GLOBAL_KEYWORDS } from './global-keywords'
+import { ResponsiveInput } from '../components/Responsive'
+import { validate } from 'uuid'
+import { Responsive } from '../components/Responsive/Input'
 
 type PropertyData = {
   input: PrimitiveType | ComponentType<EditorPropsWithLabel<any>>
@@ -95,11 +98,50 @@ const primitiveMap = {
 type PrimitiveType = keyof typeof primitiveMap
 
 const global = keyword(GLOBAL_KEYWORDS, { type: 'global' })
+
+function responsive<T>(
+  itemSchema: DataTypeSchema<T>
+): DataTypeSchema<Responsive<T>> {
+  return {
+    type: 'responsive',
+    input({ value, onChange }) {
+      return (
+        <ResponsiveInput
+          value={value}
+          onChange={onChange}
+          itemSchema={itemSchema}
+        />
+      )
+    },
+    defaultValue: { type: 'responsive', values: [itemSchema.defaultValue] },
+    validate: ((value: any) => {
+      if (typeof value !== 'object') return false
+      if (value.type !== 'responsive') return false
+      if (!(value.values instanceof Array)) return false
+      return value.values.map(itemSchema.validate)
+    }) as any,
+    regenerate({ previousValue }) {
+      return {
+        ...previousValue,
+        values: previousValue.values.map(
+          (value) =>
+            itemSchema.regenerate?.({ previousValue: value }) ??
+            itemSchema.defaultValue
+        ),
+      }
+    },
+    stringify(value) {
+      return (value as any).values.map(itemSchema.stringify)
+    },
+  }
+}
+
 function makeTopLevel<T>(schema: DataTypeSchema<T>, property: string) {
   if (property === 'fontFamily') {
     return schema
   }
-  return joinSchemas([schema, global])
+  const withGlobal = joinSchemas([schema, global])
+  return joinSchemas([withGlobal, responsive(withGlobal)])
 }
 
 function normalizeSchema(propertyData: PropertyData): DataTypeSchema<any> {

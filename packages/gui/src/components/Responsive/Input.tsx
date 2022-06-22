@@ -8,101 +8,31 @@ import { DeletePropButton } from '../inputs/Dimension/Input'
 import { omit } from 'lodash-es'
 import { replace } from '../../lib/array'
 import { EditorProps } from '../../types/editor'
+import { DataTypeSchema } from '../schemas/types'
+import FieldArray from '../FieldArray'
 
 const DEFAULT_BREAKPOINT_COUNT = 3
 
-type Responsive_<T> = { type: 'responsive'; values: T[] }
-export type Responsive<T> = T | Responsive_<T>
+export type Responsive<T> = { type: 'responsive'; values: T[] }
 type ResponsiveInputProps<T> = {
   value: Responsive<T>
   onChange: (newValue: Responsive<T>) => void
-  onRemove?: () => void
-  label: string
-  defaultValue?: T
-  Component: React.ComponentType<EditorProps<T>>
-  componentProps?: any
+  itemSchema: DataTypeSchema<T>
 }
 export function ResponsiveInput<T>({
   value,
   onChange,
-  onRemove,
-  label,
-  Component,
-  componentProps = {},
+  itemSchema,
 }: ResponsiveInputProps<T>) {
-  const { breakpoints } = useTheme()
-  const breakpointCount = breakpoints?.length || DEFAULT_BREAKPOINT_COUNT
-
-  const handleResponsiveChange = (breakpointIndex: number) => (newValue: T) => {
-    const values = (value as any).values
-    const newValues = replace(values, breakpointIndex, newValue)
-    onChange({ ...value, values: newValues })
-  }
-
-  const handleChange = (newItemValue: Responsive<T>) => {
-    onChange(newItemValue)
-  }
-
-  const handleSwitchToResponsive = () => {
-    const newValue: T[] = Array(breakpointCount).fill(value ?? null)
-    onChange({ type: 'responsive', values: newValue })
-  }
-
-  const handleSwitchFromResponsive = () => {
-    onChange((value as any).values[0])
-  }
-
-  const isResponsiveControls = isResponsive(value)
-
-  const editors = isResponsiveControls ? (
-    Array(breakpointCount)
-      .fill(null)
-      .map((_breakpoint: Breakpoint, i: number) => {
-        return (
-          <div key={breakpoints?.[i].id ?? i} sx={{ pb: 1 }}>
-            <Component
-              value={value.values[i] ?? null}
-              onChange={handleResponsiveChange(i)}
-              label={i.toString()}
-              {...componentProps}
-            />
-          </div>
-        )
-      })
-  ) : (
-    <Component
-      value={value}
-      onChange={handleChange}
-      {...omit(componentProps, ['label', 'value', 'onChange', 'onRemove'])}
-    />
-  )
-
   return (
-    <div>
-      <Label
-        sx={{ lineHeight: 1, pb: 1, margin: 0, fontSize: 0, fontWeight: 500 }}
-      >
-        <div
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            width: '100%',
-          }}
-        >
-          <span>{label}</span>
-          <div sx={{ display: 'flex' }}>
-            <ResponsiveToggle
-              isResponsive={isResponsiveControls}
-              onSwitchFromResponsive={handleSwitchFromResponsive}
-              onSwitchToResponsive={handleSwitchToResponsive}
-            />
-            {onRemove ? <DeletePropButton onRemove={onRemove} /> : null}
-          </div>
-        </div>
-      </Label>
-      {editors}
-    </div>
+    <FieldArray
+      label=""
+      itemSchema={itemSchema}
+      value={value.values}
+      onChange={(newValues) => {
+        onChange({ ...value, values: newValues })
+      }}
+    />
   )
 }
 
@@ -158,7 +88,7 @@ const ResponsiveToggle = ({
   )
 }
 
-export function isResponsive<T>(value: Responsive<T>): value is Responsive_<T> {
+export function isResponsive<T>(value: Responsive<T>): value is Responsive<T> {
   if (value instanceof Object && value.type === 'responsive') {
     return true
   }

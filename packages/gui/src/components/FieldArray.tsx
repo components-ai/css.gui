@@ -9,18 +9,13 @@ interface FieldArrayProps<T> extends EditorPropsWithLabel<T[]> {
    * (See `LayerProps` for what props this takes)
    */
   itemSchema: DataTypeSchema<T>
-  /** The values that should be populated when a new item is added. */
-  newItem(): T
-  /** How to stringify the contents of the layer */
-  stringify(value: T[]): string
-  defaultValue: T[]
 }
 
 /**
  * An alternative field array that is collapsible.
  */
 export default function FieldArray<T>(props: FieldArrayProps<T>) {
-  const { label = '', value = [], onChange, itemSchema, newItem } = props
+  const { label = '', value = [], onChange, itemSchema } = props
 
   const handleReorder = (i1: number, i2: number) => {
     if (typeof value === 'string') {
@@ -69,7 +64,7 @@ export default function FieldArray<T>(props: FieldArrayProps<T>) {
       })}
       <button
         onClick={() => {
-          onChange(value.concat([newItem()]))
+          onChange(value.concat([itemSchema.defaultValue]))
         }}
         sx={{
           width: '100%',

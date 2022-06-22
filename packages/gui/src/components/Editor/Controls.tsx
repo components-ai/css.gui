@@ -109,18 +109,6 @@ const Control = ({ field, showRemove = false, ...props }: ControlProps) => {
       onRemove={showRemove ? handleRemoveProperty : undefined}
     />
   )
-  // return (
-  //   <ResponsiveInput
-  //     label={sentenceCase(property)}
-  //     value={getField(fullField)}
-  //     onChange={(newValue: any) => {
-  //       setField(fullField, newValue)
-  //     }}
-  //     onRemove={showRemove ? handleRemoveProperty : undefined}
-  //     Component={Component}
-  //     componentProps={componentProps}
-  //   />
-  // )
 }
 
 interface ComponentGroupProps {
@@ -215,16 +203,6 @@ export const Editor = ({
 
   function regenerateAll(): any {
     return mapValues(allStyles, (value, property) => {
-      if (isResponsive(value)) {
-        return {
-          type: 'responsive',
-          values: value.values.map((item) => {
-            return (
-              properties[property].regenerate?.({ previousValue: item }) ?? item
-            )
-          }),
-        }
-      }
       return (
         properties[property].regenerate?.({ previousValue: value }) ?? value
       )

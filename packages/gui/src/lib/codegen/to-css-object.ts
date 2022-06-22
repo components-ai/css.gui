@@ -2,7 +2,6 @@ import { Styles, Length } from '../../types/css'
 import { stringifySelector } from '../stringify'
 import { isNestedSelector } from '../util'
 import { properties } from '../../data/properties'
-import { isResponsive } from '../../components/Responsive/Input'
 import { Theme } from '../../types/theme'
 
 export const stringifyProperty = (
@@ -11,10 +10,6 @@ export const stringifyProperty = (
   theme?: Theme
 ): string | undefined => {
   const stringify = properties[property]?.stringify
-  if (isResponsive(value as any)) {
-    // todo recurse instead
-    return (value as any).values.map((v: any) => stringify(v, theme))
-  }
   if (stringify) {
     return stringify(value, theme)
   }
