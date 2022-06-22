@@ -1,6 +1,7 @@
+import { joinSchemas } from './joinSchemas'
 import { listSchema } from './list'
 import { objectSchema } from './object'
-import { color, length } from './primitives'
+import { color, keyword, length } from './primitives'
 
 const singleTextShadow = objectSchema({
   fields: {
@@ -11,11 +12,10 @@ const singleTextShadow = objectSchema({
   },
 })
 
-export const textShadow = listSchema({
-  itemSchema: singleTextShadow,
-  thumbnail: Thumbnail,
-  keywords: ['none'],
-})
+export const textShadow = joinSchemas([
+  keyword(['none']),
+  listSchema({ itemSchema: singleTextShadow }),
+])
 
 function Thumbnail({ value }: { value: string }) {
   return (

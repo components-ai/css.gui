@@ -1,3 +1,4 @@
+import { joinSchemas } from './joinSchemas'
 import { listSchema } from './list'
 import {
   color,
@@ -13,7 +14,6 @@ export const stroke = color()
 
 export const strokeDasharray = listSchema({
   itemSchema: length({ number: true }),
-  variant: 'list',
 })
 export const strokeDashoffset = lengthPercentage({ number: true })
 export const strokeLinejoin = keyword([
@@ -42,4 +42,4 @@ export const strokeDashadjust = keyword([
   'dashed',
   'gaps',
 ])
-export const strokeDashcorner = length({ keywords: ['auto'] })
+export const strokeDashcorner = joinSchemas([keyword(['auto']), length()])

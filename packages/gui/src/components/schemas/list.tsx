@@ -5,7 +5,6 @@ import { DataTypeSchema, RegenOptions } from './types'
 interface CreateList<T> {
   itemSchema: DataTypeSchema<T>
   separator?: string
-  thumbnail?: ComponentType<{ value: string }>
 }
 
 export function listSchema<T>({
