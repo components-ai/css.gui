@@ -31,15 +31,9 @@ import {
 import { stylesToEditorSchema } from '../../lib/transformers/styles-to-editor-schema'
 import { removeInternalCSSClassSyntax } from '../../lib/classes'
 import { AddFieldsetControl } from '../AddFieldset'
-import { ResponsiveInput } from '../Responsive'
 import IconButton from '../ui/IconButton'
 import { RefreshCw } from 'react-feather'
-import { isResponsive } from '../Responsive/Input'
 import { SchemaInput } from '../inputs/SchemaInput'
-import { keyword } from '../schemas/primitives'
-import { GLOBAL_KEYWORDS } from '../../data/global-keywords'
-import { DataTypeSchema } from '../schemas/types'
-import { joinSchemas } from '../schemas/joinSchemas'
 
 export const getPropertyFromField = (field: KeyArg) => {
   if (Array.isArray(field)) {
