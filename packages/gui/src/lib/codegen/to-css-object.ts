@@ -11,7 +11,11 @@ export const stringifyProperty = (
 ): string | undefined => {
   const stringify = properties[property]?.stringify
   if (stringify) {
-    return stringify(value, theme)
+    try {
+      return stringify(value, theme)
+    } catch (e) {
+      throw new Error(`Error stringifying ${property}\n${e}`)
+    }
   }
 
   // // font-family?
