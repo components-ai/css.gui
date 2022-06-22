@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Editor, styled, Fieldset, Inputs, codegen } from '@compai/css-gui'
 
+// This page isn't used right now so just comment it out to get it to build
 export const TypographyGroupExample = () => {
   const [styles, setStyles] = useState({})
 
@@ -12,19 +13,19 @@ export const TypographyGroupExample = () => {
             <Fieldset type="element" name="h1">
               <>
                 <h2>Heading</h2>
-                <Inputs.FontSize />
+                {/* <Inputs.FontSize /> */}
               </>
             </Fieldset>
             <Fieldset type="element" name="p">
               <>
                 <h2>Body</h2>
-                <Inputs.FontSize />
+                {/* <Inputs.FontSize /> */}
               </>
             </Fieldset>
             <Fieldset type="element" name="pre">
               <>
                 <h2>Code</h2>
-                <Inputs.FontSize />
+                {/* <Inputs.FontSize /> */}
               </>
             </Fieldset>
           </>

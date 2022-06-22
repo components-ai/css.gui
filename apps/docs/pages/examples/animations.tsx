@@ -7,13 +7,7 @@ const initialStyles = {
   animation: [
     {
       name: 'backOutRight',
-      timingFunction: {
-        type: 'cubic-bezier',
-        p1: 0.42,
-        p2: 0,
-        p3: 0.58,
-        p4: 1,
-      },
+      timingFunction: 'ease-in-out',
       duration: { value: 2000, unit: 'ms' },
       delay: { value: 0, unit: 'ms' },
       iterationCount: 'infinite',

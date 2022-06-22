@@ -1,4 +1,5 @@
 import { easingFunction } from './easing-function'
+import { joinSchemas } from './joinSchemas'
 import { listSchema } from './list'
 import { objectSchema } from './object'
 import { ident, integer, keyword } from './primitives'
@@ -15,7 +16,7 @@ const duration = time({
   defaultValue: { value: 350, unit: 'ms' },
 })
 const fillMode = keyword(['none', 'forwards', 'backwards', 'both'])
-const iterationCount = integer()
+const iterationCount = joinSchemas([keyword(['infinite']), integer()])
 const name = ident({ defaultValue: 'none' })
 const playState = keyword(['running', 'paused'])
 const timingFunction = easingFunction

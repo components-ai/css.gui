@@ -14,7 +14,7 @@ const initialValue: any = {
     display: 'flex',
     alignItems: 'stretch',
     flexDirection: 'column',
-    textDecoration: 'none',
+    // textDecoration: 'none',
     overflow: ['hidden'],
     height: 'auto',
   },
@@ -24,11 +24,14 @@ const initialValue: any = {
       style: {
         overflow: ['hidden'],
         maxHeight: { value: 40, unit: 'vh' },
-        minHeight: [
-          { value: 160, unit: 'px' },
-          { value: 256, unit: 'px' },
-          { value: 256, unit: 'px' },
-        ],
+        minHeight: {
+          type: 'responsive',
+          values: [
+            { value: 160, unit: 'px' },
+            { value: 256, unit: 'px' },
+            { value: 256, unit: 'px' },
+          ],
+        },
       },
       children: [
         {
@@ -59,12 +62,15 @@ const initialValue: any = {
           style: {
             marginTop: { value: 0, unit: 'px' },
             marginBottom: { value: 0, unit: 'px' },
-            fontWeight: 900,
-            fontSize: [
-              { value: 24, unit: 'px' },
-              { value: 32, unit: 'px' },
-              { value: 48, unit: 'px' },
-            ],
+            fontWeight: '900',
+            fontSize: {
+              type: 'responsive',
+              values: [
+                { value: 24, unit: 'px' },
+                { value: 32, unit: 'px' },
+                { value: 48, unit: 'px' },
+              ],
+            },
             lineHeight: { value: 1.25, unit: 'number' },
           },
           children: ['Hello, world!'],
@@ -74,13 +80,16 @@ const initialValue: any = {
           style: {
             marginTop: { value: 8, unit: 'px' },
             marginBottom: { value: 0, unit: 'px' },
-            fontWeight: 600,
-            opacity: 0.7,
-            fontSize: [
-              { value: 14, unit: 'px' },
-              { value: 16, unit: 'px' },
-              { value: 20, unit: 'px' },
-            ],
+            fontWeight: '600',
+            opacity: { value: 0.7, unit: '%' },
+            fontSize: {
+              type: 'responsive',
+              values: [
+                { value: 14, unit: 'px' },
+                { value: 16, unit: 'px' },
+                { value: 20, unit: 'px' },
+              ],
+            },
             lineHeight: { value: 1.25, unit: 'number' },
           },
           children: ['This is a subtitle'],
@@ -88,11 +97,14 @@ const initialValue: any = {
         {
           tagName: 'p',
           style: {
-            fontSize: [
-              { value: 14, unit: 'px' },
-              { value: 16, unit: 'px' },
-              { value: 16, unit: 'px' },
-            ],
+            fontSize: {
+              type: 'responsive',
+              values: [
+                { value: 14, unit: 'px' },
+                { value: 16, unit: 'px' },
+                { value: 16, unit: 'px' },
+              ],
+            },
             lineHeight: { value: 1.5, unit: 'number' },
             marginTop: { value: 16, unit: 'px' },
             marginBottom: { value: 24, unit: 'px' },
@@ -115,19 +127,22 @@ const initialValue: any = {
                 backgroundColor: 'tomato',
                 color: '#fff',
                 display: 'inline-flex',
-                fontSize: [
-                  { value: 14, unit: 'px' },
-                  { value: 16, unit: 'px' },
-                  { value: 16, unit: 'px' },
-                ],
-                fontWeight: 800,
+                fontSize: {
+                  type: 'responsive',
+                  values: [
+                    { value: 14, unit: 'px' },
+                    { value: 16, unit: 'px' },
+                    { value: 16, unit: 'px' },
+                  ],
+                },
+                fontWeight: '800',
                 justifyContent: 'center',
                 maxWidth: {
                   value: 100,
                   unit: 'px',
                 },
                 textAlign: 'center',
-                textDecoration: 'none',
+                // textDecoration: 'none',
                 whiteSpace: 'nowrap',
                 paddingLeft: { value: 16, unit: 'px' },
                 paddingRight: { value: 16, unit: 'px' },
