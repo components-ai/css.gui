@@ -32,17 +32,17 @@ const initialStyles = {
   width: { value: 100, unit: '%' },
   height: { value: 240, unit: 'px' },
   borderRadius: { value: 0, unit: 'px' },
-  backgroundColor: 'primary',
+  backgroundColor: { type: 'theme', path: 'primary' },
 }
 
 export default function Transitions() {
   const [styles, setStyles] = useState<any>(initialStyles)
   return (
-    <div sx={{display: 'flex', justifyContent: 'center'}}>
-    <div>
-      <section sx={{ my: 5 }}>
-        <styled.div styles={styles} />
-      </section>
+    <div sx={{ display: 'flex', justifyContent: 'center' }}>
+      <div>
+        <section sx={{ my: 5 }}>
+          <styled.div styles={styles} />
+        </section>
         <div sx={{ '& > div': { display: 'grid', gap: '1em' } }}>
           <Editor styles={styles} onChange={setStyles} />
         </div>
