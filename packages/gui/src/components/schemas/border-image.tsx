@@ -1,6 +1,7 @@
 import { CheckboxInput } from '../inputs/CheckboxInput'
 import { boxSideSchema } from './box-side'
 import { image } from './image'
+import { joinSchemas } from './joinSchemas'
 import { objectSchema } from './object'
 import {
   keyword,
@@ -21,9 +22,11 @@ export const borderImageRepeat = tupleSchema({
 })
 
 const fill: DataTypeSchema<boolean> = {
+  type: 'fill',
   defaultValue: false,
   input: CheckboxInput,
   stringify: (value) => (value ? 'fill' : ''),
+  validate: ((value: any) => typeof value === 'boolean') as any,
 }
 export const borderImageSlice = objectSchema({
   fields: {
@@ -32,15 +35,16 @@ export const borderImageSlice = objectSchema({
   },
 })
 
-// TODO "none"
-export const borderImageSource = image
+export const borderImageSource = joinSchemas([keyword(['none']), image])
 
 export const borderImageWidth = boxSideSchema({
-  itemSchema: lengthPercentage({
-    number: true,
-    range: 'nonnegative',
-    keywords: ['auto'],
-  }),
+  itemSchema: joinSchemas([
+    keyword(['auto']),
+    lengthPercentage({
+      number: true,
+      range: 'nonnegative',
+    }),
+  ]),
 })
 
 export const borderImage = objectSchema({
