@@ -63,6 +63,7 @@ import { GLOBAL_KEYWORDS } from './global-keywords'
 import { ResponsiveInput } from '../components/Responsive'
 import { validate } from 'uuid'
 import { Responsive } from '../components/Responsive/Input'
+import ColorValueDisplay from '../components/primitives/ColorPicker/ValueDisplay'
 
 type PropertyData = {
   input: PrimitiveType | ComponentType<EditorPropsWithLabel<any>>
@@ -104,6 +105,13 @@ function responsive<T>(
 ): DataTypeSchema<Responsive<T>> {
   return {
     type: 'responsive',
+    inlineInput({ value }) {
+      return (
+        <div sx={{ fontSize: 1 }}>
+          {value.values.map((item) => itemSchema.stringify(item)).join(', ')}
+        </div>
+      )
+    },
     input({ value, onChange }) {
       return (
         <ResponsiveInput
