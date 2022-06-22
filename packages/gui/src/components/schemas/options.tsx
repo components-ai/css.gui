@@ -96,10 +96,7 @@ export function optionsSchema<T extends Record<string, any>>({
       const type = getType(value)
       return variants[type].stringify(value)
     },
-    defaultValue: {
-      ...variants[order[0]].defaultValue,
-      type: order[0],
-    },
+    defaultValue: variants[order[0]].defaultValue,
     regenerate,
     validate: ((value: any) => {
       return Object.values(variants).some((variantSchema) =>

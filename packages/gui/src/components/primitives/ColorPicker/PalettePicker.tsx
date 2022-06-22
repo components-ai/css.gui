@@ -7,7 +7,7 @@ import Checkerboard from './Checkerboard'
 import { hasAlpha, withFallback } from './util'
 import ColorValueDisplay from './ValueDisplay'
 
-interface ThemeColor {
+export interface ThemeColor {
   type: 'theme'
   path: string
 }

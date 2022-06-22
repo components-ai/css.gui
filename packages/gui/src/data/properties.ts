@@ -108,7 +108,6 @@ function normalizeSchema(propertyData: PropertyData): DataTypeSchema<any> {
           themeProperty && theme(themeProperty),
         ])
       )
-      return schema
     }
   }
   return propertyData as any
@@ -117,7 +116,7 @@ function normalizeSchema(propertyData: PropertyData): DataTypeSchema<any> {
 export const rawProperties: Record<string, any> = {
   accentColor: {
     input: 'color',
-    defaultValue: { value: 'tomato' },
+    defaultValue: 'tomato',
     keywords: ['auto', 'currentcolor', 'transparent'],
   },
   alignContent: {
@@ -246,7 +245,7 @@ export const rawProperties: Record<string, any> = {
   backgroundColor: {
     input: 'color',
     keywords: ['currentcolor', 'transparent'],
-    defaultValue: { value: 'tomato' },
+    defaultValue: 'tomato',
   },
   backgroundPositionX: {
     // TODO: Add side relative values option and multiple values option
@@ -362,7 +361,7 @@ export const rawProperties: Record<string, any> = {
   caretColor: {
     input: 'color',
     keywords: ['currentcolor', 'transparent'],
-    defaultValue: { value: '#6465ff' },
+    defaultValue: '#6465ff',
   },
   clear: {
     input: 'keyword',
@@ -379,7 +378,7 @@ export const rawProperties: Record<string, any> = {
   color: {
     input: 'color',
     keywords: ['currentcolor', 'transparent'],
-    defaultValue: { value: '#6465ff' },
+    defaultValue: '#6465ff',
   },
   colorAdjust: {
     input: 'keyword',
@@ -400,7 +399,7 @@ export const rawProperties: Record<string, any> = {
   columnRuleColor: {
     input: 'color',
     keywords: ['currentcolor', 'transparent'],
-    defaultValue: { value: '#6465ff' },
+    defaultValue: '#6465ff',
   },
   columnRuleStyle: {
     input: 'keyword',
@@ -559,7 +558,7 @@ export const rawProperties: Record<string, any> = {
   fill: {
     input: 'color',
     keywords: ['none', 'context-fill', 'context-stroke'],
-    defaultValue: { value: '#6465ff' },
+    defaultValue: '#6465ff',
   },
   filter,
   flexBasis: {
@@ -658,7 +657,7 @@ export const rawProperties: Record<string, any> = {
   floodColor: {
     input: 'color',
     keywords: ['currentcolor', 'transparent'],
-    defaultValue: { value: '#6465ff' },
+    defaultValue: '#6465ff',
   },
   floodOpacity: {
     input: 'percentage',
@@ -1176,7 +1175,7 @@ export const rawProperties: Record<string, any> = {
   outlineColor: {
     input: 'color',
     keywords: ['invert'],
-    defaultValue: { value: '#6465ff' },
+    defaultValue: '#6465ff',
   },
   outlineOffset: {
     input: 'length',
@@ -1326,7 +1325,7 @@ export const rawProperties: Record<string, any> = {
   scrollbarColor: {
     input: 'color',
     keywords: ['auto', 'currentcolor', 'transparent'],
-    defaultValue: { value: '#ff33cc' },
+    defaultValue: '#ff33cc',
   },
   scrollbarGutter: {
     input: 'keyword',
@@ -1446,7 +1445,7 @@ export const rawProperties: Record<string, any> = {
   textEmphasisColor: {
     input: 'color',
     keywords: ['currentcolor', 'transparent'],
-    defaultValue: { value: '#6465ff' },
+    defaultValue: '#6465ff',
   },
   textEmphasisPosition: {
     input: 'keyword',
