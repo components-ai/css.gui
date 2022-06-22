@@ -60,8 +60,6 @@ import { DataTypeSchema } from '../components/schemas/types'
 import { joinSchemas } from '../components/schemas/joinSchemas'
 import { theme } from '../components/schemas/theme'
 import { GLOBAL_KEYWORDS } from './global-keywords'
-import { ResponsiveInput } from '../components/Responsive'
-import { Responsive } from '../components/Responsive/Input'
 import { responsive } from '../components/schemas/responsive'
 
 type PropertyData = {
@@ -71,12 +69,8 @@ type PropertyData = {
   keywords?: readonly string[]
   range?: UnitRanges
   defaultValue?: any
-  stringify?: (value: any) => string
   dependantProperties?: string[]
   steps?: UnitSteps
-  label?: string
-  responsive?: boolean
-  dimensions?: number
   themeProperty?: string
 }
 
@@ -135,7 +129,7 @@ export const rawProperties: Record<string, any> = {
   },
   alignContent: {
     input: 'keyword',
-    responsive: true,
+
     keywords: [
       'center',
       'start',
@@ -157,7 +151,7 @@ export const rawProperties: Record<string, any> = {
   },
   alignItems: {
     input: 'keyword',
-    responsive: true,
+
     keywords: [
       'center',
       'start',
@@ -201,7 +195,7 @@ export const rawProperties: Record<string, any> = {
   },
   alignSelf: {
     input: 'keyword',
-    responsive: true,
+
     keywords: [
       'auto',
       'center',
@@ -523,7 +517,7 @@ export const rawProperties: Record<string, any> = {
   },
   display: {
     input: 'keyword',
-    responsive: true,
+
     keywords: [
       'block',
       'inline',
@@ -597,13 +591,13 @@ export const rawProperties: Record<string, any> = {
   },
   flexDirection: {
     input: 'keyword',
-    responsive: true,
+
     keywords: ['row', 'row-reverse', 'column', 'column-reverse'],
     defaultValue: 'row',
   },
   flexFlow: {
     input: 'keyword',
-    responsive: true,
+
     keywords: [
       'row',
       'row-reverse',
@@ -635,7 +629,7 @@ export const rawProperties: Record<string, any> = {
   },
   flexWrap: {
     input: 'keyword',
-    responsive: true,
+
     keywords: ['nowrap', 'wrap', 'wrap-reverse'],
     defaultValue: 'wrap',
   },
@@ -932,7 +926,7 @@ export const rawProperties: Record<string, any> = {
   },
   justifyContent: {
     input: 'keyword',
-    responsive: true,
+
     keywords: [
       'start',
       'center',
@@ -1389,7 +1383,7 @@ export const rawProperties: Record<string, any> = {
   },
   textAlign: {
     input: 'keyword',
-    responsive: true,
+
     keywords: [
       'start',
       'end',
