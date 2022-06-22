@@ -1,6 +1,9 @@
 import * as React from 'react'
-import { CursorProps } from './types'
 
+interface CursorProps {
+  x: number
+  y: number
+}
 const InternalCursor = ({ x, y }: CursorProps, ref: any) => {
   return (
     <svg

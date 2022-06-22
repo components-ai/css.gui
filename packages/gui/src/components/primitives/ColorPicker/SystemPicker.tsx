@@ -16,9 +16,9 @@ export default function SystemPicker({ value, onChange }: Props) {
             <input
               type="radio"
               name="system"
-              value={value.value}
+              value={value}
               id={keyword}
-              onChange={() => onChange({ value: keyword })}
+              onChange={() => onChange(keyword)}
             />
             {keyword}
           </label>

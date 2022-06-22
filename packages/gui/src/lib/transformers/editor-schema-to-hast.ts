@@ -16,7 +16,7 @@ export const editorSchemaToHast = (node: any, options?: Options) => {
 
   const processedTree = unified()
     .use(attributesToProperties)
-    .use(moveStyleToProperties)
+    .use(moveStyleToProperties as any)
     .use(removeProperties, { propertiesToRemove })
     .runSync(node)
   return processedTree
