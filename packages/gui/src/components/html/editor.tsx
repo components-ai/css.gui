@@ -4,7 +4,9 @@ import * as Collapsible from '@radix-ui/react-collapsible'
 import * as Tabs from '@radix-ui/react-tabs'
 import { Fragment, useState } from 'react'
 import { isNil } from 'lodash-es'
-import { Code, Layers, X } from 'react-feather'
+import { nanoid } from 'nanoid'
+import IconButton from '../ui/IconButton'
+import { Box, Code, Layers, X } from 'react-feather'
 import { Label, Combobox } from '../primitives'
 import { SelectInput } from '../inputs/SelectInput'
 import { AttributeEditor } from './AttributeEditor'
@@ -15,6 +17,9 @@ import { isSamePath } from './util'
 import { Export } from './Export'
 import { NodeEditorDropdown } from '../ui/dropdowns/NodeEditorDropdown'
 import { useTheme } from '../providers/ThemeContext'
+import { ComponentEditor } from './components/Editor'
+import { Component } from './components/types'
+import { pascalCase } from '../../lib/util'
 
 const HTML_TAGS = [
   HTMLTag.A,
@@ -211,6 +216,9 @@ export function HtmlEditor({ onChange }: HtmlEditorProps) {
           <Tabs.Trigger sx={TABS_TRIGGER_STYLES} value="tree">
             <Layers size={12} /> Layers
           </Tabs.Trigger>
+          <Tabs.Trigger sx={TABS_TRIGGER_STYLES} value="components">
+            <Box size={12} /> Components
+          </Tabs.Trigger>
           <Tabs.Trigger sx={TABS_TRIGGER_STYLES} value="export">
             <Code size={12} /> Export
           </Tabs.Trigger>
@@ -258,6 +266,9 @@ export function HtmlEditor({ onChange }: HtmlEditorProps) {
             />
           </div>
         </Tabs.Content>
+        <Tabs.Content sx={TABS_CONTENT_STYLES} value="components">
+          <ComponentEditor />
+        </Tabs.Content>
         <Tabs.Content sx={TABS_CONTENT_STYLES} value="export">
           <Export value={value} theme={theme} />
         </Tabs.Content>
@@ -282,7 +293,30 @@ function NodeEditor({
   onParentChange,
 }: TagEditorProps) {
   const { value: fullValue, selected } = useHtmlEditor()
-  const nodeType = value.type === 'text' ? 'text' : 'tag'
+
+  let nodeType = value.type === 'text' ? 'text' : 'tag'
+  if (value.type === 'component') {
+    nodeType = 'component'
+  }
+  const { createComponent } = useHtmlEditor()
+
+  const handleCreateComponent = () => {
+    const newComponent: Component = {
+      id: nanoid(),
+      name: pascalCase(value.tagName ?? ''),
+      props: [],
+      value,
+    }
+
+    createComponent(newComponent)
+
+    onChange({
+      type: 'component',
+      componentId: newComponent.id,
+      attributes: value.attributes,
+    })
+  }
+
   return (
     <div sx={{ pb: 3, overflowY: 'auto', overflowX: 'hidden' }}>
       <div
@@ -302,15 +336,20 @@ function NodeEditor({
             onChange={(value) => {
               if (value === 'text') {
                 onChange({ type: 'text', value: '' })
-              } else {
+              } else if (value === 'tag') {
                 onChange({
                   type: 'element',
                   tagName: 'div',
                   children: [],
                 })
+              } else {
+                onChange({
+                  type: 'component',
+                  children: [],
+                })
               }
             }}
-            options={['text', 'tag']}
+            options={['text', 'tag', 'component']}
           />
         </div>
         <div sx={{ mr: -2 }}>
@@ -340,8 +379,17 @@ function NodeEditor({
             }}
           />
         </div>
+        <div sx={{ position: 'relative', top: '-4px' }}>
+          <IconButton onClick={handleCreateComponent}>
+            <Box size={14} />
+          </IconButton>
+        </div>
       </div>
-      <NodeSwitch value={value} onChange={onChange} />
+      {nodeType === 'component' ? (
+        <ComponentSwitch value={value} onChange={onChange} />
+      ) : (
+        <NodeSwitch value={value} onChange={onChange} />
+      )}
     </div>
   )
 }
@@ -422,15 +470,74 @@ function NodeSwitch({ value, onChange }: EditorProps) {
   )
 }
 
+function ComponentSwitch({ value, onChange }: EditorProps) {
+  const { selected, components } = useHtmlEditor()
+
+  console.log(value)
+  console.log('------')
+
+  const handleComponentChange = (e: any) => {
+    const componentId = e.target.value
+    const componentForId = components.find((c) => c.id === componentId)
+    console.log(value, componentForId)
+    onChange({
+      type: 'component',
+      componentId,
+      value: componentForId?.value,
+    })
+  }
+
+  return (
+    <div>
+      <article
+        sx={{
+          borderBottomWidth: '1px',
+          borderBottomStyle: 'solid',
+          borderBottomColor: 'border',
+          pb: 3,
+        }}
+      >
+        <div sx={{ mb: 2, px: 3 }}>
+          <Label>Component</Label>{' '}
+          <select value={value.componentId} onChange={handleComponentChange}>
+            <option>Select a component</option>
+            {components.map((c) => {
+              return (
+                <option key={c.id} value={c.id}>
+                  {c.name || c.id}
+                </option>
+              )
+            })}
+          </select>
+        </div>
+        <div>
+          <AttributeEditor
+            value={value.attributes ?? {}}
+            onChange={(newAttributes) =>
+              onChange({ ...value, attributes: newAttributes })
+            }
+            element={value.tagName as string}
+          />
+        </div>
+      </article>
+    </div>
+  )
+}
+
 interface TreeNodeProps extends EditorProps {
   path: ElementPath
   onSelect(path: ElementPath | null): void
 }
 
 function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
-  const { selected } = useHtmlEditor()
+  const { selected, components } = useHtmlEditor()
   const [open, setOpen] = useState(true)
   const isSelected = isSamePath(path, selected)
+
+  const componentForId =
+    value.type === 'component'
+      ? components.find((comp) => comp.id === value.componentId)
+      : null
 
   if (value.type === 'text') {
     return (
@@ -469,7 +576,7 @@ function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
       }}
       onClick={() => onSelect(path)}
     >
-      &lt;{value.tagName}
+      &lt;{value.tagName || componentForId?.name || componentForId?.id}
       {!open || isVoidElement(value.tagName as string) ? ' /' : null}&gt;
     </button>
   )
@@ -584,7 +691,8 @@ function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
               fontFamily: 'monospace',
             }}
           >
-            &lt;/{value.tagName}&gt;
+            &lt;/{value.tagName || componentForId?.name || componentForId?.id}
+            &gt;
           </div>
         </div>
       </Collapsible.Content>

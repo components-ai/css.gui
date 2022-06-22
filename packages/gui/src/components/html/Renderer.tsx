@@ -7,6 +7,7 @@ import { isSamePath } from './util'
 import { useTheme } from '../providers/ThemeContext'
 import { transformValueToSchema } from '../../components/html/Provider'
 import { toReactProps } from '../../lib/codegen/to-react-props'
+import { Component } from './components/types'
 
 interface HtmlRendererProps {
   value: ElementData
@@ -37,10 +38,15 @@ interface ElementRendererProps {
   canvas: boolean
 }
 function ElementRenderer({ value, canvas, path }: ElementRendererProps) {
-  const { selected, setSelected } = useHtmlEditor()
+  const { selected, setSelected, components } = useHtmlEditor()
   const theme = useTheme()
   const { attributes = {}, style = {}, children = [] } = value
   const Tag: any = value.tagName || 'div'
+
+  const componentForId =
+    value.type === 'component'
+      ? components.find((comp) => comp.id === value.componentId)
+      : null
 
   const sx = toCSSObject(
     {
@@ -71,12 +77,19 @@ function ElementRenderer({ value, canvas, path }: ElementRendererProps) {
     return <Tag {...props} />
   }
 
+  console.log(componentForId)
+
+  if (componentForId) {
+    return <ElementRenderer canvas={canvas} value={componentForId.value} />
+  }
+
   return (
     <Tag {...props}>
       {children.map((child, i) => {
         if (child.type === 'text') {
           return child.value
         }
+
         return (
           <ElementRenderer
             key={i}

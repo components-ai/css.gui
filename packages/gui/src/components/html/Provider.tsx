@@ -2,6 +2,7 @@ import { createContext, ReactNode, useContext, useState } from 'react'
 import { htmlToEditorSchema } from '../../lib'
 import { stylesToEditorSchema } from '../../lib/transformers/styles-to-editor-schema'
 import { ThemeProvider } from '../providers/ThemeContext'
+import { Component } from './components/types'
 import { HtmlNode, ElementPath, ElementData } from './types'
 
 const DEFAULT_HTML_EDITOR_VALUE = {
@@ -15,6 +16,9 @@ const DEFAULT_HTML_EDITOR_VALUE = {
       <a href="https://components.ai">I'm a link!</a>
     </div>
   `),
+  components: [],
+  createComponent: () => {},
+  updateComponents: () => {},
 }
 
 export type HtmlEditor = {
@@ -22,6 +26,9 @@ export type HtmlEditor = {
   theme?: any
   selected: ElementPath | null
   setSelected: (newSelection: ElementPath | null) => void
+  createComponent: (newComponent: Component) => void
+  updateComponents: (newComponents: Component[]) => void
+  components: Component[]
 }
 
 export function useHtmlEditor() {
@@ -79,13 +86,21 @@ export function HtmlEditorProvider({
   theme,
 }: HtmlEditorProviderProps) {
   const [selected, setSelected] = useState<ElementPath | null>([])
+  const [components, setComponents] = useState<Component[]>([])
   const transformedValue = transformValueToSchema(value)
 
   const fullContext = {
     value: transformedValue,
+    components,
     selected,
     setSelected: (newSelection: ElementPath | null) =>
       setSelected(newSelection),
+    createComponent: (newComponent: Component) => {
+      setComponents([...components, newComponent])
+    },
+    updateComponents: (newComponents: Component[]) => {
+      setComponents(newComponents)
+    },
   }
 
   return (

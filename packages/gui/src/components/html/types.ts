@@ -1,6 +1,7 @@
 export interface ElementData {
-  type: 'element' | 'text'
+  type: 'element' | 'text' | 'component'
   tagName?: string
+  componentId?: string
   attributes?: Record<string, string>
   // `style` is an attribute, but we treat it specially for CSS.gui
   style?: Record<string, any>
