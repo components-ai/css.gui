@@ -10,9 +10,10 @@ import { keyword, length, lengthPercentage, string } from './primitives'
 import { objectSchema } from './object'
 import { joinSchemas } from './joinSchemas'
 
-const shapeRadius = lengthPercentage({
-  keywords: ['closest-side', 'farthest-side'],
-})
+const shapeRadius = joinSchemas([
+  keyword(['closest-side', 'farthest-side']),
+  lengthPercentage(),
+])
 
 const inset = functionSchema(
   'inset',
