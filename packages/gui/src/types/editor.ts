@@ -7,11 +7,6 @@ export interface EditorProps<T, K = never> {
    * A list of keywords that are applicable to this input
    */
   keywords?: K[]
-  /**
-   * Indicates whether the input is a top-level input (ie. not a sub-input)
-   * and indicates it should be populated with things like global keywords.
-   */
-  topLevel?: boolean
   onRemove?(): void
   reorder?: {
     onMoveUp?(): void
