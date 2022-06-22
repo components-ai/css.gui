@@ -1,14 +1,20 @@
 import * as Popover from '@radix-ui/react-popover'
+import { get } from 'lodash-es'
 import { Color } from '../../../types/css'
 import { Theme } from '../../../types/theme'
+import { useTheme } from '../../providers/ThemeContext'
 import Checkerboard from './Checkerboard'
 import { hasAlpha, withFallback } from './util'
 import ColorValueDisplay from './ValueDisplay'
 
+interface ThemeColor {
+  type: 'theme'
+  path: string
+}
+
 interface Props {
-  value: Color
-  onChange(value: Color): void
-  theme: Theme
+  value: ThemeColor
+  onChange(value: ThemeColor): void
 }
 
 export default function PalettePopover({
@@ -42,7 +48,7 @@ export default function PalettePopover({
       >
         {/* swatch */}
         <Popover.Anchor>{<Swatch value={value} />}</Popover.Anchor>
-        {value}
+        {value.path}
       </Popover.Trigger>
       <Popover.Content
         sx={{
@@ -60,8 +66,12 @@ export default function PalettePopover({
   )
 }
 
-function Swatch({ value }: { value: string }) {
-  const isTransparent = hasAlpha(value)
+function Swatch({ value }: { value: ThemeColor }) {
+  const theme = useTheme()
+  // FIXME extracting color value from path is annoying...
+  const color = get(theme.colors, value.path)
+  // console.log(value, theme, color)
+  const isTransparent = hasAlpha(color)
   return (
     <div
       sx={{
@@ -83,7 +93,7 @@ function Swatch({ value }: { value: string }) {
           inset: 0,
           height: '100%',
           width: '100%',
-          ...withFallback(value, (color) => ({ backgroundColor: color })),
+          ...withFallback(color, (color) => ({ backgroundColor: color })),
         }}
       />
     </div>
@@ -93,16 +103,18 @@ function Swatch({ value }: { value: string }) {
 /**
  * A color picker that allows selecting colors from a provided user theme
  */
-export function PalettePicker({ value, onChange, theme }: Props) {
+export function PalettePicker({ value, onChange }: Props) {
+  const theme = useTheme()
+  const valueColor = get(theme.colors, value.path)
   return (
     <div>
-      <ColorValueDisplay value={value} onChange={onChange} />
+      {/* <ColorValueDisplay value={color} onChange={onChange} /> */}
       <div sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-        {theme?.colors?.map((colorGroup: any, i: number) => {
+        {Object.entries(theme?.colors ?? {}).map(([name, colorGroup]) => {
           return (
-            <div key={i} sx={{ display: 'flex', gap: '.125rem' }}>
-              {colorGroup.colors.map((color: any, i: number) => {
-                const selected = value === color.value
+            <div key={name} sx={{ display: 'flex', gap: '.125rem' }}>
+              {colorGroup.colors?.map((color, i) => {
+                const selected = valueColor === color
 
                 return (
                   <button
@@ -122,8 +134,8 @@ export function PalettePicker({ value, onChange, theme }: Props) {
                     }}
                     onClick={() =>
                       onChange({
-                        value: color,
-                        themePath: `colors.${colorGroup.name}.${i}`,
+                        type: 'theme',
+                        path: `${colorGroup.name}.${i}`,
                       })
                     }
                   />

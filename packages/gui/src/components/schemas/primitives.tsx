@@ -54,7 +54,7 @@ interface ThemeColor {
 }
 
 const themeColor: DataTypeSchema<ThemeColor> = {
-  type: 'color',
+  type: 'theme',
   inlineInput: PalettePopover,
   stringify: (value, theme) => get(theme?.colors, value.path),
   defaultValue: { type: 'theme', path: 'primary' },
