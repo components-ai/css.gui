@@ -1,6 +1,7 @@
+import { color } from './color'
 import { joinSchemas } from './joinSchemas'
 import { objectSchema } from './object'
-import { color, keyword, lengthPercentage } from './primitives'
+import { keyword, lengthPercentage } from './primitives'
 
 const textDecorationLineKeywords = [
   'none',

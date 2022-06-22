@@ -1,7 +1,8 @@
 import { boxSideSchema } from './box-side'
+import { color } from './color'
 import { joinSchemas } from './joinSchemas'
 import { objectSchema } from './object'
-import { color, keyword, length } from './primitives'
+import { keyword, length } from './primitives'
 import { theme } from './theme'
 import { tupleSchema } from './tuple'
 

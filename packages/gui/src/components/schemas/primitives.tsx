@@ -1,70 +1,21 @@
 import { compact } from 'lodash-es'
-import { randomColor } from '../../lib/color'
 import { bindProps } from '../../lib/components'
 import { choose, randomStep } from '../../lib/random'
 import { stringifyUnit } from '../../lib/stringify'
 import { randomInt } from '../../lib/util'
 import {
-  Color,
   CSSUnitValue,
   Length,
   LENGTH_UNITS,
   NumberPercentage,
 } from '../../types/css'
-import { ColorInput } from '../inputs/ColorInput'
 import { Range } from '../inputs/Dimension/Input'
 import { KeywordInput } from '../inputs/KeywordInput'
 import { NumberInput } from '../inputs/NumberInput'
 import { IntegerInput } from '../inputs/PrimitiveInput'
 import { TextInput } from '../inputs/TextInput'
-import PalettePopover, {
-  ThemeColor,
-} from '../primitives/ColorPicker/PalettePicker'
-import { isValidColor } from '../primitives/ColorPicker/util'
 import { dimension } from './dimension'
-import { joinSchemas } from './joinSchemas'
 import { DataTypeSchema } from './types'
-
-function colorObject({
-  defaultValue = '#000',
-}: {
-  defaultValue?: Color
-} = {}): DataTypeSchema<Color> {
-  return {
-    type: 'color',
-    inlineInput: ColorInput,
-    stringify: stringifyUnit as any,
-    defaultValue,
-    regenerate: () => randomColor(),
-    validate: ((value: any) => {
-      return typeof value === 'string' && isValidColor(value)
-    }) as any,
-  }
-}
-
-const themeColor: DataTypeSchema<ThemeColor> = {
-  type: 'theme',
-  inlineInput: PalettePopover,
-  stringify: (value) => value.path,
-  defaultValue: { type: 'theme', path: 'primary' },
-  regenerate: () => randomColor(),
-  validate: ((value: any) => {
-    if (typeof value !== 'object') return false
-    return value.type === 'theme' && typeof value.path === 'string'
-  }) as any,
-}
-
-export function color({
-  defaultValue = 'transparent',
-}: {
-  defaultValue?: any
-} = {}) {
-  return joinSchemas([
-    colorObject({ defaultValue }),
-    themeColor,
-    keyword(['transparent', 'currentcolor']),
-  ])
-}
 
 export function percentage({
   defaultValue,

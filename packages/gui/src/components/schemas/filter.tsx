@@ -1,9 +1,10 @@
 import { listSchema } from './list'
 import { functionSchema } from './function'
-import { color, keyword, length, numberPercentage } from './primitives'
+import { keyword, length, numberPercentage } from './primitives'
 import { objectSchema } from './object'
 import { joinSchemas } from './joinSchemas'
 import { angle } from './angle'
+import { color } from './color'
 
 const blur = functionSchema('blur', length())
 

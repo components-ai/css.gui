@@ -7,12 +7,13 @@ import GradientStopsField from '../inputs/Gradient/stops'
 import { GradientStop } from '../inputs/Gradient/types'
 import { functionSchema } from './function'
 import { position } from './position'
-import { color, keyword, number } from './primitives'
+import { keyword, number } from './primitives'
 import { angle } from './angle'
 import { DataTypeSchema } from './types'
 import { objectSchema } from './object'
 import { withKeywords } from './withKeywords'
 import { joinSchemas } from './joinSchemas'
+import { color } from './color'
 
 export const stringifyStops = (
   stops: GradientStop[],

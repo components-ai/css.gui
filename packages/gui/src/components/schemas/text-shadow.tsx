@@ -1,7 +1,8 @@
+import { color } from './color'
 import { joinSchemas } from './joinSchemas'
 import { listSchema } from './list'
 import { objectSchema } from './object'
-import { color, keyword, length } from './primitives'
+import { keyword, length } from './primitives'
 
 const singleTextShadow = objectSchema({
   fields: {
