@@ -18,7 +18,7 @@ interface Props {
 
 // The "normal" color picker that lets you set a color value directly
 export default function ColorPicker(props: Props) {
-  const { value, onChange, theme = {} } = props
+  const { value, onChange } = props
 
   const normedValue = isValidColor(value) ? value : '#000000'
   const mode = getColorMode(normedValue)
@@ -67,13 +67,6 @@ export default function ColorPicker(props: Props) {
       ) : (
         <HsvColorPicker value={normedValue} onChange={onChange} mode={mode} />
       )}
-      {/* {theme && (
-        <PreviewPalettePicker
-          value={normedValue}
-          onChange={onChange}
-          theme={theme}
-        />
-      )} */}
     </div>
   )
 }

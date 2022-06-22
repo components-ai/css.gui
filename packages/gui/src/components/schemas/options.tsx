@@ -20,6 +20,9 @@ export function optionsSchema<T extends Record<string, any>>({
 }: CreateOptions<T>): DataTypeSchema<Unionize<T>> {
   function getType(value: T): keyof T {
     for (const [type, schema] of Object.entries(variants)) {
+      if (!schema.validate) {
+        console.log('invalid schema:', schema)
+      }
       if (schema.validate(value)) return type
     }
 

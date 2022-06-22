@@ -12,8 +12,6 @@ export interface Props {
   theme?: Theme
   /** If provided, a label to render for the color picker */
   title?: string
-  /** The initial tab to show on load */
-  initialTab?: string
   /** If provided, will render a trash icon that calls `onRemove` when clicked */
   onRemove?(): void
   /**
@@ -24,29 +22,18 @@ export interface Props {
 }
 
 /**
- * The color picker field: provides a color picker that lets the user:
- *
- *  - pick a color value directly in multiple color modes
- *  - select a system color
- *  - select a palette color from the user theme
- *
- * The picker appears as a field taking up the entire parent space. If a popover is desired,
- * use ColorPopover instead.
- *
+ * Color picker field for choosing a color among different color spaces
  */
 export default function ColorPicker({
   value,
   onChange,
   theme,
   title,
-  initialTab = 'picker',
   onRemove,
   onRegenerate,
 }: Props) {
-  const [tab, setTab] = useState(initialTab)
   return (
     <div>
-      {/* <Tabs.Root value={tab} onValueChange={setTab}> */}
       {title && (
         <div
           sx={{
