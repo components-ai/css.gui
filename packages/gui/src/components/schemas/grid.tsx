@@ -2,7 +2,6 @@ import { functionSchema } from './function'
 import { joinSchemas } from './joinSchemas'
 import { listSchema } from './list'
 import { objectSchema } from './object'
-import { optionsSchema } from './options'
 import { integer, keyword, lengthPercentage } from './primitives'
 
 const inflexibleBreadth = joinSchemas([
@@ -14,34 +13,31 @@ const trackBreadth = joinSchemas([
   lengthPercentage({ range: 'nonnegative', flex: true }),
 ])
 
-const trackSizeVariants = {
-  breadth: trackBreadth,
-  minmax: functionSchema(
+const trackSize = joinSchemas([
+  trackBreadth,
+  functionSchema(
     'minmax',
     objectSchema({
       fields: { min: inflexibleBreadth, max: trackBreadth },
+      separator: ', ',
     })
   ),
-  'fit-content': functionSchema('fit-content', lengthPercentage()),
-}
+  functionSchema('fit-content', lengthPercentage()),
+])
 
-const trackSize = optionsSchema({ variants: trackSizeVariants })
-
-const trackList = optionsSchema({
-  variants: {
-    ...trackSizeVariants,
-    repeat: functionSchema(
-      'repeat',
-      objectSchema({
-        fields: {
-          count: integer({ defaultValue: 1 }),
-          trackList: listSchema({ itemSchema: trackSize, separator: ' ' }),
-        },
-        separator: ', ',
-      })
-    ),
-  },
-})
+const trackList = joinSchemas([
+  trackSize,
+  functionSchema(
+    'repeat',
+    objectSchema({
+      fields: {
+        count: integer({ defaultValue: 1 }),
+        trackList: listSchema({ itemSchema: trackSize, separator: ' ' }),
+      },
+      separator: ', ',
+    })
+  ),
+])
 
 export const gridAutoRow = listSchema({ itemSchema: trackSize, separator: ' ' })
 export const gridAutoColumns = listSchema({
