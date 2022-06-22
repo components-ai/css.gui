@@ -6,15 +6,12 @@ const initialStyles = {
     path: {
       type: 'shape',
       shape: {
-        type: 'path',
-        path: 'M 10 80 C 40 10, 65 10, 95 80 S 150 150, 180 80',
+        name: 'path',
+        arguments: 'M 10 80 C 40 10, 65 10, 95 80 S 150 150, 180 80',
       },
       box: 'margin-box',
     },
-    anchor: {
-      x: { value: 'center', unit: 'keyword' },
-      y: { value: 'center', unit: 'keyword' },
-    },
+    anchor: { x: 'center', y: 'center' },
     distance: { value: 50, unit: '%' },
     rotate: { value: 0, unit: 'deg' },
     position: {
