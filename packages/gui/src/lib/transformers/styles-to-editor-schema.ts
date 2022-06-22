@@ -38,6 +38,7 @@ export const stylesToEditorSchema = (styles: any) => {
       value = value.map((v) => transformComplexObject(v))
     }
     value = transformProperty(rawProperty, value)
+
     return {
       [property]: value,
       ...acc,
@@ -47,14 +48,19 @@ export const stylesToEditorSchema = (styles: any) => {
   return stylesSchema
 }
 
-const transformComplexObject = (value: any) => {
+const transformComplexObject = (value: any): any => {
   if (typeof value === 'string') {
     return value
   }
+
+  if (Array.isArray(value)) {
+    return value.map(transformComplexObject)
+  }
+
   const transformed = Object.entries(value).reduce((acc, [k, val]) => {
     let newValue = transformProperty(k, val)
     if (Array.isArray(val)) {
-      newValue = val.map((v) => transformComplexObject(v))
+      newValue = val.map(transformComplexObject)
     } else if (typeof val === 'object') {
       newValue = transformComplexObject(val)
     }

@@ -77,9 +77,9 @@ export default function ColorPicker({
             }}
           >
             {compact([
-              'picker',
-              !hideSystemColors && 'system',
-              theme && 'theme',
+              'Picker',
+              !hideSystemColors && 'System',
+              theme && 'Theme',
             ]).map((tab: string) => {
               return (
                 <Tabs.Trigger
@@ -135,7 +135,7 @@ export default function ColorPicker({
           </Tabs.Content>
         )}
         {theme && (
-          <Tabs.Content value="theme">
+          <Tabs.Content value="Theme">
             <PalettePicker value={value} onChange={onChange} theme={theme} />
           </Tabs.Content> */}
       {/* )} */}

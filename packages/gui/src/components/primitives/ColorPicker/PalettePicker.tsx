@@ -123,14 +123,16 @@ export function PalettePicker({ value, onChange }: Props) {
                     key={color.id}
                     title={`${name}.${i}`}
                     sx={{
+                      appearance: 'none',
+                      WebkitAppearance: 'none',
                       cursor: 'pointer',
-                      border: selected ? '2px solid' : '1px solid',
+                      borderWidth: selected ? '2px' : '1px',
                       borderColor: selected ? '#ff0000' : 'border',
-                      borderRadius: '.25rem',
+                      borderStyle: 'solid',
+                      borderRadius: '9999px',
                       padding: 0,
                       margin: 0,
-                      width: '1.5rem',
-                      height: '1.5rem',
+                      width: '100%',
                       aspectRatio: '1 / 1',
                       backgroundColor: color,
                     }}

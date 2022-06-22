@@ -117,6 +117,17 @@ interface HtmlEditorProps {
   onChange(value: HtmlNode): void
 }
 
+const DEFAULT_CHILD_NODE: HtmlNode = {
+  type: 'element',
+  tagName: 'div',
+  children: [
+    {
+      type: 'text',
+      value: '',
+    },
+  ],
+}
+
 const TABS_TRIGGER_STYLES: any = {
   all: 'unset',
   cursor: 'pointer',
@@ -432,45 +443,50 @@ function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
       <span sx={{ lineHeight: 1, fontFamily: 'monospace' }}>{tagButton}</span>
       <Collapsible.Content>
         <div sx={{ ml: 4 }}>
-          {value.children?.map((child, i) => {
-            return (
-              <Fragment key={i}>
-                <AddChildButton
-                  onClick={() => {
-                    onChange(
-                      addChildAtPath(value, [i], {
-                        type: 'text',
-                        value: '',
+          {value.children?.length ? (
+            value.children?.map((child, i) => {
+              return (
+                <Fragment key={i}>
+                  <AddChildButton
+                    onClick={() => {
+                      onChange(addChildAtPath(value, [i], DEFAULT_CHILD_NODE))
+                      onSelect([...path, i])
+                    }}
+                  />
+                  <TreeNode
+                    value={child}
+                    onSelect={onSelect}
+                    path={[...path, i]}
+                    onChange={(newChild) => {
+                      onChange({
+                        ...value,
+                        children: replaceAt(value.children ?? [], i, newChild),
                       })
-                    )
-                    onSelect([i])
-                  }}
-                />
-                <TreeNode
-                  value={child}
-                  onSelect={onSelect}
-                  path={[...path, i]}
-                  onChange={(newChild) => {
-                    onChange({
-                      ...value,
-                      children: replaceAt(value.children ?? [], i, newChild),
-                    })
-                  }}
-                />
-                <AddChildButton
-                  onClick={() => {
-                    onChange(
-                      addChildAtPath(value, [value.children?.length ?? 0], {
-                        type: 'text',
-                        value: '',
-                      })
-                    )
-                    onSelect(null)
-                  }}
-                />
-              </Fragment>
-            )
-          })}
+                    }}
+                  />
+                  <AddChildButton
+                    onClick={() => {
+                      onChange(
+                        addChildAtPath(
+                          value,
+                          [value.children?.length ?? 0],
+                          DEFAULT_CHILD_NODE
+                        )
+                      )
+                      onSelect(null)
+                    }}
+                  />
+                </Fragment>
+              )
+            })
+          ) : (
+            <AddChildButton
+              onClick={() => {
+                onChange(addChildAtPath(value, [0], DEFAULT_CHILD_NODE))
+                onSelect([0])
+              }}
+            />
+          )}
         </div>
         <div sx={{ display: 'flex', alignItems: 'center' }}>
           <div
@@ -519,33 +535,25 @@ function AddChildButton({ onClick }: { onClick(): void }) {
     <button
       onClick={onClick}
       sx={{
-        cursor: 'default',
+        cursor: 'pointer',
         display: 'block',
         background: 'none',
         border: 'none',
         textAlign: 'left',
-        color: 'transparent',
         fontSize: 0,
-        height: '0.25rem',
-        m: 0,
-        p: 0,
-        transition: 'height 250ms',
+        pt: 2,
         whiteSpace: 'nowrap',
+        color: 'muted',
         zIndex: '99',
+        transition: 'color .2s ease-in-out',
         ':hover': {
-          color: 'muted',
-          height: '1rem',
+          color: 'text',
         },
       }}
     >
       + Add child
     </button>
   )
-}
-
-interface AttributeEditorProps {
-  value: Record<string, string>
-  onChange(value: Record<string, string>): void
 }
 
 function getChildAtPath(element: HtmlNode, path: ElementPath): HtmlNode {

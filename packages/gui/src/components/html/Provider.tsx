@@ -1,6 +1,4 @@
-import { property } from 'lodash-es'
-import { Children, cloneElement, createContext, isValidElement, ReactElement, ReactNode, useContext, useEffect, useState } from 'react'
-import { rawProperties } from '../../data/properties'
+import { createContext, ReactNode, useContext, useState } from 'react'
 import { htmlToEditorSchema } from '../../lib'
 import { stylesToEditorSchema } from '../../lib/transformers/styles-to-editor-schema'
 import { HtmlNode, ElementPath, ElementData } from './types'
@@ -31,14 +29,33 @@ export function useHtmlEditor() {
 
 const HtmlEditorContext = createContext<HtmlEditor>(DEFAULT_HTML_EDITOR_VALUE)
 
+const coerceNodeIntoUnist = (node: any) => {
+  if (node.tagName) {
+    return { type: 'element', attributes: {}, ...node }
+  }
+
+  return node
+}
+
 export const transformValueToSchema = (value: any): ElementData => {
-  const transformed = Object.entries(value).reduce((acc, [key, val]) => {
+  const fullValue = coerceNodeIntoUnist(value)
+
+  const transformed = Object.entries(fullValue).reduce((acc, [key, val]) => {
     let updatedValue = val
     if (key === 'children' && Array.isArray(val)) {
       updatedValue = val.map((child) => transformValueToSchema(child))
     } else if (key === 'style') {
       updatedValue = stylesToEditorSchema(val)
     }
+
+    if (value.tagName && !value.type) {
+      return {
+        type: 'element',
+        [key]: updatedValue,
+        ...acc,
+      }
+    }
+
     return {
       [key]: updatedValue,
       ...acc,

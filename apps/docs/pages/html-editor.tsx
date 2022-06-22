@@ -186,6 +186,7 @@ const initialValue: any = {
         //},
         {
           tagName: 'div',
+          children: [{ type: 'text', value: '' }],
           style: {
             color: '#000000',
             backgroundImage: [

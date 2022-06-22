@@ -51,7 +51,7 @@ export const AttributeEditor = ({
 
   return (
     <div>
-      <div sx={{ px: 3, }}>
+      <div sx={{ px: 3 }}>
         <Label>Add attribute</Label>
         <Combobox
           onFilterItems={handleFilterItems}
@@ -65,11 +65,13 @@ export const AttributeEditor = ({
         return (
           <div sx={{ px: 3, pt: 3 }}>
             <Label>
-              <span sx={{display: 'block', width: '100%'}}>{key}</span>
-              <div sx={{ display: 'flex', alignItems: 'center', gap: '.5rem', }}>
+              <span sx={{ display: 'block', width: '100%' }}>{key}</span>
+              <div sx={{ display: 'flex', alignItems: 'center', gap: '.5rem' }}>
                 <input
                   value={attrValue}
-                  onChange={(e) => onChange({ ...value, [key]: e.target.value })}
+                  onChange={(e) =>
+                    onChange({ ...value, [key]: e.target.value })
+                  }
                 />
                 <IconButton onClick={() => handleItemRemoved(key)}>
                   <X size={14} strokeWidth={3} />
@@ -79,7 +81,6 @@ export const AttributeEditor = ({
           </div>
         )
       })}
-      
     </div>
   )
 }

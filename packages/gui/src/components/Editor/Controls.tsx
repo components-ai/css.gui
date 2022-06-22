@@ -8,6 +8,7 @@ import {
   useMemo,
 } from 'react'
 import { camelCase, mapValues, uniq } from 'lodash-es'
+import { RefreshCw } from 'react-feather'
 import { Styles } from '../../types/css'
 import { Theme } from '../../types/theme'
 import { EditorProvider, useEditor } from '../providers/EditorContext'
@@ -32,8 +33,9 @@ import { stylesToEditorSchema } from '../../lib/transformers/styles-to-editor-sc
 import { removeInternalCSSClassSyntax } from '../../lib/classes'
 import { AddFieldsetControl } from '../AddFieldset'
 import IconButton from '../ui/IconButton'
-import { RefreshCw } from 'react-feather'
 import { SchemaInput } from '../inputs/SchemaInput'
+import { EditorDropdown } from '../ui/dropdowns/EditorDropdown'
+import { FieldsetDropdown } from '../ui/dropdowns/FieldsetDropdown'
 
 export const getPropertyFromField = (field: KeyArg) => {
   if (Array.isArray(field)) {
@@ -225,7 +227,7 @@ export const EditorControls = ({
   children,
   showAddProperties,
 }: EditorControlsProps) => {
-  const { value: styles } = useEditor()
+  const { value: styles, clearAll } = useEditor()
   const [fieldsets, properties] = partitionProperties(uniq(Object.keys(styles)))
   const controls = children ? (
     children
@@ -239,8 +241,25 @@ export const EditorControls = ({
   return (
     <section sx={{ pb: 5 }}>
       {showAddProperties ? (
-        <div sx={{ pb: 4 }}>
-          <AddPropertyControl styles={styles} />
+        <div
+          sx={{
+            display: 'flex',
+            alignItems: 'flex-end',
+            width: '100%',
+            borderWidth: '1px',
+            borderStyle: 'solid',
+            borderColor: 'border',
+            borderRadius: '6px',
+            p: 3,
+            my: 3,
+          }}
+        >
+          <div sx={{ width: '100%' }}>
+            <AddPropertyControl styles={styles} />
+          </div>
+          <div sx={{ flexShrink: 1, width: 32 }}>
+            <EditorDropdown onClearStyles={clearAll} />
+          </div>
         </div>
       ) : null}
       {controls}
@@ -288,7 +307,7 @@ type FieldsetControlProps = {
   property: string
 }
 const FieldsetControl = ({ field, property }: FieldsetControlProps) => {
-  const { getField } = useEditor()
+  const { getField, removeField } = useEditor()
   const styles = getField(field || property)
   const properties = Object.keys(styles)
 
@@ -300,14 +319,24 @@ const FieldsetControl = ({ field, property }: FieldsetControlProps) => {
         borderTopStyle: 'solid',
       }}
     >
-      <h3
+      <div
         sx={{
-          fontSize: 2,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
           mb: 2,
         }}
       >
-        {removeInternalCSSClassSyntax(property)}
-      </h3>
+        <h3
+          sx={{
+            fontSize: 2,
+            lineHeight: 1,
+          }}
+        >
+          {removeInternalCSSClassSyntax(property)}
+        </h3>
+        <FieldsetDropdown onRemove={() => removeField(field || property)} />
+      </div>
       <GenericFieldset property={property}>
         <div sx={{ pb: 3 }}>
           <AddPropertyControl

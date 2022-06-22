@@ -1,5 +1,61 @@
 # @compai/css-gui
 
+## 0.0.121
+
+### Patch Changes
+
+- 4632b1b: Make item display configurable
+
+## 0.0.120
+
+### Patch Changes
+
+- 1588bfd: Make default node an empty div
+- 0273dee: Fix background-size
+
+## 0.0.119
+
+### Patch Changes
+
+- c2a64fb: Fix selection bug on node adding
+- cc6d912: Improve comboboxes
+
+## 0.0.118
+
+### Patch Changes
+
+- 31bdf9b: Clear all styles dropdown
+
+## 0.0.117
+
+### Patch Changes
+
+- e432f72: Changes layers editor
+- 6c83225: Remove fieldset
+
+## 0.0.116
+
+### Patch Changes
+
+- 356d97e: Ensure "add child" is always shown
+
+## 0.0.115
+
+### Patch Changes
+
+- e0ef441: Make nodes in html editor unist friendly
+- 5fe33db: Remove props transform temporarily
+- ad2ed3e: Remove attr default temporarily
+- b894bd0: Improve unstyled html export
+
+## 0.0.114
+
+### Patch Changes
+
+- f7619d5: Fix schema transformer to not destructure raw strings
+- 0587bb0: Format exports
+- db91166: Add React(vanilla/Emotion/Theme UI/Styled JSX) and Vue exports
+
 ## 0.0.113
 
 ### Patch Changes
