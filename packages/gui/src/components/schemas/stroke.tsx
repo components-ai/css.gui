@@ -10,7 +10,10 @@ import {
 } from './primitives'
 
 // TODO url() option
-export const stroke = color()
+export const stroke = joinSchemas([
+  color(),
+  keyword(['none', 'context-fill', 'context-stroke']),
+])
 
 export const strokeDasharray = listSchema({
   itemSchema: length({ number: true }),
