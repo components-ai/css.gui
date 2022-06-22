@@ -5,7 +5,7 @@ import { defaultTheme } from '../../data/default-theme'
 import { Container } from '../../components/Container'
 
 const initialStyles = {
-  textDecorationColor: 'primary',
+  textDecorationColor: { type: 'theme', path: 'primary' },
   textDecorationThickness: {
     value: 8,
     unit: 'px',
@@ -17,12 +17,9 @@ const initialStyles = {
     value: 3,
     unit: 'rem',
   },
-  letterSpacing: {
-    value: 'initial',
-    unit: 'keyword',
-  },
+  letterSpacing: 'initial',
   lineHeight: {
-    value: '1.25',
+    value: 1.25,
     unit: 'number',
   },
   fontFamily: 'Space Mono',
@@ -65,7 +62,7 @@ export default function TextDecoration() {
           <styled.p styles={styles}>
             “The parameters comprise sequences which are theoretically infinite
             but limits are, of course, set to them in practice.“
-            <br /> 
+            <br />
             <em sx={{ fontSize: '50%' }}>
               In{' '}
               <Link
