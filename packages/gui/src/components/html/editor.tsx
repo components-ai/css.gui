@@ -1,10 +1,9 @@
 import { Editor } from '../Editor'
-import { HtmlNode, HTMLTag, ElementPath } from './types'
+import { HtmlNode, HTMLTag, ElementPath, ElementData } from './types'
 import * as Collapsible from '@radix-ui/react-collapsible'
 import * as Tabs from '@radix-ui/react-tabs'
 import { Fragment, useState } from 'react'
 import { isNil } from 'lodash-es'
-import IconButton from '../ui/IconButton'
 import { Code, Layers, X } from 'react-feather'
 import { Label, Combobox } from '../primitives'
 import { SelectInput } from '../inputs/SelectInput'
@@ -14,6 +13,7 @@ import { useHtmlEditor } from './Provider'
 import { isVoidElement } from '../../lib/elements'
 import { isSamePath } from './util'
 import { Export } from './Export'
+import { NodeEditorDropdown } from '../ui/dropdowns/NodeEditorDropdown'
 
 const HTML_TAGS = [
   HTMLTag.A,
@@ -257,32 +257,56 @@ interface TagEditorProps extends EditorProps {
 }
 
 function NodeEditor({ value, onChange, onRemove }: TagEditorProps) {
+  const { value: fullValue, selected } = useHtmlEditor()
   const nodeType = value.type === 'text' ? 'text' : 'tag'
   return (
     <div sx={{ pb: 3, overflowY: 'auto', overflowX: 'hidden' }}>
       <div
-        sx={{ mb: 2, display: 'flex', alignItems: 'flex-end', px: 3, pt: 3 }}
+        sx={{
+          mb: 2,
+          display: 'flex',
+          alignItems: 'center',
+          px: 3,
+          pt: 3,
+          width: '100%',
+        }}
       >
-        <SelectInput
-          label="Type"
-          value={nodeType}
-          onChange={(value) => {
-            if (value === 'text') {
-              onChange({ type: 'text', value: '' })
-            } else {
-              onChange({
+        <div sx={{ flexGrow: 1 }}>
+          <SelectInput
+            label="Type"
+            value={nodeType}
+            onChange={(value) => {
+              if (value === 'text') {
+                onChange({ type: 'text', value: '' })
+              } else {
+                onChange({
+                  type: 'element',
+                  tagName: 'div',
+                  children: [],
+                })
+              }
+            }}
+            options={['text', 'tag']}
+          />
+        </div>
+        <div sx={{ mr: -2 }}>
+          <NodeEditorDropdown
+            onRemove={onRemove}
+            onDuplicate={() => {
+              const parentPath = [...(selected || [])]
+              const childIndex = parentPath.pop() // Remove child from parent path
+              const parent = getAt(fullValue, parentPath)
+              onChange(addChildAtPath(parent, [childIndex ?? 0], { ...value }))
+            }}
+            onWrap={() => {
+              const wrappedNode: HtmlNode = {
                 type: 'element',
                 tagName: 'div',
-                children: [],
-              })
-            }
-          }}
-          options={['text', 'tag']}
-        />
-        <div sx={{ position: 'relative', top: '-4px' }}>
-          <IconButton onClick={onRemove}>
-            <X size={14} />
-          </IconButton>
+                children: [value],
+              }
+              return onChange(wrappedNode)
+            }}
+          />
         </div>
       </div>
       <NodeSwitch value={value} onChange={onChange} />
@@ -664,6 +688,14 @@ function addAt<T>(items: T[], index: number, newItem: T) {
   const spliced = [...items]
   spliced.splice(index, 0, newItem)
   return spliced
+}
+
+function getAt<T>(node: ElementData, path: ElementPath) {
+  let el: ElementData | undefined = node
+  path.reverse().forEach((index) => {
+    el = el?.children?.[index]
+  })
+  return el
 }
 
 function replaceAt<T>(items: T[], index: number, newItem: T) {
