@@ -8,9 +8,10 @@ import {
   number,
   numberPercentage,
 } from './primitives'
+import { url } from './url'
 
-// TODO url() option
 export const stroke = joinSchemas([
+  url,
   color(),
   keyword(['none', 'context-fill', 'context-stroke']),
 ])
