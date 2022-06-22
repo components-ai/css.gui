@@ -1,6 +1,5 @@
 import { sortBy } from 'lodash-es'
 import { bindProps } from '../../lib/components'
-import { Theme } from '../../types/theme'
 import { randomInt } from '../../lib/util'
 import GradientStopsField from '../inputs/Gradient/stops'
 import { GradientStop } from '../inputs/Gradient/types'
@@ -13,11 +12,7 @@ import { objectSchema } from './object'
 import { joinSchemas } from './joinSchemas'
 import { color } from './color'
 
-export const stringifyStops = (
-  stops: GradientStop[],
-  unit: string = '%',
-  theme?: Theme
-) => {
+export const stringifyStops = (stops: GradientStop[], unit: string = '%') => {
   return sortBy(stops, (stop) => stop.hinting)
     ?.filter(Boolean)
     ?.map(({ color: hintColor, hinting }) => {
@@ -31,7 +26,7 @@ function stops(repeating: boolean = false): DataTypeSchema<GradientStop[]> {
   return {
     type: 'gradient stops',
     input: bindProps(GradientStopsField, { repeating }),
-    stringify: (value, theme) => stringifyStops(value, '%', theme),
+    stringify: (value) => stringifyStops(value, '%'),
     defaultValue: [
       { color: 'black', hinting: 0 },
       { color: 'transparent', hinting: 100 },
@@ -66,28 +61,23 @@ const directions = [
   'to bottom left',
 ] as const
 
-const linear = functionSchema(
-  'linear-gradient',
-  objectSchema({
+function linearArgs(repeating?: boolean) {
+  return objectSchema({
     fields: {
       angle: joinSchemas([keyword(directions), angle()]),
-      stops: stops(),
+      stops: stops(repeating),
     },
   })
-)
+}
+
+const linear = functionSchema('linear-gradient', linearArgs())
 const repeatingLinear = functionSchema(
   'repeating-linear-gradient',
-  objectSchema({
-    fields: {
-      angle: joinSchemas([keyword(directions), angle()]),
-      stops: stops(true),
-    },
-  })
+  linearArgs(true)
 )
 
-const radial = functionSchema(
-  'radial-gradient',
-  objectSchema({
+function radialArgs(repeating?: boolean) {
+  return objectSchema({
     fields: {
       shape: keyword(['circle', 'ellipse']),
       // TODO length sizes
@@ -98,60 +88,39 @@ const radial = functionSchema(
         'nearest-side',
       ]),
       position,
-      stops: stops(),
+      stops: stops(repeating),
     },
     stringify: ({ shape, size, position, stops }) =>
       `${shape} ${size} at ${position}, ${stops}`,
   })
-)
+}
 
+const radial = functionSchema('radial-gradient', radialArgs())
 const repeatingRadial = functionSchema(
   'repeating-radial-gradient',
-  objectSchema({
-    fields: {
-      shape: keyword(['circle', 'ellipse']),
-      size: keyword([
-        'farthest-corner',
-        'nearest-corner',
-        'farthest-side',
-        'nearest-side',
-      ]),
-      position,
-      stops: stops(true),
-    },
-    stringify: ({ shape, size, position, stops }) =>
-      `${shape} ${size} at ${position}, ${stops}`,
-  })
+  radialArgs(true)
 )
 
-const conic = functionSchema(
-  'conic-gradient',
-  objectSchema({
+function conicArgs(repeating?: boolean) {
+  return objectSchema({
     fields: {
       angle: angle(),
       position,
-      stops: stops(),
+      stops: stops(repeating),
     },
     stringify: ({ angle, position, stops }) =>
       `from ${angle} at ${position}, ${stops}`,
   })
-)
+}
+const conic = functionSchema('conic-gradient', conicArgs())
 const repeatingConic = functionSchema(
   'repeating-conic-gradient',
-  objectSchema({
-    fields: {
-      angle: angle(),
-      position,
-      stops: stops(true),
-    },
-    stringify: ({ angle, position, stops }) =>
-      `from ${angle} at ${position}, ${stops}`,
-  })
+  conicArgs(true)
 )
 
 export const gradient = joinSchemas(
   [linear, repeatingLinear, radial, repeatingRadial, conic, repeatingConic],
-  'gradient'
+  { type: 'gradient' }
 )
 
 type DataTypeOfSchema<S> = S extends DataTypeSchema<infer T> ? T : never
