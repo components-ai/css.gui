@@ -15,8 +15,6 @@ import {
   Time,
   TIME_UNITS,
 } from '../../types/css'
-import { Theme } from '../../types/theme'
-import { angleSteps } from '../inputs/AngleInput'
 import { ColorInput } from '../inputs/ColorInput'
 import { Range } from '../inputs/Dimension/Input'
 import { KeywordInput } from '../inputs/KeywordInput'
@@ -81,12 +79,27 @@ const angleRanges = {
   grad: [0, 400],
 } as const
 
+const angleConversions = {
+  deg: 360,
+  turn: 1,
+  rad: 2 * Math.PI,
+  grad: 400,
+}
+
+export const angleSteps = {
+  deg: 1,
+  turn: 0.01,
+  rad: 0.01,
+  grad: 1,
+}
+
 export function angle({ defaultValue }: { defaultValue?: Angle } = {}) {
   return dimension({
     type: 'angle',
     defaultValue,
     steps: angleSteps,
     regenRanges: angleRanges,
+    conversions: angleConversions,
     units: ANGLE_UNITS,
   })
 }
