@@ -181,6 +181,9 @@ export function keyword<T extends string>(
     type?: string
   } = {}
 ): DataTypeSchema<T> {
+  if (options.length === 1) {
+    return literal(options[0])
+  }
   function regenerate() {
     return choose(options)
   }
@@ -195,5 +198,16 @@ export function keyword<T extends string>(
     defaultValue,
     regenerate: regenerate,
     validate: ((value: any) => options.includes(value)) as any,
+  }
+}
+
+function literal<T extends string>(value: T): DataTypeSchema<T> {
+  return {
+    type: value,
+    inlineInput: () => <div sx={{ fontSize: 1 }}>{value}</div>,
+    stringify: (value) => value,
+    defaultValue: value,
+    regenerate: () => value,
+    validate: ((testValue: any) => testValue === value) as any,
   }
 }

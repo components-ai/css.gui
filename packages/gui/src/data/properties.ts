@@ -46,21 +46,21 @@ import { textShadow } from '../components/schemas/text-shadow'
 import * as transformProperties from '../components/schemas/transform'
 import * as transitionProperties from '../components/schemas/transition'
 import {
-  angle,
-  color,
   integer,
   keyword,
   length,
   number,
   percentage,
   string,
-  time,
 } from '../components/schemas/primitives'
 import { DataTypeSchema } from '../components/schemas/types'
 import { joinSchemas } from '../components/schemas/joinSchemas'
 import { theme } from '../components/schemas/theme'
 import { GLOBAL_KEYWORDS } from './global-keywords'
 import { responsive } from '../components/schemas/responsive'
+import { color } from '../components/schemas/color'
+import { angle } from '../components/schemas/angle'
+import { time } from '../components/schemas/time'
 
 type PropertyData = {
   input: PrimitiveType | ComponentType<EditorPropsWithLabel<any>>

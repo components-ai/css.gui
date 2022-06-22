@@ -15,7 +15,7 @@ const inset: DataTypeSchema<boolean> = {
 }
 
 const singleBoxShadow = objectSchema({
-  type: '<box shadow>',
+  type: '<box-shadow>',
   fields: {
     inset,
     color: color(),

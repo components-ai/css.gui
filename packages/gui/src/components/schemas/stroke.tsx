@@ -1,7 +1,7 @@
+import { color } from './color'
 import { joinSchemas } from './joinSchemas'
 import { listSchema } from './list'
 import {
-  color,
   keyword,
   length,
   lengthPercentage,

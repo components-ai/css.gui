@@ -1,7 +1,4 @@
-import { getInputProps } from '../../lib/util'
 import { LengthPercentage } from '../../types/css'
-import { EditorPropsWithLabel } from '../../types/editor'
-import { LengthInput } from '../inputs/LengthInput'
 import { boxSideSchema } from './box-side'
 import { listSchema } from './list'
 import { functionSchema } from './function'
@@ -53,14 +50,6 @@ const ellipse = functionSchema(
 )
 
 export type Point = { x: LengthPercentage; y: LengthPercentage }
-function PointInput(props: EditorPropsWithLabel<Point>) {
-  return (
-    <div sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
-      <LengthInput percentage {...getInputProps(props, 'x')} />
-      <LengthInput percentage {...getInputProps(props, 'y')} />
-    </div>
-  )
-}
 
 const polygon = functionSchema(
   'polygon',
