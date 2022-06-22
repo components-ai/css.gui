@@ -67,4 +67,6 @@ const polygon = functionSchema(
 
 const path = functionSchema('path', string())
 
-export const basicShape = joinSchemas([inset, circle, ellipse, polygon, path])
+export const basicShape = joinSchemas([inset, circle, ellipse, polygon, path], {
+  type: '<basic-shape>',
+})
