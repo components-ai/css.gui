@@ -53,7 +53,7 @@ function colorObject({
 const themeColor: DataTypeSchema<ThemeColor> = {
   type: 'theme',
   inlineInput: PalettePopover,
-  stringify: (value, theme) => get(theme?.colors, value.path),
+  stringify: (value) => value.path,
   defaultValue: { type: 'theme', path: 'primary' },
   regenerate: () => randomColor(),
   validate: ((value: any) => {
