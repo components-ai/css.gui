@@ -1,8 +1,8 @@
-import { getColorMode, withFallback } from './util'
+import { getColorMode, isValidColor, withFallback } from './util'
 import Checkerboard from './Checkerboard'
 import { AlertTriangle } from 'react-feather'
 import * as Popover from '@radix-ui/react-popover'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Color } from '../../../types/css'
 
 interface Props {
@@ -12,6 +12,24 @@ interface Props {
 /** Displays a swatch of the color and its current value */
 export default function ColorValueDisplay({ value, onChange }: Props) {
   const colorMode = getColorMode(value)
+  const [internalValue, setInternalValue] = useState(value)
+
+  // Only propagate the value change if it's a valid color
+  function handleChange(newValue: string) {
+    setInternalValue(newValue)
+    if (isValidColor(newValue)) {
+      onChange(newValue)
+    }
+  }
+
+  // we probably shouldn't be using an effect but idk how to do this otherwise
+  // https://beta.reactjs.org/learn/you-might-not-need-an-effect
+  useEffect(() => {
+    if (value !== internalValue) {
+      setInternalValue(value)
+    }
+  }, [value])
+
   return (
     <div
       sx={{
@@ -46,8 +64,8 @@ export default function ColorValueDisplay({ value, onChange }: Props) {
       )}
       <input
         type="text"
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
+        value={internalValue}
+        onChange={(e) => handleChange(e.target.value)}
         sx={{
           py: 1,
           width: '100%',
