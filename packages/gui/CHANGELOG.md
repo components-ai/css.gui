@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.125
+
+### Patch Changes
+
+- 89c8d7fa: Stringify keywords before validation
+
 ## 0.0.124
 
 ### Patch Changes
