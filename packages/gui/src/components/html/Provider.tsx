@@ -18,6 +18,7 @@ const DEFAULT_HTML_EDITOR_VALUE = {
 
 export type HtmlEditor = {
   value: HtmlNode
+  theme?: any
   selected: ElementPath | null
   setSelected: (newSelection: ElementPath | null) => void
 }
@@ -68,16 +69,19 @@ export const transformValueToSchema = (value: any): ElementData => {
 type HtmlEditorProviderProps = {
   value: HtmlNode
   children: ReactNode
+  theme?: any
 }
 export function HtmlEditorProvider({
   children,
   value,
+  theme,
 }: HtmlEditorProviderProps) {
   const [selected, setSelected] = useState<ElementPath | null>([])
   const transformedValue = transformValueToSchema(value)
 
   const fullContext = {
     value: transformedValue,
+    theme,
     selected,
     setSelected: (newSelection: ElementPath | null) =>
       setSelected(newSelection),
