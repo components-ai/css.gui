@@ -140,11 +140,11 @@ const singleTransform = joinSchemas(
 )
 
 export const transform = joinSchemas([
-  keyword(['none']),
   listSchema({
     itemSchema: singleTransform,
     separator: ' ',
   }),
+  keyword(['none']),
 ])
 
 export const transformOrigin = objectSchema({

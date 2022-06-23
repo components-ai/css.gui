@@ -9,8 +9,8 @@ import { tupleSchema } from './tuple'
 /* Border width */
 
 const borderWidthItem = joinSchemas([
-  keyword(['thin', 'medium', 'thick']),
   length({ range: 'nonnegative' }),
+  keyword(['thin', 'medium', 'thick']),
   theme('borderWidths'),
 ])
 

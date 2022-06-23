@@ -15,6 +15,6 @@ const singleTextShadow = objectSchema({
 })
 
 export const textShadow = joinSchemas([
-  keyword(['none']),
   listSchema({ itemSchema: singleTextShadow }),
+  keyword(['none']),
 ])

@@ -3,10 +3,8 @@ import { joinSchemas } from './joinSchemas'
 import { keyword, lengthPercentage } from './primitives'
 
 const insetItem = joinSchemas([
+  lengthPercentage({ themeProperty: 'space' }),
   keyword(['auto']),
-  lengthPercentage({
-    themeProperty: 'space',
-  }),
 ])
 
 export const top = insetItem

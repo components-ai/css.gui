@@ -27,16 +27,16 @@ const textDecorationStyleKeywords = [
 ] as const
 export const textDecorationStyle = keyword(textDecorationStyleKeywords)
 export const textDecorationLength = joinSchemas([
-  keyword(['auto', 'from-font']),
   lengthPercentage(),
+  keyword(['auto', 'from-font']),
 ])
 
 export const textDecorationColor = color({ defaultValue: '#6465ff' })
 export const textDecorationThickness = joinSchemas([
-  keyword(['auto', 'from-font']),
   lengthPercentage({
     defaultValue: { value: 4, unit: 'px' },
   }),
+  keyword(['auto', 'from-font']),
 ])
 
 export const textDecoration = objectSchema({

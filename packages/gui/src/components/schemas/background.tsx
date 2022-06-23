@@ -11,14 +11,13 @@ const attachment = keyword(['scroll', 'fixed', 'local'])
 const clip = keyword([...BOX_KEYWORDS, 'text'])
 const origin = keyword(BOX_KEYWORDS)
 const repeat = joinSchemas([
-  keyword(['repeat-x', 'repeat-y']),
   tupleSchema({
     itemSchema: keyword(['repeat', 'space', 'round', 'no-repeat']),
     labels: ['x', 'y'],
   }),
+  keyword(['repeat-x', 'repeat-y']),
 ])
 const size = joinSchemas([
-  keyword(['cover', 'contain']),
   tupleSchema({
     itemSchema: joinSchemas([
       keyword(['auto']),
@@ -28,6 +27,7 @@ const size = joinSchemas([
     ]),
     labels: ['x', 'y'],
   }),
+  keyword(['cover', 'contain']),
 ])
 
 export const backgroundAttachment = listSchema({ itemSchema: attachment })

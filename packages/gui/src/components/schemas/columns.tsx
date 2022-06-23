@@ -3,9 +3,9 @@ import { objectSchema } from './object'
 import { integer, keyword, length } from './primitives'
 import { theme } from './theme'
 
-const columnWidth = joinSchemas([keyword(['auto']), theme('sizes'), length()])
+const columnWidth = joinSchemas([theme('sizes'), length(), keyword(['auto'])])
 
-const columnCount = joinSchemas([keyword(['inset']), integer()])
+const columnCount = joinSchemas([integer(), keyword(['inset'])])
 
 export const columns = objectSchema({
   fields: {

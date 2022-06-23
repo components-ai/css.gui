@@ -35,15 +35,15 @@ export const borderImageSlice = objectSchema({
   },
 })
 
-export const borderImageSource = joinSchemas([keyword(['none']), image])
+export const borderImageSource = joinSchemas([image, keyword(['none'])])
 
 export const borderImageWidth = boxSideSchema({
   itemSchema: joinSchemas([
-    keyword(['auto']),
     lengthPercentage({
       number: true,
       range: 'nonnegative',
     }),
+    keyword(['auto']),
   ]),
 })
 

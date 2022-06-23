@@ -7,8 +7,8 @@ import { objectSchema } from './object'
 import { position } from './position'
 import { keyword, lengthPercentage } from './primitives'
 
-export const offsetAnchor = joinSchemas([keyword(['auto']), position])
-export const offsetPosition = joinSchemas([keyword(['auto']), position])
+export const offsetAnchor = joinSchemas([position, keyword(['auto'])])
+export const offsetPosition = joinSchemas([position, keyword(['auto'])])
 export const offsetDistance = lengthPercentage()
 export const offsetPath = joinSchemas([
   image,

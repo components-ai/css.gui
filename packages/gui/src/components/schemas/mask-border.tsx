@@ -40,10 +40,10 @@ export const maskBorderSlice = objectSchema({
 export const maskBorderSource = image
 
 export const maskBorderWidth = joinSchemas([
-  keyword(['auto']),
   boxSideSchema({
     itemSchema: lengthPercentage({ number: true }),
   }),
+  keyword(['auto']),
 ])
 
 export const maskBorder = objectSchema({

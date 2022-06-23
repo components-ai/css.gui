@@ -5,12 +5,12 @@ import { objectSchema } from './object'
 import { integer, keyword, lengthPercentage } from './primitives'
 
 const inflexibleBreadth = joinSchemas([
-  keyword(['min-content', 'max-content', 'auto']),
   lengthPercentage({ range: 'nonnegative' }),
+  keyword(['min-content', 'max-content', 'auto']),
 ])
 const trackBreadth = joinSchemas([
-  keyword(['min-content', 'max-content', 'auto']),
   lengthPercentage({ range: 'nonnegative', flex: true }),
+  keyword(['min-content', 'max-content', 'auto']),
 ])
 
 const trackSize = joinSchemas([

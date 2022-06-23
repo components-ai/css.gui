@@ -12,23 +12,23 @@ const clip = keyword([...GEOMETRY_BOX_KEYWORDS, 'no-clip'])
 const mode = keyword(['alpha', 'luminance', 'match-source'])
 const origin = keyword(GEOMETRY_BOX_KEYWORDS)
 const repeat = joinSchemas([
-  keyword(['repeat-x', 'repeat-y']),
   tupleSchema({
     itemSchema: keyword(['repeat', 'space', 'round', 'no-repeat']),
     labels: ['x', 'y'],
   }),
+  keyword(['repeat-x', 'repeat-y']),
 ])
 const size = joinSchemas([
-  keyword(['cover', 'contain']),
   tupleSchema({
     itemSchema: joinSchemas([
-      keyword(['auto']),
       lengthPercentage({
         defaultValue: { value: 100, unit: '%' },
       }),
+      keyword(['auto']),
     ]),
     labels: ['x', 'y'],
   }),
+  keyword(['cover', 'contain']),
 ])
 
 export const maskComposite = listSchema({ itemSchema: composite })

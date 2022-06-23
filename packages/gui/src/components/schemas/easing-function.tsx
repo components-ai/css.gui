@@ -33,6 +33,7 @@ const rawEasingFunction: DataTypeSchema<EasingFunction> = {
 }
 
 export const easingFunction = joinSchemas([
+  rawEasingFunction,
   keyword([
     'linear',
     'ease',
@@ -42,5 +43,4 @@ export const easingFunction = joinSchemas([
     'step-start',
     'step-end',
   ]),
-  rawEasingFunction,
 ])

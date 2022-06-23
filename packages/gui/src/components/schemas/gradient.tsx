@@ -64,7 +64,7 @@ const directions = [
 function linearArgs(repeating?: boolean) {
   return objectSchema({
     fields: {
-      angle: joinSchemas([keyword(directions), angle()]),
+      angle: joinSchemas([angle(), keyword(directions)]),
       stops: stops(repeating),
     },
     separator: ', ',

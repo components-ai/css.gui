@@ -46,4 +46,4 @@ export const strokeDashadjust = keyword([
   'dashed',
   'gaps',
 ])
-export const strokeDashcorner = joinSchemas([keyword(['auto']), length()])
+export const strokeDashcorner = joinSchemas([length(), keyword(['auto'])])

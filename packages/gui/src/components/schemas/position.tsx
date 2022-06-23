@@ -3,7 +3,6 @@ import { objectSchema } from './object'
 import { keyword, lengthPercentage } from './primitives'
 
 const positionX = joinSchemas([
-  keyword(['left', 'center', 'right']),
   lengthPercentage({
     defaultValue: { value: 50, unit: '%' },
   }),
@@ -14,10 +13,10 @@ const positionX = joinSchemas([
       offset: lengthPercentage(),
     },
   }),
+  keyword(['left', 'center', 'right']),
 ])
 
 const positionY = joinSchemas([
-  keyword(['top', 'center', 'bottom']),
   lengthPercentage({
     defaultValue: { value: 50, unit: '%' },
   }),
@@ -28,6 +27,7 @@ const positionY = joinSchemas([
       offset: lengthPercentage(),
     },
   }),
+  keyword(['top', 'center', 'bottom']),
 ])
 
 // TODO function so we can set default values

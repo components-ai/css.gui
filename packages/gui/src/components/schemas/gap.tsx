@@ -4,8 +4,8 @@ import { theme } from './theme'
 import { tupleSchema } from './tuple'
 
 const gapItem = joinSchemas([
-  keyword(['normal']),
   lengthPercentage({ range: 'nonnegative' }),
+  keyword(['normal']),
   theme('space'),
 ])
 

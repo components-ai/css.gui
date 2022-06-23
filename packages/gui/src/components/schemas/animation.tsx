@@ -16,7 +16,7 @@ const duration = time({
   defaultValue: { value: 350, unit: 'ms' },
 })
 const fillMode = keyword(['none', 'forwards', 'backwards', 'both'])
-const iterationCount = joinSchemas([keyword(['infinite']), integer()])
+const iterationCount = joinSchemas([integer(), keyword(['infinite'])])
 const name = ident({ defaultValue: 'none' })
 const playState = keyword(['running', 'paused'])
 const timingFunction = easingFunction

@@ -8,8 +8,8 @@ import { objectSchema } from './object'
 import { joinSchemas } from './joinSchemas'
 
 const shapeRadius = joinSchemas([
-  keyword(['closest-side', 'farthest-side']),
   lengthPercentage(),
+  keyword(['closest-side', 'farthest-side']),
 ])
 
 const inset = functionSchema(

@@ -27,8 +27,8 @@ const singleBoxShadow = objectSchema({
 })
 
 export const boxShadow = joinSchemas([
-  keyword(['none']),
   listSchema({
     itemSchema: singleBoxShadow,
   }),
+  keyword(['none']),
 ])
