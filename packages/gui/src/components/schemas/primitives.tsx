@@ -197,7 +197,7 @@ export function keyword<T extends string>(
     stringify: (value) => value,
     defaultValue,
     regenerate: regenerate,
-    validate: ((value: any) => options.includes(value)) as any,
+    validate: ((value: any) => options.includes(value.toString())) as any,
   }
 }
 

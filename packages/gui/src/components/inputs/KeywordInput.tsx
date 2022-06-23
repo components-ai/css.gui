@@ -17,7 +17,7 @@ export function KeywordInput<T extends string>(props: Props<T>) {
         py: 1,
       }}
     >
-      <KeywordSelect {...props} />
+      <KeywordSelect {...props} value={String(props.value)} />
     </div>
   )
 }
