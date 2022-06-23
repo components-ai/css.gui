@@ -47,6 +47,7 @@ export const ATTRIBUTE_MAP: Record<string, string[]> = {
     'formtarget', 
   ],
   caption: GLOBAL_ATTRIBUTES,
+  cite: GLOBAL_ATTRIBUTES,
   code: GLOBAL_ATTRIBUTES,
   col: GLOBAL_ATTRIBUTES,
   colgroup: GLOBAL_ATTRIBUTES,

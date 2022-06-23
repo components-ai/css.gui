@@ -25,6 +25,7 @@ export const enum HTMLTag {
   Br = 'br',
   Button = 'button',
   Caption = 'caption',
+  Cite = 'cite',
   Code = 'code',
   Col = 'col',
   Colgroup = 'colgroup',

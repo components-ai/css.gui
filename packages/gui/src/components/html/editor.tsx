@@ -29,6 +29,7 @@ const HTML_TAGS = [
   HTMLTag.Br,
   HTMLTag.Button,
   HTMLTag.Caption,
+  HTMLTag.Cite,
   HTMLTag.Code,
   HTMLTag.Col,
   HTMLTag.Colgroup,
