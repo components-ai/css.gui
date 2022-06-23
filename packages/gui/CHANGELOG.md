@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.124
+
+### Patch Changes
+
+- 69fc6fcb: Accept theme in html editor, pass to style controls
+
 ## 0.0.123
 
 ### Patch Changes
