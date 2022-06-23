@@ -1,5 +1,23 @@
 # @compai/css-gui
 
+## 0.0.125
+
+### Patch Changes
+
+- 89c8d7fa: Stringify keywords before validation
+
+## 0.0.124
+
+### Patch Changes
+
+- 69fc6fcb: Accept theme in html editor, pass to style controls
+
+## 0.0.123
+
+### Patch Changes
+
+- c269a1e3: More app like chrome
+
 ## 0.0.122
 
 ### Patch Changes

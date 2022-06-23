@@ -16,7 +16,7 @@ const initialStyles = {
       unit: 'px',
     },
   },
-  fontWeight: '600',
+  fontWeight: 600,
   fontSize: { value: 16, unit: 'px' },
   outlineWidth: {
     value: 0,

@@ -29,6 +29,7 @@ const HTML_TAGS = [
   HTMLTag.Br,
   HTMLTag.Button,
   HTMLTag.Caption,
+  HTMLTag.Cite,
   HTMLTag.Code,
   HTMLTag.Col,
   HTMLTag.Colgroup,
@@ -145,19 +146,26 @@ const TABS_TRIGGER_STYLES: any = {
 }
 const TABS_CONTENT_STYLES: any = {
   width: 400,
-  height: 'calc(100vh - 64px)',
+  height: 'calc(100vh - 81px)',
   overflow: 'auto',
   resize: 'horizontal',
   borderRightWidth: '1px',
   borderRightStyle: 'solid',
   borderColor: 'border',
+  '&::-webkit-scrollbar': { display: 'none' },
+  scrollbarWidth: 0,
 }
 
 /**
  * An HTML tree-based editor that lets you add HTML nodes and mess around with their styles
  */
 export function HtmlEditor({ onChange }: HtmlEditorProps) {
-  const { value, selected: providedSelected, setSelected } = useHtmlEditor()
+  const {
+    value,
+    theme,
+    selected: providedSelected,
+    setSelected,
+  } = useHtmlEditor()
 
   const selected = providedSelected || []
   const nodeValue = getChildAtPath(value, selected)
@@ -208,6 +216,7 @@ export function HtmlEditor({ onChange }: HtmlEditorProps) {
           <div sx={{ pt: 3, px: 3 }}>
             <Editor
               key={selected.join('-')}
+              theme={theme}
               styles={nodeValue.style ?? {}}
               onChange={(newStyles) => {
                 const newItem = { ...nodeValue, style: newStyles }
