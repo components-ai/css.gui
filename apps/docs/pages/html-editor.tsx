@@ -1513,7 +1513,12 @@ export default function HtmlEditorExample() {
         >
           <HtmlEditor onChange={setHtml} />
         </div>
-        <div sx={{ overflow: 'auto', width: '100%', gridArea: 'content' }}>
+        <div sx={{ 
+          overflow: 'auto', 
+          width: '100%', 
+          gridArea: 'content',
+          '&::-webkit-scrollbar': { display: 'none', }
+          }}>
           <HtmlRenderer value={html} />
         </div>
       </div>
