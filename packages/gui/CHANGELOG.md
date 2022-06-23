@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.123
+
+### Patch Changes
+
+- c269a1e3: More app like chrome
+
 ## 0.0.122
 
 ### Patch Changes
