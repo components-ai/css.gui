@@ -40,7 +40,7 @@ const themeColor: DataTypeSchema<ThemeColor> = {
 }
 
 export function color({
-  defaultValue = 'transparent',
+  defaultValue = '#000000',
 }: {
   defaultValue?: any
 } = {}) {
