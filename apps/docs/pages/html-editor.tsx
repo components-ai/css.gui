@@ -1501,14 +1501,14 @@ export default function HtmlEditorExample() {
           gridTemplateAreas: '"nav content"',
           gridTemplateColumns: 'auto 1fr',
           gridTemplateRows: 'auto',
-          height: 'calc(100vh - 64px)',
+          height: 'calc(100vh - 54px)',
+          overflow: 'hidden',
         }}
       >
         <div
           sx={{
             gridArea: 'nav',
-            maxheight: 'calc(100vh - 64px)',
-            overflow: 'auto',
+            height: '100%',
           }}
         >
           <HtmlEditor onChange={setHtml} />
