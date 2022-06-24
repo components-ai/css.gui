@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.126
+
+### Patch Changes
+
+- 3660e1ad: Transform legacy formats, ensure transform happens before CSS export
+
 ## 0.0.125
 
 ### Patch Changes
