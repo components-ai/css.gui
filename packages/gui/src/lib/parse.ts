@@ -25,7 +25,7 @@ export function processTokens(tokens: string[]) {
 
 function processToken(tokens: string[]): [Token, string[]] {
   const [head, ...tail] = tokens
-  if (!isFunctionIdent) {
+  if (!isFunctionIdent(head)) {
     return [head, tail]
   }
   const [args, rest] = processArguments(tail)
@@ -45,7 +45,7 @@ function processArguments(tokens: string[]): [Token[], string[]] {
 }
 
 function isFunctionIdent(str: string) {
-  return /[-A-Za-z0-9]\(/.test(str)
+  return /[-A-Za-z0-9]+\(/.test(str)
 }
 
 /**
@@ -54,9 +54,14 @@ function isFunctionIdent(str: string) {
 export function tokenizeRaw(str: string) {
   // A CSS token is defined to be one of the following:
   //  - an alphanumeric, dashed character
+  //  - a hex color
   //  - a string, either with double quotes (") or single quotes (')
   //  - a function, which has a string and items wrapped in parentheses
+  //  - a literal used in css ( , / + - * )
+  // TODO fail if there are any extraneous non-space characters
   return [
-    ...str.matchAll(/(?:"[^"]*")|(?:[-A-Za-z0-9]+\())|[-A-Za-z0-9.]+|\/|,|\)/g),
+    ...str.matchAll(
+      /(?:"[^"]*")|(?:'[^']*')|(?:[-A-Za-z0-9]+\()|[-A-Za-z0-9.]+|(?:#[a-f0-9]+)|\/|,|\)|\+|\-|\*/g
+    ),
   ].map((match) => match[0])
 }
