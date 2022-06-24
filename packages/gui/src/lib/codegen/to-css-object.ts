@@ -3,6 +3,7 @@ import { stringifySelector } from '../stringify'
 import { isNestedSelector } from '../util'
 import { properties } from '../../data/properties'
 import { Theme } from '../../types/theme'
+import { stylesToEditorSchema } from '../transformers/styles-to-editor-schema'
 
 export const stringifyProperty = (
   property: string = '', // In the future the property might determine how we stringify
@@ -26,7 +27,8 @@ export const stringifyProperty = (
 }
 
 type StyleEntry = [string, Length | string | null | undefined]
-export const toCSSObject = (styles: Styles, theme?: Theme): any => {
+export const toCSSObject = (providedStyles: Styles, theme?: Theme): any => {
+  const styles = stylesToEditorSchema(providedStyles)
   // @ts-ignore
   return Object.entries(styles).reduce((acc: Styles, curr: StyleEntry) => {
     const [property, value] = curr
