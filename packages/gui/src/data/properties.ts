@@ -22,6 +22,7 @@ import { borderSpacing } from '../components/schemas/border-spacing'
 import { boxShadow } from '../components/schemas/box-shadow'
 import { clipPath } from '../components/schemas/clip-path'
 import * as columnProperties from '../components/schemas/columns'
+import * as columnRuleProperties from '../components/schemas/column-rule'
 import { content } from '../components/schemas/content'
 import { filter } from '../components/schemas/filter'
 import * as gapProperties from '../components/schemas/gap'
@@ -385,45 +386,10 @@ export const rawProperties: Record<string, any> = {
     keywords: ['auto', 'sRGB', 'linearRGB'],
   },
   ...columnProperties,
+  ...columnRuleProperties,
   columnFill: {
     input: 'keyword',
     keywords: ['auto', 'balance', 'balance-all'],
-  },
-  columnRuleColor: {
-    input: 'color',
-    keywords: ['currentcolor', 'transparent'],
-    defaultValue: '#6465ff',
-  },
-  columnRuleStyle: {
-    input: 'keyword',
-    keywords: [
-      'none',
-      'hidden',
-      'dotted',
-      'dashed',
-      'solid',
-      'double',
-      'groove',
-      'ridge',
-      'inset',
-      'outset',
-    ],
-    defaultValue: 'solid',
-  },
-  columnRuleWidth: {
-    input: 'length',
-    percentage: true,
-    range: {
-      [AbsoluteLengthUnits.Px]: [0, 32],
-      [FontRelativeLengthUnits.Em]: [0, 2],
-      [FontRelativeLengthUnits.Rem]: [0, 2],
-      [PercentageLengthUnits.Pct]: [0.1, 100],
-    },
-    keywords: ['thin', 'medium', 'thick'],
-    defaultValue: {
-      value: 8,
-      unit: 'px',
-    },
   },
   columnSpan: {
     input: 'keyword',
