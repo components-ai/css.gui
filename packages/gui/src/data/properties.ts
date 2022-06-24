@@ -22,6 +22,7 @@ import { borderSpacing } from '../components/schemas/border-spacing'
 import { boxShadow } from '../components/schemas/box-shadow'
 import { clipPath } from '../components/schemas/clip-path'
 import * as columnProperties from '../components/schemas/columns'
+import { content } from '../components/schemas/content'
 import { filter } from '../components/schemas/filter'
 import * as gapProperties from '../components/schemas/gap'
 import * as gridProperties from '../components/schemas/grid'
@@ -446,6 +447,7 @@ export const rawProperties: Record<string, any> = {
     ],
     defaultValue: 'none',
   },
+  content,
   contentVisibility: {
     input: 'keyword',
     keywords: ['visible', 'hidden', 'auto'],

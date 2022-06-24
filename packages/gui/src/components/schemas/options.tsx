@@ -6,6 +6,7 @@ interface CreateOptions<T extends Record<string, any>> {
   type?: string
   order?: (keyof T)[]
   convert?(oldValue: Unionize<T>[any], newType: keyof T): T | undefined
+  defaultType?: keyof T
 }
 
 /**
@@ -17,6 +18,7 @@ export function optionsSchema<T extends Record<string, any>>({
   type = 'options',
   order = Object.keys(variants),
   convert,
+  defaultType = order[0],
 }: CreateOptions<T>): DataTypeSchema<Unionize<T>> {
   function getType(value: T): keyof T {
     for (const [type, schema] of Object.entries(variants)) {
@@ -98,7 +100,7 @@ export function optionsSchema<T extends Record<string, any>>({
       const type = getType(value)
       return variants[type].stringify(value)
     },
-    defaultValue: variants[order[0]].defaultValue,
+    defaultValue: variants[defaultType].defaultValue,
     regenerate,
     validate: ((value: any) => {
       return Object.values(variants).some((variantSchema) =>
