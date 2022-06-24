@@ -244,7 +244,6 @@ export const rawProperties: Record<string, any> = {
   ...backgroundProperties,
   backgroundColor: {
     input: 'color',
-    keywords: ['currentcolor', 'transparent'],
     defaultValue: 'tomato',
   },
   backgroundPositionX: {
@@ -357,7 +356,6 @@ export const rawProperties: Record<string, any> = {
   },
   caretColor: {
     input: 'color',
-    keywords: ['currentcolor', 'transparent'],
     defaultValue: '#6465ff',
   },
   clear: {
@@ -374,7 +372,6 @@ export const rawProperties: Record<string, any> = {
   },
   color: {
     input: 'color',
-    keywords: ['currentcolor', 'transparent'],
     defaultValue: '#6465ff',
   },
   colorAdjust: {
@@ -616,7 +613,6 @@ export const rawProperties: Record<string, any> = {
   },
   floodColor: {
     input: 'color',
-    keywords: ['currentcolor', 'transparent'],
     defaultValue: '#6465ff',
   },
   floodOpacity: {
@@ -947,7 +943,6 @@ export const rawProperties: Record<string, any> = {
   },
   lightingColor: {
     input: 'color',
-    keywords: ['currentcolor', 'transparent'],
   },
   lineBreak: {
     input: 'keyword',
