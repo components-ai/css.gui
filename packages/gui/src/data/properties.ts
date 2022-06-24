@@ -45,6 +45,7 @@ import { scrollSnapAlign } from '../components/schemas/scroll-snap-align'
 import * as shapeOutsideProperties from '../components/schemas/shape-outside'
 import * as strokeProperties from '../components/schemas/stroke'
 import * as textDecorationProperties from '../components/schemas/text-decoration'
+import * as textEmphasisProperties from '../components/schemas/text-emphasis'
 import { textShadow } from '../components/schemas/text-shadow'
 import * as transformProperties from '../components/schemas/transform'
 import * as transitionProperties from '../components/schemas/transition'
@@ -1398,38 +1399,7 @@ export const rawProperties: Record<string, any> = {
     keywords: ['none', 'auto', 'all'],
     defaultValue: 'auto',
   },
-  textEmphasisColor: {
-    input: 'color',
-    keywords: ['currentcolor', 'transparent'],
-    defaultValue: '#6465ff',
-  },
-  textEmphasisPosition: {
-    input: 'keyword',
-    keywords: [
-      'over right',
-      'over left',
-      'under right',
-      'under left',
-      'left over',
-      'right under',
-      'left under',
-    ],
-    defaultValue: 'over right',
-  },
-  textEmphasisStyle: {
-    input: 'string',
-    keywords: [
-      'filled',
-      'open',
-      'dot',
-      'circle',
-      'double-circle',
-      'triangle',
-      'filled sesame',
-      'open sesame',
-    ],
-    defaultValue: 'none',
-  },
+  ...textEmphasisProperties,
   textIndent: {
     input: 'length',
     percentage: true,
