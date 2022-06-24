@@ -46,5 +46,7 @@ describe('tokenize()', () => {
         },
       ])
     })
+
+    it.todo('fails gracefully on mismatched parentheses')
   })
 })
