@@ -1,7 +1,6 @@
 /** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
 module.exports = {
-  preset: 'ts-jest/presets/default-esm', // or other ESM presets
-  // preset: 'ts-jest',
+  preset: 'ts-jest/presets/default-esm',
   testEnvironment: 'node',
   globals: {
     'ts-jest': {
@@ -11,5 +10,4 @@ module.exports = {
   moduleNameMapper: {
     '^(\\.{1,2}/.*)\\.js$': '$1',
   },
-  // extensionsToTreatAsEsm: ['.ts', '.tsx'],
 }
