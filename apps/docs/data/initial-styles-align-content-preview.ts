@@ -49,8 +49,8 @@ export const initialStyles: any = {
   },
   borderImageSource: [
     {
-      name: 'url',
-      arguments: 'https://source.unsplash.com/random',
+      type: 'url',
+      arguments: ['https://source.unsplash.com/random'],
     },
   ],
   padding: {

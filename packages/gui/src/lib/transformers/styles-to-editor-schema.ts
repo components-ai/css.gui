@@ -1,3 +1,4 @@
+import { isObject } from 'lodash-es'
 import { rawProperties } from '../../data/properties'
 import {
   addInternalCSSClassSyntax,
@@ -6,10 +7,16 @@ import {
 } from '../classes'
 import { hasPseudoSyntax, removePseudoSyntax } from '../pseudos'
 
+const isLegacyColor = (property: string, value: any) =>
+  rawProperties[property]?.input === 'color' &&
+  isObject(value) &&
+  (value as any).value
+const isLegacyUrl = (value: any) => value?.type === 'url'
+
 const transformProperty = (property: string, value: any) => {
-  // if (rawProperties[property]?.input === 'color' && typeof value === 'string') {
-  //   return { value }
-  // }
+  if (isLegacyColor(property, value)) {
+    return (value as any).value
+  }
 
   return value
 }
@@ -51,6 +58,13 @@ export const stylesToEditorSchema = (styles: any) => {
 const transformComplexObject = (value: any): any => {
   if (typeof value === 'string') {
     return value
+  }
+
+  if (isLegacyUrl(value)) {
+    return {
+      name: 'url',
+      arguments: value.arguments?.[0] || value.arguments,
+    }
   }
 
   if (Array.isArray(value)) {
