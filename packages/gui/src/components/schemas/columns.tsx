@@ -4,8 +4,8 @@ import { integer, keyword, length } from './primitives'
 import { theme } from './theme'
 
 export const columnWidth = joinSchemas([
-  theme('sizes'),
   length(),
+  theme('sizes'),
   keyword(['auto']),
 ])
 
