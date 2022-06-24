@@ -13,6 +13,7 @@ import { UnitRanges } from './ranges'
 import { EditorPropsWithLabel } from '../types/editor'
 
 import * as animationProperties from '../components/schemas/animation'
+import * as aspectRatioProperties from '../components/schemas/aspect-ratio'
 import * as backgroundProperties from '../components/schemas/background'
 import * as borderProperties from '../components/schemas/border'
 import * as borderRadiusProperties from '../components/schemas/border-radius'
@@ -231,6 +232,7 @@ export const rawProperties: Record<string, any> = {
     ],
     defaultValue: 'none',
   },
+  ...aspectRatioProperties,
   backfaceVisibility: {
     input: 'keyword',
     keywords: ['visible', 'hidden'],
