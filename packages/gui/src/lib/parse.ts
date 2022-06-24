@@ -18,10 +18,6 @@ export function processTokens(tokens: string[]) {
   }
   return result
 }
-// // Group CSS functions together in the given list of CSS tokens
-// function processTokens(tokens: string[]): [Token[], string[]] {
-
-// }
 
 function processToken(tokens: string[]): [Token, string[]] {
   const [head, ...tail] = tokens
