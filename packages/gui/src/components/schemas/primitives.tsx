@@ -158,7 +158,7 @@ export function ident({
   defaultValue?: string
 } = {}): DataTypeSchema<string> {
   return {
-    type: 'identifier',
+    type: '<custom-ident>',
     // Right now, just use a text input.
     // In the future we may want to do smart-identification of identifiers
     // the user has used in other places
@@ -166,6 +166,13 @@ export function ident({
     stringify: (value) => value,
     defaultValue,
     validate: ((value: any) => typeof value === 'string') as any,
+    parse(tokens) {
+      const [token, ...rest] = tokens
+      if (typeof token !== 'string') return [undefined, tokens]
+      // TODO allow escaped characters
+      if (!/[-_0-9A-Za-z]+/.test(token)) return [undefined, tokens]
+      return [token, rest]
+    },
   }
 }
 

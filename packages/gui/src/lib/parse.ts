@@ -57,7 +57,7 @@ export function tokenizeRaw(str: string) {
   // TODO fail if there are any extraneous non-space characters
   return [
     ...str.matchAll(
-      /(?:"[^"]*")|(?:'[^']*')|(?:[-A-Za-z0-9]+\()|[-A-Za-z0-9.]+|(?:#[a-f0-9]+)|\/|,|\)|\+|\-|\*/g
+      /(?:"[^"]*")|(?:'[^']*')|(?:[-_A-Za-z0-9]+\()|[-_A-Za-z0-9.]+|(?:#[a-f0-9]+)|\/|,|\)|\+|\-|\*/g
     ),
   ].map((match) => match[0])
 }

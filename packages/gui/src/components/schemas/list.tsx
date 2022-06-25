@@ -1,4 +1,5 @@
 import { ComponentType } from 'react'
+import { parse } from 'uuid'
 import FieldArray from '../FieldArray'
 import { DataTypeSchema, RegenOptions } from './types'
 
@@ -28,13 +29,7 @@ export function listSchema<T>({
     stringify,
     defaultValue,
     input(props) {
-      return (
-        <FieldArray
-          {...props}
-          itemSchema={itemSchema}
-          // regenerate={regenerate}
-        />
-      )
+      return <FieldArray {...props} itemSchema={itemSchema} />
     },
     regenerate,
     validate: ((value: any) => {
@@ -43,5 +38,38 @@ export function listSchema<T>({
       }
       return value.every((item) => itemSchema.validate(item))
     }) as any,
+    parse(tokens) {
+      const parseSeperator = separator.trim()
+      // Split the tokens based on the separator
+      const ensplittenedTokens = parseSeperator
+        ? splitArray(tokens, parseSeperator)
+        : tokens.map((t) => [t])
+
+      const results = []
+      for (const tokenGroup of ensplittenedTokens) {
+        const [result, rest] = itemSchema.parse(tokenGroup)
+        // Make sure the item schema parses the group *entirely* without loose ends
+        if (!result || rest.length > 0) {
+          return [undefined, tokens]
+        }
+        results.push(result)
+      }
+      // When parsed, the list should take up the remaining tokens
+      return [results, []]
+    },
   }
+}
+
+function splitArray<T>(array: T[], separator: T) {
+  const result = []
+  let current: T[] = []
+  for (const item of array) {
+    if (item === separator) {
+      result.push(current)
+      current = []
+    } else {
+      current.push(item)
+    }
+  }
+  return result
 }
