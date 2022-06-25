@@ -180,6 +180,15 @@ export function string({
     stringify: (value) => `"${value}"`,
     defaultValue,
     validate: ((value: any) => typeof value === 'string') as any,
+    parse(tokens) {
+      const [token, ...rest] = tokens
+      if (typeof token !== 'string') return [undefined, tokens]
+      const ends = [token[0], token[token.length - 1]]
+      if (ends.some((x) => x === '"') || ends.some((x) => x === "'")) {
+        return [token.substring(1, token.length - 1), rest]
+      }
+      return [undefined, tokens]
+    },
   }
 }
 
