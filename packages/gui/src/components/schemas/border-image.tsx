@@ -1,4 +1,3 @@
-import { CheckboxInput } from '../inputs/CheckboxInput'
 import { boxSideSchema } from './box-side'
 import { image } from './image'
 import { joinSchemas } from './joinSchemas'
@@ -10,8 +9,8 @@ import {
   numberPercentage,
 } from './primitives'
 import { shorthandSchema } from './shorthand'
+import { toggle } from './toggle'
 import { tupleSchema } from './tuple'
-import { DataTypeSchema } from './types'
 
 export const borderImageOutset = boxSideSchema({
   itemSchema: length({ number: true }),
@@ -22,17 +21,10 @@ export const borderImageRepeat = tupleSchema({
   labels: ['y', 'x'],
 })
 
-const fill: DataTypeSchema<boolean> = {
-  type: 'fill',
-  defaultValue: false,
-  input: CheckboxInput,
-  stringify: (value) => (value ? 'fill' : ''),
-  validate: ((value: any) => typeof value === 'boolean') as any,
-}
 export const borderImageSlice = objectSchema({
   fields: {
     value: boxSideSchema({ itemSchema: numberPercentage() }),
-    fill,
+    fill: toggle('fill'),
   },
 })
 

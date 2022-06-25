@@ -1,4 +1,3 @@
-import { CheckboxInput } from '../inputs/CheckboxInput'
 import { boxSideSchema } from './box-side'
 import { image } from './image'
 import { joinSchemas } from './joinSchemas'
@@ -10,8 +9,8 @@ import {
   numberPercentage,
 } from './primitives'
 import { shorthandSchema } from './shorthand'
+import { toggle } from './toggle'
 import { tupleSchema } from './tuple'
-import { DataTypeSchema } from './types'
 
 export const maskBorderMode = keyword(['alpha', 'luminance'])
 export const maskBorderOutset = boxSideSchema({
@@ -23,17 +22,10 @@ export const maskBorderRepeat = tupleSchema({
   labels: ['y', 'x'],
 })
 
-const fill: DataTypeSchema<boolean> = {
-  type: 'fill',
-  defaultValue: false,
-  input: CheckboxInput,
-  stringify: (value) => (value ? 'fill' : ''),
-  validate: ((value: any) => typeof value === 'boolean') as any,
-}
 export const maskBorderSlice = objectSchema({
   fields: {
     value: boxSideSchema({ itemSchema: numberPercentage() }),
-    fill,
+    fill: toggle('fill'),
   },
 })
 
