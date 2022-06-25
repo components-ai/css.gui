@@ -1,7 +1,6 @@
-import { compact } from 'lodash-es'
+import { compact, isInteger, toNumber } from 'lodash-es'
 import { bindProps } from '../../lib/components'
 import { choose, randomStep } from '../../lib/random'
-import { stringifyUnit } from '../../lib/stringify'
 import { randomInt } from '../../lib/util'
 import {
   CSSUnitValue,
@@ -42,6 +41,13 @@ export function number({
     defaultValue,
     regenerate,
     validate: ((value: any) => typeof value === 'number') as any,
+    parse(tokens) {
+      const [token, ...rest] = tokens
+      if (typeof token !== 'string') return [undefined, tokens]
+      const asNumber = toNumber(token)
+      if (isNaN(asNumber)) return [undefined, tokens]
+      return [asNumber, rest]
+    },
   }
 }
 
@@ -135,6 +141,14 @@ export function integer({
     stringify: (value) => value.toString(),
     defaultValue,
     validate: ((value: any) => typeof value === 'number') as any,
+    parse(tokens) {
+      const [token, ...rest] = tokens
+      if (typeof token !== 'string') return [undefined, tokens]
+      const asNumber = toNumber(token)
+      if (isNaN(asNumber)) return [undefined, tokens]
+      if (!isInteger(number)) return [undefined, tokens]
+      return [asNumber, rest]
+    },
   }
 }
 
@@ -198,6 +212,12 @@ export function keyword<T extends string>(
     defaultValue,
     regenerate: regenerate,
     validate: ((value: any) => options.includes(value.toString())) as any,
+    parse(tokens) {
+      const [token, ...rest] = tokens
+      if (typeof token !== 'string') return [undefined, tokens]
+      if (!options.includes(token as T)) return [undefined, tokens]
+      return [token as T, rest]
+    },
   }
 }
 
@@ -209,5 +229,11 @@ function literal<T extends string>(value: T): DataTypeSchema<T> {
     defaultValue: value,
     regenerate: () => value,
     validate: ((testValue: any) => testValue === value) as any,
+    parse(tokens) {
+      const [token, ...rest] = tokens
+      if (typeof token !== 'string') return [undefined, tokens]
+      if (token !== value) return [undefined, tokens]
+      return [value, rest]
+    },
   }
 }

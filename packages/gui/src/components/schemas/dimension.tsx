@@ -1,11 +1,14 @@
+import { toNumber } from 'lodash-es'
 import { UnitConversions, UnitSteps } from '../../lib'
 import { bindProps } from '../../lib/components'
+import { Token } from '../../lib/parse'
 import { randomStep } from '../../lib/random'
 import { stringifyUnit } from '../../lib/stringify'
 import { DimensionInput } from '../inputs/Dimension'
 import { Range } from '../inputs/Dimension/Input'
 import { calc } from './calc'
 import { joinSchemas } from './joinSchemas'
+import { number } from './primitives'
 import { DataTypeSchema, RegenOptions } from './types'
 
 type UnitRanges<U extends string> = Record<U, readonly [number, number]>
@@ -51,6 +54,14 @@ function basicDimension<U extends string>({
     defaultValue,
     regenerate,
     validate: ((value: any) => validateDimension(value, units)) as any,
+    parse(tokens) {
+      const [first, ...rest] = tokens
+      const result = parseDimension(first, units)
+      if (!result) {
+        return [undefined, tokens]
+      }
+      return [result, rest]
+    },
   }
 }
 
@@ -62,4 +73,16 @@ export function dimension<U extends string>(options: DimensionProps<U>) {
 function validateDimension(value: any, units: readonly string[]) {
   if (typeof value !== 'object') return false
   return units.includes(value.unit) && typeof value.value === 'number'
+}
+
+function parseDimension<U extends string>(
+  token: Token,
+  units: readonly U[]
+): UnitValue<U> | undefined {
+  if (typeof token !== 'string') return undefined
+  const unit = units.find((unit) => token.endsWith(unit))
+  if (!unit) return undefined
+  const numberPart = toNumber(token.replace(unit, ''))
+  if (isNaN(numberPart)) return undefined
+  return { value: numberPart, unit }
 }

@@ -28,7 +28,7 @@ export interface DataTypeSchema<T> {
    *  - the parsed data, or undefined if this does not parse
    *  - the rest of the unparsed tokens
    */
-  parse?(tokens: Token[]): [result: T | undefined, rest: string]
+  parse(tokens: Token[]): [result: T | undefined, rest: Token[]]
 }
 
 export interface RegenOptions<T> {
