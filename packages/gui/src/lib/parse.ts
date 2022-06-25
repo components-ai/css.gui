@@ -1,4 +1,4 @@
-type Token = string | CssFunction
+export type Token = string | CssFunction
 
 interface CssFunction {
   name: string

@@ -1,4 +1,5 @@
 import { ComponentType } from 'react'
+import { Token } from '../../lib/parse'
 import { EditorPropsWithLabel } from '../../types/editor'
 import { Theme } from '../../types/theme'
 
@@ -21,6 +22,13 @@ export interface DataTypeSchema<T> {
   variants?: SchemaVariants<T>
   /** Whether the input has a block input */
   hasBlockInput?(value: T): boolean
+  /**
+   * Parse the list of tokens into this schema input.
+   * Returns a tuple of:
+   *  - the parsed data, or undefined if this does not parse
+   *  - the rest of the unparsed tokens
+   */
+  parse?(tokens: Token[]): [result: T | undefined, rest: string]
 }
 
 export interface RegenOptions<T> {
