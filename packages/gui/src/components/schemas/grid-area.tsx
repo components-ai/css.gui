@@ -1,20 +1,18 @@
-import { GridLine, GridLineInput, stringifyGridLine } from '../inputs/GridLine'
-import { DataTypeSchema } from './types'
+import { joinSchemas } from './joinSchemas'
+import { objectSchema } from './object'
+import { ident, integer, keyword } from './primitives'
+import { toggle } from './toggle'
 
-const gridLine: DataTypeSchema<GridLine> = {
-  type: '<grid-line>',
-  input: GridLineInput,
-  stringify: stringifyGridLine,
-  defaultValue: { position: 0, ident: '' },
-  validate: ((value: any) => {
-    if (typeof value !== 'object') return false
-    return (
-      (!value.span || typeof value.span === 'boolean') &&
-      typeof value.position === 'number' &&
-      typeof value.ident === 'string'
-    )
-  }) as any,
-}
+const gridLine = joinSchemas([
+  objectSchema({
+    fields: {
+      span: toggle('span'),
+      position: integer(),
+      ident: ident(),
+    },
+  }),
+  keyword(['auto']),
+])
 
 export const gridColumnStart = gridLine
 export const gridRowStart = gridLine
