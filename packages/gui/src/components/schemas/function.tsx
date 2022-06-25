@@ -1,3 +1,4 @@
+import { isNil } from 'lodash-es'
 import { getInputProps } from '../../lib/util'
 import { SchemaInput } from '../inputs/SchemaInput'
 import { DataTypeSchema } from './types'
@@ -46,6 +47,15 @@ export function functionSchema<N extends string, T>(
           />
         </div>
       )
+    },
+    parse(tokens) {
+      const [token, ...rest] = tokens
+      if (typeof token === 'string') return [undefined, tokens]
+      const { name: parseName, arguments: parseArgs } = token
+      if (name !== parseName) return [undefined, tokens]
+      const [argsResult, argsRest] = argsSchema.parse(parseArgs)
+      if (isNil(argsResult) || argsRest.length > 0) return [undefined, tokens]
+      return [{ name, arguments: argsResult }, rest]
     },
   }
 }
