@@ -3,6 +3,7 @@ import { color } from './color'
 import { joinSchemas } from './joinSchemas'
 import { objectSchema } from './object'
 import { keyword, length } from './primitives'
+import { shorthandSchema } from './shorthand'
 import { theme } from './theme'
 import { tupleSchema } from './tuple'
 
@@ -93,9 +94,7 @@ export const borderInlineColor = tupleSchema({
   labels: ['Start', 'End'],
 })
 
-/* Shorthand */
-
-const borderItem = objectSchema({
+const borderItem = shorthandSchema({
   fields: {
     width: borderWidthItem,
     style: borderStyleItem,

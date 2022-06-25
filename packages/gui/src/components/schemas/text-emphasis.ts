@@ -1,6 +1,6 @@
 import { color } from './color'
-import { objectSchema } from './object'
 import { keyword } from './primitives'
+import { shorthandSchema } from './shorthand'
 
 export const textEmphasisColor = color()
 // TODO separate [open/filled] properties
@@ -15,7 +15,7 @@ export const textEmphasisStyle = keyword([
   'open sesame',
 ])
 
-export const textEmphasis = objectSchema({
+export const textEmphasis = shorthandSchema({
   fields: {
     color: textEmphasisColor,
     style: textEmphasisStyle,

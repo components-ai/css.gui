@@ -3,6 +3,7 @@ import { joinSchemas } from './joinSchemas'
 import { listSchema } from './list'
 import { objectSchema } from './object'
 import { ident, integer, keyword } from './primitives'
+import { shorthandSchema } from './shorthand'
 import { time } from './time'
 
 const delay = time()
@@ -34,7 +35,7 @@ export const animationTimingFunction = listSchema({
   itemSchema: timingFunction,
 })
 
-const singleAnimation = objectSchema({
+const singleAnimation = shorthandSchema({
   type: '<animation>',
   fields: {
     name,

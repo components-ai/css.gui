@@ -30,5 +30,3 @@ export function calc<T>(schema: DataTypeSchema<T>) {
     })
   return functionSchema('calc', joinSchemas([calcSum(), calcProduct()]))
 }
-// export const calc = functionSchema('calc', objectSchema(
-// ))

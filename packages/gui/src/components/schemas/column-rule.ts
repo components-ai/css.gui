@@ -2,6 +2,7 @@ import { color } from './color'
 import { joinSchemas } from './joinSchemas'
 import { objectSchema } from './object'
 import { keyword, lengthPercentage } from './primitives'
+import { shorthandSchema } from './shorthand'
 
 export const columnRuleColor = color({ defaultValue: '#6465ff' })
 export const columnRuleStyle = keyword(
@@ -24,7 +25,7 @@ export const columnRuleWidth = joinSchemas([
   keyword(['thin', 'medium', 'thick']),
 ])
 
-export const columnRule = objectSchema({
+export const columnRule = shorthandSchema({
   fields: {
     color: columnRuleColor,
     style: columnRuleStyle,

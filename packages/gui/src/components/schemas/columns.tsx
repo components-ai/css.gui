@@ -1,6 +1,6 @@
 import { joinSchemas } from './joinSchemas'
-import { objectSchema } from './object'
 import { integer, keyword, length } from './primitives'
+import { shorthandSchema } from './shorthand'
 import { theme } from './theme'
 
 export const columnWidth = joinSchemas([
@@ -11,7 +11,7 @@ export const columnWidth = joinSchemas([
 
 export const columnCount = joinSchemas([integer(), keyword(['inset'])])
 
-export const columns = objectSchema({
+export const columns = shorthandSchema({
   fields: {
     width: columnWidth,
     count: columnCount,

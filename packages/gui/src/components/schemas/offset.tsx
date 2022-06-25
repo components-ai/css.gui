@@ -6,6 +6,7 @@ import { joinSchemas } from './joinSchemas'
 import { objectSchema } from './object'
 import { position } from './position'
 import { keyword, lengthPercentage } from './primitives'
+import { shorthandSchema } from './shorthand'
 
 export const offsetAnchor = joinSchemas([position, keyword(['auto'])])
 export const offsetPosition = joinSchemas([position, keyword(['auto'])])
@@ -24,7 +25,7 @@ export const offsetPath = joinSchemas([
 // TODO 'auto <angle>'
 export const offsetRotate = angle()
 
-export const offset = objectSchema({
+export const offset = shorthandSchema({
   fields: {
     position: offsetPosition,
     path: offsetPath,

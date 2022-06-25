@@ -2,9 +2,9 @@ import { GEOMETRY_BOX_KEYWORDS } from '../../types/css'
 import { image } from './image'
 import { joinSchemas } from './joinSchemas'
 import { listSchema } from './list'
-import { objectSchema } from './object'
 import { position } from './position'
 import { keyword, lengthPercentage } from './primitives'
+import { shorthandSchema } from './shorthand'
 import { tupleSchema } from './tuple'
 
 const composite = keyword(['add', 'subtract', 'intersect', 'exclude'])
@@ -40,7 +40,7 @@ export const maskSize = listSchema({ itemSchema: size })
 export const maskImage = listSchema({ itemSchema: image })
 export const maskPosition = listSchema({ itemSchema: position })
 
-const singleMask = objectSchema({
+const singleMask = shorthandSchema({
   fields: {
     image,
     position,

@@ -5,6 +5,7 @@ import { listSchema } from './list'
 import { objectSchema } from './object'
 import { position } from './position'
 import { keyword, lengthPercentage } from './primitives'
+import { shorthandSchema } from './shorthand'
 import { tupleSchema } from './tuple'
 
 const attachment = keyword(['scroll', 'fixed', 'local'])
@@ -38,7 +39,7 @@ export const backgroundSize = listSchema({ itemSchema: size })
 export const backgroundImage = listSchema({ itemSchema: image })
 export const backgroundPosition = listSchema({ itemSchema: position })
 
-const singleBackground = objectSchema({
+const singleBackground = shorthandSchema({
   type: '<background>',
   fields: {
     image,

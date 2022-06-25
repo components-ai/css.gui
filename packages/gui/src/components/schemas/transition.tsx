@@ -1,8 +1,8 @@
 import { ANIMATABLE_PROPERTIES } from '../../data/animatable'
 import { easingFunction } from './easing-function'
 import { listSchema } from './list'
-import { objectSchema } from './object'
 import { keyword } from './primitives'
+import { shorthandSchema } from './shorthand'
 import { time } from './time'
 
 const singleProperty = keyword(ANIMATABLE_PROPERTIES, {
@@ -28,7 +28,7 @@ export const transitionTimingFunction = listSchema({
   itemSchema: singleTimingFunction,
 })
 
-const singleTransition = objectSchema({
+const singleTransition = shorthandSchema({
   fields: {
     property: singleProperty,
     duration: singleDuration,

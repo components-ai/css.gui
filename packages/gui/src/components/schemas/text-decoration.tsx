@@ -1,7 +1,7 @@
 import { color } from './color'
 import { joinSchemas } from './joinSchemas'
-import { objectSchema } from './object'
 import { keyword, lengthPercentage } from './primitives'
+import { shorthandSchema } from './shorthand'
 
 const textDecorationLineKeywords = [
   'none',
@@ -39,7 +39,7 @@ export const textDecorationThickness = joinSchemas([
   keyword(['auto', 'from-font']),
 ])
 
-export const textDecoration = objectSchema({
+export const textDecoration = shorthandSchema({
   fields: {
     color: textDecorationColor,
     line: textDecorationLine,

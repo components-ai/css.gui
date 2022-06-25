@@ -9,6 +9,7 @@ import {
   lengthPercentage,
   numberPercentage,
 } from './primitives'
+import { shorthandSchema } from './shorthand'
 import { tupleSchema } from './tuple'
 import { DataTypeSchema } from './types'
 
@@ -47,7 +48,7 @@ export const borderImageWidth = boxSideSchema({
   ]),
 })
 
-export const borderImage = objectSchema({
+export const borderImage = shorthandSchema({
   fields: {
     source: borderImageSource,
     slice: borderImageSlice,

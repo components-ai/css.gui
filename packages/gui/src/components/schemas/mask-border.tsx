@@ -9,6 +9,7 @@ import {
   lengthPercentage,
   numberPercentage,
 } from './primitives'
+import { shorthandSchema } from './shorthand'
 import { tupleSchema } from './tuple'
 import { DataTypeSchema } from './types'
 
@@ -46,7 +47,7 @@ export const maskBorderWidth = joinSchemas([
   keyword(['auto']),
 ])
 
-export const maskBorder = objectSchema({
+export const maskBorder = shorthandSchema({
   fields: {
     source: maskBorderSource,
     slice: maskBorderSlice,

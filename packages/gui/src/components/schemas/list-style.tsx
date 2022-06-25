@@ -1,6 +1,6 @@
 import { image } from './image'
-import { objectSchema } from './object'
 import { keyword } from './primitives'
+import { shorthandSchema } from './shorthand'
 
 export const listStyleImage = image
 export const listStylePosition = keyword(['inside', 'outside'])
@@ -17,7 +17,7 @@ export const listStyleType = keyword([
   'custom-counter-style',
 ])
 
-export const listStyle = objectSchema({
+export const listStyle = shorthandSchema({
   fields: {
     type: listStyleType,
     position: listStylePosition,
