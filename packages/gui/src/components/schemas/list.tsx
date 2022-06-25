@@ -1,5 +1,3 @@
-import { ComponentType } from 'react'
-import { parse } from 'uuid'
 import FieldArray from '../FieldArray'
 import { DataTypeSchema, RegenOptions } from './types'
 
