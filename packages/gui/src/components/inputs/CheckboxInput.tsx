@@ -1,23 +1,14 @@
-import { kebabCase } from 'lodash-es'
-import { useId } from 'react'
 import { EditorProps } from '../../types/editor'
-import { Label } from '../primitives'
 
 export function CheckboxInput({
-  label,
   value = false,
   onChange,
-}: EditorProps<boolean | undefined> & { label: string }) {
-  const id = `${useId()}-${kebabCase(label)}`
+}: EditorProps<boolean | undefined>) {
   return (
-    <div sx={{ display: 'flex' }}>
-      <Label htmlFor={id}>{label}</Label>
-      <input
-        id={id}
-        type="checkbox"
-        value={value.toString()}
-        onChange={(e) => onChange(e.target.checked)}
-      />
-    </div>
+    <input
+      type="checkbox"
+      checked={value}
+      onChange={(e) => onChange(e.target.checked)}
+    />
   )
 }

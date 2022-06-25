@@ -8,7 +8,7 @@ export function toggle(label: string): DataTypeSchema<boolean> {
   return {
     type: label,
     defaultValue: false,
-    input: CheckboxInput,
+    inlineInput: CheckboxInput,
     stringify: (value) => (value ? label : ''),
     validate: ((value: any) => !value || typeof value === 'boolean') as any,
   }
