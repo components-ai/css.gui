@@ -1,5 +1,5 @@
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
-import { Copy, Gift, MoreVertical, Trash } from 'react-feather'
+import { Copy, Plus, MoreVertical, Trash } from 'react-feather'
 import { DROPDOWN_ITEM_STYLES, DROPDOWN_STYLES } from './styles'
 
 type NodeEditorDropdownProps = {
@@ -27,7 +27,7 @@ export const NodeEditorDropdown = ({
         <MoreVertical size={12} />
       </DropdownMenu.Trigger>
       <DropdownMenu.Content sx={DROPDOWN_STYLES}>
-        <DropdownMenu.Item sx={DROPDOWN_ITEM_STYLES} onClick={onDuplicate}>
+        <DropdownMenu.Item sx={{ display: 'none' }} onClick={onDuplicate}>
           <div
             sx={{
               display: 'flex',
@@ -45,7 +45,7 @@ export const NodeEditorDropdown = ({
               alignItems: 'center',
             }}
           >
-            <Gift size={12} sx={{ color: 'muted', mr: 2 }} /> <span>Wrap</span>
+            <Plus size={12} sx={{ color: 'muted', mr: 2 }} /> <span>Add parent element</span>
           </div>
         </DropdownMenu.Item>
         <DropdownMenu.Item sx={DROPDOWN_ITEM_STYLES} onClick={onRemove}>
