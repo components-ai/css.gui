@@ -122,7 +122,7 @@ export const Header = () => {
             color: 'primary',
           },
         }}
-        href="https://components.ai/signup"
+        href="https://components.ai/login"
       >
         Log in
       </a>
@@ -144,7 +144,7 @@ export const Header = () => {
             bg: 'primaryHover',
           },
         }}
-        href="https://components.ai/signin"
+        href="https://components.ai/signup"
       >
         Sign up
       </a>
