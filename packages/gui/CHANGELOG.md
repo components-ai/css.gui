@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.128
+
+### Patch Changes
+
+- e4b01dea: Hide copy node temporarily
+
 ## 0.0.127
 
 ### Patch Changes
