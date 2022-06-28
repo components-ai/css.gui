@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.131
+
+### Patch Changes
+
+- d9d7d449: Add back node copying, make more robust
+
 ## 0.0.130
 
 ### Patch Changes
