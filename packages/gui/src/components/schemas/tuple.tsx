@@ -3,6 +3,7 @@ import { DataTypeSchema, RegenOptions } from './types'
 import * as Toggle from '@radix-ui/react-toggle'
 import { Link } from 'react-feather'
 import { SchemaInput } from '../inputs/SchemaInput'
+import { replace } from '../../lib/array'
 
 interface CreateTupleSchema<T> {
   itemSchema: DataTypeSchema<T>
@@ -56,7 +57,6 @@ export function tupleSchema<T>({
     input(props) {
       const { value, onChange } = props
       const linked = isLinked(value)
-      // const ItemInput = itemSchema.input
       return (
         <div sx={{ display: 'flex', gap: 2 }}>
           {linkable && (
@@ -75,9 +75,9 @@ export function tupleSchema<T>({
               pressed={linked}
               onPressedChange={(pressed) => {
                 if (pressed) {
-                  props.onChange([value[0]])
+                  onChange([value[0]])
                 } else {
-                  props.onChange(labels.map(() => value[0]))
+                  onChange(labels.map(() => value[0]))
                 }
               }}
             >
@@ -89,7 +89,10 @@ export function tupleSchema<T>({
               <SchemaInput
                 key={i}
                 schema={itemSchema}
-                {...getInputProps(props, i)}
+                value={value[i]}
+                onChange={(newValue) => {
+                  onChange(replace(value, i, newValue))
+                }}
                 label=""
               />
             )
