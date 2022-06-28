@@ -7,7 +7,7 @@ import {
   ReactNode,
   useMemo,
 } from 'react'
-import { camelCase, mapValues, uniq } from 'lodash-es'
+import { camelCase, isNil, mapValues, uniq } from 'lodash-es'
 import { RefreshCw } from 'react-feather'
 import { Styles } from '../../types/css'
 import { Theme } from '../../types/theme'
@@ -36,6 +36,7 @@ import IconButton from '../ui/IconButton'
 import { SchemaInput } from '../inputs/SchemaInput'
 import { EditorDropdown } from '../ui/dropdowns/EditorDropdown'
 import { FieldsetDropdown } from '../ui/dropdowns/FieldsetDropdown'
+import { tokenize } from '../../lib/parse'
 
 export const getPropertyFromField = (field: KeyArg) => {
   if (Array.isArray(field)) {
@@ -388,4 +389,18 @@ function getPropertiesFromChildren(children: ReactNode): string[] {
     }
   })
   return properties
+}
+
+export function parseStyles(styles: Record<string, any>) {
+  return mapValues(styles, (value, property) => {
+    const schema = properties[property]
+    if (!schema) {
+      throw new Error(`Parsing unknown property: ${property}`)
+    }
+    const [parsed, rest] = schema.parse(tokenize(value))
+    if (isNil(parsed) || rest.length > 0) {
+      throw new Error(`Error parsing given value ${value} into ${property}`)
+    }
+    return parsed
+  })
 }

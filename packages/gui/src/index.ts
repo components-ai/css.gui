@@ -26,6 +26,7 @@ export { theme } from './components/ui/theme'
 export { supportedProperties, unsupportedProperties } from './data/properties'
 export { allProperties } from './data/css-properties'
 export { mdnProperties } from './data/mdn-properties'
+export { parseStyles } from './components/Editor/Controls'
 
 export * from './lib'
 export * from './types/theme'

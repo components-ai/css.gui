@@ -1,4 +1,5 @@
 import { mapValues } from 'lodash-es'
+import { Token } from '../../lib/parse'
 import { getInputProps } from '../../lib/util'
 import { SchemaInput } from '../inputs/SchemaInput'
 import { DataTypeSchema, RegenOptions } from './types'
@@ -12,6 +13,7 @@ interface CreateObject<T extends object> {
   stringify?(values: Record<keyof T, string>): string
   separator?: string
   defaultValue?: Partial<T>
+  parse(tokens: Token[]): [result: T, rest: Token[]]
 }
 
 export function objectSchema<T extends object>({
@@ -21,6 +23,7 @@ export function objectSchema<T extends object>({
   separator = ' ',
   stringify: providedStringify,
   defaultValue: providedDefaultValue,
+  parse,
 }: CreateObject<T>): DataTypeSchema<T> {
   function stringify(value: T) {
     if (providedStringify) {
@@ -79,5 +82,6 @@ export function objectSchema<T extends object>({
         return schema.validate(value[key])
       })
     }) as any,
+    parse,
   }
 }

@@ -1,17 +1,25 @@
 import { useState } from 'react'
-import { codegen, Editor, styled, toCSSObject } from '@compai/css-gui'
+import {
+  codegen,
+  Editor,
+  parseStyles,
+  styled,
+  toCSSObject,
+} from '@compai/css-gui'
 
 export const SpaceExample = () => {
-  const [styles, setStyles] = useState({
-    marginTop: { value: 1, unit: 'rem' },
-    marginBottom: { value: 1, unit: 'rem' },
-    marginLeft: { value: 1, unit: 'rem' },
-    marginRight: { value: 1, unit: 'rem' },
-    paddingTop: { value: 1, unit: 'rem' },
-    paddingBottom: { value: 1, unit: 'rem' },
-    paddingLeft: { value: 1, unit: 'rem' },
-    paddingRight: { value: 1, unit: 'rem' },
-  })
+  const [styles, setStyles] = useState(
+    parseStyles({
+      marginTop: '1rem',
+      marginBottom: '1rem',
+      marginLeft: '1rem',
+      marginRight: '1rem',
+      paddingTop: '1rem',
+      paddingBottom: '1rem',
+      paddingLeft: '1rem',
+      paddingRight: '1rem',
+    })
+  )
 
   return (
     <div>
