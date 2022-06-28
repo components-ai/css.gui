@@ -1,34 +1,17 @@
-import { codegen, Editor, toCSSObject } from '@compai/css-gui'
+import { Editor, parseStyles, toCSSObject } from '@compai/css-gui'
 import { useState } from 'react'
 import { defaultTheme } from '../../data/default-theme'
-import { Container } from '../../components/Container'
 
-const initialStyles = {
+const initialStyles = parseStyles({
   stroke: '#fff',
   fill: 'none',
   strokeAlignment: 'center',
-  strokeWidth: {
-    value: 8,
-    unit: 'px',
-  },
+  strokeWidth: '8px',
   strokeLinejoin: 'round',
   strokeLinecap: 'square',
   strokeDashadjust: 'dashed',
-  strokeDashcorner: {
-    value: 0,
-    unit: 'px',
-  },
-  strokeDashoffset: {
-    value: 0,
-    unit: 'px',
-  },
-  strokeDasharray: [
-    { value: 0, unit: 'number' },
-    { value: 8, unit: 'number' },
-    { value: 0, unit: 'number' },
-    { value: 24, unit: 'number' },
-  ],
-}
+  strokeDasharray: '1, 20, 1, 15',
+})
 export default function SvgExample() {
   const [styles, setStyles] = useState<any>(initialStyles)
 

@@ -69,5 +69,6 @@ function splitArray<T>(array: T[], separator: T) {
       current.push(item)
     }
   }
+  result.push(current)
   return result
 }
