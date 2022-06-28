@@ -8,7 +8,6 @@ import { DimensionInput } from '../inputs/Dimension'
 import { Range } from '../inputs/Dimension/Input'
 import { calc } from './calc'
 import { joinSchemas } from './joinSchemas'
-import { number } from './primitives'
 import { DataTypeSchema, RegenOptions } from './types'
 
 type UnitRanges<U extends string> = Record<U, readonly [number, number]>
@@ -80,6 +79,10 @@ function parseDimension<U extends string>(
   units: readonly U[]
 ): UnitValue<U> | undefined {
   if (typeof token !== 'string') return undefined
+  // special case handling for raw numbers
+  if ((units as any).includes('number') && !isNaN(+token)) {
+    return { value: +token, unit: 'number' as U }
+  }
   const unit = units.find((unit) => token.endsWith(unit))
   if (!unit) return undefined
   const numberPart = toNumber(token.replace(unit, ''))

@@ -46,7 +46,7 @@ export function shorthandSchema<T extends object>({
         for (const key of keyOrder) {
           const fieldSchema = fields[key]
           // TODO handle slashed fields
-          const [parsed, rest] = fieldSchema.parse(tokens)
+          const [parsed, rest] = fieldSchema.parse(remaining)
           if (!isNil(parsed)) {
             result[key] = parsed
             remaining = rest

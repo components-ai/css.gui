@@ -5,23 +5,11 @@ import { defaultTheme } from '../../data/default-theme'
 import { Container } from '../../components/Container'
 
 const initialStyles = parseStyles({
-  // textDecoration: 'tomato 8px underline wavy',
-  textDecorationColor: 'tomato',
-  textDecorationThickness: '8px',
-  textDecorationLine: 'underline',
-  textDecorationStyle: 'wavy',
+  textDecoration: 'tomato 8px underline wavy',
   // Font
   fontSize: '3rem',
-  // fontSize: {
-  //   value: 3,
-  //   unit: 'rem',
-  // },
   letterSpacing: 'initial',
-  lineHeight: '2rem',
-  // lineHeight: {
-  //   value: 1.25,
-  //   unit: 'number',
-  // },
+  lineHeight: '1.25',
   // fontFamily: 'Space Mono',
 })
 
@@ -42,10 +30,11 @@ export default function TextDecoration() {
             <>
               <section sx={{ display: 'grid', gap: '.5rem', width: '240px' }}>
                 <h3 sx={{ my: 0 }}>Text Decoration</h3>
-                <Inputs.TextDecorationColor />
+                {/* <Inputs.TextDecorationColor />
                 <Inputs.TextDecorationThickness />
                 <Inputs.TextDecorationLine />
-                <Inputs.TextDecorationStyle />
+                <Inputs.TextDecorationStyle /> */}
+                <Inputs.TextDecoration />
                 <Inputs.TextDecorationSkipInk />
               </section>
               <section sx={{ display: 'grid', gap: '.5rem', width: '240px' }}>
