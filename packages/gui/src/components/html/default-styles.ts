@@ -1,12 +1,7 @@
 import { HTMLTag } from './types'
 
 export const DEFAULT_STYLES: Record<string, any> = {
-  [HTMLTag.Button]: {
-    padding: { value: 16, unit: 'px' },
-    borderRadius: { value: 5, unit: 'px' },
-    display: 'block',
-    borderStyle: 'none',
-  },
+  [HTMLTag.Button]: {},
   [HTMLTag.A]: {},
   [HTMLTag.Input]: {},
   [HTMLTag.H1]: { textAlign: 'left' },
