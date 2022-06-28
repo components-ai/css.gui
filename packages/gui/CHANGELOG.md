@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.130
+
+### Patch Changes
+
+- 5d9ad0c1: Misc bug fixes including tuple handling and box sides
+
 ## 0.0.129
 
 ### Patch Changes
