@@ -58,6 +58,8 @@ export function boxSideSchema<T>({
         return false
       }
       const { top, left, right, bottom } = value
+      // If *nothing* is defined, it is not a box side
+      if (!top) return false
       return compact([top, left, right, bottom]).every((item) =>
         itemSchema.validate(item)
       )
