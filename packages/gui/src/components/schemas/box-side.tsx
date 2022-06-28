@@ -53,6 +53,7 @@ export function boxSideSchema<T>({
     type: `${itemSchema.type} {1,4}`,
     stringify,
     defaultValue,
+    regenerate,
     validate: ((value: any) => {
       if (typeof value !== 'object') {
         return false
