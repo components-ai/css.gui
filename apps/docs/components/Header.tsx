@@ -59,7 +59,6 @@ export const Header = () => {
       <Link href="/home" passHref={true}>
         <a
           sx={{
-            fontWeight: 500,
             color: 'text',
             textDecoration: 'none',
             display: 'flex',
@@ -76,7 +75,6 @@ export const Header = () => {
       <Link href="/properties" passHref={true}>
         <a
           sx={{
-            fontWeight: 500,
             color: 'text',
             textDecoration: 'none',
             fontWeight: 700,
@@ -129,9 +127,7 @@ export const Header = () => {
       <a
         sx={{
           textDecoration: 'none',
-          color: 'currentColor',
           fontWeight: 700,
-          transition: 'color .2s ease-in-out',
           px: 3,
           fontSize: [0, 1, 1],
           bg: 'primary',

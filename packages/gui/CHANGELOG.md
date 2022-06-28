@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.129
+
+### Patch Changes
+
+- 46040f61: Remove user select from labels
+
 ## 0.0.128
 
 ### Patch Changes

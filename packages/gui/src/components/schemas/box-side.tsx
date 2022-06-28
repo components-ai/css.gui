@@ -53,11 +53,14 @@ export function boxSideSchema<T>({
     type: `${itemSchema.type} {1,4}`,
     stringify,
     defaultValue,
+    regenerate,
     validate: ((value: any) => {
       if (typeof value !== 'object') {
         return false
       }
       const { top, left, right, bottom } = value
+      // If *nothing* is defined, it is not a box side
+      if (!top) return false
       return compact([top, left, right, bottom]).every((item) =>
         itemSchema.validate(item)
       )
