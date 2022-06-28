@@ -76,7 +76,6 @@ export const Header = () => {
       <Link href="/properties" passHref={true}>
         <a
           sx={{
-            fontWeight: 500,
             color: 'text',
             textDecoration: 'none',
             fontWeight: 700,
