@@ -111,6 +111,7 @@ export function optionsSchema<T extends Record<string, any>>({
       // Try to find a variant that parses the options completely, and return that variant
       // FIXME deal with instances where the one of the variants just swallows up the other
       for (const variantSchema of Object.values(variants)) {
+        console.log('checking', variantSchema)
         const [result, rest] = variantSchema.parse(tokens)
         if (result) {
           return [result, rest]

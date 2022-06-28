@@ -1,29 +1,29 @@
 import { useState } from 'react'
 import Link from 'next/link'
-import { Editor, Inputs, styled, codegen } from '@compai/css-gui'
+import { Editor, Inputs, styled, codegen, parseStyles } from '@compai/css-gui'
 import { defaultTheme } from '../../data/default-theme'
 import { Container } from '../../components/Container'
 
-const initialStyles = {
-  textDecorationColor: { type: 'theme', path: 'primary' },
-  textDecorationThickness: {
-    value: 8,
-    unit: 'px',
-  },
+const initialStyles = parseStyles({
+  // textDecoration: 'tomato 8px underline wavy',
+  textDecorationColor: 'tomato',
+  textDecorationThickness: '8px',
   textDecorationLine: 'underline',
   textDecorationStyle: 'wavy',
   // Font
-  fontSize: {
-    value: 3,
-    unit: 'rem',
-  },
+  fontSize: '3rem',
+  // fontSize: {
+  //   value: 3,
+  //   unit: 'rem',
+  // },
   letterSpacing: 'initial',
-  lineHeight: {
-    value: 1.25,
-    unit: 'number',
-  },
-  fontFamily: 'Space Mono',
-}
+  lineHeight: '2rem',
+  // lineHeight: {
+  //   value: 1.25,
+  //   unit: 'number',
+  // },
+  // fontFamily: 'Space Mono',
+})
 
 export default function TextDecoration() {
   const [styles, setStyles] = useState<any>(initialStyles)
@@ -43,10 +43,10 @@ export default function TextDecoration() {
               <section sx={{ display: 'grid', gap: '.5rem', width: '240px' }}>
                 <h3 sx={{ my: 0 }}>Text Decoration</h3>
                 <Inputs.TextDecorationColor />
-                <Inputs.TextDecorationLine />
                 <Inputs.TextDecorationThickness />
-                <Inputs.TextDecorationSkipInk />
+                <Inputs.TextDecorationLine />
                 <Inputs.TextDecorationStyle />
+                <Inputs.TextDecorationSkipInk />
               </section>
               <section sx={{ display: 'grid', gap: '.5rem', width: '240px' }}>
                 <h3 sx={{ mt: 4, mb: 0 }}>Font</h3>

@@ -1,3 +1,4 @@
+import { isNil } from 'lodash-es'
 import { objectSchema } from './object'
 import { DataTypeSchema } from './types'
 
@@ -15,8 +16,6 @@ interface CreateShorthand<T extends object> {
 /**
  * Used for objects representing CSS shorthands, like `background` or `border`.
  * These consist of one or more optional properties.
- *
- * When certain properties are
  */
 export function shorthandSchema<T extends object>({
   type,
@@ -37,6 +36,39 @@ export function shorthandSchema<T extends object>({
           return slash?.includes(field) ? `/ ${stringified}` : stringified
         })
         .join(' ')
+    },
+    parse(tokens) {
+      let remaining = [...tokens]
+      const result: Partial<T> = {}
+      while (remaining.length > 0) {
+        let foundMatch = false
+        // Iterate through the fields to see if we can find a matching parse
+        for (const key of keyOrder) {
+          const fieldSchema = fields[key]
+          // TODO handle slashed fields
+          const [parsed, rest] = fieldSchema.parse(tokens)
+          if (!isNil(parsed)) {
+            result[key] = parsed
+            remaining = rest
+            foundMatch = true
+            break
+          }
+        }
+        if (!foundMatch) {
+          break
+        }
+      }
+      // If we got no matches at all, then parsing failed
+      if (Object.keys(result).length === 0) {
+        return [undefined, tokens]
+      }
+      // Fill the rest with defaults
+      for (const key of keyOrder) {
+        if (isNil(result[key])) {
+          result[key] = fields[key].defaultValue
+        }
+      }
+      return [result as T, remaining]
     },
   })
 }

@@ -24,6 +24,14 @@ function rawColor({
     validate: ((value: any) => {
       return typeof value === 'string' && isValidColor(value)
     }) as any,
+    parse(tokens) {
+      const [first, ...rest] = tokens
+      // TODO hsl and stuff will be parsed as functions
+      if (typeof first === 'string' && isValidColor(first)) {
+        return [first, rest]
+      }
+      return [undefined, tokens]
+    },
   }
 }
 
@@ -37,6 +45,10 @@ const themeColor: DataTypeSchema<ThemeColor> = {
     if (typeof value !== 'object') return false
     return value.type === 'theme' && typeof value.path === 'string'
   }) as any,
+  parse(tokens) {
+    // TODO aaaargh how are we going to do this
+    return [undefined, tokens]
+  },
 }
 
 export function color({

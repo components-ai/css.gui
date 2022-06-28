@@ -39,5 +39,8 @@ export function theme(path: string): DataTypeSchema<ThemeValue> {
     },
     // TODO function version of defaultValue, pass in theme
     defaultValue: { type: 'theme', path, index: 0 },
+    parse(tokens) {
+      return [undefined, tokens]
+    },
   }
 }
