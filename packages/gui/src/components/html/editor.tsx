@@ -234,6 +234,12 @@ export function HtmlEditor({ onChange }: HtmlEditorProps) {
               onChange={(newItem) =>
                 onChange(setChildAtPath(value, selected, newItem))
               }
+              onParentChange={(newItem) => {
+                const parentPath = [...(selected || [])]
+                parentPath.pop()
+                const newValue = setChildAtPath(value, parentPath, newItem)
+                onChange(newValue)
+              }}
               onRemove={() => {
                 onChange(removeChildAtPath(value, selected))
                 const newPath = [...selected]
@@ -263,9 +269,15 @@ interface EditorProps {
 }
 interface TagEditorProps extends EditorProps {
   onRemove(): void
+  onParentChange?(parentValue: HtmlNode): void
 }
 
-function NodeEditor({ value, onChange, onRemove }: TagEditorProps) {
+function NodeEditor({
+  value,
+  onChange,
+  onRemove,
+  onParentChange,
+}: TagEditorProps) {
   const { value: fullValue, selected } = useHtmlEditor()
   const nodeType = value.type === 'text' ? 'text' : 'tag'
   return (
@@ -305,7 +317,15 @@ function NodeEditor({ value, onChange, onRemove }: TagEditorProps) {
               const parentPath = [...(selected || [])]
               const childIndex = parentPath.pop() // Remove child from parent path
               const parent = getAt(fullValue, parentPath)
-              onChange(addChildAtPath(parent, [childIndex ?? 0], { ...value }))
+
+              const newParent = addChildAtPath(parent, [childIndex ?? 0], {
+                ...value,
+              })
+
+              const onChangeForParent = onParentChange
+                ? onParentChange
+                : onChange
+              onChangeForParent(newParent)
             }}
             onWrap={() => {
               const wrappedNode: HtmlNode = {
