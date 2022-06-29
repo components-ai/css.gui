@@ -18,3 +18,18 @@ export function replace<T>(array: T[], index: number, newValue: T) {
   copy.splice(index, 1, newValue)
   return copy
 }
+
+export function split<T>(array: T[], separator: T) {
+  const result = []
+  let current: T[] = []
+  for (const item of array) {
+    if (item === separator) {
+      result.push(current)
+      current = []
+    } else {
+      current.push(item)
+    }
+  }
+  result.push(current)
+  return result
+}

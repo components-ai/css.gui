@@ -1,3 +1,4 @@
+import { split } from '../../lib/array'
 import FieldArray from '../FieldArray'
 import { DataTypeSchema, RegenOptions } from './types'
 
@@ -40,7 +41,7 @@ export function listSchema<T>({
       const parseSeperator = separator.trim()
       // Split the tokens based on the separator
       const ensplittenedTokens = parseSeperator
-        ? splitArray(tokens, parseSeperator)
+        ? split(tokens, parseSeperator)
         : tokens.map((t) => [t])
 
       const results = []
@@ -56,19 +57,4 @@ export function listSchema<T>({
       return [results, []]
     },
   }
-}
-
-function splitArray<T>(array: T[], separator: T) {
-  const result = []
-  let current: T[] = []
-  for (const item of array) {
-    if (item === separator) {
-      result.push(current)
-      current = []
-    } else {
-      current.push(item)
-    }
-  }
-  result.push(current)
-  return result
 }

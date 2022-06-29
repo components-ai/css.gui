@@ -1,3 +1,4 @@
+import { split } from '../../lib/array'
 import { EasingFunctionEditor } from '../inputs/EasingFunction'
 import { keywordValues } from '../inputs/EasingFunction/keywords'
 import { stringifyEasingFunction } from '../inputs/EasingFunction/stringify'
@@ -30,6 +31,27 @@ const rawEasingFunction: DataTypeSchema<EasingFunction> = {
       }
     }
   }) as any,
+  parse(tokens) {
+    const [first, ...rest] = tokens
+    // ensure the easing function uses function syntax
+    if (typeof first === 'string') return [undefined, tokens]
+    const { name, arguments: args } = first
+    if (name === 'cubic-bezier') {
+      const [p1, p2, p3, p4] = args
+        .join('')
+        .split(',')
+        .map((p) => +p)
+      return [{ type: 'cubic-bezier', p1, p2, p3, p4 }, rest]
+    }
+    if (name === 'steps') {
+      const [numberOfSteps, direction] = args.join('').split(',')
+      return [
+        { type: 'steps', stops: +numberOfSteps, jumpTerm: direction as any },
+        rest,
+      ]
+    }
+    return [undefined, tokens]
+  },
 }
 
 export const easingFunction = joinSchemas([

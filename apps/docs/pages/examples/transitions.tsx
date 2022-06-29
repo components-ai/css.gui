@@ -1,39 +1,14 @@
-import { Editor, styled } from '@compai/css-gui'
+import { Editor, parseStyles, styled } from '@compai/css-gui'
 import { useState } from 'react'
-import { Container } from '../../components/Container'
 
-const initialStyles = {
-  transition: [
-    {
-      timingFunction: {
-        type: 'cubic-bezier',
-        p1: 0,
-        p2: 0,
-        p3: 1,
-        p4: 1,
-      },
-      property: 'width',
-      duration: { value: 250, unit: 'ms' },
-      delay: { value: 0, unit: 'ms' },
-    },
-    {
-      timingFunction: {
-        type: 'cubic-bezier',
-        p1: 0.1,
-        p2: 0.2,
-        p3: 0.9,
-        p4: 0.75,
-      },
-      property: 'background-color',
-      duration: { value: 350, unit: 'ms' },
-      delay: { value: 0, unit: 'ms' },
-    },
-  ],
-  width: { value: 100, unit: '%' },
-  height: { value: 240, unit: 'px' },
-  borderRadius: { value: 0, unit: 'px' },
-  backgroundColor: { type: 'theme', path: 'primary' },
-}
+const initialStyles = parseStyles({
+  transition:
+    'width 250ms cubic-bezier(0, 0, 1, 0), background-color 350ms cubic-bezier(0.1, 0.2, 0.9, 0.75)',
+  width: '100%',
+  height: '240px',
+  // TODO theme colors again
+  backgroundColor: 'rebeccapurple',
+})
 
 export default function Transitions() {
   const [styles, setStyles] = useState<any>(initialStyles)
