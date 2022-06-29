@@ -1,5 +1,12 @@
 # @compai/css-gui
 
+## 0.0.134
+
+### Patch Changes
+
+- 4790114f: Don't error when the theme path doesn't exist
+- 50b691fd: Adjust height/width default values
+
 ## 0.0.133
 
 ### Patch Changes
