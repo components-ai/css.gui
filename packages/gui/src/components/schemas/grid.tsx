@@ -9,7 +9,11 @@ const inflexibleBreadth = joinSchemas([
   keyword(['min-content', 'max-content', 'auto']),
 ])
 const trackBreadth = joinSchemas([
-  lengthPercentage({ range: 'nonnegative', flex: true }),
+  lengthPercentage({
+    range: 'nonnegative',
+    flex: true,
+    defaultValue: { value: 1, unit: 'fr' },
+  }),
   keyword(['min-content', 'max-content', 'auto']),
 ])
 
@@ -25,19 +29,22 @@ const trackSize = joinSchemas([
   functionSchema('fit-content', lengthPercentage()),
 ])
 
-const trackList = joinSchemas([
-  trackSize,
-  functionSchema(
-    'repeat',
-    objectSchema({
-      fields: {
-        count: integer({ defaultValue: 1 }),
-        trackList: listSchema({ itemSchema: trackSize, separator: ' ' }),
-      },
-      separator: ', ',
-    })
-  ),
-])
+const trackList = joinSchemas(
+  [
+    trackSize,
+    functionSchema(
+      'repeat',
+      objectSchema({
+        fields: {
+          count: integer({ defaultValue: 3 }),
+          trackList: listSchema({ itemSchema: trackSize, separator: ' ' }),
+        },
+        separator: ', ',
+      })
+    ),
+  ],
+  { defaultType: 'repeat' }
+)
 
 export const gridAutoRow = listSchema({ itemSchema: trackSize, separator: ' ' })
 export const gridAutoColumns = listSchema({
