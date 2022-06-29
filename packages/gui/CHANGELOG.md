@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.133
+
+### Patch Changes
+
+- cbac582a: Don't use old color shape
+
 ## 0.0.132
 
 ### Patch Changes
