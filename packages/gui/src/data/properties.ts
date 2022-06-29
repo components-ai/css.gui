@@ -273,7 +273,7 @@ export const rawProperties: Record<string, any> = {
     input: 'length',
     percentage: true,
     keywords: ['max-content', 'min-content', 'auto'],
-    defaultValue: { value: 'auto', unit: 'keyword' },
+    defaultValue: 'auto',
     themeProperty: 'sizes',
   },
   borderCollapse: {
@@ -542,7 +542,7 @@ export const rawProperties: Record<string, any> = {
       'fit-content',
       'content',
     ],
-    defaultValue: { value: 'auto', unit: 'keyword' },
+    defaultValue: 'auto',
     themeProperty: 'sizes',
   },
   flexDirection: {
@@ -1548,10 +1548,7 @@ export const rawProperties: Record<string, any> = {
       'top',
       'bottom',
     ],
-    defaultValue: {
-      value: 'baseline',
-      unit: 'keyword',
-    },
+    defaultValue: 'baseline',
   },
   visibility: {
     input: 'keyword',
