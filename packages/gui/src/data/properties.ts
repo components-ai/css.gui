@@ -1634,7 +1634,7 @@ export const rawProperties: Record<string, any> = {
   zIndex: {
     input: 'integer',
     keywords: ['auto'],
-    defaultValue: 'auto',
+    defaultValue: 1,
   },
 }
 
