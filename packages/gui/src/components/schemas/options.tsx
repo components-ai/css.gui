@@ -53,13 +53,7 @@ export function optionsSchema<T extends Record<string, any>>({
       // Render the select
       return (
         <div sx={{ display: 'flex' }}>
-          {InlineInput ? (
-            <InlineInput {...props} />
-          ) : (
-            <span sx={{ fontSize: 1 }}>
-              {variants[type].stringify(props.value)}
-            </span>
-          )}
+          {InlineInput && <InlineInput {...props} />}
           <Select.Root
             value={type.toString()}
             onValueChange={(newType) => {
