@@ -823,8 +823,8 @@ export const rawProperties: Record<string, any> = {
     keywords: ['max-content', 'min-content', 'auto'],
     range: {
       [AbsoluteLengthUnits.Px]: [0, 2160],
-      [FontRelativeLengthUnits.Em]: [0, 16],
-      [FontRelativeLengthUnits.Rem]: [0, 16],
+      [FontRelativeLengthUnits.Em]: [0, 256],
+      [FontRelativeLengthUnits.Rem]: [0, 256],
       [PercentageLengthUnits.Pct]: [0.1, 200],
       [ViewportPercentageLengthUnits.Vh]: [0, 100],
       [ViewportPercentageLengthUnits.Vw]: [0, 100],
@@ -1571,8 +1571,8 @@ export const rawProperties: Record<string, any> = {
     keywords: ['max-content', 'min-content', 'auto'],
     range: {
       [AbsoluteLengthUnits.Px]: [0, 3840],
-      [FontRelativeLengthUnits.Em]: [0, 16],
-      [FontRelativeLengthUnits.Rem]: [0, 16],
+      [FontRelativeLengthUnits.Em]: [0, 256],
+      [FontRelativeLengthUnits.Rem]: [0, 256],
       [PercentageLengthUnits.Pct]: [0.1, 200],
       [ViewportPercentageLengthUnits.Vh]: [0, 100],
       [ViewportPercentageLengthUnits.Vw]: [0, 100],
