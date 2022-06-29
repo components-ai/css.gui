@@ -10,4 +10,6 @@ module.exports = {
   moduleNameMapper: {
     '^(\\.{1,2}/.*)\\.js$': '$1',
   },
+  transform: { '^.+\\.(js|jsx|mjs)$': 'babel-jest' },
+  transformIgnorePatterns: ['<rootDir>/node_modules/(?!lodash-es)'],
 }
