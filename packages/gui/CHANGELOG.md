@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.132
+
+### Patch Changes
+
+- ea271f92: Stringify font family
+
 ## 0.0.131
 
 ### Patch Changes
