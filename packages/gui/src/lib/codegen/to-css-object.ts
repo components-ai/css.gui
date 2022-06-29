@@ -19,11 +19,9 @@ export const stringifyProperty = (
     }
   }
 
-  // // font-family?
-  // if (!isCSSUnitValue(value)) {
-  //   return String(value) ?? null
-  // }
-  // return stringifyUnit(value, theme)
+  if (property === 'fontFamily') {
+    return String(value) ?? null
+  }
 }
 
 type StyleEntry = [string, Length | string | null | undefined]
