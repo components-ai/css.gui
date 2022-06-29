@@ -831,7 +831,10 @@ export const rawProperties: Record<string, any> = {
       [ViewportPercentageLengthUnits.VMin]: [0, 100],
       [ViewportPercentageLengthUnits.VMax]: [0, 100],
     },
-    defaultValue: 'auto',
+    defaultValue: {
+      value: 100,
+      unit: '%',
+    },
     themeProperty: 'sizes',
   },
   hyphenateCharacter: {
