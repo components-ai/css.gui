@@ -72,7 +72,7 @@ export default function GradientStopsField({
           onChange([
             ...value,
             {
-              color: { value: randomColor() },
+              color: randomColor(),
               hinting: randomInt(0, 100),
             },
           ])
