@@ -104,8 +104,8 @@ function normalizeSchema(propertyData: PropertyData): DataTypeSchema<any> {
       let schema = primitiveMap[input](propertyData) as any
       return joinSchemas(
         compact([
-          keywords && keyword(keywords),
           schema,
+          keywords && keyword(keywords),
           themeProperty && theme(themeProperty),
         ])
       )
