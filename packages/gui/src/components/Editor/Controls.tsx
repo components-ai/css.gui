@@ -84,6 +84,10 @@ const Control = ({ field, showRemove = false, ...props }: ControlProps) => {
 
   const schema = properties[property]
 
+  if (schema.type === 'none') {
+    return null
+  }
+
   return (
     <SchemaInput
       label={sentenceCase(property)}

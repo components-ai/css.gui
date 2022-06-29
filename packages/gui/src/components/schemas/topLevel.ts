@@ -4,8 +4,10 @@ import { keyword } from './primitives'
 import { responsive } from './responsive'
 import { DataTypeSchema } from './types'
 
+const NO_GLOBAL_SCHEMA_PROPERTIES = ['fontFamily', 'fontVariationSettings']
+
 export function topLevel<T>(schema: DataTypeSchema<T>, property: string) {
-  if (property === 'fontFamily') {
+  if (NO_GLOBAL_SCHEMA_PROPERTIES.includes(property)) {
     return schema
   }
   const withGlobal = joinSchemas([schema, global])
