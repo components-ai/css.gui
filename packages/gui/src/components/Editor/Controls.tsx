@@ -397,7 +397,7 @@ export function parseStyles(styles: Record<string, any>) {
     if (!schema) {
       throw new Error(`Parsing unknown property: ${property}`)
     }
-    const [parsed, rest] = schema.parse(tokenize(value))
+    const [parsed, rest] = schema.parse!(tokenize(value))
     if (isNil(parsed) || rest.length > 0) {
       throw new Error(`Error parsing given value ${value} into ${property}`)
     }

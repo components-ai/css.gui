@@ -46,7 +46,7 @@ export function listSchema<T>({
 
       const results = []
       for (const tokenGroup of ensplittenedTokens) {
-        const [result, rest] = itemSchema.parse(tokenGroup)
+        const [result, rest] = itemSchema.parse!(tokenGroup)
         // Make sure the item schema parses the group *entirely* without loose ends
         if (!result || rest.length > 0) {
           return [undefined, tokens]

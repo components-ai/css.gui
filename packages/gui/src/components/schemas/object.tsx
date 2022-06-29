@@ -13,7 +13,7 @@ interface CreateObject<T extends object> {
   stringify?(values: Record<keyof T, string>): string
   separator?: string
   defaultValue?: Partial<T>
-  parse(tokens: Token[]): [result: T | undefined, rest: Token[]]
+  parse?(tokens: Token[]): [result: T | undefined, rest: Token[]]
 }
 
 export function objectSchema<T extends object>({
