@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.135
+
+### Patch Changes
+
+- 5bfb117d: Change default length value for height
+
 ## 0.0.134
 
 ### Patch Changes
