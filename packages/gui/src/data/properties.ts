@@ -100,6 +100,13 @@ function normalizeSchema(propertyData: PropertyData): DataTypeSchema<any> {
     if (input === 'keyword') {
       // const { keywords = [], ...rest } = propertyData
       return keyword(keywords!, propertyData)
+    } else if (input === 'none') {
+      return {
+        type: 'none',
+        defaultValue: null,
+        validate: (() => true) as any,
+        stringify: (value) => String(value),
+      }
     } else {
       let schema = primitiveMap[input](propertyData) as any
       return joinSchemas(
