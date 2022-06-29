@@ -2,7 +2,6 @@ import { useTheme } from '@emotion/react'
 import { get, range } from 'lodash-es'
 import { ThemeValue } from '../../types/css'
 import { SelectInput } from '../inputs/SelectInput'
-import { length } from './primitives'
 import { DataTypeSchema } from './types'
 
 export function theme(path: string): DataTypeSchema<ThemeValue> {
@@ -21,7 +20,7 @@ export function theme(path: string): DataTypeSchema<ThemeValue> {
     },
     inlineInput(props) {
       const theme = useTheme()
-      const numOptions = get(theme, path).length
+      const numOptions = get(theme, path)?.length || 0
       return (
         <SelectInput
           label=""
