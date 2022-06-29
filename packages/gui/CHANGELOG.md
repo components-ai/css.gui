@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.136
+
+### Patch Changes
+
+- af3185f5: Default z index to 1
+
 ## 0.0.135
 
 ### Patch Changes
