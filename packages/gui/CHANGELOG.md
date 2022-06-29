@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.137
+
+### Patch Changes
+
+- 6df72919: Properly hide none schema type, tie in variable fonts
+
 ## 0.0.136
 
 ### Patch Changes
