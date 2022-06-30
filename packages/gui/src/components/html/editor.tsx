@@ -322,8 +322,8 @@ function NodeEditor({
             onDuplicate={() => {
               const parentPath = [...(selected || [])]
               const childIndex = parentPath.pop() // Remove child from parent path
-              const parent = getAt(fullValue, parentPath)
 
+              const parent = getChildAtPath(fullValue, parentPath)
               const newParent = addChildAtPath(parent, [childIndex ?? 0], {
                 ...value,
               })
@@ -729,14 +729,6 @@ function addAt<T>(items: T[], index: number, newItem: T) {
   const spliced = [...items]
   spliced.splice(index, 0, newItem)
   return spliced
-}
-
-function getAt<T>(node: ElementData, path: ElementPath) {
-  let el: ElementData | undefined = node
-  path.reverse().forEach((index) => {
-    el = el?.children?.[index]
-  })
-  return el
 }
 
 function replaceAt<T>(items: T[], index: number, newItem: T) {
