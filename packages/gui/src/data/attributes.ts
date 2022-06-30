@@ -1,14 +1,14 @@
-const GLOBAL_ATTRIBUTES = ['class', 'id', 'title',]
+const GLOBAL_ATTRIBUTES = ['class', 'id', 'title']
 
 export const ATTRIBUTE_MAP: Record<string, string[]> = {
   a: [
-    ...GLOBAL_ATTRIBUTES, 
-    'href', 
-    'target', 
-    'download', 
-    'hreflang', 
-    'referrerpolicy', 
-    'rel' 
+    ...GLOBAL_ATTRIBUTES,
+    'href',
+    'target',
+    'download',
+    'hreflang',
+    'referrerpolicy',
+    'rel',
   ],
   abbr: GLOBAL_ATTRIBUTES,
   address: GLOBAL_ATTRIBUTES,
@@ -28,50 +28,42 @@ export const ATTRIBUTE_MAP: Record<string, string[]> = {
   b: GLOBAL_ATTRIBUTES,
   bdi: GLOBAL_ATTRIBUTES,
   bdo: GLOBAL_ATTRIBUTES,
-  blockquote: [ ...GLOBAL_ATTRIBUTES, 'cite' ],
+  blockquote: [...GLOBAL_ATTRIBUTES, 'cite'],
   br: GLOBAL_ATTRIBUTES,
   button: [
-    'type', 
-    'disabled', 
-    'name', 
-    'value', 
+    'type',
+    'disabled',
+    'name',
+    'value',
     'autofocus',
-    'form', 
-    'formaction', 
+    'form',
+    'formaction',
     'formenctype',
     'formnovalidate',
     'formtarget',
-    'formmethod', 
+    'formmethod',
     'step',
-    'formnovalidate', 
-    'formtarget', 
+    'formnovalidate',
+    'formtarget',
   ],
   caption: GLOBAL_ATTRIBUTES,
   cite: GLOBAL_ATTRIBUTES,
   code: GLOBAL_ATTRIBUTES,
   col: GLOBAL_ATTRIBUTES,
   colgroup: GLOBAL_ATTRIBUTES,
-  data: [
-    ...GLOBAL_ATTRIBUTES,
-    'datetime',
-  ],
+  data: [...GLOBAL_ATTRIBUTES, 'datetime'],
   datalist: GLOBAL_ATTRIBUTES,
   dd: GLOBAL_ATTRIBUTES,
   del: GLOBAL_ATTRIBUTES,
   details: GLOBAL_ATTRIBUTES,
   dfn: GLOBAL_ATTRIBUTES,
-  dialog: [...GLOBAL_ATTRIBUTES, 'open' ],
+  dialog: [...GLOBAL_ATTRIBUTES, 'open'],
   div: GLOBAL_ATTRIBUTES,
   dl: GLOBAL_ATTRIBUTES,
   dt: GLOBAL_ATTRIBUTES,
   em: GLOBAL_ATTRIBUTES,
-  fieldset: [
-    ...GLOBAL_ATTRIBUTES,
-    'disabled',
-    'form',
-    'name',
-  ],
-  figcaption: GLOBAL_ATTRIBUTES, 
+  fieldset: [...GLOBAL_ATTRIBUTES, 'disabled', 'form', 'name'],
+  figcaption: GLOBAL_ATTRIBUTES,
   figure: GLOBAL_ATTRIBUTES,
   footer: GLOBAL_ATTRIBUTES,
   form: [
@@ -96,10 +88,10 @@ export const ATTRIBUTE_MAP: Record<string, string[]> = {
   hr: GLOBAL_ATTRIBUTES,
   i: GLOBAL_ATTRIBUTES,
   img: [
-    ...GLOBAL_ATTRIBUTES, 
-    'alt', 
-    'src', 
-    'srcset', 
+    ...GLOBAL_ATTRIBUTES,
+    'alt',
+    'src',
+    'srcset',
     'width',
     'height',
     'sizes',
@@ -111,16 +103,16 @@ export const ATTRIBUTE_MAP: Record<string, string[]> = {
     'crossorigin',
   ],
   input: [
-    ...GLOBAL_ATTRIBUTES, 
+    ...GLOBAL_ATTRIBUTES,
     // TODO: Adjust attribute list based on type value
-    'type',  
+    'type',
     'value', // all
-    'name',  // all
-    'disabled',  // almost all
+    'name', // all
+    'disabled', // almost all
     'required', // almost all
-    'checked', // radio, checkbox 
+    'checked', // radio, checkbox
     'autocomplete', // all
-    'dirname',  // text, search
+    'dirname', // text, search
     'form', // all
     'formaction', // image, submit
     'formenctype', // image, submit
@@ -129,10 +121,10 @@ export const ATTRIBUTE_MAP: Record<string, string[]> = {
     'formtarget', // image, submit
     'alt', // image
     'src', // image
-    'list', // almost all 
+    'list', // almost all
     'max', // numeric types
     'maxlength', // password, search, tel, text, url
-    'min', // numeric types 
+    'min', // numeric types
     'minlength', // password, search, tel, text, url
     'step', // numeric types
     'capture', // file
@@ -144,16 +136,9 @@ export const ATTRIBUTE_MAP: Record<string, string[]> = {
     'size', // email, password, tel, text, url
   ],
   kbd: GLOBAL_ATTRIBUTES,
-  label: [
-    ...GLOBAL_ATTRIBUTES,
-    'for',
-  ],
+  label: [...GLOBAL_ATTRIBUTES, 'for'],
   legend: GLOBAL_ATTRIBUTES,
-  li: [
-    ...GLOBAL_ATTRIBUTES,
-    'value',
-    'type',
-  ],
+  li: [...GLOBAL_ATTRIBUTES, 'value', 'type'],
   main: GLOBAL_ATTRIBUTES,
   mark: GLOBAL_ATTRIBUTES,
   menu: GLOBAL_ATTRIBUTES,
@@ -169,27 +154,15 @@ export const ATTRIBUTE_MAP: Record<string, string[]> = {
   ],
   nav: GLOBAL_ATTRIBUTES,
   noscript: GLOBAL_ATTRIBUTES,
-  ol: [
-    ...GLOBAL_ATTRIBUTES,
-    'reversed',
-    'start',
-    'type',
-  ],
+  ol: [...GLOBAL_ATTRIBUTES, 'reversed', 'start', 'type'],
   optgroup: GLOBAL_ATTRIBUTES,
   option: GLOBAL_ATTRIBUTES,
   output: GLOBAL_ATTRIBUTES,
   p: GLOBAL_ATTRIBUTES,
   picture: GLOBAL_ATTRIBUTES,
   pre: GLOBAL_ATTRIBUTES,
-  progress: [
-    ...GLOBAL_ATTRIBUTES,
-    'max',
-    'value',
-  ],
-  q: [
-    ...GLOBAL_ATTRIBUTES,
-    'cite',
-  ],
+  progress: [...GLOBAL_ATTRIBUTES, 'max', 'value'],
+  q: [...GLOBAL_ATTRIBUTES, 'cite'],
   rp: GLOBAL_ATTRIBUTES,
   rt: GLOBAL_ATTRIBUTES,
   rtc: GLOBAL_ATTRIBUTES,
@@ -197,10 +170,7 @@ export const ATTRIBUTE_MAP: Record<string, string[]> = {
   s: GLOBAL_ATTRIBUTES,
   samp: GLOBAL_ATTRIBUTES,
   section: GLOBAL_ATTRIBUTES,
-  slot: [
-    ...GLOBAL_ATTRIBUTES,
-    'name',
-  ],
+  slot: [...GLOBAL_ATTRIBUTES, 'name'],
   small: GLOBAL_ATTRIBUTES,
   source: [
     ...GLOBAL_ATTRIBUTES,
@@ -218,12 +188,7 @@ export const ATTRIBUTE_MAP: Record<string, string[]> = {
   sup: GLOBAL_ATTRIBUTES,
   table: GLOBAL_ATTRIBUTES,
   tbody: GLOBAL_ATTRIBUTES,
-  td: [
-    ...GLOBAL_ATTRIBUTES,
-    'colspan',
-    'headers',
-    'rowspan',
-  ],
+  td: [...GLOBAL_ATTRIBUTES, 'colspan', 'headers', 'rowspan'],
   template: GLOBAL_ATTRIBUTES,
   textarea: [
     ...GLOBAL_ATTRIBUTES,
@@ -245,19 +210,9 @@ export const ATTRIBUTE_MAP: Record<string, string[]> = {
   tfoot: GLOBAL_ATTRIBUTES,
   th: GLOBAL_ATTRIBUTES,
   thead: GLOBAL_ATTRIBUTES,
-  time: [
-    ...GLOBAL_ATTRIBUTES,
-    'datetime',
-  ],
+  time: [...GLOBAL_ATTRIBUTES, 'datetime'],
   tr: GLOBAL_ATTRIBUTES,
-  track: [
-    ...GLOBAL_ATTRIBUTES,
-    'default',
-    'kind',
-    'label',
-    'src',
-    'srclang',
-  ],
+  track: [...GLOBAL_ATTRIBUTES, 'default', 'kind', 'label', 'src', 'srclang'],
   u: GLOBAL_ATTRIBUTES,
   ul: GLOBAL_ATTRIBUTES,
   var: GLOBAL_ATTRIBUTES,
@@ -280,4 +235,9 @@ export const ATTRIBUTE_MAP: Record<string, string[]> = {
     'crossorigin',
   ],
   wbr: GLOBAL_ATTRIBUTES,
+  svg: [...GLOBAL_ATTRIBUTES, 'version', 'xmlns', 'viewBox'],
+  circle: [...GLOBAL_ATTRIBUTES, 'cx', 'cy', 'r'],
+  rect: [...GLOBAL_ATTRIBUTES, 'width', 'height'],
+  line: [...GLOBAL_ATTRIBUTES, 'x1', 'y1', 'x2', 'y2'],
+  path: [...GLOBAL_ATTRIBUTES, 'd'],
 }
