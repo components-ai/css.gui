@@ -11,3 +11,10 @@ export const DEFAULT_STYLES: Record<string, any> = {
   [HTMLTag.H5]: { textAlign: 'left' },
   [HTMLTag.H6]: { textAlign: 'left' },
 }
+
+export const DEFAULT_ATTRIBUTES: Record<string, any> = {
+  [HTMLTag.Svg]: {
+    version: '1.1',
+    xmlns: 'http://www.w3.org/2000/svg',
+  },
+}

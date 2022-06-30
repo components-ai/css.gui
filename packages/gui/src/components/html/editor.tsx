@@ -8,7 +8,7 @@ import { Code, Layers, X } from 'react-feather'
 import { Label, Combobox } from '../primitives'
 import { SelectInput } from '../inputs/SelectInput'
 import { AttributeEditor } from './AttributeEditor'
-import { DEFAULT_STYLES } from './default-styles'
+import { DEFAULT_ATTRIBUTES, DEFAULT_STYLES } from './default-styles'
 import { useHtmlEditor } from './Provider'
 import { isVoidElement } from '../../lib/elements'
 import { isSamePath } from './util'
@@ -112,6 +112,12 @@ const HTML_TAGS = [
   HTMLTag.Var,
   HTMLTag.Video,
   HTMLTag.Wbr,
+  HTMLTag.Svg,
+  HTMLTag.Circle,
+  HTMLTag.Line,
+  HTMLTag.Rect,
+  HTMLTag.Path,
+  HTMLTag.Text,
 ]
 
 interface HtmlEditorProps {
@@ -389,8 +395,14 @@ function NodeSwitch({ value, onChange }: EditorProps) {
             onItemSelected={(selectedItem) => {
               const defaultStyles = DEFAULT_STYLES[selectedItem] || {}
               const mergedStyles = { ...defaultStyles, ...value.style }
+              const defaultAttributes = DEFAULT_ATTRIBUTES[selectedItem] || {}
+              const mergedAttributes = {
+                ...defaultAttributes,
+                ...(value.attributes || {}),
+              }
               onChange({
                 ...value,
+                attributes: mergedAttributes,
                 tagName: selectedItem,
                 style: mergedStyles,
               })
