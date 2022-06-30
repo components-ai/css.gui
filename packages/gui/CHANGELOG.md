@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.138
+
+### Patch Changes
+
+- 6ad62f66: Add some basic SVG functionality
+
 ## 0.0.137
 
 ### Patch Changes
