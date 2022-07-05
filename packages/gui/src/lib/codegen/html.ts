@@ -16,7 +16,7 @@ type HTMLOptions = {
   selector?: string
   theme?: any
 }
-export const html = async (node: HtmlNode, { theme }: CSSOptions = {}) => {
+export const html = async (node: HtmlNode, { theme }: HTMLOptions = {}) => {
   const res = await fetch('https://components.ai/api/v1/gui/export/html', {
     method: 'POST',
     headers: {
