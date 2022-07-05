@@ -1,5 +1,12 @@
 # @compai/css-gui
 
+## 0.0.139
+
+### Patch Changes
+
+- 20f68b77: Remove unneeded internal function
+- ffb1ef8e: Fix theme handling in HTML editor
+
 ## 0.0.138
 
 ### Patch Changes
