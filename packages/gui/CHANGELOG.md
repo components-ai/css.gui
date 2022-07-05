@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.140
+
+### Patch Changes
+
+- 09588f40: Improve theme integration
+
 ## 0.0.139
 
 ### Patch Changes
