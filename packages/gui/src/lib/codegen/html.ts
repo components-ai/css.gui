@@ -12,13 +12,17 @@ export const unstyledHtml = async (node: HtmlNode) => {
   return format('html', output)
 }
 
-export const html = async (node: HtmlNode) => {
+type HTMLOptions = {
+  selector?: string
+  theme?: any
+}
+export const html = async (node: HtmlNode, { theme }: CSSOptions = {}) => {
   const res = await fetch('https://components.ai/api/v1/gui/export/html', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ html: node }),
+    body: JSON.stringify({ html: node, theme }),
   })
 
   const html = await res.text()
