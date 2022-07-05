@@ -1,7 +1,18 @@
 import { v4 as uuid } from 'uuid'
-import { ColorModesScale } from 'theme-ui'
+import { ColorModesScale, get as themeUIGet } from 'theme-ui'
 import { THEME_SCALES } from './constants'
 import { ColorGroup, Theme } from '../types/theme'
+
+type GetArguments = {
+  theme: any
+  path: string | number
+  property: string
+}
+export const themeGet = ({ theme, path, property }: GetArguments) => {
+  const scale = THEME_SCALES[property]
+  const fullPath = [scale, path].filter(Boolean).join('.')
+  return themeUIGet(theme, fullPath) ?? property
+}
 
 export const isThemeable = (property?: string): boolean =>
   !!THEME_SCALES[property || '']

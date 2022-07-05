@@ -1,11 +1,8 @@
 import * as Popover from '@radix-ui/react-popover'
-import { get } from 'lodash-es'
-import { Color } from '../../../types/css'
-import { Theme } from '../../../types/theme'
+import { themeGet } from '../../../lib'
 import { useTheme } from '../../providers/ThemeContext'
 import Checkerboard from './Checkerboard'
 import { hasAlpha, withFallback } from './util'
-import ColorValueDisplay from './ValueDisplay'
 
 export interface ThemeColor {
   type: 'theme'
@@ -69,7 +66,7 @@ export default function PalettePopover({
 function Swatch({ value }: { value: ThemeColor }) {
   const theme = useTheme()
   // FIXME extracting color value from path is annoying...
-  const color = get(theme.colors, value.path)
+  const color = themeGet({ theme, property: 'color', path: value.path })
   const isTransparent = hasAlpha(color)
   return (
     <div
@@ -104,7 +101,7 @@ function Swatch({ value }: { value: ThemeColor }) {
  */
 export function PalettePicker({ value, onChange }: Props) {
   const theme = useTheme()
-  const valueColor = get(theme.colors, value.path)
+  const valueColor = themeGet({ theme, property: 'color', path: value.path })
   return (
     <div>
       {/* <ColorValueDisplay value={color} onChange={onChange} /> */}

@@ -1,4 +1,3 @@
-import { Fragment, HTMLAttributes } from 'react'
 import { toCSSObject } from '../../lib'
 import { ElementData, ElementPath } from './types'
 import { HTMLFontTags } from './FontTags'

@@ -14,6 +14,7 @@ import { isVoidElement } from '../../lib/elements'
 import { isSamePath } from './util'
 import { Export } from './Export'
 import { NodeEditorDropdown } from '../ui/dropdowns/NodeEditorDropdown'
+import { useTheme } from '../providers/ThemeContext'
 
 const HTML_TAGS = [
   HTMLTag.A,
@@ -166,12 +167,8 @@ const TABS_CONTENT_STYLES: any = {
  * An HTML tree-based editor that lets you add HTML nodes and mess around with their styles
  */
 export function HtmlEditor({ onChange }: HtmlEditorProps) {
-  const {
-    value,
-    theme,
-    selected: providedSelected,
-    setSelected,
-  } = useHtmlEditor()
+  const { value, selected: providedSelected, setSelected } = useHtmlEditor()
+  const theme = useTheme()
 
   const selected = providedSelected || []
   const nodeValue = getChildAtPath(value, selected)
