@@ -72,6 +72,7 @@ type HtmlEditorProviderProps = {
   children: ReactNode
   theme?: any
 }
+
 export function HtmlEditorProvider({
   children,
   value,

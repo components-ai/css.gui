@@ -90,9 +90,9 @@ export function optionsSchema<T extends Record<string, any>>({
       const type = getType(value)
       return !!variants[type].input
     },
-    stringify(value) {
+    stringify(value, ...args) {
       const type = getType(value)
-      return variants[type].stringify(value)
+      return variants[type].stringify(value, ...args)
     },
     defaultValue: variants[defaultType].defaultValue,
     regenerate,

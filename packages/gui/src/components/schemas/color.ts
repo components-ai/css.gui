@@ -1,3 +1,5 @@
+import { get } from 'theme-ui'
+import { themeGet } from '../../lib'
 import { randomColor } from '../../lib/color'
 import { stringifyUnit } from '../../lib/stringify'
 import { Color } from '../../types/css'
@@ -38,7 +40,13 @@ function rawColor({
 const themeColor: DataTypeSchema<ThemeColor> = {
   type: 'theme',
   inlineInput: PalettePopover,
-  stringify: (value) => value.path,
+  stringify: (value, theme = {}) => {
+    return themeGet({
+      theme,
+      property: 'color',
+      path: value.path,
+    })
+  },
   defaultValue: { type: 'theme', path: 'primary' },
   regenerate: () => randomColor(),
   validate: ((value: any) => {
