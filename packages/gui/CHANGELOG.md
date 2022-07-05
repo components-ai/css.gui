@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.141
+
+### Patch Changes
+
+- 1fd871b3: Pass theme along with document for codegen
+
 ## 0.0.140
 
 ### Patch Changes
