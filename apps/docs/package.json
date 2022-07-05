@@ -13,7 +13,7 @@
     "@compai/css-gui": "*",
     "@compai/logo": "^0.1.0",
     "@emotion/react": "^11.9.0",
-    "@mdx-js/loader": "^2.1.1",
+    "@mdx-js/loader": "^2.1.2",
     "@next/mdx": "^12.1.5",
     "@segment/snippet": "^4.15.3",
     "next": "12.1.5",
