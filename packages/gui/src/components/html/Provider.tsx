@@ -1,6 +1,7 @@
 import { createContext, ReactNode, useContext, useState } from 'react'
 import { htmlToEditorSchema } from '../../lib'
 import { stylesToEditorSchema } from '../../lib/transformers/styles-to-editor-schema'
+import { ThemeProvider } from '../providers/ThemeContext'
 import { HtmlNode, ElementPath, ElementData } from './types'
 
 const DEFAULT_HTML_EDITOR_VALUE = {
@@ -81,15 +82,16 @@ export function HtmlEditorProvider({
 
   const fullContext = {
     value: transformedValue,
-    theme,
     selected,
     setSelected: (newSelection: ElementPath | null) =>
       setSelected(newSelection),
   }
 
   return (
-    <HtmlEditorContext.Provider value={fullContext}>
-      {children}
-    </HtmlEditorContext.Provider>
+    <ThemeProvider theme={theme}>
+      <HtmlEditorContext.Provider value={fullContext}>
+        {children}
+      </HtmlEditorContext.Provider>
+    </ThemeProvider>
   )
 }
