@@ -17,7 +17,7 @@ const translateX = functionSchema('translateX', lengthPercentage())
 const translateY = functionSchema('translateY', lengthPercentage())
 const translateZ = functionSchema('translateZ', lengthPercentage())
 const translate3d = functionSchema(
-  'trnaslate3d',
+  'translate3d',
   tupleSchema({
     // TODO 'z' axis should be  `length` only
     itemSchema: lengthPercentage(),
