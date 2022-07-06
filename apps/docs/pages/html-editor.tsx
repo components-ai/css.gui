@@ -1,5 +1,6 @@
 import { HtmlEditor, HtmlRenderer, HtmlEditorProvider } from '@compai/css-gui'
 import { useState } from 'react'
+import { defaultTheme } from '../data/default-theme'
 
 const initialValue: any = {
   tagName: 'div',
@@ -31,7 +32,7 @@ const initialValue: any = {
           tagName: 'h1',
           attributes: {},
           style: {
-            color: { type: 'theme', path: 'primary' },
+            color: '#4e4fec',
             fontSize: {
               type: 'responsive',
               values: [
@@ -816,7 +817,7 @@ const initialValue: any = {
               },
             ],
             ':hover': {
-              color: { type: 'theme', path: 'primaryHover' },
+              color: '#4041c2',
             },
           },
           attributes: {
@@ -860,7 +861,7 @@ const initialValue: any = {
               },
             ],
             ':hover': {
-              backgroundColor: { type: 'theme', path: 'primaryHover' },
+              backgroundColor: '#4041c2',
             },
           },
           children: [{ type: 'text', value: 'Primary Button' }],
@@ -974,7 +975,7 @@ const initialValue: any = {
               },
             ],
             ':hover': {
-              color: { type: 'theme', path: 'primary' },
+              color: '#4e4fec',
             },
           },
           attributes: {
@@ -1312,7 +1313,7 @@ const initialValue: any = {
           tagName: 'blockquote',
           style: {
             borderLeftWidth: { value: 4, unit: 'px' },
-            borderLeftColor: { type: 'theme', path: 'primary' },
+            borderLeftColor: '#4e4fec',
             borderLeftStyle: 'solid',
             marginLeft: { value: 0, unit: 'px' },
             paddingLeft: { value: 32, unit: 'px' },
@@ -1494,7 +1495,7 @@ export default function HtmlEditorExample() {
   const [html, setHtml] = useState(initialValue)
 
   return (
-    <HtmlEditorProvider value={html}>
+    <HtmlEditorProvider value={html} theme={defaultTheme}>
       <div
         sx={{
           display: 'grid',
@@ -1513,12 +1514,14 @@ export default function HtmlEditorExample() {
         >
           <HtmlEditor onChange={setHtml} />
         </div>
-        <div sx={{ 
-          overflow: 'auto', 
-          width: '100%', 
-          gridArea: 'content',
-          '&::-webkit-scrollbar': { display: 'none', }
-          }}>
+        <div
+          sx={{
+            overflow: 'auto',
+            width: '100%',
+            gridArea: 'content',
+            '&::-webkit-scrollbar': { display: 'none' },
+          }}
+        >
           <HtmlRenderer value={html} />
         </div>
       </div>
