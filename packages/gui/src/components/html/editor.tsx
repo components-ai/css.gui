@@ -259,7 +259,7 @@ export function HtmlEditor({ onChange }: HtmlEditorProps) {
           </div>
         </Tabs.Content>
         <Tabs.Content sx={TABS_CONTENT_STYLES} value="export">
-          <Export value={value} />
+          <Export value={value} theme={theme} />
         </Tabs.Content>
       </Tabs.Root>
     </div>

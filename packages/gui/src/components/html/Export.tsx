@@ -26,8 +26,9 @@ const CODEGEN_DISPLAY_NAMES: Record<string, string> = {
 
 type ExportProps = {
   value: HtmlNode
+  theme?: any
 }
-export const Export = ({ value }: ExportProps) => {
+export const Export = ({ value, theme }: ExportProps) => {
   const [src, setSrc] = useState<string | null>(null)
   const [loading, setLoading] = useState<boolean>(true)
   const [copied, setCopied] = useState<boolean>(true)
@@ -44,7 +45,7 @@ export const Export = ({ value }: ExportProps) => {
       gen = codegen.html
     }
 
-    gen(value).then((v: string) => {
+    gen(value, { theme }).then((v: string) => {
       setLoading(false)
 
       if (format === 'css') {
