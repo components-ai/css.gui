@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.143
+
+### Patch Changes
+
+- 236266eb: Zero index theme values
+
 ## 0.0.142
 
 ### Patch Changes
