@@ -25,17 +25,17 @@ export function objectSchema<T extends object>({
   defaultValue: providedDefaultValue,
   parse,
 }: CreateObject<T>): DataTypeSchema<T> {
-  function stringify(value: T) {
+  function stringify(value: T, ...args) {
     if (providedStringify) {
       const stringifiedFields = mapValues(fields, (schema, key: keyof T) => {
-        return schema.stringify(value[key])
+        return schema.stringify(value[key], ...args)
       }) as any
       return providedStringify(stringifiedFields)
     }
     // By default, join the stringified values with spaces in key order
     return keyOrder
       .map((key) => {
-        return fields[key].stringify(value[key])
+        return fields[key].stringify(value[key], ...args)
       })
       .join(separator)
   }
