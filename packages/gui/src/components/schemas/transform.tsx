@@ -69,6 +69,7 @@ const skew = functionSchema(
   tupleSchema({
     itemSchema: angle(),
     labels: ['x', 'y'],
+    separator: ',',
   })
 )
 const skewX = functionSchema('skewX', angle())
