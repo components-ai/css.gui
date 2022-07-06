@@ -23,10 +23,10 @@ export interface BoxSide<T> {
 export function boxSideSchema<T>({
   itemSchema,
 }: CreateBoxSideSchema<T>): DataTypeSchema<BoxSide<T>> {
-  function stringify(value: BoxSide<T>) {
+  function stringify(value: BoxSide<T>, ...args) {
     const { stringify, defaultValue } = itemSchema
     if (isLinked(value)) {
-      return stringify(value.top)
+      return stringify(value.top, ...args)
     }
     const {
       top,
@@ -34,7 +34,9 @@ export function boxSideSchema<T>({
       bottom = defaultValue,
       left = defaultValue,
     } = value
-    return [top, right, bottom, left].map(stringify as any).join(' ')
+    return [top, right, bottom, left]
+      .map((side) => stringify(side, ...args))
+      .join(' ')
   }
   const defaultValue = {
     top: itemSchema.defaultValue,
