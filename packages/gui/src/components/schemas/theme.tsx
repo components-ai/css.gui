@@ -31,7 +31,7 @@ export function theme(path: string): DataTypeSchema<ThemeValue> {
               index: +value - 1,
             })
           }
-          options={range(1, numOptions + 1).map((x) => x.toString())}
+          options={range(0, numOptions).map((x) => x.toString())}
         />
       )
       // return null
