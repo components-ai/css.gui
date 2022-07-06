@@ -1,5 +1,12 @@
 # @compai/css-gui
 
+## 0.0.145
+
+### Patch Changes
+
+- 6f28e1db: Add theme support for box side properties
+- 141b70c7: Pass theme to shorthands
+
 ## 0.0.144
 
 ### Patch Changes
