@@ -45,7 +45,7 @@ function ElementRenderer({ value, canvas, path }: ElementRendererProps) {
   const sx = toCSSObject(
     {
       ...style,
-      ...DEFAULT_ELEMENT_STYLES_IN_CANVAS,
+      ...(canvas ? DEFAULT_ELEMENT_STYLES_IN_CANVAS : {}),
     },
     theme
   )
