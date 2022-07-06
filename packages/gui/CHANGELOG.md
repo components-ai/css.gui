@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.146
+
+### Patch Changes
+
+- 888a55fe: Set default to current color
+
 ## 0.0.145
 
 ### Patch Changes
