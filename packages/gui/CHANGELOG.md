@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.147
+
+### Patch Changes
+
+- 7e8991b8: Only set default canvas styles in canvas mode
+
 ## 0.0.146
 
 ### Patch Changes
