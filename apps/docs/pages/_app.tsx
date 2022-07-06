@@ -22,6 +22,7 @@ Router.events.on('routeChangeComplete', (url) => {
 const NO_NAV_PAGES: Record<string, boolean> = {
   '/playground': true,
   '/html-editor': true,
+  '/dev': true,
 }
 const isNoNavPage = (router: NextRouter) => {
   if (router.pathname.startsWith('/library')) {
