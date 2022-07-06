@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.144
+
+### Patch Changes
+
+- d2bf7579: Pass theme to codegen
+
 ## 0.0.143
 
 ### Patch Changes
