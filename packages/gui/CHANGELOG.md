@@ -1,5 +1,12 @@
 # @compai/css-gui
 
+## 0.0.148
+
+### Patch Changes
+
+- 5bd603aa: Allow cursor to be overridden in canvas
+- 97d48aee: Fix translate3d
+
 ## 0.0.147
 
 ### Patch Changes
