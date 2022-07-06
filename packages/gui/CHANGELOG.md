@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.142
+
+### Patch Changes
+
+- 07cf4070: Fix system colors
+
 ## 0.0.141
 
 ### Patch Changes
