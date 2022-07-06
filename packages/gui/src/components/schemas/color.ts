@@ -65,8 +65,8 @@ export function color({
   defaultValue?: any
 } = {}) {
   return joinSchemas([
+    keyword(['transparent', 'currentcolor'], { type: 'system' }),
     rawColor({ defaultValue }),
     themeColor,
-    keyword(['transparent', 'currentcolor'], { type: 'system' }),
   ])
 }
