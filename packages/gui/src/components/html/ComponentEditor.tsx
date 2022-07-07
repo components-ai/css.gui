@@ -1,3 +1,4 @@
+import fuzzysort from 'fuzzysort'
 import { Label, Combobox } from '../primitives'
 import { ComponentData } from './types'
 import { useHtmlEditor } from './Provider'
@@ -10,15 +11,22 @@ interface ComponentEditorProps {
 export const ComponentEditor = ({ value, onChange }: ComponentEditorProps) => {
   const { components = [] } = useHtmlEditor()
 
-  const componentNames = components.map((c) => c.id)
+  const componentIds = components.map((c) => c.id)
+  const componentNames = components.map((c) => c.tagName)
 
   const handleFilterComponents = (input: string) => {
-    return componentNames
+    if (!input) {
+      return componentNames
+    }
+
+    return fuzzysort
+      .go(input, componentNames)
+      .map((res) => res.target)
+      .map((name) => components.find((c) => c.tagName === name)?.id ?? name)
   }
 
   const handleComponentSelected = (selectedItem: string) => {
     const component = components.find((c) => c.id === selectedItem)
-
     if (component) {
       onChange(component)
     }
@@ -31,7 +39,10 @@ export const ComponentEditor = ({ value, onChange }: ComponentEditorProps) => {
         <Combobox
           onFilterItems={handleFilterComponents}
           onItemSelected={handleComponentSelected}
-          items={componentNames}
+          decorateItemText={(id) => {
+            return components.find((c) => c.id === id)?.tagName ?? id
+          }}
+          items={componentIds}
           clearOnSelect
         />
       </div>
