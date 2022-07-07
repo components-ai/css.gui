@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.151
+
+### Patch Changes
+
+- 7683e6b8: Fix theme selection for box side
+
 ## 0.0.150
 
 ### Patch Changes
