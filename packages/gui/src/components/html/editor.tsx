@@ -232,7 +232,7 @@ export function HtmlEditor({ onChange }: HtmlEditorProps) {
           </div>
         </Tabs.Content>
         <Tabs.Content sx={TABS_CONTENT_STYLES} value="tree">
-          <div sx={{}}>
+          <div>
             <NodeEditor
               value={nodeValue}
               onChange={(newItem) =>
@@ -285,7 +285,7 @@ function NodeEditor({
   const { value: fullValue, selected } = useHtmlEditor()
   const nodeType = value.type === 'text' ? 'text' : 'tag'
   return (
-    <div sx={{ pb: 3, overflowY: 'auto', overflowX: 'hidden' }}>
+    <div sx={{ minHeight: '256px', position: 'sticky', top: 0, boxSizing: 'border-box', overflowX: 'hidden', borderBottomWidth: '1px', borderBottomStyle: 'solid', borderBottomColor: 'border',   }}>
       <div
         sx={{
           mb: 2,
@@ -377,9 +377,6 @@ function NodeSwitch({ value, onChange }: EditorProps) {
     <div>
       <article
         sx={{
-          borderBottomWidth: '1px',
-          borderBottomStyle: 'solid',
-          borderBottomColor: 'border',
           pb: 3,
         }}
       >
