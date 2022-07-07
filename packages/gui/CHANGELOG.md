@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.153
+
+### Patch Changes
+
+- 7ba14dbb: Adds background color to fix bug on node editor
+
 ## 0.0.152
 
 ### Patch Changes
