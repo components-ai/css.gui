@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.154
+
+### Patch Changes
+
+- e4f12cad: Add initial component support
+
 ## 0.0.153
 
 ### Patch Changes
