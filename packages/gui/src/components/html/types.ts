@@ -8,7 +8,24 @@ export interface ElementData {
   children?: HtmlNode[]
 }
 
-export type HtmlNode = ElementData
+export type PropDefinition = {
+  name: string
+  type: 'string' | 'number'
+  defaultValue?: string | number
+}
+export type PropsDefinition = PropDefinition[]
+export interface ComponentData {
+  type: 'component'
+  id: string
+  tagName: string
+  propTypes: PropsDefinition
+  value: HtmlNode
+  attributes?: Record<string, string>
+  style?: Record<string, any>
+  children?: HtmlNode[]
+}
+
+export type HtmlNode = ElementData | ComponentData
 export type ElementPath = number[]
 
 export const enum HTMLTag {

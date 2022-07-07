@@ -1,5 +1,5 @@
 import { Editor } from '../Editor'
-import { HtmlNode, HTMLTag, ElementPath, ElementData } from './types'
+import { HtmlNode, HTMLTag, ElementPath } from './types'
 import * as Collapsible from '@radix-ui/react-collapsible'
 import * as Tabs from '@radix-ui/react-tabs'
 import { Fragment, useState } from 'react'
@@ -15,6 +15,7 @@ import { isSamePath } from './util'
 import { Export } from './Export'
 import { NodeEditorDropdown } from '../ui/dropdowns/NodeEditorDropdown'
 import { useTheme } from '../providers/ThemeContext'
+import { ComponentEditor } from './ComponentEditor'
 
 const HTML_TAGS = [
   HTMLTag.A,
@@ -282,8 +283,22 @@ function NodeEditor({
   onRemove,
   onParentChange,
 }: TagEditorProps) {
-  const { value: fullValue, selected } = useHtmlEditor()
-  const nodeType = value.type === 'text' ? 'text' : 'tag'
+  const {
+    value: fullValue,
+    selected,
+    hasComponents,
+    components,
+  } = useHtmlEditor()
+  let nodeType = value.type === 'text' ? 'text' : 'tag'
+  if (value.type === 'component') {
+    nodeType = 'component'
+  }
+
+  const baseNodeTypes = ['text', 'tag']
+  const nodeTypes = hasComponents
+    ? [...baseNodeTypes, 'component']
+    : baseNodeTypes
+
   return (
     <div sx={{ minHeight: '256px', position: 'sticky', top: 0, boxSizing: 'border-box', overflowX: 'hidden', borderBottomWidth: '1px', borderBottomStyle: 'solid', borderBottomColor: 'border',   }}>
       <div
@@ -303,6 +318,12 @@ function NodeEditor({
             onChange={(value) => {
               if (value === 'text') {
                 onChange({ type: 'text', value: '' })
+              } else if (value === 'component') {
+                const firstComponent = components?.[0]
+
+                if (firstComponent) {
+                  onChange(firstComponent)
+                }
               } else {
                 onChange({
                   type: 'element',
@@ -311,7 +332,7 @@ function NodeEditor({
                 })
               }
             }}
-            options={['text', 'tag']}
+            options={nodeTypes}
           />
         </div>
         <div sx={{ mr: -2 }}>
@@ -371,6 +392,10 @@ function NodeSwitch({ value, onChange }: EditorProps) {
         </Label>
       </div>
     )
+  }
+
+  if (value.type === 'component') {
+    return <ComponentEditor value={value} onChange={onChange} />
   }
 
   return (

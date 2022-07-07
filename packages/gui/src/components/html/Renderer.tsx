@@ -1,5 +1,5 @@
 import { toCSSObject } from '../../lib'
-import { ElementData, ElementPath } from './types'
+import { ElementData, ElementPath, HtmlNode } from './types'
 import { HTMLFontTags } from './FontTags'
 import { useHtmlEditor } from './Provider'
 import { isVoidElement } from '../../lib/elements'
@@ -9,7 +9,7 @@ import { transformValueToSchema } from '../../components/html/Provider'
 import { toReactProps } from '../../lib/codegen/to-react-props'
 
 interface HtmlRendererProps {
-  value: ElementData
+  value: HtmlNode
   path?: ElementPath
   canvas?: boolean
 }
@@ -32,7 +32,7 @@ const DEFAULT_ELEMENT_STYLES_IN_CANVAS = {
 }
 
 interface ElementRendererProps {
-  value: ElementData
+  value: HtmlNode
   path: ElementPath
   canvas: boolean
 }
@@ -66,6 +66,10 @@ function ElementRenderer({ value, canvas, path }: ElementRendererProps) {
       setSelected(path)
     },
   })
+
+  if (value.type === 'component') {
+    return <ElementRenderer value={value.value} canvas={true} path={path} />
+  }
 
   if (isVoidElement(Tag)) {
     return <Tag {...props} />
