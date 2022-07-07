@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.155
+
+### Patch Changes
+
+- 184ff579: Fix responsive theme values
+
 ## 0.0.154
 
 ### Patch Changes
