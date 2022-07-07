@@ -114,4 +114,5 @@ export const enum HTMLTag {
   Path = 'path',
   Rect = 'rect',
   Text = 'text',
+  Polyline = 'polyline',
 }

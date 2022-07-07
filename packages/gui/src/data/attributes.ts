@@ -240,4 +240,5 @@ export const ATTRIBUTE_MAP: Record<string, string[]> = {
   rect: [...GLOBAL_ATTRIBUTES, 'width', 'height'],
   line: [...GLOBAL_ATTRIBUTES, 'x1', 'y1', 'x2', 'y2'],
   path: [...GLOBAL_ATTRIBUTES, 'd'],
+  polyline: [...GLOBAL_ATTRIBUTES, 'points'],
 }

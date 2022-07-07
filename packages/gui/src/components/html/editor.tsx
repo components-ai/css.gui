@@ -119,6 +119,7 @@ const HTML_TAGS = [
   HTMLTag.Rect,
   HTMLTag.Path,
   HTMLTag.Text,
+  HTMLTag.Polyline,
 ]
 
 interface HtmlEditorProps {
