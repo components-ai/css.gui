@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.152
+
+### Patch Changes
+
+- 0246cd41: Changes element editor to sticky position
+
 ## 0.0.151
 
 ### Patch Changes
