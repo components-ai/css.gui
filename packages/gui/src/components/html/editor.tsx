@@ -285,7 +285,7 @@ function NodeEditor({
   const { value: fullValue, selected } = useHtmlEditor()
   const nodeType = value.type === 'text' ? 'text' : 'tag'
   return (
-    <div sx={{ minHeight: '256px', position: 'sticky', top: 0, boxSizing: 'border-box', overflowX: 'hidden', borderBottomWidth: '1px', borderBottomStyle: 'solid', borderBottomColor: 'border',   }}>
+    <div sx={{ bg: 'background', height: '240px', resize: 'vertical', position: 'sticky', top: 0, boxSizing: 'border-box', overflowX: 'hidden', borderBottomWidth: '1px', borderBottomStyle: 'solid', borderBottomColor: 'border',   }}>
       <div
         sx={{
           mb: 2,
