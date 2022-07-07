@@ -1,6 +1,7 @@
 import { HtmlEditor, HtmlRenderer, HtmlEditorProvider } from '@compai/css-gui'
 import { useState } from 'react'
 import { defaultTheme } from '../data/default-theme'
+import { initialComponents } from '../data/initial-html-editor-data'
 
 const initialValue: any = {
   tagName: 'div',
@@ -130,7 +131,11 @@ export default function HtmlEditorExample() {
   const [html, setHtml] = useState(initialValue)
 
   return (
-    <HtmlEditorProvider value={html} theme={defaultTheme}>
+    <HtmlEditorProvider
+      value={html}
+      components={initialComponents}
+      theme={defaultTheme}
+    >
       <div
         sx={{
           display: 'grid',

@@ -171,7 +171,7 @@ export function Combobox({
                     toggleMenu()
                   }}
                 >
-                  {item || decorateItemText(item)}
+                  {decorateItemText(item)}
                 </li>
               )
             })}

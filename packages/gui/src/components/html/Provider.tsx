@@ -2,7 +2,7 @@ import { createContext, ReactNode, useContext, useState } from 'react'
 import { htmlToEditorSchema } from '../../lib'
 import { stylesToEditorSchema } from '../../lib/transformers/styles-to-editor-schema'
 import { ThemeProvider } from '../providers/ThemeContext'
-import { HtmlNode, ElementPath, ElementData } from './types'
+import { HtmlNode, ElementPath, ElementData, ComponentData } from './types'
 
 const DEFAULT_HTML_EDITOR_VALUE = {
   selected: [],
@@ -15,6 +15,7 @@ const DEFAULT_HTML_EDITOR_VALUE = {
       <a href="https://components.ai">I'm a link!</a>
     </div>
   `),
+  hasComponents: false,
 }
 
 export type HtmlEditor = {
@@ -22,6 +23,8 @@ export type HtmlEditor = {
   theme?: any
   selected: ElementPath | null
   setSelected: (newSelection: ElementPath | null) => void
+  components?: ComponentData[]
+  hasComponents: boolean
 }
 
 export function useHtmlEditor() {
@@ -48,6 +51,8 @@ export const transformValueToSchema = (value: any): ElementData => {
       updatedValue = val.map((child) => transformValueToSchema(child))
     } else if (key === 'style') {
       updatedValue = stylesToEditorSchema(val)
+    } else if (value.type === 'component' && key === 'value') {
+      updatedValue = transformValueToSchema(val)
     }
 
     if (value.tagName && !value.type) {
@@ -71,12 +76,14 @@ type HtmlEditorProviderProps = {
   value: HtmlNode
   children: ReactNode
   theme?: any
+  components?: ComponentData[]
 }
 
 export function HtmlEditorProvider({
   children,
   value,
   theme,
+  components = [],
 }: HtmlEditorProviderProps) {
   const [selected, setSelected] = useState<ElementPath | null>([])
   const transformedValue = transformValueToSchema(value)
@@ -86,6 +93,8 @@ export function HtmlEditorProvider({
     selected,
     setSelected: (newSelection: ElementPath | null) =>
       setSelected(newSelection),
+    components,
+    hasComponents: !!components.length,
   }
 
   return (
