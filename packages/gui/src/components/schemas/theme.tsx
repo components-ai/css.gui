@@ -24,11 +24,11 @@ export function theme(path: string): DataTypeSchema<ThemeValue> {
       return (
         <SelectInput
           label=""
-          value={`${props.value.index + 1}`}
+          value={`${props.value.index}`}
           onChange={(value) =>
             props.onChange({
               ...props.value,
-              index: +value - 1,
+              index: +value,
             })
           }
           options={range(0, numOptions).map((x) => x.toString())}
