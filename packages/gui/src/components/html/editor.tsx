@@ -127,6 +127,10 @@ interface HtmlEditorProps {
   onChange(value: HtmlNode): void
 }
 
+const isSelfClosing = (node: HtmlNode) => {
+  return node.type === 'component' || isVoidElement(node.tagName as string)
+}
+
 const DEFAULT_CHILD_NODE: HtmlNode = {
   type: 'element',
   tagName: 'div',
@@ -493,11 +497,11 @@ function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
       onClick={() => onSelect(path)}
     >
       &lt;{value.tagName}
-      {!open || isVoidElement(value.tagName as string) ? ' /' : null}&gt;
+      {!open || isSelfClosing(value) ? ' /' : null}&gt;
     </button>
   )
 
-  if (isVoidElement(value.tagName as string)) {
+  if (isSelfClosing(value)) {
     return tagButton
   }
 
