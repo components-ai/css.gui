@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.150
+
+### Patch Changes
+
+- 000e4489: Add polyline element
+
 ## 0.0.149
 
 ### Patch Changes
