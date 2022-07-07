@@ -58,17 +58,23 @@ function ElementRenderer({ value, canvas, path }: ElementRendererProps) {
     sx.userSelect = 'none'
   }
 
+  const handleSelect = (e: MouseEvent) => {
+    e.stopPropagation()
+    setSelected(path)
+  }
+
   const props = toReactProps({
     ...(canvas ? cleanAttributes(attributes) : attributes),
     sx,
-    onClick: (e: MouseEvent) => {
-      e.stopPropagation()
-      setSelected(path)
-    },
+    onClick: handleSelect,
   })
 
   if (value.type === 'component') {
-    return <ElementRenderer value={value.value} canvas={true} path={path} />
+    return (
+      <div sx={sx}>
+        <ElementRenderer value={value.value} canvas={false} path={path} />
+      </div>
+    )
   }
 
   if (isVoidElement(Tag)) {
