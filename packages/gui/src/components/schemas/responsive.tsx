@@ -48,8 +48,10 @@ export function responsive<T>(
         ),
       }
     },
-    stringify(value) {
-      return (value as any).values.map(itemSchema.stringify)
+    stringify(value, ...args) {
+      return (value as any).values.map((val: T) =>
+        itemSchema.stringify(val, ...args)
+      )
     },
   }
 }
