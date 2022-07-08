@@ -1534,4 +1534,50 @@ export const initialComponents: any = [
       children: [{ type: 'text', value: 'CSS.GUI' }],
     },
   },
+  {
+    type: 'component',
+    id: '456def',
+    tagName: 'Heading2',
+    propTypes: [],
+    value: {
+      tagName: 'h1',
+      attributes: {},
+      style: {
+        color: 'tomato',
+        fontSize: {
+          type: 'responsive',
+          values: [
+            {
+              value: 4,
+              unit: 'rem',
+            },
+            {
+              value: 6,
+              unit: 'rem',
+            },
+            {
+              value: 10,
+              unit: 'rem',
+            },
+          ],
+        },
+        fontWeight: '900',
+        fontFamily: 'Inter',
+        letterSpacing: { value: -8, unit: 'px' },
+        marginTop: {
+          value: 0,
+          unit: 'px',
+        },
+        marginBottom: {
+          value: 0,
+          unit: 'px',
+        },
+        lineHeight: {
+          value: 1.25,
+          unit: 'number',
+        },
+      },
+      children: [{ type: 'text', value: 'CSS.GUI' }],
+    },
+  },
 ]

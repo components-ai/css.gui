@@ -16,7 +16,7 @@ export const ComponentEditor = ({ value, onChange }: ComponentEditorProps) => {
 
   const handleFilterComponents = (input: string) => {
     if (!input) {
-      return componentNames
+      return componentIds
     }
 
     return fuzzysort
