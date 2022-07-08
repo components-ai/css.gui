@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.156
+
+### Patch Changes
+
+- 2bd60942: Fix component selection
+
 ## 0.0.155
 
 ### Patch Changes
