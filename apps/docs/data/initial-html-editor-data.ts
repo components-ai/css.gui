@@ -1492,7 +1492,7 @@ export const initialComponents: any = [
     type: 'component',
     id: '123abc',
     tagName: 'Heading',
-    propTypes: [],
+    propTypes: [{ name: 'children', type: 'string', defaultValue: 'CSS.GUI' }],
     value: {
       tagName: 'h1',
       attributes: {},
@@ -1531,14 +1531,14 @@ export const initialComponents: any = [
           unit: 'number',
         },
       },
-      children: [{ type: 'text', value: 'CSS.GUI' }],
+      children: [{ type: 'slot', name: 'children' }],
     },
   },
   {
     type: 'component',
     id: '456def',
     tagName: 'Heading2',
-    propTypes: [],
+    propTypes: [{ name: 'children', type: 'string', defaultValue: 'CSS.GUI' }],
     value: {
       tagName: 'h1',
       attributes: {},
@@ -1577,7 +1577,7 @@ export const initialComponents: any = [
           unit: 'number',
         },
       },
-      children: [{ type: 'text', value: 'CSS.GUI' }],
+      children: [{ type: 'slot', name: 'children' }],
     },
   },
 ]

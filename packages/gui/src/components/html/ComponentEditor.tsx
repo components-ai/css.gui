@@ -1,7 +1,8 @@
 import fuzzysort from 'fuzzysort'
 import { Label, Combobox } from '../primitives'
-import { ComponentData } from './types'
+import { ComponentData, PropsDefinition } from './types'
 import { useHtmlEditor } from './Provider'
+import { ChangeEvent } from 'react'
 
 interface ComponentEditorProps {
   value: ComponentData
@@ -13,6 +14,7 @@ export const ComponentEditor = ({ value, onChange }: ComponentEditorProps) => {
 
   const componentIds = components.map((c) => c.id)
   const componentNames = components.map((c) => c.tagName)
+  const propTypes: PropsDefinition = value.propTypes || []
 
   const handleFilterComponents = (input: string) => {
     if (!input) {
@@ -32,9 +34,39 @@ export const ComponentEditor = ({ value, onChange }: ComponentEditorProps) => {
     }
   }
 
+  const handleAddProp = () => {
+    propTypes.push({
+      name: 'newProp',
+      type: 'string',
+      defaultValue: 'Hello, world!',
+    })
+
+    onChange({ ...value, propTypes })
+  }
+
+  const handlePropNameChange =
+    (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
+      propTypes[index].name = e.target.value
+      onChange({ ...value, propTypes })
+    }
+
+  const handlePropDefaultValueChange =
+    (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
+      propTypes[index].defaultValue = e.target.value
+      onChange({ ...value, propTypes })
+    }
+
   return (
     <div>
-      <div sx={{ px: 3 }}>
+      <div
+        sx={{
+          px: 3,
+          pb: 3,
+          mb: 3,
+          borderBottom: 'thin solid',
+          borderColor: 'border',
+        }}
+      >
         <Label>Component</Label>
         <Combobox
           onFilterItems={handleFilterComponents}
@@ -45,6 +77,29 @@ export const ComponentEditor = ({ value, onChange }: ComponentEditorProps) => {
           items={componentIds}
           clearOnSelect
         />
+      </div>
+      <div sx={{ px: 3, pb: 3 }}>
+        <h3 sx={{ m: 0 }}>Props</h3>
+        {propTypes.map((prop, index) => {
+          return (
+            <div key={index}>
+              <h4 sx={{ m: 0 }}>{prop.name}</h4>
+              <Label>Prop name</Label>
+              <input
+                type="text"
+                value={prop.name}
+                onChange={handlePropNameChange(index)}
+              />
+              <Label>Default Value</Label>
+              <input
+                type="text"
+                value={prop.defaultValue}
+                onChange={handlePropDefaultValueChange(index)}
+              />
+            </div>
+          )
+        })}
+        <button onClick={handleAddProp}>Add prop</button>
       </div>
     </div>
   )
