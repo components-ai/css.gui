@@ -4,12 +4,13 @@ import { DataTypeSchema } from './types'
 interface JoinSchemaOptions<S> {
   type?: string
   defaultType?: string
+  defaultValue?: ExtractDataType<S>
   convert?(oldValue: ExtractDataType<S>, newType: string): S | undefined
 }
 
 export function joinSchemas<S extends DataTypeSchema<any>>(
   schemas: S[],
-  { type, convert, defaultType }: JoinSchemaOptions<S> = {}
+  { type, convert, defaultType, defaultValue }: JoinSchemaOptions<S> = {}
 ): DataTypeSchema<ExtractDataType<S>> {
   let variants = {}
 
@@ -27,6 +28,7 @@ export function joinSchemas<S extends DataTypeSchema<any>>(
     type,
     convert: convert as any,
     defaultType: defaultType as any,
+    defaultValue,
   })
 }
 
