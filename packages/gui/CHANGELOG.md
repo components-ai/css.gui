@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.157
+
+### Patch Changes
+
+- 971e506a: Improve some default values
+
 ## 0.0.156
 
 ### Patch Changes
