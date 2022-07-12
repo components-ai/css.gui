@@ -19,6 +19,7 @@ const repeat = joinSchemas([
   keyword(['repeat-x', 'repeat-y']),
 ])
 const size = joinSchemas([
+  keyword(['cover', 'contain']),
   tupleSchema({
     itemSchema: joinSchemas([
       keyword(['auto']),
@@ -28,7 +29,6 @@ const size = joinSchemas([
     ]),
     labels: ['x', 'y'],
   }),
-  keyword(['cover', 'contain']),
 ])
 
 export const backgroundAttachment = listSchema({ itemSchema: attachment })
