@@ -17,7 +17,10 @@ export const ComponentEditor = ({ value, onChange }: ComponentEditorProps) => {
   const componentNames = components.map((c) => c.tagName)
   const componentProps = value.props || {}
   const slots = getSlots(value.value)
-  const attributes = value.value.attributes || {}
+  const attributes = {
+    ...(value.value.attributes || {}),
+    ...(value.attributes || {}),
+  }
   const attributeEntries = Object.entries(attributes)
 
   const handleFilterComponents = (input: string) => {
@@ -53,12 +56,9 @@ export const ComponentEditor = ({ value, onChange }: ComponentEditorProps) => {
     (name: string) => (e: ChangeEvent<HTMLInputElement>) => {
       onChange({
         ...value,
-        value: {
-          ...value.value,
-          attributes: {
-            ...attributes,
-            [name]: e.target.value,
-          },
+        attributes: {
+          ...attributes,
+          [name]: e.target.value,
         },
       })
     }
