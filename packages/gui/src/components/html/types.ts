@@ -6,26 +6,35 @@ export interface ElementData {
   style?: Record<string, any>
   value?: string
   children?: HtmlNode[]
+  props?: Props
+}
+export type Props = {
+  [key: string]: string | number
 }
 
-export type PropDefinition = {
+export interface Slot {
+  type: 'slot'
   name: string
-  type: 'string' | 'number'
-  defaultValue?: string | number
+  value?: string
+  tagName?: string
+  attributes?: Record<string, string>
+  style?: Record<string, any>
+  children?: HtmlNode[]
+  props?: Props
 }
-export type PropsDefinition = PropDefinition[]
 export interface ComponentData {
   type: 'component'
   id: string
   tagName: string
-  propTypes: PropsDefinition
+  props?: Props
   value: HtmlNode
   attributes?: Record<string, string>
   style?: Record<string, any>
   children?: HtmlNode[]
 }
 
-export type HtmlNode = ElementData | ComponentData
+export type HtmlBaseNode = ElementData | ComponentData
+export type HtmlNode = HtmlBaseNode | Slot
 export type ElementPath = number[]
 
 export const enum HTMLTag {

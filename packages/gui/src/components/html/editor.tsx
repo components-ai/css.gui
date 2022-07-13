@@ -16,6 +16,7 @@ import { Export } from './Export'
 import { NodeEditorDropdown } from '../ui/dropdowns/NodeEditorDropdown'
 import { useTheme } from '../providers/ThemeContext'
 import { ComponentEditor } from './ComponentEditor'
+import { SlotEditor } from './SlotEditor'
 
 const HTML_TAGS = [
   HTMLTag.A,
@@ -128,6 +129,10 @@ interface HtmlEditorProps {
 }
 
 const isSelfClosing = (node: HtmlNode) => {
+  if (node.type === 'slot') {
+    return false
+  }
+
   return node.type === 'component' || isVoidElement(node.tagName as string)
 }
 
@@ -300,11 +305,24 @@ function NodeEditor({
 
   const baseNodeTypes = ['text', 'tag']
   const nodeTypes = hasComponents
-    ? [...baseNodeTypes, 'component']
+    ? [...baseNodeTypes, 'component', 'slot']
     : baseNodeTypes
 
   return (
-    <div sx={{ bg: 'background', height: '240px', resize: 'vertical', position: 'sticky', top: 0, boxSizing: 'border-box', overflowX: 'hidden', borderBottomWidth: '1px', borderBottomStyle: 'solid', borderBottomColor: 'border',   }}>
+    <div
+      sx={{
+        bg: 'background',
+        height: '240px',
+        resize: 'vertical',
+        position: 'sticky',
+        top: 0,
+        boxSizing: 'border-box',
+        overflowX: 'hidden',
+        borderBottomWidth: '1px',
+        borderBottomStyle: 'solid',
+        borderBottomColor: 'border',
+      }}
+    >
       <div
         sx={{
           mb: 2,
@@ -328,6 +346,12 @@ function NodeEditor({
                 if (firstComponent) {
                   onChange(firstComponent)
                 }
+              } else if (value === 'slot') {
+                onChange({
+                  type: 'slot',
+                  name: 'newSlot',
+                  value: 'Hello, world!',
+                })
               } else {
                 onChange({
                   type: 'element',
@@ -400,6 +424,10 @@ function NodeSwitch({ value, onChange }: EditorProps) {
 
   if (value.type === 'component') {
     return <ComponentEditor value={value} onChange={onChange} />
+  }
+
+  if (value.type === 'slot') {
+    return <SlotEditor value={value} onChange={onChange} />
   }
 
   return (
@@ -475,6 +503,27 @@ function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
           onClick={() => onSelect(path)}
         >
           "{value.value}"
+        </button>
+      </div>
+    )
+  }
+
+  if (value.type === 'slot') {
+    return (
+      <div sx={{ cursor: 'default' }}>
+        <button
+          sx={{
+            appearance: 'none',
+            border: 'none',
+            backgroundColor: 'background',
+            color: 'text',
+            fontWeight: isSelected ? 600 : 400,
+            textAlign: 'start',
+            fontSize: 0,
+          }}
+          onClick={() => onSelect(path)}
+        >
+          {value.name}: "{value.value}"
         </button>
       </div>
     )

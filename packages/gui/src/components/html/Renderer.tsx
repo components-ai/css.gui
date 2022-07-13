@@ -1,5 +1,5 @@
 import { toCSSObject } from '../../lib'
-import { ElementData, ElementPath, HtmlNode } from './types'
+import { ElementPath, HtmlNode, Slot } from './types'
 import { HTMLFontTags } from './FontTags'
 import { useHtmlEditor } from './Provider'
 import { isVoidElement } from '../../lib/elements'
@@ -7,6 +7,7 @@ import { isSamePath } from './util'
 import { useTheme } from '../providers/ThemeContext'
 import { transformValueToSchema } from '../../components/html/Provider'
 import { toReactProps } from '../../lib/codegen/to-react-props'
+import { ComponentProvider, useComponent } from './ComponentProvider'
 
 interface HtmlRendererProps {
   value: HtmlNode
@@ -39,6 +40,11 @@ interface ElementRendererProps {
 function ElementRenderer({ value, canvas, path }: ElementRendererProps) {
   const { selected, setSelected } = useHtmlEditor()
   const theme = useTheme()
+
+  if (value.type === 'slot') {
+    return <SlotRenderer value={value} />
+  }
+
   const { attributes = {}, style = {}, children = [] } = value
   const Tag: any = value.tagName || 'div'
 
@@ -71,9 +77,11 @@ function ElementRenderer({ value, canvas, path }: ElementRendererProps) {
 
   if (value.type === 'component') {
     return (
-      <div sx={sx}>
-        <ElementRenderer value={value.value} canvas={false} path={path} />
-      </div>
+      <ComponentProvider value={value}>
+        <div sx={sx}>
+          <ElementRenderer value={value.value} canvas={false} path={path} />
+        </div>
+      </ComponentProvider>
     )
   }
 
@@ -98,6 +106,19 @@ function ElementRenderer({ value, canvas, path }: ElementRendererProps) {
       })}
     </Tag>
   )
+}
+
+interface SlotRendererProps {
+  value: HtmlNode
+}
+function SlotRenderer({ value: providedValue }: SlotRendererProps) {
+  const { value: outerValue } = useComponent()
+
+  const value = providedValue as Slot
+  const outerProps = outerValue?.props || {}
+  const propValue = outerProps[value.name] || value.value || null
+
+  return <>{propValue}</>
 }
 
 const cleanAttributes = (attributes: Record<string, string>) => {

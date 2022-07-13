@@ -1,7 +1,11 @@
+import { ChangeEvent } from 'react'
 import fuzzysort from 'fuzzysort'
 import { Label, Combobox } from '../primitives'
-import { ComponentData } from './types'
+import { ComponentData, Slot } from './types'
 import { useHtmlEditor } from './Provider'
+import { unified } from 'unified'
+import { visit } from 'unist-util-visit'
+import { getSlots } from './util'
 
 interface ComponentEditorProps {
   value: ComponentData
@@ -13,6 +17,8 @@ export const ComponentEditor = ({ value, onChange }: ComponentEditorProps) => {
 
   const componentIds = components.map((c) => c.id)
   const componentNames = components.map((c) => c.tagName)
+  const componentProps = value.props || {}
+  const slots = getSlots(value)
 
   const handleFilterComponents = (input: string) => {
     if (!input) {
@@ -32,9 +38,28 @@ export const ComponentEditor = ({ value, onChange }: ComponentEditorProps) => {
     }
   }
 
+  const handlePropChange =
+    (name: string) => (e: ChangeEvent<HTMLInputElement>) => {
+      onChange({
+        ...value,
+        props: {
+          ...componentProps,
+          [name]: e.target.value,
+        },
+      })
+    }
+
   return (
     <div>
-      <div sx={{ px: 3 }}>
+      <div
+        sx={{
+          px: 3,
+          pb: 3,
+          mb: 3,
+          borderBottom: 'thin solid',
+          borderColor: 'border',
+        }}
+      >
         <Label>Component</Label>
         <Combobox
           onFilterItems={handleFilterComponents}
@@ -45,6 +70,21 @@ export const ComponentEditor = ({ value, onChange }: ComponentEditorProps) => {
           items={componentIds}
           clearOnSelect
         />
+      </div>
+      <div sx={{ px: 3, pb: 3 }}>
+        <h3 sx={{ m: 0 }}>Props</h3>
+        {slots.map((slot, index) => {
+          return (
+            <div key={index}>
+              <Label>{slot.name}</Label>
+              <input
+                type="text"
+                value={componentProps[slot.name] ?? slot.value}
+                onChange={handlePropChange(slot.name)}
+              />
+            </div>
+          )
+        })}
       </div>
     </div>
   )
