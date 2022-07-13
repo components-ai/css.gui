@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.160
+
+### Patch Changes
+
+- b2c31b23: Make list schema use theme when relevant
+
 ## 0.0.159
 
 ### Patch Changes
