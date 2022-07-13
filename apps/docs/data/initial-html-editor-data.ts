@@ -1531,14 +1531,13 @@ export const initialComponents: any = [
           unit: 'number',
         },
       },
-      children: [{ type: 'slot', name: 'children' }],
+      children: [{ type: 'slot', name: 'children', value: 'CSS.GUI' }],
     },
   },
   {
     type: 'component',
     id: '456def',
     tagName: 'Heading2',
-    propTypes: [{ name: 'children', type: 'string', defaultValue: 'CSS.GUI' }],
     value: {
       tagName: 'h1',
       attributes: {},
@@ -1577,7 +1576,7 @@ export const initialComponents: any = [
           unit: 'number',
         },
       },
-      children: [{ type: 'slot', name: 'children' }],
+      children: [{ type: 'slot', name: 'children', value: 'CSS.GUI' }],
     },
   },
 ]

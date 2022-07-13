@@ -115,9 +115,10 @@ function SlotRenderer({ value: providedValue }: SlotRendererProps) {
   const { value: outerValue } = useComponent()
 
   const value = providedValue as Slot
-  const slot = outerValue?.propTypes?.find((prop) => prop.name === value.name)
+  const outerProps = outerValue?.props || {}
+  const propValue = outerProps[value.name] || value.value || null
 
-  return <>{slot?.defaultValue || value.value || null}</>
+  return <>{propValue}</>
 }
 
 const cleanAttributes = (attributes: Record<string, string>) => {

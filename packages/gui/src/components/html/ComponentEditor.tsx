@@ -1,8 +1,11 @@
+import { ChangeEvent } from 'react'
 import fuzzysort from 'fuzzysort'
 import { Label, Combobox } from '../primitives'
-import { ComponentData, PropsDefinition } from './types'
+import { ComponentData, Slot } from './types'
 import { useHtmlEditor } from './Provider'
-import { ChangeEvent } from 'react'
+import { unified } from 'unified'
+import { visit } from 'unist-util-visit'
+import { getSlots } from './util'
 
 interface ComponentEditorProps {
   value: ComponentData
@@ -14,7 +17,8 @@ export const ComponentEditor = ({ value, onChange }: ComponentEditorProps) => {
 
   const componentIds = components.map((c) => c.id)
   const componentNames = components.map((c) => c.tagName)
-  const propTypes: PropsDefinition = value.propTypes || []
+  const componentProps = value.props || {}
+  const slots = getSlots(value)
 
   const handleFilterComponents = (input: string) => {
     if (!input) {
@@ -34,26 +38,15 @@ export const ComponentEditor = ({ value, onChange }: ComponentEditorProps) => {
     }
   }
 
-  const handleAddProp = () => {
-    propTypes.push({
-      name: 'newProp',
-      type: 'string',
-      defaultValue: 'Hello, world!',
-    })
-
-    onChange({ ...value, propTypes })
-  }
-
-  const handlePropNameChange =
-    (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
-      propTypes[index].name = e.target.value
-      onChange({ ...value, propTypes })
-    }
-
-  const handlePropDefaultValueChange =
-    (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
-      propTypes[index].defaultValue = e.target.value
-      onChange({ ...value, propTypes })
+  const handlePropChange =
+    (name: string) => (e: ChangeEvent<HTMLInputElement>) => {
+      onChange({
+        ...value,
+        props: {
+          ...componentProps,
+          [name]: e.target.value,
+        },
+      })
     }
 
   return (
@@ -80,26 +73,18 @@ export const ComponentEditor = ({ value, onChange }: ComponentEditorProps) => {
       </div>
       <div sx={{ px: 3, pb: 3 }}>
         <h3 sx={{ m: 0 }}>Props</h3>
-        {propTypes.map((prop, index) => {
+        {slots.map((slot, index) => {
           return (
             <div key={index}>
-              <h4 sx={{ m: 0 }}>{prop.name}</h4>
-              <Label>Prop name</Label>
+              <Label>{slot.name}</Label>
               <input
                 type="text"
-                value={prop.name}
-                onChange={handlePropNameChange(index)}
-              />
-              <Label>Default Value</Label>
-              <input
-                type="text"
-                value={prop.defaultValue}
-                onChange={handlePropDefaultValueChange(index)}
+                value={componentProps[slot.name] ?? slot.value}
+                onChange={handlePropChange(slot.name)}
               />
             </div>
           )
         })}
-        <button onClick={handleAddProp}>Add prop</button>
       </div>
     </div>
   )

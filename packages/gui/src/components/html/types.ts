@@ -1,9 +1,3 @@
-export type PropDefinition = {
-  name: string
-  type: 'string' | 'number'
-  defaultValue?: string | number
-}
-export type PropsDefinition = PropDefinition[]
 export interface ElementData {
   type: 'element' | 'text'
   tagName?: string
@@ -12,7 +6,10 @@ export interface ElementData {
   style?: Record<string, any>
   value?: string
   children?: HtmlNode[]
-  propTypes?: PropsDefinition
+  props?: Props
+}
+export type Props = {
+  [key: string]: string | number
 }
 
 export interface Slot {
@@ -23,12 +20,13 @@ export interface Slot {
   attributes?: Record<string, string>
   style?: Record<string, any>
   children?: HtmlNode[]
+  props: Props
 }
 export interface ComponentData {
   type: 'component'
   id: string
   tagName: string
-  propTypes: PropsDefinition
+  props: Props
   value: HtmlNode
   attributes?: Record<string, string>
   style?: Record<string, any>
