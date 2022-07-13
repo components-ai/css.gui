@@ -1,11 +1,9 @@
 import { ChangeEvent } from 'react'
 import fuzzysort from 'fuzzysort'
 import { Label, Combobox } from '../primitives'
-import { ComponentData, Slot } from './types'
+import { ComponentData } from './types'
 import { useHtmlEditor } from './Provider'
-import { unified } from 'unified'
-import { visit } from 'unist-util-visit'
-import { getSlots } from './util'
+import { getSlots } from '../../lib/codegen/util'
 
 interface ComponentEditorProps {
   value: ComponentData
@@ -18,7 +16,7 @@ export const ComponentEditor = ({ value, onChange }: ComponentEditorProps) => {
   const componentIds = components.map((c) => c.id)
   const componentNames = components.map((c) => c.tagName)
   const componentProps = value.props || {}
-  const slots = getSlots(value)
+  const slots = getSlots(value.value)
 
   const handleFilterComponents = (input: string) => {
     if (!input) {

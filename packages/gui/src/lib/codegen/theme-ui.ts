@@ -5,6 +5,7 @@ import { toCSSObject } from './to-css-object'
 import { stringifyHastNode } from './stringify-hast-node'
 import { toReactProps } from './to-react-props'
 import { format } from './format'
+import { getPropSyntax } from './util'
 
 const h = (tagName: string, props: any, children?: any[]) => {
   const newProps = toReactProps(props)
@@ -19,12 +20,12 @@ const h = (tagName: string, props: any, children?: any[]) => {
 }
 
 export const themeUI = async (node: HtmlNode) => {
-  const root = editorSchemaToHast(node)
+  const root = editorSchemaToHast(node, { addSlotSyntax: true })
   const functionBody = stringifyHastNode(toH(h, root))
 
   const output = `
   /** @jsxImportSource theme-ui */
-  export default function Component() {
+  export default function Component(${getPropSyntax(node)}) {
     return (
       ${functionBody}
     )
