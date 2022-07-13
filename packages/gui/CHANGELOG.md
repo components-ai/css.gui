@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.162
+
+### Patch Changes
+
+- 0a39cf5f: Don't allow for path selection inside component
+
 ## 0.0.161
 
 ### Patch Changes
