@@ -65,6 +65,10 @@ function ElementRenderer({ value, canvas, path }: ElementRendererProps) {
   }
 
   const handleSelect = (e: MouseEvent) => {
+    if (!canvas) {
+      return
+    }
+
     e.stopPropagation()
     setSelected(path)
   }
@@ -85,7 +89,7 @@ function ElementRenderer({ value, canvas, path }: ElementRendererProps) {
     }
     return (
       <ComponentProvider value={value}>
-        <div sx={sx}>
+        <div {...props}>
           <ElementRenderer value={fullValue} canvas={false} path={path} />
         </div>
       </ComponentProvider>
