@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.158
+
+### Patch Changes
+
+- 993b2236: Add basic slot support for strings
+
 ## 0.0.157
 
 ### Patch Changes
