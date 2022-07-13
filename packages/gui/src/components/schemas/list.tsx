@@ -11,8 +11,8 @@ export function listSchema<T>({
   itemSchema,
   separator = ', ',
 }: CreateList<T>): DataTypeSchema<T[]> {
-  const stringify = (value: T[]) => {
-    const stringified = value.map((item) => itemSchema.stringify(item))
+  const stringify = (value: T[], ...args: any[]) => {
+    const stringified = value.map((item) => itemSchema.stringify(item, ...args))
     return stringified.join(separator)
   }
   const defaultValue = [itemSchema.defaultValue]
