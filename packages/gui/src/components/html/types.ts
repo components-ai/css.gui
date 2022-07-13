@@ -20,13 +20,13 @@ export interface Slot {
   attributes?: Record<string, string>
   style?: Record<string, any>
   children?: HtmlNode[]
-  props: Props
+  props?: Props
 }
 export interface ComponentData {
   type: 'component'
   id: string
   tagName: string
-  props: Props
+  props?: Props
   value: HtmlNode
   attributes?: Record<string, string>
   style?: Record<string, any>
