@@ -117,7 +117,7 @@ function SlotRenderer({ value: providedValue }: SlotRendererProps) {
   const value = providedValue as Slot
   const slot = outerValue?.propTypes?.find((prop) => prop.name === value.name)
 
-  return <>{slot?.defaultValue || null}</>
+  return <>{slot?.defaultValue || value.value || null}</>
 }
 
 const cleanAttributes = (attributes: Record<string, string>) => {
