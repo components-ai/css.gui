@@ -1492,7 +1492,6 @@ export const initialComponents: any = [
     type: 'component',
     id: '123abc',
     tagName: 'Heading',
-    propTypes: [{ name: 'children', type: 'string', defaultValue: 'CSS.GUI' }],
     value: {
       tagName: 'h1',
       attributes: {},
