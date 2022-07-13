@@ -17,6 +17,11 @@ export const ComponentEditor = ({ value, onChange }: ComponentEditorProps) => {
   const componentNames = components.map((c) => c.tagName)
   const componentProps = value.props || {}
   const slots = getSlots(value.value)
+  const attributes = {
+    ...(value.value.attributes || {}),
+    ...(value.attributes || {}),
+  }
+  const attributeEntries = Object.entries(attributes)
 
   const handleFilterComponents = (input: string) => {
     if (!input) {
@@ -42,6 +47,17 @@ export const ComponentEditor = ({ value, onChange }: ComponentEditorProps) => {
         ...value,
         props: {
           ...componentProps,
+          [name]: e.target.value,
+        },
+      })
+    }
+
+  const handleAttributeChange =
+    (name: string) => (e: ChangeEvent<HTMLInputElement>) => {
+      onChange({
+        ...value,
+        attributes: {
+          ...attributes,
           [name]: e.target.value,
         },
       })
@@ -83,6 +99,32 @@ export const ComponentEditor = ({ value, onChange }: ComponentEditorProps) => {
             </div>
           )
         })}
+        {attributeEntries.length ? (
+          <>
+            {attributeEntries.map((entry) => {
+              const [key, val] = entry
+              return (
+                <div key={key}>
+                  <Label>
+                    <span sx={{ display: 'block', width: '100%' }}>{key}</span>
+                    <div
+                      sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '.5rem',
+                      }}
+                    >
+                      <input
+                        value={val}
+                        onChange={handleAttributeChange(key)}
+                      />
+                    </div>
+                  </Label>
+                </div>
+              )
+            })}
+          </>
+        ) : null}
       </div>
     </div>
   )

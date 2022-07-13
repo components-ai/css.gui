@@ -1578,4 +1578,25 @@ export const initialComponents: any = [
       children: [{ type: 'slot', name: 'children', value: 'CSS.GUI' }],
     },
   },
+  {
+    type: 'component',
+    id: 'aabbcc',
+    tagName: 'NavLink',
+    value: {
+      tagName: 'a',
+      attributes: {
+        href: '#!',
+        title: 'A navigation link',
+      },
+      style: {
+        color: 'tomato',
+        fontWeight: '500',
+        lineHeight: {
+          value: 1,
+          unit: 'number',
+        },
+      },
+      children: [{ type: 'slot', name: 'children', value: 'CSS.GUI' }],
+    },
+  },
 ]

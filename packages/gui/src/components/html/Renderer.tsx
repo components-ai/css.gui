@@ -76,10 +76,17 @@ function ElementRenderer({ value, canvas, path }: ElementRendererProps) {
   })
 
   if (value.type === 'component') {
+    const fullValue = {
+      ...value.value,
+      attributes: {
+        ...(value.value.attributes || {}),
+        ...(value.attributes || {}),
+      },
+    }
     return (
       <ComponentProvider value={value}>
         <div sx={sx}>
-          <ElementRenderer value={value.value} canvas={false} path={path} />
+          <ElementRenderer value={fullValue} canvas={false} path={path} />
         </div>
       </ComponentProvider>
     )
