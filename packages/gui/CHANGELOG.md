@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.159
+
+### Patch Changes
+
+- 03505bbf: Add prop syntax to relevant exports
+
 ## 0.0.158
 
 ### Patch Changes
