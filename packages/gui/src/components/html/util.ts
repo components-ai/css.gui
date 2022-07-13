@@ -1,6 +1,4 @@
-import { unified } from 'unified'
-import { visit } from 'unist-util-visit'
-import { ComponentData, ElementPath, Slot } from './types'
+import { ElementPath } from './types'
 
 export const isSamePath = (
   path1: ElementPath | null,
@@ -11,17 +9,4 @@ export const isSamePath = (
   }
 
   return path1.join('-') === path2.join('-')
-}
-
-export const getSlots = (value: ComponentData) => {
-  let slots: Slot[] = []
-  unified()
-    .use(() => (tree: any) => {
-      visit(tree, 'slot', (node: any) => {
-        slots.push(node)
-      })
-    })
-    .runSync(value.value)
-
-  return slots
 }

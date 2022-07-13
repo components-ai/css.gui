@@ -1,3 +1,4 @@
+import { camelCase, cloneDeep } from 'lodash-es'
 import { unified } from 'unified'
 import { visit } from 'unist-util-visit'
 import { attributesToProperties } from './plugins/attributes-to-properties'
@@ -5,7 +6,8 @@ import { moveStyleToProperties } from './plugins/move-style-to-properties'
 import { removeProperties } from './plugins/remove-properties'
 
 type Options = {
-  removeStyleProperty: boolean
+  removeStyleProperty?: boolean
+  addSlotSyntax?: boolean
 }
 export const editorSchemaToHast = (node: any, options?: Options) => {
   const propertiesToRemove: string[] = []
@@ -18,6 +20,14 @@ export const editorSchemaToHast = (node: any, options?: Options) => {
     .use(attributesToProperties)
     .use(moveStyleToProperties as any)
     .use(removeProperties, { propertiesToRemove })
-    .runSync(node)
+    .use(() => (tree) => {
+      if (options?.addSlotSyntax) {
+        visit(tree, 'slot', (node) => {
+          node.type = 'text'
+          node.value = `{${camelCase(node.name)}}`
+        })
+      }
+    })
+    .runSync(cloneDeep(node))
   return processedTree
 }
