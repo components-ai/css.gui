@@ -1,11 +1,5 @@
 import { Editor } from '../Editor'
-import {
-  HtmlNode,
-  HTMLTag,
-  ElementPath,
-  PropDefinition,
-  ElementData,
-} from './types'
+import { HtmlNode, HTMLTag, ElementPath } from './types'
 import * as Collapsible from '@radix-ui/react-collapsible'
 import * as Tabs from '@radix-ui/react-tabs'
 import { Fragment, useState } from 'react'
