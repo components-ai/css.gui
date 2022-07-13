@@ -1,3 +1,9 @@
+export type PropDefinition = {
+  name: string
+  type: 'string' | 'number'
+  defaultValue?: string | number
+}
+export type PropsDefinition = PropDefinition[]
 export interface ElementData {
   type: 'element' | 'text'
   tagName?: string
@@ -6,18 +12,18 @@ export interface ElementData {
   style?: Record<string, any>
   value?: string
   children?: HtmlNode[]
+  propTypes?: PropsDefinition
 }
 
-export type Slot = {
+export interface Slot {
   type: 'slot'
   name: string
+  value?: string
+  tagName?: string
+  attributes?: Record<string, string>
+  style?: Record<string, any>
+  children?: HtmlNode[]
 }
-export type PropDefinition = {
-  name: string
-  type: 'string' | 'number'
-  defaultValue?: string | number
-}
-export type PropsDefinition = PropDefinition[]
 export interface ComponentData {
   type: 'component'
   id: string
@@ -29,7 +35,8 @@ export interface ComponentData {
   children?: HtmlNode[]
 }
 
-export type HtmlNode = ElementData | ComponentData | Slot
+export type HtmlBaseNode = ElementData | ComponentData
+export type HtmlNode = HtmlBaseNode | Slot
 export type ElementPath = number[]
 
 export const enum HTMLTag {

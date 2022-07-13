@@ -1,5 +1,5 @@
 import { toCSSObject } from '../../lib'
-import { ElementData, ElementPath, HtmlNode, Slot } from './types'
+import { ElementPath, HtmlNode, Slot } from './types'
 import { HTMLFontTags } from './FontTags'
 import { useHtmlEditor } from './Provider'
 import { isVoidElement } from '../../lib/elements'
