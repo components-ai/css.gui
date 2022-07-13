@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.161
+
+### Patch Changes
+
+- 57dd87dd: Expose attributes for a component
+
 ## 0.0.160
 
 ### Patch Changes
