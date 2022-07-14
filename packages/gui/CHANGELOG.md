@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.163
+
+### Patch Changes
+
+- 7ee06fcd: Internal refactoring
+
 ## 0.0.162
 
 ### Patch Changes
