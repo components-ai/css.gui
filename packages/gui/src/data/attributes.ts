@@ -237,7 +237,7 @@ export const ATTRIBUTE_MAP: Record<string, string[]> = {
   wbr: GLOBAL_ATTRIBUTES,
   svg: [...GLOBAL_ATTRIBUTES, 'version', 'xmlns', 'viewBox'],
   circle: [...GLOBAL_ATTRIBUTES, 'cx', 'cy', 'r'],
-  rect: [...GLOBAL_ATTRIBUTES, 'width', 'height'],
+  rect: [...GLOBAL_ATTRIBUTES, 'width', 'height', 'x', 'y', 'rx', 'ry'],
   line: [...GLOBAL_ATTRIBUTES, 'x1', 'y1', 'x2', 'y2'],
   path: [...GLOBAL_ATTRIBUTES, 'd'],
   polyline: [...GLOBAL_ATTRIBUTES, 'points'],
