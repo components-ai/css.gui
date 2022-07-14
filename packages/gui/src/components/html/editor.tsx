@@ -1,19 +1,9 @@
 import { Editor } from '../Editor'
-import { HtmlNode, ElementPath } from './types'
-import * as Collapsible from '@radix-ui/react-collapsible'
+import { HtmlNode } from './types'
 import * as Tabs from '@radix-ui/react-tabs'
-import { Fragment, useState } from 'react'
 import { Code, Layers } from 'react-feather'
 import { useHtmlEditor } from './Provider'
-import { isVoidElement } from '../../lib/elements'
-import {
-  addChildAtPath,
-  getChildAtPath,
-  isSamePath,
-  removeChildAtPath,
-  replaceAt,
-  setChildAtPath,
-} from './util'
+import { getChildAtPath, removeChildAtPath, setChildAtPath } from './util'
 import { Export } from './Export'
 import { useTheme } from '../providers/ThemeContext'
 import { NodeEditor } from './NodeEditor'
