@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.164
+
+### Patch Changes
+
+- 27c01a47: Add support for nesting components as children
+
 ## 0.0.163
 
 ### Patch Changes
