@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.165
+
+### Patch Changes
+
+- 1a9b3f54: Add more rect attributes
+
 ## 0.0.164
 
 ### Patch Changes
