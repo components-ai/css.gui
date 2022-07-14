@@ -25,3 +25,8 @@ export const getPropSyntax = (value: HtmlNode) => {
   const props = slots.map((slot) => camelCase(slot.name)).join(', ')
   return props.length ? `{ ${props} }` : ''
 }
+
+export const hasChildrenSlot = (value: HtmlNode) => {
+  const slots = getSlots(value)
+  return !!slots.find((slot) => slot.name === 'children')
+}
