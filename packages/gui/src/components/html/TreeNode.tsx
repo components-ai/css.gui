@@ -4,6 +4,8 @@ import { Fragment, useState } from 'react'
 import { useHtmlEditor } from './Provider'
 import { isVoidElement } from '../../lib/elements'
 import { addChildAtPath, isSamePath, replaceAt } from './util'
+import { useComponent } from './ComponentProvider'
+import { hasChildrenSlot } from '../../lib/codegen/util'
 
 interface EditorProps {
   value: HtmlNode
@@ -201,11 +203,11 @@ export function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
 }
 
 const isSelfClosing = (node: HtmlNode) => {
-  if (node.type === 'slot') {
-    return false
+  if (node.type !== 'component') {
+    return isVoidElement(node.tagName as string)
   }
 
-  return node.type === 'component' || isVoidElement(node.tagName as string)
+  return !hasChildrenSlot(node.value)
 }
 
 const DEFAULT_CHILD_NODE: HtmlNode = {

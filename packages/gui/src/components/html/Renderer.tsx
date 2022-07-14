@@ -127,7 +127,28 @@ function SlotRenderer({ value: providedValue }: SlotRendererProps) {
 
   const value = providedValue as Slot
   const outerProps = outerValue?.props || {}
-  const propValue = outerProps[value.name] || value.value || null
+  let propValue = outerProps[value.name] || value.value || null
+
+  if (value.name === 'children' && outerValue?.children) {
+    return (
+      <>
+        {outerValue.children.map((child: HtmlNode, index: number) => {
+          if (child.type === 'text') {
+            return <>{child.value}</>
+          }
+
+          return (
+            <ElementRenderer
+              key={index}
+              path={[]}
+              canvas={false}
+              value={child}
+            />
+          )
+        })}
+      </>
+    )
+  }
 
   return <>{propValue}</>
 }
