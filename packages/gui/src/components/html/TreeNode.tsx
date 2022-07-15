@@ -40,10 +40,45 @@ export function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
             fontWeight: isSelected ? 600 : 400,
             textAlign: 'start',
             fontSize: 0,
+            width: '100%',
           }}
           onClick={() => onSelect(path)}
         >
-          "{value.value}"
+          {editing ? (
+            <textarea
+              sx={{
+                display: 'block',
+                width: '100%',
+              }}
+              value={value.value}
+              onChange={(e) =>
+                onChange({
+                  ...value,
+                  value: e.target.value,
+                })
+              }
+            />
+          ) : (
+            <button
+              sx={{
+                textAlign: 'left',
+                cursor: isSelected ? 'text' : 'pointer',
+                fontWeight: isSelected ? 600 : 400,
+                border: 'none',
+                backgroundColor: 'transparent',
+                color: 'text',
+                margin: 0,
+                padding: 0,
+              }}
+              onClick={() => {
+                if (isSelected) {
+                  setEditing(true)
+                }
+              }}
+            >
+              "{value.value}"
+            </button>
+          )}
         </button>
       </div>
     )
