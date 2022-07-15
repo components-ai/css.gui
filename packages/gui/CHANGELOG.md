@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.170
+
+### Patch Changes
+
+- ff1d652e: Ensure that theme colors are generated
+
 ## 0.0.169
 
 ### Patch Changes
