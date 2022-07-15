@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext } from 'react'
+import { createContext, MouseEvent, ReactNode, useContext } from 'react'
 import { toCSSObject } from '../../lib/codegen/to-css-object'
 import { toReactProps } from '../../lib/codegen/to-react-props'
 import { useTheme } from '../providers/ThemeContext'
@@ -15,17 +15,18 @@ type CanvasProviderType = {
   canvas?: boolean
 }
 
+export type CanvasElementProps = {
+  path: ElementPath
+  value: HtmlNode
+  onClick?(e: MouseEvent): void
+}
+
 export function useCanvas() {
   const context = useContext(CanvasContext)
   return context
 }
 
-type UseCanvasPropsArguments = {
-  path: ElementPath
-  value: HtmlNode
-}
-
-export function useCanvasProps({ path, value }: UseCanvasPropsArguments) {
+export function useCanvasProps({ path, value, onClick }: CanvasElementProps) {
   const { canvas } = useContext(CanvasContext)
   const { selected, setSelected } = useHtmlEditor()
   const theme = useTheme()
@@ -53,12 +54,17 @@ export function useCanvasProps({ path, value }: UseCanvasPropsArguments) {
       return
     }
 
+    if (onClick) {
+      return onClick(e)
+    }
+
     e.stopPropagation()
     setSelected(path)
   }
 
   const props = toReactProps({
     ...(canvas ? cleanAttributesForCanvas(attributes) : attributes),
+    ...(canvas ? { 'data-path': path.join('-') } : {}),
     sx,
     onClick: handleSelect,
   })

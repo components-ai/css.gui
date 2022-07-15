@@ -15,11 +15,11 @@ export function HtmlRenderer({ value, canvas = true }: HtmlRendererProps) {
   const transformedVal = transformValueToSchema(value)
 
   return (
-    <CanvasProvider canvas={canvas}>
-      <>
-        <HTMLFontTags htmlTree={transformedVal} />
+    <>
+      <HTMLFontTags htmlTree={transformedVal} />
+      <CanvasProvider canvas={canvas}>
         <ElementRenderer value={transformedVal} path={DEFAULT_PATH} />
-      </>
-    </CanvasProvider>
+      </CanvasProvider>
+    </>
   )
 }
