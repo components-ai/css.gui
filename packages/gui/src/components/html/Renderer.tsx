@@ -42,7 +42,7 @@ function ElementRenderer({ value, canvas, path }: ElementRendererProps) {
   const theme = useTheme()
 
   if (value.type === 'slot') {
-    return <SlotRenderer value={value} />
+    return <SlotRenderer value={value} path={path} canvas={canvas} />
   }
 
   const { attributes = {}, style = {}, children = [] } = value
@@ -121,8 +121,10 @@ function ElementRenderer({ value, canvas, path }: ElementRendererProps) {
 
 interface SlotRendererProps {
   value: HtmlNode
+  path: ElementPath
+  canvas: boolean
 }
-function SlotRenderer({ value: providedValue }: SlotRendererProps) {
+function SlotRenderer({ value: providedValue, canvas }: SlotRendererProps) {
   const { value: outerValue } = useComponent()
 
   const value = providedValue as Slot
