@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.167
+
+### Patch Changes
+
+- e2bd4fb8: Internal refactor for canvas prop instantiation
+
 ## 0.0.166
 
 ### Patch Changes
