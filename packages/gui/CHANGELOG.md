@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.168
+
+### Patch Changes
+
+- b6d1c2fe: Internal refactor of HTML renderers and editors
+
 ## 0.0.167
 
 ### Patch Changes
