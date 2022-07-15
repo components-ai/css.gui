@@ -1,9 +1,13 @@
 import { HtmlNode, ElementPath } from './types'
 import * as Collapsible from '@radix-ui/react-collapsible'
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { useHtmlEditor } from './Provider'
 import { isVoidElement } from '../../lib/elements'
-import { addChildAtPath, isSamePath, replaceAt } from './util'
+import { addChildAtPath, getChildAtPath, isSamePath, replaceAt } from './util'
+import { NodeEditorDropdown } from '../ui/dropdowns/NodeEditorDropdown'
+import { Combobox } from '../primitives'
+import { HTML_TAGS } from './data'
+import { DEFAULT_ATTRIBUTES, DEFAULT_STYLES } from './default-styles'
 
 interface EditorProps {
   value: HtmlNode
@@ -17,7 +21,12 @@ interface TreeNodeProps extends EditorProps {
 export function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
   const { selected } = useHtmlEditor()
   const [open, setOpen] = useState(true)
+  const [editing, setEditing] = useState(false)
   const isSelected = isSamePath(path, selected)
+
+  if (editing && !isSelected) {
+    setEditing(false)
+  }
 
   if (value.type === 'text') {
     return (
@@ -61,6 +70,51 @@ export function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
     )
   }
 
+  const tagEditor = editing ? (
+    <Combobox
+      key={selected?.join('-')}
+      onFilterItems={(filterValue) => {
+        return HTML_TAGS.filter((el) => el.startsWith(filterValue))
+      }}
+      onItemSelected={(selectedItem) => {
+        const defaultStyles = DEFAULT_STYLES[selectedItem] || {}
+        const mergedStyles = { ...defaultStyles, ...value.style }
+        const defaultAttributes = DEFAULT_ATTRIBUTES[selectedItem] || {}
+        const mergedAttributes = {
+          ...defaultAttributes,
+          ...(value.attributes || {}),
+        }
+        setEditing(false)
+        onChange({
+          ...value,
+          attributes: mergedAttributes,
+          tagName: selectedItem,
+          style: mergedStyles,
+        })
+      }}
+      items={HTML_TAGS}
+      value={value.tagName}
+    />
+  ) : (
+    <button
+      sx={{
+        cursor: isSelected ? 'text' : 'pointer',
+        border: 'none',
+        backgroundColor: 'transparent',
+        color: 'text',
+        margin: 0,
+        padding: 0,
+      }}
+      onClick={() => {
+        if (isSelected) {
+          setEditing(true)
+        }
+      }}
+    >
+      {value.tagName}
+    </button>
+  )
+
   const tagButton = (
     <button
       sx={{
@@ -74,10 +128,11 @@ export function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
         mr: 0,
         ml: 0,
         textAlign: 'start',
+        display: 'inline-flex',
       }}
       onClick={() => onSelect(path)}
     >
-      &lt;{value.tagName}
+      &lt;{tagEditor}
       {!open || isSelfClosing(value) ? ' /' : null}&gt;
     </button>
   )
