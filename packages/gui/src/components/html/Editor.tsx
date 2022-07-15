@@ -8,6 +8,7 @@ import { Export } from './Export'
 import { useTheme } from '../providers/ThemeContext'
 import { NodeEditor } from './Editors/NodeEditor'
 import { TreeNode } from './TreeNode'
+import { htmlToEditorSchema } from '../../lib'
 
 interface HtmlEditorProps {
   onChange(value: HtmlNode): void
@@ -135,6 +136,39 @@ export function HtmlEditor({ onChange }: HtmlEditorProps) {
               onSelect={setSelected}
               path={[]}
               onChange={onChange}
+            />
+          </div>
+        </Tabs.Content>
+        <Tabs.Content sx={TABS_CONTENT_STYLES} value="import">
+          <div>
+            <textarea
+              sx={{
+                overflow: 'auto',
+                height: '80vh',
+                border: 'thin solid',
+                borderColor: 'border',
+                backgroundColor: 'rgba(0, 0, 0, 0.02)',
+                p: 2,
+                m: 3,
+              }}
+              onPaste={(e) => {
+                e.preventDefault()
+
+                // todo — no html?
+                const htmlContent = e.clipboardData.getData('text/html')
+
+                // need to wrap as editor requires single parent node
+                const htmlString = `<div>${htmlContent.replace(
+                  '<!DOCTYPE html>',
+                  ''
+                )}</div>`
+
+                setSelected(null)
+                onChange(htmlToEditorSchema(htmlString))
+
+                // temporary — just show what's been pasted but don't store
+                e.target.value = htmlString
+              }}
             />
           </div>
         </Tabs.Content>
