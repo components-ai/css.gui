@@ -99,6 +99,7 @@ export function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
     <button
       sx={{
         cursor: isSelected ? 'text' : 'pointer',
+        fontWeight: isSelected ? 600 : 400,
         border: 'none',
         backgroundColor: 'transparent',
         color: 'text',
