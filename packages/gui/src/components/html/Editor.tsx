@@ -1,7 +1,7 @@
 import { Editor } from '../Editor'
 import { HtmlNode } from './types'
 import * as Tabs from '@radix-ui/react-tabs'
-import { Code, Layers } from 'react-feather'
+import { Code, Layers, LogIn } from 'react-feather'
 import { useHtmlEditor } from './Provider'
 import { getChildAtPath, removeChildAtPath, setChildAtPath } from './util'
 import { Export } from './Export'
@@ -87,6 +87,9 @@ export function HtmlEditor({ onChange }: HtmlEditorProps) {
           </Tabs.Trigger>
           <Tabs.Trigger sx={TABS_TRIGGER_STYLES} value="tree">
             <Layers size={12} /> Layers
+          </Tabs.Trigger>
+          <Tabs.Trigger sx={TABS_TRIGGER_STYLES} value="import">
+            <LogIn size={12} /> Import
           </Tabs.Trigger>
           <Tabs.Trigger sx={TABS_TRIGGER_STYLES} value="export">
             <Code size={12} /> Export
