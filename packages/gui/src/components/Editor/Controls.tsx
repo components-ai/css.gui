@@ -37,6 +37,8 @@ import { SchemaInput } from '../inputs/SchemaInput'
 import { EditorDropdown } from '../ui/dropdowns/EditorDropdown'
 import { FieldsetDropdown } from '../ui/dropdowns/FieldsetDropdown'
 import { tokenize } from '../../lib/parse'
+import { pseudoClasses } from '../../data/pseudo-classes'
+import { pseudoElements } from '../../data/pseudo-elements'
 
 export const getPropertyFromField = (field: KeyArg) => {
   if (Array.isArray(field)) {
@@ -316,6 +318,12 @@ const FieldsetControl = ({ field, property }: FieldsetControlProps) => {
   const styles = getField(field || property)
   const properties = Object.keys(styles)
 
+  const propertyLabel = pseudoClasses.includes(property as any)
+    ? `:${property}`
+    : pseudoElements.includes(property as any)
+    ? `::${property}`
+    : property
+
   return (
     <section
       sx={{
@@ -338,7 +346,7 @@ const FieldsetControl = ({ field, property }: FieldsetControlProps) => {
             lineHeight: 1,
           }}
         >
-          {removeInternalCSSClassSyntax(property)}
+          {removeInternalCSSClassSyntax(propertyLabel)}
         </h3>
         <FieldsetDropdown onRemove={() => removeField(field || property)} />
       </div>
@@ -347,7 +355,7 @@ const FieldsetControl = ({ field, property }: FieldsetControlProps) => {
           <AddPropertyControl
             field={field || property}
             styles={styles}
-            label={`Add property to ${property}`}
+            label={`Add property to ${propertyLabel}`}
           />
         </div>
         <ControlSet field={field} properties={properties} />
