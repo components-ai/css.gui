@@ -6,7 +6,7 @@ import { useHtmlEditor } from './Provider'
 import { getChildAtPath, removeChildAtPath, setChildAtPath } from './util'
 import { Export } from './Export'
 import { useTheme } from '../providers/ThemeContext'
-import { NodeEditor } from './NodeEditor'
+import { NodeEditor } from './Editors/NodeEditor'
 import { TreeNode } from './TreeNode'
 
 interface HtmlEditorProps {

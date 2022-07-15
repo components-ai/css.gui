@@ -4,7 +4,6 @@ import {
   buildFontFamiliesHref,
   buildVariableFontFamiliesHref,
 } from '../inputs/FontFamily/FontTags'
-import { HtmlNode } from './types'
 
 export function getStyleFonts(style: any): string[] {
   if (!style) return []

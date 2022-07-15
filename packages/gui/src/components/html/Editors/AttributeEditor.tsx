@@ -1,9 +1,9 @@
 import { X } from 'react-feather'
-import { Label } from '../primitives'
-import IconButton from '../ui/IconButton'
+import { Label } from '../../primitives'
+import IconButton from '../../ui/IconButton'
 import { useEffect } from 'react'
-import { Combobox } from '../primitives'
-import { ATTRIBUTE_MAP } from '../../data/attributes'
+import { Combobox } from '../../primitives'
+import { ATTRIBUTE_MAP } from '../../../data/attributes'
 
 interface AttributeEditorProps {
   value: Record<string, string>

@@ -1,14 +1,14 @@
-import { HtmlNode } from './types'
-import { Label, Combobox } from '../primitives'
-import { SelectInput } from '../inputs/SelectInput'
+import { HtmlNode } from '../types'
+import { Label, Combobox } from '../../primitives'
+import { SelectInput } from '../../inputs/SelectInput'
 import { AttributeEditor } from './AttributeEditor'
-import { DEFAULT_ATTRIBUTES, DEFAULT_STYLES } from './default-styles'
-import { useHtmlEditor } from './Provider'
-import { addChildAtPath, getChildAtPath } from './util'
-import { NodeEditorDropdown } from '../ui/dropdowns/NodeEditorDropdown'
-import { ComponentEditor } from './ComponentEditor'
+import { DEFAULT_ATTRIBUTES, DEFAULT_STYLES } from '../default-styles'
+import { useHtmlEditor } from '../Provider'
+import { addChildAtPath, getChildAtPath } from '../util'
+import { NodeEditorDropdown } from '../../ui/dropdowns/NodeEditorDropdown'
+import { ComponentEditor } from '../Component'
 import { SlotEditor } from './SlotEditor'
-import { HTML_TAGS } from './data'
+import { HTML_TAGS } from '../data'
 
 interface EditorProps {
   value: HtmlNode
