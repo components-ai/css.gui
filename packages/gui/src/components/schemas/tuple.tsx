@@ -37,9 +37,9 @@ export function tupleSchema<T>({
     )
   }
 
-  function regenerate({ previousValue }: RegenOptions<T[]>) {
+  function regenerate({ theme, previousValue }: RegenOptions<T[]>) {
     return previousValue.map(
-      (item) => itemSchema.regenerate?.({ previousValue: item }) ?? item
+      (item) => itemSchema.regenerate?.({ theme, previousValue: item }) ?? item
     )
   }
 

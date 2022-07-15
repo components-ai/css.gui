@@ -11,7 +11,7 @@ type GetArguments = {
 export const themeGet = ({ theme, path, property }: GetArguments) => {
   const scale = THEME_SCALES[property]
   const fullPath = [scale, path].filter(Boolean).join('.')
-  return themeUIGet(theme, fullPath) ?? property
+  return themeUIGet(theme, fullPath) ?? path ?? property
 }
 
 export const isThemeable = (property?: string): boolean =>
