@@ -197,7 +197,8 @@ export const Editor = ({
   function regenerateAll(): any {
     return mapValues(allStyles, (value, property) => {
       return (
-        properties[property].regenerate?.({ previousValue: value }) ?? value
+        properties[property].regenerate?.({ theme, previousValue: value }) ??
+        value
       )
     })
   }

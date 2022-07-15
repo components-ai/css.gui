@@ -38,12 +38,12 @@ export function responsive<T>(
       if (!(value.values instanceof Array)) return false
       return value.values.map(itemSchema.validate)
     }) as any,
-    regenerate({ previousValue }) {
+    regenerate({ theme, previousValue }) {
       return {
         ...previousValue,
         values: previousValue.values.map(
           (value) =>
-            itemSchema.regenerate?.({ previousValue: value }) ??
+            itemSchema.regenerate?.({ theme, previousValue: value }) ??
             itemSchema.defaultValue
         ),
       }

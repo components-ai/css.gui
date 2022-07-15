@@ -17,9 +17,9 @@ export function listSchema<T>({
   }
   const defaultValue = [itemSchema.defaultValue]
 
-  function regenerate({ previousValue }: RegenOptions<T[]>) {
+  function regenerate({ theme, previousValue }: RegenOptions<T[]>) {
     return previousValue.map((value) => {
-      return itemSchema.regenerate?.({ previousValue: value }) ?? value
+      return itemSchema.regenerate?.({ theme, previousValue: value }) ?? value
     })
   }
 

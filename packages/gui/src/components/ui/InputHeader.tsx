@@ -2,6 +2,7 @@ import { ReactNode } from 'react'
 import { ChevronDown, ChevronUp, RefreshCw, X } from 'react-feather'
 import { EditorPropsWithLabel } from '../../types/editor'
 import { Label } from '../primitives'
+import { useTheme } from '../providers/ThemeContext'
 import IconButton from './IconButton'
 
 interface Props extends Omit<EditorPropsWithLabel<any>, 'keywords'> {
@@ -22,6 +23,7 @@ export function InputHeader({
   regenerate,
   reorder,
 }: Props) {
+  const theme = useTheme()
   return (
     <div
       sx={{
@@ -39,7 +41,7 @@ export function InputHeader({
             title="regenerate"
             sx={{ transition: 'opacity 150ms' }}
             onClick={() => {
-              onChange(regenerate({ previousValue: value }))
+              onChange(regenerate({ theme, previousValue: value }))
             }}
           >
             <RefreshCw size={12} />

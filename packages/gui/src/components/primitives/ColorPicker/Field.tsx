@@ -3,8 +3,9 @@ import ValuePicker from './ValuePicker'
 import IconButton from '../../ui/IconButton'
 import { RefreshCw, Trash } from 'react-feather'
 import { Theme } from '../../../types/theme'
-import { randomColor } from '../../../lib/color'
+import { randomColor, randomHexColor } from '../../../lib/color'
 import { Color } from '../../../types/css'
+import { themeGet } from '../../../lib'
 
 export interface Props {
   value: Color
@@ -18,7 +19,7 @@ export interface Props {
    * Allows a custom regenerate function (e.g. for color contrast) when the user clicks
    * the regenerate button. If not provided, uses the default random color generator.
    */
-  onRegenerate?(): Color
+  onRegenerate?(theme?: Theme): Color
 }
 
 /**
@@ -63,11 +64,17 @@ export default function ColorPicker({
             onClick={() => {
               // If a user-defined regenerator is given, use it
               if (onRegenerate) {
-                onChange(onRegenerate())
+                onChange(onRegenerate(theme))
                 return
               } else {
                 // Otherwise, regenerate a random color based on theme
-                onChange(randomColor(theme))
+                const path = randomColor(theme) ?? randomHexColor()
+                const color = themeGet({
+                  theme,
+                  path,
+                  property: 'color',
+                })
+                onChange(color)
               }
             }}
           >

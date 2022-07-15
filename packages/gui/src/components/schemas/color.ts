@@ -1,6 +1,6 @@
 import { get } from 'theme-ui'
 import { themeGet } from '../../lib'
-import { randomColor } from '../../lib/color'
+import { randomColor, randomHexColor } from '../../lib/color'
 import { stringifyUnit } from '../../lib/stringify'
 import { Color } from '../../types/css'
 import { ColorInput } from '../inputs/ColorInput'
@@ -22,7 +22,14 @@ function rawColor({
     inlineInput: ColorInput,
     stringify: (value) => value,
     defaultValue,
-    regenerate: () => randomColor(),
+    regenerate: ({ theme }) => {
+      const path = randomColor(theme) || randomHexColor()
+      return themeGet({
+        theme,
+        path,
+        property: 'color',
+      })
+    },
     validate: ((value: any) => {
       return typeof value === 'string' && isValidColor(value)
     }) as any,
@@ -48,7 +55,11 @@ const themeColor: DataTypeSchema<ThemeColor> = {
     })
   },
   defaultValue: { type: 'theme', path: 'primary' },
-  regenerate: () => randomColor(),
+  regenerate: ({ theme }) => {
+    const path = randomColor(theme) ?? ''
+    const color: ThemeColor = { type: 'theme', path }
+    return color
+  },
   validate: ((value: any) => {
     if (typeof value !== 'object') return false
     return value.type === 'theme' && typeof value.path === 'string'
