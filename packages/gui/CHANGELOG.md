@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.166
+
+### Patch Changes
+
+- 084d6bb9: Add inline text editing to node tree
+
 ## 0.0.165
 
 ### Patch Changes
