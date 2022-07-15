@@ -18,7 +18,7 @@ export {
 } from './components/providers/ThemeContext'
 export { EditorProvider } from './components/providers/EditorContext'
 export { Layout } from './components/ui/Layout'
-export { HtmlEditor } from './components/html/editor'
+export { HtmlEditor } from './components/html/Editor'
 export { HtmlRenderer } from './components/html/Renderer'
 export { HtmlEditorProvider } from './components/html/Provider'
 

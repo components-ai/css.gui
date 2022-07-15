@@ -1,5 +1,5 @@
-import { Label } from '../primitives'
-import { Slot } from './types'
+import { Label } from '../../primitives'
+import { Slot } from '../types'
 import { ChangeEvent } from 'react'
 
 interface SlotEditorProps {
