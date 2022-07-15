@@ -1,10 +1,10 @@
 import { HtmlNode, ElementPath } from './types'
 import * as Collapsible from '@radix-ui/react-collapsible'
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment, useState } from 'react'
 import { useHtmlEditor } from './Provider'
 import { isVoidElement } from '../../lib/elements'
-import { addChildAtPath, getChildAtPath, isSamePath, replaceAt } from './util'
-import { NodeEditorDropdown } from '../ui/dropdowns/NodeEditorDropdown'
+import { addChildAtPath, isSamePath, replaceAt } from './util'
+import { hasChildrenSlot } from '../../lib/codegen/util'
 import { Combobox } from '../primitives'
 import { HTML_TAGS } from './data'
 import { DEFAULT_ATTRIBUTES, DEFAULT_STYLES } from './default-styles'
@@ -256,11 +256,11 @@ export function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
 }
 
 const isSelfClosing = (node: HtmlNode) => {
-  if (node.type === 'slot') {
-    return false
+  if (node.type !== 'component') {
+    return isVoidElement(node.tagName as string)
   }
 
-  return node.type === 'component' || isVoidElement(node.tagName as string)
+  return !hasChildrenSlot(node.value)
 }
 
 const DEFAULT_CHILD_NODE: HtmlNode = {

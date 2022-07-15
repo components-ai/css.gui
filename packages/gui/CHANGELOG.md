@@ -1,5 +1,23 @@
 # @compai/css-gui
 
+## 0.0.165
+
+### Patch Changes
+
+- 1a9b3f54: Add more rect attributes
+
+## 0.0.164
+
+### Patch Changes
+
+- 27c01a47: Add support for nesting components as children
+
+## 0.0.163
+
+### Patch Changes
+
+- 7ee06fcd: Internal refactoring
+
 ## 0.0.162
 
 ### Patch Changes

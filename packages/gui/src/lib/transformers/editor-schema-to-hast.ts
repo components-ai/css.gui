@@ -2,6 +2,7 @@ import { camelCase, cloneDeep } from 'lodash-es'
 import { unified } from 'unified'
 import { visit } from 'unist-util-visit'
 import { attributesToProperties } from './plugins/attributes-to-properties'
+import { convertComponentsToHast } from './plugins/convert-components-to-hast'
 import { moveStyleToProperties } from './plugins/move-style-to-properties'
 import { removeProperties } from './plugins/remove-properties'
 
@@ -20,6 +21,7 @@ export const editorSchemaToHast = (node: any, options?: Options) => {
     .use(attributesToProperties)
     .use(moveStyleToProperties as any)
     .use(removeProperties, { propertiesToRemove })
+    .use(convertComponentsToHast)
     .use(() => (tree) => {
       if (options?.addSlotSyntax) {
         visit(tree, 'slot', (node) => {
