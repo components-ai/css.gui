@@ -34,7 +34,6 @@ const scale = functionSchema(
     labels: ['x', 'y'],
   })
 )
-console.log(scale.defaultValue)
 const scaleX = functionSchema('scaleX', scaleNumber)
 const scaleY = functionSchema('scaleY', scaleNumber)
 const scaleZ = functionSchema('scaleZ', scaleNumber)
