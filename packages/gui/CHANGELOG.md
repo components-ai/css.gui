@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.172
+
+### Patch Changes
+
+- 3930a3bc: Improve element selection
+
 ## 0.0.171
 
 ### Patch Changes
