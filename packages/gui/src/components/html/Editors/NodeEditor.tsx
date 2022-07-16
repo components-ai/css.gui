@@ -1,3 +1,4 @@
+import fuzzysort from 'fuzzysort'
 import { HtmlNode } from '../types'
 import { Label, Combobox } from '../../primitives'
 import { SelectInput } from '../../inputs/SelectInput'
@@ -176,7 +177,13 @@ function NodeSwitch({ value, onChange }: EditorProps) {
           <Combobox
             key={selected?.join('-')}
             onFilterItems={(filterValue) => {
-              return HTML_TAGS.filter((el) => el.startsWith(filterValue))
+              if (!filterValue) {
+                return HTML_TAGS
+              }
+
+              return fuzzysort
+                .go(filterValue, HTML_TAGS)
+                .map((res) => res.target)
             }}
             onItemSelected={(selectedItem) => {
               const defaultStyles = DEFAULT_STYLES[selectedItem] || {}
