@@ -26,20 +26,22 @@ const translate3d = functionSchema(
   })
 )
 
+const scaleNumber = number({ defaultValue: 1 })
 const scale = functionSchema(
   'scale',
   tupleSchema({
-    itemSchema: number(),
+    itemSchema: scaleNumber,
     labels: ['x', 'y'],
   })
 )
-const scaleX = functionSchema('scaleX', number())
-const scaleY = functionSchema('scaleY', number())
-const scaleZ = functionSchema('scaleZ', number())
+console.log(scale.defaultValue)
+const scaleX = functionSchema('scaleX', scaleNumber)
+const scaleY = functionSchema('scaleY', scaleNumber)
+const scaleZ = functionSchema('scaleZ', scaleNumber)
 const scale3d = functionSchema(
   'scale3d',
   tupleSchema({
-    itemSchema: number(),
+    itemSchema: scaleNumber,
     labels: ['x', 'y', 'z'],
     linkable: false,
   })
