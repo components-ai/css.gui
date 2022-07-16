@@ -56,7 +56,7 @@ export const stylesToEditorSchema = (styles: any) => {
 }
 
 const transformComplexObject = (value: any): any => {
-  if (typeof value === 'string') {
+  if (typeof value === 'string' || typeof value === 'number') {
     return value
   }
 

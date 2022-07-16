@@ -36,7 +36,7 @@ export function number({
   }
   return {
     type: 'number',
-    inlineInput: bindProps(NumberInput, regenerate),
+    inlineInput: bindProps(NumberInput, { step: 0.1 }),
     stringify: (x: number) => x.toString(),
     defaultValue,
     regenerate,
