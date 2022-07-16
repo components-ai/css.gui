@@ -31,13 +31,13 @@ function stops(repeating: boolean = false): DataTypeSchema<GradientStop[]> {
       { color: 'black', hinting: 0 },
       { color: 'transparent', hinting: 100 },
     ],
-    regenerate({ previousValue }) {
+    regenerate({ theme, previousValue }) {
       const newStops = previousValue.map(() => randomInt(0, 101))
       newStops.sort()
       return newStops.map((hinting) => {
         return {
           hinting,
-          color: color().regenerate!({ previousValue: 'black' }),
+          color: color().regenerate!({ theme, previousValue: 'black' }),
         }
       })
     },

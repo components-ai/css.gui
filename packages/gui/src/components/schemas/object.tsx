@@ -44,9 +44,9 @@ export function objectSchema<T extends object>({
     ...providedDefaultValue,
   } as any // IDK why the typing doesn't work
 
-  function regenerate({ previousValue }: RegenOptions<T>): T {
+  function regenerate({ theme, previousValue }: RegenOptions<T>): T {
     return mapValues(previousValue, (value, key: keyof T) => {
-      return fields[key].regenerate?.({ previousValue: value }) ?? value
+      return fields[key].regenerate?.({ theme, previousValue: value }) ?? value
     }) as T
   }
   return {

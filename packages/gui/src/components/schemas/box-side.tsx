@@ -42,11 +42,12 @@ export function boxSideSchema<T>({
     top: itemSchema.defaultValue,
   }
 
-  function regenerate({ previousValue }: RegenOptions<BoxSide<T>>) {
+  function regenerate({ theme, previousValue }: RegenOptions<BoxSide<T>>) {
     return mapValues(previousValue, (value) => {
       if (value) {
         return (
-          itemSchema.regenerate?.({ previousValue: value }) ?? previousValue
+          itemSchema.regenerate?.({ theme, previousValue: value }) ??
+          previousValue
         )
       }
     }) as BoxSide<T>

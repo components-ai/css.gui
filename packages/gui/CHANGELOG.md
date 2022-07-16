@@ -1,5 +1,35 @@
 # @compai/css-gui
 
+## 0.0.170
+
+### Patch Changes
+
+- ff1d652e: Ensure that theme colors are generated
+
+## 0.0.169
+
+### Patch Changes
+
+- 122bd3ed: Enable selection for nested components
+
+## 0.0.168
+
+### Patch Changes
+
+- b6d1c2fe: Internal refactor of HTML renderers and editors
+
+## 0.0.167
+
+### Patch Changes
+
+- e2bd4fb8: Internal refactor for canvas prop instantiation
+
+## 0.0.166
+
+### Patch Changes
+
+- 084d6bb9: Add inline text editing to node tree
+
 ## 0.0.165
 
 ### Patch Changes

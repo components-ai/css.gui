@@ -12,6 +12,24 @@ export const isSamePath = (
   return path1.join('-') === path2.join('-')
 }
 
+export const removeTailFromPath = (path: ElementPath) => {
+  const newPath = [...path]
+  newPath.pop()
+  return newPath
+}
+
+export const cleanAttributesForCanvas = (
+  attributes: Record<string, string>
+) => {
+  const newAttributes = { ...attributes }
+
+  if (newAttributes.href) {
+    newAttributes.href = '#!'
+  }
+
+  return newAttributes
+}
+
 export function getChildAtPath(element: HtmlNode, path: ElementPath): HtmlNode {
   if (path.length === 0) {
     return element
