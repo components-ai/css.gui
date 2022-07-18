@@ -2,6 +2,7 @@ import { startCase } from 'lodash-es'
 import { useState } from 'react'
 import { htmlToEditorSchema } from '../../lib'
 import { HtmlNode } from './types'
+import * as parsers from '../../lib/parsers'
 
 const PRE_STYLES = {
   overflow: 'auto',
@@ -15,20 +16,25 @@ const PRE_STYLES = {
   m: 3,
 }
 
-const FORMATS: string[] = ['html', 'markdown']
+const FORMATS: string[] = ['html', 'md']
 
 const DISPLAY_NAMES: Record<string, string> = {
   html: 'HTML',
+  md: 'Markdown',
 }
 
 type ImportProps = {
-  value: HtmlNode
+  onChange(newValue: HtmlNode): void
 }
-export const Import = ({ value }: ImportProps) => {
+export const Import = ({ onChange }: ImportProps) => {
   const [src, setSrc] = useState<string>('')
   const [format, setFormat] = useState<string>('html')
 
-  const handleImport = () => {}
+  const handleImport = () => {
+    // @ts-ignore
+    const newValue = parsers[format](src)
+    onChange(newValue)
+  }
 
   return (
     <>
@@ -36,24 +42,6 @@ export const Import = ({ value }: ImportProps) => {
         sx={PRE_STYLES}
         value={src}
         onChange={(e) => setSrc(e.target.value)}
-        onPaste={(e) => {
-          e.preventDefault()
-
-          // todo — no html?
-          const htmlContent = e.clipboardData.getData('text/html')
-
-          // need to wrap as editor requires single parent node
-          const htmlString = `<div>${htmlContent.replace(
-            '<!DOCTYPE html>',
-            ''
-          )}</div>`
-
-          const data = htmlToEditorSchema(htmlString)
-
-          console.log(data)
-          // temporary — just show what's been pasted but don't store
-          e.target.value = htmlString
-        }}
       />
       <div sx={{ px: 3, pb: 4, display: 'flex', alignItems: 'center' }}>
         <select
