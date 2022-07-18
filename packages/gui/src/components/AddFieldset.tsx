@@ -1,5 +1,6 @@
 import { useCombobox } from 'downshift'
 import { useEffect, useId, useRef, useState } from 'react'
+import { elements } from '../data/elements'
 import { pseudoClasses } from '../data/pseudo-classes'
 import { pseudoElements } from '../data/pseudo-elements'
 import { Styles } from '../types/css'
@@ -19,7 +20,7 @@ export const AddFieldsetControl = ({
   label = 'Add pseudo element or class',
 }: Props) => {
   const { setField } = useEditor()
-  const allItems = [...pseudoClasses, ...pseudoElements]
+  const allItems = [...pseudoClasses, ...pseudoElements, ...elements]
 
   const handleFilterItems = (input: string) => {
     const styleItems = Object.keys(styles)
@@ -40,13 +41,15 @@ export const AddFieldsetControl = ({
   }
 
   return (
-    <div sx={{
-      borderRadius: '6px',
-      borderWidth: '1px',
-      borderStyle: 'solid',
-      borderColor: 'border',
-      p: 3,
-    }}>
+    <div
+      sx={{
+        borderRadius: '6px',
+        borderWidth: '1px',
+        borderStyle: 'solid',
+        borderColor: 'border',
+        p: 3,
+      }}
+    >
       <Label>{label}</Label>
       <Combobox
         items={allItems}
