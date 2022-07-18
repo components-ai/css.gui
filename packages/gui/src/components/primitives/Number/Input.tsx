@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { NumberInputProps } from './types'
-import { useDrag } from 'react-use-gesture'
+import { useDrag } from '@use-gesture/react'
 import { roundToStep } from '../../../lib/math'
 
 interface DraggableLabelProps {
@@ -42,7 +42,7 @@ export const DraggableInput = ({
   }, [value])
 
   const bind = useDrag(
-    ({ dragging, first, last, tap, movement: [dx] }) => {
+    ({ dragging = false, first, last, tap, movement: [dx] }) => {
       setDragging(dragging)
 
       const parsedValue = typeof value === 'string' ? parseFloat(value) : value
@@ -57,8 +57,8 @@ export const DraggableInput = ({
       if (dragging && (max || max === 0)) newValue = Math.min(newValue, max)
 
       updateValue(newValue)
-    },
-    { pointerEvents: true }
+    }
+    // { pointerEvents: true }
   )
 
   return (
