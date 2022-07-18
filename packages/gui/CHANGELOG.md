@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.174
+
+### Patch Changes
+
+- 92807f4a: Add support for nested elements
+
 ## 0.0.173
 
 ### Patch Changes
