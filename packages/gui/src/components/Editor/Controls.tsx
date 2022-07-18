@@ -408,21 +408,13 @@ export function parseStyles(styles: Record<string, any>) {
   return mapValues(styles, (value, property) => {
     const schema = properties[property]
     if (!schema) {
-      // throw new Error(`Parsing unknown property: ${property}`)
-      return
-    }
-
-    console.log('schema', schema)
-    console.log('tokenized', tokenize(value))
-
-    if (!schema.parse) {
-      return tokenize(value)
+      throw new Error(`Parsing unknown property: ${property}`)
     }
 
     const [parsed, rest] = schema.parse!(tokenize(value))
-    // if (isNil(parsed) || rest.length > 0) {
-    //   throw new Error(`Error parsing given value ${value} into ${property}`)
-    // }
+    if (isNil(parsed) || rest.length > 0) {
+      throw new Error(`Error parsing given value ${value} into ${property}`)
+    }
     return parsed
   })
 }
