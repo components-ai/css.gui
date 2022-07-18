@@ -37,8 +37,7 @@ import { SchemaInput } from '../inputs/SchemaInput'
 import { EditorDropdown } from '../ui/dropdowns/EditorDropdown'
 import { FieldsetDropdown } from '../ui/dropdowns/FieldsetDropdown'
 import { tokenize } from '../../lib/parse'
-import { pseudoClasses } from '../../data/pseudo-classes'
-import { pseudoElements } from '../../data/pseudo-elements'
+import { addPseudoSyntax } from '../../lib/pseudos'
 
 export const getPropertyFromField = (field: KeyArg) => {
   if (Array.isArray(field)) {
@@ -242,6 +241,7 @@ export const EditorControls = ({
   ) : (
     <ControlSet properties={sortProperties(properties)} />
   )
+
   const fieldsetControls = children ? null : (
     <ControlSet properties={sortProperties(fieldsets)} />
   )
@@ -319,11 +319,7 @@ const FieldsetControl = ({ field, property }: FieldsetControlProps) => {
   const styles = getField(field || property)
   const properties = Object.keys(styles)
 
-  const propertyLabel = pseudoClasses.includes(property as any)
-    ? `:${property}`
-    : pseudoElements.includes(property as any)
-    ? `::${property}`
-    : property
+  const propertyLabel = addPseudoSyntax(property)
 
   return (
     <section

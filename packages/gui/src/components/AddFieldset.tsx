@@ -1,5 +1,4 @@
-import { useCombobox } from 'downshift'
-import { useEffect, useId, useRef, useState } from 'react'
+import fuzzysort from 'fuzzysort'
 import { elements } from '../data/elements'
 import { pseudoClasses } from '../data/pseudo-classes'
 import { pseudoElements } from '../data/pseudo-elements'
@@ -23,16 +22,15 @@ export const AddFieldsetControl = ({
   const allItems = [...pseudoClasses, ...pseudoElements, ...elements]
 
   const handleFilterItems = (input: string) => {
-    const styleItems = Object.keys(styles)
-    const filteredItems = allItems
-      .filter((item) => {
-        if (item.toLowerCase().startsWith(input.toLowerCase() || '')) {
-          return !styleItems.includes(item)
-        }
-      })
-      .sort()
+    if (input === '') {
+      return allItems
+    }
 
-    return filteredItems
+    const styleItems = Object.keys(styles)
+    return fuzzysort
+      .go(input.replace(/-/g, ''), allItems)
+      .map((res) => res.target)
+      .filter((item) => !styleItems.includes(item))
   }
 
   const handleAddFieldset = (propertyName: string) => {
