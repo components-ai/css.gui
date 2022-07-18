@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.175
+
+### Patch Changes
+
+- cc3bed1f: Improve fieldset fuzzy search
+
 ## 0.0.174
 
 ### Patch Changes
