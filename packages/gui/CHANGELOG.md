@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.173
+
+### Patch Changes
+
+- 9b88bf0d: Implement HTML and Markdown imports for DOM structure
+
 ## 0.0.172
 
 ### Patch Changes
