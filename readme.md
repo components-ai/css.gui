@@ -2,11 +2,12 @@
 
 **_Visual development environment for CSS._**
 
-![image](https://user-images.githubusercontent.com/1748143/173137122-53686102-fda8-4da8-b75f-dd78187b8666.png)
+![CSS GUI screenshot](https://user-images.githubusercontent.com/1748143/173137122-53686102-fda8-4da8-b75f-dd78187b8666.png)
 
 CSS GUI is a visual toolkit for editing element styles on the web.
 It's theme-aware, performant, and can be composed into any React app.
 
+- [**Create and save designs &rarr;**](https://comp.new)
 - [**Read the documentation &rarr;**](https://components.ai/open-source/css-gui)
 - [**Play with a demo on CodeSandbox &rarr;**](https://codesandbox.io/s/cssgui-example-w1c9h5)
 - [**Watch an introduction on YouTube &rarr;**](https://www.youtube.com/watch?v=b6J2TGyDYc0)
@@ -16,7 +17,7 @@ It's theme-aware, performant, and can be composed into any React app.
 - Controls for 280 CSS properties
 - Theme aware so you can quickly select from your brand
 - Responsive value arrays
-- Support for all CSS units 
+- Support for all CSS units
 - Variable font support
 - +1000 Google fonts
 - Support for styling any element, pseudo-element or pseudo-class
