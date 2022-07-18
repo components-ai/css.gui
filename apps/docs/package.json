@@ -11,14 +11,14 @@
   },
   "dependencies": {
     "@compai/css-gui": "*",
-    "@compai/logo": "^0.1.0",
-    "@emotion/react": "^11.9.0",
+    "@compai/logo": "^0.1.2",
+    "@emotion/react": "^11.9.3",
     "@mdx-js/loader": "^2.1.2",
-    "@next/mdx": "^12.2.0",
+    "@next/mdx": "^12.2.2",
     "@segment/snippet": "^4.15.3",
-    "next": "12.1.5",
-    "react": "18.1.0",
-    "react-dom": "18.0.0",
+    "next": "12.2.2",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
     "rehype-autolink-headings": "^6.1.1",
     "rehype-slug": "^5.0.1",
     "remark-gfm": "^3.0.1",
@@ -26,11 +26,11 @@
     "theme-ui": "^0.14.6"
   },
   "devDependencies": {
-    "@types/node": "^17.0.31",
-    "@types/react": "18.0.10",
+    "@types/node": "^18.0.6",
+    "@types/react": "18.0.15",
     "config": "*",
-    "eslint": "8.18.0",
+    "eslint": "8.20.0",
     "tsconfig": "*",
-    "typescript": "^4.6.4"
+    "typescript": "^4.7.4"
   }
 }
