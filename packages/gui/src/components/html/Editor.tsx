@@ -8,7 +8,6 @@ import { Export } from './Export'
 import { useTheme } from '../providers/ThemeContext'
 import { NodeEditor } from './Editors/NodeEditor'
 import { TreeNode } from './TreeNode'
-import { htmlToEditorSchema } from '../../lib'
 import { Import } from './Import'
 
 interface HtmlEditorProps {
