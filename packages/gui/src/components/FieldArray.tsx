@@ -31,7 +31,7 @@ export default function FieldArray<T>(props: FieldArrayProps<T>) {
     <div sx={{ display: 'grid', gap: 2 }}>
       {value.map((item, i) => {
         return (
-          <>
+          <div>
             {isDragging && <DropZone />}
             <div
               key={i}
@@ -73,7 +73,7 @@ export default function FieldArray<T>(props: FieldArrayProps<T>) {
                 }}
               />
             </div>
-          </>
+          </div>
         )
       })}
       <button
