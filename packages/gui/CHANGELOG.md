@@ -1,5 +1,29 @@
 # @compai/css-gui
 
+## 0.0.179
+
+### Patch Changes
+
+- 5820a1bb: Fix node type select
+
+## 0.0.178
+
+### Patch Changes
+
+- bb72987d: Ignore style attribute on import for now
+
+## 0.0.177
+
+### Patch Changes
+
+- 474882f6: Improve nested component selection
+
+## 0.0.176
+
+### Patch Changes
+
+- ebde90d6: Improve HTML node imports
+
 ## 0.0.175
 
 ### Patch Changes
