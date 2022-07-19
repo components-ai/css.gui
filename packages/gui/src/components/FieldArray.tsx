@@ -18,6 +18,7 @@ interface FieldArrayProps<T> extends EditorPropsWithLabel<T[]> {
 export default function FieldArray<T>(props: FieldArrayProps<T>) {
   const { label = '', value = [], onChange, itemSchema } = props
   const [dragIndex, setDragIndex] = useState(-1)
+  const isDragging = dragIndex >= 0
 
   const handleReorder = (i1: number, i2: number) => {
     if (typeof value === 'string') {
@@ -31,14 +32,13 @@ export default function FieldArray<T>(props: FieldArrayProps<T>) {
       {value.map((item, i) => {
         return (
           <>
-            <DropZone />
+            {isDragging && <DropZone />}
             <div
               key={i}
               sx={{
                 display: 'grid',
                 gridTemplateColumns: '1fr max-content',
                 gap: 1,
-                // opacity: i === dragIndex ? 0.75 : 1,
                 backgroundColor:
                   i === dragIndex ? 'backgroundOffset' : 'transparent',
               }}
@@ -53,6 +53,9 @@ export default function FieldArray<T>(props: FieldArrayProps<T>) {
                 onRemove={() => onChange(remove(value, i))}
                 onDrag={() => {
                   setDragIndex(i)
+                }}
+                onDragEnd={() => {
+                  setDragIndex(-1)
                 }}
                 reorder={{
                   onMoveUp:
@@ -102,19 +105,28 @@ interface DropZoneProps {}
 function DropZone() {
   const [hovered, setHovered] = useState(false)
   return (
-    <div sx={{ position: 'relative' }}>
+    <div sx={{ position: 'relative', height: '0px' }}>
       <div
         sx={{
           position: 'absolute',
-          height: '1rem',
+          height: '2rem',
           width: '100%',
-          ':hover': {
-            backgroundColor: 'red',
+          top: '-1rem',
+          pointerEvents: 'auto',
+          display: 'flex',
+          alignItems: 'center',
+          '::before': {
+            position: 'absolute',
+            content: '""',
+            display: 'block',
+            width: '100%',
+            height: '2px',
+            backgroundColor: hovered ? 'primary' : 'transparent',
           },
         }}
-        onMouseOver={() => setHovered(true)}
-        onMouseOut={() => setHovered(false)}
-      />
+        onDragOver={() => setHovered(true)}
+        onDragLeave={() => setHovered(false)}
+      ></div>
     </div>
   )
 }

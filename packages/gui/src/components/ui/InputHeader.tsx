@@ -15,6 +15,7 @@ interface Props extends Omit<EditorPropsWithLabel<any>, 'keywords'> {
   children?: ReactNode
   regenerate?(options: any): any
   onDrag?(): void
+  onDragEnd?(): void
   reorder?: {
     onMoveUp?(): void
     onMoveDown?(): void
@@ -28,6 +29,7 @@ export function InputHeader({
   onChange,
   onRemove,
   onDrag,
+  onDragEnd,
   regenerate,
   reorder,
 }: Props) {
@@ -44,6 +46,7 @@ export function InputHeader({
         <div
           draggable
           onDrag={onDrag}
+          onDragEnd={onDragEnd}
           sx={{ mt: 1, color: 'muted', cursor: 'grab' }}
         >
           <AlignJustify size={16} />

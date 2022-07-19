@@ -11,6 +11,7 @@ interface Props<T> {
   onChange(value: T): void
   onRemove?(): void
   onDrag?(): void
+  onDragEnd?(): void
   reorder?: {
     onMoveUp?(): void
     onMoveDown?(): void
