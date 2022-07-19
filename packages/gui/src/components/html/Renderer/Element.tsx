@@ -11,7 +11,12 @@ export function ElementRenderer({
   path,
   ...canvasElementProps
 }: CanvasElementProps) {
-  const props = useCanvasProps({ value, path, ...canvasElementProps })
+  const { selectComponent } = useComponent()
+  const { onClick, ...props } = useCanvasProps({
+    value,
+    path,
+    ...canvasElementProps,
+  })
 
   if (value.type === 'slot') {
     return <SlotRenderer value={value} path={path} />
@@ -21,12 +26,20 @@ export function ElementRenderer({
 
   const Tag: any = value.tagName || 'div'
 
+  const handleClick = (e: MouseEvent) => {
+    if (selectComponent) {
+      return selectComponent(e)
+    }
+
+    onClick(e)
+  }
+
   if (isVoidElement(Tag)) {
-    return <Tag {...props} />
+    return <Tag {...props} onClick={handleClick} />
   }
 
   return (
-    <Tag {...props}>
+    <Tag {...props} onClick={handleClick}>
       <ChildrenRenderer value={value.children} path={path} />
     </Tag>
   )
@@ -56,7 +69,6 @@ interface ComponentRendererProps {
   path: ElementPath
 }
 export function ComponentRenderer({ value, path }: ComponentRendererProps) {
-  const { onClick } = useCanvasProps({ value, path })
   const fullValue = {
     ...value.value,
     attributes: mergeComponentAttributes(value),
@@ -64,7 +76,7 @@ export function ComponentRenderer({ value, path }: ComponentRendererProps) {
 
   return (
     <ComponentProvider value={value} path={path}>
-      <ElementRenderer value={fullValue} path={path} onClick={onClick} />
+      <ElementRenderer value={fullValue} path={path} />
     </ComponentProvider>
   )
 }

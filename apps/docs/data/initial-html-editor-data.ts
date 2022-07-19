@@ -1599,4 +1599,23 @@ export const initialComponents: any = [
       children: [{ type: 'slot', name: 'children', value: 'CSS.GUI' }],
     },
   },
+  {
+    type: 'component',
+    id: 'ddeeff',
+    tagName: 'Footer',
+    value: {
+      tagName: 'footer',
+      attributes: {},
+      style: {},
+      children: [
+        {
+          type: 'element',
+          tagName: 'h1',
+          attributes: {},
+          style: {},
+          children: [{ type: 'text', value: 'A footer!!!!' }],
+        },
+      ],
+    },
+  },
 ]
