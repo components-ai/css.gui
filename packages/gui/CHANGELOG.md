@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.178
+
+### Patch Changes
+
+- bb72987d: Ignore style attribute on import for now
+
 ## 0.0.177
 
 ### Patch Changes
