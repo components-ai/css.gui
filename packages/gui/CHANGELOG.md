@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.179
+
+### Patch Changes
+
+- 5820a1bb: Fix node type select
+
 ## 0.0.178
 
 ### Patch Changes
