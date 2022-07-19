@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.177
+
+### Patch Changes
+
+- 474882f6: Improve nested component selection
+
 ## 0.0.176
 
 ### Patch Changes
