@@ -1,5 +1,11 @@
 import { ReactNode } from 'react'
-import { ChevronDown, ChevronUp, RefreshCw, X } from 'react-feather'
+import {
+  AlignJustify,
+  ChevronDown,
+  ChevronUp,
+  RefreshCw,
+  X,
+} from 'react-feather'
 import { EditorPropsWithLabel } from '../../types/editor'
 import { Label } from '../primitives'
 import { useTheme } from '../providers/ThemeContext'
@@ -8,6 +14,7 @@ import IconButton from './IconButton'
 interface Props extends Omit<EditorPropsWithLabel<any>, 'keywords'> {
   children?: ReactNode
   regenerate?(options: any): any
+  onDrag?(): void
   reorder?: {
     onMoveUp?(): void
     onMoveDown?(): void
@@ -20,6 +27,7 @@ export function InputHeader({
   value,
   onChange,
   onRemove,
+  onDrag,
   regenerate,
   reorder,
 }: Props) {
@@ -32,6 +40,15 @@ export function InputHeader({
         alignItems: 'center',
       }}
     >
+      {onDrag && (
+        <div
+          draggable
+          onDrag={onDrag}
+          sx={{ mt: 1, color: 'muted', cursor: 'grab' }}
+        >
+          <AlignJustify size={16} />
+        </div>
+      )}
       {label && <Label>{label}</Label>}
       {children}
       <div sx={{ ml: 'auto', display: 'flex', gap: 1, alignItems: 'center' }}>
@@ -48,28 +65,28 @@ export function InputHeader({
           </IconButton>
         )}
         {onRemove && <DeleteButton onRemove={onRemove} />}
-      </div>
-      {reorder && (
-        <div
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifySelf: 'right',
-            alignSelf: 'center',
-            gap: '-0.5rem',
-          }}
-        >
-          <IconButton disabled={!reorder.onMoveUp} onClick={reorder.onMoveUp}>
-            <ChevronUp size={16} />
-          </IconButton>
-          <IconButton
-            disabled={!reorder.onMoveDown}
-            onClick={reorder.onMoveDown}
+        {reorder && (
+          <div
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifySelf: 'right',
+              alignSelf: 'center',
+              gap: '-0.5rem',
+            }}
           >
-            <ChevronDown size={16} />
-          </IconButton>
-        </div>
-      )}
+            <IconButton disabled={!reorder.onMoveUp} onClick={reorder.onMoveUp}>
+              <ChevronUp size={16} />
+            </IconButton>
+            <IconButton
+              disabled={!reorder.onMoveDown}
+              onClick={reorder.onMoveDown}
+            >
+              <ChevronDown size={16} />
+            </IconButton>
+          </div>
+        )}
+      </div>
     </div>
   )
 }
