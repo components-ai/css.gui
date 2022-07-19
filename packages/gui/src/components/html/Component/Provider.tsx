@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useContext } from 'react'
+import { useHtmlEditor } from '../Provider'
 import { ComponentData, ElementPath } from '../types'
 
 const DEFAULT_COMPONENT_VALUE = {}
@@ -6,6 +7,7 @@ const DEFAULT_COMPONENT_VALUE = {}
 type ComponentProviderType = {
   value?: ComponentData
   path?: ElementPath
+  selectComponent?(e: MouseEvent): void
 }
 
 export function useComponent() {
@@ -28,8 +30,13 @@ export function ComponentProvider({
   path,
   children,
 }: ComponentProviderProps) {
+  const { setSelected } = useHtmlEditor()
+  const selectComponent = (e: MouseEvent) => {
+    setSelected(path)
+    e.stopPropagation()
+  }
   return (
-    <ComponentContext.Provider value={{ value, path }}>
+    <ComponentContext.Provider value={{ value, path, selectComponent }}>
       {children}
     </ComponentContext.Provider>
   )

@@ -36,6 +36,8 @@ export function NodeEditor({
   let nodeType = value.type === 'text' ? 'text' : 'tag'
   if (value.type === 'component') {
     nodeType = 'component'
+  } else if (value.type === 'slot') {
+    nodeType = 'slot'
   }
 
   const baseNodeTypes = ['text', 'tag']
