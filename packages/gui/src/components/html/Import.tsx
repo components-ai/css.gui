@@ -1,8 +1,8 @@
 import { startCase } from 'lodash-es'
-import { useState } from 'react'
-import { htmlToEditorSchema } from '../../lib'
+import { ChangeEvent, useState } from 'react'
 import { HtmlNode } from './types'
 import * as parsers from '../../lib/parsers'
+import { htmlToMd, mdToHtml } from '../../lib'
 
 const PRE_STYLES = {
   overflow: 'auto',
@@ -30,6 +30,20 @@ export const Import = ({ onChange }: ImportProps) => {
   const [src, setSrc] = useState<string>('')
   const [format, setFormat] = useState<string>('html')
 
+  const handleSetFormat = (e: ChangeEvent<HTMLSelectElement>) => {
+    const newFormat = e.target.value
+
+    let newSrc = src
+    if (newFormat === 'md') {
+      newSrc = htmlToMd(src)
+    } else if (newFormat === 'html') {
+      newSrc = mdToHtml(src)
+    }
+
+    setFormat(newFormat)
+    setSrc(newSrc)
+  }
+
   const handleImport = () => {
     // @ts-ignore
     const newValue = parsers[format](src)
@@ -46,7 +60,7 @@ export const Import = ({ onChange }: ImportProps) => {
       <div sx={{ px: 3, pb: 4, display: 'flex', alignItems: 'center' }}>
         <select
           value={format}
-          onChange={(e) => setFormat(e.target.value)}
+          onChange={handleSetFormat}
           sx={{
             mr: 2,
             px: 1,
