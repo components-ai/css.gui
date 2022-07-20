@@ -21,13 +21,17 @@ interface TreeNodeProps extends EditorProps {
 }
 
 export function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
-  const { selected } = useHtmlEditor()
+  const { selected, isEditing, setEditing } = useHtmlEditor()
   const [open, setOpen] = useState(true)
-  const [editing, setEditing] = useState(false)
   const isSelected = isSamePath(path, selected)
+  const isEditingNode = isSelected && isEditing
 
-  if (editing && !isSelected) {
-    setEditing(false)
+  function handleSelect() {
+    // If we are selecting a different node than the currently selected node, move out of editing mode
+    if (!isSelected) {
+      setEditing(false)
+    }
+    onSelect(path)
   }
 
   if (value.type === 'text') {
@@ -44,9 +48,11 @@ export function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
             fontSize: 0,
             width: '100%',
           }}
-          onClick={() => onSelect(path)}
+          onClick={() => {
+            handleSelect()
+          }}
         >
-          {editing ? (
+          {isEditingNode ? (
             <textarea
               sx={{
                 display: 'block',
@@ -99,7 +105,7 @@ export function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
             textAlign: 'start',
             fontSize: 0,
           }}
-          onClick={() => onSelect(path)}
+          onClick={() => handleSelect()}
         >
           {value.name}: "{value.value}"
         </button>
@@ -107,7 +113,7 @@ export function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
     )
   }
 
-  const tagEditor = editing ? (
+  const tagEditor = isEditingNode ? (
     <Combobox
       key={selected?.join('-')}
       onFilterItems={(filterValue) => {
@@ -168,7 +174,9 @@ export function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
         textAlign: 'start',
         display: 'inline-flex',
       }}
-      onClick={() => onSelect(path)}
+      onClick={() => {
+        handleSelect()
+      }}
     >
       &lt;{tagEditor}
       {!open || isSelfClosing(value) ? ' /' : null}&gt;
