@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.180
+
+### Patch Changes
+
+- d7124e11: Add draggable reordering to field array inputs
+
 ## 0.0.179
 
 ### Patch Changes
