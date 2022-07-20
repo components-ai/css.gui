@@ -226,6 +226,7 @@ export function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
                   onClick={(childType) => {
                     handleAddChild(i, childType)
                     onSelect([...path, i])
+                    setEditing(true)
                   }}
                 />
                 <div sx={{ py: '0.0625rem' }}>
@@ -246,8 +247,10 @@ export function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
           })}
           <AddChildButton
             onClick={(childType) => {
-              handleAddChild(value.children?.length ?? 0, childType)
-              onSelect(null)
+              const index = value.children?.length ?? 0
+              handleAddChild(index, childType)
+              onSelect([...path, index])
+              setEditing(true)
             }}
           />
         </div>
