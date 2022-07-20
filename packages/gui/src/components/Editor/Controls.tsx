@@ -52,7 +52,7 @@ interface ControlProps extends InputProps {
   showRemove?: boolean
 }
 const Control = ({ field, showRemove = false, ...props }: ControlProps) => {
-  const { getField, setField, removeField } = useEditor()
+  const { getField, getParentField, setField, removeField } = useEditor()
   const { removeDynamicProperty } = useDynamicControls()
   const fieldset = useFieldset()
   const property = getPropertyFromField(field)
@@ -99,6 +99,7 @@ const Control = ({ field, showRemove = false, ...props }: ControlProps) => {
         setField(fullField, newValue)
       }}
       onRemove={showRemove ? handleRemoveProperty : undefined}
+      ruleset={getParentField(fullField)}
     />
   )
 }
@@ -196,8 +197,11 @@ export const Editor = ({
   function regenerateAll(): any {
     return mapValues(allStyles, (value, property) => {
       return (
-        properties[property].regenerate?.({ theme, previousValue: value }) ??
-        value
+        properties[property].regenerate?.({
+          theme,
+          previousValue: value,
+          styles: allStyles,
+        }) ?? value
       )
     })
   }

@@ -1,7 +1,5 @@
-import { get } from 'theme-ui'
 import { themeGet } from '../../lib'
 import { randomColor, randomHexColor } from '../../lib/color'
-import { stringifyUnit } from '../../lib/stringify'
 import { Color } from '../../types/css'
 import { ColorInput } from '../inputs/ColorInput'
 import PalettePopover, {
@@ -22,8 +20,10 @@ function rawColor({
     inlineInput: ColorInput,
     stringify: (value) => value,
     defaultValue,
-    regenerate: ({ theme }) => {
-      const path = randomColor(theme) || randomHexColor()
+    regenerate: (...args) => {
+      const path = randomColor(...args) || randomHexColor()
+      const theme = args?.[0]?.theme
+
       return themeGet({
         theme,
         path,
@@ -55,8 +55,8 @@ const themeColor: DataTypeSchema<ThemeColor> = {
     })
   },
   defaultValue: { type: 'theme', path: 'primary' },
-  regenerate: ({ theme }) => {
-    const path = randomColor(theme) ?? ''
+  regenerate: (...args) => {
+    const path = randomColor(...args) ?? ''
     const color: ThemeColor = { type: 'theme', path }
     return color
   },

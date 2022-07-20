@@ -1,7 +1,13 @@
 import { isBoolean, isNumber, isObject, isString, sample } from 'lodash-es'
-import { Theme } from '../types/theme'
+import { ThemeColor } from '../components/primitives/ColorPicker/PalettePicker'
+import { RegenOptions } from '../components/schemas/types'
+import { Color } from '../types/css'
 
-export function randomColor(theme?: Theme) {
+export function randomColor({
+  theme,
+  ruleset,
+}: RegenOptions<Color | ThemeColor>) {
+  console.log('!!!!', ruleset)
   if (theme && theme.colors) {
     const path = sample(Object.keys(flatten(theme.colors)))
 

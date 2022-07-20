@@ -6,6 +6,12 @@ export function joinPath(path1: KeyArg, path2: KeyArg): KeyPath {
   return [...toPath(path1), ...toPath(path2)]
 }
 
+export function parentPath(path: KeyPath): KeyPath {
+  const parentPath = [...path]
+  parentPath.pop()
+  return parentPath
+}
+
 // lib/util's set and get functions don't handle the case
 // of setting a nested path when parent paths don't exist,
 // so we make our own functions for now
