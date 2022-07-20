@@ -13,6 +13,12 @@ export function remove<T>(array: T[], index: number) {
   return copy
 }
 
+export function insert<T>(array: T[], index: number, newValue: T) {
+  const copy = [...array]
+  copy.splice(index, 0, newValue)
+  return copy
+}
+
 export function replace<T>(array: T[], index: number, newValue: T) {
   const copy = [...array]
   copy.splice(index, 1, newValue)

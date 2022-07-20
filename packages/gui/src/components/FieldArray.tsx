@@ -1,5 +1,6 @@
+import produce from 'immer'
 import { useState } from 'react'
-import { flip, replace, remove } from '../lib/array'
+import { flip, replace, remove, insert } from '../lib/array'
 import { EditorPropsWithLabel } from '../types/editor'
 import { SchemaInput } from './inputs/SchemaInput'
 import { DataTypeSchema } from './schemas/types'
@@ -27,12 +28,27 @@ export default function FieldArray<T>(props: FieldArrayProps<T>) {
     onChange(flip(value, i1, i2))
   }
 
+  const handleDragDrop = (i1: number, i2: number) => {
+    const item = value[i1]
+    const removed = remove(value, i1)
+    if (i2 > i1) i2--
+    const final = insert(removed, i2, item)
+    onChange(final)
+  }
+
   return (
     <div sx={{ display: 'grid', gap: 2 }}>
       {value.map((item, i) => {
         return (
           <div>
-            {isDragging && <DropZone />}
+            {isDragging && (
+              <DropZone
+                onDrop={() => {
+                  handleDragDrop(dragIndex, i)
+                  setDragIndex(-1)
+                }}
+              />
+            )}
             <div
               key={i}
               sx={{
@@ -76,6 +92,14 @@ export default function FieldArray<T>(props: FieldArrayProps<T>) {
           </div>
         )
       })}
+      {isDragging && (
+        <DropZone
+          onDrop={() => {
+            handleDragDrop(dragIndex, value.length)
+            setDragIndex(-1)
+          }}
+        />
+      )}
       <button
         onClick={() => {
           onChange(value.concat([itemSchema.defaultValue]))
@@ -100,9 +124,11 @@ export default function FieldArray<T>(props: FieldArrayProps<T>) {
   )
 }
 
-interface DropZoneProps {}
+interface DropZoneProps {
+  onDrop(): void
+}
 
-function DropZone() {
+function DropZone({ onDrop }: DropZoneProps) {
   const [hovered, setHovered] = useState(false)
   return (
     <div sx={{ position: 'relative', height: '0px' }}>
@@ -124,8 +150,12 @@ function DropZone() {
             backgroundColor: hovered ? 'primary' : 'transparent',
           },
         }}
-        onDragOver={() => setHovered(true)}
+        onDragEnter={() => setHovered(true)}
         onDragLeave={() => setHovered(false)}
+        onDragOver={(e) => {
+          e.preventDefault()
+        }}
+        onDrop={onDrop}
       ></div>
     </div>
   )
