@@ -1,6 +1,6 @@
 import { HtmlNode, ElementPath } from './types'
 import * as Collapsible from '@radix-ui/react-collapsible'
-import { Fragment, useState } from 'react'
+import { useState } from 'react'
 import { useHtmlEditor } from './Provider'
 import { isVoidElement } from '../../lib/elements'
 import { addChildAtPath, isSamePath, replaceAt } from './util'
@@ -311,7 +311,7 @@ function AddChildButton({ onClick }: { onClick(type: string): void }) {
       <DropdownMenu.Root open={open} onOpenChange={setOpen}>
         <DropdownMenu.Trigger
           sx={{
-            '--height': '1rem',
+            '--height': '0.5rem',
             display: 'flex',
             alignItems: 'center',
             position: 'absolute',
