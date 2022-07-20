@@ -37,7 +37,7 @@ export default function FieldArray<T>(props: FieldArrayProps<T>) {
   }
 
   return (
-    <div sx={{ display: 'grid', gap: 2 }}>
+    <div sx={{ display: 'grid' }}>
       {value.map((item, i) => {
         return (
           <div>
@@ -55,6 +55,7 @@ export default function FieldArray<T>(props: FieldArrayProps<T>) {
                 display: 'grid',
                 gridTemplateColumns: '1fr max-content',
                 gap: 1,
+                my: 1,
                 backgroundColor:
                   i === dragIndex ? 'backgroundOffset' : 'transparent',
               }}
