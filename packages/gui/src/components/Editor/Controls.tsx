@@ -301,7 +301,7 @@ const ControlSet = ({ field, properties }: ControlSetProps) => {
         const fullField = field ? joinPath(field, property) : property
 
         return isFieldsetGroup(property) ? (
-          <FieldsetControl key={property} property={property} />
+          <FieldsetControl key={property} field={property} />
         ) : (
           <Control key={property} field={fullField} showRemove />
         )
@@ -311,15 +311,13 @@ const ControlSet = ({ field, properties }: ControlSetProps) => {
 }
 
 type FieldsetControlProps = {
-  field?: KeyArg
-  property: string
+  field: string
 }
-const FieldsetControl = ({ field, property }: FieldsetControlProps) => {
+const FieldsetControl = ({ field }: FieldsetControlProps) => {
   const { getField, removeField } = useEditor()
-  const styles = getField(field || property)
+  const styles = getField(field)
   const properties = Object.keys(styles)
-
-  const propertyLabel = addPseudoSyntax(property)
+  const label = addPseudoSyntax(field)
 
   return (
     <section
@@ -343,19 +341,19 @@ const FieldsetControl = ({ field, property }: FieldsetControlProps) => {
             lineHeight: 1,
           }}
         >
-          {removeInternalCSSClassSyntax(propertyLabel)}
+          {removeInternalCSSClassSyntax(label)}
         </h3>
-        <FieldsetDropdown onRemove={() => removeField(field || property)} />
+        <FieldsetDropdown onRemove={() => removeField(field)} />
       </div>
-      <GenericFieldset property={property}>
+      <GenericFieldset field={field}>
         <div sx={{ pb: 3 }}>
           <AddPropertyControl
-            field={field || property}
+            field={field}
             styles={styles}
-            label={`Add property to ${propertyLabel}`}
+            label={`Add property to ${label}`}
           />
         </div>
-        <ControlSet field={field} properties={properties} />
+        <ControlSet properties={properties} />
       </GenericFieldset>
     </section>
   )

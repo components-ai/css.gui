@@ -2,7 +2,7 @@ import * as React from 'react'
 import { elements } from '../../data/elements'
 import { pseudoClasses } from '../../data/pseudo-classes'
 import { pseudoElements } from '../../data/pseudo-elements'
-import { getFieldsetPropsFromProperty } from './util'
+import { getFieldsetPropsFromName } from './util'
 
 type PseudoElementTypes = typeof pseudoElements[number]
 type PseudoClassTypes = typeof pseudoClasses[number]
@@ -42,14 +42,9 @@ export const Fieldset = ({ type, name, children }: FieldsetProps) => {
 }
 
 type GenericFieldsetProps = {
-  property: string
+  field: string
   children?: React.ReactNode
 }
-export const GenericFieldset = ({
-  property,
-  children,
-}: GenericFieldsetProps) => {
-  return (
-    <Fieldset {...getFieldsetPropsFromProperty(property)}>{children}</Fieldset>
-  )
+export const GenericFieldset = ({ field, children }: GenericFieldsetProps) => {
+  return <Fieldset {...getFieldsetPropsFromName(field)}>{children}</Fieldset>
 }
