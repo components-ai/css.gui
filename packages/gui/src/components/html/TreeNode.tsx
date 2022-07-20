@@ -210,28 +210,30 @@ export function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
       />
       <span sx={{ lineHeight: 1, fontFamily: 'monospace' }}>{tagButton}</span>
       <Collapsible.Content>
-        <div sx={{ ml: 4 }}>
+        <div sx={{ ml: 4, py: '0.0625rem' }}>
           {value.children?.map((child, i) => {
             return (
-              <Fragment key={i}>
+              <div key={i}>
                 <AddChildButton
                   onClick={(childType) => {
                     handleAddChild(i, childType)
                     onSelect([...path, i])
                   }}
                 />
-                <TreeNode
-                  value={child}
-                  onSelect={onSelect}
-                  path={[...path, i]}
-                  onChange={(newChild) => {
-                    onChange({
-                      ...value,
-                      children: replaceAt(value.children ?? [], i, newChild),
-                    })
-                  }}
-                />
-              </Fragment>
+                <div sx={{ py: '0.0625rem' }}>
+                  <TreeNode
+                    value={child}
+                    onSelect={onSelect}
+                    path={[...path, i]}
+                    onChange={(newChild) => {
+                      onChange({
+                        ...value,
+                        children: replaceAt(value.children ?? [], i, newChild),
+                      })
+                    }}
+                  />
+                </div>
+              </div>
             )
           })}
           <AddChildButton
@@ -303,9 +305,10 @@ const DEFAULT_TEXT: HtmlNode = {
 
 function AddChildButton({ onClick }: { onClick(type: string): void }) {
   const [hovered, setHovered] = useState(false)
+  const [open, setOpen] = useState(false)
   return (
     <div sx={{ position: 'relative' }}>
-      <DropdownMenu.Root>
+      <DropdownMenu.Root open={open} onOpenChange={setOpen}>
         <DropdownMenu.Trigger
           sx={{
             '--height': '1rem',
@@ -325,7 +328,7 @@ function AddChildButton({ onClick }: { onClick(type: string): void }) {
 
             '::before': {
               content: '""',
-              backgroundColor: hovered ? 'muted' : 'transparent',
+              backgroundColor: hovered || open ? 'muted' : 'transparent',
               display: 'block',
               height: '2px',
               width: '100%',
