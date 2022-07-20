@@ -33,6 +33,7 @@ export function InputHeader({
   regenerate,
   reorder,
   ruleset,
+  property,
 }: Props) {
   const theme = useTheme()
   return (
@@ -62,7 +63,9 @@ export function InputHeader({
             title="regenerate"
             sx={{ transition: 'opacity 150ms' }}
             onClick={() => {
-              onChange(regenerate({ theme, previousValue: value, ruleset }))
+              onChange(
+                regenerate({ theme, previousValue: value, ruleset, property })
+              )
             }}
           >
             <RefreshCw size={12} />

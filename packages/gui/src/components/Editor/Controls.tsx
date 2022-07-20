@@ -100,6 +100,7 @@ const Control = ({ field, showRemove = false, ...props }: ControlProps) => {
       }}
       onRemove={showRemove ? handleRemoveProperty : undefined}
       ruleset={getParentField(fullField)}
+      property={property}
     />
   )
 }
@@ -200,7 +201,8 @@ export const Editor = ({
         properties[property].regenerate?.({
           theme,
           previousValue: value,
-          styles: allStyles,
+          ruleset: allStyles,
+          property,
         }) ?? value
       )
     })

@@ -21,6 +21,7 @@ export interface Props {
    */
   onRegenerate?(theme?: Theme): Color
   ruleset: any
+  property: string
 }
 
 /**
@@ -34,6 +35,7 @@ export default function ColorPicker({
   onRemove,
   onRegenerate,
   ruleset,
+  property,
 }: Props) {
   return (
     <div>
@@ -71,8 +73,12 @@ export default function ColorPicker({
               } else {
                 // Otherwise, regenerate a random color based on theme
                 const path =
-                  randomColor({ theme, ruleset, previousValue: value }) ??
-                  randomHexColor()
+                  randomColor({
+                    theme,
+                    ruleset,
+                    previousValue: value,
+                    property,
+                  }) ?? randomHexColor()
                 const color = themeGet({
                   theme,
                   path,

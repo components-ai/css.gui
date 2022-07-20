@@ -6,8 +6,9 @@ import { Color } from '../types/css'
 export function randomColor({
   theme,
   ruleset,
+  property,
 }: RegenOptions<Color | ThemeColor>) {
-  console.log('!!!!', ruleset)
+  console.log('!!!!', ruleset, property)
   if (theme && theme.colors) {
     const path = sample(Object.keys(flatten(theme.colors)))
 
