@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.181
+
+### Patch Changes
+
+- 1a4562c9: Refactor fieldset passing
+
 ## 0.0.180
 
 ### Patch Changes
