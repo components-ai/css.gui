@@ -8,6 +8,8 @@ import { hasChildrenSlot } from '../../lib/codegen/util'
 import { Combobox } from '../primitives'
 import { HTML_TAGS } from './data'
 import { DEFAULT_ATTRIBUTES, DEFAULT_STYLES } from './default-styles'
+import { Icon } from '@radix-ui/react-select'
+import { Plus } from 'react-feather'
 
 interface EditorProps {
   value: HtmlNode
@@ -204,50 +206,41 @@ export function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
       <span sx={{ lineHeight: 1, fontFamily: 'monospace' }}>{tagButton}</span>
       <Collapsible.Content>
         <div sx={{ ml: 4 }}>
-          {value.children?.length ? (
-            value.children?.map((child, i) => {
-              return (
-                <Fragment key={i}>
-                  <AddChildButton
-                    onClick={() => {
-                      onChange(addChildAtPath(value, [i], DEFAULT_CHILD_NODE))
-                      onSelect([...path, i])
-                    }}
-                  />
-                  <TreeNode
-                    value={child}
-                    onSelect={onSelect}
-                    path={[...path, i]}
-                    onChange={(newChild) => {
-                      onChange({
-                        ...value,
-                        children: replaceAt(value.children ?? [], i, newChild),
-                      })
-                    }}
-                  />
-                  <AddChildButton
-                    onClick={() => {
-                      onChange(
-                        addChildAtPath(
-                          value,
-                          [value.children?.length ?? 0],
-                          DEFAULT_CHILD_NODE
-                        )
-                      )
-                      onSelect(null)
-                    }}
-                  />
-                </Fragment>
+          {value.children?.map((child, i) => {
+            return (
+              <Fragment key={i}>
+                <AddChildButton
+                  onClick={() => {
+                    onChange(addChildAtPath(value, [i], DEFAULT_CHILD_NODE))
+                    onSelect([...path, i])
+                  }}
+                />
+                <TreeNode
+                  value={child}
+                  onSelect={onSelect}
+                  path={[...path, i]}
+                  onChange={(newChild) => {
+                    onChange({
+                      ...value,
+                      children: replaceAt(value.children ?? [], i, newChild),
+                    })
+                  }}
+                />
+              </Fragment>
+            )
+          })}
+          <AddChildButton
+            onClick={() => {
+              onChange(
+                addChildAtPath(
+                  value,
+                  [value.children?.length ?? 0],
+                  DEFAULT_CHILD_NODE
+                )
               )
-            })
-          ) : (
-            <AddChildButton
-              onClick={() => {
-                onChange(addChildAtPath(value, [0], DEFAULT_CHILD_NODE))
-                onSelect([0])
-              }}
-            />
-          )}
+              onSelect(null)
+            }}
+          />
         </div>
         <div sx={{ display: 'flex', alignItems: 'center' }}>
           <div
@@ -311,27 +304,39 @@ const DEFAULT_CHILD_NODE: HtmlNode = {
 }
 
 function AddChildButton({ onClick }: { onClick(): void }) {
+  const [hovered, setHovered] = useState(false)
   return (
-    <button
-      onClick={onClick}
-      sx={{
-        cursor: 'pointer',
-        display: 'block',
-        background: 'none',
-        border: 'none',
-        textAlign: 'left',
-        fontSize: 0,
-        pt: 2,
-        whiteSpace: 'nowrap',
-        color: 'muted',
-        zIndex: '99',
-        transition: 'color .2s ease-in-out',
-        ':hover': {
-          color: 'text',
-        },
-      }}
-    >
-      + Add child
-    </button>
+    <div sx={{ position: 'relative' }}>
+      <button
+        sx={{
+          '--height': '1rem',
+          display: 'flex',
+          alignItems: 'center',
+          position: 'absolute',
+          height: 'var(--height)',
+          top: 'calc(var(--height) / -2 )',
+          width: '100%',
+          cursor: 'pointer',
+          ':hover': {
+            color: 'muted',
+          },
+
+          background: 'transparent',
+          border: 'none',
+
+          '::before': {
+            content: '""',
+            backgroundColor: hovered ? 'muted' : 'transparent',
+            display: 'block',
+            height: '2px',
+            width: '100%',
+          },
+        }}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
+        <Plus size={16} />
+      </button>
+    </div>
   )
 }
