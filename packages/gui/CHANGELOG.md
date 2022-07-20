@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.182
+
+### Patch Changes
+
+- 2351ca88: Handle textarea children
+
 ## 0.0.181
 
 ### Patch Changes
