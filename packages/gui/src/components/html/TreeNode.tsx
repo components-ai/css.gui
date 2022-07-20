@@ -8,8 +8,8 @@ import { hasChildrenSlot } from '../../lib/codegen/util'
 import { Combobox } from '../primitives'
 import { HTML_TAGS } from './data'
 import { DEFAULT_ATTRIBUTES, DEFAULT_STYLES } from './default-styles'
-import { Icon } from '@radix-ui/react-select'
 import { Plus } from 'react-feather'
+import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 
 interface EditorProps {
   value: HtmlNode
@@ -179,6 +179,11 @@ export function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
     return tagButton
   }
 
+  function handleAddChild(i: number, type: string) {
+    const child = type === 'tag' ? DEFAULT_TAG : DEFAULT_TEXT
+    onChange(addChildAtPath(value, [i], child))
+  }
+
   return (
     <Collapsible.Root open={open} onOpenChange={setOpen}>
       <Collapsible.Trigger
@@ -210,8 +215,8 @@ export function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
             return (
               <Fragment key={i}>
                 <AddChildButton
-                  onClick={() => {
-                    onChange(addChildAtPath(value, [i], DEFAULT_CHILD_NODE))
+                  onClick={(childType) => {
+                    handleAddChild(i, childType)
                     onSelect([...path, i])
                   }}
                 />
@@ -230,14 +235,8 @@ export function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
             )
           })}
           <AddChildButton
-            onClick={() => {
-              onChange(
-                addChildAtPath(
-                  value,
-                  [value.children?.length ?? 0],
-                  DEFAULT_CHILD_NODE
-                )
-              )
+            onClick={(childType) => {
+              handleAddChild(value.children?.length ?? 0, childType)
               onSelect(null)
             }}
           />
@@ -292,51 +291,82 @@ const isSelfClosing = (node: HtmlNode) => {
   return !hasChildrenSlot(node.value)
 }
 
-const DEFAULT_CHILD_NODE: HtmlNode = {
+const DEFAULT_TAG: HtmlNode = {
   type: 'element',
   tagName: 'div',
-  children: [
-    {
-      type: 'text',
-      value: '',
-    },
-  ],
 }
 
-function AddChildButton({ onClick }: { onClick(): void }) {
+const DEFAULT_TEXT: HtmlNode = {
+  type: 'text',
+  value: '',
+}
+
+function AddChildButton({ onClick }: { onClick(type: string): void }) {
   const [hovered, setHovered] = useState(false)
   return (
     <div sx={{ position: 'relative' }}>
-      <button
-        sx={{
-          '--height': '1rem',
-          display: 'flex',
-          alignItems: 'center',
-          position: 'absolute',
-          height: 'var(--height)',
-          top: 'calc(var(--height) / -2 )',
-          width: '100%',
-          cursor: 'pointer',
-          ':hover': {
-            color: 'muted',
-          },
-
-          background: 'transparent',
-          border: 'none',
-
-          '::before': {
-            content: '""',
-            backgroundColor: hovered ? 'muted' : 'transparent',
-            display: 'block',
-            height: '2px',
+      <DropdownMenu.Root>
+        <DropdownMenu.Trigger
+          sx={{
+            '--height': '1rem',
+            display: 'flex',
+            alignItems: 'center',
+            position: 'absolute',
+            height: 'var(--height)',
+            top: 'calc(var(--height) / -2 )',
             width: '100%',
-          },
-        }}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-      >
-        <Plus size={16} />
-      </button>
+            cursor: 'pointer',
+            ':hover': {
+              color: 'muted',
+            },
+
+            background: 'transparent',
+            border: 'none',
+
+            '::before': {
+              content: '""',
+              backgroundColor: hovered ? 'muted' : 'transparent',
+              display: 'block',
+              height: '2px',
+              width: '100%',
+            },
+          }}
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
+        >
+          <Plus size={16} />
+        </DropdownMenu.Trigger>
+        <DropdownMenu.Content
+          sx={{
+            minWidth: '12rem',
+            border: '1px solid',
+            borderColor: 'border',
+            borderRadius: '0.25rem',
+            backgroundColor: 'background',
+            py: 2,
+          }}
+        >
+          {['tag', 'text'].map((childType) => {
+            return (
+              <DropdownMenu.Item
+                key={childType}
+                onClick={() => {
+                  onClick(childType)
+                }}
+                sx={{
+                  cursor: 'pointer',
+                  px: 3,
+                  ':hover': {
+                    backgroundColor: 'backgroundOffset',
+                  },
+                }}
+              >
+                Add {childType}
+              </DropdownMenu.Item>
+            )
+          })}
+        </DropdownMenu.Content>
+      </DropdownMenu.Root>
     </div>
   )
 }
