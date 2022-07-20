@@ -38,6 +38,14 @@ export function ElementRenderer({
     return <Tag {...props} onClick={handleClick} />
   }
 
+  if (Tag === 'textarea' && value.children) {
+    return (
+      <Tag {...props} onClick={handleClick}>
+        {value.children.map((child) => child.value).join(' ')}
+      </Tag>
+    )
+  }
+
   return (
     <Tag {...props} onClick={handleClick}>
       <ChildrenRenderer value={value.children} path={path} />
