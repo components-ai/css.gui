@@ -20,8 +20,8 @@ export interface Props {
    * the regenerate button. If not provided, uses the default random color generator.
    */
   onRegenerate?(theme?: Theme): Color
-  ruleset: any
-  property: string
+  ruleset?: any
+  property?: string
 }
 
 /**

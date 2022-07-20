@@ -8,8 +8,8 @@ interface Props<T> {
   schema: DataTypeSchema<T>
   label: string
   value: T
-  ruleset: any
-  property: string
+  ruleset?: any
+  property?: string
   onChange(value: T): void
   onRemove?(): void
   onDrag?(): void

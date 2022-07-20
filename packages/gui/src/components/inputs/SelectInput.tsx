@@ -7,6 +7,8 @@ interface Props<T extends string> {
   onRemove?: () => void
   value: T
   options: readonly T[]
+  ruleset?: any
+  property?: string
 }
 // A select input with a label
 export function SelectInput<T extends string>(props: Props<T>) {
