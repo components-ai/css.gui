@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.183
+
+### Patch Changes
+
+- 49aae809: Constrain to accessible contrasts when generating colors
+
 ## 0.0.182
 
 ### Patch Changes
