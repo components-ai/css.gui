@@ -15,6 +15,8 @@ const DEFAULT_HTML_EDITOR_VALUE = {
       <a href="https://components.ai">I'm a link!</a>
     </div>
   `),
+  isEditing: false,
+  setEditing: () => {},
   hasComponents: false,
 }
 
@@ -23,6 +25,8 @@ export type HtmlEditor = {
   theme?: any
   selected: ElementPath | null
   setSelected: (newSelection: ElementPath | null) => void
+  isEditing: boolean
+  setEditing(value: boolean): void
   components?: ComponentData[]
   hasComponents: boolean
 }
@@ -86,6 +90,7 @@ export function HtmlEditorProvider({
   components = [],
 }: HtmlEditorProviderProps) {
   const [selected, setSelected] = useState<ElementPath | null>([])
+  const [isEditing, setEditing] = useState(false)
   const transformedValue = transformValueToSchema(value)
 
   const fullContext = {
@@ -94,6 +99,8 @@ export function HtmlEditorProvider({
     setSelected: (newSelection: ElementPath | null) =>
       setSelected(newSelection),
     components,
+    isEditing,
+    setEditing: (newValue: any) => setEditing(newValue),
     hasComponents: !!components.length,
   }
 
