@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.184
+
+### Patch Changes
+
+- 304e6671: Improve node adding and editing
+
 ## 0.0.183
 
 ### Patch Changes
