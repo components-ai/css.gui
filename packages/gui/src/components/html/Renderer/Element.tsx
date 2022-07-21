@@ -63,7 +63,7 @@ function ChildrenRenderer({ value = [], path }: ChildrenRendererProps) {
       {value.map((child, i) => {
         const childPath: ElementPath = [...path, i]
         if (child.type === 'text') {
-          return <TextRenderer key={i} value={child} path={path} />
+          return <TextRenderer key={i} value={child} path={childPath} />
         }
 
         return <ElementRenderer key={i} value={child} path={childPath} />

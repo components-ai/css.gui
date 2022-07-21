@@ -18,10 +18,12 @@ const DEFAULT_HTML_EDITOR_VALUE = {
   isEditing: false,
   setEditing: () => {},
   hasComponents: false,
+  update: () => {},
 }
 
 export type HtmlEditor = {
   value: HtmlNode
+  update(value: HtmlNode): void
   theme?: any
   selected: ElementPath | null
   setSelected: (newSelection: ElementPath | null) => void
@@ -78,6 +80,7 @@ export const transformValueToSchema = (value: any): ElementData => {
 
 type HtmlEditorProviderProps = {
   value: HtmlNode
+  onChange(value: HtmlNode): void
   children: ReactNode
   theme?: any
   components?: ComponentData[]
@@ -88,6 +91,7 @@ export function HtmlEditorProvider({
   value,
   theme,
   components = [],
+  onChange,
 }: HtmlEditorProviderProps) {
   const [selected, setSelected] = useState<ElementPath | null>([])
   const [isEditing, setEditing] = useState(false)
@@ -102,6 +106,7 @@ export function HtmlEditorProvider({
     isEditing,
     setEditing: (newValue: any) => setEditing(newValue),
     hasComponents: !!components.length,
+    update: onChange,
   }
 
   return (

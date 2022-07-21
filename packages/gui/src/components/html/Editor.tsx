@@ -1,5 +1,4 @@
 import { Editor } from '../Editor'
-import { HtmlNode } from './types'
 import * as Tabs from '@radix-ui/react-tabs'
 import { Code, Layers, LogIn } from 'react-feather'
 import { useHtmlEditor } from './Provider'
@@ -9,10 +8,6 @@ import { useTheme } from '../providers/ThemeContext'
 import { NodeEditor } from './Editors/NodeEditor'
 import { TreeNode } from './TreeNode'
 import { Import } from './Import'
-
-interface HtmlEditorProps {
-  onChange(value: HtmlNode): void
-}
 
 const TABS_TRIGGER_STYLES: any = {
   all: 'unset',
@@ -44,8 +39,13 @@ const TABS_CONTENT_STYLES: any = {
 /**
  * An HTML tree-based editor that lets you add HTML nodes and mess around with their styles
  */
-export function HtmlEditor({ onChange }: HtmlEditorProps) {
-  const { value, selected: providedSelected, setSelected } = useHtmlEditor()
+export function HtmlEditor() {
+  const {
+    value,
+    update: onChange,
+    selected: providedSelected,
+    setSelected,
+  } = useHtmlEditor()
   const theme = useTheme()
 
   const selected = providedSelected || []

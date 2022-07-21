@@ -7,7 +7,7 @@ export default function HtmlEditorExample() {
   const [html, setHtml] = useState(initialValue)
 
   return (
-    <HtmlEditorProvider value={html} theme={defaultTheme}>
+    <HtmlEditorProvider value={html} onChange={setHtml} theme={defaultTheme}>
       <div
         sx={{
           display: 'grid',
@@ -24,7 +24,7 @@ export default function HtmlEditorExample() {
             height: '100%',
           }}
         >
-          <HtmlEditor onChange={setHtml} />
+          <HtmlEditor />
         </div>
         <div
           sx={{
