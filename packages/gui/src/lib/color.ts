@@ -71,7 +71,6 @@ export function randomColor({
         if (
           getContrast.ratio(value, colorToContrastWith) >= CONTRAST_THRESHOLD
         ) {
-          console.log(getContrast.ratio(value, colorToContrastWith))
           return [...acc, path]
         }
       } catch (e) {}
