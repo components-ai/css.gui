@@ -1,4 +1,5 @@
-import { FormEvent, FormEventHandler } from 'react'
+import { FormEvent, FormEventHandler, useRef } from 'react'
+import { useCanvas } from '../CanvasProvider'
 import { useHtmlEditor } from '../Provider'
 import { ElementPath, HtmlNode } from '../types'
 import { setChildAtPath } from '../util'
@@ -7,13 +8,18 @@ type TextRendererProps = {
   value: HtmlNode
   path: ElementPath
 }
-export function TextRenderer({ value, path }: TextRendererProps) {
-  const { value: fullValue } = useHtmlEditor()
+export function TextRenderer({
+  value: providedValue,
+  path,
+}: TextRendererProps) {
+  const { value: fullValue, update } = useHtmlEditor()
+  const { canvas } = useCanvas()
+  const value = useRef(providedValue.value)
 
   const handleInput = (e: FormEvent) => {
     const newText = e.currentTarget.textContent || ''
     const newTextNode = {
-      ...value,
+      ...providedValue,
       value: newText,
     }
 
@@ -21,6 +27,11 @@ export function TextRenderer({ value, path }: TextRendererProps) {
     // TS isn't happy here. Need to fix that...
     // @ts-ignore
     const newFullValue = setChildAtPath(fullValue, path, newTextNode)
+    update(newFullValue)
+  }
+
+  if (!canvas) {
+    return <>{providedValue.value || null}</>
   }
 
   return (
@@ -31,7 +42,7 @@ export function TextRenderer({ value, path }: TextRendererProps) {
       contentEditable={true}
       onInput={handleInput}
     >
-      {value.value as string}
+      {value.current as string}
     </span>
   )
 }
