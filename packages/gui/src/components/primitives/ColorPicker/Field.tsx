@@ -20,6 +20,8 @@ export interface Props {
    * the regenerate button. If not provided, uses the default random color generator.
    */
   onRegenerate?(theme?: Theme): Color
+  ruleset?: any
+  property?: string
 }
 
 /**
@@ -32,6 +34,8 @@ export default function ColorPicker({
   title,
   onRemove,
   onRegenerate,
+  ruleset,
+  property,
 }: Props) {
   return (
     <div>
@@ -68,7 +72,13 @@ export default function ColorPicker({
                 return
               } else {
                 // Otherwise, regenerate a random color based on theme
-                const path = randomColor(theme) ?? randomHexColor()
+                const path =
+                  randomColor({
+                    theme,
+                    ruleset,
+                    previousValue: value,
+                    property,
+                  }) ?? randomHexColor()
                 const color = themeGet({
                   theme,
                   path,

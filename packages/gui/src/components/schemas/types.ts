@@ -34,6 +34,8 @@ export interface DataTypeSchema<T> {
 export interface RegenOptions<T> {
   previousValue: T
   theme?: Theme
+  ruleset?: any
+  property?: string
 }
 
 export type SchemaVariants<T> = { [V in keyof T]: DataTypeSchema<T[V]> }

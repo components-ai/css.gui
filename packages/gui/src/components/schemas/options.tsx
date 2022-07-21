@@ -34,14 +34,11 @@ export function optionsSchema<T extends Record<string, any>>({
     )
   }
   function regenerate({
-    theme,
     previousValue,
+    ...options
   }: RegenOptions<Unionize<T>>): Unionize<T> {
     const type = getType(previousValue)
-    const newValue = variants[type].regenerate?.({
-      theme,
-      previousValue,
-    })
+    const newValue = variants[type].regenerate?.({ previousValue, ...options })
     return newValue ?? previousValue
   }
 
