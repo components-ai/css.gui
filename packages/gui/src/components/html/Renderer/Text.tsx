@@ -1,4 +1,4 @@
-import { FormEvent, FormEventHandler, useRef } from 'react'
+import { FormEvent, useCallback, useState } from 'react'
 import { useCanvas } from '../CanvasProvider'
 import { useHtmlEditor } from '../Provider'
 import { ElementPath, HtmlNode } from '../types'
@@ -14,7 +14,14 @@ export function TextRenderer({
 }: TextRendererProps) {
   const { value: fullValue, update } = useHtmlEditor()
   const { canvas } = useCanvas()
-  const value = useRef(providedValue.value)
+  const [text, setText] = useState<string>(providedValue.value as string)
+  const [editing, setEditing] = useState(false)
+
+  const textRef = useCallback(() => {
+    if (!editing) {
+      return setText(providedValue.value as string)
+    }
+  }, [providedValue])
 
   const handleInput = (e: FormEvent) => {
     const newText = e.currentTarget.textContent || ''
@@ -36,13 +43,16 @@ export function TextRenderer({
 
   return (
     <span
+      ref={textRef}
       sx={{
         outline: 'none',
       }}
       contentEditable={true}
       onInput={handleInput}
+      onBlur={() => setEditing(false)}
+      onClick={() => setEditing(true)}
     >
-      {value.current as string}
+      {text}
     </span>
   )
 }
