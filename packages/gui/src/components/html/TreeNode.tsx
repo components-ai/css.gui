@@ -1,6 +1,6 @@
 import { HtmlNode, ElementPath } from './types'
 import * as Collapsible from '@radix-ui/react-collapsible'
-import { Fragment, useState } from 'react'
+import { useState } from 'react'
 import { useHtmlEditor } from './Provider'
 import { isVoidElement } from '../../lib/elements'
 import { addChildAtPath, isSamePath, replaceAt } from './util'
@@ -8,6 +8,8 @@ import { hasChildrenSlot } from '../../lib/codegen/util'
 import { Combobox } from '../primitives'
 import { HTML_TAGS } from './data'
 import { DEFAULT_ATTRIBUTES, DEFAULT_STYLES } from './default-styles'
+import { Plus } from 'react-feather'
+import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 
 interface EditorProps {
   value: HtmlNode
@@ -19,13 +21,17 @@ interface TreeNodeProps extends EditorProps {
 }
 
 export function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
-  const { selected } = useHtmlEditor()
+  const { selected, isEditing, setEditing } = useHtmlEditor()
   const [open, setOpen] = useState(true)
-  const [editing, setEditing] = useState(false)
   const isSelected = isSamePath(path, selected)
+  const isEditingNode = isSelected && isEditing
 
-  if (editing && !isSelected) {
-    setEditing(false)
+  function handleSelect() {
+    // If we are selecting a different node than the currently selected node, move out of editing mode
+    if (!isSelected) {
+      setEditing(false)
+    }
+    onSelect(path)
   }
 
   if (value.type === 'text') {
@@ -42,9 +48,11 @@ export function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
             fontSize: 0,
             width: '100%',
           }}
-          onClick={() => onSelect(path)}
+          onClick={() => {
+            handleSelect()
+          }}
         >
-          {editing ? (
+          {isEditingNode ? (
             <textarea
               sx={{
                 display: 'block',
@@ -97,7 +105,7 @@ export function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
             textAlign: 'start',
             fontSize: 0,
           }}
-          onClick={() => onSelect(path)}
+          onClick={() => handleSelect()}
         >
           {value.name}: "{value.value}"
         </button>
@@ -105,7 +113,7 @@ export function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
     )
   }
 
-  const tagEditor = editing ? (
+  const tagEditor = isEditingNode ? (
     <Combobox
       key={selected?.join('-')}
       onFilterItems={(filterValue) => {
@@ -166,7 +174,9 @@ export function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
         textAlign: 'start',
         display: 'inline-flex',
       }}
-      onClick={() => onSelect(path)}
+      onClick={() => {
+        handleSelect()
+      }}
     >
       &lt;{tagEditor}
       {!open || isSelfClosing(value) ? ' /' : null}&gt;
@@ -175,6 +185,11 @@ export function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
 
   if (isSelfClosing(value)) {
     return tagButton
+  }
+
+  function handleAddChild(i: number, type: string) {
+    const child = type === 'tag' ? DEFAULT_TAG : DEFAULT_TEXT
+    onChange(addChildAtPath(value, [i], child))
   }
 
   return (
@@ -203,17 +218,18 @@ export function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
       />
       <span sx={{ lineHeight: 1, fontFamily: 'monospace' }}>{tagButton}</span>
       <Collapsible.Content>
-        <div sx={{ ml: 4 }}>
-          {value.children?.length ? (
-            value.children?.map((child, i) => {
-              return (
-                <Fragment key={i}>
-                  <AddChildButton
-                    onClick={() => {
-                      onChange(addChildAtPath(value, [i], DEFAULT_CHILD_NODE))
-                      onSelect([...path, i])
-                    }}
-                  />
+        <div sx={{ ml: 4, py: '0.0625rem' }}>
+          {value.children?.map((child, i) => {
+            return (
+              <div key={i}>
+                <AddChildButton
+                  onClick={(childType) => {
+                    handleAddChild(i, childType)
+                    onSelect([...path, i])
+                    setEditing(true)
+                  }}
+                />
+                <div sx={{ py: '0.0625rem' }}>
                   <TreeNode
                     value={child}
                     onSelect={onSelect}
@@ -225,29 +241,18 @@ export function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
                       })
                     }}
                   />
-                  <AddChildButton
-                    onClick={() => {
-                      onChange(
-                        addChildAtPath(
-                          value,
-                          [value.children?.length ?? 0],
-                          DEFAULT_CHILD_NODE
-                        )
-                      )
-                      onSelect(null)
-                    }}
-                  />
-                </Fragment>
-              )
-            })
-          ) : (
-            <AddChildButton
-              onClick={() => {
-                onChange(addChildAtPath(value, [0], DEFAULT_CHILD_NODE))
-                onSelect([0])
-              }}
-            />
-          )}
+                </div>
+              </div>
+            )
+          })}
+          <AddChildButton
+            onClick={(childType) => {
+              const index = value.children?.length ?? 0
+              handleAddChild(index, childType)
+              onSelect([...path, index])
+              setEditing(true)
+            }}
+          />
         </div>
         <div sx={{ display: 'flex', alignItems: 'center' }}>
           <div
@@ -299,39 +304,83 @@ const isSelfClosing = (node: HtmlNode) => {
   return !hasChildrenSlot(node.value)
 }
 
-const DEFAULT_CHILD_NODE: HtmlNode = {
+const DEFAULT_TAG: HtmlNode = {
   type: 'element',
   tagName: 'div',
-  children: [
-    {
-      type: 'text',
-      value: '',
-    },
-  ],
 }
 
-function AddChildButton({ onClick }: { onClick(): void }) {
+const DEFAULT_TEXT: HtmlNode = {
+  type: 'text',
+  value: '',
+}
+
+function AddChildButton({ onClick }: { onClick(type: string): void }) {
+  const [hovered, setHovered] = useState(false)
+  const [open, setOpen] = useState(false)
   return (
-    <button
-      onClick={onClick}
-      sx={{
-        cursor: 'pointer',
-        display: 'block',
-        background: 'none',
-        border: 'none',
-        textAlign: 'left',
-        fontSize: 0,
-        pt: 2,
-        whiteSpace: 'nowrap',
-        color: 'muted',
-        zIndex: '99',
-        transition: 'color .2s ease-in-out',
-        ':hover': {
-          color: 'text',
-        },
-      }}
-    >
-      + Add child
-    </button>
+    <div sx={{ position: 'relative' }}>
+      <DropdownMenu.Root open={open} onOpenChange={setOpen}>
+        <DropdownMenu.Trigger
+          sx={{
+            '--height': '0.5rem',
+            display: 'flex',
+            alignItems: 'center',
+            position: 'absolute',
+            height: 'var(--height)',
+            top: 'calc(var(--height) / -2 )',
+            width: '100%',
+            cursor: 'pointer',
+            ':hover': {
+              color: 'muted',
+            },
+
+            background: 'transparent',
+            border: 'none',
+
+            '::before': {
+              content: '""',
+              backgroundColor: hovered || open ? 'muted' : 'transparent',
+              display: 'block',
+              height: '2px',
+              width: '100%',
+            },
+          }}
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
+        >
+          <Plus size={16} />
+        </DropdownMenu.Trigger>
+        <DropdownMenu.Content
+          sx={{
+            minWidth: '12rem',
+            border: '1px solid',
+            borderColor: 'border',
+            borderRadius: '0.25rem',
+            backgroundColor: 'background',
+            py: 2,
+          }}
+        >
+          {['tag', 'text'].map((childType) => {
+            return (
+              <DropdownMenu.Item
+                key={childType}
+                onClick={() => {
+                  onClick(childType)
+                }}
+                sx={{
+                  cursor: 'pointer',
+                  px: 3,
+                  ':hover': {
+                    backgroundColor: 'backgroundOffset',
+                  },
+                }}
+              >
+                Add {childType}
+              </DropdownMenu.Item>
+            )
+          })}
+        </DropdownMenu.Content>
+      </DropdownMenu.Root>
+    </div>
   )
 }

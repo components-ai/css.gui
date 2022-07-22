@@ -1,14 +1,97 @@
-import { isBoolean, isNumber, isObject, isString, sample } from 'lodash-es'
-import { Theme } from '../types/theme'
+import {
+  cloneDeep,
+  isBoolean,
+  isNumber,
+  isObject,
+  isString,
+  sample,
+} from 'lodash-es'
+import getContrast from 'get-contrast'
+import { ThemeColor } from '../components/primitives/ColorPicker/PalettePicker'
+import { RegenOptions } from '../components/schemas/types'
+import { Color } from '../types/css'
+import { themeGet } from './theme'
 
-export function randomColor(theme?: Theme) {
-  if (theme && theme.colors) {
-    const path = sample(Object.keys(flatten(theme.colors)))
+const CONTRAST_THRESHOLD = 4.5
+const CONTRAST_PROPERTY_MAP: Record<string, string> = {
+  color: 'backgroundColor',
+  backgroundColor: 'color',
+}
 
-    return path
+const getColorToContrastWith = (
+  property: string,
+  ruleset: Record<string, any>,
+  theme?: any
+) => {
+  const contrastProperty = CONTRAST_PROPERTY_MAP[property]
+  if (!contrastProperty) {
+    return null
   }
 
-  return randomHexColor()
+  const valueOrPath = ruleset[contrastProperty]
+  if (!valueOrPath) {
+    return null
+  }
+
+  return themeGet({
+    theme,
+    path: valueOrPath?.path || valueOrPath,
+    property: 'color',
+  })
+}
+
+const hasContrastToCheck = (
+  property?: string,
+  ruleset?: Record<string, any>,
+  theme?: any
+) => {
+  if (!property || !ruleset) {
+    return false
+  }
+
+  return !!getColorToContrastWith(property, ruleset, theme)
+}
+
+export function randomColor({
+  theme,
+  ruleset,
+  property,
+}: RegenOptions<Color | ThemeColor>) {
+  if (!theme?.colors) {
+    return randomHexColor()
+  }
+
+  const allColors = cloneDeep(theme.colors)
+  // @ts-ignore
+  delete allColors.modes
+
+  const colors = flatten(allColors)
+
+  if (!hasContrastToCheck(property, ruleset, theme)) {
+    return sample(Object.keys(colors))
+  }
+
+  const colorToContrastWith = getColorToContrastWith(property!, ruleset, theme)
+  const colorsWithContrast = Object.entries(colors).reduce(
+    (acc: string[], curr) => {
+      const [path, value] = curr
+
+      try {
+        if (
+          getContrast.ratio(value, colorToContrastWith) >= CONTRAST_THRESHOLD
+        ) {
+          return [...acc, path]
+        }
+      } catch (e) {}
+
+      return acc
+    },
+    []
+  )
+
+  return colorsWithContrast.length
+    ? sample(colorsWithContrast)
+    : sample(Object.keys(colors))
 }
 
 export function randomHexColor() {

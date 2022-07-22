@@ -1,5 +1,41 @@
 # @compai/css-gui
 
+## 0.0.185
+
+### Patch Changes
+
+- d9ff3da0: Properly handle contrast for all properties
+
+## 0.0.184
+
+### Patch Changes
+
+- 304e6671: Improve node adding and editing
+
+## 0.0.183
+
+### Patch Changes
+
+- 49aae809: Constrain to accessible contrasts when generating colors
+
+## 0.0.182
+
+### Patch Changes
+
+- 2351ca88: Handle textarea children
+
+## 0.0.181
+
+### Patch Changes
+
+- 1a4562c9: Refactor fieldset passing
+
+## 0.0.180
+
+### Patch Changes
+
+- d7124e11: Add draggable reordering to field array inputs
+
 ## 0.0.179
 
 ### Patch Changes

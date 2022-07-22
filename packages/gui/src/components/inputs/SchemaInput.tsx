@@ -8,6 +8,8 @@ interface Props<T> {
   schema: DataTypeSchema<T>
   label: string
   value: T
+  ruleset?: any
+  property?: string
   onChange(value: T): void
   onRemove?(): void
   onDrag?(): void
@@ -26,12 +28,22 @@ export function SchemaInput<T>({
   label,
   value,
   onChange,
+  ruleset,
+  property,
   ...props
 }: Props<T>) {
   const Input = schema.input
   const InlineInput = schema.inlineInput
 
-  const content = Input && <Input label="" value={value} onChange={onChange} />
+  const content = Input && (
+    <Input
+      label=""
+      value={value}
+      onChange={onChange}
+      ruleset={ruleset}
+      property={property}
+    />
+  )
   const { hasBlockInput = () => !!content } = schema
   return (
     <Collapsible.Root defaultOpen>
@@ -41,6 +53,8 @@ export function SchemaInput<T>({
         label={label}
         value={value}
         onChange={onChange}
+        ruleset={ruleset}
+        property={property}
       >
         {hasBlockInput(value) && (
           <Collapsible.Trigger asChild>
@@ -58,7 +72,13 @@ export function SchemaInput<T>({
           </Collapsible.Trigger>
         )}
         {InlineInput && (
-          <InlineInput label="" value={value} onChange={onChange} />
+          <InlineInput
+            label=""
+            value={value}
+            onChange={onChange}
+            ruleset={ruleset}
+            property={property}
+          />
         )}
       </InputHeader>
       {content && <Collapsible.Content>{content}</Collapsible.Content>}

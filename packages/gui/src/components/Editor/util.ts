@@ -30,9 +30,7 @@ export const isFieldsetGroup = (str: string) => {
   return isPseudo(str) || isElement(str) || isInternalCSSClass(str)
 }
 
-export const getFieldsetPropsFromProperty = (
-  str: string
-): FieldsetContextProps => {
+export const getFieldsetPropsFromName = (str: string): FieldsetContextProps => {
   if (isElement(str)) {
     return {
       type: 'element',

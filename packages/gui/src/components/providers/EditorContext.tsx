@@ -2,7 +2,7 @@ import { ThemeProvider as ThemeUIProvider } from 'theme-ui'
 import { get, unset } from 'lodash-es'
 import { createContext, ReactNode, useContext } from 'react'
 import { KeyArg, Recipe, EditorData } from './types'
-import { applyRecipe } from './util'
+import { applyRecipe, parentPath } from './util'
 import { ThemeProvider, useTheme } from './ThemeContext'
 import { EditorConfigProvider, EditorConfig } from './EditorConfigContext'
 import { theme as uiTheme } from '../ui/theme'
@@ -14,6 +14,7 @@ export interface EditorContextValue<V> extends EditorData<V> {
   theme?: Theme
   setValue(value: Recipe<V>): void
   getField<T = any>(key: KeyArg): T
+  getParentField<T = any>(key: KeyArg): T
   setField<T>(key: KeyArg, value: Recipe<T>): void
   setFields<T>(fields: Record<string, Recipe<T>>, removeFields?: KeyArg[]): void
   removeField(key: KeyArg): void
@@ -27,6 +28,14 @@ export function useEditor() {
 
   function getField<T = any>(field: KeyArg | undefined) {
     return field ? (get(value, field) as T) : value
+  }
+
+  function getParentField<T = any>(field: KeyArg | undefined) {
+    if (!field || !Array.isArray(field)) {
+      return value
+    }
+
+    return get(value, parentPath(field))
   }
 
   function getFields<T = any>(fields: KeyArg[] | undefined) {
@@ -83,6 +92,7 @@ export function useEditor() {
   return {
     ...context,
     getField,
+    getParentField,
     getFields,
     setField,
     setFields,
