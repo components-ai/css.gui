@@ -98,7 +98,6 @@ function normalizeSchema(propertyData: PropertyData): DataTypeSchema<any> {
   const { input, keywords, themeProperty } = propertyData
   if (typeof input === 'string') {
     if (input === 'keyword') {
-      // const { keywords = [], ...rest } = propertyData
       return keyword(keywords!, propertyData)
     } else if (input === 'none') {
       return {
@@ -108,13 +107,15 @@ function normalizeSchema(propertyData: PropertyData): DataTypeSchema<any> {
         stringify: (value) => String(value),
       }
     } else {
-      let schema = primitiveMap[input](propertyData) as any
+      const { defaultValue, ...basePropertyData } = propertyData
+      let schema = primitiveMap[input](basePropertyData) as any
       return joinSchemas(
         compact([
           schema,
           keywords && keyword(keywords),
           themeProperty && theme(themeProperty),
-        ])
+        ]),
+        { defaultValue }
       )
     }
   }
