@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.185
+
+### Patch Changes
+
+- d9ff3da0: Properly handle contrast for all properties
+
 ## 0.0.184
 
 ### Patch Changes
