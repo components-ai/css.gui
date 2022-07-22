@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useContext } from 'react'
 import { useHtmlEditor } from '../Provider'
-import { ComponentData, ElementPath } from '../types'
+import { ComponentData, ElementPath, HtmlNode } from '../types'
 
 const DEFAULT_COMPONENT_VALUE = {}
 
@@ -8,6 +8,7 @@ type ComponentProviderType = {
   value?: ComponentData
   path?: ElementPath
   selectComponent?(e: MouseEvent): void
+  updateComponent?(path: ElementPath, newItem: HtmlNode): void
 }
 
 export function useComponent() {
@@ -35,8 +36,17 @@ export function ComponentProvider({
     setSelected(path)
     e.stopPropagation()
   }
+
+  const updateComponent = (path: ElementPath, newValue: HtmlNode) => {
+    // TODO: It's a slot!!!!!!
+    // update the `props`
+    console.log({ path, value, newValue })
+  }
+
   return (
-    <ComponentContext.Provider value={{ value, path, selectComponent }}>
+    <ComponentContext.Provider
+      value={{ value, path, selectComponent, updateComponent }}
+    >
       {children}
     </ComponentContext.Provider>
   )

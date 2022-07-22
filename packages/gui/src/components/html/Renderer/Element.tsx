@@ -1,6 +1,7 @@
 import { isVoidElement } from '../../../lib/elements'
 import { CanvasElementProps, useCanvasProps } from '../CanvasProvider'
 import { ComponentProvider, useComponent } from '../Component'
+import { SlotProvider } from '../Component/SlotProvider'
 import { mergeComponentAttributes } from '../Component/util'
 import { ComponentData, ElementPath, HtmlNode, Slot } from '../types'
 import { removeTailFromPath } from '../util'
@@ -129,5 +130,10 @@ function SlotRenderer({ value, path }: SlotRendererProps) {
 
   const slotValue = outerProps[value.name] || value.value
   const textNode: HtmlNode = { type: 'text', value: slotValue as string }
-  return <TextRenderer value={textNode} path={path} />
+
+  return (
+    <SlotProvider value={value} path={path}>
+      <TextRenderer value={textNode} path={path} />
+    </SlotProvider>
+  )
 }

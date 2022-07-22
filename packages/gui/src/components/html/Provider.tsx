@@ -109,6 +109,8 @@ export function HtmlEditorProvider({
     update: onChange,
   }
 
+  console.log(fullContext.value)
+
   return (
     <ThemeProvider theme={theme}>
       <HtmlEditorContext.Provider value={fullContext}>
