@@ -23,10 +23,19 @@ const getColorToContrastWith = (
   ruleset: Record<string, any>,
   theme?: any
 ) => {
-  const valueOrPath = ruleset[CONTRAST_PROPERTY_MAP[property]]
+  const contrastProperty = CONTRAST_PROPERTY_MAP[property]
+  if (!contrastProperty) {
+    return null
+  }
+
+  const valueOrPath = ruleset[contrastProperty]
+  if (!valueOrPath) {
+    return null
+  }
+
   return themeGet({
     theme,
-    path: valueOrPath.path || valueOrPath,
+    path: valueOrPath?.path || valueOrPath,
     property: 'color',
   })
 }
