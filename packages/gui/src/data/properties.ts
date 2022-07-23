@@ -59,7 +59,7 @@ import {
 } from '../components/schemas/primitives'
 import { DataTypeSchema } from '../components/schemas/types'
 import { joinSchemas } from '../components/schemas/joinSchemas'
-import { theme } from '../components/schemas/theme'
+import { themeRecord, themeScale } from '../components/schemas/theme'
 import { color } from '../components/schemas/color'
 import { angle } from '../components/schemas/angle'
 import { time } from '../components/schemas/time'
@@ -94,6 +94,13 @@ const primitiveMap = {
 }
 type PrimitiveType = keyof typeof primitiveMap
 
+function themeSchema(property: string) {
+  if (['lineHeights', 'letterSpacings'].includes(property)) {
+    return themeRecord(property)
+  }
+  return themeScale(property)
+}
+
 function normalizeSchema(propertyData: PropertyData): DataTypeSchema<any> {
   const { input, keywords, themeProperty } = propertyData
   if (typeof input === 'string') {
@@ -113,7 +120,7 @@ function normalizeSchema(propertyData: PropertyData): DataTypeSchema<any> {
         compact([
           schema,
           keywords && keyword(keywords),
-          themeProperty && theme(themeProperty),
+          themeProperty && themeSchema(themeProperty),
         ]),
         { defaultValue }
       )

@@ -1,13 +1,13 @@
 import { boxSideSchema } from './box-side'
 import { joinSchemas } from './joinSchemas'
 import { keyword, lengthPercentage } from './primitives'
-import { theme } from './theme'
+import { themeScale } from './theme'
 import { tupleSchema } from './tuple'
 
 const scrollPaddingItem = joinSchemas([
   lengthPercentage(),
   keyword(['auto']),
-  theme('space'),
+  themeScale('space'),
 ])
 
 export const scrollPaddingBottom = scrollPaddingItem

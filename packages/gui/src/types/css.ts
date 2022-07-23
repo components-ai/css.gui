@@ -181,3 +181,9 @@ export interface ThemeValue {
   path: string // theme path
   index: number
 }
+
+export interface ThemeNamedValue {
+  type: 'theme'
+  path: string
+  key: string
+}

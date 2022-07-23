@@ -4,7 +4,7 @@ import { joinSchemas } from './joinSchemas'
 import { objectSchema } from './object'
 import { keyword, length } from './primitives'
 import { shorthandSchema } from './shorthand'
-import { theme } from './theme'
+import { themeScale } from './theme'
 import { tupleSchema } from './tuple'
 
 /* Border width */
@@ -12,7 +12,7 @@ import { tupleSchema } from './tuple'
 const borderWidthItem = joinSchemas([
   length({ range: 'nonnegative' }),
   keyword(['thin', 'medium', 'thick']),
-  theme('borderWidths'),
+  themeScale('borderWidths'),
 ])
 
 export const borderTopWidth = borderWidthItem

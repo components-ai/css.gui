@@ -1,12 +1,12 @@
 import { joinSchemas } from './joinSchemas'
 import { keyword, lengthPercentage } from './primitives'
-import { theme } from './theme'
+import { themeScale } from './theme'
 import { tupleSchema } from './tuple'
 
 const gapItem = joinSchemas([
   lengthPercentage({ range: 'nonnegative' }),
   keyword(['normal']),
-  theme('space'),
+  themeScale('space'),
 ])
 
 export const rowGap = gapItem

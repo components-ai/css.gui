@@ -1,11 +1,11 @@
 import { joinSchemas } from './joinSchemas'
 import { integer, keyword, length } from './primitives'
 import { shorthandSchema } from './shorthand'
-import { theme } from './theme'
+import { themeScale } from './theme'
 
 export const columnWidth = joinSchemas([
   length(),
-  theme('sizes'),
+  themeScale('sizes'),
   keyword(['auto']),
 ])
 
