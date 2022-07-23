@@ -1,9 +1,5 @@
 import { ReactNode } from 'react'
-import {
-  AlignJustify,
-  RefreshCw,
-  X,
-} from 'react-feather'
+import { AlignJustify, RefreshCw, X } from 'react-feather'
 import { EditorPropsWithLabel } from '../../types/editor'
 import { Label } from '../primitives'
 import { useTheme } from '../providers/ThemeContext'
@@ -25,7 +21,6 @@ export function InputHeader({
   onDrag,
   onDragEnd,
   regenerate,
-  reorder,
   ruleset,
   property,
 }: Props) {

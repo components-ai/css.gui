@@ -74,20 +74,6 @@ export default function FieldArray<T>(props: FieldArrayProps<T>) {
                 onDragEnd={() => {
                   setDragIndex(-1)
                 }}
-                reorder={{
-                  onMoveUp:
-                    i === 0
-                      ? undefined
-                      : () => {
-                          handleReorder(i, i - 1)
-                        },
-                  onMoveDown:
-                    i === value.length - 1
-                      ? undefined
-                      : () => {
-                          handleReorder(i, i + 1)
-                        },
-                }}
               />
             </div>
           </div>
