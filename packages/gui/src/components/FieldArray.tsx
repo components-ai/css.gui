@@ -1,6 +1,5 @@
-import produce from 'immer'
 import { useState } from 'react'
-import { flip, replace, remove, insert } from '../lib/array'
+import { replace, remove, insert } from '../lib/array'
 import { EditorPropsWithLabel } from '../types/editor'
 import { SchemaInput } from './inputs/SchemaInput'
 import { DataTypeSchema } from './schemas/types'
@@ -20,13 +19,6 @@ export default function FieldArray<T>(props: FieldArrayProps<T>) {
   const { label = '', value = [], onChange, itemSchema } = props
   const [dragIndex, setDragIndex] = useState(-1)
   const isDragging = dragIndex >= 0
-
-  const handleReorder = (i1: number, i2: number) => {
-    if (typeof value === 'string') {
-      return
-    }
-    onChange(flip(value, i1, i2))
-  }
 
   const handleDragDrop = (i1: number, i2: number) => {
     const item = value[i1]
@@ -73,20 +65,6 @@ export default function FieldArray<T>(props: FieldArrayProps<T>) {
                 }}
                 onDragEnd={() => {
                   setDragIndex(-1)
-                }}
-                reorder={{
-                  onMoveUp:
-                    i === 0
-                      ? undefined
-                      : () => {
-                          handleReorder(i, i - 1)
-                        },
-                  onMoveDown:
-                    i === value.length - 1
-                      ? undefined
-                      : () => {
-                          handleReorder(i, i + 1)
-                        },
                 }}
               />
             </div>

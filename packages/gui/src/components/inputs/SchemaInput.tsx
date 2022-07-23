@@ -14,10 +14,6 @@ interface Props<T> {
   onRemove?(): void
   onDrag?(): void
   onDragEnd?(): void
-  reorder?: {
-    onMoveUp?(): void
-    onMoveDown?(): void
-  }
 }
 
 /**
