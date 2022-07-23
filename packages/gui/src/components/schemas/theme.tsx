@@ -34,7 +34,6 @@ export function themeScale(path: string): DataTypeSchema<ThemeValue> {
           options={range(0, numOptions).map((x) => x.toString())}
         />
       )
-      // return null
     },
     // TODO function version of defaultValue, pass in theme
     defaultValue: { type: 'theme', path, index: 0 },
@@ -61,21 +60,20 @@ export function themeRecord(path: string): DataTypeSchema<ThemeNamedValue> {
     },
     inlineInput(props) {
       const theme = useTheme()
-      const options = get(theme, path)
+      const options = Object.keys(get(theme, path))
       return (
         <SelectInput
           label=""
-          value={`${props.value.key}`}
+          value={props.value.key || options[0]}
           onChange={(value) =>
             props.onChange({
               ...props.value,
               key: value,
             })
           }
-          options={Object.keys(options)}
+          options={options}
         />
       )
-      // return null
     },
     // TODO function version of defaultValue, pass in theme
     defaultValue: { type: 'theme', path, key: '' },
