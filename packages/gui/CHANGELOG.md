@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.188
+
+### Patch Changes
+
+- 130847c4: Fix bug with inline text editing
+
 ## 0.0.187
 
 ### Patch Changes
