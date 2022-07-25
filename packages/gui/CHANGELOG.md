@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.186
+
+### Patch Changes
+
+- 6e4d520b: Theme handling improvements, remove duplicate UI
+
 ## 0.0.185
 
 ### Patch Changes
