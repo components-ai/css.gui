@@ -15,7 +15,11 @@ export function TextRenderer({
   path,
 }: TextRendererProps) {
   const { value: slot } = useSlot()
-  const { updateComponent, updateComponentSlot } = useComponent()
+  const {
+    value: component,
+    updateComponent,
+    updateComponentSlot,
+  } = useComponent()
   const { value: fullValue, update } = useHtmlEditor()
   const { canvas } = useCanvas()
   const [text, setText] = useState<string>(providedValue.value as string)
@@ -30,11 +34,23 @@ export function TextRenderer({
   const handleInput = (e: FormEvent) => {
     if (slot) {
       return handleSlotInput(e)
+    } else if (component) {
+      return handleComponentInput(e)
     }
 
-    const newText = e.currentTarget.textContent || ''
     // We still handle the text and component types a little funky so
     // TS isn't happy here. Need to fix that...
+    // @ts-ignore
+    const newText: HtmlNode = {
+      ...providedValue,
+      value: e.currentTarget.textContent || '',
+    }
+    const newValue = setChildAtPath(fullValue, path, newText)
+    update(newValue)
+  }
+
+  const handleComponentInput = (e: FormEvent) => {
+    const newText = e.currentTarget.textContent || ''
     // @ts-ignore
     const newTextNode: HtmlNode = {
       ...providedValue,
