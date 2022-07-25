@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.187
+
+### Patch Changes
+
+- db4fa469: Implement inline text editing
+
 ## 0.0.186
 
 ### Patch Changes
