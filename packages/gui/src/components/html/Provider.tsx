@@ -26,10 +26,11 @@ export type HtmlEditor = {
   update(value: HtmlNode): void
   theme?: any
   selected: ElementPath | null
-  setSelected: (newSelection: ElementPath | null) => void
+  setSelected(newSelection: ElementPath | null): void
   isEditing: boolean
   setEditing(value: boolean): void
   components?: ComponentData[]
+  updateComponent?(newComponent: ComponentData): void
   hasComponents: boolean
 }
 
@@ -52,7 +53,7 @@ export const transformValueToSchema = (value: any): ElementData => {
   const fullValue = coerceNodeIntoUnist(value)
 
   const transformed = Object.entries(fullValue).reduce((acc, [key, val]) => {
-    let updatedValue = val
+    let updatedValue: any = val
     if (key === 'children' && Array.isArray(val)) {
       updatedValue = val.map((child) => transformValueToSchema(child))
     } else if (key === 'style') {
@@ -84,6 +85,7 @@ type HtmlEditorProviderProps = {
   children: ReactNode
   theme?: any
   components?: ComponentData[]
+  updateComponent?(newComponent: ComponentData): void
 }
 
 export function HtmlEditorProvider({
@@ -91,6 +93,7 @@ export function HtmlEditorProvider({
   value,
   theme,
   components = [],
+  updateComponent,
   onChange,
 }: HtmlEditorProviderProps) {
   const [selected, setSelected] = useState<ElementPath | null>([])
@@ -105,11 +108,10 @@ export function HtmlEditorProvider({
     components,
     isEditing,
     setEditing: (newValue: any) => setEditing(newValue),
+    updateComponent,
     hasComponents: !!components.length,
     update: onChange,
   }
-
-  console.log(fullContext.value)
 
   return (
     <ThemeProvider theme={theme}>
