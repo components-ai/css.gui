@@ -34,7 +34,13 @@ export function ComponentProvider({
   path,
   children,
 }: ComponentProviderProps) {
-  const { setSelected, value: fullValue, update, components } = useHtmlEditor()
+  const {
+    setSelected,
+    value: fullValue,
+    update,
+    components,
+    updateComponent: emitUpdatedComponent,
+  } = useHtmlEditor()
   const selectComponent = (e: MouseEvent) => {
     setSelected(path)
     e.stopPropagation()
@@ -56,7 +62,7 @@ export function ComponentProvider({
     })
 
     update(newFullValue)
-    // TODO: Emit componentUpdated with newComponent
+    emitUpdatedComponent?.(newComponent)
   }
 
   const updateComponentSlot = (newValue: HtmlNode) => {
