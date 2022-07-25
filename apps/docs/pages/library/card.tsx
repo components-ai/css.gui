@@ -163,8 +163,8 @@ export default function HtmlEditorExample() {
 
   return (
     <div sx={{ display: 'flex' }}>
-      <HtmlEditorProvider value={html}>
-        <HtmlEditor onChange={setHtml} />
+      <HtmlEditorProvider value={html} onChange={setHtml}>
+        <HtmlEditor />
         <div sx={{ width: '100%' }}>
           <HtmlRenderer value={html} />
         </div>
