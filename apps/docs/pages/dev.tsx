@@ -133,6 +133,7 @@ export default function HtmlEditorExample() {
   return (
     <HtmlEditorProvider
       value={html}
+      onChange={setHtml}
       components={initialComponents}
       theme={defaultTheme}
     >
@@ -152,7 +153,7 @@ export default function HtmlEditorExample() {
             height: '100%',
           }}
         >
-          <HtmlEditor onChange={setHtml} />
+          <HtmlEditor />
         </div>
         <div
           sx={{
