@@ -58,6 +58,7 @@ export function NodeEditor({
         borderBottomWidth: '1px',
         borderBottomStyle: 'solid',
         borderBottomColor: 'border',
+        zIndex: 4,
       }}
     >
       <div

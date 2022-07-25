@@ -162,13 +162,16 @@ export function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
   const tagButton = (
     <button
       sx={{
+        appearance: 'none',
+        WebkitAppearance: 'none',
         cursor: 'pointer',
         border: 'none',
-        backgroundColor: 'background',
+        backgroundColor: isSelected ? '#ff0' : 'background',
         color: 'text',
-        fontSize: 1,
-        fontWeight: isSelected ? 600 : 400,
-        px: 0,
+        fontSize: '14px',
+        fontWeight: isSelected ? 700 : 400,
+        borderRadius: '6px',
+        px: 2,
         mr: 0,
         ml: 0,
         textAlign: 'start',
@@ -216,7 +219,7 @@ export function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
           },
         }}
       />
-      <span sx={{ lineHeight: 1, fontFamily: 'monospace' }}>{tagButton}</span>
+      <span sx={{ fontSize: 1, lineHeight: 1, fontFamily: 'monospace' }}>{tagButton}</span>
       <Collapsible.Content>
         <div sx={{ ml: 4, py: '0.0625rem' }}>
           {value.children?.map((child, i) => {
@@ -281,11 +284,14 @@ export function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
           ></div>
           <div
             sx={{
-              fontWeight: isSelected ? 600 : 400,
               lineHeight: 1,
-              p: 0,
-              fontSize: 1,
-              fontFamily: 'monospace',
+              py: 0,
+              px: 2,
+              fontSize: '14px',
+              bg: isSelected ? '#ff0' : 'background',
+              fontWeight: isSelected ? 700 : 400,
+              borderRadius: '6px',
+              transition: 'background-color .2s ease-in-out',
             }}
           >
             &lt;/{value.tagName}&gt;
