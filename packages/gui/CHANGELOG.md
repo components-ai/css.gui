@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.190
+
+### Patch Changes
+
+- 684e2f65: Fix gradient stops adding
+
 ## 0.0.189
 
 ### Patch Changes
