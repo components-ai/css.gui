@@ -27,11 +27,12 @@ export const defaultTheme: any = {
   letterSpacings: { tracked: '0.1em', negative: '-0.05em', large: '0.25em' },
   lineHeights: { solid: 1, heading: 1.2, body: 1.4 },
   borderWidths: ['1px', '2px', '4px', '8px'],
-  fonts: [
-    "-apple-system, BlinkMacSystemFont, 'avenir next', avenir, 'helvetica neue', helvetica, Ubuntu, roboto, noto, segoe ui, arial, sans-serif",
-    '"SFMono-Regular",Consolas,"Liberation Mono",Menlo,Courier,monospace',
-    'Inter',
-  ],
+  fonts: {
+    heading:
+      "-apple-system, BlinkMacSystemFont, 'avenir next', avenir, 'helvetica neue', helvetica, Ubuntu, roboto, noto, segoe ui, arial, sans-serif",
+    code: '"SFMono-Regular",Consolas,"Liberation Mono",Menlo,Courier,monospace',
+    body: 'Inter',
+  },
   borderRadius: [0, '4px', '8px', '16px', '32px', '64px', '9999999px'],
   breakpoints: [],
   borderStyles: [],

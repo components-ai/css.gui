@@ -8,7 +8,7 @@ export type Theme = {
   breakpoints?: Breakpoint[]
   colors?: ColorGroup[]
   durations?: Duration[]
-  fonts?: FontFamily[]
+  fonts?: Record<string, string>
   fontSizes?: FontSize[]
   fontWeights?: FontWeight[]
   gradients?: Gradient[]
@@ -175,6 +175,6 @@ export type TextStyleProperty = {
 }
 
 export type Transition = {
-  id: string,
+  id: string
   name: string
 }

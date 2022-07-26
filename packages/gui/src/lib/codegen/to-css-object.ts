@@ -18,10 +18,6 @@ export const stringifyProperty = (
       throw new Error(`Error stringifying ${property}\n${e}`)
     }
   }
-
-  if (property === 'fontFamily') {
-    return String(value) ?? null
-  }
 }
 
 type StyleEntry = [string, Length | string | null | undefined]

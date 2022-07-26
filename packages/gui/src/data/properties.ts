@@ -6,7 +6,7 @@ import {
   ViewportPercentageLengthUnits,
   PercentageLengthUnits,
 } from '../types/css'
-import { UnitSteps } from '../lib'
+import { themeGet, UnitSteps } from '../lib'
 import { allProperties } from './css-properties'
 import { camelCase, compact, mapValues, uniqBy } from 'lodash-es'
 import { UnitRanges } from './ranges'
@@ -64,6 +64,7 @@ import { color } from '../components/schemas/color'
 import { angle } from '../components/schemas/angle'
 import { time } from '../components/schemas/time'
 import { topLevel } from '../components/schemas/topLevel'
+import { stringifyFontFamily } from '../lib/stringify'
 
 type PropertyData = {
   input: PrimitiveType | ComponentType<EditorPropsWithLabel<any>>
@@ -639,6 +640,7 @@ export const rawProperties: Record<string, any> = {
   },
   fontFamily: {
     input: FontFamily,
+    stringify: stringifyFontFamily,
     dependantProperties: ['fontStyle', 'fontVariationSettings'],
     defaultValue: 'Inter',
     themeProperty: 'fonts',

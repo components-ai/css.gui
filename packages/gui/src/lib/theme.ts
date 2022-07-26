@@ -46,22 +46,13 @@ type FontsArray = string[]
 type Fonts = FontsObject | FontsArray
 export const importFonts = (fonts: Fonts) => {
   if (Array.isArray(fonts)) {
-    return fonts.map((value: string) => {
+    return fonts.reduce((acc, value: string) => {
       return {
-        id: uuid(),
-        name: value,
-        stack: value,
+        ...acc,
+        [value]: value,
       }
-    })
+    }, {})
   }
-
-  return Object.entries(fonts).map(([key, value]) => {
-    return {
-      id: uuid(),
-      name: key,
-      stack: value,
-    }
-  })
 }
 
 type RawLength = number | string

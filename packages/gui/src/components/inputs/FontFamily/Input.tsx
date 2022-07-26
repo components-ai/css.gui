@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { kebabCase, uniq } from 'lodash-es'
+import { kebabCase } from 'lodash-es'
 import { useCombobox } from 'downshift'
 import { FontFamilyType } from '../../../types/css'
 import { EditorProps } from '../../../types/editor'
@@ -70,7 +70,7 @@ export function FontFamilyInput({ label, value, onChange, onRemove }: Props) {
     getFontData()
   }, [])
 
-  const themeFonts = uniq(theme.fonts?.map((f) => f.stack) || [])
+  const themeFonts = Object.keys(theme.fonts || {})
   const [includeSans, setIncSans] = React.useState<boolean>(true)
   const [includeSerif, setIncSerif] = React.useState<boolean>(true)
   const [includeMono, setIncMono] = React.useState<boolean>(true)

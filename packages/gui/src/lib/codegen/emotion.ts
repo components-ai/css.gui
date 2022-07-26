@@ -6,22 +6,24 @@ import { stringifyHastNode } from './stringify-hast-node'
 import { toReactProps } from './to-react-props'
 import { format } from './format'
 import { getPropSyntax } from './util'
+import { Theme } from '../../types/theme'
 
-const h = (tagName: string, props: any, children?: any[]) => {
-  const newProps = toReactProps(props)
+const h =
+  (theme?: Theme) => (tagName: string, props: any, children?: any[]) => {
+    const newProps = toReactProps(props)
 
-  if (newProps.style) {
-    const style = newProps.style
-    delete newProps.style
-    newProps.css = toCSSObject(style)
+    if (newProps.style) {
+      const style = newProps.style
+      delete newProps.style
+      newProps.css = toCSSObject(style, theme)
+    }
+
+    return { tagName, props: newProps, children }
   }
 
-  return { tagName, props: newProps, children }
-}
-
-export const emotion = async (node: HtmlNode) => {
+export const emotion = async (node: HtmlNode, options: any) => {
   const root = editorSchemaToHast(node, { addSlotSyntax: true })
-  const functionBody = stringifyHastNode(toH(h, root))
+  const functionBody = stringifyHastNode(toH(h(options.theme), root))
 
   const output = `
   /** @jsxImportSource @emotion/react */
