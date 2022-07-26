@@ -13,6 +13,7 @@ import {
   removeInternalCSSClassSyntax,
 } from './classes'
 import { addPseudoSyntax } from './pseudos'
+import { themeGet } from './theme'
 
 export function stringifySelector(selector: string): string {
   if (isElement(selector)) {
@@ -85,6 +86,16 @@ export function stringifyPrimitive(value: Primitive, theme?: Theme) {
     return value
   }
   return stringifyUnit(value)
+}
+
+export function stringifyFontFamily(value: string, theme?: Theme) {
+  return (
+    themeGet({
+      property: 'fontFamily',
+      path: value,
+      theme,
+    }) ?? value
+  )
 }
 
 type Primitive = Length | number | Color | MultidimensionalLength | string

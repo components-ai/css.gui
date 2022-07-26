@@ -1,11 +1,14 @@
 import { debounce, uniq } from 'lodash-es'
 import { useEffect, useState } from 'react'
+import { stringifyFontFamily } from '../../lib/stringify'
+import { Theme } from '../../types/theme'
 import {
   buildFontFamiliesHref,
   buildVariableFontFamiliesHref,
 } from '../inputs/FontFamily/FontTags'
+import { useTheme } from '../providers/ThemeContext'
 
-export function getStyleFonts(style: any): string[] {
+export function getStyleFonts(style: any, theme?: Theme): string[] {
   if (!style) return []
   let fonts: string[] = []
 
@@ -19,10 +22,10 @@ export function getStyleFonts(style: any): string[] {
     }
   }
 
-  return uniq(fonts)
+  return uniq(fonts).map((font) => stringifyFontFamily(font, theme))
 }
 
-export function getHTMLTreeFonts(root: any): string[] {
+export function getHTMLTreeFonts(root: any, theme?: Theme): string[] {
   if (!root) return []
   let treeFonts: any[] = []
 
@@ -31,7 +34,7 @@ export function getHTMLTreeFonts(root: any): string[] {
   }
 
   if (root.type === 'component' && root.value) {
-    return [...treeFonts, ...getHTMLTreeFonts(root.value)]
+    return [...treeFonts, ...getHTMLTreeFonts(root.value, theme)]
   }
 
   if (!root.children) {
@@ -40,11 +43,11 @@ export function getHTMLTreeFonts(root: any): string[] {
 
   for (const node of root.children) {
     if (node.type !== 'text') {
-      treeFonts = [...treeFonts, ...getHTMLTreeFonts(node)]
+      treeFonts = [...treeFonts, ...getHTMLTreeFonts(node, theme)]
     }
   }
 
-  return uniq(treeFonts)
+  return uniq(treeFonts).map((font) => stringifyFontFamily(font, theme))
 }
 
 interface BuildHrefProps {
@@ -52,14 +55,18 @@ interface BuildHrefProps {
   style: any
   setStaticHref: Function
   setVariableHref: Function
+  theme?: Theme
 }
 async function buildHrefs({
   tree,
   style,
   setStaticHref,
   setVariableHref,
+  theme,
 }: BuildHrefProps) {
-  const fonts = style ? getStyleFonts(style) : getHTMLTreeFonts(tree)
+  const fonts = style
+    ? getStyleFonts(style, theme)
+    : getHTMLTreeFonts(tree, theme)
   const staticHref = await buildFontFamiliesHref(fonts)
   const variableHref = await buildVariableFontFamiliesHref(fonts)
 
@@ -74,6 +81,7 @@ interface Props {
   style?: any
 }
 export function HTMLFontTags({ htmlTree = {}, style }: Props) {
+  const theme = useTheme()
   const [staticHref, setStaticHref] = useState<string>('')
   const [variableHref, setVariableHref] = useState<string>('')
 
@@ -83,6 +91,7 @@ export function HTMLFontTags({ htmlTree = {}, style }: Props) {
       style,
       setStaticHref,
       setVariableHref,
+      theme,
     })
   }, [htmlTree, style])
 
