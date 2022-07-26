@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.191
+
+### Patch Changes
+
+- 1fd09f49: Improve font family theme integration
+
 ## 0.0.190
 
 ### Patch Changes
