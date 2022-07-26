@@ -8,6 +8,7 @@ import { NumberInput } from '../NumberInput'
 import { getInputProps, randomInt } from '../../../lib/util'
 import { GradientStop as GradientStopValue } from './types'
 import { stringifyGradient } from './stringify'
+import { useTheme } from '../../providers/ThemeContext'
 
 interface StopsProps {
   value: GradientStopValue[]
@@ -20,6 +21,7 @@ export default function GradientStopsField({
   value,
   repeating,
 }: StopsProps) {
+  const theme = useTheme()
   const track = useRef<any>(null)
   const [selected, setSelected] = useState(-1)
   const [dragIndex, setDragIndex] = useState(-1)
@@ -72,7 +74,7 @@ export default function GradientStopsField({
           onChange([
             ...value,
             {
-              color: randomColor(),
+              color: randomColor({ theme, previousValue: '#000' }),
               hinting: randomInt(0, 100),
             },
           ])
