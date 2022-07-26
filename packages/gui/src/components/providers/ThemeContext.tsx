@@ -6,7 +6,9 @@ const DEFAULT_THEME_CONTEXT: Theme = {}
 const ThemeContext = React.createContext<Theme>(DEFAULT_THEME_CONTEXT)
 
 export const useTheme = (): Theme => React.useContext(ThemeContext)
-export const useThemeProperty = (property?: string): any[] => {
+export const useThemeProperty = (
+  property?: string
+): any[] | Record<string, string> => {
   const context = React.useContext(ThemeContext)
   switch (property) {
     case 'fontSizes':
@@ -24,7 +26,7 @@ export const useThemeProperty = (property?: string): any[] => {
     case 'colors':
       return context.colors || []
     case 'fonts':
-      return context.fonts || []
+      return context.fonts || {}
     case 'fontWeights':
       return context.fontWeights || []
     case 'letterSpacings':
