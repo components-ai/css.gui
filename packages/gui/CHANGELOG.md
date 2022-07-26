@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.189
+
+### Patch Changes
+
+- 05f3157a: Add component/slot to layers panel
+
 ## 0.0.188
 
 ### Patch Changes
