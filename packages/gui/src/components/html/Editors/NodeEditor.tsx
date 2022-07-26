@@ -10,6 +10,7 @@ import { NodeEditorDropdown } from '../../ui/dropdowns/NodeEditorDropdown'
 import { ComponentEditor } from '../Component'
 import { SlotEditor } from './SlotEditor'
 import { HTML_TAGS } from '../data'
+import { useNodeTypes } from './util'
 
 interface EditorProps {
   value: HtmlNode
@@ -40,10 +41,7 @@ export function NodeEditor({
     nodeType = 'slot'
   }
 
-  const baseNodeTypes = ['text', 'tag']
-  const nodeTypes = hasComponents
-    ? [...baseNodeTypes, 'component', 'slot']
-    : baseNodeTypes
+  const nodeTypes = useNodeTypes()
 
   return (
     <div

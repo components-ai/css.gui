@@ -10,6 +10,7 @@ import { HTML_TAGS } from './data'
 import { DEFAULT_ATTRIBUTES, DEFAULT_STYLES } from './default-styles'
 import { Plus } from 'react-feather'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
+import { useNodeTypes } from './Editors/util'
 
 interface EditorProps {
   value: HtmlNode
@@ -219,7 +220,9 @@ export function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
           },
         }}
       />
-      <span sx={{ fontSize: 1, lineHeight: 1, fontFamily: 'monospace' }}>{tagButton}</span>
+      <span sx={{ fontSize: 1, lineHeight: 1, fontFamily: 'monospace' }}>
+        {tagButton}
+      </span>
       <Collapsible.Content>
         <div sx={{ ml: 4, py: '0.0625rem' }}>
           {value.children?.map((child, i) => {
@@ -323,6 +326,8 @@ const DEFAULT_TEXT: HtmlNode = {
 function AddChildButton({ onClick }: { onClick(type: string): void }) {
   const [hovered, setHovered] = useState(false)
   const [open, setOpen] = useState(false)
+  const nodeTypes = useNodeTypes()
+
   return (
     <div sx={{ position: 'relative' }}>
       <DropdownMenu.Root open={open} onOpenChange={setOpen}>
@@ -366,7 +371,7 @@ function AddChildButton({ onClick }: { onClick(type: string): void }) {
             py: 2,
           }}
         >
-          {['tag', 'text'].map((childType) => {
+          {nodeTypes.map((childType) => {
             return (
               <DropdownMenu.Item
                 key={childType}
