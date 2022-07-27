@@ -1,15 +1,19 @@
-import { getInputProps } from '../../lib/util'
 import { DataTypeSchema, RegenOptions } from './types'
 import * as Toggle from '@radix-ui/react-toggle'
 import { Link } from 'react-feather'
 import { SchemaInput } from '../inputs/SchemaInput'
 import { replace } from '../../lib/array'
+import { ComponentType } from 'react'
+import { EditorPropsWithLabel } from '../../types/editor'
 
 interface CreateTupleSchema<T> {
   itemSchema: DataTypeSchema<T>
   labels: string[]
   linkable?: boolean
   separator?: string
+  /** Custom block input for the schema */
+  input?: ComponentType<EditorPropsWithLabel<T[]>>
+  defaultValue?: T[]
 }
 
 /**
@@ -22,6 +26,8 @@ export function tupleSchema<T>({
   labels,
   linkable = true,
   separator = ' ',
+  input: CustomInput,
+  defaultValue: providedDefault,
 }: CreateTupleSchema<T>): DataTypeSchema<T[]> {
   function isLinked(value: T[]) {
     return value.length <= 1
@@ -46,7 +52,7 @@ export function tupleSchema<T>({
   return {
     type: `${itemSchema.type} list`,
     stringify,
-    defaultValue,
+    defaultValue: providedDefault ?? defaultValue,
     regenerate,
     validate: ((value: any) => {
       if (!(value instanceof Array)) {
@@ -55,6 +61,9 @@ export function tupleSchema<T>({
       return value.every((item) => itemSchema.validate(item))
     }) as any,
     input(props) {
+      if (CustomInput) {
+        return <CustomInput {...props} />
+      }
       const { value, onChange } = props
       const linked = isLinked(value)
       return (
