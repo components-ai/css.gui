@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.192
+
+### Patch Changes
+
+- 82aafd34: Add random image to image when added to canvas
+
 ## 0.0.191
 
 ### Patch Changes
