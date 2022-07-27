@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.193
+
+### Patch Changes
+
+- b5c54ad8: Make border radius theme aware
+
 ## 0.0.192
 
 ### Patch Changes
