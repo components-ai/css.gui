@@ -17,4 +17,7 @@ export const borderTopRightRadius = borderRadiusItem
 export const borderBottomRightRadius = borderRadiusItem
 
 // TODO four-valued syntax
-export const borderRadius = lengthPercentage()
+export const borderRadius = joinSchemas([
+  lengthPercentage({ range: 'nonnegative' }),
+  themeScale('borderRadius'),
+])
