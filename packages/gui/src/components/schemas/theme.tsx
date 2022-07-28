@@ -43,7 +43,7 @@ export function themeScale(path: string): DataTypeSchema<ThemeValue> {
   }
 }
 
-// Theme properties for stuff represented by a string names
+// Theme properties for stuff represented by a string name
 export function themeRecord(path: string): DataTypeSchema<ThemeNamedValue> {
   return {
     type: 'theme',
