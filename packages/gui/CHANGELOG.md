@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.194
+
+### Patch Changes
+
+- 9784d96d: Add changeset
+
 ## 0.0.193
 
 ### Patch Changes
