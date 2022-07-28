@@ -46,7 +46,10 @@ const trackList = joinSchemas(
   { defaultType: 'repeat' }
 )
 
-export const gridAutoRow = listSchema({ itemSchema: trackSize, separator: ' ' })
+export const gridAutoRows = listSchema({
+  itemSchema: trackSize,
+  separator: ' ',
+})
 export const gridAutoColumns = listSchema({
   itemSchema: trackSize,
   separator: ' ',
