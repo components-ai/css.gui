@@ -6,7 +6,7 @@ import {
   ViewportPercentageLengthUnits,
   PercentageLengthUnits,
 } from '../types/css'
-import { themeGet, UnitSteps } from '../lib'
+import { UnitSteps } from '../lib'
 import { allProperties } from './css-properties'
 import { camelCase, compact, mapValues, uniqBy } from 'lodash-es'
 import { UnitRanges } from './ranges'
@@ -40,6 +40,7 @@ import * as overflowProperties from '../components/schemas/overflow'
 import * as overscrollProperties from '../components/schemas/overscroll'
 import * as paddingProperties from '../components/schemas/padding'
 import * as perspectiveProperties from '../components/schemas/perspective'
+import * as placeProperties from '../components/schemas/place'
 import * as scrollMarginProperties from '../components/schemas/scroll-margin'
 import * as scrollPaddingProperties from '../components/schemas/scroll-padding'
 import { scrollSnapAlign } from '../components/schemas/scroll-snap-align'
@@ -138,57 +139,6 @@ export const rawProperties: Record<string, any> = {
     defaultValue: 'tomato',
     keywords: ['auto', 'currentcolor', 'transparent'],
   },
-  alignContent: {
-    input: 'keyword',
-
-    keywords: [
-      'center',
-      'start',
-      'end',
-      'flex-start',
-      'flex-end',
-      'normal',
-      'baseline',
-      'first baseline',
-      'last baseline',
-      'space-between',
-      'space-around',
-      'space-evenly',
-      'stretch',
-      'safe center',
-      'unsafe center',
-    ],
-    defaultValue: 'center',
-  },
-  alignItems: {
-    input: 'keyword',
-
-    keywords: [
-      'center',
-      'start',
-      'end',
-      'flex-start',
-      'flex-end',
-      'normal',
-      'stretch',
-      'self-start',
-      'self-end',
-      'baseline',
-      'first baseline',
-      'last baseline',
-      'safe center',
-      'unsafe center',
-      'safe right',
-      'unsafe right',
-      'safe end',
-      'unsafe end',
-      'safe self-end',
-      'unsafe self-end',
-      'safe flex-end',
-      'unsafe flex-end',
-    ],
-    defaultValue: 'center',
-  },
   alignmentBaseline: {
     // Can be used with tspan tref altGlyph and textPath SVG elements
     input: 'keyword',
@@ -201,28 +151,6 @@ export const rawProperties: Record<string, any> = {
       'central',
       'mathematical',
       'text-top',
-    ],
-  },
-  alignSelf: {
-    input: 'keyword',
-
-    keywords: [
-      'auto',
-      'center',
-      'start',
-      'end',
-      'flex-start',
-      'flex-end',
-      'normal',
-      'stretch',
-      'baseline',
-      'first baseline',
-      'last baseline',
-      'space-between',
-      'space-around',
-      'space-evenly',
-      'safe center',
-      'unsafe center',
     ],
   },
   all: {
@@ -891,71 +819,6 @@ export const rawProperties: Record<string, any> = {
     input: 'keyword',
     keywords: ['auto', 'isolate'],
   },
-  justifyContent: {
-    input: 'keyword',
-
-    keywords: [
-      'start',
-      'center',
-      'end',
-      'space-between',
-      'space-around',
-      'space-evenly',
-      'flex-start',
-      'flex-end',
-      'left',
-      'right',
-      'normal',
-      'stretch',
-      'safe center',
-      'unsafe center',
-    ],
-    defaultValue: 'center',
-  },
-  justifyItems: {
-    input: 'keyword',
-    keywords: [
-      'normal',
-      'stretch',
-      'center',
-      'start',
-      'end',
-      'flex-start',
-      'flex-end',
-      'self-start',
-      'self-end',
-      'left',
-      'right',
-      'baseline',
-      'first baseline',
-      'last baseline',
-      'safe center',
-      'unsafe center',
-    ],
-    defaultValue: 'center',
-  },
-  justifySelf: {
-    input: 'keyword',
-    keywords: [
-      'normal',
-      'stretch',
-      'center',
-      'start',
-      'end',
-      'flex-start',
-      'flex-end',
-      'self-start',
-      'self-end',
-      'left',
-      'right',
-      'baseline',
-      'first baseline',
-      'last baseline',
-      'safe center',
-      'unsafe center',
-    ],
-    defaultValue: 'center',
-  },
   letterSpacing: {
     input: 'length',
     percentage: true,
@@ -1166,48 +1029,7 @@ export const rawProperties: Record<string, any> = {
   ...overscrollProperties,
   ...paddingProperties,
   ...perspectiveProperties,
-  placeItems: {
-    input: 'keyword',
-    keywords: [
-      'center',
-      'normal start',
-      'center normal',
-      'start legacy',
-      'end normal',
-      'self-start legacy',
-      'self-end normal',
-      'flex-start legacy',
-      'flex-end normal',
-      'left legacy',
-      'right normal',
-      'baseline normal',
-      'first baseline legacy',
-      'last baseline normal',
-      'stretch legacy',
-    ],
-    defaultValue: 'center',
-  },
-  placeSelf: {
-    input: 'keyword',
-    keywords: [
-      'auto center',
-      'normal start',
-      'center normal',
-      'start auto',
-      'end normal',
-      'self-start auto',
-      'self-end normal',
-      'flex-start auto',
-      'flex-end normal',
-      'left auto',
-      'right normal',
-      'baseline normal',
-      'first baseline auto',
-      'last baseline normal',
-      'stretch auto',
-    ],
-    defaultValue: 'auto center',
-  },
+  ...placeProperties,
   pointerEvents: {
     input: 'keyword',
     keywords: [
