@@ -25,6 +25,7 @@ import * as columnProperties from '../components/schemas/columns'
 import * as columnRuleProperties from '../components/schemas/column-rule'
 import { content } from '../components/schemas/content'
 import { filter } from '../components/schemas/filter'
+import * as flexProperties from '../components/schemas/flex'
 import * as gapProperties from '../components/schemas/gap'
 import * as gridProperties from '../components/schemas/grid'
 import * as gridAreaProperties from '../components/schemas/grid-area'
@@ -464,26 +465,7 @@ export const rawProperties: Record<string, any> = {
     defaultValue: '#6465ff',
   },
   filter,
-  flexBasis: {
-    input: 'length',
-    percentage: true,
-    range: {
-      [AbsoluteLengthUnits.Px]: [0, 512],
-      [FontRelativeLengthUnits.Em]: [0, 16],
-      [FontRelativeLengthUnits.Rem]: [0, 16],
-      [PercentageLengthUnits.Pct]: [0.1, 100],
-    },
-    keywords: [
-      'auto',
-      'fill',
-      'max-content',
-      'min-content',
-      'fit-content',
-      'content',
-    ],
-    defaultValue: 'auto',
-    themeProperty: 'sizes',
-  },
+  ...flexProperties,
   flexDirection: {
     input: 'keyword',
 
@@ -511,16 +493,6 @@ export const rawProperties: Record<string, any> = {
       'column-reverse wrap',
     ],
     defaultValue: 'row wrap',
-  },
-  flexGrow: {
-    input: 'number',
-    range: { number: [0, Infinity] },
-    defaultValue: 0,
-  },
-  flexShrink: {
-    input: 'number',
-    range: { number: [0, Infinity] },
-    defaultValue: 1,
   },
   flexWrap: {
     input: 'keyword',

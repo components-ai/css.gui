@@ -30,13 +30,19 @@ export function percentage({
 
 export function number({
   defaultValue = 0,
-}: { defaultValue?: number } = {}): DataTypeSchema<number> {
+  range,
+}: {
+  defaultValue?: number
+  range?: 'nonnegative'
+} = {}): DataTypeSchema<number> {
   function regenerate() {
     return randomStep(0, 2, 0.1)
   }
+  const [min, max] =
+    range === 'nonnegative' ? [0, Infinity] : [-Infinity, Infinity]
   return {
     type: 'number',
-    inlineInput: bindProps(NumberInput, { step: 0.1 }),
+    inlineInput: bindProps(NumberInput, { step: 0.1, min, max }),
     stringify: (x: number) => x.toString(),
     defaultValue,
     regenerate,
