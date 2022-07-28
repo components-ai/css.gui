@@ -3,6 +3,7 @@ import { joinSchemas } from './joinSchemas'
 import { listSchema } from './list'
 import { objectSchema } from './object'
 import { keyword, length } from './primitives'
+import { themeRecord } from './theme'
 import { toggle } from './toggle'
 
 const singleBoxShadow = objectSchema({
@@ -22,4 +23,5 @@ export const boxShadow = joinSchemas([
     itemSchema: singleBoxShadow,
   }),
   keyword(['none']),
+  themeRecord('boxShadows'),
 ])
