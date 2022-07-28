@@ -66,6 +66,7 @@ import { angle } from '../components/schemas/angle'
 import { time } from '../components/schemas/time'
 import { topLevel } from '../components/schemas/topLevel'
 import { stringifyFontFamily } from '../lib/stringify'
+import { quotes } from '../components/schemas/quotes'
 
 type PropertyData = {
   input: PrimitiveType | ComponentType<EditorPropsWithLabel<any>>
@@ -1234,6 +1235,7 @@ export const rawProperties: Record<string, any> = {
     keywords: ['economy', 'exact'],
     defaultValue: 'exact',
   },
+  quotes,
   resize: {
     input: 'keyword',
     keywords: ['none', 'both', 'horizontal', 'vertical', 'block', 'inline'],
