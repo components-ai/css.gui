@@ -35,6 +35,7 @@ import * as maskProperties from '../components/schemas/mask'
 import * as maskBorderProperties from '../components/schemas/mask-border'
 import * as objectProperties from '../components/schemas/object-position'
 import * as offsetProperties from '../components/schemas/offset'
+import * as outlineProperties from '../components/schemas/outline'
 import * as overflowProperties from '../components/schemas/overflow'
 import * as overscrollProperties from '../components/schemas/overscroll'
 import * as paddingProperties from '../components/schemas/padding'
@@ -1144,43 +1145,7 @@ export const rawProperties: Record<string, any> = {
     range: { number: [1, 10] },
     defaultValue: 2,
   },
-  outlineColor: {
-    input: 'color',
-    keywords: ['invert'],
-    defaultValue: '#6465ff',
-  },
-  outlineOffset: {
-    input: 'length',
-    percentage: true,
-    defaultValue: {
-      value: 4,
-      unit: 'px',
-    },
-  },
-  outlineStyle: {
-    input: 'keyword',
-    keywords: [
-      'none',
-      'dotted',
-      'dashed',
-      'solid',
-      'double',
-      'groove',
-      'ridge',
-      'inset',
-      'outset',
-    ],
-    defaultValue: 'solid',
-  },
-  outlineWidth: {
-    input: 'length',
-    percentage: true,
-    keywords: ['thin', 'medium', 'thick'],
-    defaultValue: {
-      value: 2,
-      unit: 'px',
-    },
-  },
+  ...outlineProperties,
   ...overflowProperties,
   overflowAnchor: {
     input: 'keyword',
