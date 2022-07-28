@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.195
+
+### Patch Changes
+
+- 5a373ac3: Add support for box shadows in theme
+
 ## 0.0.194
 
 ### Patch Changes
