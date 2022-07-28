@@ -1,7 +1,7 @@
 import { color } from './color'
 import { joinSchemas } from './joinSchemas'
-import { objectSchema } from './object'
 import { keyword, length } from './primitives'
+import { shorthandSchema } from './shorthand'
 
 export const outlineColor = joinSchemas([
   color({ defaultValue: '#6465ff' }),
@@ -26,7 +26,7 @@ export const outlineStyle = keyword([
   'outset',
 ])
 
-export const outline = objectSchema({
+export const outline = shorthandSchema({
   fields: {
     color: outlineColor,
     width: outlineWidth,
