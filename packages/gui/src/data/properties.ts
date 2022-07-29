@@ -120,6 +120,9 @@ function normalizeSchema(propertyData: PropertyData): DataTypeSchema<any> {
       }
     } else {
       const { defaultValue, ...basePropertyData } = propertyData
+      // TODO: Figure out how to make this use Ranges rather than UnitRanges
+      // so there's proper support for `range: 'nonnegative'`
+      // @ts-ignore
       let schema = primitiveMap[input](basePropertyData) as any
       return joinSchemas(
         compact([
