@@ -31,19 +31,24 @@ export function percentage({
 export function number({
   defaultValue = 0,
   range,
+  regenRange = [0, 2],
+  stringify = (x) => x.toString(),
 }: {
   defaultValue?: number
   range?: 'nonnegative'
+  regenRange?: [number, number]
+  stringify?(x: number): string
 } = {}): DataTypeSchema<number> {
   function regenerate() {
-    return randomStep(0, 2, 0.1)
+    const [regenMin, regenMax] = regenRange
+    return randomStep(regenMin, regenMax, 0.1)
   }
   const [min, max] =
     range === 'nonnegative' ? [0, Infinity] : [-Infinity, Infinity]
   return {
     type: 'number',
     inlineInput: bindProps(NumberInput, { step: 0.1, min, max }),
-    stringify: (x: number) => x.toString(),
+    stringify,
     defaultValue,
     regenerate,
     validate: ((value: any) => typeof value === 'number') as any,

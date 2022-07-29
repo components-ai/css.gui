@@ -4,7 +4,7 @@ import { EditorPropsWithLabel } from '../types/editor'
 import { SchemaInput } from './inputs/SchemaInput'
 import { DataTypeSchema } from './schemas/types'
 
-interface FieldArrayProps<T> extends EditorPropsWithLabel<T[]> {
+export interface FieldArrayProps<T> extends EditorPropsWithLabel<T[]> {
   /**
    * The component to render each of the individual input values.
    * (See `LayerProps` for what props this takes)

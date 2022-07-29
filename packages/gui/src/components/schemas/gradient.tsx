@@ -1,6 +1,4 @@
-import { sortBy } from 'lodash-es'
 import { bindProps } from '../../lib/components'
-import { randomInt } from '../../lib/util'
 import GradientStopsField from '../inputs/Gradient/stops'
 import { GradientStop } from '../inputs/Gradient/types'
 import { functionSchema } from './function'
@@ -11,43 +9,25 @@ import { DataTypeSchema } from './types'
 import { objectSchema } from './object'
 import { joinSchemas } from './joinSchemas'
 import { color } from './color'
+import { listSchema } from './list'
+import { stringifyStops } from '../inputs/Gradient/stringify'
 
-export const stringifyStops = (stops: GradientStop[], unit: string = '%') => {
-  return sortBy(stops, (stop) => stop.hinting)
-    ?.filter(Boolean)
-    ?.map(({ color: hintColor, hinting }) => {
-      const resolved = color().stringify(hintColor)
-      return `${resolved} ${hinting}${unit}`
-    })
-    ?.join(', ')
-}
+const gradientStop = objectSchema({
+  fields: {
+    color: color({ defaultValue: '#000000' }),
+    hinting: number({
+      stringify: (x) => `${x}%`,
+      regenRange: [0, 100],
+    }), // TODO should be length or percentage
+  },
+})
 
 function stops(repeating: boolean = false): DataTypeSchema<GradientStop[]> {
-  return {
-    type: 'gradient stops',
+  return listSchema({
+    itemSchema: gradientStop,
     input: bindProps(GradientStopsField, { repeating }),
-    stringify: (value) => stringifyStops(value, '%'),
-    defaultValue: [
-      { color: 'black', hinting: 0 },
-      { color: 'transparent', hinting: 100 },
-    ],
-    regenerate({ theme, previousValue }) {
-      const newStops = previousValue.map(() => randomInt(0, 101))
-      newStops.sort()
-      return newStops.map((hinting) => {
-        return {
-          hinting,
-          color: color().regenerate!({ theme, previousValue: 'black' }),
-        }
-      })
-    },
-    validate: ((value: any) => {
-      if (!(value instanceof Array)) return false
-      return value.every((item) => {
-        return color().validate(item.color) && number().validate(item.hinting)
-      })
-    }) as any,
-  }
+    stringify: stringifyStops,
+  })
 }
 
 const directions = [

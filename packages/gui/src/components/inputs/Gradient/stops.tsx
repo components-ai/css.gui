@@ -9,17 +9,23 @@ import { getInputProps, randomInt } from '../../../lib/util'
 import { GradientStop as GradientStopValue } from './types'
 import { stringifyGradient } from './stringify'
 import { useTheme } from '../../providers/ThemeContext'
+import { DataTypeSchema } from '../../schemas/types'
+import { SchemaInput } from '../SchemaInput'
+import { color } from '../../schemas/color'
+import { Theme } from '../../../types/theme'
 
 interface StopsProps {
   value: GradientStopValue[]
   onChange: any
   repeating: boolean
+  itemSchema: DataTypeSchema<any>
 }
 
 export default function GradientStopsField({
   onChange,
   value,
   repeating,
+  itemSchema,
 }: StopsProps) {
   const theme = useTheme()
   const track = useRef<any>(null)
@@ -74,7 +80,10 @@ export default function GradientStopsField({
           onChange([
             ...value,
             {
-              color: randomColor({ theme, previousValue: '#000' }),
+              color: {
+                type: 'theme',
+                path: randomColor({ theme, previousValue: '#000' }),
+              },
               hinting: randomInt(0, 100),
             },
           ])
@@ -99,10 +108,11 @@ export default function GradientStopsField({
           height: '2rem',
         }}
       >
-        <Track value={value} repeating={repeating} />
+        <Track value={value} repeating={repeating} theme={theme} />
         {value.map((stop, i) => {
           return (
             <Marker
+              theme={theme}
               tabIndex={0}
               key={i}
               value={stop}
@@ -139,7 +149,9 @@ export default function GradientStopsField({
         })}
       </div>
       {selected !== -1 && value[selected] && (
-        <StopFields
+        <SchemaInput
+          label=""
+          schema={itemSchema}
           value={value[selected]}
           onChange={(newStopValue: GradientStopValue) => {
             const newValue = produce(value, (draft: any) => {
@@ -184,8 +196,9 @@ function Toolbar({ onAdd, onDelete }: ToolbarProps) {
 interface TrackProps {
   repeating: boolean
   value: GradientStopValue[]
+  theme: Theme
 }
-function Track({ repeating, value }: TrackProps) {
+function Track({ repeating, value, theme }: TrackProps) {
   return (
     <div
       sx={{
@@ -202,11 +215,14 @@ function Track({ repeating, value }: TrackProps) {
           content: "''",
           position: 'absolute',
           inset: 0,
-          backgroundImage: stringifyGradient({
-            type: repeating ? 'repeating-linear' : 'linear',
-            angle: { value: 90, unit: 'deg' },
-            stops: value,
-          }),
+          backgroundImage: stringifyGradient(
+            {
+              type: repeating ? 'repeating-linear' : 'linear',
+              angle: { value: 90, unit: 'deg' },
+              stops: value,
+            },
+            theme
+          ),
         },
       }}
     />
@@ -228,9 +244,10 @@ function StopFields(props: StopFieldsProps) {
 
 interface MarkerProps extends HTMLAttributes<HTMLDivElement> {
   value: GradientStopValue
+  theme: Theme
   isSelected: boolean
 }
-function Marker({ value, isSelected, ...props }: MarkerProps) {
+function Marker({ value, isSelected, theme, ...props }: MarkerProps) {
   return (
     <div
       {...props}
@@ -260,7 +277,7 @@ function Marker({ value, isSelected, ...props }: MarkerProps) {
           content: "''",
           position: 'absolute',
           inset: 0,
-          backgroundColor: value.color as any,
+          backgroundColor: color().stringify(value.color, theme),
         },
       }}
     />
