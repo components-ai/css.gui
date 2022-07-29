@@ -4,15 +4,17 @@ import {
   stringifyPosition,
   stringifyUnit,
 } from '../../../lib/stringify'
+import { Theme } from '../../../types/theme'
+import { color } from '../../schemas/color'
 import { Gradient } from './types'
 
-export function stringifyGradient(gradient: Gradient): string {
+export function stringifyGradient(gradient: Gradient, theme?: Theme): string {
   switch (gradient.type) {
     case 'linear':
     case 'repeating-linear': {
       return stringifyFunction(gradient.type + '-gradient', [
         gradient.angle,
-        stringifyStops(gradient, '%'),
+        stringifyStops(gradient, '%', theme),
       ])
     }
     case 'radial':
@@ -21,7 +23,7 @@ export function stringifyGradient(gradient: Gradient): string {
         `${gradient.shape ?? 'circle'} at ${stringifyPosition(
           gradient.position
         )}`,
-        stringifyStops(gradient, '%'),
+        stringifyStops(gradient, '%', theme),
       ])
     }
     case 'conic':
@@ -30,15 +32,22 @@ export function stringifyGradient(gradient: Gradient): string {
         `from ${stringifyUnit(gradient.angle)} at ${stringifyPosition(
           gradient.position
         )}`,
-        stringifyStops(gradient, '%'),
+        stringifyStops(gradient, '%', theme),
       ])
     }
   }
 }
 
-export const stringifyStops = (gradient: Gradient, unit: string) => {
+export const stringifyStops = (
+  gradient: Gradient,
+  unit: string,
+  theme?: Theme
+) => {
   return sortBy(gradient?.stops, (stop) => stop.hinting)
     ?.filter(Boolean)
-    ?.map(({ color, hinting }) => `${color} ${hinting}${unit}`)
+    ?.map(
+      ({ color: stopColor, hinting }) =>
+        `${color().stringify(stopColor, theme)} ${hinting}${unit}`
+    )
     ?.join(', ')
 }

@@ -31,9 +31,11 @@ export function percentage({
 export function number({
   defaultValue = 0,
   range,
+  stringify = (x) => x.toString(),
 }: {
   defaultValue?: number
   range?: 'nonnegative'
+  stringify?(x: number): string
 } = {}): DataTypeSchema<number> {
   function regenerate() {
     return randomStep(0, 2, 0.1)
@@ -43,7 +45,7 @@ export function number({
   return {
     type: 'number',
     inlineInput: bindProps(NumberInput, { step: 0.1, min, max }),
-    stringify: (x: number) => x.toString(),
+    stringify,
     defaultValue,
     regenerate,
     validate: ((value: any) => typeof value === 'number') as any,

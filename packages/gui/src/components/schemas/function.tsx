@@ -18,8 +18,8 @@ export function functionSchema<N extends string, T>(
   return {
     // a function's display type is its name
     type: name,
-    stringify(value: FunctionData<N, T>) {
-      return `${value.name}(${argsSchema.stringify(value.arguments)})`
+    stringify(value: FunctionData<N, T>, theme) {
+      return `${value.name}(${argsSchema.stringify(value.arguments, theme)})`
     },
     defaultValue: {
       name,

@@ -1,15 +1,18 @@
+import { ComponentType } from 'react'
 import { split } from '../../lib/array'
-import FieldArray from '../FieldArray'
+import FieldArray, { FieldArrayProps } from '../FieldArray'
 import { DataTypeSchema, RegenOptions } from './types'
 
 interface CreateList<T> {
   itemSchema: DataTypeSchema<T>
   separator?: string
+  input?: ComponentType<FieldArrayProps<T>>
 }
 
 export function listSchema<T>({
   itemSchema,
   separator = ', ',
+  input: Input,
 }: CreateList<T>): DataTypeSchema<T[]> {
   const stringify = (value: T[], ...args: any[]) => {
     const stringified = value.map((item) => itemSchema.stringify(item, ...args))
@@ -28,6 +31,9 @@ export function listSchema<T>({
     stringify,
     defaultValue,
     input(props) {
+      if (Input) {
+        return <Input {...props} itemSchema={itemSchema} />
+      }
       return <FieldArray {...props} itemSchema={itemSchema} />
     },
     regenerate,
