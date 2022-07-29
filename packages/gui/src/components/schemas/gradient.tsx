@@ -17,6 +17,7 @@ const gradientStop = objectSchema({
     color: color({ defaultValue: '#000000' }),
     hinting: number({
       stringify: (x) => `${x}%`,
+      regenRange: [0, 100],
     }), // TODO should be length or percentage
   },
 })
