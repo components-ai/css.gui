@@ -40,6 +40,9 @@ export function functionSchema<N extends string, T>(
     input(props) {
       return (
         <div>
+          <span sx={{ fontSize: 1, fontWeight: 600 }}>
+            {props.value.name}()
+          </span>
           <SchemaInput
             schema={argsSchema}
             {...getInputProps(props, 'arguments')}
