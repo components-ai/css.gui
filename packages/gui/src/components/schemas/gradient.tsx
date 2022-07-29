@@ -1,4 +1,3 @@
-import { sortBy } from 'lodash-es'
 import { bindProps } from '../../lib/components'
 import GradientStopsField from '../inputs/Gradient/stops'
 import { GradientStop } from '../inputs/Gradient/types'
@@ -11,16 +10,7 @@ import { objectSchema } from './object'
 import { joinSchemas } from './joinSchemas'
 import { color } from './color'
 import { listSchema } from './list'
-
-export const stringifyStops = (stops: GradientStop[], unit: string = '%') => {
-  return sortBy(stops, (stop) => stop.hinting)
-    ?.filter(Boolean)
-    ?.map(({ color: hintColor, hinting }) => {
-      const resolved = color().stringify(hintColor)
-      return `${resolved} ${hinting}${unit}`
-    })
-    ?.join(', ')
-}
+import { stringifyStops } from '../inputs/Gradient/stringify'
 
 const gradientStop = objectSchema({
   fields: {
@@ -35,6 +25,7 @@ function stops(repeating: boolean = false): DataTypeSchema<GradientStop[]> {
   return listSchema({
     itemSchema: gradientStop,
     input: bindProps(GradientStopsField, { repeating }),
+    stringify: stringifyStops,
   })
 }
 

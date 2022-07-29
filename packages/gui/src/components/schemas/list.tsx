@@ -7,16 +7,22 @@ interface CreateList<T> {
   itemSchema: DataTypeSchema<T>
   separator?: string
   input?: ComponentType<FieldArrayProps<T>>
+  stringify?(value: T[]): string
 }
 
 export function listSchema<T>({
   itemSchema,
   separator = ', ',
   input: Input,
+  stringify,
 }: CreateList<T>): DataTypeSchema<T[]> {
-  const stringify = (value: T[], ...args: any[]) => {
-    const stringified = value.map((item) => itemSchema.stringify(item, ...args))
-    return stringified.join(separator)
+  if (!stringify) {
+    stringify = (value: T[], ...args: any[]) => {
+      const stringified = value.map((item) =>
+        itemSchema.stringify(item, ...args)
+      )
+      return stringified.join(separator)
+    }
   }
   const defaultValue = [itemSchema.defaultValue]
 
