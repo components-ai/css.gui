@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.196
+
+### Patch Changes
+
+- a3654f79: Add theme support in gradient
+
 ## 0.0.195
 
 ### Patch Changes
