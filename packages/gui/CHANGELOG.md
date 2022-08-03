@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.197
+
+### Patch Changes
+
+- 5cb0fcf5: Show function names in input
+
 ## 0.0.196
 
 ### Patch Changes
