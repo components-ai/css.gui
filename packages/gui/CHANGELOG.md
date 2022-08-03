@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.198
+
+### Patch Changes
+
+- f464b9d0: Bump theme-ui from 0.14.6 to 0.14.7
+
 ## 0.0.197
 
 ### Patch Changes
