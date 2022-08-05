@@ -74,6 +74,7 @@ export const ComponentEditor = ({ value, onChange }: ComponentEditorProps) => {
       >
         <Label>Component</Label>
         <Combobox
+          value={value.tagName}
           onFilterItems={handleFilterComponents}
           onItemSelected={handleComponentSelected}
           decorateItemText={(id) => {
