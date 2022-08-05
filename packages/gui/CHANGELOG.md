@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.199
+
+### Patch Changes
+
+- af5a6cf9: Add component name to dropdown in editor
+
 ## 0.0.198
 
 ### Patch Changes
