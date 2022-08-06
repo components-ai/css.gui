@@ -1,13 +1,12 @@
-import { HTMLAttributes } from 'react'
+import { HTMLAttributes, ReactNode } from 'react'
 import Link, { LinkProps } from 'next/link'
 import { useRouter } from 'next/router'
 
-interface NavItemProps extends HTMLAttributes<HTMLLinkElement> {}
 export const NavItem = ({
   children,
   href,
   ...props
-}: NavItemProps & LinkProps) => {
+}: LinkProps & { children: ReactNode }) => {
   const router = useRouter()
   const isActive = router.asPath === href
   return (
@@ -26,8 +25,8 @@ export const NavItem = ({
           py: 2,
           transition: 'color .2s ease-in-out',
           ':hover': {
-            color: isActive? 'background' : 'primary'
-          }
+            color: isActive ? 'background' : 'primary',
+          },
         }}
       >
         {children}
@@ -36,8 +35,7 @@ export const NavItem = ({
   )
 }
 
-interface NavSectionTitleProps extends HTMLAttributes<HTMLHeadingElement> {}
-export const NavSectionTitle = (props: NavSectionTitleProps) => {
+export const NavSectionTitle = (props: HTMLAttributes<HTMLHeadingElement>) => {
   return (
     <h3
       sx={{
