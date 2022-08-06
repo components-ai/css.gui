@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.201
+
+### Patch Changes
+
+- afcce3ed: Improve control styles
+
 ## 0.0.200
 
 ### Patch Changes
