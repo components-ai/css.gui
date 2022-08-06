@@ -3,6 +3,7 @@ import { get, range } from 'lodash-es'
 import { ThemeNamedValue, ThemeValue } from '../../types/css'
 import { SelectInput } from '../inputs/SelectInput'
 import { DataTypeSchema } from './types'
+import { joinPath } from '../providers/util'
 
 export function themeScale(path: string): DataTypeSchema<ThemeValue> {
   return {
@@ -16,11 +17,15 @@ export function themeScale(path: string): DataTypeSchema<ThemeValue> {
       )
     }) as any,
     stringify(value, theme) {
-      return get(theme, `${value.path}.${value.index}`)
+      return get(theme, joinPath(value.path, value.index))
     },
     inlineInput(props) {
       const theme = useTheme()
       const numOptions = get(theme, path)?.length || 0
+      const decorateText = (step: string) => {
+        const value = get(theme, joinPath(path, step))
+        return `${step} - ${value}`
+      }
       return (
         <SelectInput
           label=""
@@ -32,6 +37,7 @@ export function themeScale(path: string): DataTypeSchema<ThemeValue> {
             })
           }
           options={range(0, numOptions).map((x) => x.toString())}
+          decorateText={decorateText}
         />
       )
     },

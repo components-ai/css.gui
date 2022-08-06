@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.200
+
+### Patch Changes
+
+- 58c2c3fa: Display theme value for scales
+
 ## 0.0.199
 
 ### Patch Changes

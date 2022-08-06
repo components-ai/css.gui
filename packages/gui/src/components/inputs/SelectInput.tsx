@@ -9,9 +9,13 @@ interface Props<T extends string> {
   options: readonly T[]
   ruleset?: any
   property?: string
+  decorateText?(text: T): string
 }
 // A select input with a label
-export function SelectInput<T extends string>(props: Props<T>) {
+export function SelectInput<T extends string>({
+  decorateText,
+  ...props
+}: Props<T>) {
   const { value, onChange, options = [] } = props
 
   return (
@@ -34,7 +38,9 @@ export function SelectInput<T extends string>(props: Props<T>) {
             return (
               <Select.Item key={v} value={v}>
                 <Select.ItemIndicator />
-                <Select.ItemText>{v}</Select.ItemText>
+                <Select.ItemText>
+                  {decorateText ? decorateText(v) : v}
+                </Select.ItemText>
               </Select.Item>
             )
           })}
