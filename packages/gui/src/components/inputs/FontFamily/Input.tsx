@@ -158,7 +158,7 @@ export function FontFamilyInput({ label, value, onChange, onRemove }: Props) {
           {label}
         </Label>
       )}
-      <div sx={{ display: 'flex', flexDirection: 'row' }}>
+      <div sx={{ pb: 2, display: 'flex', flexDirection: 'row', gap: '8px' }}>
         <input
           type="text"
           value={value.fontFamily}
@@ -252,8 +252,8 @@ export function FontFamilyInput({ label, value, onChange, onRemove }: Props) {
                 width: '100%',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                paddingY: 2,
-                paddingX: 3,
+                py: 2,
+                px: 3,
                 fontSize: 1,
               }}
             >
@@ -308,6 +308,9 @@ export function FontFamilyInput({ label, value, onChange, onRemove }: Props) {
             })}
         </ul>
       </div>
+      <section sx={{ 
+        display: 'flex', flexDirection: 'column', gap: '8px'
+      }}>
       {variableFont &&
         Object.entries(variableFont).map(([k, v]) => {
           if (['name', 'ital'].includes(k)) return null
@@ -324,10 +327,11 @@ export function FontFamilyInput({ label, value, onChange, onRemove }: Props) {
               max={v.max}
               step={v.step}
               label={nameMap[k] ?? k}
-              sx={{ width: '100%' }}
+              sx={{ width: '100%', }}
             />
           )
         })}
+      </section>
     </div>
   )
 }

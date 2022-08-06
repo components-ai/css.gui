@@ -11,9 +11,10 @@ const PRE_STYLES = {
   borderColor: 'border',
   backgroundColor: 'rgba(0, 0, 0, 0.02)',
   display: 'block',
+  minWidth: '100%',
   width: '-webkit-fill-available',
   p: 2,
-  m: 3,
+  my: 3,
 }
 
 const FORMATS: string[] = ['html', 'md']
@@ -51,13 +52,13 @@ export const Import = ({ onChange }: ImportProps) => {
   }
 
   return (
-    <>
+    <div sx={{px: 3}}>
       <textarea
         sx={PRE_STYLES}
         value={src}
         onChange={(e) => setSrc(e.target.value)}
       />
-      <div sx={{ px: 3, pb: 4, display: 'flex', alignItems: 'center' }}>
+      <div sx={{ pb: 4, display: 'flex', alignItems: 'center' }}>
         <select
           value={format}
           onChange={handleSetFormat}
@@ -82,7 +83,7 @@ export const Import = ({ onChange }: ImportProps) => {
             boxSizing: 'border-box',
             border: '0',
             borderRadius: '6px',
-            color: '#fff',
+            color: '#ffffff',
             bg: '#6465ff',
             display: 'flex',
             alignItems: 'center',
@@ -93,6 +94,7 @@ export const Import = ({ onChange }: ImportProps) => {
             px: 3,
             py: 2,
             cursor: 'pointer',
+            transition: '.2s background-color ease-in-out',
             '&:hover': {
               bg: '#4e4fec',
             },
@@ -102,6 +104,6 @@ export const Import = ({ onChange }: ImportProps) => {
           Import
         </button>
       </div>
-    </>
+    </div>
   )
 }
