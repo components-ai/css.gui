@@ -1358,6 +1358,17 @@
     "@radix-ui/react-id" "0.1.5"
     "@radix-ui/react-primitive" "0.1.4"
 
+"@radix-ui/react-label@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@radix-ui/react-label/-/react-label-1.0.0.tgz#c6691b0bec18958512a952c18732279285b61fef"
+  integrity sha512-k+EbxeRaVbSJ4oaR9eUYuC0cDIGRB4TAPhilbFCIMpP9pXFNcyQPQUvRaVOQBrviuArYM80xh0BQR/0y3kjUdQ==
+  dependencies:
+    "@babel/runtime" "^7.13.10"
+    "@radix-ui/react-compose-refs" "1.0.0"
+    "@radix-ui/react-context" "1.0.0"
+    "@radix-ui/react-id" "1.0.0"
+    "@radix-ui/react-primitive" "1.0.0"
+
 "@radix-ui/react-menu@1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@radix-ui/react-menu/-/react-menu-1.0.0.tgz#f1e07778c0011aa0c5be260fee88491d3aadf261"
@@ -1577,20 +1588,20 @@
     "@babel/runtime" "^7.13.10"
     "@radix-ui/react-compose-refs" "1.0.0"
 
-"@radix-ui/react-switch@^0.1.5":
-  version "0.1.5"
-  resolved "https://registry.yarnpkg.com/@radix-ui/react-switch/-/react-switch-0.1.5.tgz#071ffa19a17a47fdc5c5e6f371bd5901c9fef2f4"
-  integrity sha512-ITtslJPK+Yi34iNf7K9LtsPaLD76oRIVzn0E8JpEO5HW8gpRBGb2NNI9mxKtEB30TVqIcdjdL10AmuIfOMwjtg==
+"@radix-ui/react-switch@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@radix-ui/react-switch/-/react-switch-1.0.0.tgz#f714eb81da7b16dae7f5ab6e774e3194d8f009b6"
+  integrity sha512-SydkCiuirxJfRG8259J0RIpOw1p6y4TgJdNYvDNXgkEjCjFzLCvBbgDNQn9SeYXk3mjO/ezMgMFsacnrp4eihw==
   dependencies:
     "@babel/runtime" "^7.13.10"
-    "@radix-ui/primitive" "0.1.0"
-    "@radix-ui/react-compose-refs" "0.1.0"
-    "@radix-ui/react-context" "0.1.1"
-    "@radix-ui/react-label" "0.1.5"
-    "@radix-ui/react-primitive" "0.1.4"
-    "@radix-ui/react-use-controllable-state" "0.1.0"
-    "@radix-ui/react-use-previous" "0.1.1"
-    "@radix-ui/react-use-size" "0.1.1"
+    "@radix-ui/primitive" "1.0.0"
+    "@radix-ui/react-compose-refs" "1.0.0"
+    "@radix-ui/react-context" "1.0.0"
+    "@radix-ui/react-label" "1.0.0"
+    "@radix-ui/react-primitive" "1.0.0"
+    "@radix-ui/react-use-controllable-state" "1.0.0"
+    "@radix-ui/react-use-previous" "1.0.0"
+    "@radix-ui/react-use-size" "1.0.0"
 
 "@radix-ui/react-tabs@^0.1.5":
   version "0.1.5"
@@ -1715,6 +1726,13 @@
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/@radix-ui/react-use-previous/-/react-use-previous-0.1.1.tgz#0226017f72267200f6e832a7103760e96a6db5d0"
   integrity sha512-O/ZgrDBr11dR8rhO59ED8s5zIXBRFi8MiS+CmFGfi7MJYdLbfqVOmQU90Ghf87aifEgWe6380LA69KBneaShAg==
+  dependencies:
+    "@babel/runtime" "^7.13.10"
+
+"@radix-ui/react-use-previous@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@radix-ui/react-use-previous/-/react-use-previous-1.0.0.tgz#e48a69c3a7d8078a967084038df66d0d181c56ac"
+  integrity sha512-RG2K8z/K7InnOKpq6YLDmT49HGjNmrK+fr82UCVKT2sW0GYfVnYp4wZWBooT/EYfQ5faA9uIjvsuMMhH61rheg==
   dependencies:
     "@babel/runtime" "^7.13.10"
 
