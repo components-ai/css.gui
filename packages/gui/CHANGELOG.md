@@ -1,5 +1,13 @@
 # @compai/css-gui
 
+## 0.0.202
+
+### Patch Changes
+
+- f7c41754: Bump @radix-ui/react-switch from 0.1.5 to 1.0.0
+- 5aa3cbec: Bump @radix-ui/react-dropdown-menu from 0.1.6 to 1.0.0
+- 473ba671: Bump @radix-ui/react-popover from 0.1.6 to 1.0.0
+
 ## 0.0.201
 
 ### Patch Changes
