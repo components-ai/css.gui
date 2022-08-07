@@ -52,14 +52,16 @@ export const AddPropertyControl = ({
 
   return (
     <div>
-      <Label>{label}</Label>
-      <Combobox
-        onFilterItems={handleFilterItems}
-        onItemSelected={handleAddProperty}
-        items={allProperties}
-        decorateItemText={(str) => kebabCase(str)}
-        clearOnSelect
-      />
+      <Label>
+        <span sx={{display: 'block', mb: 1,}}>{label}</span>
+        <Combobox
+          onFilterItems={handleFilterItems}
+          onItemSelected={handleAddProperty}
+          items={allProperties}
+          decorateItemText={(str) => kebabCase(str)}
+          clearOnSelect
+        />
+      </Label>
     </div>
   )
 }

@@ -179,7 +179,7 @@ export default function Layers<T>(props: LayersProps<T>) {
             appearance: 'none',
             px: 0,
             py: 2,
-            m: 0,
+            mt: 2,
             border: 'none',
             background: 'none',
             cursor: 'pointer',

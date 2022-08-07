@@ -73,7 +73,7 @@ export function Combobox({
             handleFilterItems('')
           }
         }}
-        sx={{ width: '100%' }}
+        sx={{ WebkitAppearance: 'none', appearance: 'none', width: '100%', border: '1px solid', borderRadius: '6px', p: 1 }}
       />
       <div
         sx={{

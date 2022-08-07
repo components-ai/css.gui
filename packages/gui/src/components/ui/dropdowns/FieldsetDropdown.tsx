@@ -11,6 +11,7 @@ export const FieldsetDropdown = ({ onRemove }: FieldsetDropdownProps) => {
       <DropdownMenu.Trigger
         sx={{
           all: 'unset',
+          cursor: 'pointer',
           px: 3,
           lineHeight: 1,
           position: 'relative',

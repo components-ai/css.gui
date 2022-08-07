@@ -6,12 +6,12 @@ type Props = EditorPropsWithLabel<string>
 export function TextInput<T extends string>(props: Props) {
   const { value, onChange } = props
   return (
-    <div sx={{ display: 'flex', flexDirection: 'row' }}>
+    <div sx={{ width: '100%' }}>
       <input
         type="text"
         value={value}
         onChange={(e) => onChange(e.target.value as T)}
-        sx={{ width: '100%', minHeight: '1.6em', mr: 1 }}
+        sx={{ WebkitAppearance: 'none', appearance: 'none', width: '100%', border: '1px solid', boxSizing: 'border-box', display: 'block', p:2, borderRadius: '6px' }}
       />
     </div>
   )
