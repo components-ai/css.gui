@@ -56,6 +56,7 @@ export function SchemaInput<T>({
           <Collapsible.Trigger asChild>
             <IconButton
               sx={{
+                mr: 2,
                 transform: 'rotate(0deg)',
                 transition: 'transform 250ms',
                 '&[data-state=closed]': {
@@ -69,7 +70,7 @@ export function SchemaInput<T>({
         )}
         {InlineInput && (
           <InlineInput
-            label=""
+            label=''
             value={value}
             onChange={onChange}
             ruleset={ruleset}

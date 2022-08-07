@@ -54,7 +54,7 @@ export default function Layers<T>(props: LayersProps<T>) {
         sx={{
           border: '1px solid',
           borderColor: 'border',
-          borderRadius: 8,
+          borderRadius: '6px',
         }}
       >
         <Accordion.Root

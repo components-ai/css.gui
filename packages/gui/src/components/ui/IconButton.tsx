@@ -6,12 +6,13 @@ export default function IconButton(props: Props) {
   return (
     <button
       sx={{
-        p: 0,
+        p: 1,
         m: 0,
         appearance: 'none',
         WebkitAppearance: 'none',
-        background: 'none',
+        background: 'backgroundOffset',
         border: 'none',
+        borderRadius: '6px',
         cursor: 'pointer',
         color: 'muted',
         display: 'flex',

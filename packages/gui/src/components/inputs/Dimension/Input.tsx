@@ -4,6 +4,7 @@ import { EditorPropsWithLabel } from '../../../types/editor'
 import { UnitConversions } from '../../../lib/convert'
 import { convertUnits } from '../../../lib/convert'
 import { X } from 'react-feather'
+import IconButton from '../../ui/IconButton'
 
 // Mapping of units to [min, max] tuple
 type UnitRanges = Record<string, [min: number, max: number]>
@@ -85,25 +86,10 @@ interface DeleteProps {
 }
 export const DeletePropButton = ({ onRemove }: DeleteProps) => {
   return (
-    <button
-      sx={{
-        cursor: 'pointer',
-        appearance: 'none',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'right',
-        p: 0,
-        bg: 'rgba(0,0,0,0)',
-        border: 0,
-        color: 'muted',
-        transition: '.2s color ease-in-out',
-        ':hover': {
-          color: 'text',
-        },
-      }}
+    <IconButton
       onClick={() => onRemove()}
     >
-      <X size={14} strokeWidth={3} color="currentColor" />
-    </button>
+      <X size={16} strokeWidth={3} color="currentColor" />
+    </IconButton>
   )
 }

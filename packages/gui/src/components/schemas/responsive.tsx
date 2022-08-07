@@ -10,9 +10,9 @@ export function responsive<T>(
     type: 'responsive',
     inlineInput({ value }) {
       return (
-        <div sx={{ fontSize: 1 }}>
+        <pre sx={{ fontSize: 0 }}>
           {value.values.map((item) => itemSchema.stringify(item)).join(', ')}
-        </div>
+        </pre>
       )
     },
     input({ value, onChange }) {

@@ -44,9 +44,6 @@ export default function FieldArray<T>(props: FieldArrayProps<T>) {
             <div
               key={i}
               sx={{
-                display: 'grid',
-                gridTemplateColumns: '1fr max-content',
-                gap: 1,
                 my: 1,
                 backgroundColor:
                   i === dragIndex ? 'backgroundOffset' : 'transparent',
@@ -91,7 +88,7 @@ export default function FieldArray<T>(props: FieldArrayProps<T>) {
           m: 0,
           border: '1px solid',
           borderColor: 'border',
-          borderRadius: '0.5rem',
+          borderRadius: '6px',
           background: 'none',
           cursor: 'pointer',
           color: 'text',

@@ -59,9 +59,10 @@ export function objectSchema<T extends object>({
           sx={{
             display: 'grid',
             gap: 2,
-            borderLeft: '4px solid',
+            borderLeft: '1px solid',
             borderColor: 'border',
             pl: 2,
+            my: 2,
           }}
         >
           {keyOrder.map((key) => {

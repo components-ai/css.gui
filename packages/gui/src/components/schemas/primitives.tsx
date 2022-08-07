@@ -251,7 +251,7 @@ export function keyword<T extends string>(
 function literal<T extends string>(value: T): DataTypeSchema<T> {
   return {
     type: value,
-    inlineInput: () => <div sx={{ fontSize: 1 }}>{value}</div>,
+    inlineInput: () => <pre sx={{ fontSize: 0 }}>{value}</pre>,
     stringify: (value) => value,
     defaultValue: value,
     regenerate: () => value,

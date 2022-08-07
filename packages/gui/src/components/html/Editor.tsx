@@ -14,14 +14,24 @@ const TABS_TRIGGER_STYLES: any = {
   cursor: 'pointer',
   fontSize: 0,
   fontWeight: 500,
-  px: 2,
+  px: 3,
   py: 1,
+  my: 2,
+  borderRadius: '6px',
   color: 'muted',
   display: 'inline-flex',
   gap: '.5em',
   alignItems: 'center',
+  filter: 'grayscale(100%)',
+  transition: 'all .2s ease-in-out',
   '&[data-state="active"]': {
     color: 'text',
+    filter: 'grayscale(0%)',
+    bg: 'backgroundOffset',
+  },
+  ':hover': {
+    color: 'text',
+    filter: 'grayscale(0%)',
   },
 }
 const TABS_CONTENT_STYLES: any = {
@@ -79,12 +89,13 @@ export function HtmlEditor() {
             borderColor: 'border',
             display: 'flex',
             alignItems: 'center',
+            justifyContent: 'space-between',
             flexWrap: 'nowrap',
             overflowX: 'auto',
           }}
         >
           <Tabs.Trigger sx={TABS_TRIGGER_STYLES} value="node">
-            🎨 Styles
+            <span>🎨</span> Styles
           </Tabs.Trigger>
           <Tabs.Trigger sx={TABS_TRIGGER_STYLES} value="tree">
             <Layers size={12} /> Layers

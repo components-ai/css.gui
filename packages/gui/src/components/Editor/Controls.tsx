@@ -216,12 +216,12 @@ export const Editor = ({
       hideResponsiveControls={hideResponsiveControls}
     >
       {showRegenerate && (
-        <div sx={{ display: 'flex' }}>
+        <div sx={{ ml: 'auto', display: 'flex' }}>
           <IconButton
             onClick={() => onChange(regenerateAll())}
-            sx={{ ml: 'auto', display: 'flex', gap: 2 }}
+            sx={{ ml: 'auto', }}
           >
-            Regenerate <RefreshCw size={14} />
+            <RefreshCw size={15} />
           </IconButton>
         </div>
       )}
