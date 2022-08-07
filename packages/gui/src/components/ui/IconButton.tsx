@@ -12,7 +12,7 @@ export default function IconButton(props: Props) {
         WebkitAppearance: 'none',
         background: 'backgroundOffset',
         border: 'none',
-        borderRadius: '6px,
+        borderRadius: '6px',
         cursor: 'pointer',
         color: 'muted',
         display: 'flex',
