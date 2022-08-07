@@ -1,5 +1,12 @@
 # @compai/css-gui
 
+## 0.0.203
+
+### Patch Changes
+
+- 08f99dbb: Fixes typo
+- a90031f8: Visual changes to editor controls
+
 ## 0.0.202
 
 ### Patch Changes
