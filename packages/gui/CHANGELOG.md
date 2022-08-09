@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.204
+
+### Patch Changes
+
+- f0114ae9: Fix color picker style bug
+
 ## 0.0.203
 
 ### Patch Changes
