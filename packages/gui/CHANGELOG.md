@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.205
+
+### Patch Changes
+
+- 635d59de: Fix palette picker z index
+
 ## 0.0.204
 
 ### Patch Changes
