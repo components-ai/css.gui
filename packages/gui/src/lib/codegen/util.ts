@@ -14,6 +14,14 @@ export const getSlots = (value: HtmlNode) => {
       visit(tree, 'slot', (node: any) => {
         slots.push(node)
       })
+      visit(tree, 'element', (node: any) => {
+        const attributes = node.attributes || {}
+        Object.values(attributes).forEach((val: any) => {
+          if (isSlot(val)) {
+            slots.push(val)
+          }
+        })
+      })
     })
     .runSync(value)
 
@@ -31,8 +39,13 @@ export const hasChildrenSlot = (value: HtmlNode) => {
   return !!slots.find((slot) => slot.name === 'children')
 }
 
-export const stringifySlotInProp = (value: any) => {
+export const stringifySlotInProp = (value: any, outerProps: any) => {
   if (isSlot(value)) {
+    const slotName = value.name
+    if (outerProps && outerProps[slotName]) {
+      return outerProps[slotName]
+    }
+
     return value.value ?? null
   }
 

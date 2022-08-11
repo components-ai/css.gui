@@ -4,7 +4,7 @@ import { stringifySlotInProp } from './util'
 const SCHEMA = 'html' as unknown as propInfo.Schema
 
 type Props = Record<string, any>
-export const toReactProps = (props: Props): Props => {
+export const toReactProps = ({ outerProps, ...props }: Props): Props => {
   return Object.entries(props).reduce((acc, curr) => {
     const [key, value] = curr
 
@@ -16,12 +16,12 @@ export const toReactProps = (props: Props): Props => {
       const propName = info.property || key
 
       return {
-        [propName]: stringifySlotInProp(value),
+        [propName]: stringifySlotInProp(value, outerProps),
         ...acc,
       }
     } catch (e) {
       return {
-        [key]: stringifySlotInProp(value),
+        [key]: stringifySlotInProp(value, outerProps),
         ...acc,
       }
     }

@@ -1631,6 +1631,17 @@ export const initialComponents: any = [
           style: {},
           children: [{ type: 'text', value: 'A footer!!!!' }],
         },
+        {
+          type: 'element',
+          tagName: 'img',
+          attributes: {
+            src: {
+              type: 'slot',
+              name: 'imgSrc',
+              value: 'https://source.unsplash.com/random',
+            },
+          },
+        },
       ],
     },
   },
