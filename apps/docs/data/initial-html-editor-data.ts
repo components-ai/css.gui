@@ -1498,7 +1498,7 @@ export const initialComponents: any = [
         title: {
           type: 'slot',
           name: 'title',
-          value: 'THE TITLE FOR 1!!!!',
+          value: 'The title for heading 1',
         },
       },
       style: {
@@ -1549,7 +1549,7 @@ export const initialComponents: any = [
         title: {
           type: 'slot',
           name: 'title',
-          value: 'THE TITLE FOR 2!!!',
+          value: 'The title for heading 2',
         },
       },
       style: {
@@ -1601,7 +1601,7 @@ export const initialComponents: any = [
         title: {
           type: 'slot',
           name: 'title',
-          value: 'THE TITLE FOR NAV LINK!!!',
+          value: 'A nav link',
         },
       },
       style: {
@@ -1630,17 +1630,6 @@ export const initialComponents: any = [
           attributes: {},
           style: {},
           children: [{ type: 'text', value: 'A footer!!!!' }],
-        },
-        {
-          type: 'element',
-          tagName: 'img',
-          attributes: {
-            src: {
-              type: 'slot',
-              name: 'imgSrc',
-              value: 'https://source.unsplash.com/random',
-            },
-          },
         },
       ],
     },
