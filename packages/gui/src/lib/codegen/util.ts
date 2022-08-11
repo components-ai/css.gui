@@ -4,7 +4,7 @@ import { visit } from 'unist-util-visit'
 import { HtmlNode, Slot } from '../../components/html/types'
 
 export const getSlots = (value: HtmlNode) => {
-  if (value.type === 'text' || value.type === 'slot') {
+  if (isText(value) || isSlot(value)) {
     return []
   }
 
@@ -30,3 +30,14 @@ export const hasChildrenSlot = (value: HtmlNode) => {
   const slots = getSlots(value)
   return !!slots.find((slot) => slot.name === 'children')
 }
+
+export const stringifySlotInProp = (value: any) => {
+  if (isSlot(value)) {
+    return value.value ?? null
+  }
+
+  return value
+}
+
+export const isText = (value: HtmlNode) => value?.type === 'text'
+export const isSlot = (value: HtmlNode) => value?.type === 'slot'

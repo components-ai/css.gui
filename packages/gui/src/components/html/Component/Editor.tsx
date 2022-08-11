@@ -1,9 +1,9 @@
 import { ChangeEvent } from 'react'
 import fuzzysort from 'fuzzysort'
 import { Label, Combobox } from '../../primitives'
-import { ComponentData } from '../types'
+import { ComponentData, Slot } from '../types'
 import { useHtmlEditor } from '../Provider'
-import { getSlots } from '../../../lib/codegen/util'
+import { getSlots, isSlot } from '../../../lib/codegen/util'
 import { mergeComponentAttributes } from './util'
 
 interface ComponentEditorProps {
@@ -101,7 +101,12 @@ export const ComponentEditor = ({ value, onChange }: ComponentEditorProps) => {
         {attributeEntries.length ? (
           <>
             {attributeEntries.map((entry) => {
-              const [key, val] = entry
+              const [key, rawValue] = entry
+
+              const val = isSlot(rawValue as Slot)
+                ? (rawValue as Slot).value
+                : rawValue
+
               return (
                 <div key={key}>
                   <Label>
@@ -114,7 +119,7 @@ export const ComponentEditor = ({ value, onChange }: ComponentEditorProps) => {
                       }}
                     >
                       <input
-                        value={val}
+                        value={val as string}
                         onChange={handleAttributeChange(key)}
                       />
                     </div>

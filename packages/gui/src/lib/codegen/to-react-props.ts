@@ -1,4 +1,5 @@
 import * as propInfo from 'property-information'
+import { stringifySlotInProp } from './util'
 
 const SCHEMA = 'html' as unknown as propInfo.Schema
 
@@ -15,12 +16,12 @@ export const toReactProps = (props: Props): Props => {
       const propName = info.property || key
 
       return {
-        [propName]: value,
+        [propName]: stringifySlotInProp(value),
         ...acc,
       }
     } catch (e) {
       return {
-        [key]: value,
+        [key]: stringifySlotInProp(value),
         ...acc,
       }
     }
