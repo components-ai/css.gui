@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.207
+
+### Patch Changes
+
+- c53ca4bb: Improve enter handling for combobox
+
 ## 0.0.206
 
 ### Patch Changes
