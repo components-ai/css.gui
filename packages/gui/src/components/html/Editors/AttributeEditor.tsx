@@ -1,13 +1,15 @@
 import { X } from 'react-feather'
 import { Label } from '../../primitives'
 import IconButton from '../../ui/IconButton'
-import { useEffect } from 'react'
+import { ChangeEvent, useEffect } from 'react'
 import { Combobox } from '../../primitives'
 import { ATTRIBUTE_MAP } from '../../../data/attributes'
+import { isSlot } from '../../../lib/codegen/util'
+import { Slot } from '../types'
 
 interface AttributeEditorProps {
-  value: Record<string, string>
-  onChange(value: Record<string, string>): void
+  value: Record<string, string | Slot>
+  onChange(value: Record<string, string | Slot>): void
   element: string
 }
 
@@ -49,6 +51,27 @@ export const AttributeEditor = ({
     onChange(newValue)
   }
 
+  const handleSlotToggle = (key: string) => {
+    const val = value[key]
+    const slotValue = val as unknown as Slot
+
+    if (isSlot(slotValue)) {
+      onChange({
+        ...value,
+        [key]: slotValue.value as string,
+      })
+    } else {
+      onChange({
+        ...value,
+        [key]: {
+          type: 'slot',
+          name: key,
+          value: val as string,
+        },
+      })
+    }
+  }
+
   return (
     <div>
       <div sx={{ px: 3 }}>
@@ -62,25 +85,115 @@ export const AttributeEditor = ({
       </div>
       {/* @ts-ignore */}
       {Object.entries(value).map(([key, attrValue]) => {
+        if (isSlot(attrValue as unknown as Slot)) {
+          return (
+            <SlotAttributeEditor
+              key={key}
+              name={key}
+              value={attrValue as unknown as Slot}
+              onChange={(newValue: Slot) =>
+                onChange({ ...value, [key]: newValue })
+              }
+              onRemove={() => handleItemRemoved(key)}
+              onSlot={() => handleSlotToggle(key)}
+            />
+          )
+        }
+
         return (
-          <div sx={{ px: 3, pt: 3 }}>
-            <Label>
-              <span sx={{ display: 'block', width: '100%' }}>{key}</span>
-              <div sx={{ display: 'flex', alignItems: 'center', gap: '.5rem' }}>
-                <input
-                  value={attrValue}
-                  onChange={(e) =>
-                    onChange({ ...value, [key]: e.target.value })
-                  }
-                />
-                <IconButton onClick={() => handleItemRemoved(key)}>
-                  <X size={14} strokeWidth={3} />
-                </IconButton>
-              </div>
-            </Label>
-          </div>
+          <StringAttributeEditor
+            key={key}
+            name={key}
+            value={attrValue as string}
+            onChange={(e) => onChange({ ...value, [key]: e.target.value })}
+            onRemove={() => handleItemRemoved(key)}
+            onSlot={() => handleSlotToggle(key)}
+          />
         )
       })}
+    </div>
+  )
+}
+
+interface StringAttributeEditorProps {
+  name: string
+  value: string
+  onChange(e: ChangeEvent<HTMLInputElement>): void
+  onRemove(): void
+  onSlot(): void
+}
+const StringAttributeEditor = ({
+  name,
+  value,
+  onChange,
+  onRemove,
+  onSlot,
+}: StringAttributeEditorProps) => {
+  return (
+    <div sx={{ px: 3, pt: 3 }}>
+      <Label>
+        <span sx={{ display: 'block', width: '100%' }}>{name}</span>
+        <div sx={{ display: 'flex', alignItems: 'center', gap: '.5rem' }}>
+          <input value={value} onChange={onChange} />
+          <IconButton onClick={onRemove}>
+            <X size={14} strokeWidth={3} />
+          </IconButton>
+          <IconButton onClick={onSlot}>Make slot</IconButton>
+        </div>
+      </Label>
+    </div>
+  )
+}
+
+interface SlotAttributeEditorProps {
+  name: string
+  value: Slot
+  onChange(newValue: Slot): void
+  onRemove(): void
+  onSlot(): void
+}
+const SlotAttributeEditor = ({
+  name,
+  value,
+  onChange,
+  onRemove,
+  onSlot,
+}: SlotAttributeEditorProps) => {
+  return (
+    <div sx={{ px: 3, pt: 3 }}>
+      <span sx={{ display: 'block', width: '100%' }}>{name}</span>
+      <Label>
+        <span sx={{ display: 'block', width: '100%' }}>Name</span>
+        <div sx={{ display: 'flex', alignItems: 'center', gap: '.5rem' }}>
+          <input
+            value={value.name}
+            onChange={(e) =>
+              onChange({
+                ...value,
+                name: e.target.value,
+              })
+            }
+          />
+        </div>
+      </Label>
+      <Label>
+        <span sx={{ display: 'block', width: '100%' }}>Value</span>
+        <div sx={{ display: 'flex', alignItems: 'center', gap: '.5rem' }}>
+          <input
+            value={value.value}
+            onChange={(e) =>
+              onChange({
+                ...value,
+                value: e.target.value,
+              })
+            }
+          />
+          <IconButton onClick={onRemove}>
+            <X size={14} strokeWidth={3} />
+          </IconButton>
+          <IconButton onClick={onSlot}>Make string</IconButton>
+        </div>
+      </Label>
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import { HtmlNode, ElementPath } from './types'
+import { HtmlNode, ElementPath, Slot } from './types'
 import { isNil } from 'lodash-es'
 
 export const isSamePath = (
@@ -19,7 +19,7 @@ export const removeTailFromPath = (path: ElementPath) => {
 }
 
 export const cleanAttributesForCanvas = (
-  attributes: Record<string, string>
+  attributes: Record<string, string | Slot>
 ) => {
   const newAttributes = { ...attributes }
 
