@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.206
+
+### Patch Changes
+
+- 2908cba5: Make sure default value is passed to base schema
+
 ## 0.0.205
 
 ### Patch Changes
