@@ -166,6 +166,8 @@ function NodeSwitch({ value, onChange }: EditorProps) {
     return <SlotEditor value={value} onChange={onChange} />
   }
 
+  const tagKey = [...(selected || []), value.tagName || ''].join('-')
+
   return (
     <div>
       <article
@@ -176,7 +178,7 @@ function NodeSwitch({ value, onChange }: EditorProps) {
         <div sx={{ mb: 2, px: 3 }}>
           <Label>Tag name</Label>{' '}
           <Combobox
-            key={selected?.join('-')}
+            key={tagKey}
             onFilterItems={(filterValue) => {
               if (!filterValue) {
                 return HTML_TAGS
