@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.208
+
+### Patch Changes
+
+- b5dc91a7: Make sure tag name combobox syncs
+
 ## 0.0.207
 
 ### Patch Changes
