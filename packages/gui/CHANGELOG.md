@@ -1,5 +1,35 @@
 # @compai/css-gui
 
+## 0.0.208
+
+### Patch Changes
+
+- b5dc91a7: Make sure tag name combobox syncs
+
+## 0.0.207
+
+### Patch Changes
+
+- c53ca4bb: Improve enter handling for combobox
+
+## 0.0.206
+
+### Patch Changes
+
+- 2908cba5: Make sure default value is passed to base schema
+
+## 0.0.205
+
+### Patch Changes
+
+- 635d59de: Fix palette picker z index
+
+## 0.0.204
+
+### Patch Changes
+
+- f0114ae9: Fix color picker style bug
+
 ## 0.0.203
 
 ### Patch Changes

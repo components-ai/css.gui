@@ -12,10 +12,11 @@ export function ElementRenderer({
   path,
   ...canvasElementProps
 }: CanvasElementProps) {
-  const { selectComponent } = useComponent()
+  const { selectComponent, value: componentValue } = useComponent()
   const { onClick, ...props } = useCanvasProps({
     value,
     path,
+    component: componentValue,
     ...canvasElementProps,
   })
 

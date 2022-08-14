@@ -54,6 +54,7 @@ export default function ColorPopover({
           border: '1px solid',
           borderColor: 'border',
           borderRadius: '0.5rem',
+          zIndex: 9999,
         }}
       >
         <ColorField value={value} onChange={onChange} {...props} />

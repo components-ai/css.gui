@@ -1494,7 +1494,13 @@ export const initialComponents: any = [
     tagName: 'Heading',
     value: {
       tagName: 'h1',
-      attributes: {},
+      attributes: {
+        title: {
+          type: 'slot',
+          name: 'title',
+          value: 'The title for heading 1',
+        },
+      },
       style: {
         color: '#4e4fec',
         fontSize: {
@@ -1539,7 +1545,13 @@ export const initialComponents: any = [
     tagName: 'Heading2',
     value: {
       tagName: 'h1',
-      attributes: {},
+      attributes: {
+        title: {
+          type: 'slot',
+          name: 'title',
+          value: 'The title for heading 2',
+        },
+      },
       style: {
         color: 'tomato',
         fontSize: {
@@ -1586,7 +1598,11 @@ export const initialComponents: any = [
       tagName: 'a',
       attributes: {
         href: '#!',
-        title: 'A navigation link',
+        title: {
+          type: 'slot',
+          name: 'title',
+          value: 'A nav link',
+        },
       },
       style: {
         color: 'tomato',

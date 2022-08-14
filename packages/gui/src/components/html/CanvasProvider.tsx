@@ -3,7 +3,7 @@ import { toCSSObject } from '../../lib/codegen/to-css-object'
 import { toReactProps } from '../../lib/codegen/to-react-props'
 import { useTheme } from '../providers/ThemeContext'
 import { useHtmlEditor } from './Provider'
-import { ElementPath, HtmlNode } from './types'
+import { ComponentData, ElementPath, HtmlNode } from './types'
 import { cleanAttributesForCanvas, isSamePath } from './util'
 
 const DEFAULT_CANVAS_VALUE = {}
@@ -18,6 +18,7 @@ type CanvasProviderType = {
 export type CanvasElementProps = {
   path: ElementPath
   value: HtmlNode
+  component?: ComponentData
   onClick?(e: MouseEvent): void
 }
 
@@ -26,7 +27,12 @@ export function useCanvas() {
   return context
 }
 
-export function useCanvasProps({ path, value, onClick }: CanvasElementProps) {
+export function useCanvasProps({
+  path,
+  value,
+  component,
+  onClick,
+}: CanvasElementProps) {
   const { canvas } = useContext(CanvasContext)
   const { selected, setSelected } = useHtmlEditor()
   const theme = useTheme()
@@ -66,6 +72,7 @@ export function useCanvasProps({ path, value, onClick }: CanvasElementProps) {
     ...(canvas ? cleanAttributesForCanvas(attributes) : attributes),
     ...(canvas ? { 'data-path': path.join('-') } : {}),
     sx,
+    outerProps: component?.props,
     onClick: handleSelect,
   })
 

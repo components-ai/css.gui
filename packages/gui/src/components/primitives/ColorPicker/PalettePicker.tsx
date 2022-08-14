@@ -55,6 +55,7 @@ export default function PalettePopover({
           border: '1px solid',
           borderColor: 'border',
           borderRadius: '0.5rem',
+          zIndex: 99999,
         }}
       >
         <PalettePicker value={value} onChange={onChange} {...props} />

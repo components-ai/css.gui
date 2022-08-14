@@ -1,5 +1,12 @@
 import { useCombobox } from 'downshift'
-import { useEffect, useId, useRef, useState } from 'react'
+import {
+  ChangeEvent,
+  KeyboardEvent,
+  useEffect,
+  useId,
+  useRef,
+  useState,
+} from 'react'
 
 interface ComboboxInterface {
   onFilterItems: (filterValue: string) => string[]
@@ -59,13 +66,27 @@ export function Combobox({
     setFilterValue(clearOnSelect ? '' : selectedItem)
   }
 
+  const handleEnter = () => {
+    if (items.includes(filterValue)) {
+      handleItemSelected(filterValue)
+      toggleMenu()
+    }
+  }
+
   return (
     <div {...getComboboxProps()}>
       <input
         type="text"
         {...getInputProps({
           ref: inputRef,
-          onChange: (e: any) => setFilterValue(e.target.value),
+          onChange: (e: ChangeEvent<HTMLInputElement>) => {
+            setFilterValue(e.target.value)
+          },
+          onKeyDown: (e: KeyboardEvent<HTMLInputElement>) => {
+            if (e.key === 'Enter') {
+              handleEnter()
+            }
+          },
         })}
         onFocus={() => {
           if (!isOpen) {
@@ -73,7 +94,14 @@ export function Combobox({
             handleFilterItems('')
           }
         }}
-        sx={{ WebkitAppearance: 'none', appearance: 'none', width: '100%', border: '1px solid', borderRadius: '6px', p: 1 }}
+        sx={{
+          WebkitAppearance: 'none',
+          appearance: 'none',
+          width: '100%',
+          border: '1px solid',
+          borderRadius: '6px',
+          p: 1,
+        }}
       />
       <div
         sx={{
