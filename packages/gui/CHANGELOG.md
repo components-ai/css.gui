@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.209
+
+### Patch Changes
+
+- 50d060da: Adds new properties and svg elements
+
 ## 0.0.208
 
 ### Patch Changes
