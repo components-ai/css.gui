@@ -29,6 +29,8 @@ export interface DataTypeSchema<T> {
    *  - the rest of the unparsed tokens
    */
   parse?(tokens: Token[]): [result: T | undefined, rest: Token[]]
+  /** Optional conversion function to transform an old value to its new type */
+  convert?(oldValue: T, newType: keyof T): T | undefined
 }
 
 export interface RegenOptions<T> {
@@ -39,3 +41,4 @@ export interface RegenOptions<T> {
 }
 
 export type SchemaVariants<T> = { [V in keyof T]: DataTypeSchema<T[V]> }
+type Unionize<T> = { [K in keyof T]: T[K] }[keyof T]

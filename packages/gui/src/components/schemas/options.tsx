@@ -42,8 +42,15 @@ export function optionsSchema<T extends Record<string, any>>({
     return newValue ?? previousValue
   }
 
+  let color = false
+  if (convert && String(convert).includes('!!!')) {
+    color = true
+    console.log(convert)
+  }
+
   return {
     type,
+    convert: convert as any,
     variants: variants as any,
     inlineInput(props) {
       const type = getType(props.value)

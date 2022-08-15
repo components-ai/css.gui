@@ -14,14 +14,27 @@ export function topLevel<T>(schema: DataTypeSchema<T>, property: string) {
   const responsiveInput = responsive(withGlobal)
   return joinSchemas([withGlobal, responsiveInput], {
     convert(oldValue, newType) {
+      console.log(schema)
       // If converting *from* a responsive input, take the first value
       if (responsiveInput.validate(oldValue)) {
-        return oldValue.values[0] as any
+        const newValue = oldValue.values[0] as any
+        console.log('sch conv', oldValue, newType, schema.convert)
+        if (!schema.convert) {
+          return newValue
+        }
+
+        console.log('CONVERTING!!!')
+        return schema.convert(newValue, newType as any)
       }
       // If converting *to* a responsive input, triplicate the current input
       if (newType === 'responsive') {
         return { type: 'responsive', values: [oldValue, oldValue, oldValue] }
       }
+
+      if (schema.convert) {
+        return schema.convert(oldValue as T, newType as any)
+      }
+
       return undefined
     },
   })

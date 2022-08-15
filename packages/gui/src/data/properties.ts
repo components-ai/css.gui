@@ -129,7 +129,7 @@ function normalizeSchema(propertyData: PropertyData): DataTypeSchema<any> {
           keywords && keyword(keywords),
           themeProperty && themeSchema(themeProperty),
         ]),
-        { defaultValue: propertyData.defaultValue }
+        { defaultValue: propertyData.defaultValue, convert: schema.convert }
       )
     }
   }

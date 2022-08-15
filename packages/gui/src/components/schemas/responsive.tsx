@@ -48,6 +48,7 @@ export function responsive<T>(
         ),
       }
     },
+    convert: itemSchema.convert,
     stringify(value, ...args) {
       return (value as any).values.map((val: T) =>
         itemSchema.stringify(val, ...args)

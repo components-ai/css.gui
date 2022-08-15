@@ -81,6 +81,13 @@ export function color({
       keyword(['currentcolor', 'transparent'], { type: 'system' }),
       themeColor,
     ],
-    { defaultValue }
+    {
+      defaultValue,
+      convert: (a) => {
+        console.log(a)
+        console.log('!!!!!!!!!')
+        return defaultValue
+      },
+    }
   )
 }

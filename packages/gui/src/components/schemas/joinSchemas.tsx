@@ -21,6 +21,7 @@ export function joinSchemas<S extends DataTypeSchema<any>>(
       variants = { ...variants, [variant.type]: variant }
     }
   }
+
   // TODO Keep conversion functions from sub-variants
   // if a `convert` function is defined, it is not propagated to the joined schema right now
   return optionsSchema({
