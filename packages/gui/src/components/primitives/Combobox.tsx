@@ -63,7 +63,10 @@ export function Combobox({
 
   const handleItemSelected = (selectedItem: string) => {
     onItemSelected(selectedItem)
-    setFilterValue(clearOnSelect ? '' : selectedItem)
+    const selectedItemText = decorateItemText
+      ? decorateItemText(selectedItem)
+      : selectedItem
+    setFilterValue(clearOnSelect ? '' : selectedItemText)
   }
 
   const handleEnter = () => {

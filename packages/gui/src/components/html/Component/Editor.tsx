@@ -82,7 +82,6 @@ export const ComponentEditor = ({ value, onChange }: ComponentEditorProps) => {
             return components.find((c) => c.id === id)?.tagName ?? id
           }}
           items={componentIds}
-          clearOnSelect
         />
       </div>
       <div sx={{ px: 3, pb: 3 }}>
