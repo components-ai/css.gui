@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.210
+
+### Patch Changes
+
+- 9628acc5: Keep props around when swapping between components
+
 ## 0.0.209
 
 ### Patch Changes
