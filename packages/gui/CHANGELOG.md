@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.211
+
+### Patch Changes
+
+- 790afdba: Keep component name in combobox when selected
+
 ## 0.0.210
 
 ### Patch Changes
