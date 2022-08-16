@@ -7,11 +7,13 @@ interface CreateList<T> {
   itemSchema: DataTypeSchema<T>
   separator?: string
   input?: ComponentType<FieldArrayProps<T>>
+  addItem?(currentValue: T[]): T
   stringify?(value: T[]): string
 }
 
 export function listSchema<T>({
   itemSchema,
+  addItem,
   separator = ', ',
   input: Input,
   stringify,
@@ -40,7 +42,7 @@ export function listSchema<T>({
       if (Input) {
         return <Input {...props} itemSchema={itemSchema} />
       }
-      return <FieldArray {...props} itemSchema={itemSchema} />
+      return <FieldArray {...props} itemSchema={itemSchema} addItem={addItem} />
     },
     regenerate,
     validate: ((value: any) => {
