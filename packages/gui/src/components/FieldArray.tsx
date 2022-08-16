@@ -10,12 +10,16 @@ export interface FieldArrayProps<T> extends EditorPropsWithLabel<T[]> {
    * (See `LayerProps` for what props this takes)
    */
   itemSchema: DataTypeSchema<T>
+  addItem?(currentValue: T[]): T
 }
 
 /**
  * An alternative field array that is collapsible.
  */
-export default function FieldArray<T>(props: FieldArrayProps<T>) {
+export default function FieldArray<T>({
+  addItem,
+  ...props
+}: FieldArrayProps<T>) {
   const { label = '', value = [], onChange, itemSchema } = props
   const [dragIndex, setDragIndex] = useState(-1)
   const isDragging = dragIndex >= 0
@@ -78,7 +82,8 @@ export default function FieldArray<T>(props: FieldArrayProps<T>) {
       )}
       <button
         onClick={() => {
-          onChange(value.concat([itemSchema.defaultValue]))
+          const newLayerValue = addItem?.(value) ?? itemSchema.defaultValue
+          onChange(value.concat([newLayerValue]))
         }}
         sx={{
           width: '100%',

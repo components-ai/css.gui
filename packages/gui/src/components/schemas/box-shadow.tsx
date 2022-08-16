@@ -21,6 +21,10 @@ const singleBoxShadow = objectSchema({
 export const boxShadow = joinSchemas([
   listSchema({
     itemSchema: singleBoxShadow,
+    addItem: (curr: any) => {
+      const [last] = curr.slice(-1)
+      return last
+    },
   }),
   keyword(['none']),
   themeRecord('boxShadows'),
