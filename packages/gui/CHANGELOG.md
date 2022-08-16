@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.213
+
+### Patch Changes
+
+- 8114b4c4: Improve color display
+
 ## 0.0.212
 
 ### Patch Changes
