@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.214
+
+### Patch Changes
+
+- 74ac4a3e: Improve adding box shadow layers
+
 ## 0.0.213
 
 ### Patch Changes
