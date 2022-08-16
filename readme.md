@@ -82,8 +82,7 @@ export const MyEditor = () => {
 }
 ```
 
-For more customization, you can compose together your own controls and style
-pseudo-elements.
+For more customization, you can compose your own controls and style pseudo-elements.
 
 ```js
 import { useState } from 'react'
