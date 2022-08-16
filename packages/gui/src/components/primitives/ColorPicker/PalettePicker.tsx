@@ -1,6 +1,7 @@
 import * as Popover from '@radix-ui/react-popover'
 import { themeGet } from '../../../lib'
 import { useTheme } from '../../providers/ThemeContext'
+import { joinPath } from '../../providers/util'
 import Checkerboard from './Checkerboard'
 import { hasAlpha, withFallback } from './util'
 
@@ -20,6 +21,15 @@ export default function PalettePopover({
   // swatch,
   ...props
 }: Props) {
+  const theme = useTheme()
+  const rawValue = themeGet({
+    property: 'color',
+    path: value.path,
+    theme,
+  })
+
+  const labelMeta = value.path === rawValue ? null : `(${rawValue})`
+
   return (
     <Popover.Root>
       <Popover.Trigger
@@ -46,6 +56,7 @@ export default function PalettePopover({
         {/* swatch */}
         <Popover.Anchor>{<Swatch value={value} />}</Popover.Anchor>
         {value.path}
+        <span sx={{ fontSize: 0, color: 'muted' }}>{labelMeta}</span>
       </Popover.Trigger>
       <Popover.Content
         sx={{
@@ -114,12 +125,18 @@ export function PalettePicker({ value, onChange }: Props) {
           return (
             <div key={name} sx={{ display: 'flex', gap: '.125rem' }}>
               {(colorGroup as any).map((color: any, i: number) => {
+                const colorPath = `${name}.${i}`
                 const selected = valueColor === color
+                const rawColor = themeGet({
+                  theme,
+                  property: 'color',
+                  path: colorPath,
+                })
 
                 return (
                   <button
                     key={color.id}
-                    title={`${name}.${i}`}
+                    title={`${colorPath} (${rawColor})`}
                     sx={{
                       appearance: 'none',
                       WebkitAppearance: 'none',
