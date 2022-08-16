@@ -24,18 +24,6 @@ It's theme-aware, performant, and can be composed into any React app.
 - Scrubbable number inputs
 - Smart default ranges
 
-## ⚠️ Under active development
-
-This project is a work in (rapid) progress.
-
-Over the next few weeks the API will be stabilizing as more functionality is added.
-CSS GUI only [supports a portion](https://components.ai/open-source/css-gui/unsupported)
-of the CSS spec currently, but the intention is to support it all.
-
-[We welcome any and all contributions](https://github.com/components-ai/css.gui/blob/main/.github/contributing.md).
-We'd love it if you try to experiment with CSS GUI. Please feel free to report bugs
-or make feature requests.
-
 ## Why?
 
 We want to improve creative coding and web development workflows by making
@@ -53,9 +41,16 @@ These controls are specifically built for CSS and will adhere to the CSS spec.
 This builds on the web platform itself, allowing the expressiveness of CSS/HTML/SVG
 to create endless outputs.
 
-It's our goal and intention to support the entire CSS spec beginning with the more
+It's our [goal and intention](https://components.ai/open-source/css-gui/unsupported)
+to support the entire CSS spec beginning with the more
 common controls like Length, Color, Keywords and expanding over time to more complex
 stacks and grammars (think gradients, background-image, box shadow, etc.).
+
+## How can you help?
+
+[We welcome any and all contributions](https://github.com/components-ai/css.gui/blob/main/.github/contributing.md).
+We'd love it if you try to experiment with CSS GUI and let us know how it goes. Please feel free to
+[report bugs or make feature requests](https://github.com/components-ai/css.gui/issues/new).
 
 ## Installation
 
