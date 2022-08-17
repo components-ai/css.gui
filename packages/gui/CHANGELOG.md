@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.216
+
+### Patch Changes
+
+- 354f899f: Implement inline insert for components/slots
+
 ## 0.0.215
 
 ### Patch Changes
