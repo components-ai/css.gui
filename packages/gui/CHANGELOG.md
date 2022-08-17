@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.215
+
+### Patch Changes
+
+- 565f3ed3: Maintain component children
+
 ## 0.0.214
 
 ### Patch Changes
