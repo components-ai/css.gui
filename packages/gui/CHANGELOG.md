@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.217
+
+### Patch Changes
+
+- eb553037: Improve node type swapping
+
 ## 0.0.216
 
 ### Patch Changes
