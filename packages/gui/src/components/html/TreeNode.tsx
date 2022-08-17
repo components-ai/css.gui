@@ -149,6 +149,7 @@ export function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
         color: 'text',
         margin: 0,
         padding: 0,
+        fontSize: '14px',
       }}
       onClick={() => {
         if (isSelected) {
