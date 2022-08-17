@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.218
+
+### Patch Changes
+
+- 794eab84: Make font size consistent in DOM tree
+
 ## 0.0.217
 
 ### Patch Changes
