@@ -36,7 +36,11 @@ export const ComponentEditor = ({ value, onChange }: ComponentEditorProps) => {
     const component = components.find((c) => c.id === selectedItem)
 
     if (component) {
-      onChange({ ...component, props: value.props })
+      onChange({
+        ...component,
+        props: value.props,
+        children: value.children,
+      })
     }
   }
 
