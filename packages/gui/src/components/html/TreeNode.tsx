@@ -22,7 +22,7 @@ interface TreeNodeProps extends EditorProps {
 }
 
 export function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
-  const { selected, isEditing, setEditing } = useHtmlEditor()
+  const { selected, isEditing, setEditing, components } = useHtmlEditor()
   const [open, setOpen] = useState(true)
   const isSelected = isSamePath(path, selected)
   const isEditingNode = isSelected && isEditing
@@ -192,7 +192,15 @@ export function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
   }
 
   function handleAddChild(i: number, type: string) {
-    const child = type === 'tag' ? DEFAULT_TAG : DEFAULT_TEXT
+    let child = DEFAULT_TEXT
+    if (type === 'tag') {
+      child = DEFAULT_TAG
+    } else if (type === 'component') {
+      child = components![0]
+    } else if (type === 'slot') {
+      child = DEFAULT_SLOT
+    }
+
     onChange(addChildAtPath(value, [i], child))
   }
 
@@ -320,6 +328,12 @@ const DEFAULT_TAG: HtmlNode = {
 
 const DEFAULT_TEXT: HtmlNode = {
   type: 'text',
+  value: '',
+}
+
+const DEFAULT_SLOT: HtmlNode = {
+  type: 'slot',
+  name: 'newSlot',
   value: '',
 }
 
