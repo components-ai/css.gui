@@ -28,12 +28,7 @@ export function NodeEditor({
   onRemove,
   onParentChange,
 }: TagEditorProps) {
-  const {
-    value: fullValue,
-    selected,
-    hasComponents,
-    components,
-  } = useHtmlEditor()
+  const { value: fullValue, selected, components } = useHtmlEditor()
   let nodeType = value.type === 'text' ? 'text' : 'tag'
   if (value.type === 'component') {
     nodeType = 'component'
@@ -73,16 +68,20 @@ export function NodeEditor({
           <SelectInput
             label="Type"
             value={nodeType}
-            onChange={(value) => {
-              if (value === 'text') {
+            onChange={(newType) => {
+              if (newType === 'text') {
                 onChange({ type: 'text', value: '' })
-              } else if (value === 'component') {
+              } else if (newType === 'component') {
                 const firstComponent = components?.[0]
 
                 if (firstComponent) {
-                  onChange(firstComponent)
+                  onChange({
+                    ...firstComponent,
+                    props: value.props,
+                    children: value.children,
+                  })
                 }
-              } else if (value === 'slot') {
+              } else if (newType === 'slot') {
                 onChange({
                   type: 'slot',
                   name: 'newSlot',
@@ -92,7 +91,8 @@ export function NodeEditor({
                 onChange({
                   type: 'element',
                   tagName: 'div',
-                  children: [],
+                  props: value.props,
+                  children: value.children ?? [],
                 })
               }
             }}
