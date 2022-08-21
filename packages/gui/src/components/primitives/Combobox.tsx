@@ -97,6 +97,8 @@ export function Combobox({
             handleFilterItems('')
           }
         }}
+        autocorrect='off'
+        spellcheck='false'
         sx={{
           WebkitAppearance: 'none',
           appearance: 'none',
