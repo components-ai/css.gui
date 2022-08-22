@@ -2,7 +2,7 @@ import { compact, isNil, mapValues } from 'lodash-es'
 import { getInputProps } from '../../lib/util'
 import { DataTypeSchema, RegenOptions } from './types'
 import * as Toggle from '@radix-ui/react-toggle'
-import { Link } from 'react-feather'
+import { Maximize, Minimize } from 'react-feather'
 import { SchemaInput } from '../inputs/SchemaInput'
 
 interface CreateBoxSideSchema<T> {
@@ -73,7 +73,7 @@ export function boxSideSchema<T>({
       const linked = isLinked(props.value)
       const linkToggle = (
         <Toggle.Root
-          title="Link inputs"
+          title="Show all directions (longhand)"
           sx={{
             p: 0,
             background: 'none',
@@ -98,13 +98,17 @@ export function boxSideSchema<T>({
             }
           }}
         >
-          <Link size={14} />
+          {linked ? (
+            <Maximize size={16} />
+          ) : (
+            <Minimize size={16} />
+          )}
         </Toggle.Root>
       )
       return (
         <div>
           {linked ? (
-            <div sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+            <div sx={{ display: 'flex', alignItems: 'center', gap: 1, mt: 1, }}>
               {linkToggle}
               <SchemaInput
                 schema={itemSchema}
@@ -117,6 +121,7 @@ export function boxSideSchema<T>({
               sx={{
                 display: 'grid',
                 justifyItems: 'center',
+                alignItems: 'center',
                 gridTemplateRows: '1fr max-content 1fr',
                 gridTemplateAreas: `
                 "top top top"

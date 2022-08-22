@@ -343,8 +343,9 @@ const FieldsetControl = ({ field }: FieldsetControlProps) => {
       >
         <h3
           sx={{
-            fontSize: 2,
+            fontSize: 1,
             lineHeight: 1,
+            mb: 0,
           }}
         >
           {removeInternalCSSClassSyntax(label)}
