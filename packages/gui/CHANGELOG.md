@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.219
+
+### Patch Changes
+
+- ff2f1dcd: A small patch to remove autocorrect from property input control
+
 ## 0.0.218
 
 ### Patch Changes
