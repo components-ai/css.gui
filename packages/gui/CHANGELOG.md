@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.220
+
+### Patch Changes
+
+- c9b6365d: Disable browser label/input selection handling in the canvas
+
 ## 0.0.219
 
 ### Patch Changes
