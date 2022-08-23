@@ -42,8 +42,8 @@ export function ComponentProvider({
     updateComponent: emitUpdatedComponent,
   } = useHtmlEditor()
   const selectComponent = (e: MouseEvent) => {
-    setSelected(path)
     e.stopImmediatePropagation()
+    setSelected(path)
   }
 
   const updateComponent = (fullEditPath: ElementPath, newValue: HtmlNode) => {
