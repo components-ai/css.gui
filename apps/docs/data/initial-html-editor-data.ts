@@ -1634,4 +1634,46 @@ export const initialComponents: any = [
       ],
     },
   },
+  {
+    type: 'component',
+    id: 'ddeeff123',
+    tagName: 'Input',
+    attributes: {},
+    value: {
+      type: 'element',
+      tagName: 'input',
+      attributes: {},
+      style: {},
+    },
+  },
+  {
+    type: 'component',
+    id: 'ddeeff456',
+    tagName: 'Email Input',
+    attributes: {},
+    value: {
+      tagName: 'label',
+      attributes: {},
+      style: {},
+      children: [
+        {
+          type: 'element',
+          tagName: 'span',
+          attributes: {},
+          children: [{ type: 'text', value: 'Email' }],
+        },
+        {
+          type: 'component',
+          tagName: 'Input',
+          attributes: {},
+          value: {
+            type: 'element',
+            tagName: 'input',
+            attributes: {},
+            style: {},
+          },
+        },
+      ],
+    },
+  },
 ]
