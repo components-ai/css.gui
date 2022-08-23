@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.221
+
+### Patch Changes
+
+- d1039b08: Move event propagation call
+
 ## 0.0.220
 
 ### Patch Changes
