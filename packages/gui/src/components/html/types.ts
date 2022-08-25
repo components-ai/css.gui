@@ -30,6 +30,7 @@ export interface ComponentData {
   value: HtmlNode
   attributes?: Record<string, string | Slot>
   style?: Record<string, any>
+  swappableComponentIds?: string[]
   children?: HtmlNode[]
 }
 

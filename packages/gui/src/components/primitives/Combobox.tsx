@@ -77,7 +77,7 @@ export function Combobox({
   }
 
   return (
-    <div {...getComboboxProps()}>
+    <div {...getComboboxProps()} sx={{ width: '100%' }}>
       <input
         type="text"
         {...getInputProps({
@@ -97,8 +97,8 @@ export function Combobox({
             handleFilterItems('')
           }
         }}
-        autocorrect='off'
-        spellcheck='false'
+        autocorrect="off"
+        spellcheck="false"
         sx={{
           WebkitAppearance: 'none',
           appearance: 'none',

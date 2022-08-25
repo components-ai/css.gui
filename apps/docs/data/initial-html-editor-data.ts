@@ -1492,6 +1492,7 @@ export const initialComponents: any = [
     type: 'component',
     id: '123abc',
     tagName: 'Heading',
+    swappableComponentIds: ['456def', '789ghi'],
     value: {
       tagName: 'h1',
       attributes: {
@@ -1543,6 +1544,7 @@ export const initialComponents: any = [
     type: 'component',
     id: '456def',
     tagName: 'Heading2',
+    swappableComponentIds: ['123abc', '789ghi'],
     value: {
       tagName: 'h1',
       attributes: {
@@ -1554,6 +1556,58 @@ export const initialComponents: any = [
       },
       style: {
         color: 'tomato',
+        fontSize: {
+          type: 'responsive',
+          values: [
+            {
+              value: 4,
+              unit: 'rem',
+            },
+            {
+              value: 6,
+              unit: 'rem',
+            },
+            {
+              value: 10,
+              unit: 'rem',
+            },
+          ],
+        },
+        fontWeight: '900',
+        fontFamily: 'Inter',
+        letterSpacing: { value: -8, unit: 'px' },
+        marginTop: {
+          value: 0,
+          unit: 'px',
+        },
+        marginBottom: {
+          value: 0,
+          unit: 'px',
+        },
+        lineHeight: {
+          value: 1.25,
+          unit: 'number',
+        },
+      },
+      children: [{ type: 'slot', name: 'children', value: 'CSS.GUI' }],
+    },
+  },
+  {
+    type: 'component',
+    id: '789ghi',
+    tagName: 'Heading3',
+    swappableComponentIds: ['123abc', '456def'],
+    value: {
+      tagName: 'h1',
+      attributes: {
+        title: {
+          type: 'slot',
+          name: 'title',
+          value: 'The title for heading 2',
+        },
+      },
+      style: {
+        color: 'papayawhip',
         fontSize: {
           type: 'responsive',
           values: [

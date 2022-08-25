@@ -1,5 +1,7 @@
 import { ChangeEvent } from 'react'
 import fuzzysort from 'fuzzysort'
+import { sample } from 'lodash-es'
+import { RefreshCw } from 'react-feather'
 import { Label, Combobox } from '../../primitives'
 import { ComponentData, Slot } from '../types'
 import { useHtmlEditor } from '../Provider'
@@ -66,6 +68,23 @@ export const ComponentEditor = ({ value, onChange }: ComponentEditorProps) => {
       })
     }
 
+  const handleSwap = () => {
+    const newComponentId = sample(value.swappableComponentIds || [])
+    const newComponent = components.find((c) => c.id === newComponentId)
+
+    if (!newComponentId || !newComponent) {
+      return
+    }
+
+    onChange({
+      ...value,
+      id: newComponentId,
+      tagName: newComponent.tagName,
+      value: newComponent.value,
+      swappableComponentIds: newComponent.swappableComponentIds,
+    })
+  }
+
   return (
     <div>
       <div
@@ -78,15 +97,25 @@ export const ComponentEditor = ({ value, onChange }: ComponentEditorProps) => {
         }}
       >
         <Label>Component</Label>
-        <Combobox
-          value={value.tagName}
-          onFilterItems={handleFilterComponents}
-          onItemSelected={handleComponentSelected}
-          decorateItemText={(id) => {
-            return components.find((c) => c.id === id)?.tagName ?? id
-          }}
-          items={componentIds}
-        />
+        <span sx={{ display: 'flex', alignItems: 'center' }}>
+          <Combobox
+            key={value.tagName}
+            value={value.tagName}
+            onFilterItems={handleFilterComponents}
+            onItemSelected={handleComponentSelected}
+            decorateItemText={(id) => {
+              return components.find((c) => c.id === id)?.tagName ?? id
+            }}
+            items={componentIds}
+          />
+          {value.swappableComponentIds?.length ? (
+            <RefreshCw
+              size={12}
+              onClick={handleSwap}
+              sx={{ color: 'muted', ml: 2 }}
+            />
+          ) : null}
+        </span>
       </div>
       <div sx={{ px: 3, pb: 3 }}>
         <h3 sx={{ m: 0 }}>Props</h3>
