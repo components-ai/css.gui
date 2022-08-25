@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.222
+
+### Patch Changes
+
+- 7f4f6573: Add component swapping
+
 ## 0.0.221
 
 ### Patch Changes
