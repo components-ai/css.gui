@@ -29,7 +29,7 @@ const trackSize = joinSchemas([
   functionSchema('fit-content', lengthPercentage()),
 ])
 
-const trackCount = joinSchemas([
+const repeatTrackCount = joinSchemas([
   integer({ defaultValue: 3 }),
   keyword(['auto-fit', 'auto-fill']),
 ])
@@ -41,7 +41,7 @@ const trackList = joinSchemas(
       'repeat',
       objectSchema({
         fields: {
-          count: trackCount,
+          count: repeatTrackCount,
           trackList: listSchema({ itemSchema: trackSize, separator: ' ' }),
         },
         separator: ', ',
