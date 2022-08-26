@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.223
+
+### Patch Changes
+
+- 049630e1: Add repeat keywords to count
+
 ## 0.0.222
 
 ### Patch Changes
