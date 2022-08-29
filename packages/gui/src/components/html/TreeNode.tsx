@@ -150,6 +150,7 @@ export function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
         margin: 0,
         padding: 0,
         fontSize: '14px',
+        fontFamily: 'monospace',
       }}
       onClick={() => {
         if (isSelected) {
@@ -171,6 +172,7 @@ export function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
         backgroundColor: isSelected ? '#ff0' : 'background',
         color: 'text',
         fontSize: '14px',
+        fontFamily: 'monospace',
         fontWeight: isSelected ? 700 : 400,
         borderRadius: '6px',
         px: 2,
@@ -300,6 +302,7 @@ export function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
               py: 0,
               px: 2,
               fontSize: '14px',
+              fontFamily: 'monospace',
               bg: isSelected ? '#ff0' : 'background',
               fontWeight: isSelected ? 700 : 400,
               borderRadius: '6px',
