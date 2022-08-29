@@ -37,9 +37,11 @@ export function tupleSchema<T>({
     ? [itemSchema.defaultValue]
     : labels.map(() => itemSchema.defaultValue)
 
-  function stringify(value: T[]) {
+  function stringify(value: T[], ...args: any[]) {
     return (
-      value?.map((item) => itemSchema.stringify(item)).join(separator) ?? null
+      value
+        ?.map((item) => itemSchema.stringify(item, ...args))
+        .join(separator) ?? null
     )
   }
 
