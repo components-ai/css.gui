@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.225
+
+### Patch Changes
+
+- 603fbfed: Add an empty text node to prose elements
+
 ## 0.0.224
 
 ### Patch Changes
