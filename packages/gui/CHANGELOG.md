@@ -1,5 +1,12 @@
 # @compai/css-gui
 
+## 0.0.224
+
+### Patch Changes
+
+- 859ef100: Fix inconsistent typefaces
+- d6ddbe3b: Send along options to stringify in tuple schema
+
 ## 0.0.223
 
 ### Patch Changes
