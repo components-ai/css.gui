@@ -1,9 +1,10 @@
 import { useTheme } from '../providers/ThemeContext'
-import { get, range } from 'lodash-es'
+import { get, range, sample } from 'lodash-es'
 import { ThemeNamedValue, ThemeValue } from '../../types/css'
 import { SelectInput } from '../inputs/SelectInput'
 import { DataTypeSchema } from './types'
 import { joinPath } from '../providers/util'
+import { randomInt } from '../../lib/random'
 
 export function themeScale(path: string): DataTypeSchema<ThemeValue> {
   return {
@@ -18,6 +19,13 @@ export function themeScale(path: string): DataTypeSchema<ThemeValue> {
     }) as any,
     stringify(value, theme) {
       return get(theme, joinPath(value.path, value.index))
+    },
+    regenerate(options) {
+      const scale = get(options.theme, options.previousValue.path)
+      return {
+        ...options.previousValue,
+        index: randomInt(0, scale.length),
+      }
     },
     inlineInput(props) {
       const theme = useTheme()
@@ -63,6 +71,15 @@ export function themeRecord(path: string): DataTypeSchema<ThemeNamedValue> {
     }) as any,
     stringify(value, theme) {
       return get(theme, `${value.path}.${value.key}`)
+    },
+    regenerate(options) {
+      const records = get(options.theme, options.previousValue.path)
+      const paths = Object.keys(records || {})
+
+      return {
+        ...options.previousValue,
+        key: sample(paths) ?? '',
+      }
     },
     inlineInput(props) {
       const theme = useTheme()
