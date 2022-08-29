@@ -2,7 +2,7 @@ import { HtmlNode, ElementPath } from './types'
 import * as Collapsible from '@radix-ui/react-collapsible'
 import { useState } from 'react'
 import { useHtmlEditor } from './Provider'
-import { isVoidElement } from '../../lib/elements'
+import { isProseElement, isVoidElement } from '../../lib/elements'
 import { addChildAtPath, isSamePath, replaceAt } from './util'
 import { hasChildrenSlot } from '../../lib/codegen/util'
 import { Combobox } from '../primitives'
@@ -128,13 +128,17 @@ export function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
           ...defaultAttributes,
           ...(value.attributes || {}),
         }
-        setEditing(false)
-        onChange({
+        const fullValue = {
           ...value,
           attributes: mergedAttributes,
           tagName: selectedItem,
           style: mergedStyles,
-        })
+        }
+        if (isProseElement(selectedItem) && !fullValue.children?.length) {
+          fullValue.children = [{ type: 'text', value: '' }]
+        }
+        setEditing(false)
+        onChange(fullValue)
       }}
       items={HTML_TAGS}
       value={value.tagName}

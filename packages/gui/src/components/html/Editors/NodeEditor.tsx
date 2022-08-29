@@ -11,6 +11,7 @@ import { ComponentEditor } from '../Component'
 import { SlotEditor } from './SlotEditor'
 import { HTML_TAGS } from '../data'
 import { useNodeTypes } from './util'
+import { isProseElement } from '../../../lib/elements'
 
 interface EditorProps {
   value: HtmlNode
@@ -196,12 +197,16 @@ function NodeSwitch({ value, onChange }: EditorProps) {
                 ...defaultAttributes,
                 ...(value.attributes || {}),
               }
-              onChange({
+              const fullValue = {
                 ...value,
                 attributes: mergedAttributes,
                 tagName: selectedItem,
                 style: mergedStyles,
-              })
+              }
+              if (isProseElement(selectedItem) && !fullValue.children?.length) {
+                fullValue.children = [{ type: 'text', value: '' }]
+              }
+              onChange(fullValue)
             }}
             items={HTML_TAGS}
             value={value.tagName}
