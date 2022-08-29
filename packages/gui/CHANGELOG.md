@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.226
+
+### Patch Changes
+
+- 98b7d345: Fix regen for theme values
+
 ## 0.0.225
 
 ### Patch Changes
