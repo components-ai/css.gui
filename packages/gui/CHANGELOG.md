@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.228
+
+### Patch Changes
+
+- 312acb38: Apply styles to text parent
+
 ## 0.0.227
 
 ### Patch Changes
