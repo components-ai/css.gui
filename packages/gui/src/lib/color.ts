@@ -7,6 +7,7 @@ import {
   sample,
 } from 'lodash-es'
 import getContrast from 'get-contrast'
+import * as culori from 'culori'
 import { ThemeColor } from '../components/primitives/ColorPicker/PalettePicker'
 import { RegenOptions } from '../components/schemas/types'
 import { Color } from '../types/css'
@@ -77,6 +78,10 @@ export function randomColor({
       const [path, value] = curr
 
       try {
+        if (hasAlpha(value)) {
+          return acc
+        }
+
         if (
           getContrast.ratio(value, colorToContrastWith) >= CONTRAST_THRESHOLD
         ) {
@@ -99,6 +104,18 @@ export function randomHexColor() {
     '#' +
     ('000000' + Math.floor(Math.random() * 16777215).toString(16)).slice(-6)
   )
+}
+
+export function hasAlpha(color: string) {
+  if (!isValidColor(color)) {
+    return false
+  }
+  const { alpha = 1 } = culori.parse(color)
+  return alpha !== 1
+}
+
+export function isValidColor(value: Color) {
+  return !!culori.parse(value)
 }
 
 type Key = string | number
