@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.227
+
+### Patch Changes
+
+- 8d695237: Ignore colors with alpha in regen
+
 ## 0.0.226
 
 ### Patch Changes
