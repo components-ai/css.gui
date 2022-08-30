@@ -45,6 +45,15 @@ export function getChildAtPath(element: HtmlNode, path: ElementPath): HtmlNode {
   return getChildAtPath(child, rest)
 }
 
+export function getParentAtPath(
+  element: HtmlNode,
+  path: ElementPath
+): HtmlNode {
+  const newPath = [...path]
+  newPath.pop()
+  return getChildAtPath(element, newPath)
+}
+
 export function addChildAtPath(
   element: HtmlNode,
   path: ElementPath,

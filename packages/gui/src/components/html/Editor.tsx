@@ -8,6 +8,7 @@ import { useTheme } from '../providers/ThemeContext'
 import { NodeEditor } from './Editors/NodeEditor'
 import { TreeNode } from './TreeNode'
 import { Import } from './Import'
+import { isText } from '../../lib/codegen/util'
 
 const TABS_TRIGGER_STYLES: any = {
   all: 'unset',
@@ -61,6 +62,13 @@ export function HtmlEditor() {
   const selected = providedSelected || []
   const nodeValue = getChildAtPath(value, selected)
 
+  let nodeForStyleEditor = nodeValue
+  const stylePath = [...selected]
+  if (isText(nodeValue)) {
+    stylePath.pop()
+    nodeForStyleEditor = getChildAtPath(value, stylePath)
+  }
+
   return (
     <div
       sx={{
@@ -112,10 +120,10 @@ export function HtmlEditor() {
             <Editor
               key={selected.join('-')}
               theme={theme}
-              styles={nodeValue.style ?? {}}
+              styles={nodeForStyleEditor.style ?? {}}
               onChange={(newStyles) => {
-                const newItem = { ...nodeValue, style: newStyles }
-                onChange(setChildAtPath(value, selected, newItem))
+                const newItem = { ...nodeForStyleEditor, style: newStyles }
+                onChange(setChildAtPath(value, stylePath, newItem))
               }}
               showRegenerate
               showAddProperties
