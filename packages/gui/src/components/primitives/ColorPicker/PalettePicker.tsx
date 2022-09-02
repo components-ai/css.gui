@@ -43,7 +43,7 @@ export default function PalettePopover({
           border: '1px solid',
           borderColor: 'border',
           borderRadius: '0.25rem',
-          width: 'max-content',
+          maxWidth: '200px',
           fontSize: '0.875rem',
           textOverflow: 'ellipsis',
           overflow: 'hidden',
