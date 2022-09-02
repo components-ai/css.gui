@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.229
+
+### Patch Changes
+
+- 5770da69: Improve tap targets and spacing
+
 ## 0.0.228
 
 ### Patch Changes
