@@ -338,11 +338,13 @@ const FieldsetControl = ({ field }: FieldsetControlProps) => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
+          mt: 3,
           mb: 2,
         }}
       >
         <h3
           sx={{
+            mt: 0,
             fontSize: 1,
             lineHeight: 1,
             mb: 0,
@@ -353,7 +355,7 @@ const FieldsetControl = ({ field }: FieldsetControlProps) => {
         <FieldsetDropdown onRemove={() => removeField(field)} />
       </div>
       <GenericFieldset field={field}>
-        <div sx={{ pb: 3 }}>
+        <div sx={{ mb: 3, p: 3, borderWidth: '1px', borderStyle: 'solid', borderColor: 'border', borderRadius: '6px', }}>
           <AddPropertyControl
             field={field}
             styles={styles}

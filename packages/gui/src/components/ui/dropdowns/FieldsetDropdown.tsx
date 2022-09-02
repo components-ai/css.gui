@@ -10,16 +10,29 @@ export const FieldsetDropdown = ({ onRemove }: FieldsetDropdownProps) => {
     <DropdownMenu.Root>
       <DropdownMenu.Trigger
         sx={{
-          all: 'unset',
+          p: 1,
+          mr: 0,
+          appearance: 'none',
+          WebkitAppearance: 'none',
+          background: 'backgroundOffset',
+          border: 'none',
+          borderRadius: '6px',
           cursor: 'pointer',
-          px: 3,
-          lineHeight: 1,
-          position: 'relative',
-          top: '1px',
           color: 'muted',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          transition: 'color .2s ease-in-out',
+          ':hover': {
+            color: 'text',
+          },
+          ':disabled': {
+            opacity: '50%',
+            cursor: 'initial',
+          },
         }}
       >
-        <MoreVertical size={12} />
+        <MoreVertical size={15} strokeWidth={2}  />
       </DropdownMenu.Trigger>
       <DropdownMenu.Content sx={DROPDOWN_STYLES}>
         <DropdownMenu.Item sx={DROPDOWN_ITEM_STYLES} onClick={onRemove}>

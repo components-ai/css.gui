@@ -7,6 +7,7 @@ import { ComponentData, Slot } from '../types'
 import { useHtmlEditor } from '../Provider'
 import { getSlots, isSlot } from '../../../lib/codegen/util'
 import { mergeComponentAttributes } from './util'
+import IconButton from '../../ui/IconButton'
 
 interface ComponentEditorProps {
   value: ComponentData
@@ -109,11 +110,13 @@ export const ComponentEditor = ({ value, onChange }: ComponentEditorProps) => {
             items={componentIds}
           />
           {value.swappableComponentIds?.length ? (
-            <RefreshCw
-              size={12}
-              onClick={handleSwap}
-              sx={{ color: 'muted', ml: 2 }}
-            />
+            <IconButton onClick={handleSwap}>
+              <RefreshCw
+                size={15}
+                strokeWidth={2}
+                sx={{ color: 'muted', ml: 2 }}
+              />
+            </IconButton>
           ) : null}
         </span>
       </div>

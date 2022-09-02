@@ -43,7 +43,8 @@ export function NodeEditor({
     <div
       sx={{
         bg: 'background',
-        height: '240px',
+        minHeight: '4px',
+        height: 'auto',
         resize: 'vertical',
         position: 'sticky',
         top: 0,
