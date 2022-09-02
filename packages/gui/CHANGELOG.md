@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.230
+
+### Patch Changes
+
+- 0846769d: Fix color label overflow
+
 ## 0.0.229
 
 ### Patch Changes
