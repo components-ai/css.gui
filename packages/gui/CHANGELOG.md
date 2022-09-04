@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.231
+
+### Patch Changes
+
+- 294beec5: Adds new svg elements and attributes
+
 ## 0.0.230
 
 ### Patch Changes
