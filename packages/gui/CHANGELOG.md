@@ -1,5 +1,12 @@
 # @compai/css-gui
 
+## 0.0.232
+
+### Patch Changes
+
+- 08e07226: Bump @radix-ui/react-slider from 0.1.4 to 1.0.0
+- d48ae3bf: Bump copy-to-clipboard from 3.3.1 to 3.3.2
+
 ## 0.0.231
 
 ### Patch Changes
