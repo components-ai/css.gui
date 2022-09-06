@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.233
+
+### Patch Changes
+
+- adea2803: Add filter element attributes
+
 ## 0.0.232
 
 ### Patch Changes
