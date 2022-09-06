@@ -1028,10 +1028,10 @@
   dependencies:
     glob "7.1.7"
 
-"@next/mdx@^12.2.0":
-  version "12.2.0"
-  resolved "https://registry.yarnpkg.com/@next/mdx/-/mdx-12.2.0.tgz#de38207bc1150836c33455fa072afb55cdbbd194"
-  integrity sha512-obWsgfD0/1+OOr4PMQlSal34uhIDxkFe9Db+LaFfRDbsmD8+gb0YevUOV5KBoleEHXfDku0WAPUUmPmDiAxu1w==
+"@next/mdx@^12.2.5":
+  version "12.2.5"
+  resolved "https://registry.yarnpkg.com/@next/mdx/-/mdx-12.2.5.tgz#f88743cad222c53bf1648ce15d22e9a49a4c5bc4"
+  integrity sha512-b4gDNNvlt1Icf9D+nMzc66Tn1ei4lYRUFjwjWdCgdQFCo2ahKl+/f4R/g958KGzZMFmmXBJ7JIfzeAqgPv7TsA==
 
 "@next/swc-android-arm-eabi@12.2.4":
   version "12.2.4"
