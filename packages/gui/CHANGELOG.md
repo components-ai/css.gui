@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.234
+
+### Patch Changes
+
+- 63cc6ff4: Add initial support for selector functions
+
 ## 0.0.233
 
 ### Patch Changes
