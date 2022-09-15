@@ -14,7 +14,7 @@ const h = (tagName: string, props: any, children?: any[]) => {
   if (newProps.style) {
     const style = newProps.style
     delete newProps.style
-    newProps.sx = toCSSObject(style)
+    newProps.style = toCSSObject(style)
   }
 
   return { tagName, props: newProps, children }
@@ -25,7 +25,8 @@ export const enhanceSFC = async (node: HtmlNode) => {
   const functionBody = stringifyHastNode(toH(h, root))
 
   const output = `
-  export default function Component({ html }) {
+  export default function Component({ html, state = {} }) {
+    ${getAttrSyntax(node)}
     return html\`
       ${functionBody}
     \`
@@ -37,8 +38,14 @@ export const enhanceSFC = async (node: HtmlNode) => {
 
 export const getAttrSyntax = (value: HtmlNode) => {
   const slots = getSlots(value)
+
+  if (!slots.length) {
+    return ''
+  }
+
   const props = slots.map((slot) => kebabCase(slot.name)).join(', ')
   const attrString = props.length ? `{ ${props} }` : ''
+
   return `
     const { attrs } = state
     const ${attrString} = attrs

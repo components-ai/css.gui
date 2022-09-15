@@ -19,10 +19,12 @@ export const editorSchemaToHast = (node: any, options?: Options) => {
   }
 
   const processedTree = unified()
+    .use(convertComponentsToHast)
+    // @ts-ignore
     .use(attributesToProperties)
     .use(moveStyleToProperties as any)
+    // @ts-ignore
     .use(removeProperties, { propertiesToRemove })
-    .use(convertComponentsToHast)
     .use(() => (tree) => {
       if (options?.addSlotSyntax) {
         visit(tree, 'slot', (node) => {
