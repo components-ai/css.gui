@@ -3,7 +3,7 @@ import { HtmlNode } from '../../components/html/types'
 import { extractStyles } from './extract-styles'
 import { format } from './format'
 import { html as toHtml } from './html'
-import { stringifyHastNode } from './stringify-hast-node'
+import { stringifyHastNode } from './stringify-hast-node-as-jsx'
 import { toReactProps } from './to-react-props'
 
 const h = (tagName: string, props: any, children?: any[]) => {

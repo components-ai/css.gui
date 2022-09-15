@@ -9,6 +9,7 @@ import { removeProperties } from './plugins/remove-properties'
 type Options = {
   removeStyleProperty?: boolean
   addSlotSyntax?: boolean
+  addSlotTagSyntax?: boolean
 }
 export const editorSchemaToHast = (node: any, options?: Options) => {
   const propertiesToRemove: string[] = []
@@ -27,6 +28,12 @@ export const editorSchemaToHast = (node: any, options?: Options) => {
         visit(tree, 'slot', (node) => {
           node.type = 'text'
           node.value = `{${camelCase(node.name)}}`
+        })
+      }
+      if (options?.addSlotTagSyntax) {
+        visit(tree, 'slot', (node) => {
+          node.type = 'text'
+          node.value = `<slot name="${camelCase(node.name)}"></slot>`
         })
       }
     })
