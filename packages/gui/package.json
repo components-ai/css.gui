@@ -1,6 +1,6 @@
 {
   "name": "@compai/css-gui",
-  "version": "0.0.234",
+  "version": "0.0.235",
   "type": "module",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
