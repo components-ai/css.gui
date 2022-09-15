@@ -2,10 +2,11 @@ import { toH } from 'hast-to-hyperscript'
 import { HtmlNode } from '../../components/html/types'
 import { editorSchemaToHast } from '../transformers/editor-schema-to-hast'
 import { toCSSObject } from './to-css-object'
-import { stringifyHastNode } from './stringify-hast-node-as-jsx'
+import { stringifyHastNode } from './stringify-hast-node-as-html'
 import { toReactProps } from './to-react-props'
 import { format } from './format'
-import { getPropSyntax } from './util'
+import { getSlots } from './util'
+import { kebabCase } from 'lodash-es'
 
 const h = (tagName: string, props: any, children?: any[]) => {
   const newProps = toReactProps(props)
@@ -19,18 +20,27 @@ const h = (tagName: string, props: any, children?: any[]) => {
   return { tagName, props: newProps, children }
 }
 
-export const themeUI = async (node: HtmlNode) => {
-  const root = editorSchemaToHast(node, { addSlotSyntax: true })
+export const enhanceSFC = async (node: HtmlNode) => {
+  const root = editorSchemaToHast(node, { addSlotTagSyntax: true })
   const functionBody = stringifyHastNode(toH(h, root))
 
   const output = `
-  /** @jsxImportSource theme-ui */
-  export default function Component(${getPropSyntax(node)}) {
-    return (
+  export default function Component({ html }) {
+    return html\`
       ${functionBody}
-    )
+    \`
   }
   `
 
   return format('js', output)
+}
+
+export const getAttrSyntax = (value: HtmlNode) => {
+  const slots = getSlots(value)
+  const props = slots.map((slot) => kebabCase(slot.name)).join(', ')
+  const attrString = props.length ? `{ ${props} }` : ''
+  return `
+    const { attrs } = state
+    const ${attrString} = attrs
+  `
 }

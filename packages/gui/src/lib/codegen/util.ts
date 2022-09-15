@@ -1,4 +1,4 @@
-import { camelCase } from 'lodash-es'
+import { camelCase, kebabCase } from 'lodash-es'
 import { unified } from 'unified'
 import { visit } from 'unist-util-visit'
 import { HtmlNode, Slot } from '../../components/html/types'
