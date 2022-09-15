@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.236
+
+### Patch Changes
+
+- 38996b16: Include attributes in enhance export
+
 ## 0.0.235
 
 ### Patch Changes
