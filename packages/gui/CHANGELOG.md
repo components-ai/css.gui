@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.235
+
+### Patch Changes
+
+- b0c58514: Implement first pass of enhance output
+
 ## 0.0.234
 
 ### Patch Changes
