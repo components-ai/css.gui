@@ -54,3 +54,19 @@ export const stringifySlotInProp = (value: any, outerProps: any) => {
 
 export const isText = (value: HtmlNode) => value?.type === 'text'
 export const isSlot = (value: HtmlNode) => value?.type === 'slot'
+
+export const getAttrSyntax = (value: HtmlNode) => {
+  const slots = getSlots(value)
+
+  if (!slots.length) {
+    return ''
+  }
+
+  const props = slots.map((slot) => kebabCase(slot.name)).join(', ')
+  const attrString = props.length ? `{ ${props} }` : ''
+
+  return `
+    const { attrs } = state
+    const ${attrString} = attrs
+  `
+}

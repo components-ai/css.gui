@@ -5,8 +5,7 @@ import { toCSSObject } from './to-css-object'
 import { stringifyHastNode } from './stringify-hast-node-as-html'
 import { toReactProps } from './to-react-props'
 import { format } from './format'
-import { getSlots } from './util'
-import { kebabCase } from 'lodash-es'
+import { getAttrSyntax } from './util'
 
 const h = (tagName: string, props: any, children?: any[]) => {
   const newProps = toReactProps(props)
@@ -34,20 +33,4 @@ export const enhanceSFC = async (node: HtmlNode) => {
   `
 
   return format('js', output)
-}
-
-export const getAttrSyntax = (value: HtmlNode) => {
-  const slots = getSlots(value)
-
-  if (!slots.length) {
-    return ''
-  }
-
-  const props = slots.map((slot) => kebabCase(slot.name)).join(', ')
-  const attrString = props.length ? `{ ${props} }` : ''
-
-  return `
-    const { attrs } = state
-    const ${attrString} = attrs
-  `
 }
