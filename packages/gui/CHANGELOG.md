@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.237
+
+### Patch Changes
+
+- 263b9b23: Move getAttrSyntax to util
+
 ## 0.0.236
 
 ### Patch Changes
