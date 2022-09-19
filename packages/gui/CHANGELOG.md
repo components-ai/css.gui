@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.238
+
+### Patch Changes
+
+- 700259d1: Make sure all code generators are passed theme in export
+
 ## 0.0.237
 
 ### Patch Changes
