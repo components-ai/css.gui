@@ -23,18 +23,22 @@ export const stringifyProperty = (
 type StyleEntry = [string, Length | string | null | undefined]
 export const toCSSObject = (providedStyles: Styles, theme?: Theme): any => {
   const styles = stylesToEditorSchema(providedStyles)
-  // @ts-ignore
-  return Object.entries(styles).reduce((acc: Styles, curr: StyleEntry) => {
-    const [property, value] = curr
-    if (isNestedSelector(property.replace(/^:+/, ''))) {
+  const cssObject = Object.entries(styles).reduce(
+    // @ts-ignore
+    (acc: Styles, curr: StyleEntry) => {
+      const [property, value] = curr
+      if (isNestedSelector(property.replace(/^:+/, ''))) {
+        return {
+          ...acc,
+          [stringifySelector(property)]: toCSSObject(value as Styles, theme),
+        }
+      }
       return {
         ...acc,
-        [stringifySelector(property)]: toCSSObject(value as Styles, theme),
+        [property]: stringifyProperty(property, value, theme),
       }
-    }
-    return {
-      ...acc,
-      [property]: stringifyProperty(property, value, theme),
-    }
-  }, {})
+    },
+    {}
+  )
+  return cssObject
 }
