@@ -6,22 +6,24 @@ import { stringifyHastNode } from './stringify-hast-node-as-html'
 import { toReactProps } from './to-react-props'
 import { format } from './format'
 import { getAttrSyntax } from './util'
+import { CodegenOptions } from './types'
+import { Theme } from '../../types/theme'
 
-const h = (tagName: string, props: any, children?: any[]) => {
+const h = (theme: Theme) => (tagName: string, props: any, children?: any[]) => {
   const newProps = toReactProps(props)
 
   if (newProps.style) {
     const style = newProps.style
     delete newProps.style
-    newProps.style = toCSSObject(style)
+    newProps.style = toCSSObject(style, theme)
   }
 
   return { tagName, props: newProps, children }
 }
 
-export const enhanceSFC = async (node: HtmlNode) => {
+export const enhanceSFC = async (node: HtmlNode, options: CodegenOptions) => {
   const root = editorSchemaToHast(node, { addSlotTagSyntax: true })
-  const functionBody = stringifyHastNode(toH(h, root))
+  const functionBody = stringifyHastNode(toH(h(options?.theme), root))
 
   const output = `
   export default function Component({ html, state = {} }) {
