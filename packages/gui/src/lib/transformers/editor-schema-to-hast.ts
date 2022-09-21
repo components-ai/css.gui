@@ -40,5 +40,6 @@ export const editorSchemaToHast = (node: any, options?: Options) => {
       }
     })
     .runSync(cloneDeep(node))
+
   return processedTree
 }
