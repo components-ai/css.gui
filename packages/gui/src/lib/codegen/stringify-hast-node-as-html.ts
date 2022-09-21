@@ -2,6 +2,7 @@ import { isArray, isNumber, isObject, kebabCase } from 'lodash-es'
 import escapeHtml from 'escape-html'
 import { isElement, isVoidElement } from '../elements'
 import { getSlots, isSlot } from './util'
+import { objectToDecls } from './stringify-css-object'
 
 // TODO: This can, and should, be done at the AST level in the future
 export const formatTagName = (node: any) => {
@@ -21,6 +22,10 @@ export const formatTagName = (node: any) => {
 export const stringifyHastNode = (node: any) => {
   if (typeof node === 'string' || isSlot(node)) {
     return node.value || node
+  }
+
+  if (node.props.style) {
+    node.props.style = objectToDecls(node.props.style).trim()
   }
 
   if (isVoidElement(node.tagName)) {
