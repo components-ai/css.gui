@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.239
+
+### Patch Changes
+
+- 8db98565: Use style string and don't destructure slots as attrs
+
 ## 0.0.238
 
 ### Patch Changes
