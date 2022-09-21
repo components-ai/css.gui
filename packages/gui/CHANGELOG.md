@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.240
+
+### Patch Changes
+
+- 3d312157: Add style element to enhance export
+
 ## 0.0.239
 
 ### Patch Changes
