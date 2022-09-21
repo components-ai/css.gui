@@ -8,6 +8,7 @@ import { format } from './format'
 import { getAttrSyntax } from './util'
 import { CodegenOptions } from './types'
 import { Theme } from '../../types/theme'
+import { inlineStylesToStyleElement } from '../transformers/inline-styles-to-style-element'
 
 const h = (theme: Theme) => (tagName: string, props: any, children?: any[]) => {
   const newProps = toReactProps(props)
@@ -23,13 +24,20 @@ const h = (theme: Theme) => (tagName: string, props: any, children?: any[]) => {
 
 export const enhanceSFC = async (node: HtmlNode, options: CodegenOptions) => {
   const root = editorSchemaToHast(node, { addSlotTagSyntax: true })
-  const functionBody = stringifyHastNode(toH(h(options?.theme), root))
+  const { node: htmlNode, styles } = inlineStylesToStyleElement(root)
+  // @ts-ignore
+  const functionBody = stringifyHastNode(toH(h(options?.theme), htmlNode))
+
+  const htmlString = `
+        <style>${styles}</style>
+      ${functionBody}`
+  const formattedHtmlString = await format('html', htmlString)
 
   const output = `
   export default function Component({ html, state = {} }) {
     ${getAttrSyntax(node)}
     return html\`
-      ${functionBody}
+      ${formattedHtmlString}
     \`
   }
   `
