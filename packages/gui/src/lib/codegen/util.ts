@@ -55,7 +55,9 @@ export const stringifySlotInProp = (value: any, outerProps: any) => {
 export const isText = (value: HtmlNode) => value?.type === 'text'
 export const isSlot = (value: HtmlNode) => value?.type === 'slot'
 
+// TODO: This should find attr slots only
 export const getAttrSyntax = (value: HtmlNode) => {
+  return ''
   const slots = getSlots(value)
 
   if (!slots.length) {

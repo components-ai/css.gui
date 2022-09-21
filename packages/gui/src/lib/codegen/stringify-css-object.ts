@@ -3,7 +3,7 @@ import { isCSSClass } from '../classes'
 import { isElement } from '../elements'
 import { isPseudo } from '../pseudos'
 
-const objectToDecls = (obj: any): string => {
+export const objectToDecls = (obj: any): string => {
   return Object.entries(obj)
     .map(([key, value]: [string, any]) => {
       return `  ${kebabCase(key)}: ${value};`
