@@ -164,7 +164,7 @@ export const initialValue: any = {
           tagName: 'video',
           attributes: {
             title: 'Video - <video>',
-            src: 'http://dc28c2r6oodom.cloudfront.net/vid/cube-loop.mp4',
+            src: 'https://dc28c2r6oodom.cloudfront.net/vid/cube-loop.mp4',
             loop: true,
             autoPlay: true,
             playsInline: true,
