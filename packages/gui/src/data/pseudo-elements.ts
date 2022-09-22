@@ -1,3 +1,5 @@
+export const selectorFunctionPseudoElements = ['part', 'slotted']
+
 export const pseudoElements = [
   'after',
   'backdrop',
@@ -13,4 +15,5 @@ export const pseudoElements = [
   'selection',
   'spelling-error',
   'target-text',
+  ...selectorFunctionPseudoElements,
 ] as const

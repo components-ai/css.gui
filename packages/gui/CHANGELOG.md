@@ -1,5 +1,78 @@
 # @compai/css-gui
 
+## 0.0.240
+
+### Patch Changes
+
+- 3d312157: Add style element to enhance export
+
+## 0.0.239
+
+### Patch Changes
+
+- 8db98565: Use style string and don't destructure slots as attrs
+
+## 0.0.238
+
+### Patch Changes
+
+- 700259d1: Make sure all code generators are passed theme in export
+
+## 0.0.237
+
+### Patch Changes
+
+- 263b9b23: Move getAttrSyntax to util
+
+## 0.0.236
+
+### Patch Changes
+
+- 38996b16: Include attributes in enhance export
+
+## 0.0.235
+
+### Patch Changes
+
+- b0c58514: Implement first pass of enhance output
+
+## 0.0.234
+
+### Patch Changes
+
+- 63cc6ff4: Add initial support for selector functions
+
+## 0.0.233
+
+### Patch Changes
+
+- adea2803: Add filter element attributes
+
+## 0.0.232
+
+### Patch Changes
+
+- 08e07226: Bump @radix-ui/react-slider from 0.1.4 to 1.0.0
+- d48ae3bf: Bump copy-to-clipboard from 3.3.1 to 3.3.2
+
+## 0.0.231
+
+### Patch Changes
+
+- 294beec5: Adds new svg elements and attributes
+
+## 0.0.230
+
+### Patch Changes
+
+- 0846769d: Fix color label overflow
+
+## 0.0.229
+
+### Patch Changes
+
+- 5770da69: Improve tap targets and spacing
+
 ## 0.0.228
 
 ### Patch Changes

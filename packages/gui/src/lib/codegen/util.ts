@@ -1,4 +1,4 @@
-import { camelCase } from 'lodash-es'
+import { camelCase, kebabCase } from 'lodash-es'
 import { unified } from 'unified'
 import { visit } from 'unist-util-visit'
 import { HtmlNode, Slot } from '../../components/html/types'
@@ -54,3 +54,21 @@ export const stringifySlotInProp = (value: any, outerProps: any) => {
 
 export const isText = (value: HtmlNode) => value?.type === 'text'
 export const isSlot = (value: HtmlNode) => value?.type === 'slot'
+
+// TODO: This should find attr slots only
+export const getAttrSyntax = (value: HtmlNode) => {
+  return ''
+  const slots = getSlots(value)
+
+  if (!slots.length) {
+    return ''
+  }
+
+  const props = slots.map((slot) => kebabCase(slot.name)).join(', ')
+  const attrString = props.length ? `{ ${props} }` : ''
+
+  return `
+    const { attrs } = state
+    const ${attrString} = attrs
+  `
+}

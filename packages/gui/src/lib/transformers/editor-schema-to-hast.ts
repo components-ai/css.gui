@@ -9,6 +9,7 @@ import { removeProperties } from './plugins/remove-properties'
 type Options = {
   removeStyleProperty?: boolean
   addSlotSyntax?: boolean
+  addSlotTagSyntax?: boolean
 }
 export const editorSchemaToHast = (node: any, options?: Options) => {
   const propertiesToRemove: string[] = []
@@ -18,10 +19,12 @@ export const editorSchemaToHast = (node: any, options?: Options) => {
   }
 
   const processedTree = unified()
+    .use(convertComponentsToHast)
+    // @ts-ignore
     .use(attributesToProperties)
     .use(moveStyleToProperties as any)
+    // @ts-ignore
     .use(removeProperties, { propertiesToRemove })
-    .use(convertComponentsToHast)
     .use(() => (tree) => {
       if (options?.addSlotSyntax) {
         visit(tree, 'slot', (node) => {
@@ -29,7 +32,14 @@ export const editorSchemaToHast = (node: any, options?: Options) => {
           node.value = `{${camelCase(node.name)}}`
         })
       }
+      if (options?.addSlotTagSyntax) {
+        visit(tree, 'slot', (node) => {
+          node.type = 'text'
+          node.value = `<slot name="${camelCase(node.name)}"></slot>`
+        })
+      }
     })
     .runSync(cloneDeep(node))
+
   return processedTree
 }

@@ -6,6 +6,7 @@ import {
   isValidElement,
   ReactNode,
   useMemo,
+  useState,
 } from 'react'
 import { camelCase, isNil, mapValues, uniq } from 'lodash-es'
 import { RefreshCw } from 'react-feather'
@@ -37,7 +38,14 @@ import { SchemaInput } from '../inputs/SchemaInput'
 import { EditorDropdown } from '../ui/dropdowns/EditorDropdown'
 import { FieldsetDropdown } from '../ui/dropdowns/FieldsetDropdown'
 import { tokenize } from '../../lib/parse'
-import { addPseudoSyntax } from '../../lib/pseudos'
+import {
+  addPseudoSyntax,
+  getSelectorFunctionArgument,
+  getSelectorFunctionName,
+  isSelectorFunction,
+  removePseudoSyntax,
+  stringifySelectorFunction,
+} from '../../lib/pseudos'
 
 export const getPropertyFromField = (field: KeyArg) => {
   if (Array.isArray(field)) {
@@ -219,7 +227,7 @@ export const Editor = ({
         <div sx={{ ml: 'auto', display: 'flex' }}>
           <IconButton
             onClick={() => onChange(regenerateAll())}
-            sx={{ ml: 'auto', }}
+            sx={{ ml: 'auto' }}
           >
             <RefreshCw size={15} />
           </IconButton>
@@ -320,10 +328,13 @@ type FieldsetControlProps = {
   field: string
 }
 const FieldsetControl = ({ field }: FieldsetControlProps) => {
-  const { getField, removeField } = useEditor()
+  const { getField, removeField, setFields } = useEditor()
+  const [argument, setArgument] = useState(getSelectorFunctionArgument(field))
+
   const styles = getField(field)
   const properties = Object.keys(styles)
   const label = addPseudoSyntax(field)
+  const rawFieldsetName = getSelectorFunctionName(field)
 
   return (
     <section
@@ -350,12 +361,45 @@ const FieldsetControl = ({ field }: FieldsetControlProps) => {
             mb: 0,
           }}
         >
-          {removeInternalCSSClassSyntax(label)}
+          {rawFieldsetName}
+          {isSelectorFunction(rawFieldsetName) ? (
+            <>
+              {'('}
+              <input
+                value={argument}
+                sx={{
+                  width: 64,
+                }}
+                onChange={(e) => {
+                  setArgument(e.target.value)
+                }}
+                onBlur={() => {
+                  setFields(
+                    {
+                      [stringifySelectorFunction(rawFieldsetName, argument)]:
+                        styles,
+                    },
+                    [field]
+                  )
+                }}
+              />
+              {')'}
+            </>
+          ) : null}
         </h3>
         <FieldsetDropdown onRemove={() => removeField(field)} />
       </div>
       <GenericFieldset field={field}>
-        <div sx={{ mb: 3, p: 3, borderWidth: '1px', borderStyle: 'solid', borderColor: 'border', borderRadius: '6px', }}>
+        <div
+          sx={{
+            mb: 3,
+            p: 3,
+            borderWidth: '1px',
+            borderStyle: 'solid',
+            borderColor: 'border',
+            borderRadius: '6px',
+          }}
+        >
           <AddPropertyControl
             field={field}
             styles={styles}

@@ -43,15 +43,25 @@ export const inputPseudoClasses = [
 export const treeStructuralPseudoClasses = [
   'root',
   'empty',
-  'nth-child',
-  'nth-last-child',
   'first-child',
   'last-child',
   'only-child',
-  'nth-of-type',
-  'nth-last-of-type',
   'only-of-type',
 ] as const
+export const selectorFunctionPseudoClasses = [
+  'dir',
+  'has',
+  'host-context',
+  'host',
+  'is',
+  'lang',
+  'not',
+  'nth-child',
+  'nth-last-child',
+  'nth-last-of-type',
+  'nth-of-type',
+  'where',
+]
 export const pseudoClasses = [
   ...linquisticPseudoClasses,
   ...locationPseudoClasses,
@@ -60,4 +70,5 @@ export const pseudoClasses = [
   ...resourceStatePseudoClasses,
   ...inputPseudoClasses,
   ...treeStructuralPseudoClasses,
+  ...selectorFunctionPseudoClasses,
 ] as const

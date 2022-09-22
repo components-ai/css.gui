@@ -1,4 +1,4 @@
-import { isPseudoClass, isPseudoElement } from './pseudos'
+import { isPseudoClass, isPseudoElement, isSelectorFunction } from './pseudos'
 import { isElement } from './elements'
 import { lowerCase, startCase, upperFirst } from 'lodash-es'
 import { EditorProps, EditorPropsWithLabel } from '../types/editor'
@@ -31,6 +31,7 @@ export function isNestedSelector(selector: string): boolean {
     isElement(selector) ||
     isPseudoClass(selector) ||
     isPseudoElement(selector) ||
+    isSelectorFunction(selector) ||
     isInternalCSSClass(selector) ||
     false
   )
