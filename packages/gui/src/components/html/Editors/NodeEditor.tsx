@@ -46,14 +46,17 @@ export function NodeEditor({
         minHeight: '4px',
         height: 'auto',
         resize: 'vertical',
-        position: 'sticky',
-        top: 0,
         boxSizing: 'border-box',
-        overflowX: 'hidden',
         borderBottomWidth: '1px',
         borderBottomStyle: 'solid',
         borderBottomColor: 'border',
-        zIndex: 4,
+        zIndex: 9999,
+        position: 'sticky',
+        top: 0,
+        overflowY: 'scroll',
+        borderTopWidth: '4px',
+        borderTopStyle: 'solid',
+        borderTopColor: 'border',
       }}
     >
       <div
@@ -171,14 +174,13 @@ function NodeSwitch({ value, onChange }: EditorProps) {
   const tagKey = [...(selected || []), value.tagName || ''].join('-')
 
   return (
-    <div>
       <article
         sx={{
-          pb: 3,
+          pb: 4,
         }}
       >
-        <div sx={{ mb: 2, px: 3 }}>
-          <Label>Tag name</Label>{' '}
+        <div sx={{ px: 3, mb: 2 }}>
+          <Label>Element</Label>{' '}
           <Combobox
             key={tagKey}
             onFilterItems={(filterValue) => {
@@ -223,6 +225,5 @@ function NodeSwitch({ value, onChange }: EditorProps) {
           />
         </div>
       </article>
-    </div>
   )
 }

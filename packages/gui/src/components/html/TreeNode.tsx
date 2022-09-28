@@ -48,6 +48,8 @@ export function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
             textAlign: 'start',
             fontSize: 0,
             width: '100%',
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
           }}
           onClick={() => {
             handleSelect()
@@ -173,7 +175,7 @@ export function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
         WebkitAppearance: 'none',
         cursor: 'pointer',
         border: 'none',
-        backgroundColor: isSelected ? '#ff0' : 'background',
+        backgroundColor: isSelected ? 'primary' : 'background',
         color: 'text',
         fontSize: '14px',
         fontFamily: 'monospace',
@@ -307,7 +309,7 @@ export function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
               px: 2,
               fontSize: '14px',
               fontFamily: 'monospace',
-              bg: isSelected ? '#ff0' : 'background',
+              bg: isSelected ? 'primary' : 'background',
               fontWeight: isSelected ? 700 : 400,
               borderRadius: '6px',
               transition: 'background-color .2s ease-in-out',

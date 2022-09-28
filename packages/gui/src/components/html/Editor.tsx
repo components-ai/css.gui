@@ -38,7 +38,21 @@ const TABS_TRIGGER_STYLES: any = {
 const TABS_CONTENT_STYLES: any = {
   width: 400,
   height: 'calc(100vh - 81px)',
-  overflow: 'auto',
+  maxHeight: '100%',
+  overflow: 'hidden',
+  resize: 'horizontal',
+  borderRightWidth: '1px',
+  borderRightStyle: 'solid',
+  borderColor: 'border',
+  '&::-webkit-scrollbar': { display: 'none' },
+  scrollbarWidth: 0,
+}
+
+const TABS_EDITOR_STYLES: any = {
+  width: '400px',
+  height: 'calc(100vh - 81px)',
+  maxHeight: '100%',
+  overflow: 'hidden',
   resize: 'horizontal',
   borderRightWidth: '1px',
   borderRightStyle: 'solid',
@@ -103,10 +117,7 @@ export function HtmlEditor() {
           }}
         >
           <Tabs.Trigger sx={TABS_TRIGGER_STYLES} value="node">
-            <span>🎨</span> Styles
-          </Tabs.Trigger>
-          <Tabs.Trigger sx={TABS_TRIGGER_STYLES} value="tree">
-            <Layers size={12} /> Layers
+            <span>🎨</span> Editor
           </Tabs.Trigger>
           <Tabs.Trigger sx={TABS_TRIGGER_STYLES} value="import">
             <LogIn size={12} /> Import
@@ -115,8 +126,8 @@ export function HtmlEditor() {
             <Code size={12} /> Export
           </Tabs.Trigger>
         </Tabs.List>
-        <Tabs.Content sx={TABS_CONTENT_STYLES} value="node">
-          <div sx={{ pt: 3, px: 3 }}>
+        <Tabs.Content sx={TABS_EDITOR_STYLES} value="node">
+          <div sx={{ pt: 3, px: 3, resize: 'vertical', overflowY: 'scroll', height: '50vh' }}>
             <Editor
               key={selected.join('-')}
               theme={theme}
@@ -129,9 +140,7 @@ export function HtmlEditor() {
               showAddProperties
             />
           </div>
-        </Tabs.Content>
-        <Tabs.Content sx={TABS_CONTENT_STYLES} value="tree">
-          <div>
+            <div sx={{ height: '50%', position: 'relative', }}>
             <NodeEditor
               value={nodeValue}
               onChange={(newItem) =>
@@ -150,13 +159,17 @@ export function HtmlEditor() {
                 setSelected(newPath)
               }}
             />
-            <TreeNode
-              value={value}
-              onSelect={setSelected}
-              path={[]}
-              onChange={onChange}
-            />
-          </div>
+            <div sx={{ height: '100%', overflow: 'scroll', resize: 'vertical', borderBottomWidth: '1px', borderBottomStyle: 'solid', borderBottomColor: 'border' }}>
+              <div sx={{ pb: '480px', minHeight: '100%' }}>
+                <TreeNode
+                  value={value}
+                  onSelect={setSelected}
+                  path={[]}
+                  onChange={onChange}
+                />
+              </div>
+            </div>
+            </div>
         </Tabs.Content>
         <Tabs.Content sx={TABS_CONTENT_STYLES} value="import">
           <Import onChange={onChange} />
