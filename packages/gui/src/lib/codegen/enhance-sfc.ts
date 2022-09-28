@@ -24,7 +24,7 @@ const h = (theme: Theme) => (tagName: string, props: any, children?: any[]) => {
 
 export const enhanceSFC = async (node: HtmlNode, options: CodegenOptions) => {
   const root = editorSchemaToHast(node, { addSlotTagSyntax: true })
-  const { node: htmlNode, styles } = inlineStylesToStyleElement(root)
+  const { node: htmlNode, styles } = inlineStylesToStyleElement(root, options)
   // @ts-ignore
   const functionBody = stringifyHastNode(toH(h(options?.theme), htmlNode))
 

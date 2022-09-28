@@ -5,8 +5,12 @@ import hash from '../hash'
 import { stringifyCSSObject } from '../codegen/stringify-css-object'
 import { toCSSObject } from '../codegen/to-css-object'
 import { addCSSClassSyntax } from '../classes'
+import { CodegenOptions } from '../codegen/types'
 
-export const inlineStylesToStyleElement = (node: any) => {
+export const inlineStylesToStyleElement = (
+  node: any,
+  options: CodegenOptions
+) => {
   const styleMap: Record<string, any> = {}
   const processedTree = unified()
     .use(() => (tree) => {
@@ -27,8 +31,9 @@ export const inlineStylesToStyleElement = (node: any) => {
 
         delete node.properties.style
 
+        console.log(options)
         styleMap[selector] = stringifyCSSObject(
-          toCSSObject(style),
+          toCSSObject(style, options?.theme),
           addCSSClassSyntax(selector)
         )
       })
