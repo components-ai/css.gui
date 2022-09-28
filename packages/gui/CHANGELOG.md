@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.242
+
+### Patch Changes
+
+- 1f758bed: Fixes to two small design bugs
+
 ## 0.0.241
 
 ### Patch Changes
