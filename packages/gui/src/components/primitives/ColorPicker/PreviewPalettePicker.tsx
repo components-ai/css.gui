@@ -53,15 +53,14 @@ export function PreviewPalettePicker({
                       appearance: 'none',
                       WebkitAppearance: 'none',
                       cursor: 'pointer',
-                      borderWidth: selected ? '2px' : '1px',
-                      borderColor: selected ? '#ff0000' : 'border',
-                      borderStyle: 'solid',
+                      boxShadow: selected ? 'inset 0 0 0 2px white, 0 0 0 2px '+color.value : 'inset 0 0 0 2px rgba(0,0,0,.15)',
                       borderRadius: '9999px',
                       padding: 0,
                       margin: 0,
                       width: '100%',
                       aspectRatio: '1 / 1',
                       backgroundColor: color.value,
+                      border: 0,
                     }}
                     onClick={() =>
                       onChange({

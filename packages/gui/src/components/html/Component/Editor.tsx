@@ -98,7 +98,7 @@ export const ComponentEditor = ({ value, onChange }: ComponentEditorProps) => {
         }}
       >
         <Label>Component</Label>
-        <span sx={{ display: 'flex', alignItems: 'center' }}>
+        <span sx={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <Combobox
             key={value.tagName}
             value={value.tagName}
@@ -114,7 +114,7 @@ export const ComponentEditor = ({ value, onChange }: ComponentEditorProps) => {
               <RefreshCw
                 size={15}
                 strokeWidth={2}
-                sx={{ color: 'muted', ml: 2 }}
+                sx={{ color: 'muted' }}
               />
             </IconButton>
           ) : null}
