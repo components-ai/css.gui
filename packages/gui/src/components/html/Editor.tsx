@@ -37,7 +37,7 @@ const TABS_TRIGGER_STYLES: any = {
 }
 const TABS_CONTENT_STYLES: any = {
   width: 400,
-  height: 'calc(100vh - 81px)',
+  height: 'calc(100vh - 97px)',
   maxHeight: '100%',
   overflow: 'hidden',
   resize: 'horizontal',
@@ -50,13 +50,13 @@ const TABS_CONTENT_STYLES: any = {
 
 const TABS_EDITOR_STYLES: any = {
   width: '400px',
-  height: 'calc(100vh - 81px)',
+  height: 'calc(100vh - 97px)',
   maxHeight: '100%',
   overflow: 'hidden',
   resize: 'horizontal',
   borderRightWidth: '1px',
   borderRightStyle: 'solid',
-  borderColor: 'border',
+  borderRightColor: 'border',
   '&::-webkit-scrollbar': { display: 'none' },
   scrollbarWidth: 0,
 }
@@ -140,6 +140,7 @@ export function HtmlEditor() {
               showAddProperties
             />
           </div>
+          <h4 sx={{ bg: 'backgroundOffset', py: 2, my: 0, px: 3, fontSize: 0, display: 'flex', alignItems: 'center', gap: '4px', borderTopWidth: '1px', borderTopStyle: 'solid', borderTopColor: 'border' }}><Layers size={15} /> Layers</h4>
             <div sx={{ height: '50%', position: 'relative', }}>
             <NodeEditor
               value={nodeValue}

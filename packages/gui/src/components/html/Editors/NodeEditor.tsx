@@ -1,4 +1,5 @@
 import fuzzysort from 'fuzzysort'
+import { Layers } from 'react-feather'
 import { HtmlNode } from '../types'
 import { Label, Combobox } from '../../primitives'
 import { SelectInput } from '../../inputs/SelectInput'
@@ -54,9 +55,9 @@ export function NodeEditor({
         position: 'sticky',
         top: 0,
         overflowY: 'scroll',
-        borderTopWidth: '4px',
-        borderTopStyle: 'solid',
-        borderTopColor: 'border',
+      //  borderTopWidth: '1px',
+      //  borderTopStyle: 'solid',
+      //  borderTopColor: 'border',
       }}
     >
       <div

@@ -103,9 +103,12 @@ export function Combobox({
           WebkitAppearance: 'none',
           appearance: 'none',
           width: '100%',
-          border: '1px solid',
-          borderRadius: '6px',
-          p: 1,
+          borderWidth: '1px',
+          borderStyle: 'solid',
+          borderColor: 'inputBorder',
+          borderRadius: '4px',
+          p: 2,
+          bg: 'background',
         }}
       />
       <div
