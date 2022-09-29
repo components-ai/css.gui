@@ -1,5 +1,12 @@
 # @compai/css-gui
 
+## 0.0.243
+
+### Patch Changes
+
+- bb2079e3: New design styles
+- e116b855: Ensure theme is passed to style element stringification
+
 ## 0.0.242
 
 ### Patch Changes
