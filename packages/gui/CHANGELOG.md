@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.245
+
+### Patch Changes
+
+- debd3b89: Properly handle pseudos when stringifying CSS object
+
 ## 0.0.244
 
 ### Patch Changes
