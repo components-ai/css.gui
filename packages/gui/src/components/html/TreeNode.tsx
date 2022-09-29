@@ -309,7 +309,7 @@ export function TreeNode({ value, path, onSelect, onChange }: TreeNodeProps) {
               px: 2,
               fontSize: '14px',
               fontFamily: 'monospace',
-              bg: isSelected '#d128dd' : 'background',
+              bg: isSelected ? '#d128dd' : 'background',
               fontWeight: isSelected ? 700 : 400,
               borderRadius: '6px',
               transition: 'background-color .2s ease-in-out',
