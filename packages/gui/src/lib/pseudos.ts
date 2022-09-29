@@ -42,6 +42,10 @@ export const stringifySelectorFunction = (
 }
 
 export const addPseudoSyntax = (str: string): string => {
+  if (hasPseudoSyntax(str)) {
+    return str
+  }
+
   if (isPseudoClass(str) || isSelectorFunction(str)) {
     return ':' + str
   } else if (isPseudoElement(str)) {

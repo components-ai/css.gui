@@ -31,7 +31,6 @@ export const inlineStylesToStyleElement = (
 
         delete node.properties.style
 
-        console.log(options)
         styleMap[selector] = stringifyCSSObject(
           toCSSObject(style, options?.theme),
           addCSSClassSyntax(selector)

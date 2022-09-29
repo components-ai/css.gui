@@ -1,7 +1,7 @@
 import { isEmpty, kebabCase } from 'lodash-es'
 import { isCSSClass } from '../classes'
 import { isElement } from '../elements'
-import { isPseudo } from '../pseudos'
+import { addPseudoSyntax, hasPseudoSyntax, isPseudo } from '../pseudos'
 
 export const objectToDecls = (obj: any): string => {
   return Object.entries(obj)
@@ -28,8 +28,8 @@ const flattenCSSObject = (
         ...flattenedGroups,
       }
       return
-    } else if (isPseudo(key)) {
-      const fullSelector = selector + key
+    } else if (isPseudo(key) || hasPseudoSyntax(key)) {
+      const fullSelector = selector + addPseudoSyntax(key)
       const flattenedGroups = flattenCSSObject(value, fullSelector)
       cssDeclGroups = {
         ...cssDeclGroups,
