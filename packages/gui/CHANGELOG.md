@@ -1,5 +1,12 @@
 # @compai/css-gui
 
+## 0.0.244
+
+### Patch Changes
+
+- d543091c: Changes color to be more accessible in editor
+- fd7865c8: Fixes typo
+
 ## 0.0.243
 
 ### Patch Changes
