@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.246
+
+### Patch Changes
+
+- 95540fca: Adds Astro support for export
+
 ## 0.0.245
 
 ### Patch Changes
