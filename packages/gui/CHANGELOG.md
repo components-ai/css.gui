@@ -1,5 +1,11 @@
 # @compai/css-gui
 
+## 0.0.247
+
+### Patch Changes
+
+- 2c1bbde9: Bump @radix-ui/react-dropdown-menu from 1.0.0 to 2.0.3
+
 ## 0.0.246
 
 ### Patch Changes
