@@ -103,27 +103,6 @@ export const Header = () => {
       >
         GitHub
       </a>
-      <a
-        sx={{
-          textDecoration: 'none',
-          color: 'currentColor',
-          fontWeight: 700,
-          transition: 'color .2s ease-in-out',
-          px: 3,
-          py: 2,
-          boxShadow: 'inset 0 0 1px 0 currentColor',
-          borderRadius: '4px',
-          lineHeight: 1,
-          fontSize: [0, 1, 1],
-          mr: 2,
-          ':hover': {
-            color: 'primary',
-          },
-        }}
-        href="https://components.ai/login"
-      >
-        Log in
-      </a>
     </header>
   )
 }
