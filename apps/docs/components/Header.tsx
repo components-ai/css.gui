@@ -124,26 +124,6 @@ export const Header = () => {
       >
         Log in
       </a>
-      <a
-        sx={{
-          textDecoration: 'none',
-          fontWeight: 700,
-          px: 3,
-          fontSize: [0, 1, 1],
-          bg: 'primary',
-          color: 'white',
-          borderRadius: '4px',
-          lineHeight: 1,
-          py: 2,
-          transition: '.25s background-color ease-in-out',
-          ':hover': {
-            bg: 'primaryHover',
-          },
-        }}
-        href="https://components.ai/signup"
-      >
-        Sign up
-      </a>
     </header>
   )
 }
