@@ -60,7 +60,7 @@ export function TransitionPreview() {
               alignItems: 'center',
               justifyContent: 'center',
               backgroundImage:
-                'url(https://source.unsplash.com/random/1920x1080)',
+                'url(https://dlu344star2bj.cloudfront.net/i/3090-0015.jpg)',
               backgroundSize: 'cover',
               backgroundPosition: 'center center',
               transition: 'all .2s ease-in-out',

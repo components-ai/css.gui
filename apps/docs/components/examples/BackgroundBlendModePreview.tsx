@@ -36,7 +36,7 @@ export function BackgroundBlendModePreview() {
           }}>
           <styled.div styles={styles} style={{ 
             backgroundColor: '#6465ff',
-            backgroundImage: 'url(https://source.unsplash.com/random)',
+            backgroundImage: 'url(https://dlu344star2bj.cloudfront.net/i/3090-0015.jpg)',
             backgroundSize: 'cover',
             height: '100%',
             width: '100%',

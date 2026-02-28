@@ -29,7 +29,7 @@ export default function Filters() {
             sx={{
               width: '100%',
               aspectRatio: '4 / 3',
-              backgroundImage: 'url("https://source.unsplash.com/random")',
+              backgroundImage: 'url("https://dlu344star2bj.cloudfront.net/i/3090-0015.jpg")',
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               display: 'flex',

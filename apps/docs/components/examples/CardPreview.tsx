@@ -10,7 +10,7 @@ export const CardPreview = () => {
     <>
       <div>
         <styled.a styles={styles}>
-          <img src='https://source.unsplash.com/random' />
+          <img src='https://dlu344star2bj.cloudfront.net/i/3090-0015.jpg' />
           <h1>Heading</h1>
           <p>Body text</p>
         </styled.a>

@@ -19,7 +19,7 @@ const initialStyles = {
     {
       image: {
         name: 'url',
-        arguments: 'https://source.unsplash.com/random',
+        arguments: 'https://dlu344star2bj.cloudfront.net/i/3090-0015.jpg',
       },
       position: {
         x: 'center',

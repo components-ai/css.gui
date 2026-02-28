@@ -148,7 +148,7 @@ export const initialValue: any = {
         {
           tagName: 'img',
           attributes: {
-            src: 'https://source.unsplash.com/random/1920x1280',
+            src: 'https://dlu344star2bj.cloudfront.net/i/3090-0015.jpg',
             title: 'Image - <img />',
           },
           style: {

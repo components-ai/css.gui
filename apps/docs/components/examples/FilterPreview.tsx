@@ -37,7 +37,7 @@ export function FilterPreview() {
           mb: 3,
           }}>
           <styled.div styles={styles}>
-            <img src='https://source.unsplash.com/random' sx={{display: 'block', width: '100%', }}/>
+            <img src='https://dlu344star2bj.cloudfront.net/i/3090-0015.jpg' sx={{display: 'block', width: '100%', }}/>
           </styled.div>
         </section>
         <Editor styles={styles} onChange={setStyles} theme={defaultTheme}>

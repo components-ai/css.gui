@@ -9,7 +9,7 @@ const initialStyles = {
       clip: 'border-box',
       image: {
         name: 'url',
-        arguments: 'https://source.unsplash.com/random',
+        arguments: 'https://dlu344star2bj.cloudfront.net/i/3090-0015.jpg',
       },
       origin: 'border-box',
       position: {
@@ -34,7 +34,7 @@ export default function MaskExample() {
       <Container>
         <div sx={{ mb: 5, '& > img': { maxWidth: '100%', display: 'block' } }}>
           <img
-            src="https://source.unsplash.com/random"
+            src="https://dlu344star2bj.cloudfront.net/i/3090-0015.jpg"
             sx={toCSSObject(styles)}
           />
         </div>

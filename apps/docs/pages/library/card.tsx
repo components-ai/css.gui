@@ -41,7 +41,7 @@ const initialValue: any = {
             display: 'block',
           },
           attributes: {
-            src: 'https://source.unsplash.com/random',
+            src: 'https://dlu344star2bj.cloudfront.net/i/3090-0015.jpg',
           },
           children: [],
         },

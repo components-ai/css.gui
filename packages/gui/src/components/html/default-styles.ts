@@ -16,7 +16,7 @@ export const DEFAULT_ATTRIBUTES: Record<string, any> = {
     xmlns: 'http://www.w3.org/2000/svg',
   },
   img: {
-    src: 'https://source.unsplash.com/random',
-    alt: 'Random image from unsplash',
+    src: 'https://dlu344star2bj.cloudfront.net/i/3090-0015.jpg',
+    alt: 'Image',
   },
 }
