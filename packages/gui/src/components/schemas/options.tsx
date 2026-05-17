@@ -104,7 +104,7 @@ export function optionsSchema<T extends Record<string, any>>({
       // TODO deal with instances where the one of the variants just swallows up the other
       for (const variantSchema of Object.values(variants)) {
         const [result, rest] = variantSchema.parse(tokens)
-        if (result) {
+        if (result !== undefined) {
           return [result, rest]
         }
       }

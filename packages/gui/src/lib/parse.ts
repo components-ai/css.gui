@@ -25,6 +25,9 @@ function processToken(tokens: string[]): [Token, string[]] {
     return [head, tail]
   }
   const [args, rest] = processArguments(tail)
+  if (rest[0] !== ')') {
+    return [head, tail]
+  }
   return [{ name: head.slice(0, -1), arguments: args }, rest.slice(1)]
 }
 
@@ -41,8 +44,11 @@ function processArguments(tokens: string[]): [Token[], string[]] {
 }
 
 function isFunctionIdent(str: string) {
-  return /[-A-Za-z0-9]+\(/.test(str)
+  return /^[-_A-Za-z0-9]+\($/.test(str)
 }
+
+const tokenPattern =
+  /(?:"(?:\\.|[^"\\])*")|(?:'(?:\\.|[^'\\])*')|(?:[-_A-Za-z0-9]+\()|(?:#[a-fA-F0-9]+)|[-_%A-Za-z0-9.]+|\/|,|\)|\+|\-|\*/y
 
 /**
  * Tokenize the value into css value tokens (not counting functions)
@@ -54,10 +60,26 @@ export function tokenizeRaw(str: string) {
   //  - a string, either with double quotes (") or single quotes (')
   //  - a function, which has a string and items wrapped in parentheses
   //  - a literal used in css ( , / + - * )
-  // TODO fail if there are any extraneous non-space characters
-  return [
-    ...str.matchAll(
-      /(?:"[^"]*")|(?:'[^']*')|(?:[-_A-Za-z0-9]+\()|[-_%A-Za-z0-9.]+|(?:#[a-f0-9]+)|\/|,|\)|\+|\-|\*/g
-    ),
-  ].map((match) => match[0])
+  const tokens = []
+  let index = 0
+
+  while (index < str.length) {
+    if (/\s/.test(str[index])) {
+      index += 1
+      continue
+    }
+
+    tokenPattern.lastIndex = index
+    const match = tokenPattern.exec(str)
+
+    if (match) {
+      tokens.push(match[0])
+      index = tokenPattern.lastIndex
+    } else {
+      tokens.push(str[index])
+      index += 1
+    }
+  }
+
+  return tokens
 }

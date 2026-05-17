@@ -12,7 +12,10 @@ describe('tokenize()', () => {
     it('tokenizes single-quoted strings', () => {
       expect(tokenize("'some name'")).toEqual(["'some name'"])
     })
-    it.todo('tokenizes escaped strings correctly')
+    it('tokenizes escaped strings correctly', () => {
+      expect(tokenize('"some \\"name\\""')).toEqual(['"some \\"name\\""'])
+      expect(tokenize("'some \\'name\\''")).toEqual(["'some \\'name\\''"])
+    })
   })
 
   it('tokenizes lists', () => {
@@ -47,6 +50,17 @@ describe('tokenize()', () => {
       ])
     })
 
-    it.todo('fails gracefully on mismatched parentheses')
+    it('leaves unterminated functions unparsed', () => {
+      expect(tokenize('translate(2px,3px')).toEqual([
+        'translate(',
+        '2px',
+        ',',
+        '3px',
+      ])
+    })
+  })
+
+  it('keeps unsupported characters so parsers can reject them', () => {
+    expect(tokenize('foo!')).toEqual(['foo', '!'])
   })
 })
