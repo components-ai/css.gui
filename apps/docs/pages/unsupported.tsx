@@ -54,7 +54,7 @@ export default function UnsupportedProperties() {
               },
               '&::-moz-progress-bar': {
                 background: '#6465ff',
-              }
+              },
             }}
           >
             {percentageComplete}%
@@ -62,7 +62,7 @@ export default function UnsupportedProperties() {
         </label>
         <div sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <span>0</span>
-          <span>427</span>
+          <span>{allPropertiesCount}</span>
         </div>
         <h2 sx={{ mt: 5, mb: 4 }}>
           The following properties are on our TODO list

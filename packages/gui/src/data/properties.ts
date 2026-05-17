@@ -54,8 +54,10 @@ import * as transformProperties from '../components/schemas/transform'
 import * as transitionProperties from '../components/schemas/transition'
 import {
   integer,
+  ident,
   keyword,
   length,
+  lengthPercentage,
   number,
   percentage,
   string,
@@ -69,6 +71,19 @@ import { time } from '../components/schemas/time'
 import { topLevel } from '../components/schemas/topLevel'
 import { stringifyFontFamily } from '../lib/stringify'
 import { quotes } from '../components/schemas/quotes'
+
+const customIdent = ident({ defaultValue: 'custom' })
+const dashedIdent = ident({ defaultValue: '--name' })
+const anchorIdent = ident({ defaultValue: '--anchor' })
+const timelineIdent = ident({ defaultValue: '--timeline' })
+const anchorName = joinSchemas([keyword(['none']), anchorIdent])
+const anchorReference = joinSchemas([keyword(['auto']), anchorIdent])
+const timelineName = joinSchemas([keyword(['none', 'auto']), timelineIdent])
+const timelineAxis = keyword(['block', 'inline', 'x', 'y'])
+const lengthPercentageOrAuto = joinSchemas([
+  lengthPercentage(),
+  keyword(['auto']),
+])
 
 type PropertyData = {
   input: PrimitiveType | ComponentType<EditorPropsWithLabel<any>>
@@ -161,7 +176,54 @@ export const rawProperties: Record<string, any> = {
     keywords: [],
     defaultValue: 'unset',
   },
+  anchorName,
+  anchorScope: anchorName,
   ...animationProperties,
+  animationComposition: {
+    input: 'keyword',
+    keywords: ['replace', 'add', 'accumulate'],
+    defaultValue: 'replace',
+  },
+  animationRange: {
+    input: 'keyword',
+    keywords: [
+      'normal',
+      'cover',
+      'contain',
+      'entry',
+      'exit',
+      'entry-crossing',
+      'exit-crossing',
+    ],
+    defaultValue: 'normal',
+  },
+  animationRangeEnd: {
+    input: 'keyword',
+    keywords: [
+      'normal',
+      'cover',
+      'contain',
+      'entry',
+      'exit',
+      'entry-crossing',
+      'exit-crossing',
+    ],
+    defaultValue: 'normal',
+  },
+  animationRangeStart: {
+    input: 'keyword',
+    keywords: [
+      'normal',
+      'cover',
+      'contain',
+      'entry',
+      'exit',
+      'entry-crossing',
+      'exit-crossing',
+    ],
+    defaultValue: 'normal',
+  },
+  animationTimeline: timelineName,
   appearance: {
     input: 'keyword',
     keywords: [
@@ -332,6 +394,11 @@ export const rawProperties: Record<string, any> = {
     input: 'keyword',
     keywords: ['auto', 'sRGB', 'linearRGB'],
   },
+  colorScheme: {
+    input: 'keyword',
+    keywords: ['normal', 'light', 'dark', 'light dark', 'only light'],
+    defaultValue: 'normal',
+  },
   ...columnProperties,
   ...columnRuleProperties,
   columnFill: {
@@ -359,6 +426,22 @@ export const rawProperties: Record<string, any> = {
       'size layout paint style content',
     ],
     defaultValue: 'none',
+  },
+  containIntrinsicBlockSize: lengthPercentageOrAuto,
+  containIntrinsicHeight: lengthPercentageOrAuto,
+  containIntrinsicInlineSize: lengthPercentageOrAuto,
+  containIntrinsicSize: lengthPercentageOrAuto,
+  containIntrinsicWidth: lengthPercentageOrAuto,
+  container: {
+    input: 'keyword',
+    keywords: ['none', 'normal', 'size', 'inline-size', 'scroll-state'],
+    defaultValue: 'none',
+  },
+  containerName: joinSchemas([keyword(['none']), customIdent]),
+  containerType: {
+    input: 'keyword',
+    keywords: ['normal', 'size', 'inline-size', 'scroll-state'],
+    defaultValue: 'normal',
   },
   content,
   contentVisibility: {
@@ -426,10 +509,24 @@ export const rawProperties: Record<string, any> = {
       'grid',
       'inline-grid',
       'flow-root',
+      'contents',
       'none',
       'table',
+      'inline-table',
+      'table-caption',
+      'table-cell',
+      'table-column',
+      'table-column-group',
+      'table-footer-group',
+      'table-header-group',
       'table-row',
+      'table-row-group',
       'list-item',
+      'ruby',
+      'ruby-base',
+      'ruby-base-container',
+      'ruby-text',
+      'ruby-text-container',
       'block flow',
       'inline flow',
       'inline flow-root',
@@ -456,10 +553,25 @@ export const rawProperties: Record<string, any> = {
       'text-top',
     ],
   },
+  dynamicRangeLimit: {
+    input: 'keyword',
+    keywords: [
+      'standard',
+      'no-limit',
+      'constrained',
+      'dynamic-range-limit-mix()',
+    ],
+    defaultValue: 'standard',
+  },
   emptyCells: {
     input: 'keyword',
     keywords: ['show', 'hide'],
     defaultValue: 'hide',
+  },
+  fieldSizing: {
+    input: 'keyword',
+    keywords: ['fixed', 'content'],
+    defaultValue: 'fixed',
   },
   fill: {
     input: 'color',
@@ -557,6 +669,7 @@ export const rawProperties: Record<string, any> = {
     input: 'keyword',
     keywords: ['auto', 'none'],
   },
+  fontPalette: joinSchemas([keyword(['normal', 'light', 'dark']), customIdent]),
   fontSize: {
     input: 'length',
     percentage: true,
@@ -622,12 +735,33 @@ export const rawProperties: Record<string, any> = {
       'none',
       'weight',
       'style',
+      'position',
       'small-caps',
       'weight style',
       'weight small-caps',
       'style small-caps',
       'weight style small-caps',
     ],
+  },
+  fontSynthesisPosition: {
+    input: 'keyword',
+    keywords: ['auto', 'none'],
+    defaultValue: 'auto',
+  },
+  fontSynthesisSmallCaps: {
+    input: 'keyword',
+    keywords: ['auto', 'none'],
+    defaultValue: 'auto',
+  },
+  fontSynthesisStyle: {
+    input: 'keyword',
+    keywords: ['auto', 'none'],
+    defaultValue: 'auto',
+  },
+  fontSynthesisWeight: {
+    input: 'keyword',
+    keywords: ['auto', 'none'],
+    defaultValue: 'auto',
   },
   fontVariantCaps: {
     input: 'keyword',
@@ -655,6 +789,11 @@ export const rawProperties: Record<string, any> = {
       'proportional-width',
       'ruby full-width jis83',
     ],
+  },
+  fontVariantEmoji: {
+    input: 'keyword',
+    keywords: ['normal', 'text', 'emoji', 'unicode'],
+    defaultValue: 'normal',
   },
   fontVariantLigatures: {
     input: 'keyword',
@@ -713,9 +852,30 @@ export const rawProperties: Record<string, any> = {
     defaultValue: '400',
     themeProperty: 'fontWeights',
   },
+  fontWidth: {
+    input: 'percentage',
+    keywords: [
+      'ultra-condensed',
+      'extra-condensed',
+      'condensed',
+      'semi-condensed',
+      'normal',
+      'semi-expanded',
+      'expanded',
+      'extra-expanded',
+      'ultra-expanded',
+    ],
+    range: { [PercentageLengthUnits.Pct]: [50, 200] },
+    defaultValue: 'normal',
+  },
   forceColorAdjust: {
     input: 'keyword',
     keywords: ['auto', 'none'],
+  },
+  forcedColorAdjust: {
+    input: 'keyword',
+    keywords: ['auto', 'none', 'preserve-parent-color'],
+    defaultValue: 'auto',
   },
   ...gapProperties,
   ...gridProperties,
@@ -784,6 +944,59 @@ export const rawProperties: Record<string, any> = {
     defaultValue: 'none',
   },
   ...insetProperties,
+  inlineSize: {
+    input: 'length',
+    percentage: true,
+    keywords: ['max-content', 'min-content', 'auto'],
+    defaultValue: 'auto',
+    themeProperty: 'sizes',
+  },
+  inputSecurity: {
+    input: 'keyword',
+    keywords: ['auto', 'none'],
+    defaultValue: 'auto',
+  },
+  insetBlock: {
+    input: 'length',
+    percentage: true,
+    keywords: ['auto'],
+    themeProperty: 'space',
+  },
+  insetBlockEnd: {
+    input: 'length',
+    percentage: true,
+    keywords: ['auto'],
+    themeProperty: 'space',
+  },
+  insetBlockStart: {
+    input: 'length',
+    percentage: true,
+    keywords: ['auto'],
+    themeProperty: 'space',
+  },
+  insetInline: {
+    input: 'length',
+    percentage: true,
+    keywords: ['auto'],
+    themeProperty: 'space',
+  },
+  insetInlineEnd: {
+    input: 'length',
+    percentage: true,
+    keywords: ['auto'],
+    themeProperty: 'space',
+  },
+  insetInlineStart: {
+    input: 'length',
+    percentage: true,
+    keywords: ['auto'],
+    themeProperty: 'space',
+  },
+  interpolateSize: {
+    input: 'keyword',
+    keywords: ['numeric-only', 'allow-keywords'],
+    defaultValue: 'numeric-only',
+  },
   imageRendering: {
     input: 'keyword',
     keywords: ['auto', 'crisp-edges', 'pixelated'],
@@ -807,6 +1020,12 @@ export const rawProperties: Record<string, any> = {
     input: 'keyword',
     keywords: ['auto', 'loose', 'normal', 'strict', 'anywhere'],
     defaultValue: 'auto',
+  },
+  lineClamp: {
+    input: 'integer',
+    keywords: ['none'],
+    range: { number: [1, 9999] },
+    defaultValue: 'none',
   },
   ...listStyleProperties,
   lineGrid: {
@@ -836,6 +1055,20 @@ export const rawProperties: Record<string, any> = {
     defaultValue: 'none',
   },
   ...marginProperties,
+  marginTrim: {
+    input: 'keyword',
+    keywords: [
+      'none',
+      'block',
+      'inline',
+      'block-start',
+      'block-end',
+      'inline-start',
+      'inline-end',
+      'block inline',
+    ],
+    defaultValue: 'none',
+  },
   marqueeDirection: {
     input: 'keyword',
     keywords: ['forward', 'reverse'],
@@ -990,15 +1223,30 @@ export const rawProperties: Record<string, any> = {
     keywords: ['auto', 'none'],
     defaultValue: 'auto',
   },
+  overflowBlock: {
+    input: 'keyword',
+    keywords: ['visible', 'hidden', 'clip', 'scroll', 'auto'],
+    defaultValue: 'visible',
+  },
   overflowClipMargin: {
     // TODO: Add ranges
     input: 'length',
     percentage: true,
   },
+  overflowInline: {
+    input: 'keyword',
+    keywords: ['visible', 'hidden', 'clip', 'scroll', 'auto'],
+    defaultValue: 'visible',
+  },
   overflowWrap: {
     input: 'keyword',
     keywords: ['normal', 'break-word', 'anywhere'],
     defaultValue: 'normal',
+  },
+  overlay: {
+    input: 'keyword',
+    keywords: ['none', 'auto'],
+    defaultValue: 'none',
   },
   ...overscrollProperties,
   ...paddingProperties,
@@ -1026,12 +1274,79 @@ export const rawProperties: Record<string, any> = {
     keywords: ['static', 'relative', 'absolute', 'fixed', 'sticky'],
     defaultValue: 'static',
   },
+  positionAnchor: anchorReference,
+  positionArea: {
+    input: 'keyword',
+    keywords: [
+      'none',
+      'center',
+      'top',
+      'right',
+      'bottom',
+      'left',
+      'start',
+      'end',
+      'self-start',
+      'self-end',
+      'span-all',
+    ],
+    defaultValue: 'none',
+  },
+  positionTry: {
+    input: 'keyword',
+    keywords: [
+      'normal',
+      'most-width',
+      'most-height',
+      'most-block-size',
+      'most-inline-size',
+    ],
+    defaultValue: 'normal',
+  },
+  positionTryFallbacks: {
+    input: 'keyword',
+    keywords: ['none'],
+    defaultValue: 'none',
+  },
+  positionTryOrder: {
+    input: 'keyword',
+    keywords: [
+      'normal',
+      'most-width',
+      'most-height',
+      'most-block-size',
+      'most-inline-size',
+    ],
+    defaultValue: 'normal',
+  },
+  positionVisibility: {
+    input: 'keyword',
+    keywords: ['anchors-visible', 'always', 'no-overflow'],
+    defaultValue: 'anchors-visible',
+  },
   printColorAdjust: {
     input: 'keyword',
     keywords: ['economy', 'exact'],
     defaultValue: 'exact',
   },
   quotes,
+  readingFlow: {
+    input: 'keyword',
+    keywords: [
+      'normal',
+      'flex-visual',
+      'flex-flow',
+      'grid-rows',
+      'grid-columns',
+      'grid-order',
+      'source-order',
+    ],
+    defaultValue: 'normal',
+  },
+  readingOrder: {
+    input: 'integer',
+    defaultValue: 0,
+  },
   resize: {
     input: 'keyword',
     keywords: ['none', 'both', 'horizontal', 'vertical', 'block', 'inline'],
@@ -1057,6 +1372,33 @@ export const rawProperties: Record<string, any> = {
     keywords: ['auto', 'smooth'],
     defaultValue: 'auto',
   },
+  scrollInitialTarget: {
+    input: 'keyword',
+    keywords: ['none', 'nearest'],
+    defaultValue: 'none',
+  },
+  scrollMarkerGroup: {
+    input: 'keyword',
+    keywords: ['none', 'before', 'after'],
+    defaultValue: 'none',
+  },
+  scrollStartTarget: {
+    input: 'keyword',
+    keywords: ['none', 'auto'],
+    defaultValue: 'none',
+  },
+  scrollTargetGroup: {
+    input: 'keyword',
+    keywords: ['none', 'auto'],
+    defaultValue: 'none',
+  },
+  scrollTimeline: {
+    input: 'keyword',
+    keywords: ['none', 'block', 'inline', 'x', 'y'],
+    defaultValue: 'none',
+  },
+  scrollTimelineAxis: timelineAxis,
+  scrollTimelineName: timelineName,
   scrollbarColor: {
     input: 'color',
     keywords: ['auto', 'currentcolor', 'transparent'],
@@ -1150,6 +1492,26 @@ export const rawProperties: Record<string, any> = {
       'match-parent',
     ],
     defaultValue: 'start',
+  },
+  textAutospace: {
+    input: 'keyword',
+    keywords: [
+      'normal',
+      'no-autospace',
+      'ideograph-alpha',
+      'ideograph-numeric',
+    ],
+    defaultValue: 'normal',
+  },
+  textBoxEdge: {
+    input: 'keyword',
+    keywords: ['auto', 'text', 'cap', 'ex', 'ideographic', 'ideographic-ink'],
+    defaultValue: 'auto',
+  },
+  textBoxTrim: {
+    input: 'keyword',
+    keywords: ['none', 'trim-start', 'trim-end', 'trim-both'],
+    defaultValue: 'none',
   },
   textCombineUpright: {
     // note: there is a special `digits <number>` syntax that is only supported by Internet Explorer??
@@ -1249,9 +1611,28 @@ export const rawProperties: Record<string, any> = {
   },
   textWrap: {
     input: 'keyword',
-    keywords: ['wrap', 'nowrap', 'balance', 'stable', 'pretty'],
+    keywords: [
+      'wrap',
+      'nowrap',
+      'balance',
+      'stable',
+      'pretty',
+      'auto',
+      'avoid',
+    ],
     defaultValue: 'wrap',
   },
+  textWrapMode: {
+    input: 'keyword',
+    keywords: ['wrap', 'nowrap'],
+    defaultValue: 'wrap',
+  },
+  textWrapStyle: {
+    input: 'keyword',
+    keywords: ['auto', 'balance', 'stable', 'pretty', 'avoid'],
+    defaultValue: 'auto',
+  },
+  timelineScope: timelineName,
   touchAction: {
     input: 'keyword',
     keywords: [
@@ -1269,6 +1650,22 @@ export const rawProperties: Record<string, any> = {
     defaultValue: 'auto',
   },
   ...transformProperties,
+  rotate: {
+    input: 'angle',
+    keywords: ['none'],
+    defaultValue: 'none',
+  },
+  scale: {
+    input: 'number',
+    keywords: ['none'],
+    defaultValue: 'none',
+  },
+  translate: {
+    input: 'length',
+    percentage: true,
+    keywords: ['none'],
+    defaultValue: 'none',
+  },
   transformBox: {
     input: 'keyword',
     keywords: [
@@ -1285,6 +1682,11 @@ export const rawProperties: Record<string, any> = {
     keywords: ['flat', 'preserve-3d'],
   },
   ...transitionProperties,
+  transitionBehavior: {
+    input: 'keyword',
+    keywords: ['normal', 'allow-discrete'],
+    defaultValue: 'normal',
+  },
   unicodeBidi: {
     input: 'keyword',
     keywords: [
@@ -1328,6 +1730,25 @@ export const rawProperties: Record<string, any> = {
     keywords: ['visible', 'hidden', 'collapse'],
     defaultValue: 'visible',
   },
+  viewTimeline: {
+    input: 'keyword',
+    keywords: ['none', 'block', 'inline', 'x', 'y'],
+    defaultValue: 'none',
+  },
+  viewTimelineAxis: timelineAxis,
+  viewTimelineInset: lengthPercentageOrAuto,
+  viewTimelineName: timelineName,
+  viewTransitionClass: joinSchemas([keyword(['none']), customIdent]),
+  viewTransitionGroup: {
+    input: 'keyword',
+    keywords: ['normal', 'nearest', 'contain', 'none'],
+    defaultValue: 'normal',
+  },
+  viewTransitionName: joinSchemas([
+    keyword(['none', 'match-element']),
+    customIdent,
+  ]),
+  viewTransitionScope: joinSchemas([keyword(['none']), customIdent]),
   whiteSpace: {
     input: 'keyword',
     keywords: [
@@ -1337,8 +1758,32 @@ export const rawProperties: Record<string, any> = {
       'pre-wrap',
       'pre-line',
       'break-spaces',
+      'preserve nowrap',
+      'collapse balance',
     ],
     defaultValue: 'normal',
+  },
+  whiteSpaceCollapse: {
+    input: 'keyword',
+    keywords: [
+      'collapse',
+      'discard',
+      'preserve',
+      'preserve-breaks',
+      'preserve-spaces',
+      'break-spaces',
+    ],
+    defaultValue: 'collapse',
+  },
+  whiteSpaceTrim: {
+    input: 'keyword',
+    keywords: ['none', 'discard-before', 'discard-after', 'discard-inner'],
+    defaultValue: 'none',
+  },
+  wordSpaceTransform: {
+    input: 'keyword',
+    keywords: ['none', 'space', 'ideographic-space'],
+    defaultValue: 'none',
   },
   widows: {
     input: 'integer',
@@ -1403,6 +1848,11 @@ export const rawProperties: Record<string, any> = {
     keywords: ['none', 'wrap'],
     defaultValue: 'none',
   },
+  windowDrag: {
+    input: 'keyword',
+    keywords: ['default', 'no-drag', 'drag'],
+    defaultValue: 'default',
+  },
   writingMode: {
     input: 'keyword',
     keywords: ['horizontal-tb', 'vertical-rl', 'vertical-lr'],
@@ -1412,6 +1862,15 @@ export const rawProperties: Record<string, any> = {
     input: 'integer',
     keywords: ['auto'],
     defaultValue: 1,
+  },
+  zoom: {
+    input: 'percentage',
+    number: true,
+    keywords: ['normal', 'reset'],
+    defaultValue: {
+      value: 100,
+      unit: '%',
+    },
   },
 }
 

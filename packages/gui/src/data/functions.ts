@@ -22,7 +22,39 @@ export const transformFunctions = [
   'translatey',
   'translatez',
 ] as const
-export const mathFunctions = ['calc', 'clamp', 'max', 'min'] as const
+export const mathFunctions = [
+  'abs',
+  'acos',
+  'asin',
+  'atan',
+  'atan2',
+  'calc',
+  'calc-size',
+  'clamp',
+  'container-progress',
+  'cos',
+  'exp',
+  'first-valid',
+  'hypot',
+  'if',
+  'log',
+  'max',
+  'media-progress',
+  'min',
+  'mod',
+  'pow',
+  'progress',
+  'random',
+  'random-item',
+  'rem',
+  'round',
+  'sign',
+  'sin',
+  'sibling-count',
+  'sibling-index',
+  'sqrt',
+  'tan',
+] as const
 export const filterFunctions = [
   'blur',
   'brightness',
@@ -39,12 +71,16 @@ export const colorFunctions = [
   'color',
   'color-mix',
   'color-contrast',
+  'contrast-color',
   'device-cmyk',
   'hsl',
   'hsla',
   'hwb',
   'lab',
   'lch',
+  'light-dark',
+  'oklab',
+  'oklch',
   'rgb',
   'rgba',
 ] as const
@@ -57,10 +93,12 @@ export const imageFunctions = [
   'repeating-linear-gradient',
   'repeating-radial-gradient',
   'repeating-conic-gradient',
+  'stripes',
   'cross-fade',
   'element',
   'paint',
 ] as const
+export const easingFunctions = ['cubic-bezier', 'linear', 'steps'] as const
 export const counterFunctions = ['counter', 'counters', 'symbols'] as const
 export const shapeFunctions = [
   'circle',
@@ -68,15 +106,24 @@ export const shapeFunctions = [
   'inset',
   'polygon',
   'path',
+  'ray',
+  'rect',
+  'shape',
+  'xywh',
 ] as const
 export const referenceFunctions = ['attr', 'env', 'url', 'var'] as const
+export const positionFunctions = ['anchor', 'anchor-size'] as const
+export const timelineFunctions = ['scroll', 'view'] as const
 export const functions = [
   ...transformFunctions,
   ...mathFunctions,
   ...filterFunctions,
   ...colorFunctions,
   ...imageFunctions,
+  ...easingFunctions,
   ...counterFunctions,
   ...shapeFunctions,
   ...referenceFunctions,
+  ...positionFunctions,
+  ...timelineFunctions,
 ] as const

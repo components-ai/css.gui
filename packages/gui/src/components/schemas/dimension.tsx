@@ -83,7 +83,9 @@ function parseDimension<U extends string>(
   if ((units as any).includes('number') && !isNaN(+token)) {
     return { value: +token, unit: 'number' as U }
   }
-  const unit = units.find((unit) => token.endsWith(unit))
+  const unit = [...units]
+    .sort((a, b) => b.length - a.length)
+    .find((unit) => token.endsWith(unit))
   if (!unit) return undefined
   const numberPart = toNumber(token.replace(unit, ''))
   if (isNaN(numberPart)) return undefined

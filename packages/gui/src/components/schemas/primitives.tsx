@@ -1,4 +1,4 @@
-import { compact, isInteger, toNumber } from 'lodash-es'
+import { compact } from 'lodash-es'
 import { bindProps } from '../../lib/components'
 import { choose, randomStep } from '../../lib/random'
 import { randomInt } from '../../lib/util'
@@ -14,6 +14,12 @@ import { NumberInput } from '../inputs/NumberInput'
 import { IntegerInput } from '../inputs/PrimitiveInput'
 import { TextInput } from '../inputs/TextInput'
 import { dimension } from './dimension'
+import {
+  parseIdentToken,
+  parseIntegerToken,
+  parseNumberToken,
+  parseQuotedStringToken,
+} from './primitive-parsers'
 import { DataTypeSchema } from './types'
 
 export function percentage({
@@ -54,9 +60,8 @@ export function number({
     validate: ((value: any) => typeof value === 'number') as any,
     parse(tokens) {
       const [token, ...rest] = tokens
-      if (typeof token !== 'string') return [undefined, tokens]
-      const asNumber = toNumber(token)
-      if (isNaN(asNumber)) return [undefined, tokens]
+      const asNumber = parseNumberToken(token)
+      if (asNumber === undefined) return [undefined, tokens]
       return [asNumber, rest]
     },
   }
@@ -84,16 +89,28 @@ export const lengthSteps = {
   number: 0.1,
   theme: 1,
   px: 1,
+  cap: 0.125,
+  ch: 0.125,
   em: 0.125,
+  ex: 0.125,
+  ic: 0.125,
+  lh: 0.125,
   rem: 0.125,
+  rlh: 0.125,
   '%': 0.1,
   fr: 0.1,
 }
 
 const lengthRanges = {
   px: [0, 256],
+  cap: [0, 16],
+  ch: [0, 16],
   rem: [0, 16],
   em: [0, 16],
+  ex: [0, 16],
+  ic: [0, 16],
+  lh: [0, 16],
+  rlh: [0, 16],
   '%': [0, 100],
   number: [0, 2],
   fr: [0, 5],
@@ -154,10 +171,8 @@ export function integer({
     validate: ((value: any) => typeof value === 'number') as any,
     parse(tokens) {
       const [token, ...rest] = tokens
-      if (typeof token !== 'string') return [undefined, tokens]
-      const asNumber = toNumber(token)
-      if (isNaN(asNumber)) return [undefined, tokens]
-      if (!isInteger(number)) return [undefined, tokens]
+      const asNumber = parseIntegerToken(token)
+      if (asNumber === undefined) return [undefined, tokens]
       return [asNumber, rest]
     },
   }
@@ -179,10 +194,9 @@ export function ident({
     validate: ((value: any) => typeof value === 'string') as any,
     parse(tokens) {
       const [token, ...rest] = tokens
-      if (typeof token !== 'string') return [undefined, tokens]
-      // TODO allow escaped characters
-      if (!/[-_0-9A-Za-z]+/.test(token)) return [undefined, tokens]
-      return [token, rest]
+      const ident = parseIdentToken(token)
+      if (ident === undefined) return [undefined, tokens]
+      return [ident, rest]
     },
   }
 }
@@ -200,12 +214,9 @@ export function string({
     validate: ((value: any) => typeof value === 'string') as any,
     parse(tokens) {
       const [token, ...rest] = tokens
-      if (typeof token !== 'string') return [undefined, tokens]
-      const ends = [token[0], token[token.length - 1]]
-      if (ends.some((x) => x === '"') || ends.some((x) => x === "'")) {
-        return [token.substring(1, token.length - 1), rest]
-      }
-      return [undefined, tokens]
+      const value = parseQuotedStringToken(token)
+      if (value === undefined) return [undefined, tokens]
+      return [value, rest]
     },
   }
 }
